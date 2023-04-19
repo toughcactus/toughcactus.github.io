@@ -1,0 +1,1281 @@
+<!DOCTYPE html>
+
+
+<html lang="en-us" data-theme="">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>源码 &gt; TheBasics - 苔滑非关雨，松鸣不假风。</title>
+
+<meta name="description" content="">
+
+
+
+
+
+<link rel="icon" type="image/x-icon" href="https://toughcactus.github.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://toughcactus.github.io/favicon.png">
+
+
+<style>
+  body {
+    visibility: hidden;
+    opacity: 0;
+  }
+</style>
+
+<noscript>
+  <style>
+    body {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</noscript>
+
+
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <link rel="stylesheet" href="https://toughcactus.github.io/css/style.min.aac3b3a2a3235d20a652d9ccde7ec59be09f74c45de387513f681d02f3912b95.css" integrity="sha256-qsOzoqMjXSCmUtnM3n7Fm&#43;CfdMRd44dRP2gdAvORK5U=">
+    
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <script src="https://toughcactus.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js" type="text/javascript" charset="utf-8" integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script>
+    
+
+
+
+
+
+
+
+<meta property="og:title" content="源码 &gt; TheBasics" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/source/thebasics/" /><meta property="article:section" content="source" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="源码 &gt; TheBasics"/>
+<meta name="twitter:description" content=""/>
+
+
+
+
+
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header class="common-header"> 
+            
+                <div class="header-top">
+    <h1 class="site-title">
+    <a href="/">苔滑非关雨，松鸣不假风。</a>
+</h1>
+    <ul class="social-icons">
+
+
+
+
+    <li>
+            <a href="https://toughcactus.github.io/index.xml" title="RSS" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+</ul>
+</div>
+
+    <nav>
+        
+        
+        <a class="" href="https://toughcactus.github.io/about/" title="">About</a>
+        
+        <a class="" href="https://toughcactus.github.io/handbook/" title="">手册</a>
+        
+        <a class="" href="https://toughcactus.github.io/tags/" title="">Tags</a>
+        
+        <a class="" href="https://toughcactus.github.io/posts/" title="">Archive</a>
+        
+        <a class="" href="https://toughcactus.github.io/%E9%98%BF%E6%9F%94/" title="">阿柔</a>
+        
+    </nav>
+
+
+
+
+
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+    
+
+    <article class="post h-entry">
+        <div class="post-header">
+            <header>
+                <h1 class="p-name post-title">源码 &gt; TheBasics</h1>
+
+                
+            </header>
+        </div>
+        <div class="content e-content">
+            <div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GeometryGameModeBase.cpp
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GeometryGameModeBase.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GeometryPawn.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GeometryPlayerController.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryGameModeBase<span style="color:#f92672">::</span>InitPawn()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    DefaultPawnClass <span style="color:#f92672">=</span> AGeometryPawn<span style="color:#f92672">::</span>StaticClass();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>AGeometryGameModeBase<span style="color:#f92672">::</span>AGeometryGameModeBase()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    InitPawn();
+</span></span><span style="display:flex;"><span>    InitPlayerController();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryGameModeBase<span style="color:#f92672">::</span>InitPlayerController() {
+</span></span><span style="display:flex;"><span>    PlayerControllerClass <span style="color:#f92672">=</span> AGeometryPlayerController<span style="color:#f92672">::</span>StaticClass();
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GeometryGameModeBase.h
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma once
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;CoreMinimal.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFramework/GameModeBase.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GeometryGameModeBase.generated.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span>UCLASS()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">THEBASICS_API</span> AGeometryGameModeBase : <span style="color:#66d9ef">public</span> AGameModeBase
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	GENERATED_BODY()
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> InitPawn();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	AGeometryGameModeBase();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> InitPlayerController();
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GeometryHub.cpp
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GeometryHub.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Engine/World.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GeometryObject.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>DEFINE_LOG_CATEGORY_STATIC(LogGeometryHub, All, All)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sets default values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>AGeometryHub<span style="color:#f92672">::</span>AGeometryHub()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span> 	<span style="color:#75715e">// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don&#39;t need it.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	PrimaryActorTick.bCanEverTick <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called when the game starts or when spawned
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> AGeometryHub<span style="color:#f92672">::</span>BeginPlay()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>BeginPlay();
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//SpawnGeometry1();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//SpawnGeometry2();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//SpawnGeometry3();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//SpawnGeometryForDestroy();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">//SpawnGeometryForColorChange();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    SpawnGeometryForGarbageCollector();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called every frame
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> AGeometryHub<span style="color:#f92672">::</span>Tick(<span style="color:#66d9ef">float</span> DeltaTime)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>Tick(DeltaTime);
+</span></span><span style="display:flex;"><span>    PrintPointerStatus();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryHub<span style="color:#f92672">::</span>SpawnGeometry1()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    UWorld<span style="color:#f92672">*</span> World <span style="color:#f92672">=</span> GetWorld();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (World)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        World<span style="color:#f92672">-&gt;</span>SpawnActor(GeometryClass1);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryHub<span style="color:#f92672">::</span>SpawnGeometry2()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    UWorld<span style="color:#f92672">*</span> World <span style="color:#f92672">=</span> GetWorld();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (World)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> FTransform Transform <span style="color:#f92672">=</span> FTransform(FRotator<span style="color:#f92672">::</span>ZeroRotator, FVector(<span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">300.0f</span>, <span style="color:#ae81ff">300.0f</span>));
+</span></span><span style="display:flex;"><span>        AGeometryObject<span style="color:#f92672">*</span> Geometry <span style="color:#f92672">=</span> World<span style="color:#f92672">-&gt;</span>SpawnActor<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span>(GeometryClass2, Transform);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryHub<span style="color:#f92672">::</span>SpawnGeometry3()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    UWorld<span style="color:#f92672">*</span> World <span style="color:#f92672">=</span> GetWorld();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (World)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">int</span> i <span style="color:#f92672">=</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">for</span> (<span style="color:#66d9ef">const</span> FGeometrySetting <span style="color:#f92672">&amp;</span>Payload : GeometryPayloads)
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">const</span> FTransform Transform <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>                FTransform(FRotator<span style="color:#f92672">::</span>ZeroRotator, FVector(<span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">400.0f</span> <span style="color:#f92672">*</span> (i<span style="color:#f92672">++</span>), <span style="color:#ae81ff">800.0f</span>));
+</span></span><span style="display:flex;"><span>            AGeometryObject<span style="color:#f92672">*</span> Geometry <span style="color:#f92672">=</span> World<span style="color:#f92672">-&gt;</span>SpawnActorDeferred<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span>(GeometryClass3, Transform);
+</span></span><span style="display:flex;"><span>            Geometry<span style="color:#f92672">-&gt;</span>SetGeometrySetting(Payload);
+</span></span><span style="display:flex;"><span>            Geometry<span style="color:#f92672">-&gt;</span>FinishSpawning(Transform);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryHub<span style="color:#f92672">::</span>OnActorDestroy(AActor <span style="color:#f92672">*</span>Actor)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>Actor) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    UE_LOG(LogGeometryHub, Log, TEXT(<span style="color:#e6db74">&#34;Destroy Timer of Actor %s is UP&#34;</span>), <span style="color:#f92672">*</span>Actor<span style="color:#f92672">-&gt;</span>GetName());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    AGeometryObject <span style="color:#f92672">*</span>Geometry <span style="color:#f92672">=</span> Cast<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span>(Actor);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>Geometry) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    UE_LOG(LogGeometryHub, Log, TEXT(<span style="color:#e6db74">&#34;Next to DESTROY Actor %s&#34;</span>), <span style="color:#f92672">*</span>Geometry<span style="color:#f92672">-&gt;</span>GetName());
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    Geometry<span style="color:#f92672">-&gt;</span>Destroy();
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//    Geometry-&gt;SetLifeSpan(2.0f);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryHub<span style="color:#f92672">::</span>SpawnGeometryForDestroy()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    UWorld<span style="color:#f92672">*</span> World <span style="color:#f92672">=</span> GetWorld();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (World)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> FTransform Transform <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>            FTransform(FRotator<span style="color:#f92672">::</span>ZeroRotator, FVector(<span style="color:#ae81ff">300.0f</span>, <span style="color:#ae81ff">0.0f</span>, <span style="color:#ae81ff">800.0f</span>));
+</span></span><span style="display:flex;"><span>        AGeometryObject<span style="color:#f92672">*</span> Geometry <span style="color:#f92672">=</span> World<span style="color:#f92672">-&gt;</span>SpawnActorDeferred<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span>(GeometryClassForDestroy, Transform);
+</span></span><span style="display:flex;"><span>        Geometry<span style="color:#f92672">-&gt;</span>OnActorDestroy.AddUObject(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>AGeometryHub<span style="color:#f92672">::</span>OnActorDestroy);
+</span></span><span style="display:flex;"><span>        Geometry<span style="color:#f92672">-&gt;</span>FinishSpawning(Transform);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryHub<span style="color:#f92672">::</span>OnColorChange(<span style="color:#66d9ef">const</span> FLinearColor <span style="color:#f92672">&amp;</span>Color,
+</span></span><span style="display:flex;"><span>                                 <span style="color:#66d9ef">const</span> FString <span style="color:#f92672">&amp;</span>Name) {
+</span></span><span style="display:flex;"><span>    UE_LOG(LogGeometryHub, Warning, TEXT(<span style="color:#e6db74">&#34;Actor %s color changed to %s&#34;</span>), <span style="color:#f92672">*</span>Name, <span style="color:#f92672">*</span>Color.ToString());
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryHub<span style="color:#f92672">::</span>SpawnGeometryForColorChange() {
+</span></span><span style="display:flex;"><span>    UWorld<span style="color:#f92672">*</span> World <span style="color:#f92672">=</span> GetWorld();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (World)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> FTransform Transform <span style="color:#f92672">=</span>
+</span></span><span style="display:flex;"><span>            FTransform(FRotator<span style="color:#f92672">::</span>ZeroRotator, FVector(<span style="color:#ae81ff">300.0f</span>, <span style="color:#ae81ff">400.0f</span>, <span style="color:#ae81ff">800.0f</span>));
+</span></span><span style="display:flex;"><span>        AGeometryObject<span style="color:#f92672">*</span> Geometry <span style="color:#f92672">=</span> World<span style="color:#f92672">-&gt;</span>SpawnActorDeferred<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span>(GeometryClassForColorChange, Transform);
+</span></span><span style="display:flex;"><span>        Geometry<span style="color:#f92672">-&gt;</span>OnColorChange.AddDynamic(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>AGeometryHub<span style="color:#f92672">::</span>OnColorChange);
+</span></span><span style="display:flex;"><span>        FGeometrySetting GeometrySetting <span style="color:#f92672">=</span> Geometry<span style="color:#f92672">-&gt;</span>GetGeometrySetting();
+</span></span><span style="display:flex;"><span>        GeometrySetting.FlagRandomColor <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>        GeometrySetting.MoveType <span style="color:#f92672">=</span> FMath<span style="color:#f92672">::</span>RandBool() <span style="color:#f92672">?</span> EGeometryMoveType<span style="color:#f92672">::</span>Rotate : EGeometryMoveType<span style="color:#f92672">::</span>Sin;
+</span></span><span style="display:flex;"><span>        Geometry<span style="color:#f92672">-&gt;</span>SetGeometrySetting(GeometrySetting);
+</span></span><span style="display:flex;"><span>        Geometry<span style="color:#f92672">-&gt;</span>FinishSpawning(Transform);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryHub<span style="color:#f92672">::</span>SpawnGeometryForGarbageCollector() {
+</span></span><span style="display:flex;"><span>    UWorld <span style="color:#f92672">*</span>World <span style="color:#f92672">=</span> GetWorld();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (World)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        FTransform Transform <span style="color:#f92672">=</span> FTransform(FRotator<span style="color:#f92672">::</span>ZeroRotator, FVector(<span style="color:#ae81ff">600.0f</span>, <span style="color:#ae81ff">400.0f</span>, <span style="color:#ae81ff">800.0f</span>));
+</span></span><span style="display:flex;"><span>        NonePropertyGeometry <span style="color:#f92672">=</span> World<span style="color:#f92672">-&gt;</span>SpawnActor<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span>(GeometryClassForGarbageCollector, Transform);
+</span></span><span style="display:flex;"><span>        Transform <span style="color:#f92672">=</span> FTransform(FRotator<span style="color:#f92672">::</span>ZeroRotator, FVector(<span style="color:#ae81ff">600.0f</span>, <span style="color:#ae81ff">800.0f</span>, <span style="color:#ae81ff">800.0f</span>));
+</span></span><span style="display:flex;"><span>        PropertyGeometry <span style="color:#f92672">=</span> World<span style="color:#f92672">-&gt;</span>SpawnActor<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span>(GeometryClassForGarbageCollector, Transform);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryHub<span style="color:#f92672">::</span>PrintPointerStatus() {
+</span></span><span style="display:flex;"><span>    UE_LOG(LogGeometryHub, Log, TEXT(<span style="color:#e6db74">&#34;property pointer %i, is valid %i&#34;</span>), PropertyGeometry <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>, IsValid(PropertyGeometry));
+</span></span><span style="display:flex;"><span>    UE_LOG(LogGeometryHub, Log, TEXT(<span style="color:#e6db74">&#34;nonproperty pointer %i, is valid %i&#34;</span>), NonePropertyGeometry <span style="color:#f92672">!=</span> <span style="color:#66d9ef">nullptr</span>, IsValid(NonePropertyGeometry));    
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GeometryHub.h
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma once
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;CoreMinimal.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFramework/Actor.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GeometryObject.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GeometryHub.generated.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>UCLASS()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">THEBASICS_API</span> AGeometryHub : <span style="color:#66d9ef">public</span> AActor
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	GENERATED_BODY()
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Sets default values for this actor&#39;s properties
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	AGeometryHub();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called when the game starts or when spawned
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> BeginPlay() <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called every frame
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> Tick(<span style="color:#66d9ef">float</span> DeltaTime) <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span>    TSubclassOf<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span> GeometryClass1;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span>    TSubclassOf<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span> GeometryClass2;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span>    TSubclassOf<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span> GeometryClass3;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span>    TArray<span style="color:#f92672">&lt;</span>FGeometrySetting<span style="color:#f92672">&gt;</span> GeometryPayloads;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span>    TSubclassOf<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span> GeometryClassForDestroy;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span>    TSubclassOf<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span> GeometryClassForColorChange;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> SpawnGeometry1();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SpawnGeometry2</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SpawnGeometry3</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnActorDestroy</span>(AActor <span style="color:#f92672">*</span>Actor);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SpawnGeometryForDestroy</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UFUNCTION()
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> OnColorChange(<span style="color:#66d9ef">const</span> FLinearColor <span style="color:#f92672">&amp;</span>Color, <span style="color:#66d9ef">const</span> FString <span style="color:#f92672">&amp;</span>Name);
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SpawnGeometryForColorChange</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span>    TSubclassOf<span style="color:#f92672">&lt;</span>AGeometryObject<span style="color:#f92672">&gt;</span> GeometryClassForGarbageCollector;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    AGeometryObject <span style="color:#f92672">*</span>NonePropertyGeometry <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY()
+</span></span><span style="display:flex;"><span>    AGeometryObject <span style="color:#f92672">*</span>PropertyGeometry <span style="color:#f92672">=</span> <span style="color:#66d9ef">nullptr</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SpawnGeometryForGarbageCollector</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">PrintPointerStatus</span>();
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GeometryObject.cpp
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GeometryObject.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/StaticMeshComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Materials/MaterialInstanceDynamic.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;TimerManager.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>DEFINE_LOG_CATEGORY_STATIC(LogGeometryObject, All, All)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sets default values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>AGeometryObject<span style="color:#f92672">::</span>AGeometryObject()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span> 	<span style="color:#75715e">// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don&#39;t need it.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	PrimaryActorTick.bCanEverTick <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    InitGeometrySetting(GeometrySetting);
+</span></span><span style="display:flex;"><span>    InitStaticMesh(StaticMesh);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called when the game starts or when spawned
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> AGeometryObject<span style="color:#f92672">::</span>BeginPlay()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>BeginPlay();
+</span></span><span style="display:flex;"><span>    InitInitialTransform(GeometrySetting.InitialTransform);
+</span></span><span style="display:flex;"><span>    SetMaterialParameter(StaticMesh, GeometrySetting.Color);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (GeometrySetting.FlagRandomColor)
+</span></span><span style="display:flex;"><span>        InitTimerRandomColor(GeometrySetting.RandomColorTimer, GeometrySetting.TimerRate);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    InitTimerDestroy();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called every frame
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> AGeometryObject<span style="color:#f92672">::</span>Tick(<span style="color:#66d9ef">float</span> DeltaTime)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>Tick(DeltaTime);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    MoveInForce(GeometrySetting.MoveType, GeometrySetting.InitialTransform,
+</span></span><span style="display:flex;"><span>                GeometrySetting.Amplitude, GeometrySetting.Frequency);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryObject<span style="color:#f92672">::</span>InitGeometrySetting(FGeometrySetting <span style="color:#f92672">&amp;</span>Setting) {
+</span></span><span style="display:flex;"><span>    Setting.Color <span style="color:#f92672">=</span> FLinearColor<span style="color:#f92672">::</span>MakeRandomColor();
+</span></span><span style="display:flex;"><span>    Setting.FlagRandomColor <span style="color:#f92672">=</span> FMath<span style="color:#f92672">::</span>RandBool();
+</span></span><span style="display:flex;"><span>    Setting.TimerRate <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.0f</span>;
+</span></span><span style="display:flex;"><span>    Setting.Amplitude <span style="color:#f92672">=</span> <span style="color:#ae81ff">50.0f</span>;
+</span></span><span style="display:flex;"><span>    Setting.Frequency <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0f</span>;
+</span></span><span style="display:flex;"><span>    Setting.MoveType <span style="color:#f92672">=</span> EGeometryMoveType<span style="color:#f92672">::</span>Static;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryObject<span style="color:#f92672">::</span>InitStaticMesh(UStaticMeshComponent <span style="color:#f92672">*&amp;</span>Mesh) {
+</span></span><span style="display:flex;"><span>    Mesh <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>UStaticMeshComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;StaticMeshInEditor&#34;</span>);
+</span></span><span style="display:flex;"><span>    SetRootComponent(Mesh);  
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryObject<span style="color:#f92672">::</span>InitInitialTransform(FTransform <span style="color:#f92672">&amp;</span>Transform) {
+</span></span><span style="display:flex;"><span>    Transform <span style="color:#f92672">=</span> GetActorTransform();    
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryObject<span style="color:#f92672">::</span>SetMaterialParameter(UStaticMeshComponent <span style="color:#f92672">*</span>Mesh, <span style="color:#66d9ef">const</span> FLinearColor <span style="color:#f92672">&amp;</span>Color)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>Mesh) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    UMaterialInstanceDynamic <span style="color:#f92672">*</span>Material <span style="color:#f92672">=</span> Mesh<span style="color:#f92672">-&gt;</span>CreateAndSetMaterialInstanceDynamic(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(Material)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Material<span style="color:#f92672">-&gt;</span>SetVectorParameterValue(<span style="color:#e6db74">&#34;Color&#34;</span>, Color);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryObject<span style="color:#f92672">::</span>OnTimerRandomColor() {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> FLinearColor Color <span style="color:#f92672">=</span> FLinearColor<span style="color:#f92672">::</span>MakeRandomColor();
+</span></span><span style="display:flex;"><span>    SetMaterialParameter(StaticMesh, Color);
+</span></span><span style="display:flex;"><span>    OnColorChange.Broadcast(Color, GetName());
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryObject<span style="color:#f92672">::</span>InitTimerRandomColor(FTimerHandle <span style="color:#f92672">&amp;</span>Timer, <span style="color:#66d9ef">float</span> TimerRate) {
+</span></span><span style="display:flex;"><span>    GetWorldTimerManager().SetTimer(Timer, <span style="color:#66d9ef">this</span>,
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">&amp;</span>AGeometryObject<span style="color:#f92672">::</span>OnTimerRandomColor,
+</span></span><span style="display:flex;"><span>                                    TimerRate, true);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryObject<span style="color:#f92672">::</span>MoveInForce(EGeometryMoveType Type, FTransform <span style="color:#f92672">&amp;</span>InitialTransform,
+</span></span><span style="display:flex;"><span>                      <span style="color:#66d9ef">float</span> Amplitude, <span style="color:#66d9ef">float</span> Frequency) {
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> (Type)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> EGeometryMoveType<span style="color:#f92672">::</span>Sin:
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        FVector InitialLocation <span style="color:#f92672">=</span>InitialTransform.GetLocation();
+</span></span><span style="display:flex;"><span>        FVector CurrentLocation <span style="color:#f92672">=</span> GetActorLocation();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// y = Asin(bx)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (GetWorld())
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">float</span> Time <span style="color:#f92672">=</span> GetWorld()<span style="color:#f92672">-&gt;</span>GetTimeSeconds();
+</span></span><span style="display:flex;"><span>            CurrentLocation.Z <span style="color:#f92672">=</span> InitialLocation.Z <span style="color:#f92672">+</span> Amplitude <span style="color:#f92672">*</span> FMath<span style="color:#f92672">::</span>Sin(Frequency <span style="color:#f92672">*</span> Time);
+</span></span><span style="display:flex;"><span>            SetActorLocation(CurrentLocation);
+</span></span><span style="display:flex;"><span>        }		
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> EGeometryMoveType<span style="color:#f92672">::</span>Rotate:
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        FRotator InitRotation <span style="color:#f92672">=</span> InitialTransform.Rotator();
+</span></span><span style="display:flex;"><span>        FRotator CurrentRotation <span style="color:#f92672">=</span> GetActorRotation();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (GetWorld())
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">float</span> Time <span style="color:#f92672">=</span> GetWorld()<span style="color:#f92672">-&gt;</span>GetTimeSeconds();
+</span></span><span style="display:flex;"><span>            CurrentRotation.Yaw <span style="color:#f92672">=</span> (InitRotation.Yaw <span style="color:#f92672">+</span> Time <span style="color:#f92672">*</span> Amplitude);
+</span></span><span style="display:flex;"><span>            SetActorRotation(CurrentRotation);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> EGeometryMoveType<span style="color:#f92672">::</span>Static:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryObject<span style="color:#f92672">::</span>OnTimerDestroy() {
+</span></span><span style="display:flex;"><span>    GetWorldTimerManager().ClearTimer(DestroyTimer);
+</span></span><span style="display:flex;"><span>    OnActorDestroy.Broadcast(<span style="color:#66d9ef">this</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryObject<span style="color:#f92672">::</span>InitTimerDestroy() {
+</span></span><span style="display:flex;"><span>    GetWorldTimerManager().SetTimer(DestroyTimer, <span style="color:#66d9ef">this</span>,
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">&amp;</span>AGeometryObject<span style="color:#f92672">::</span>OnTimerDestroy,
+</span></span><span style="display:flex;"><span>                                    DestroyTimerRate, true);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryObject<span style="color:#f92672">::</span>EndPlay(EEndPlayReason<span style="color:#f92672">::</span>Type EndPlayReason) {
+</span></span><span style="display:flex;"><span>    Super<span style="color:#f92672">::</span>EndPlay(EndPlayReason);
+</span></span><span style="display:flex;"><span>    UE_LOG(LogGeometryObject, Log, TEXT(<span style="color:#e6db74">&#34;EndPlay Called&#34;</span>));
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GeometryObject.h
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma once
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;CoreMinimal.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFramework/Actor.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GeometryObject.generated.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>DECLARE_MULTICAST_DELEGATE_OneParam(FOnActorDestroy, AActor <span style="color:#f92672">*</span>);
+</span></span><span style="display:flex;"><span>DECLARE_DYNAMIC_MULTICAST_DELEGATE_TwoParams(FOnColorChange, <span style="color:#66d9ef">const</span> FLinearColor<span style="color:#f92672">&amp;</span>, Color, <span style="color:#66d9ef">const</span> FString<span style="color:#f92672">&amp;</span>, Name);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UENUM(BlueprintType)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">enum</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EGeometryMoveType</span> <span style="color:#f92672">:</span> uint8
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Static,
+</span></span><span style="display:flex;"><span>    Sin,
+</span></span><span style="display:flex;"><span>    Rotate
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>USTRUCT(BlueprintType)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">FGeometrySetting</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    GENERATED_USTRUCT_BODY()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GeometrySetting&#34;</span>)
+</span></span><span style="display:flex;"><span>    FLinearColor Color;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GeometrySetting&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">bool</span> FlagRandomColor;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    FTimerHandle RandomColorTimer;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GeometrySetting&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> TimerRate <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.0f</span>;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GeometrySetting&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> Amplitude <span style="color:#f92672">=</span> <span style="color:#ae81ff">50.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GeometrySetting&#34;</span>)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> Frequency <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	UPROPERTY(EditAnywhere, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;GeometrySetting&#34;</span>)
+</span></span><span style="display:flex;"><span>	EGeometryMoveType MoveType <span style="color:#f92672">=</span> EGeometryMoveType<span style="color:#f92672">::</span>Static;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    FTransform InitialTransform;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UCLASS()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">THEBASICS_API</span> AGeometryObject : <span style="color:#66d9ef">public</span> AActor
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	GENERATED_BODY()
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Sets default values for this actor&#39;s properties
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	AGeometryObject();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called when the game starts or when spawned
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> BeginPlay() <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called every frame
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> Tick(<span style="color:#66d9ef">float</span> DeltaTime) <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(EditAnywhere, BlueprintReadWrite)
+</span></span><span style="display:flex;"><span>    FGeometrySetting GeometrySetting;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(VisibleAnywhere)
+</span></span><span style="display:flex;"><span>    UStaticMeshComponent<span style="color:#f92672">*</span> StaticMesh;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> InitGeometrySetting(FGeometrySetting <span style="color:#f92672">&amp;</span>Setting);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitStaticMesh</span>(UStaticMeshComponent <span style="color:#f92672">*&amp;</span>Mesh);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitInitialTransform</span>(FTransform <span style="color:#f92672">&amp;</span>Transform);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SetMaterialParameter</span>(UStaticMeshComponent <span style="color:#f92672">*</span>Mesh, <span style="color:#66d9ef">const</span> FLinearColor <span style="color:#f92672">&amp;</span>Color);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnTimerRandomColor</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitTimerRandomColor</span>(FTimerHandle <span style="color:#f92672">&amp;</span>Timer, <span style="color:#66d9ef">float</span> TimerRate);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">MoveInForce</span>(EGeometryMoveType Type, FTransform <span style="color:#f92672">&amp;</span>InitialTransform, <span style="color:#66d9ef">float</span> Amplitude, <span style="color:#66d9ef">float</span> Frequency);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UFUNCTION(BlueprintCallable)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> SetGeometrySetting(<span style="color:#66d9ef">const</span> FGeometrySetting <span style="color:#f92672">&amp;</span>Setting) { GeometrySetting <span style="color:#f92672">=</span> Setting; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UFUNCTION(BlueprintCallable)
+</span></span><span style="display:flex;"><span>    FGeometrySetting GetGeometrySetting() {<span style="color:#66d9ef">return</span> GeometrySetting; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    FOnActorDestroy OnActorDestroy;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    FTimerHandle DestroyTimer;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> DestroyTimerRate <span style="color:#f92672">=</span> <span style="color:#ae81ff">30.0f</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnTimerDestroy</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitTimerDestroy</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> EndPlay(EEndPlayReason<span style="color:#f92672">::</span>Type EndPlayReason) <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(BlueprintAssignable)
+</span></span><span style="display:flex;"><span>    FOnColorChange OnColorChange;
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GeometryPawn.cpp
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GeometryPawn.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/StaticMeshComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Camera/CameraComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/InputComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>DEFINE_LOG_CATEGORY_STATIC(LogGeometryPawn, All, All)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sets default values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>AGeometryPawn<span style="color:#f92672">::</span>AGeometryPawn()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span> 	<span style="color:#75715e">// Set this pawn to call Tick() every frame.  You can turn this off to improve performance if you don&#39;t need it.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	PrimaryActorTick.bCanEverTick <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    InitComponent();
+</span></span><span style="display:flex;"><span>    InitStaticMeshAndCameraComponent();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called when the game starts or when spawned
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> AGeometryPawn<span style="color:#f92672">::</span>BeginPlay()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>BeginPlay();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called every frame
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> AGeometryPawn<span style="color:#f92672">::</span>Tick(<span style="color:#66d9ef">float</span> DeltaTime)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>Tick(DeltaTime);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (IsPawnControlled())
+</span></span><span style="display:flex;"><span>        VelocityInForce(DeltaTime);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    ClearVelocityVector();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called to bind functionality to input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> AGeometryPawn<span style="color:#f92672">::</span>SetupPlayerInputComponent(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>SetupPlayerInputComponent(PlayerInputComponent);
+</span></span><span style="display:flex;"><span>    BindAxis(PlayerInputComponent);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryPawn<span style="color:#f92672">::</span>MoveForward(<span style="color:#66d9ef">float</span> Amount)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (Amount)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        FString Direction <span style="color:#f92672">=</span> Amount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;forward&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;backward&#34;</span>;
+</span></span><span style="display:flex;"><span>        UE_LOG(LogGeometryPawn, Display, TEXT(<span style="color:#e6db74">&#34;Move %s: %f&#34;</span>), <span style="color:#f92672">*</span>Direction, Amount);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    VelocityVector.X <span style="color:#f92672">=</span> Amount;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryPawn<span style="color:#f92672">::</span>MoveRight(<span style="color:#66d9ef">float</span> Amount)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (Amount)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        FString Direction <span style="color:#f92672">=</span> Amount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0</span> <span style="color:#f92672">?</span> <span style="color:#e6db74">&#34;right&#34;</span> <span style="color:#f92672">:</span> <span style="color:#e6db74">&#34;left&#34;</span>;
+</span></span><span style="display:flex;"><span>        UE_LOG(LogGeometryPawn, Display, TEXT(<span style="color:#e6db74">&#34;Move %s: %f&#34;</span>), <span style="color:#f92672">*</span>Direction, Amount);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    VelocityVector.Y <span style="color:#f92672">=</span> Amount;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryPawn<span style="color:#f92672">::</span>VelocityInForce(<span style="color:#66d9ef">float</span> DeltaTime)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>VelocityVector.IsZero())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">const</span> FVector NewLocation <span style="color:#f92672">=</span> GetActorLocation() <span style="color:#f92672">+</span> Velocity <span style="color:#f92672">*</span> DeltaTime <span style="color:#f92672">*</span> VelocityVector;
+</span></span><span style="display:flex;"><span>        SetActorLocation(NewLocation);
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryPawn<span style="color:#f92672">::</span>BindAxis(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAxis(<span style="color:#e6db74">&#34;MoveForward&#34;</span>, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>AGeometryPawn<span style="color:#f92672">::</span>MoveForward);
+</span></span><span style="display:flex;"><span>    PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAxis(<span style="color:#e6db74">&#34;MoveRight&#34;</span>, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>AGeometryPawn<span style="color:#f92672">::</span>MoveRight);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryPawn<span style="color:#f92672">::</span>InitComponent()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    SceneComponent <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>USceneComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;SceneComponent&#34;</span>);
+</span></span><span style="display:flex;"><span>    SetRootComponent(SceneComponent);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryPawn<span style="color:#f92672">::</span>InitStaticMeshAndCameraComponent() {
+</span></span><span style="display:flex;"><span>    StaticMesh <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>UStaticMeshComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;StaticMeshComponent&#34;</span>);
+</span></span><span style="display:flex;"><span>    Camera <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>UCameraComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;CameraComponent&#34;</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    StaticMesh<span style="color:#f92672">-&gt;</span>SetupAttachment(SceneComponent);
+</span></span><span style="display:flex;"><span>    Camera<span style="color:#f92672">-&gt;</span>SetupAttachment(GetRootComponent());
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryPawn<span style="color:#f92672">::</span>PossessedBy(AController <span style="color:#f92672">*</span>NewController) {
+</span></span><span style="display:flex;"><span>    Super<span style="color:#f92672">::</span>PossessedBy(NewController);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>NewController) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UE_LOG(LogGeometryPawn, Log, TEXT(<span style="color:#e6db74">&#34;%s possessed by %s&#34;</span>), <span style="color:#f92672">*</span>GetName(), <span style="color:#f92672">*</span>NewController<span style="color:#f92672">-&gt;</span>GetName());
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryPawn<span style="color:#f92672">::</span>UnPossessed() {
+</span></span><span style="display:flex;"><span>    Super<span style="color:#f92672">::</span>UnPossessed();
+</span></span><span style="display:flex;"><span>    UE_LOG(LogGeometryPawn, Log, TEXT(<span style="color:#e6db74">&#34;%s is unpossessed&#34;</span>), <span style="color:#f92672">*</span>GetName());
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> AGeometryPawn<span style="color:#f92672">::</span>ClearVelocityVector() {
+</span></span><span style="display:flex;"><span>    VelocityVector <span style="color:#f92672">=</span> FVector<span style="color:#f92672">::</span>ZeroVector;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// GeometryPawn.h
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma once
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/StaticMeshComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;CoreMinimal.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFramework/Controller.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFramework/Pawn.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GeometryPawn.generated.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UCameraComponent</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UStaticMeshComponent</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UCLASS()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">THEBASICS_API</span> AGeometryPawn : <span style="color:#66d9ef">public</span> APawn
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	GENERATED_BODY()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Sets default values for this pawn&#39;s properties
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	AGeometryPawn();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called when the game starts or when spawned
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> BeginPlay() <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called every frame
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> Tick(<span style="color:#66d9ef">float</span> DeltaTime) <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called to bind functionality to input
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SetupPlayerInputComponent</span>(<span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UInputComponent</span><span style="color:#f92672">*</span> PlayerInputComponent) <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> Velocity <span style="color:#f92672">=</span> <span style="color:#ae81ff">300.0f</span>;
+</span></span><span style="display:flex;"><span>    FVector VelocityVector <span style="color:#f92672">=</span> FVector<span style="color:#f92672">::</span>ZeroVector;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">MoveForward</span>(<span style="color:#66d9ef">float</span> Amount);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">MoveRight</span>(<span style="color:#66d9ef">float</span> Amount);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">VelocityInForce</span>(<span style="color:#66d9ef">float</span> DeltaTime);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">BindAxis</span>(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  	USceneComponent<span style="color:#f92672">*</span> SceneComponent;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitComponent</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(VisibleAnywhere)
+</span></span><span style="display:flex;"><span>    UStaticMeshComponent <span style="color:#f92672">*</span>StaticMesh;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(VisibleAnywhere)
+</span></span><span style="display:flex;"><span>    UCameraComponent <span style="color:#f92672">*</span>Camera;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> InitStaticMeshAndCameraComponent();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> PossessedBy(AController <span style="color:#f92672">*</span>NewController) <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">UnPossessed</span>() <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> ClearVelocityVector();
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// SimpleGeometry.cpp
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;SimpleGeometry.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Engine/Engine.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/StaticMeshComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Materials/MaterialInstanceDynamic.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;TimerManager.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>DEFINE_LOG_CATEGORY_STATIC(LogSimpleGeometry, All, All)
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sets default values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ASimpleGeometry<span style="color:#f92672">::</span>ASimpleGeometry()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span> 	<span style="color:#75715e">// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don&#39;t need it.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	PrimaryActorTick.bCanEverTick <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>    InitStaticMesh();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called when the game starts or when spawned
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASimpleGeometry<span style="color:#f92672">::</span>BeginPlay()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>BeginPlay();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UseLogTemp();
+</span></span><span style="display:flex;"><span>    UseStaticLogCategory();
+</span></span><span style="display:flex;"><span>    PrintLogOnScreen();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    SetMaterialParameter();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    InitMoveSetting();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    InitTimerRandomColor();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called every frame
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASimpleGeometry<span style="color:#f92672">::</span>Tick(<span style="color:#66d9ef">float</span> DeltaTime)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>Tick(DeltaTime);
+</span></span><span style="display:flex;"><span>    MoveInForce();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 使用LogTemp打印日志
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASimpleGeometry<span style="color:#f92672">::</span>UseLogTemp()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    UE_LOG(LogTemp, Log, TEXT(<span style="color:#e6db74">&#34;Hello Unreal!&#34;</span>));
+</span></span><span style="display:flex;"><span>    UE_LOG(LogTemp, Display, TEXT(<span style="color:#e6db74">&#34;Hello Unreal!&#34;</span>));
+</span></span><span style="display:flex;"><span>    UE_LOG(LogTemp, Warning, TEXT(<span style="color:#e6db74">&#34;Hello Unreal!&#34;</span>));
+</span></span><span style="display:flex;"><span>    UE_LOG(LogTemp, Error, TEXT(<span style="color:#e6db74">&#34;Hello Unreal!&#34;</span>));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 使用自定义日志类型打印日志
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASimpleGeometry<span style="color:#f92672">::</span>UseStaticLogCategory()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    UE_LOG(LogSimpleGeometry, Display, TEXT(<span style="color:#e6db74">&#34;Name: %s&#34;</span>), <span style="color:#f92672">*</span>GetName());
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">// 在屏幕输出信息
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#66d9ef">void</span> ASimpleGeometry<span style="color:#f92672">::</span>PrintLogOnScreen()
+</span></span><span style="display:flex;"><span> {
+</span></span><span style="display:flex;"><span>     <span style="color:#66d9ef">if</span> (GEngine)
+</span></span><span style="display:flex;"><span>     {
+</span></span><span style="display:flex;"><span>         GEngine<span style="color:#f92672">-&gt;</span>AddOnScreenDebugMessage(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">3.0f</span>, FColor<span style="color:#f92672">::</span>Orange, TEXT(<span style="color:#e6db74">&#34;Hello&#34;</span>));
+</span></span><span style="display:flex;"><span>         GEngine<span style="color:#f92672">-&gt;</span>AddOnScreenDebugMessage(<span style="color:#f92672">-</span><span style="color:#ae81ff">1</span>, <span style="color:#ae81ff">5.0f</span>, FColor<span style="color:#f92672">::</span>Green, TEXT(<span style="color:#e6db74">&#34;World!&#34;</span>));
+</span></span><span style="display:flex;"><span>     }
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">// 初始化StaticMesh并注册为根组件
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span> <span style="color:#66d9ef">void</span> ASimpleGeometry<span style="color:#f92672">::</span>InitStaticMesh()
+</span></span><span style="display:flex;"><span> {
+</span></span><span style="display:flex;"><span>     StaticMesh <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>UStaticMeshComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;StaticMeshInEditor&#34;</span>);
+</span></span><span style="display:flex;"><span>     SetRootComponent(StaticMesh);
+</span></span><span style="display:flex;"><span> }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 设置材质的Color参数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASimpleGeometry<span style="color:#f92672">::</span>SetMaterialParameter()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>StaticMesh) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    UMaterialInstanceDynamic <span style="color:#f92672">*</span>Material <span style="color:#f92672">=</span> StaticMesh<span style="color:#f92672">-&gt;</span>CreateAndSetMaterialInstanceDynamic(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span>(Material)
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        Material<span style="color:#f92672">-&gt;</span>SetVectorParameterValue(<span style="color:#e6db74">&#34;Color&#34;</span>, FLinearColor<span style="color:#f92672">::</span>MakeRandomColor());
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 初始化MoveSetting
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASimpleGeometry<span style="color:#f92672">::</span>InitMoveSetting()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    MoveSetting.InitialTransform <span style="color:#f92672">=</span> GetActorTransform();
+</span></span><span style="display:flex;"><span>    MoveSetting.MoveType <span style="color:#f92672">=</span> FMath<span style="color:#f92672">::</span>RandBool() <span style="color:#f92672">?</span> EMoveType<span style="color:#f92672">::</span>Sin : EMoveType<span style="color:#f92672">::</span>Rotate;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// MoveSetting生效
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASimpleGeometry<span style="color:#f92672">::</span>MoveInForce()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">switch</span> (MoveSetting.MoveType)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> EMoveType<span style="color:#f92672">::</span>Sin:
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        FVector InitialLocation <span style="color:#f92672">=</span> MoveSetting.InitialTransform.GetLocation();
+</span></span><span style="display:flex;"><span>        FVector CurrentLocation <span style="color:#f92672">=</span> GetActorLocation();
+</span></span><span style="display:flex;"><span>        <span style="color:#75715e">// y = Asin(bx)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>        <span style="color:#66d9ef">if</span> (GetWorld())
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">float</span> Time <span style="color:#f92672">=</span> GetWorld()<span style="color:#f92672">-&gt;</span>GetTimeSeconds();
+</span></span><span style="display:flex;"><span>            CurrentLocation.Z <span style="color:#f92672">=</span> InitialLocation.Z <span style="color:#f92672">+</span> MoveSetting.Amplitude <span style="color:#f92672">*</span> FMath<span style="color:#f92672">::</span>Sin(MoveSetting.Frequency <span style="color:#f92672">*</span> Time);
+</span></span><span style="display:flex;"><span>            SetActorLocation(CurrentLocation);
+</span></span><span style="display:flex;"><span>        }		
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> EMoveType<span style="color:#f92672">::</span>Rotate:
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        FRotator InitRotation <span style="color:#f92672">=</span> MoveSetting.InitialTransform.Rotator();
+</span></span><span style="display:flex;"><span>        FRotator CurrentRotation <span style="color:#f92672">=</span> GetActorRotation();
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">if</span> (GetWorld())
+</span></span><span style="display:flex;"><span>        {
+</span></span><span style="display:flex;"><span>            <span style="color:#66d9ef">float</span> Time <span style="color:#f92672">=</span> GetWorld()<span style="color:#f92672">-&gt;</span>GetTimeSeconds();
+</span></span><span style="display:flex;"><span>            CurrentRotation.Yaw <span style="color:#f92672">=</span> (InitRotation.Yaw <span style="color:#f92672">+</span> Time <span style="color:#f92672">*</span> MoveSetting.Amplitude);
+</span></span><span style="display:flex;"><span>            SetActorRotation(CurrentRotation);
+</span></span><span style="display:flex;"><span>        }
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">case</span> EMoveType<span style="color:#f92672">::</span>Static:
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">default</span><span style="color:#f92672">:</span> <span style="color:#66d9ef">break</span>;
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 初始化定时器
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASimpleGeometry<span style="color:#f92672">::</span>InitTimerRandomColor()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    GetWorldTimerManager().SetTimer(RandomColorTimer, <span style="color:#66d9ef">this</span>,
+</span></span><span style="display:flex;"><span>                                    <span style="color:#f92672">&amp;</span>ASimpleGeometry<span style="color:#f92672">::</span>OnTimerRandomColor,
+</span></span><span style="display:flex;"><span>                                    TimerRate, true);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 回调函数 ｜ 随机材质颜色
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASimpleGeometry<span style="color:#f92672">::</span>OnTimerRandomColor()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> FLinearColor Color <span style="color:#f92672">=</span> FLinearColor<span style="color:#f92672">::</span>MakeRandomColor();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (<span style="color:#f92672">!</span>StaticMesh) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>	UMaterialInstanceDynamic<span style="color:#f92672">*</span> Material <span style="color:#f92672">=</span> StaticMesh<span style="color:#f92672">-&gt;</span>CreateAndSetMaterialInstanceDynamic(<span style="color:#ae81ff">0</span>);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (Material)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		Material<span style="color:#f92672">-&gt;</span>SetVectorParameterValue(<span style="color:#e6db74">&#34;Color&#34;</span>, Color);
+</span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// SimpleGeometry.h
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma once
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;CoreMinimal.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFramework/Actor.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;SimpleGeometry.generated.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UStaticMeshComponent</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UENUM(BlueprintType)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">enum</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EMoveType</span> <span style="color:#f92672">:</span> uint8
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Static,
+</span></span><span style="display:flex;"><span>    Sin,
+</span></span><span style="display:flex;"><span>    Rotate
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>USTRUCT(BlueprintType)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">struct</span> <span style="color:#a6e22e">FMoveSetting</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    GENERATED_USTRUCT_BODY()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MoveSetting&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> Amplitude <span style="color:#f92672">=</span> <span style="color:#ae81ff">50.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(VisibleDefaultsOnly, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MoveSetting&#34;</span>)
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> Frequency <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(VisibleInstanceOnly, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;MoveSetting&#34;</span>)
+</span></span><span style="display:flex;"><span>    EMoveType MoveType <span style="color:#f92672">=</span> EMoveType<span style="color:#f92672">::</span>Static;
+</span></span><span style="display:flex;"><span>        
+</span></span><span style="display:flex;"><span>    FTransform InitialTransform;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UCLASS()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">THEBASICS_API</span> ASimpleGeometry : <span style="color:#66d9ef">public</span> AActor
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	GENERATED_BODY()
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Sets default values for this actor&#39;s properties
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	ASimpleGeometry();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called when the game starts or when spawned
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> BeginPlay() <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called every frame
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> Tick(<span style="color:#66d9ef">float</span> DeltaTime) <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> UseLogTemp();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">UseStaticLogCategory</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">PrintLogOnScreen</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitStaticMesh</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SetMaterialParameter</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitMoveSetting</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">MoveInForce</span>();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitTimerRandomColor</span>();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnTimerRandomColor</span>();
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(VisibleAnywhere)
+</span></span><span style="display:flex;"><span>    UStaticMeshComponent<span style="color:#f92672">*</span> StaticMesh;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(VisibleAnywhere)
+</span></span><span style="display:flex;"><span>    FMoveSetting MoveSetting;
+</span></span><span style="display:flex;"><span>    
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    FTimerHandle RandomColorTimer;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">float</span> TimerRate <span style="color:#f92672">=</span> <span style="color:#ae81ff">3.0f</span>;
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+</div>
+        </div>
+        
+
+    
+
+
+<div class="post-info">
+    
+
+    <a class="post-hidden-url u-url" href="https://toughcactus.github.io/source/thebasics/">https://toughcactus.github.io/source/thebasics/</a>
+    <a href="https://toughcactus.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">Dorothy</a>
+
+
+    <div class="post-taxonomies">
+        
+            <ul class="post-categories">
+                
+                    
+                    <li><a href="https://toughcactus.github.io/categories/%E6%BA%90%E7%A0%81/">源码</a></li>
+                
+            </ul>
+            
+            
+    </div>
+</div>
+
+    </article>
+
+    
+        
+        
+    
+
+    
+        
+    <div class="pagination post-pagination">
+        <div class="left pagination-item ">
+            
+                <a href="/source/strblob-%E5%85%B1%E4%BA%AB%E5%AD%97%E7%AC%A6%E4%B8%B2%E6%95%B0%E7%BB%84/">源码 &gt; StrBlob-共享字符串数组</a>
+            
+        </div>
+        <div class="right pagination-item ">
+            
+                <a href="/source/weak_ptr%E5%92%8Cshared_ptr/">源码 &gt; weak_ptr和shared_ptr</a>
+            
+        </div>
+    </div>
+
+
+
+
+    
+
+    
+        
+
+
+
+
+
+
+
+    
+
+        </main>
+        
+            <footer class="common-footer">
+    
+    
+
+    <div class="common-footer-bottom">
+        
+        <div class="copyright">
+            <p>© Dorothy, 2023<br>
+            Powered by <a target="_blank" rel="noopener noreferrer" href="https://gohugo.io/">Hugo</a>, theme <a target="_blank" rel="noopener noreferrer" href="https://github.com/mitrichius/hugo-theme-anubis">Anubis</a>.<br>
+            
+            </p>  
+        </div> 
+
+        
+
+    
+
+
+
+    <button class="theme-switcher">
+        Dark theme
+    </button>
+
+
+<script>
+const STORAGE_KEY = 'user-color-scheme'
+const defaultTheme = "auto"
+
+let currentTheme
+let switchButton
+let autoDefinedScheme = window.matchMedia('(prefers-color-scheme: dark)')
+
+const autoChangeScheme = e => {
+    currentTheme = e.matches ? 'dark' : 'light'
+    document.documentElement.setAttribute('data-theme', currentTheme)
+    changeButtonText()
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    switchButton = document.querySelector('.theme-switcher')
+    currentTheme = detectCurrentScheme()
+    if (currentTheme == 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark')
+    }
+    if (currentTheme == 'auto') {
+        autoChangeScheme(autoDefinedScheme);
+        autoDefinedScheme.addListener(autoChangeScheme);
+    }
+
+    if (switchButton) {
+        changeButtonText()
+        switchButton.addEventListener('click', switchTheme, false)
+    }
+  
+    showContent()
+})
+
+function detectCurrentScheme() {
+    if (localStorage.getItem(STORAGE_KEY)) {
+        return localStorage.getItem(STORAGE_KEY)
+    } 
+    if (defaultTheme) {
+        return defaultTheme
+    } 
+    if (!window.matchMedia) {
+        return 'light'
+    } 
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
+    }
+    return 'light'
+}
+
+function changeButtonText()
+{   
+    if (switchButton) {
+        switchButton.textContent = currentTheme == 'dark' ?  "Light theme" : "Dark theme"
+    }
+}
+
+function switchTheme(e) {
+    if (currentTheme == 'dark') {
+        localStorage.setItem(STORAGE_KEY, 'light')
+        document.documentElement.setAttribute('data-theme', 'light')
+        currentTheme = 'light'
+    } else {
+        localStorage.setItem(STORAGE_KEY, 'dark')
+        document.documentElement.setAttribute('data-theme', 'dark')
+        currentTheme = 'dark'
+    }
+    changeButtonText()
+}
+
+function showContent() {
+    document.body.style.visibility = 'visible';
+    document.body.style.opacity = 1;
+}
+</script>   
+    </div>
+
+    <p class="h-card vcard">
+
+    <a href=https://toughcactus.github.io/ class="p-name u-url url fn" rel="me">Dorothy</a> 
+
+    
+
+    
+</p> 
+</footer>
+
+        
+    </div>
+</body>
+</html>

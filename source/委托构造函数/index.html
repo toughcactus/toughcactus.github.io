@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+
+
+<html lang="en-us" data-theme="">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>源码 &gt; 委托构造函数 - 苔滑非关雨，松鸣不假风。</title>
+
+<meta name="description" content="">
+
+
+
+
+
+<link rel="icon" type="image/x-icon" href="https://toughcactus.github.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://toughcactus.github.io/favicon.png">
+
+
+<style>
+  body {
+    visibility: hidden;
+    opacity: 0;
+  }
+</style>
+
+<noscript>
+  <style>
+    body {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</noscript>
+
+
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <link rel="stylesheet" href="https://toughcactus.github.io/css/style.min.aac3b3a2a3235d20a652d9ccde7ec59be09f74c45de387513f681d02f3912b95.css" integrity="sha256-qsOzoqMjXSCmUtnM3n7Fm&#43;CfdMRd44dRP2gdAvORK5U=">
+    
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <script src="https://toughcactus.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js" type="text/javascript" charset="utf-8" integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script>
+    
+
+
+
+
+
+
+
+<meta property="og:title" content="源码 &gt; 委托构造函数" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/source/%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/" /><meta property="article:section" content="source" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="源码 &gt; 委托构造函数"/>
+<meta name="twitter:description" content=""/>
+
+
+
+
+
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header class="common-header"> 
+            
+                <div class="header-top">
+    <h1 class="site-title">
+    <a href="/">苔滑非关雨，松鸣不假风。</a>
+</h1>
+    <ul class="social-icons">
+
+
+
+
+    <li>
+            <a href="https://toughcactus.github.io/index.xml" title="RSS" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+</ul>
+</div>
+
+    <nav>
+        
+        
+        <a class="" href="https://toughcactus.github.io/about/" title="">About</a>
+        
+        <a class="" href="https://toughcactus.github.io/handbook/" title="">手册</a>
+        
+        <a class="" href="https://toughcactus.github.io/tags/" title="">Tags</a>
+        
+        <a class="" href="https://toughcactus.github.io/posts/" title="">Archive</a>
+        
+        <a class="" href="https://toughcactus.github.io/%E9%98%BF%E6%9F%94/" title="">阿柔</a>
+        
+    </nav>
+
+
+
+
+
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+    
+
+    <article class="post h-entry">
+        <div class="post-header">
+            <header>
+                <h1 class="p-name post-title">源码 &gt; 委托构造函数</h1>
+
+                
+            </header>
+        </div>
+        <div class="content e-content">
+            <div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 委托构造函数.cpp
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;iostream&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&lt;string&gt;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> std<span style="color:#f92672">::</span>cout;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> std<span style="color:#f92672">::</span>endl;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> std<span style="color:#f92672">::</span>ostream;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">using</span> std<span style="color:#f92672">::</span>string;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">GamePlayer</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">friend</span> ostream <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span> (ostream <span style="color:#f92672">&amp;</span>os, <span style="color:#66d9ef">const</span> GamePlayer <span style="color:#f92672">&amp;</span>gp);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    GamePlayer(string _name, <span style="color:#66d9ef">int</span> _age) <span style="color:#f92672">:</span> name(_name), age(_age) { cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;This is constructor1.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>; } <span style="color:#75715e">// 受委托构造函数
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    GamePlayer()<span style="color:#f92672">:</span> GamePlayer(<span style="color:#e6db74">&#34;&#34;</span>, <span style="color:#ae81ff">0</span>) { cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;This is default constructor.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>; }
+</span></span><span style="display:flex;"><span>    GamePlayer(string _name) <span style="color:#f92672">:</span> GamePlayer(_name, <span style="color:#ae81ff">0</span>) { cout <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;This is constructor2.</span><span style="color:#ae81ff">\n</span><span style="color:#e6db74">&#34;</span>; }
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">int</span> age;
+</span></span><span style="display:flex;"><span>    string name;
+</span></span><span style="display:flex;"><span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ostream <span style="color:#f92672">&amp;</span><span style="color:#66d9ef">operator</span><span style="color:#f92672">&lt;&lt;</span> (ostream <span style="color:#f92672">&amp;</span>os, <span style="color:#66d9ef">const</span> GamePlayer <span style="color:#f92672">&amp;</span>gp)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (gp.name <span style="color:#f92672">==</span> <span style="color:#e6db74">&#34;&#34;</span>)
+</span></span><span style="display:flex;"><span>        os <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#34;none&#34;</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">else</span>
+</span></span><span style="display:flex;"><span>        os <span style="color:#f92672">&lt;&lt;</span> gp.name;
+</span></span><span style="display:flex;"><span>    os <span style="color:#f92672">&lt;&lt;</span> <span style="color:#e6db74">&#39;\t&#39;</span> <span style="color:#f92672">&lt;&lt;</span> gp.age;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> os;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#a6e22e">main</span>()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    GamePlayer gp(<span style="color:#e6db74">&#34;Dot&#34;</span>, <span style="color:#ae81ff">25</span>);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> gp <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    GamePlayer gp2(<span style="color:#e6db74">&#34;Mary&#34;</span>);
+</span></span><span style="display:flex;"><span>    cout <span style="color:#f92672">&lt;&lt;</span> gp2 <span style="color:#f92672">&lt;&lt;</span> endl;
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0</span>;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+        </div>
+        
+
+    
+
+
+<div class="post-info">
+    
+
+    <a class="post-hidden-url u-url" href="https://toughcactus.github.io/source/%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/">https://toughcactus.github.io/source/%E5%A7%94%E6%89%98%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/</a>
+    <a href="https://toughcactus.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">Dorothy</a>
+
+
+    <div class="post-taxonomies">
+        
+            <ul class="post-categories">
+                
+                    
+                    <li><a href="https://toughcactus.github.io/categories/%E6%BA%90%E7%A0%81/">源码</a></li>
+                
+            </ul>
+            
+            
+    </div>
+</div>
+
+    </article>
+
+    
+        
+        
+    
+
+    
+        
+    <div class="pagination post-pagination">
+        <div class="left pagination-item ">
+            
+                <a href="/source/%E5%85%B7%E6%9C%89%E5%85%A8%E5%B1%80%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E9%A1%B6%E5%B1%82const%E5%AF%B9%E8%B1%A1%E5%92%8C%E5%85%B7%E6%9C%89%E6%96%87%E4%BB%B6%E4%BD%9C%E7%94%A8%E5%9F%9F%E7%9A%84%E9%A1%B6%E5%B1%82const%E5%AF%B9%E8%B1%A1%E5%AD%98%E5%9C%A8%E4%BA%8E%E5%90%8C%E4%B8%80%E4%B8%AA%E6%96%87%E4%BB%B6/">源码 &gt; 具有全局作用域的顶层const对象和具有文件作用域的顶层const对象存在于同一个文件</a>
+            
+        </div>
+        <div class="right pagination-item ">
+            
+                <a href="/source/init/">配置 &gt; init</a>
+            
+        </div>
+    </div>
+
+
+
+
+    
+
+    
+        
+
+
+
+
+
+
+
+    
+
+        </main>
+        
+            <footer class="common-footer">
+    
+    
+
+    <div class="common-footer-bottom">
+        
+        <div class="copyright">
+            <p>© Dorothy, 2023<br>
+            Powered by <a target="_blank" rel="noopener noreferrer" href="https://gohugo.io/">Hugo</a>, theme <a target="_blank" rel="noopener noreferrer" href="https://github.com/mitrichius/hugo-theme-anubis">Anubis</a>.<br>
+            
+            </p>  
+        </div> 
+
+        
+
+    
+
+
+
+    <button class="theme-switcher">
+        Dark theme
+    </button>
+
+
+<script>
+const STORAGE_KEY = 'user-color-scheme'
+const defaultTheme = "auto"
+
+let currentTheme
+let switchButton
+let autoDefinedScheme = window.matchMedia('(prefers-color-scheme: dark)')
+
+const autoChangeScheme = e => {
+    currentTheme = e.matches ? 'dark' : 'light'
+    document.documentElement.setAttribute('data-theme', currentTheme)
+    changeButtonText()
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    switchButton = document.querySelector('.theme-switcher')
+    currentTheme = detectCurrentScheme()
+    if (currentTheme == 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark')
+    }
+    if (currentTheme == 'auto') {
+        autoChangeScheme(autoDefinedScheme);
+        autoDefinedScheme.addListener(autoChangeScheme);
+    }
+
+    if (switchButton) {
+        changeButtonText()
+        switchButton.addEventListener('click', switchTheme, false)
+    }
+  
+    showContent()
+})
+
+function detectCurrentScheme() {
+    if (localStorage.getItem(STORAGE_KEY)) {
+        return localStorage.getItem(STORAGE_KEY)
+    } 
+    if (defaultTheme) {
+        return defaultTheme
+    } 
+    if (!window.matchMedia) {
+        return 'light'
+    } 
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
+    }
+    return 'light'
+}
+
+function changeButtonText()
+{   
+    if (switchButton) {
+        switchButton.textContent = currentTheme == 'dark' ?  "Light theme" : "Dark theme"
+    }
+}
+
+function switchTheme(e) {
+    if (currentTheme == 'dark') {
+        localStorage.setItem(STORAGE_KEY, 'light')
+        document.documentElement.setAttribute('data-theme', 'light')
+        currentTheme = 'light'
+    } else {
+        localStorage.setItem(STORAGE_KEY, 'dark')
+        document.documentElement.setAttribute('data-theme', 'dark')
+        currentTheme = 'dark'
+    }
+    changeButtonText()
+}
+
+function showContent() {
+    document.body.style.visibility = 'visible';
+    document.body.style.opacity = 1;
+}
+</script>   
+    </div>
+
+    <p class="h-card vcard">
+
+    <a href=https://toughcactus.github.io/ class="p-name u-url url fn" rel="me">Dorothy</a> 
+
+    
+
+    
+</p> 
+</footer>
+
+        
+    </div>
+</body>
+</html>

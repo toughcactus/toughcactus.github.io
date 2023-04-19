@@ -1,0 +1,248 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>类 on 苔滑非关雨，松鸣不假风。</title>
+    <link>https://toughcactus.github.io/tags/%E7%B1%BB/</link>
+    <description>苔滑非关雨，松鸣不假风。 (类)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All Rights Reserved.</copyright>
+    
+    <atom:link href="https://toughcactus.github.io/tags/%E7%B1%BB/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>C&#43;&#43; &gt; 类 &gt; 构造函数</title>
+      <link>https://toughcactus.github.io/post/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/%E6%9E%84%E9%80%A0%E5%87%BD%E6%95%B0/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;构造函数&lt;/li&gt;
+&lt;li&gt;初始值列表&lt;/li&gt;
+&lt;li&gt;析构函数&lt;/li&gt;
+&lt;li&gt;析构函数的合成版本&lt;/li&gt;
+&lt;li&gt;默认构造函数&lt;/li&gt;
+&lt;li&gt;编译器合成的默认构造函数&lt;/li&gt;
+&lt;li&gt;委托构造函数&lt;/li&gt;
+&lt;li&gt;转换构造函数&lt;/li&gt;
+&lt;li&gt;直接初始化&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、构造函数
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;构造类对象时调用，初始化所有数据成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;建议为 内置类型 | 顶层const对象 | 左值引用 提供类内初始值或者安排在初始值列表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;构造函数和类同名，没有返回类型&lt;/li&gt;
+&lt;li&gt;不能声明为const&lt;/li&gt;
+&lt;li&gt;构造顶层const对象时，构造函数结束之后对象才具有顶层const属性&lt;/li&gt;
+&lt;li&gt;在函数体执行之前，已完成数据成员的初始化，按照它们在类中出现的顺序进行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、初始值列表
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;使用给定值初始化数据成员&lt;/li&gt;
+&lt;li&gt;建议与数据成员在类中的出现顺序一致&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、析构函数
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;销毁类对象时，对其调用析构函数&lt;/li&gt;
+&lt;li&gt;函数名为~后接类名，没有返回值，不接受参数&lt;/li&gt;
+&lt;li&gt;不能被重载，一个类只有一个析构函数&lt;/li&gt;
+&lt;li&gt;在析构函数中，先执行函数体，再在隐含的析构阶段销毁成员；成员按初始化顺序的逆序销毁&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、析构函数的合成版本
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;如果未定义析构函数，编译器提供合成版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+五、默认构造函数
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;参数列表为空，或参数均有默认实参的构造函数&lt;/li&gt;
+&lt;li&gt;默认初始化类对象时调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+六、编译器合成的默认构造函数
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+合成前提
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;所有数据成员均可默认初始化&lt;/li&gt;
+&lt;li&gt;未定义任何构造函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+七、委托构造函数
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;初始值列表有且仅有一个同名构造函数作为入口，代为初始化对象&lt;/li&gt;
+&lt;li&gt;先执行受委托构造函数的初始值列表和函数体，之后把控制权交还给委托者的函数体&lt;/li&gt;
+&lt;li&gt;受委托构造函数通常在初始值列表中初始化了所有数据成员，委托者只传递自己有的参数，其他数据成员使用默认值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/source/委托构造函数/&#34;&gt;委托构造函数&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+  &lt;a href=&#34;https://toughcactus.github.io/code/委托构造函数.cpp&#34;&gt;委托构造函数.cpp | 下载&lt;/a&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-9&#34;&gt;
+八、转换构造函数
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;只接受一个实参，或者除第一个参数外均有默认实参的构造函数&lt;/li&gt;
+&lt;li&gt;定义转换规则，支持隐式转换，声明为explicit则只支持显式转换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-10&#34;&gt;
+1. 举例 | string | const char* 到string是隐式转换
+&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-11&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-11&#34;&gt;
+2. 只允许一步类型转换
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-11&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;函数F接受A类型变量&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;A类型支持B-&amp;gt;A的隐式转换&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;B类型支持C-&amp;gt;B的隐式转换&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;函数F可以接受B类型变量，不接受C类型变量&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-12&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-12&#34;&gt;
+3. explict关键字
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-12&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;只用于转换构造函数 | 只在声明时给出&lt;/li&gt;
+&lt;li&gt;声明为显式构造函数 | 定义显式转换规则&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-13&#34; class=&#34;outline-4&#34;&gt;
+&lt;h4 id=&#34;headline-13&#34;&gt;
+1. 举例 | vector | 接受容量参数的构造函数是explicit的
+&lt;/h4&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-14&#34; class=&#34;outline-4&#34;&gt;
+&lt;h4 id=&#34;headline-14&#34;&gt;
+2. 不再用于隐式转换
+&lt;/h4&gt;
+&lt;div id=&#34;outline-text-headline-14&#34; class=&#34;outline-text-4&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;函数F接受A类型变量&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;A类型有显式构造函数，支持B-&amp;gt;A&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;ol&gt;
+&lt;li&gt;函数F不接受B类型变量&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-15&#34; class=&#34;outline-4&#34;&gt;
+&lt;h4 id=&#34;headline-15&#34;&gt;
+3. 使用场景
+&lt;/h4&gt;
+&lt;div id=&#34;outline-text-headline-15&#34; class=&#34;outline-text-4&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;直接初始化时，可以匹配显式构造函数&lt;/li&gt;
+&lt;li&gt;显式强制转换 | static_cast&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-16&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-16&#34;&gt;
+九、直接初始化
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-16&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;对类类型匹配构造函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-17&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-17&#34;&gt;
+举例
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-17&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;使用圆括号初始化类对象&lt;/li&gt;
+&lt;li&gt;使用emplace为容器添加成员&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

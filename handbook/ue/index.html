@@ -1,0 +1,712 @@
+<!DOCTYPE html>
+
+
+<html lang="en-us" data-theme="">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>虚幻引擎 - 苔滑非关雨，松鸣不假风。</title>
+
+<meta name="description" content="Handbook of UE">
+
+
+
+
+
+<link rel="icon" type="image/x-icon" href="https://toughcactus.github.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://toughcactus.github.io/favicon.png">
+
+
+<style>
+  body {
+    visibility: hidden;
+    opacity: 0;
+  }
+</style>
+
+<noscript>
+  <style>
+    body {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</noscript>
+
+
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <link rel="stylesheet" href="https://toughcactus.github.io/css/style.min.aac3b3a2a3235d20a652d9ccde7ec59be09f74c45de387513f681d02f3912b95.css" integrity="sha256-qsOzoqMjXSCmUtnM3n7Fm&#43;CfdMRd44dRP2gdAvORK5U=">
+    
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <script src="https://toughcactus.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js" type="text/javascript" charset="utf-8" integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script>
+    
+
+
+
+
+
+
+
+<meta property="og:title" content="虚幻引擎" />
+<meta property="og:description" content="Handbook of UE" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/handbook/ue/" /><meta property="article:section" content="" />
+<meta property="article:published_time" content="2023-03-25T00:00:00+00:00" />
+<meta property="article:modified_time" content="2023-03-25T00:00:00+00:00" />
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="虚幻引擎"/>
+<meta name="twitter:description" content="Handbook of UE"/>
+
+
+
+
+
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header class="common-header"> 
+            
+                <div class="header-top">
+    <h1 class="site-title">
+    <a href="/">苔滑非关雨，松鸣不假风。</a>
+</h1>
+    <ul class="social-icons">
+
+
+
+
+    <li>
+            <a href="https://toughcactus.github.io/index.xml" title="RSS" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+</ul>
+</div>
+
+    <nav>
+        
+        
+        <a class="" href="https://toughcactus.github.io/about/" title="">About</a>
+        
+        <a class="" href="https://toughcactus.github.io/handbook/" title="">手册</a>
+        
+        <a class="" href="https://toughcactus.github.io/tags/" title="">Tags</a>
+        
+        <a class="" href="https://toughcactus.github.io/posts/" title="">Archive</a>
+        
+        <a class="" href="https://toughcactus.github.io/%E9%98%BF%E6%9F%94/" title="">阿柔</a>
+        
+    </nav>
+
+
+
+
+
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+    
+        <nav class="post-navigation">
+        
+            <a href="https://toughcactus.github.io/handbook/" title="Handbook">手册</a>
+        
+            <a href="https://toughcactus.github.io/handbook/emacs/" title="Emacs">Emacs</a>
+        
+            <a href="https://toughcactus.github.io/handbook/ue/" title="Unreal Engine">虚幻引擎</a>
+        
+            <a href="https://toughcactus.github.io/handbook/dev-tools/" title="Development Tools">开发工具</a>
+        
+            <a href="https://toughcactus.github.io/handbook/share/" title="Share">分享</a>
+        
+            <a href="https://toughcactus.github.io/handbook/cpp/" title="CPP">C&#43;&#43;</a>
+        
+            <a href="https://toughcactus.github.io/handbook/shell/" title="ShellScript">Shell脚本</a>
+        
+        </nav>
+    
+
+    <article class="post h-entry">
+        <div class="post-header">
+            <header>
+                <h1 class="p-name post-title">虚幻引擎</h1>
+
+                
+            </header>
+        </div>
+        <div class="content e-content">
+            <ul>
+<li><a href="/post/使用emacs开发unrealc++项目/">使用Emacs开发Unreal C++项目</a></li>
+<li>
+<p>虚幻初级课程 笔记</p>
+<ul>
+<li>源码 &gt; <a href="/source/thebasics/">TheBasics</a></li>
+</ul>
+<ol>
+<li>
+<p>初识虚幻引擎</p>
+<ul>
+<li>
+<p>虚幻编辑器</p>
+<ul>
+<li>1.1 <a href="/post/1.1熟悉虚幻编辑器/">熟悉虚幻编辑器</a></li>
+<li>1.2 <a href="/post/1.2创建c++类/">创建C++类</a>       </li>
+</ul>
+</li>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>1.3 <a href="/post/1.3项目结构/">项目结构</a></li>
+<li>1.4 <a href="/post/1.4c++类源码阅读/">C++类源码阅读</a></li>
+</ul>
+</li>
+<li>
+<p>General</p>
+<ul>
+<li>1.5 <a href="/post/1.5基础知识/">基础知识</a></li>
+<li>1.6 <a href="/post/1.6使用unrealbuildtool/">使用UnrealBuildTool</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>虚幻C++ &gt; 输出日志</p>
+<ul>
+<li>API &gt; 1. <a href="/post/1.日志类别/">日志类别</a></li>
+<li>API &gt; 2. <a href="/post/2.字符串/">字符串</a></li>
+<li>API &gt; 3. <a href="/post/3.ue_log宏/">UE_LOG宏</a></li>
+<li>API &gt; 4. <a href="/post/4.aactor类型/">AActor类型</a></li>
+<li>2 <a href="/post/2.输出日志/">输出日志</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻C++ &gt; 在屏幕输出日志</p>
+<ul>
+<li>API &gt; 5. <a href="/post/5.颜色结构体/">颜色结构体</a></li>
+<li>API &gt; 6. <a href="/post/6.uengine类型/">UEngine类型</a></li>
+<li>3 <a href="/post/3.在屏幕输出日志/">在屏幕输出日志</a></li>
+</ul>
+</li>
+<li>
+<p>添加静态网格组件</p>
+<ul>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>API &gt; 7. <a href="/post/7.uproperty宏/">UPROPERTY宏</a></li>
+<li>API &gt; AActor类型</li>
+<li>API &gt; 8. <a href="/post/8.ustaticmeshcomponent类型/">UStaticMeshComponent类型</a></li>
+<li>4.1 <a href="/post/4.1添加静态网格组件/">添加静态网格组件</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻编辑器</p>
+<ul>
+<li>4.2 <a href="/post/4.2为静态网格组件绑定模型/">为静态网格组件绑定模型</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>虚幻编辑器 &gt; 材质类和材质实例类</p>
+<ul>
+<li>API &gt; 1. <a href="/post/1.向量类型/">向量类型</a></li>
+<li>5.1 <a href="/post/5.1材质类和材质实例类/">材质类和材质实例类</a></li>
+<li>5.2 <a href="/post/5.2基于c++类的蓝图类/">基于C++类的蓝图类</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻C++ &gt; 设置材质参数</p>
+<ul>
+<li>API &gt; 颜色结构体</li>
+<li>API &gt; UStaticMeshComponent类型</li>
+<li>API &gt; 9. <a href="/post/9.umaterialinstancedynamic类型/">UMaterialInstanceDynamic类型</a></li>
+<li>6 <a href="/post/6.设置材质参数/">设置材质参数</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻C++ &gt; 让Actor对象运动</p>
+<ul>
+<li>API &gt; 10. <a href="/post/10.uenum宏/">UENUM宏</a></li>
+<li>API &gt; 11. <a href="/post/11.ftransform结构体/">FTransform结构体</a></li>
+<li>API &gt; UPROPERTY宏         </li>
+<li>API &gt; 12. <a href="/post/12.ustruct宏/">USTRUCT宏</a></li>
+<li>API &gt; AActor类型</li>
+<li>API &gt; 13. <a href="/post/13.fmath库/">FMath库</a></li>
+<li>API &gt; 14. <a href="/post/14.uworld类型/">UWorld类型</a></li>
+<li>API &gt; 15. <a href="/post/15.向量结构体/">向量结构体</a></li>
+<li>7 <a href="/post/7.让actor对象运动/">让Actor对象运动</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻C++ &gt; 让材质颜色周期性随机</p>
+<ul>
+<li>API &gt; AActor类型</li>
+<li>API &gt; 16. <a href="/post/16.ftimermanager结构体/">FTimerManager结构体</a></li>
+<li>8 <a href="/post/8.让材质颜色周期性随机/">让材质颜色周期性随机</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻C++ &gt; 创建Actor对象</p>
+<ul>
+<li>API &gt; UPROPERTY宏         </li>
+<li>9.1 <a href="/post/9.1创建geometryobject类/">创建GeometryObject类</a></li>
+<li>API &gt; Actor类型</li>
+<li>API &gt; UWorld类型</li>
+<li>API &gt; 17. <a href="/post/17.类模板/">类模板</a></li>
+<li>API &gt; 18. <a href="/post/18.数组类型/">数组类型</a></li>
+<li>9.2 <a href="/post/9.2创建actor对象/">创建Actor对象</a></li>
+</ul>
+</li>
+<li>
+<p>基于C++的蓝图类2</p>
+<ul>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>API &gt; 19. <a href="/post/19.ufunction宏/">UFUNCTION宏</a></li>
+<li>10.1 <a href="/post/10.1添加获取和设置geometrysetting的接口/">添加获取和设置GeometrySetting的接口</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻编辑器</p>
+<ul>
+<li>10.2 <a href="/post/10.2基于c++类的蓝图类2/">基于C++类的蓝图类2</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>委托机制 C++客户端</p>
+<ul>
+<li>
+<p>General</p>
+<ul>
+<li>基础知识</li>
+</ul>
+</li>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>API &gt; 20. <a href="/post/20.委托/">委托</a></li>
+<li>API &gt; FTimerManager结构体</li>
+<li>API &gt; AActor类型</li>
+<li>11 <a href="/post/11.销毁actor对象/">销毁Actor对象</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>委托机制 蓝图客户端 和 C++客户端</p>
+<ul>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>API &gt; 委托</li>
+<li>12.1 <a href="/post/12.1材质颜色改变时通知/">材质颜色改变时通知</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻编辑器</p>
+<ul>
+<li>API &gt; 2. <a href="/post/2.字符串/">字符串</a></li>
+<li>12.2 <a href="/post/12.2在蓝图中订阅委托并实现处理函数/">在蓝图中订阅委托并实现处理函数</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>12.3 <a href="/post/12.3在c++侧订阅委托并注册处理函数/">在C++侧订阅委托并注册处理函数</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>初识GameModeBase</p>
+<ul>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>API &gt; AActor类型</li>
+<li>API &gt; UWorld类型</li>
+</ul>
+</li>
+<li>
+<p>General</p>
+<ul>
+<li>13.1 <a href="/post/13.1虚幻引擎主要类概述/">虚幻引擎主要类概述</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻编辑器</p>
+<ul>
+<li>13.2 &gt; <a href="/post/13.2熟悉gamemode/">熟悉GameMode</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>使用Pawn</p>
+<ul>
+<li>
+<p>虚幻编辑器</p>
+<ul>
+<li>API &gt; 3. <a href="/post/3.键位绑定/">键位绑定</a></li>
+<li>14.1 <a href="/post/14.1创建派生自apawn的c++类并为其绑定键位/">创建派生自APawn的C++类并为其绑定键位</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>API &gt; FVector</li>
+<li>API &gt; 21. <a href="/post/21.apawn类型/">APawn类型</a></li>
+<li>API &gt; 22. <a href="/post/22.uinputcomponent类型/">UInputComponent类型</a></li>
+<li>API &gt; 23. <a href="/post/23.agamemodebase类型/">AGameModeBase类型</a></li>
+<li>14.2 <a href="/post/14.2实现geometrypawn/">实现GeometryPawn</a></li>
+<li>14.3 <a href="/post/14.3使用geometrypawn/">使用GeometryPawn</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>在多个Pawn对象之间进行切换</p>
+<ul>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>API &gt; 24. <a href="/post/24.uscenecomponent类型/">USceneComponent类型</a></li>
+<li>API &gt; 25. <a href="/post/25.ucameracomponent类型/">UCameraComponent类型</a></li>
+<li>API &gt; APawn类型</li>
+<li>15.1 <a href="/post/15.1添加cameracomponent/">添加CameraComponent</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻编辑器</p>
+<ul>
+<li>15.2 <a href="/post/15.2创建基于geometrypawn的蓝图类/">创建基于GeometryPawn的蓝图类</a></li>
+<li>15.3 <a href="/post/15.3创建派生自aplayercontroller的c++类并为其绑定键位/">创建派生自APlayerController的C++类并为其绑定键位</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>API &gt; 26. <a href="/post/26.ugameplaystatics类型/">UGameplayStatics类型</a></li>
+<li>API &gt; 27. <a href="/post/27.aplayercontroller类型/">APlayerController类型</a></li>
+<li>API &gt; AActor类型</li>
+<li>API &gt; UInputComponent类型</li>
+<li>15.4 <a href="/post/15.4切换pawn/">切换Pawn</a></li>
+<li>15.5 <a href="/post/15.5使用geometryplayercontroller/">使用GeometryPlayerController</a></li>
+<li>15.6 <a href="/post/15.6比较apawn和aplayercontroller的输入处理/">比较APawn和APlayerController的输入处理</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻编辑器</p>
+<ul>
+<li>15.7 <a href="/post/15.7查看切换pawn日志/">查看切换Pawn日志</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>15.8 <a href="/post/15.8修复键位滞粘/">修复键位滞粘</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>General &gt; 项目编译</p>
+<ul>
+<li>16.1 <a href="/post/16.1源码的编译过程/">源码的编译过程</a></li>
+<li>16.2 <a href="/post/16.2宏和生成文件/">宏和生成文件</a></li>
+</ul>
+</li>
+<li>
+<p>垃圾回收器</p>
+<ul>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>API &gt; AActor类型          </li>
+<li>17.1 <a href="/post/17.1使用geometryhub动态创建actor对象/">使用GeometryHub动态创建Actor对象</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻编辑器</p>
+<ul>
+<li>17.2 <a href="/post/17.2垃圾回收器/">垃圾回收器</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</li>
+<li>
+<p>虚幻进阶课程 笔记</p>
+<ul>
+<li>源码 &gt; <a href="/source/shoottraining/">ShootTraining</a>        </li>
+<li>
+<p>Part 1 &gt; 角色动作和动画</p>
+<ul>
+<li>
+<p>虚幻C++ &gt; 在本地运行ShooterGame示例项目</p>
+<ul>
+<li>1.1 <a href="/post/1.1在本地运行shootergame示例项目/">在本地运行ShooterGame示例项目</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻编辑器 &gt; 初始化ShootTraining项目</p>
+<ul>
+<li>1.2 <a href="/post/1.2初始化shoottraining项目/">初始化ShootTraining项目</a></li>
+</ul>
+</li>
+<li>
+<p>General &gt; 代码规范</p>
+<ul>
+<li>1.3 <a href="/post/1.3代码规范/">代码规范</a></li>
+</ul>
+</li>
+<li>
+<p>ACharacter类</p>
+<ul>
+<li>
+<p>虚幻编辑器</p>
+<ul>
+<li>1.4.1 <a href="/post/1.4.1创建派生自acharacter的c++类/">创建派生自ACharacter的C++类</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻C++</p>
+<ul>
+<li>API &gt; 28. <a href="/post/28.acharacter类型/">ACharacter类型</a></li>
+<li>1.4.2 <a href="/post/1.4.2设置stgamemodebase/">设置STGameModeBase</a></li>
+</ul>
+</li>
+<li>
+<p>虚幻编辑器</p>
+<ul>
+<li>1.4.3 <a href="/post/1.4.3设置bp_stbasecharacter/">设置BP_STBaseCharacter</a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+        </div>
+        
+
+    
+
+
+<div class="post-info">
+    
+        <div class="post-date dt-published">2023-03-25</div>
+    
+
+    <a class="post-hidden-url u-url" href="https://toughcactus.github.io/handbook/ue/">https://toughcactus.github.io/handbook/ue/</a>
+    <a href="https://toughcactus.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">Dorothy</a>
+
+
+    <div class="post-taxonomies">
+        
+            
+    </div>
+</div>
+
+    </article>
+
+    
+        
+        
+    
+
+    
+
+    
+        
+
+
+
+
+
+
+
+    
+
+        </main>
+        
+            <footer class="common-footer">
+    
+    
+
+    <div class="common-footer-bottom">
+        
+        <div class="copyright">
+            <p>© Dorothy, 2023<br>
+            Powered by <a target="_blank" rel="noopener noreferrer" href="https://gohugo.io/">Hugo</a>, theme <a target="_blank" rel="noopener noreferrer" href="https://github.com/mitrichius/hugo-theme-anubis">Anubis</a>.<br>
+            
+            </p>  
+        </div> 
+
+        
+
+    
+
+
+
+    <button class="theme-switcher">
+        Dark theme
+    </button>
+
+
+<script>
+const STORAGE_KEY = 'user-color-scheme'
+const defaultTheme = "auto"
+
+let currentTheme
+let switchButton
+let autoDefinedScheme = window.matchMedia('(prefers-color-scheme: dark)')
+
+const autoChangeScheme = e => {
+    currentTheme = e.matches ? 'dark' : 'light'
+    document.documentElement.setAttribute('data-theme', currentTheme)
+    changeButtonText()
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    switchButton = document.querySelector('.theme-switcher')
+    currentTheme = detectCurrentScheme()
+    if (currentTheme == 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark')
+    }
+    if (currentTheme == 'auto') {
+        autoChangeScheme(autoDefinedScheme);
+        autoDefinedScheme.addListener(autoChangeScheme);
+    }
+
+    if (switchButton) {
+        changeButtonText()
+        switchButton.addEventListener('click', switchTheme, false)
+    }
+  
+    showContent()
+})
+
+function detectCurrentScheme() {
+    if (localStorage.getItem(STORAGE_KEY)) {
+        return localStorage.getItem(STORAGE_KEY)
+    } 
+    if (defaultTheme) {
+        return defaultTheme
+    } 
+    if (!window.matchMedia) {
+        return 'light'
+    } 
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
+    }
+    return 'light'
+}
+
+function changeButtonText()
+{   
+    if (switchButton) {
+        switchButton.textContent = currentTheme == 'dark' ?  "Light theme" : "Dark theme"
+    }
+}
+
+function switchTheme(e) {
+    if (currentTheme == 'dark') {
+        localStorage.setItem(STORAGE_KEY, 'light')
+        document.documentElement.setAttribute('data-theme', 'light')
+        currentTheme = 'light'
+    } else {
+        localStorage.setItem(STORAGE_KEY, 'dark')
+        document.documentElement.setAttribute('data-theme', 'dark')
+        currentTheme = 'dark'
+    }
+    changeButtonText()
+}
+
+function showContent() {
+    document.body.style.visibility = 'visible';
+    document.body.style.opacity = 1;
+}
+</script>   
+    </div>
+
+    <p class="h-card vcard">
+
+    <a href=https://toughcactus.github.io/ class="p-name u-url url fn" rel="me">Dorothy</a> 
+
+    
+
+    
+</p> 
+</footer>
+
+        
+    </div>
+</body>
+</html>

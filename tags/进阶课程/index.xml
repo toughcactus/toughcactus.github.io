@@ -1,0 +1,794 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>进阶课程 on 苔滑非关雨，松鸣不假风。</title>
+    <link>https://toughcactus.github.io/tags/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/</link>
+    <description>苔滑非关雨，松鸣不假风。 (进阶课程)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All Rights Reserved.</copyright>
+    
+    <atom:link href="https://toughcactus.github.io/tags/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 1.3代码规范</title>
+      <link>https://toughcactus.github.io/post/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;文件.clang-format&lt;/li&gt;
+&lt;li&gt;文件.gitignore&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、代码规范
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;按个人习惯来，非建议&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.unrealengine.com/5.1/en-US/epic-cplusplus-coding-standard-for-unreal-engine/&#34;&gt;参考&lt;/a&gt;    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;大括号&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;放在新行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;缩进&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;虚幻引擎建议使用制表符，也可以使用空格&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、.clang-format文件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;很多项目都包含该文件，描述了管理代码文件的统一格式&lt;/li&gt;
+&lt;li&gt;我们可以通过该文件设置格式化代码的规则&lt;/li&gt;
+&lt;li&gt;YAML标记文件&lt;/li&gt;
+&lt;li&gt;在ShootTraining中添加.clang-format文件&lt;/li&gt;
+&lt;li&gt;每行遵循格式 key: value&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://clang.llvm.org/docs/ClangFormatStyleOptions.html&#34;&gt;参考&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+1. 设置应用该格式的语言
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;如果项目中只一种开发语言，或者所有开发语言使用相同规范，可忽略该配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-yaml&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;Language&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Cpp&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+2. Style
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Google&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;一个制表符对应2个空格，大括号不在新行&lt;/p&gt;
+&lt;div class=&#34;src src-yaml&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;BasedOnStyle&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Google&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Microsoft&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;一个制表符对应4个空格，大括号在新行&lt;/p&gt;
+&lt;div class=&#34;src src-yaml&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;BasedOnStyle&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Microsoft&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+3. 缩进宽度
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;div class=&#34;src src-yaml&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;IndentWidth&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;4&amp;#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+4. 缩进使用制表符或空格
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;缩进使用空格&lt;/p&gt;
+&lt;div class=&#34;src src-yaml&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;UseTab&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Never&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;缩进使用制表符&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;源文件中既有空格又有制表符&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-yaml&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;UseTab&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Always&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+5. 制表符宽度
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;每6个空格替换一个制表符，当缩进使用制表符时，效果很糟糕&lt;/p&gt;
+&lt;div class=&#34;src src-yaml&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;TabWidth&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;6&amp;#39;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-8&#34;&gt;
+6. 设置大括号位置
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;不在新行&lt;/p&gt;
+&lt;div class=&#34;src src-yaml&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;BreakBeforeBraces&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Attach&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在新行&lt;/p&gt;
+&lt;div class=&#34;src src-yaml&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;BreakBeforeBraces&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Allman&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-9&#34;&gt;
+7. 其他设置
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;div class=&#34;src src-yaml&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-yaml&#34; data-lang=&#34;yaml&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;ColumnLimit&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;140&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;AccessModifierOffset&lt;/span&gt;: &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;-4&amp;#39;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;SortIncludes&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;AllowShortBlocksOnASingleLine&lt;/span&gt;: &lt;span style=&#34;color:#66d9ef&#34;&gt;false&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;AlignAfterOpenBracket&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;DontAlign&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;AllowShortFunctionsOnASingleLine&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Inline&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#f92672&#34;&gt;PointerAlignment&lt;/span&gt;: &lt;span style=&#34;color:#ae81ff&#34;&gt;Left&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-10&#34;&gt;
+三、.gitignore文件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-10&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;告诉Git，排除哪些文件和文件夹&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/github/gitignore/blob/main/UnrealEngine.gitignore&#34;&gt;参考&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-11&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-11&#34;&gt;
+四、虚幻引擎蓝图命名格式
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-11&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/Allar/ue5-style-guide&#34;&gt;参考&lt;/a&gt;&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/代码规范/蓝图命名格式.png&#34; alt=&#34;/pic/代码规范/蓝图命名格式.png&#34; title=&#34;/pic/代码规范/蓝图命名格式.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.1在本地运行ShooterGame示例项目</title>
+      <link>https://toughcactus.github.io/post/1.1%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8Cshootergame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.1%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8Cshootergame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、下载ShooterGame
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Epic Games Launcher &amp;gt; Samples &amp;gt; Shooter Game&lt;/li&gt;
+&lt;li&gt;支持引擎版本4.0 - 4.27，当前使用引擎版本5.1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、需要修改的问题
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;UMatineeCameraShake已被ULegacyCameraShake替代&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PLATFORM_PS4&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;一个不合适的改法是在引擎代码中，紧接着SWITCH定义该宏&lt;/li&gt;
+&lt;li&gt;另一个麻烦但更合理的改法是，屏蔽该宏的出现&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Source/ShooterGame/Private/Player/ShhoterCharacter.cpp:322&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;条件运算符的第二个和第三个操作数如果类型不一致，存在转换&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://learn.microsoft.com/zh-cn/cpp/cpp/conditional-operator-q?view=msvc-170&#34;&gt;参考&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;AController*和AActor*可以相互转换，此处有歧义&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、运行效果
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在本地运行ShooterGame示例项目/运行效果.png&#34; alt=&#34;/pic/在本地运行ShooterGame示例项目/运行效果.png&#34; title=&#34;/pic/在本地运行ShooterGame示例项目/运行效果.png&#34; width=&#34;600&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.4.2设置STGameModeBase</title>
+      <link>https://toughcactus.github.io/post/1.4.2%E8%AE%BE%E7%BD%AEstgamemodebase/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.4.2%E8%AE%BE%E7%BD%AEstgamemodebase/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、头文件包含
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;查看源文件，指明上级文件夹Player&lt;/p&gt;
+&lt;p width=&#34;600&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置STGameModeBase/头文件路径.png&#34; alt=&#34;/pic/设置STGameModeBase/头文件路径.png&#34; title=&#34;/pic/设置STGameModeBase/头文件路径.png&#34;/&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置头文件搜索路径&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ShootTraining.Build.cs&lt;/p&gt;
+&lt;div class=&#34;src src-c#&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  PublicIncludePaths.AddRange(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;[] { &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining/Public/Player&amp;#34;&lt;/span&gt; });&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在STGameModeBase中使用STBaseCharacter和STPlayerController
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在源文件包含头文件&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;STBaseCharacter.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;STPlayerController.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加函数成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在默认构造函数中调用  &lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTGameModeBase&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitCharacterAndPlayerController()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      DefaultPawnClass &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;StaticClass();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerControllerClass &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; ASTPlayerController&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;StaticClass();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;实现默认构造函数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;public&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ASTGameModeBase&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;ASTGameModeBase()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      InitCharacterAndPlayerController();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、为STBaseCharacter添加Camera组件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;头文件中添加前向声明&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UCameraComponent&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;源文件中添加头文件&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Camera/CameraComponent.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加数据成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;protected&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Components&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UCameraComponent &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;Camera;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加函数成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在构造函数中调用&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitCameraComponent()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      Camera &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; CreateDefaultSubobject&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;UCameraComponent&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CameraComponent&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      Camera&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;SetupAttachment(GetRootComponent());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.2初始化ShootTraining项目</title>
+      <link>https://toughcactus.github.io/post/1.2%E5%88%9D%E5%A7%8B%E5%8C%96shoottraining%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.2%E5%88%9D%E5%A7%8B%E5%8C%96shoottraining%E9%A1%B9%E7%9B%AE/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;将ShooterGame作为内容包，基于其开发ShootTraining&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如有室内设计师提供游戏资料，我们基于此开发游戏&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建ShootTraining项目
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Blank&lt;/li&gt;
+&lt;li&gt;Blueprint&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、配置ShootTraining
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加Copyright&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;项目设置 &amp;gt; Project &amp;gt; Description &amp;gt; Legal &amp;gt; Copyright Notice&lt;/li&gt;
+&lt;li&gt;Shoot Training Game, All Rights Reserved.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;关卡设置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加关卡文件夹 Content/Levels&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建关卡&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/创建关卡.png&#34; alt=&#34;/pic/初始化ShootTraining项目/创建关卡.png&#34; title=&#34;/pic/初始化ShootTraining项目/创建关卡.png&#34; width=&#34;200&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;选择Basic&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/创建关卡-Basic.png&#34; alt=&#34;/pic/初始化ShootTraining项目/创建关卡-Basic.png&#34; title=&#34;/pic/初始化ShootTraining项目/创建关卡-Basic.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;命名为DefaultMap，保存到Content/Levels&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置DefaultMap作为EditorStartupMap和GameDefaultMap&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;项目设置 &amp;gt; Project &amp;gt; Maps &amp;amp; Modes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不使用预编译头文件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ShootTraining.Build.cs&lt;/p&gt;
+&lt;div class=&#34;src src-c#&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;// PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  PCHUsage = PCHUsageMode.NoPCHs;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;添加外部资产文件夹 Content/ExternalContent&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、从ShooterGame获取的资产
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;打开ShooterGame项目，在内容浏览器选中Content/Animations/TTP_Animations&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;右键 &amp;gt; Migrate&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/ContentBrowser-Migrate.png&#34; alt=&#34;/pic/初始化ShootTraining项目/ContentBrowser-Migrate.png&#34; title=&#34;/pic/初始化ShootTraining项目/ContentBrowser-Migrate.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取消Sounds勾选&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/Migrate-取消Sounds勾选.png&#34; alt=&#34;/pic/初始化ShootTraining项目/Migrate-取消Sounds勾选.png&#34; title=&#34;/pic/初始化ShootTraining项目/Migrate-取消Sounds勾选.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过虚幻编辑器，将Content目录下的Animations，Characters，Environment移动到ExternalContent目录下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不能直接迁移到ExternalContent，虚幻引擎会检查目录，这些资产的上级目录要求是Content，即使根目录是Content也无法通过检查&lt;/li&gt;
+&lt;li&gt;不能直接将三个文件夹移动到ExternalContent中，会导致资产之间的相互引用路径出错&lt;/li&gt;
+&lt;li&gt;Animations，Characters，Environment三个文件夹里的内容都是和TTP_Animations相关的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;打开ShootTraining项目，为ExternalContent设置文件夹颜色&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;选中Content/ExternalContent，右键&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor.png&#34; alt=&#34;/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor.png&#34; title=&#34;/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor.png&#34; width=&#34;400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor-Result.png&#34; alt=&#34;/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor-Result.png&#34; title=&#34;/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor-Result.png&#34; width=&#34;200&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/Content结构.png&#34; alt=&#34;/pic/初始化ShootTraining项目/Content结构.png&#34; title=&#34;/pic/初始化ShootTraining项目/Content结构.png&#34;/&gt;       &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、基于蓝图创建C++项目
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;添加C++类即可&lt;/li&gt;
+&lt;li&gt;创建蓝图项目的时间开销明显小于创建C++项目的时间开销&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加C++类 STGameModeBase&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;不设置类类型&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/STGameModeBase.png&#34; alt=&#34;/pic/初始化ShootTraining项目/STGameModeBase.png&#34; title=&#34;/pic/初始化ShootTraining项目/STGameModeBase.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Content同级目录出现C++ Classes文件夹&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/ContentBrowser-C++Classes.png&#34; alt=&#34;/pic/初始化ShootTraining项目/ContentBrowser-C++Classes.png&#34; title=&#34;/pic/初始化ShootTraining项目/ContentBrowser-C++Classes.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置关卡的GameModeBase为STGameModeBase&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/WorldSettings-STGameModeBase.png&#34; alt=&#34;/pic/初始化ShootTraining项目/WorldSettings-STGameModeBase.png&#34; title=&#34;/pic/初始化ShootTraining项目/WorldSettings-STGameModeBase.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+五、脚本
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;build.sh&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  BuildScript&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;EpicGames/UE_5.1/Engine/Build/BatchFiles/Mac/Build.sh&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ProjectName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Project&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Projects/5.1.1/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.uproject&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Target&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Editor&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  $BuildScript $Target Mac Development &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$Project&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; -waitmutex -NoHotReload&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;open_editor.sh&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UnrealEditor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;EpicGames/UE_5.1/Engine/Binaries/Mac/UnrealEditor.app&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ProjectName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Project&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Projects/5.1.1/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.uproject&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  open $Project&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;generate_project_files.sh&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  GenerateProjectFilesScript&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;EpicGames/UE_5.1/Engine/Build/BatchFiles/Mac/GenerateProjectFiles.sh&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ProjectName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Project&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Projects/5.1.1/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.uproject&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  $GenerateProjectFilesScript -projectfiles -project&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$Project -game -rocket -progress -VSCode 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# $GenerateProjectFilesScript -projectfiles -project=$Project -game -rocket -progress -XCodeProjectFiles&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  EngineCCDst&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;EpicGames/UE_5.1/compile_commands.json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  EngineCCSrc&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;EpicGames/UE_5.1/.vscode/compileCommands_Default.json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ProjectCCDst&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Projects/5.1.1/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/compile_commands.json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ProjectCCSrc&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Projects/5.1.1/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/.vscode/compileCommands_&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  cp $EngineCCSrc $EngineCCDst
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  cp $ProjectCCSrc $ProjectCCDst&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+六、查看项目源码
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;可以在源码文件看见注释的版权信息&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/版权注释.png&#34; alt=&#34;/pic/初始化ShootTraining项目/版权注释.png&#34; title=&#34;/pic/初始化ShootTraining项目/版权注释.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.4.1创建派生自ACharacter的C&#43;&#43;类</title>
+      <link>https://toughcactus.github.io/post/1.4.1%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAacharacter%E7%9A%84c&#43;&#43;%E7%B1%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.4.1%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAacharacter%E7%9A%84c&#43;&#43;%E7%B1%BB/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建派生自ACharacter的C++类 STBaseCharacter
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在子目录Player下创建，命名为STBaseCharacter&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自ACharacter的C++类/C++Classes-Player-STBaseCharacter.png&#34; alt=&#34;/pic/创建派生自ACharacter的C++类/C++Classes-Player-STBaseCharacter.png&#34; title=&#34;/pic/创建派生自ACharacter的C++类/C++Classes-Player-STBaseCharacter.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;公有类&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自ACharacter的C++类/C++Classes-Player-STBaseCharacter-Public.png&#34; alt=&#34;/pic/创建派生自ACharacter的C++类/C++Classes-Player-STBaseCharacter-Public.png&#34; title=&#34;/pic/创建派生自ACharacter的C++类/C++Classes-Player-STBaseCharacter-Public.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、创建派生自APlayerController的C++类 STPlayerController
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;在子目录Player下创建，命名为STPlayerController&lt;/li&gt;
+&lt;li&gt;公有类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自ACharacter的C++类/C++Classes-Player-STPlayerController.png&#34; alt=&#34;/pic/创建派生自ACharacter的C++类/C++Classes-Player-STPlayerController.png&#34; title=&#34;/pic/创建派生自ACharacter的C++类/C++Classes-Player-STPlayerController.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.4.3设置BP_STBaseCharacter</title>
+      <link>https://toughcactus.github.io/post/1.4.3%E8%AE%BE%E7%BD%AEbp_stbasecharacter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.4.3%E8%AE%BE%E7%BD%AEbp_stbasecharacter/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、在虚幻编辑器中查看
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/WorldSettings-STGameModeBase.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/WorldSettings-STGameModeBase.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/WorldSettings-STGameModeBase.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、创建蓝图类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;创建文件夹 Content/Player&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Content目录下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;BP_STGameModeBase&lt;/p&gt;
+&lt;p width=&#34;600&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/ContentBrowser-Content.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/ContentBrowser-Content.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/ContentBrowser-Content.png&#34;/&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Content/Player目录下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;BP_STBaseCharacter&lt;/li&gt;
+&lt;li&gt;BP_STPlayerController&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/ContentBrowser-Content-Player.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/ContentBrowser-Content-Player.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/ContentBrowser-Content-Player.png&#34;/&gt;    &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、设置关卡使用蓝图类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/WorldSettings-BP_.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/WorldSettings-BP_.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/WorldSettings-BP_.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、打开BP_STBaseCharacter
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+组件信息
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Component.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Component.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Component.png&#34;/&gt; &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Capsule组件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;根组件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Arrow组件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;角色的前进方向&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Camera组件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;C++中添加&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Mesh组件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;skeletal mesh&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Character Movement&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;纯逻辑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+为Mesh组件绑定HeroTPP
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Mesh绑定HeroTPP&lt;/p&gt;
+&lt;p width=&#34;1400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh-HeroTPP-Lookup.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh-HeroTPP-Lookup.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh-HeroTPP-Lookup.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;材质自动应用HeroTPP&lt;/p&gt;
+&lt;p width=&#34;1400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh-HeroTPP.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh-HeroTPP.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh-HeroTPP.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;移动到合适位置，旋转模型与前进方向一致&lt;/p&gt;
+&lt;p width=&#34;1400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+第三视角
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;分离Camera组件和Mesh组件&lt;/p&gt;
+&lt;p width=&#34;1400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/分离Camera和Mesh.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/分离Camera和Mesh.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/分离Camera和Mesh.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;运行效果图&lt;/p&gt;
+&lt;p width=&#34;800&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/效果图.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/效果图.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/效果图.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

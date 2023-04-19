@@ -1,0 +1,2024 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>虚幻编辑器 on 苔滑非关雨，松鸣不假风。</title>
+    <link>https://toughcactus.github.io/tags/%E8%99%9A%E5%B9%BB%E7%BC%96%E8%BE%91%E5%99%A8/</link>
+    <description>苔滑非关雨，松鸣不假风。 (虚幻编辑器)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All Rights Reserved.</copyright>
+    
+    <atom:link href="https://toughcactus.github.io/tags/%E8%99%9A%E5%B9%BB%E7%BC%96%E8%BE%91%E5%99%A8/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 1.向量类型</title>
+      <link>https://toughcactus.github.io/post/1.%E5%90%91%E9%87%8F%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.%E5%90%91%E9%87%8F%E7%B1%BB%E5%9E%8B/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、1-4维向量
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Constant&lt;/li&gt;
+&lt;li&gt;Constant2Vector&lt;/li&gt;
+&lt;li&gt;Constant3Vector&lt;/li&gt;
+&lt;li&gt;Constant4Vector&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、创建1-4维向量
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;任意区域 右键 搜索&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图类型/Blueprint-CreateConstants.png&#34; alt=&#34;/pic/蓝图类型/Blueprint-CreateConstants.png&#34; title=&#34;/pic/蓝图类型/Blueprint-CreateConstants.png&#34; width=&#34;150&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;快捷键&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;键盘数字 1-4&lt;/li&gt;
+&lt;li&gt;鼠标左键&lt;/li&gt;
+&lt;li&gt;对应1-4维向量实例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、常量 Constant
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图类型/Blueprint-Constant.png&#34; alt=&#34;/pic/蓝图类型/Blueprint-Constant.png&#34; title=&#34;/pic/蓝图类型/Blueprint-Constant.png&#34; width=&#34;120&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、四维常量 Constant4Vector
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图类型/Blueprint-Constant4Vector.png&#34; alt=&#34;/pic/蓝图类型/Blueprint-Constant4Vector.png&#34; title=&#34;/pic/蓝图类型/Blueprint-Constant4Vector.png&#34; width=&#34;120&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;可以用来存储颜色，4个分量分别存放RGBA&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+写值
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;双击vector&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图类型/Blueprint-Constant4Vector-Init1.png&#34; alt=&#34;/pic/蓝图类型/Blueprint-Constant4Vector-Init1.png&#34; title=&#34;/pic/蓝图类型/Blueprint-Constant4Vector-Init1.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在细节面板设置&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图类型/Blueprint-Constant4Vector-Init2.png&#34; alt=&#34;/pic/蓝图类型/Blueprint-Constant4Vector-Init2.png&#34; title=&#34;/pic/蓝图类型/Blueprint-Constant4Vector-Init2.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+五、转换成可输入参数
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;右键&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图类型/Blueprint-ConvertToParameter.png&#34; alt=&#34;/pic/蓝图类型/Blueprint-ConvertToParameter.png&#34; title=&#34;/pic/蓝图类型/Blueprint-ConvertToParameter.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;命名&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图类型/Blueprint-Constant4Vector-Parameter.png&#34; alt=&#34;/pic/蓝图类型/Blueprint-Constant4Vector-Parameter.png&#34; title=&#34;/pic/蓝图类型/Blueprint-Constant4Vector-Parameter.png&#34; width=&#34;150&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 2.字符串</title>
+      <link>https://toughcactus.github.io/post/2.%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建字符串变量 MakeLiteralString
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/字符串/Blueprint-Search-String-MakeLiteralString.png&#34; alt=&#34;/pic/字符串/Blueprint-Search-String-MakeLiteralString.png&#34; title=&#34;/pic/字符串/Blueprint-Search-String-MakeLiteralString.png&#34; width=&#34;300&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/字符串/Blueprint-String-MakeLiteralString.png&#34; alt=&#34;/pic/字符串/Blueprint-String-MakeLiteralString.png&#34; title=&#34;/pic/字符串/Blueprint-String-MakeLiteralString.png&#34; width=&#34;200&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、连接字符串 Append
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/字符串/Blueprint-Search-String-Append.png&#34; alt=&#34;/pic/字符串/Blueprint-Search-String-Append.png&#34; title=&#34;/pic/字符串/Blueprint-Search-String-Append.png&#34; width=&#34;300&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/字符串/Blueprint-String-Append.png&#34; alt=&#34;/pic/字符串/Blueprint-String-Append.png&#34; title=&#34;/pic/字符串/Blueprint-String-Append.png&#34; width=&#34;200&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;可增加输入字符串个数 Add pin&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/字符串/Blueprint-String-Append-AddPin.png&#34; alt=&#34;/pic/字符串/Blueprint-String-Append-AddPin.png&#34; title=&#34;/pic/字符串/Blueprint-String-Append-AddPin.png&#34; width=&#34;200&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、输出字符串 PrintString
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/字符串/Blueprint-Search-String-PrintString.png&#34; alt=&#34;/pic/字符串/Blueprint-Search-String-PrintString.png&#34; title=&#34;/pic/字符串/Blueprint-Search-String-PrintString.png&#34; width=&#34;350&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/字符串/Blueprint-String-PrintString.png&#34; alt=&#34;/pic/字符串/Blueprint-String-PrintString.png&#34; title=&#34;/pic/字符串/Blueprint-String-PrintString.png&#34; width=&#34;200&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 3.键位绑定</title>
+      <link>https://toughcactus.github.io/post/3.%E9%94%AE%E4%BD%8D%E7%BB%91%E5%AE%9A/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/3.%E9%94%AE%E4%BD%8D%E7%BB%91%E5%AE%9A/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;入口&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;项目设置 &amp;gt; 引擎 &amp;gt; 输入 &amp;gt; Bindings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;键位绑定有两种，动作映射和轴映射，其触发机制不同&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/键位绑定/ProjectSettings-Bindings.png&#34; alt=&#34;/pic/键位绑定/ProjectSettings-Bindings.png&#34; title=&#34;/pic/键位绑定/ProjectSettings-Bindings.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、动作映射
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;一次完整的按下并松开按键，触发一次回调函数&lt;/li&gt;
+&lt;li&gt;具有离散性&lt;/li&gt;
+&lt;li&gt;如，跳跃&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、轴映射
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;按下键位之后，松开之前的这段时间，持续触发回调函数&lt;/li&gt;
+&lt;li&gt;每次刷新帧时，调用回调函数&lt;/li&gt;
+&lt;li&gt;具有连续性&lt;/li&gt;
+&lt;li&gt;如，前后左右移动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、绑定
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在虚幻编辑器中，将键位和函数描述绑定在一起；稍后在C++中，再将回调函数和函数描述绑定在一起&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/键位绑定/ProjectSettings-Bindings-Example.png&#34; alt=&#34;/pic/键位绑定/ProjectSettings-Bindings-Example.png&#34; title=&#34;/pic/键位绑定/ProjectSettings-Bindings-Example.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 1.1熟悉虚幻编辑器</title>
+      <link>https://toughcactus.github.io/post/1.1%E7%86%9F%E6%82%89%E8%99%9A%E5%B9%BB%E7%BC%96%E8%BE%91%E5%99%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.1%E7%86%9F%E6%82%89%E8%99%9A%E5%B9%BB%E7%BC%96%E8%BE%91%E5%99%A8/</guid>
+      <description>&lt;p&gt;
+虚幻编辑器是统称，而不是一个具体的编辑器。其包含关卡编辑器，蓝图编辑器，材质编辑器等。&lt;/p&gt;
+&lt;p&gt;
+关卡编辑器是这些编辑器的中心，可以在内容浏览器选中关卡，或蓝图类，或C++类，或材质，或其他资产。&lt;/p&gt;
+&lt;p&gt;
+当我们打开虚幻编辑器时，打开的是关卡编辑器。&lt;/p&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、关卡编辑器布局
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/LevelEditor.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/LevelEditor.png&#34; title=&#34;/pic/熟悉虚幻编辑器/LevelEditor.png&#34; width=&#34;1400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、正中间 视口 世界场景
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;显示设置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;视图设置 设置视口的观察方式&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/LevelEditor-Viewport-Settings.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/LevelEditor-Viewport-Settings.png&#34; title=&#34;/pic/熟悉虚幻编辑器/LevelEditor-Viewport-Settings.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;光照设置 设置光照渲染&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/LevelEditor-Viewport-Rendering.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/LevelEditor-Viewport-Rendering.png&#34; title=&#34;/pic/熟悉虚幻编辑器/LevelEditor-Viewport-Rendering.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;顶视图 + 线框 用来判断对齐与否&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/LevelEditor-Viewport-Top+Wireframe.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/LevelEditor-Viewport-Top+Wireframe.png&#34; title=&#34;/pic/熟悉虚幻编辑器/LevelEditor-Viewport-Top+Wireframe.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;显示FPS&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;每秒传输帧数 Frame Per Second &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;菜单&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/LevelEditor-Viewport-ShowFPS.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/LevelEditor-Viewport-ShowFPS.png&#34; title=&#34;/pic/熟悉虚幻编辑器/LevelEditor-Viewport-ShowFPS.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Gizmo&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;具有Gizmo的Actor对象可平移，缩放，旋转&lt;/li&gt;
+&lt;li&gt;选择当前的操作，也可使用快捷键切换&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、下方 内容浏览器
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;展示各种资产，如关卡，C++类，蓝图类，材质，声音资产，角色模型等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、下方 输出日志
+&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+五、右上 世界大纲
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;世界场景(World)中所有物体列表&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+六、右下 世界场景设置(World Settings)
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;配置关卡&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/LevelEditor-WorldSettings.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/LevelEditor-WorldSettings.png&#34; title=&#34;/pic/熟悉虚幻编辑器/LevelEditor-WorldSettings.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-7&#34;&gt;
+七、右下 细节面板
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;在世界大纲选中物体，在细节面板对其进行设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+八、左侧 放置Actor
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;列出常用Actor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-9&#34;&gt;
+九、工具栏
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;运行 或 停止 程序&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在独立窗口运行&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/LevelEditor-ToolBar-NewEditorWindow.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/LevelEditor-ToolBar-NewEditorWindow.png&#34; title=&#34;/pic/熟悉虚幻编辑器/LevelEditor-ToolBar-NewEditorWindow.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-10&#34;&gt;
+十、菜单栏 常用操作
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-10&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/UnrealEditor-Menu.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/UnrealEditor-Menu.png&#34; title=&#34;/pic/熟悉虚幻编辑器/UnrealEditor-Menu.png&#34; width=&#34;500&#34;/&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;打开 或 关闭 窗口&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Window项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/UnrealEditor-Menu-Window-Select.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/UnrealEditor-Menu-Window-Select.png&#34; title=&#34;/pic/熟悉虚幻编辑器/UnrealEditor-Menu-Window-Select.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;打开 虚幻编辑器偏好设置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Edit项(Windows系统)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/UnrealEditor-Menu-Edit-Preference.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/UnrealEditor-Menu-Edit-Preference.png&#34; title=&#34;/pic/熟悉虚幻编辑器/UnrealEditor-Menu-Edit-Preference.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;打开 项目设置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Edit项&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/UnrealEditor-Menu-Edit-ProjectSettings.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/UnrealEditor-Menu-Edit-ProjectSettings.png&#34; title=&#34;/pic/熟悉虚幻编辑器/UnrealEditor-Menu-Edit-ProjectSettings.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-11&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-11&#34;&gt;
+十一、内容浏览器 常用操作
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-11&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;创建资产&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在内容浏览器右键，或者点击 Add&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/LevelEditor-ContentBrowser-CreateAsset.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/LevelEditor-ContentBrowser-CreateAsset.png&#34; title=&#34;/pic/熟悉虚幻编辑器/LevelEditor-ContentBrowser-CreateAsset.png&#34; /&gt;&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在场景中应用资产&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;把资产拖到视口中的物体&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;调整图标大小及其他设置&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/LevelEditor-ContentBrowser-IconSize.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/LevelEditor-ContentBrowser-IconSize.png&#34; title=&#34;/pic/熟悉虚幻编辑器/LevelEditor-ContentBrowser-IconSize.png&#34; width=&#34;1400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-12&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-12&#34;&gt;
+十二、关卡设置
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-12&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;创建Map&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;新建文件夹Content/Map，保存到该目录下&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/LevelEditor-ContentBrowser-CreateMap.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/LevelEditor-ContentBrowser-CreateMap.png&#34; title=&#34;/pic/熟悉虚幻编辑器/LevelEditor-ContentBrowser-CreateMap.png&#34; width=&#34;250&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置关卡编辑器和游戏的默认载入关卡&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;项目设置 &amp;gt; Project &amp;gt; Maps &amp;amp; Modes&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置 Editor Startup Map&lt;/li&gt;
+&lt;li&gt;设置 Game Default Map&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;编辑器默认载入OpenWorld关卡，在场景中做的所有操作若不保存则会丢失&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/LevelEditor-Toolbar-SaveMap.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/LevelEditor-Toolbar-SaveMap.png&#34; title=&#34;/pic/熟悉虚幻编辑器/LevelEditor-Toolbar-SaveMap.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-13&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-13&#34;&gt;
+十三、编辑器偏好设置
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-13&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;General&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;快捷键&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;查询 或 自定义 快捷键&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;外观&lt;/li&gt;
+&lt;li&gt;源码编辑器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/UnrealEditor-Preference-General.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/UnrealEditor-Preference-General.png&#34; title=&#34;/pic/熟悉虚幻编辑器/UnrealEditor-Preference-General.png&#34; width=&#34;1200  align left&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;自定义快捷键&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;编辑器偏好设置 &amp;gt; General &amp;gt; Keyboard Shortcuts &amp;gt; Main Frame&lt;/li&gt;
+&lt;li&gt;Ctrl + Shift + N&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-14&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-14&#34;&gt;
+十四、项目设置
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-14&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;生成项目ID&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Project &amp;gt; Description&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置默认Map&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;见关卡设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-15&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-15&#34;&gt;
+十五、快捷键
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-15&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;移动视口中的摄像机&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;按住鼠标 左键 或 右键&lt;/li&gt;
+&lt;li&gt;ADWS对应左右前后，QE对应上下&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;切换物体变换模式&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;W，E，R对应位移，旋转，缩放&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;隐藏 或 恢复 非游戏元素的显示&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;G 进入到游戏模式&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使选中物体落到最近的平面(Mac不生效)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;End&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建C++类(自定义添加快捷键)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Ctrl + Shift + N&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;定位Actor Focus&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在世界大纲选中实例&lt;/li&gt;
+&lt;li&gt;F&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;停止游戏&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Esc&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;释放鼠标控制，游戏仍在运行&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;S-F1&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-16&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-16&#34;&gt;
+十六、恢复属性的默认值
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-16&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/LevelEditor-Detail-ResetAttribute.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/LevelEditor-Detail-ResetAttribute.png&#34; title=&#34;/pic/熟悉虚幻编辑器/LevelEditor-Detail-ResetAttribute.png&#34; width=&#34;400&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;设置属性值之后，会出现 恢复图标&lt;/li&gt;
+&lt;li&gt;点击恢复默认值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-17&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-17&#34;&gt;
+十七、在命令行使用虚幻编辑器打开项目
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-17&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Windows&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  start &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;E:\Epic/熟悉虚幻编辑器 Games\UE_5.1\Engine\Binaries\Win64\UnrealEditor.exe&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Dirk\Dirk.uproject&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MacOS&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  open &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/Volumes/虚幻引擎/Epic/熟悉虚幻编辑器Games/UE_5.1/Engine/Binaries/Mac/UnrealEditor.app&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  open &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/Volumes/虚幻引擎/Projects/5.1.1/TheBasics/TheBasics.uproject&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-18&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-18&#34;&gt;
+十八、从Visual Studio启动虚幻编辑器
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-18&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;创建项目之后，我们通常在VS中进行编译运行，从而打开虚幻编辑器&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/VS-Debug.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/VS-Debug.png&#34; title=&#34;/pic/熟悉虚幻编辑器/VS-Debug.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;已经打开虚幻编辑器，使VS项目附加到进程&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/VS-AttachUnrealEditor1.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/VS-AttachUnrealEditor1.png&#34; title=&#34;/pic/熟悉虚幻编辑器/VS-AttachUnrealEditor1.png&#34; width=&#34;1000&#34;/&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉虚幻编辑器/VS-AttachUnrealEditor2.png&#34; alt=&#34;/pic/熟悉虚幻编辑器/VS-AttachUnrealEditor2.png&#34; title=&#34;/pic/熟悉虚幻编辑器/VS-AttachUnrealEditor2.png&#34;/&gt;      &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 1.2创建C&#43;&#43;类</title>
+      <link>https://toughcactus.github.io/post/1.2%E5%88%9B%E5%BB%BAc&#43;&#43;%E7%B1%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.2%E5%88%9B%E5%BB%BAc&#43;&#43;%E7%B1%BB/</guid>
+      <description>&lt;p&gt;
+我通常在虚幻编辑器中创建C++类，在代码编辑器中编辑。&lt;/p&gt;
+&lt;p&gt;
+当然可以徒手创建。&lt;/p&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建C++类 入口
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在内容浏览器中创建&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;显示C++类&lt;/p&gt;
+&lt;p width=&#34;100&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/创建C++类/ContentBrowser-ShowC++Class.png&#34; alt=&#34;/pic/创建C++类/ContentBrowser-ShowC++Class.png&#34; title=&#34;/pic/创建C++类/ContentBrowser-ShowC++Class.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;去到C++类目录 右键&lt;/p&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/创建C++类/ContentBrowser-CreateC++Class.png&#34; alt=&#34;/pic/创建C++类/ContentBrowser-CreateC++Class.png&#34; title=&#34;/pic/创建C++类/ContentBrowser-CreateC++Class.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;菜单栏 工具&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建C++类/Menu-Tools-CreateC++Class.png&#34; alt=&#34;/pic/创建C++类/Menu-Tools-CreateC++Class.png&#34; title=&#34;/pic/创建C++类/Menu-Tools-CreateC++Class.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;自定义快捷键 C-N&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、配置C++类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;选择基类 Actor&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;常见类中可以直接看到Actor，以及描述信息&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建C++类/C++Class-Base-Commons.png&#34; alt=&#34;/pic/创建C++类/C++Class-Base-Commons.png&#34; title=&#34;/pic/创建C++类/C++Class-Base-Commons.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;所有类中可以看到类的派生关系&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建C++类/C++Class-Base-All.png&#34; alt=&#34;/pic/创建C++类/C++Class-Base-All.png&#34; title=&#34;/pic/创建C++类/C++Class-Base-All.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使用默认路径 SimpleGeometry&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;类的类型 公有类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;不设置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件和源文件都在Source/TheBasics目录下&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;公有类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;会在Source/TheBasics创建Public和Private文件夹&lt;/li&gt;
+&lt;li&gt;头文件在Public目录下，源文件在Private目录下&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、在编辑器中查看SimpleGeometry
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;内容浏览器&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Content/C++ Classes/TheBasics/Public/&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;700&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/创建C++类/ContentBrowser-C++Class.png&#34; alt=&#34;/pic/创建C++类/ContentBrowser-C++Class.png&#34; title=&#34;/pic/创建C++类/ContentBrowser-C++Class.png&#34;/&gt;            	&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;双击C++类会跳转到代码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、在关卡中添加SimpleGeometry对象 ｜ 正方体
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;拖动C++类到视口，可在世界大纲查看新增物体&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;没有Gizmo&lt;/li&gt;
+&lt;li&gt;在世界大纲中选中实例，按下F键定位(Focus)到 正方体&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 10.2基于C&#43;&#43;类的蓝图类2</title>
+      <link>https://toughcactus.github.io/post/10.2%E5%9F%BA%E4%BA%8Ec&#43;&#43;%E7%B1%BB%E7%9A%84%E8%93%9D%E5%9B%BE%E7%B1%BB2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/10.2%E5%9F%BA%E4%BA%8Ec&#43;&#43;%E7%B1%BB%E7%9A%84%E8%93%9D%E5%9B%BE%E7%B1%BB2/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、打开蓝图类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;双击蓝图类时，如果没有修改，默认显示原型细节面板&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/BlueprintEditor-Open.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/BlueprintEditor-Open.png&#34; title=&#34;/pic/基于C++类的蓝图类2/BlueprintEditor-Open.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在蓝图编辑器中查看继承的数据成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;声明AGeometryObject::GeometrySetting时，在UPROPERTY宏中给出BlueprintReadWrite&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;勾选继承成员可见&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/BlueprintEditor-ShowInheritedVariables.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/BlueprintEditor-ShowInheritedVariables.png&#34; title=&#34;/pic/基于C++类的蓝图类2/BlueprintEditor-ShowInheritedVariables.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将数据成员拖入蓝图中，可以设置或获取该成员，由虚幻引擎提供实现&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/Blueprint-GeometrySetting-Edit.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/Blueprint-GeometrySetting-Edit.png&#34; title=&#34;/pic/基于C++类的蓝图类2/Blueprint-GeometrySetting-Edit.png&#34; width=&#34;150&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/Blueprint-GeometrySetting-Set.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/Blueprint-GeometrySetting-Set.png&#34; title=&#34;/pic/基于C++类的蓝图类2/Blueprint-GeometrySetting-Set.png&#34; width=&#34;150&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/Blueprint-GeometrySetting-Get.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/Blueprint-GeometrySetting-Get.png&#34; title=&#34;/pic/基于C++类的蓝图类2/Blueprint-GeometrySetting-Get.png&#34; width=&#34;150&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;结构体操作&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;显示分量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;右键，Split Struct Pin&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/Blueprint-Struct-SplitStructPin.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/Blueprint-Struct-SplitStructPin.png&#34; title=&#34;/pic/基于C++类的蓝图类2/Blueprint-Struct-SplitStructPin.png&#34; width=&#34;150&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/Blueprint-Struct-ShowAllPin.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/Blueprint-Struct-ShowAllPin.png&#34; title=&#34;/pic/基于C++类的蓝图类2/Blueprint-Struct-ShowAllPin.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;对GeometrySettingGet操作的结果，Break&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/Blueprint-Struct-Break.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/Blueprint-Struct-Break.png&#34; title=&#34;/pic/基于C++类的蓝图类2/Blueprint-Struct-Break.png&#34; width=&#34;500&#34;/&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/Blueprint-Struct-Break-Result.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/Blueprint-Struct-Break-Result.png&#34; title=&#34;/pic/基于C++类的蓝图类2/Blueprint-Struct-Break-Result.png&#34;/&gt;         &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;收起分量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;右键，Recombine Struct Pin&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/Blueprint-Struct-RecombineStructPin.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/Blueprint-Struct-RecombineStructPin.png&#34; title=&#34;/pic/基于C++类的蓝图类2/Blueprint-Struct-RecombineStructPin.png&#34; width=&#34;150&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、结构体操作
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/Blueprint-FGeometrySetting.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/Blueprint-FGeometrySetting.png&#34; title=&#34;/pic/基于C++类的蓝图类2/Blueprint-FGeometrySetting.png&#34;/&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;获取分量 Break&lt;/p&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/Blueprint-FGeometrySetting-Break.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/Blueprint-FGeometrySetting-Break.png&#34; title=&#34;/pic/基于C++类的蓝图类2/Blueprint-FGeometrySetting-Break.png&#34;/&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、在蓝图编辑器中使用C++函数
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/Blueprint-SetGetGeometrySetting.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/Blueprint-SetGetGeometrySetting.png&#34; title=&#34;/pic/基于C++类的蓝图类2/Blueprint-SetGetGeometrySetting.png&#34; width=&#34;400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类2/Blueprint-SetGetGeometrySetting-Result.png&#34; alt=&#34;/pic/基于C++类的蓝图类2/Blueprint-SetGetGeometrySetting-Result.png&#34; title=&#34;/pic/基于C++类的蓝图类2/Blueprint-SetGetGeometrySetting-Result.png&#34; width=&#34;200&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 12.2在蓝图中订阅委托并实现处理函数</title>
+      <link>https://toughcactus.github.io/post/12.2%E5%9C%A8%E8%93%9D%E5%9B%BE%E4%B8%AD%E8%AE%A2%E9%98%85%E5%A7%94%E6%89%98%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/12.2%E5%9C%A8%E8%93%9D%E5%9B%BE%E4%B8%AD%E8%AE%A2%E9%98%85%E5%A7%94%E6%89%98%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;C++侧订阅委托并注册处理函数是在对Actor对象调用BeginPlay函数之前完成的&lt;/li&gt;
+&lt;li&gt;蓝图侧在BeginPlay函数之后订阅委托并注册处理函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、打开基于AGeometryObject的蓝图类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;BP_Geometry_Sphere&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在BeginPlay函数之后，对OnColorChanged赋值，即订阅FOnColorChange服务&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中订阅委托并实现处理函数/BlueprintEditor-Assign-OnColorChange.png&#34; alt=&#34;/pic/在蓝图中订阅委托并实现处理函数/BlueprintEditor-Assign-OnColorChange.png&#34; title=&#34;/pic/在蓝图中订阅委托并实现处理函数/BlueprintEditor-Assign-OnColorChange.png&#34; width=&#34;500&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中订阅委托并实现处理函数/BlueprintEditor-Assign-OnColorChange-Result.png&#34; alt=&#34;/pic/在蓝图中订阅委托并实现处理函数/BlueprintEditor-Assign-OnColorChange-Result.png&#34; title=&#34;/pic/在蓝图中订阅委托并实现处理函数/BlueprintEditor-Assign-OnColorChange-Result.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、实现处理函数
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;收到通知时，从OnColorChange_Event出发&lt;/li&gt;
+&lt;li&gt;Color和Name作为传入参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;整合Color和Name到一个字符串 Append&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;自动添加节点将FLinearColor转换成String&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;输出字符串 PrintString&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中订阅委托并实现处理函数/BlueprintEditor-DELEGATE-Handle.png&#34; alt=&#34;/pic/在蓝图中订阅委托并实现处理函数/BlueprintEditor-DELEGATE-Handle.png&#34; title=&#34;/pic/在蓝图中订阅委托并实现处理函数/BlueprintEditor-DELEGATE-Handle.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、输出
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中订阅委托并实现处理函数/LevelEditor-Output.png&#34; alt=&#34;/pic/在蓝图中订阅委托并实现处理函数/LevelEditor-Output.png&#34; title=&#34;/pic/在蓝图中订阅委托并实现处理函数/LevelEditor-Output.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 13.2熟悉GameMode</title>
+      <link>https://toughcactus.github.io/post/13.2%E7%86%9F%E6%82%89gamemode/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/13.2%E7%86%9F%E6%82%89gamemode/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建派生自GameModeBase的蓝图类 BP_GameModeBase
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉GameMode/UnrealEditor-GameModeBase-Create.png&#34; alt=&#34;/pic/熟悉GameMode/UnrealEditor-GameModeBase-Create.png&#34; title=&#34;/pic/熟悉GameMode/UnrealEditor-GameModeBase-Create.png&#34; width=&#34;600&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在World Settings中应用
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉GameMode/LevelEditor-WorldSettings-GameModeOverride.png&#34; alt=&#34;/pic/熟悉GameMode/LevelEditor-WorldSettings-GameModeOverride.png&#34; title=&#34;/pic/熟悉GameMode/LevelEditor-WorldSettings-GameModeOverride.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、熟悉关卡的基础类型
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;游戏中有多个关卡，每个关卡基础类型的配置可以各不相同&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可设置为GameMode的有&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;GameModeBase      &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可设置为Pawn的有&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;APawn&lt;/li&gt;
+&lt;li&gt;ACharacter  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可设置为PlayerController的有&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;APlayerController&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉GameMode/LevelEditor-WorldSettings.png&#34; alt=&#34;/pic/熟悉GameMode/LevelEditor-WorldSettings.png&#34; title=&#34;/pic/熟悉GameMode/LevelEditor-WorldSettings.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、运行游戏
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;世界大纲&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉GameMode/LevelEditor-Outline.png&#34; alt=&#34;/pic/熟悉GameMode/LevelEditor-Outline.png&#34; title=&#34;/pic/熟悉GameMode/LevelEditor-Outline.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;运行游戏时的世界大纲&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉GameMode/LevelEditor-Outline-Running.png&#34; alt=&#34;/pic/熟悉GameMode/LevelEditor-Outline-Running.png&#34; title=&#34;/pic/熟悉GameMode/LevelEditor-Outline-Running.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+五、创建派生自GameModeBase的C++类 GeometryGameModeBase
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;选择基类 GameModeBase&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉GameMode/UnrealEditor-C++-GameModeBase-Create.png&#34; alt=&#34;/pic/熟悉GameMode/UnrealEditor-C++-GameModeBase-Create.png&#34; title=&#34;/pic/熟悉GameMode/UnrealEditor-C++-GameModeBase-Create.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;公有类   &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;应用GeometryGameModeBase&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;注意到，基础类型不可配置，只能在C++中进行配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/熟悉GameMode/LevelEditor-WorldSettings-GeometryGameModeBase-Select.png&#34; alt=&#34;/pic/熟悉GameMode/LevelEditor-WorldSettings-GeometryGameModeBase-Select.png&#34; title=&#34;/pic/熟悉GameMode/LevelEditor-WorldSettings-GeometryGameModeBase-Select.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;说明&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;5.1之前，创建项目时，自动生成GameModeBase源码文件，和Private、Public文件夹同级&lt;/li&gt;
+&lt;li&gt;类定义为空，派生自AGameModeBase&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;此时使用的DefaultPawn具有最小输入，支持前后左右上下移动&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 14.1创建派生自APawn的C&#43;&#43;类并为其绑定键位</title>
+      <link>https://toughcactus.github.io/post/14.1%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAapawn%E7%9A%84c&#43;&#43;%E7%B1%BB%E5%B9%B6%E4%B8%BA%E5%85%B6%E7%BB%91%E5%AE%9A%E9%94%AE%E4%BD%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/14.1%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAapawn%E7%9A%84c&#43;&#43;%E7%B1%BB%E5%B9%B6%E4%B8%BA%E5%85%B6%E7%BB%91%E5%AE%9A%E9%94%AE%E4%BD%8D/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建派生自APawn的C++类 GeometryPawn
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;选择基类 Pawn&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自APawn的C++类并为其绑定键位/UnrealEditor-C++-Pawn-Create.png&#34; alt=&#34;/pic/创建派生自APawn的C++类并为其绑定键位/UnrealEditor-C++-Pawn-Create.png&#34; title=&#34;/pic/创建派生自APawn的C++类并为其绑定键位/UnrealEditor-C++-Pawn-Create.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;公有类&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、为GeometryPawn绑定键位
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;MoveRight&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;键位 Right 和 Left，缩放系数为1和-1  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MoveForward&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;键位 Up 和 Down，缩放系数为1和-1  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自APawn的C++类并为其绑定键位/GeometryPawn-Axis.png&#34; alt=&#34;/pic/创建派生自APawn的C++类并为其绑定键位/GeometryPawn-Axis.png&#34; title=&#34;/pic/创建派生自APawn的C++类并为其绑定键位/GeometryPawn-Axis.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 15.2创建基于GeometryPawn的蓝图类</title>
+      <link>https://toughcactus.github.io/post/15.2%E5%88%9B%E5%BB%BA%E5%9F%BA%E4%BA%8Egeometrypawn%E7%9A%84%E8%93%9D%E5%9B%BE%E7%B1%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/15.2%E5%88%9B%E5%BB%BA%E5%9F%BA%E4%BA%8Egeometrypawn%E7%9A%84%E8%93%9D%E5%9B%BE%E7%B1%BB/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建基于GeometryPawn的蓝图类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;BP_GeometryPawn_Sphere&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;双击打开蓝图编辑器，摄像机就是CameraComponent的表示&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建基于GeometryPawn的蓝图类/BP_GeometryPawn_Sphere.png&#34; alt=&#34;/pic/创建基于GeometryPawn的蓝图类/BP_GeometryPawn_Sphere.png&#34; title=&#34;/pic/创建基于GeometryPawn的蓝图类/BP_GeometryPawn_Sphere.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、为StaticMesh绑定模型Sphere，并应用材质
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建基于GeometryPawn的蓝图类/StaticMesh-Settings.png&#34; alt=&#34;/pic/创建基于GeometryPawn的蓝图类/StaticMesh-Settings.png&#34; title=&#34;/pic/创建基于GeometryPawn的蓝图类/StaticMesh-Settings.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、分离StaticMesh组件和Camera组件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;实际运行起来，相当于第三视角，可以看到StaticMesh的运动&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建基于GeometryPawn的蓝图类/Component-Seperate.png&#34; alt=&#34;/pic/创建基于GeometryPawn的蓝图类/Component-Seperate.png&#34; title=&#34;/pic/创建基于GeometryPawn的蓝图类/Component-Seperate.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、可以为Camera组件添加附件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;按理说是无法看到添加的附件的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;选中CameraComponent&lt;/p&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/创建基于GeometryPawn的蓝图类/BlueprintEditor-SelectComponent.png&#34; alt=&#34;/pic/创建基于GeometryPawn的蓝图类/BlueprintEditor-SelectComponent.png&#34; title=&#34;/pic/创建基于GeometryPawn的蓝图类/BlueprintEditor-SelectComponent.png&#34;/&gt;     &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Add，选择Cube作为附件&lt;/p&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/创建基于GeometryPawn的蓝图类/BlueprintEditor-Add-Cube.png&#34; alt=&#34;/pic/创建基于GeometryPawn的蓝图类/BlueprintEditor-Add-Cube.png&#34; title=&#34;/pic/创建基于GeometryPawn的蓝图类/BlueprintEditor-Add-Cube.png&#34;/&gt;    &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可为Cube应用材质&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建基于GeometryPawn的蓝图类/BlueprintEditor-Cube-Material.png&#34; alt=&#34;/pic/创建基于GeometryPawn的蓝图类/BlueprintEditor-Cube-Material.png&#34; title=&#34;/pic/创建基于GeometryPawn的蓝图类/BlueprintEditor-Cube-Material.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 15.3创建派生自APlayerController的C&#43;&#43;类并为其绑定键位</title>
+      <link>https://toughcactus.github.io/post/15.3%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAaplayercontroller%E7%9A%84c&#43;&#43;%E7%B1%BB%E5%B9%B6%E4%B8%BA%E5%85%B6%E7%BB%91%E5%AE%9A%E9%94%AE%E4%BD%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/15.3%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAaplayercontroller%E7%9A%84c&#43;&#43;%E7%B1%BB%E5%B9%B6%E4%B8%BA%E5%85%B6%E7%BB%91%E5%AE%9A%E9%94%AE%E4%BD%8D/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建派生自APlayerController的C++类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;公有类&lt;/li&gt;
+&lt;li&gt;AGeometryPlayerController&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、添加动作映射，按空格时切换当前Pawn
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Project Settings &amp;gt; Engine &amp;gt; Input&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;函数描述 ChangePawn    &lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自APlayerController的C++类并为其绑定键位/ProjectSettings-Bindings-SpaceBar.png&#34; alt=&#34;/pic/创建派生自APlayerController的C++类并为其绑定键位/ProjectSettings-Bindings-SpaceBar.png&#34; title=&#34;/pic/创建派生自APlayerController的C++类并为其绑定键位/ProjectSettings-Bindings-SpaceBar.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 15.7查看切换Pawn日志</title>
+      <link>https://toughcactus.github.io/post/15.7%E6%9F%A5%E7%9C%8B%E5%88%87%E6%8D%A2pawn%E6%97%A5%E5%BF%97/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/15.7%E6%9F%A5%E7%9C%8B%E5%88%87%E6%8D%A2pawn%E6%97%A5%E5%BF%97/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、在虚幻编辑器中查看
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/查看切换Pawn日志/UnrealEditor-WorldSettings.png&#34; alt=&#34;/pic/查看切换Pawn日志/UnrealEditor-WorldSettings.png&#34; title=&#34;/pic/查看切换Pawn日志/UnrealEditor-WorldSettings.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在虚幻编辑器中添加BP_GeometryPawn_Sphere实例，用以切换
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;初始状态&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PlayerController接管GeometryPawn&lt;/li&gt;
+&lt;li&gt;AIController接管BP_GeometryPawn_Cube&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第一次切换 PlayerController预备接管BP_GeometryPawn_Cube&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PlayerController释放GeometryPawn&lt;/li&gt;
+&lt;li&gt;AIController释放BP_GeometryPawn_Cube&lt;/li&gt;
+&lt;li&gt;PlayerController接管BP_GeometryPawn_Cube&lt;/li&gt;
+&lt;li&gt;GeometryPawn处于等待接管状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第二次切换 PlayerController预备接管GeometryPawn&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PlayerController释放BP_GeometryPawn_Cube&lt;/li&gt;
+&lt;li&gt;PlayerController接管GeometryPawn&lt;/li&gt;
+&lt;li&gt;BP_GeometryPawn_Cube处于等待接管状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;第三次切换 PlayerController预备接管BP_GeometryPawn_Cube&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PlayerController释放GeometryPawn&lt;/li&gt;
+&lt;li&gt;PlayerController接管BP_GeometryPawn_Cube&lt;/li&gt;
+&lt;li&gt;GeometryPawn处于等待接管状态&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;结束游戏&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;PlayerController释放BP_GeometryPawn_Cube&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/查看切换Pawn日志/切换Pawn日志.png&#34; alt=&#34;/pic/查看切换Pawn日志/切换Pawn日志.png&#34; title=&#34;/pic/查看切换Pawn日志/切换Pawn日志.png&#34; width=&#34;800&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、对BP_GeometryPawn_Sphere实例禁用AI自动控制
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;默认 Placed in World&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/查看切换Pawn日志/LevelEditor-Details-AutoPossessAI.png&#34; alt=&#34;/pic/查看切换Pawn日志/LevelEditor-Details-AutoPossessAI.png&#34; title=&#34;/pic/查看切换Pawn日志/LevelEditor-Details-AutoPossessAI.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;禁用 Disabled&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/查看切换Pawn日志/LevelEditor-Details-AutoPossessAI-Disable.png&#34; alt=&#34;/pic/查看切换Pawn日志/LevelEditor-Details-AutoPossessAI-Disable.png&#34; title=&#34;/pic/查看切换Pawn日志/LevelEditor-Details-AutoPossessAI-Disable.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;日志&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/查看切换Pawn日志/切换Pawn日志-禁用AutoPossessAI.png&#34; alt=&#34;/pic/查看切换Pawn日志/切换Pawn日志-禁用AutoPossessAI.png&#34; title=&#34;/pic/查看切换Pawn日志/切换Pawn日志-禁用AutoPossessAI.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、按住方向键切换Pawn，切换后，前Pawn仍在移动
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;说明&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;基类UnPossessd函数中，会调用DestroyPlayerInputComponent函数，删除输入组件&lt;/li&gt;
+&lt;li&gt;即在删除输入组件之前，不会更新速度方向&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决思路1&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在Tick函数的最后，复位速度矢量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;解决思路2&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;只有当Pawn对象被使用时，调用VelocityInForce&lt;/li&gt;
+&lt;li&gt;切换后，前Pawn不会移动，但切换回前Pawn，会保持移动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 17.2垃圾回收器</title>
+      <link>https://toughcactus.github.io/post/17.2%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/17.2%E5%9E%83%E5%9C%BE%E5%9B%9E%E6%94%B6%E5%99%A8/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;Garbage Collector&lt;/li&gt;
+&lt;li&gt;负责定期清理内存&lt;/li&gt;
+&lt;li&gt;当Actor对象或组件被销毁时，虚幻编辑器中指向对象或组件的指针会被置空&lt;/li&gt;
+&lt;li&gt;TheBasics项目的最后一个内容点&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、设置Garbage Collector间隔
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Project Settings &amp;gt; Engine &amp;gt; Garbage Collection &amp;gt; Time Between Purging Pending Kill Objects&lt;/li&gt;
+&lt;li&gt;当前61.1s&lt;/li&gt;
+&lt;li&gt;开销不小，不建议频繁触发&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、编辑Level Blueprint
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;不建议在关卡的蓝图编辑器添加实现&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对关卡蓝图的了解不够&lt;/li&gt;
+&lt;li&gt;难以追踪逻辑的执行  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;打开关卡的蓝图编辑器&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/打开关卡蓝图编辑器.png&#34; alt=&#34;/pic/垃圾回收器/打开关卡蓝图编辑器.png&#34; title=&#34;/pic/垃圾回收器/打开关卡蓝图编辑器.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+按下Enter时从场景中删除所有指定类型的Actor对象
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加事件 键盘 Enter&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/KeyboardEvents-Enter.png&#34; alt=&#34;/pic/垃圾回收器/KeyboardEvents-Enter.png&#34; title=&#34;/pic/垃圾回收器/KeyboardEvents-Enter.png&#34; width=&#34;400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/KeyboardEvents-Enter-Result.png&#34; alt=&#34;/pic/垃圾回收器/KeyboardEvents-Enter-Result.png&#34; title=&#34;/pic/垃圾回收器/KeyboardEvents-Enter-Result.png&#34; width=&#34;100&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;从Pressed出发 获取场景中指定类型的所有Actor对象&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置ActorClass GeometryObject&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/Blueprint-GetAllActorsOfClass.png&#34; alt=&#34;/pic/垃圾回收器/Blueprint-GetAllActorsOfClass.png&#34; title=&#34;/pic/垃圾回收器/Blueprint-GetAllActorsOfClass.png&#34; width=&#34;450&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;从OutActors出发 遍历数组&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/Blueprint-ForEachLoop-LookUp.png&#34; alt=&#34;/pic/垃圾回收器/Blueprint-ForEachLoop-LookUp.png&#34; title=&#34;/pic/垃圾回收器/Blueprint-ForEachLoop-LookUp.png&#34; width=&#34;400&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;接下来执行ForEachLoop&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/Blueprint-ForEachLoop.png&#34; alt=&#34;/pic/垃圾回收器/Blueprint-ForEachLoop.png&#34; title=&#34;/pic/垃圾回收器/Blueprint-ForEachLoop.png&#34; width=&#34;450&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;从ArrayElement出发 对每个元素调用DestroyActor&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/Blueprint-DestroyActor-LookUp.png&#34; alt=&#34;/pic/垃圾回收器/Blueprint-DestroyActor-LookUp.png&#34; title=&#34;/pic/垃圾回收器/Blueprint-DestroyActor-LookUp.png&#34; width=&#34;400&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;接下来执行DestroyActor&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/Blueprint-DestroyActor.png&#34; alt=&#34;/pic/垃圾回收器/Blueprint-DestroyActor.png&#34; title=&#34;/pic/垃圾回收器/Blueprint-DestroyActor.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+按下Tab时立即回收内存
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加事件 键盘 Tab&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/KeyboardEvents-Tab.png&#34; alt=&#34;/pic/垃圾回收器/KeyboardEvents-Tab.png&#34; title=&#34;/pic/垃圾回收器/KeyboardEvents-Tab.png&#34; width=&#34;400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/KeyboardEvents-Tab-Result.png&#34; alt=&#34;/pic/垃圾回收器/KeyboardEvents-Tab-Result.png&#34; title=&#34;/pic/垃圾回收器/KeyboardEvents-Tab-Result.png&#34; width=&#34;100&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;从Pressed出发 立即回收内存&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;调用CollectGarbage&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/Blueprint-CollectGarbage.png&#34; alt=&#34;/pic/垃圾回收器/Blueprint-CollectGarbage.png&#34; title=&#34;/pic/垃圾回收器/Blueprint-CollectGarbage.png&#34; width=&#34;400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/Blueprint-CollectGarbage-Result.png&#34; alt=&#34;/pic/垃圾回收器/Blueprint-CollectGarbage-Result.png&#34; title=&#34;/pic/垃圾回收器/Blueprint-CollectGarbage-Result.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+效果图，保存并编译
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/LevelBlueprint-Result.png&#34; alt=&#34;/pic/垃圾回收器/LevelBlueprint-Result.png&#34; title=&#34;/pic/垃圾回收器/LevelBlueprint-Result.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+三、查看日志
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;运行程序&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/日志-均有效1.png&#34; alt=&#34;/pic/垃圾回收器/日志-均有效1.png&#34; title=&#34;/pic/垃圾回收器/日志-均有效1.png&#34; width=&#34;400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/日志-均有效2.png&#34; alt=&#34;/pic/垃圾回收器/日志-均有效2.png&#34; title=&#34;/pic/垃圾回收器/日志-均有效2.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;按下Enter Actor从场景中消失&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Actor对象的PendingToKill被置1，等待垃圾回收器回收内存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/日志-按下Enter1.png&#34; alt=&#34;/pic/垃圾回收器/日志-按下Enter1.png&#34; title=&#34;/pic/垃圾回收器/日志-按下Enter1.png&#34; width=&#34;400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/日志-按下Enter2.png&#34; alt=&#34;/pic/垃圾回收器/日志-按下Enter2.png&#34; title=&#34;/pic/垃圾回收器/日志-按下Enter2.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;按下Tab 立即回收内存&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使能虚幻编辑器的指针被指空&lt;/li&gt;
+&lt;li&gt;仅在C++中使用的指针变做空悬指针，指向无效内存&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/垃圾回收器/日志-按下Tab.png&#34; alt=&#34;/pic/垃圾回收器/日志-按下Tab.png&#34; title=&#34;/pic/垃圾回收器/日志-按下Tab.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 4.2为静态网格组件绑定模型</title>
+      <link>https://toughcactus.github.io/post/4.2%E4%B8%BA%E9%9D%99%E6%80%81%E7%BD%91%E6%A0%BC%E7%BB%84%E4%BB%B6%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/4.2%E4%B8%BA%E9%9D%99%E6%80%81%E7%BD%91%E6%A0%BC%E7%BB%84%E4%BB%B6%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;使用新手包里的模型或引擎提供的模型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加新手包
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;内容浏览器，Add 按钮&lt;/li&gt;
+&lt;li&gt;添加功能或内容包&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;内容，初学者内容包&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/为静态网格组件绑定模型/AddStarterContent.png&#34; alt=&#34;/pic/为静态网格组件绑定模型/AddStarterContent.png&#34; title=&#34;/pic/为静态网格组件绑定模型/AddStarterContent.png&#34; width=&#34;900&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、使用虚幻引擎自带内容
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;显示引擎内容&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在世界大纲选中对象&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;细节 静态网格体 下拉框&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/为静态网格组件绑定模型/Details-StaticMesh-Settings.png&#34; alt=&#34;/pic/为静态网格组件绑定模型/Details-StaticMesh-Settings.png&#34; title=&#34;/pic/为静态网格组件绑定模型/Details-StaticMesh-Settings.png&#34; width=&#34;350&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;管理 按钮&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;显示引擎内容&lt;/p&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/为静态网格组件绑定模型/Details-StaticMesh-Settings-ShowEngineContent.png&#34; alt=&#34;/pic/为静态网格组件绑定模型/Details-StaticMesh-Settings-ShowEngineContent.png&#34; title=&#34;/pic/为静态网格组件绑定模型/Details-StaticMesh-Settings-ShowEngineContent.png&#34;/&gt;    &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;搜索Cube&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;选择 EngineMeshes/Cube&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;700&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/为静态网格组件绑定模型/Details-StaticMesh-Cube.png&#34; alt=&#34;/pic/为静态网格组件绑定模型/Details-StaticMesh-Cube.png&#34; title=&#34;/pic/为静态网格组件绑定模型/Details-StaticMesh-Cube.png&#34;/&gt;    &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;效果图&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/为静态网格组件绑定模型/Viewport-Cube.png&#34; alt=&#34;/pic/为静态网格组件绑定模型/Viewport-Cube.png&#34; title=&#34;/pic/为静态网格组件绑定模型/Viewport-Cube.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;其他网格体&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;立方体 Engine/EngineMeshes/Cube&lt;/li&gt;
+&lt;li&gt;球形 Engine/EngineMeshes/Sphere&lt;/li&gt;
+&lt;li&gt;圆锥 Engine/BasicShapes/Cone&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 5.1材质类和材质实例类</title>
+      <link>https://toughcactus.github.io/post/5.1%E6%9D%90%E8%B4%A8%E7%B1%BB%E5%92%8C%E6%9D%90%E8%B4%A8%E5%AE%9E%E4%BE%8B%E7%B1%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/5.1%E6%9D%90%E8%B4%A8%E7%B1%BB%E5%92%8C%E6%9D%90%E8%B4%A8%E5%AE%9E%E4%BE%8B%E7%B1%BB/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;应用材质，使Actor对象具有图案和纹理&lt;/li&gt;
+&lt;li&gt;使用基础颜色&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ul&gt;
+&lt;li&gt;材质类以M_打头&lt;/li&gt;
+&lt;li&gt;修改材质参数后，需要手动保存&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;材质&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;虚幻引擎中的一种资产，负责视觉部分，如静态网格物体 static mesh，骨骼网格物体 skeletal mesh，粒子系统particle system，以及其他物体的外观&lt;/li&gt;
+&lt;li&gt;更确切地说，材质是一种着色器，即一个微型子例程，可以GPU上运行并计算场景中像素点的颜色和位置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;材质实例类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;材质实例类派生自材质类&lt;/li&gt;
+&lt;li&gt;派生自同一材质类的材质实例类，可以分别对材质类的参数进行设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、在内容浏览器创建材质类 M_Color
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;创建文件夹 Content/Material&lt;/li&gt;
+&lt;li&gt;右键，（创建基础资产）材质&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在虚幻编辑器中打开材质类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;双击材质类，打开材质编辑器&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/材质类和材质实例类/MaterialEditor-M_Color.png&#34; alt=&#34;/pic/材质类和材质实例类/MaterialEditor-M_Color.png&#34; title=&#34;/pic/材质类和材质实例类/MaterialEditor-M_Color.png&#34; width=&#34;900&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+材质编辑器
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;专门处理材质参数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+三、为材质设置颜色 BaseColor
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用Constant4Vector作为输入&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/材质类和材质实例类/MaterialEditor-Material-BaseColor.png&#34; alt=&#34;/pic/材质类和材质实例类/MaterialEditor-Material-BaseColor.png&#34; title=&#34;/pic/材质类和材质实例类/MaterialEditor-Material-BaseColor.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;转换为参数，命名为Color&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/材质类和材质实例类/Material-BaseColor.png&#34; alt=&#34;/pic/材质类和材质实例类/Material-BaseColor.png&#34; title=&#34;/pic/材质类和材质实例类/Material-BaseColor.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+四、为材质设置金属度 Metallic
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用Constant作为输入&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/材质类和材质实例类/MaterialEditor-Material-Metallic.png&#34; alt=&#34;/pic/材质类和材质实例类/MaterialEditor-Material-Metallic.png&#34; title=&#34;/pic/材质类和材质实例类/MaterialEditor-Material-Metallic.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;为0，不具备金属度  &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为1，效果图&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/材质类和材质实例类/Material-Metallic-1.png&#34; alt=&#34;/pic/材质类和材质实例类/Material-Metallic-1.png&#34; title=&#34;/pic/材质类和材质实例类/Material-Metallic-1.png&#34; width=&#34;900&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+五、创建材质实例类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;内容浏览器 选中材质类，右键，创建材质实例&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/材质类和材质实例类/LevelEditor-ContentBrowser-CreateMaterialInstance.png&#34; alt=&#34;/pic/材质类和材质实例类/LevelEditor-ContentBrowser-CreateMaterialInstance.png&#34; title=&#34;/pic/材质类和材质实例类/LevelEditor-ContentBrowser-CreateMaterialInstance.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;双击材质实例类，在材质编辑器中打开，M_Color_Inst&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;如果Color没有转换为参数，材质实例类不能修改Color值&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/材质类和材质实例类/MaterialEditor-M_Color_Inst.png&#34; alt=&#34;/pic/材质类和材质实例类/MaterialEditor-M_Color_Inst.png&#34; title=&#34;/pic/材质类和材质实例类/MaterialEditor-M_Color_Inst.png&#34; width=&#34;1400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+创建多个材质实例类，Color值不同
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/材质类和材质实例类/LevelEditor-ContentBrowser-MaterialInstanceList.png&#34; alt=&#34;/pic/材质类和材质实例类/LevelEditor-ContentBrowser-MaterialInstanceList.png&#34; title=&#34;/pic/材质类和材质实例类/LevelEditor-ContentBrowser-MaterialInstanceList.png&#34; width=&#34;800&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+六、应用材质
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;将材质拖放到视口中的对象上&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;应用按钮&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在内容浏览器中选中材质&lt;/li&gt;
+&lt;li&gt;在世界大纲中选中对象&lt;/li&gt;
+&lt;li&gt;在细节面板中应用该材质&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/材质类和材质实例类/UnrealEditor-ApplyMaterial1.png&#34; alt=&#34;/pic/材质类和材质实例类/UnrealEditor-ApplyMaterial1.png&#34; title=&#34;/pic/材质类和材质实例类/UnrealEditor-ApplyMaterial1.png&#34; width=&#34;900&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;下拉框&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在世界大纲中选中对象&lt;/li&gt;
+&lt;li&gt;在细节面板中设置材质&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/材质类和材质实例类/UnrealEditor-ApplyMaterial2.png&#34; alt=&#34;/pic/材质类和材质实例类/UnrealEditor-ApplyMaterial2.png&#34; title=&#34;/pic/材质类和材质实例类/UnrealEditor-ApplyMaterial2.png&#34; width=&#34;600&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 初级课程 &gt; 虚幻编辑器 &gt; 5.2基于C&#43;&#43;类的蓝图类</title>
+      <link>https://toughcactus.github.io/post/5.2%E5%9F%BA%E4%BA%8Ec&#43;&#43;%E7%B1%BB%E7%9A%84%E8%93%9D%E5%9B%BE%E7%B1%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/5.2%E5%9F%BA%E4%BA%8Ec&#43;&#43;%E7%B1%BB%E7%9A%84%E8%93%9D%E5%9B%BE%E7%B1%BB/</guid>
+      <description>&lt;p&gt;
+可以在虚幻编辑器中创建蓝图类，使其派生自C++类。&lt;/p&gt;
+&lt;p&gt;
+可以在虚幻编辑器中编辑蓝图类，设置数据成员初始值及其他。&lt;/p&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建蓝图类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;创建文件夹，Content/BlueprintClasses&lt;/li&gt;
+&lt;li&gt;内容浏览器 右键，Create Blueprint class based on SimpleGeometry&lt;/li&gt;
+&lt;li&gt;名字以BP_开头&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在虚幻编辑器中打开蓝图类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;双击蓝图类，打开蓝图编辑器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类/BP_SimpleGeometry.png&#34; alt=&#34;/pic/基于C++类的蓝图类/BP_SimpleGeometry.png&#34; title=&#34;/pic/基于C++类的蓝图类/BP_SimpleGeometry.png&#34; width=&#34;1400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、创建多个蓝图类，使StaticMesh绑定不同模型，并应用不同材质实例类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/基于C++类的蓝图类/LevelEditor-ContentBrowser-BPList.png&#34; alt=&#34;/pic/基于C++类的蓝图类/LevelEditor-ContentBrowser-BPList.png&#34; title=&#34;/pic/基于C++类的蓝图类/LevelEditor-ContentBrowser-BPList.png&#34; width=&#34;900&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.2初始化ShootTraining项目</title>
+      <link>https://toughcactus.github.io/post/1.2%E5%88%9D%E5%A7%8B%E5%8C%96shoottraining%E9%A1%B9%E7%9B%AE/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.2%E5%88%9D%E5%A7%8B%E5%8C%96shoottraining%E9%A1%B9%E7%9B%AE/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;将ShooterGame作为内容包，基于其开发ShootTraining&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;如有室内设计师提供游戏资料，我们基于此开发游戏&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建ShootTraining项目
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Blank&lt;/li&gt;
+&lt;li&gt;Blueprint&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、配置ShootTraining
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加Copyright&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;项目设置 &amp;gt; Project &amp;gt; Description &amp;gt; Legal &amp;gt; Copyright Notice&lt;/li&gt;
+&lt;li&gt;Shoot Training Game, All Rights Reserved.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;关卡设置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加关卡文件夹 Content/Levels&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建关卡&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/创建关卡.png&#34; alt=&#34;/pic/初始化ShootTraining项目/创建关卡.png&#34; title=&#34;/pic/初始化ShootTraining项目/创建关卡.png&#34; width=&#34;200&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;选择Basic&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/创建关卡-Basic.png&#34; alt=&#34;/pic/初始化ShootTraining项目/创建关卡-Basic.png&#34; title=&#34;/pic/初始化ShootTraining项目/创建关卡-Basic.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;命名为DefaultMap，保存到Content/Levels&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置DefaultMap作为EditorStartupMap和GameDefaultMap&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;项目设置 &amp;gt; Project &amp;gt; Maps &amp;amp; Modes&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;不使用预编译头文件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ShootTraining.Build.cs&lt;/p&gt;
+&lt;div class=&#34;src src-c#&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;// PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  PCHUsage = PCHUsageMode.NoPCHs;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;添加外部资产文件夹 Content/ExternalContent&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、从ShooterGame获取的资产
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;打开ShooterGame项目，在内容浏览器选中Content/Animations/TTP_Animations&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;右键 &amp;gt; Migrate&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/ContentBrowser-Migrate.png&#34; alt=&#34;/pic/初始化ShootTraining项目/ContentBrowser-Migrate.png&#34; title=&#34;/pic/初始化ShootTraining项目/ContentBrowser-Migrate.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取消Sounds勾选&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/Migrate-取消Sounds勾选.png&#34; alt=&#34;/pic/初始化ShootTraining项目/Migrate-取消Sounds勾选.png&#34; title=&#34;/pic/初始化ShootTraining项目/Migrate-取消Sounds勾选.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;通过虚幻编辑器，将Content目录下的Animations，Characters，Environment移动到ExternalContent目录下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不能直接迁移到ExternalContent，虚幻引擎会检查目录，这些资产的上级目录要求是Content，即使根目录是Content也无法通过检查&lt;/li&gt;
+&lt;li&gt;不能直接将三个文件夹移动到ExternalContent中，会导致资产之间的相互引用路径出错&lt;/li&gt;
+&lt;li&gt;Animations，Characters，Environment三个文件夹里的内容都是和TTP_Animations相关的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;打开ShootTraining项目，为ExternalContent设置文件夹颜色&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;选中Content/ExternalContent，右键&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor.png&#34; alt=&#34;/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor.png&#34; title=&#34;/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor.png&#34; width=&#34;400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor-Result.png&#34; alt=&#34;/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor-Result.png&#34; title=&#34;/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor-Result.png&#34; width=&#34;200&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/Content结构.png&#34; alt=&#34;/pic/初始化ShootTraining项目/Content结构.png&#34; title=&#34;/pic/初始化ShootTraining项目/Content结构.png&#34;/&gt;       &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、基于蓝图创建C++项目
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;添加C++类即可&lt;/li&gt;
+&lt;li&gt;创建蓝图项目的时间开销明显小于创建C++项目的时间开销&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加C++类 STGameModeBase&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;不设置类类型&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/STGameModeBase.png&#34; alt=&#34;/pic/初始化ShootTraining项目/STGameModeBase.png&#34; title=&#34;/pic/初始化ShootTraining项目/STGameModeBase.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Content同级目录出现C++ Classes文件夹&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/ContentBrowser-C++Classes.png&#34; alt=&#34;/pic/初始化ShootTraining项目/ContentBrowser-C++Classes.png&#34; title=&#34;/pic/初始化ShootTraining项目/ContentBrowser-C++Classes.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置关卡的GameModeBase为STGameModeBase&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/WorldSettings-STGameModeBase.png&#34; alt=&#34;/pic/初始化ShootTraining项目/WorldSettings-STGameModeBase.png&#34; title=&#34;/pic/初始化ShootTraining项目/WorldSettings-STGameModeBase.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+五、脚本
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;build.sh&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  BuildScript&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;EpicGames/UE_5.1/Engine/Build/BatchFiles/Mac/Build.sh&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ProjectName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Project&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Projects/5.1.1/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.uproject&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Target&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Editor&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  $BuildScript $Target Mac Development &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt;$Project&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&lt;/span&gt; -waitmutex -NoHotReload&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;open_editor.sh&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UnrealEditor&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;EpicGames/UE_5.1/Engine/Binaries/Mac/UnrealEditor.app&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ProjectName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Project&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Projects/5.1.1/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.uproject&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  open $Project&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;generate_project_files.sh&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#!/bin/bash&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  GenerateProjectFilesScript&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;EpicGames/UE_5.1/Engine/Build/BatchFiles/Mac/GenerateProjectFiles.sh&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ProjectName&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  Project&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Projects/5.1.1/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.uproject&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  $GenerateProjectFilesScript -projectfiles -project&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$Project -game -rocket -progress -VSCode 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# $GenerateProjectFilesScript -projectfiles -project=$Project -game -rocket -progress -XCodeProjectFiles&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  EngineCCDst&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;EpicGames/UE_5.1/compile_commands.json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  EngineCCSrc&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;EpicGames/UE_5.1/.vscode/compileCommands_Default.json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ProjectCCDst&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Projects/5.1.1/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/compile_commands.json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ProjectCCSrc&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Projects/5.1.1/&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/.vscode/compileCommands_&amp;#34;&lt;/span&gt;$ProjectName&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  cp $EngineCCSrc $EngineCCDst
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  cp $ProjectCCSrc $ProjectCCDst&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+六、查看项目源码
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;可以在源码文件看见注释的版权信息&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/初始化ShootTraining项目/版权注释.png&#34; alt=&#34;/pic/初始化ShootTraining项目/版权注释.png&#34; title=&#34;/pic/初始化ShootTraining项目/版权注释.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.4.1创建派生自ACharacter的C&#43;&#43;类</title>
+      <link>https://toughcactus.github.io/post/1.4.1%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAacharacter%E7%9A%84c&#43;&#43;%E7%B1%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.4.1%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAacharacter%E7%9A%84c&#43;&#43;%E7%B1%BB/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建派生自ACharacter的C++类 STBaseCharacter
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在子目录Player下创建，命名为STBaseCharacter&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自ACharacter的C++类/C++Classes-Player-STBaseCharacter.png&#34; alt=&#34;/pic/创建派生自ACharacter的C++类/C++Classes-Player-STBaseCharacter.png&#34; title=&#34;/pic/创建派生自ACharacter的C++类/C++Classes-Player-STBaseCharacter.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;公有类&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自ACharacter的C++类/C++Classes-Player-STBaseCharacter-Public.png&#34; alt=&#34;/pic/创建派生自ACharacter的C++类/C++Classes-Player-STBaseCharacter-Public.png&#34; title=&#34;/pic/创建派生自ACharacter的C++类/C++Classes-Player-STBaseCharacter-Public.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、创建派生自APlayerController的C++类 STPlayerController
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;在子目录Player下创建，命名为STPlayerController&lt;/li&gt;
+&lt;li&gt;公有类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自ACharacter的C++类/C++Classes-Player-STPlayerController.png&#34; alt=&#34;/pic/创建派生自ACharacter的C++类/C++Classes-Player-STPlayerController.png&#34; title=&#34;/pic/创建派生自ACharacter的C++类/C++Classes-Player-STPlayerController.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.4.3设置BP_STBaseCharacter</title>
+      <link>https://toughcactus.github.io/post/1.4.3%E8%AE%BE%E7%BD%AEbp_stbasecharacter/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.4.3%E8%AE%BE%E7%BD%AEbp_stbasecharacter/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、在虚幻编辑器中查看
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/WorldSettings-STGameModeBase.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/WorldSettings-STGameModeBase.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/WorldSettings-STGameModeBase.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、创建蓝图类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;创建文件夹 Content/Player&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Content目录下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;BP_STGameModeBase&lt;/p&gt;
+&lt;p width=&#34;600&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/ContentBrowser-Content.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/ContentBrowser-Content.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/ContentBrowser-Content.png&#34;/&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Content/Player目录下&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;BP_STBaseCharacter&lt;/li&gt;
+&lt;li&gt;BP_STPlayerController&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/ContentBrowser-Content-Player.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/ContentBrowser-Content-Player.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/ContentBrowser-Content-Player.png&#34;/&gt;    &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、设置关卡使用蓝图类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/WorldSettings-BP_.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/WorldSettings-BP_.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/WorldSettings-BP_.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、打开BP_STBaseCharacter
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+组件信息
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Component.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Component.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Component.png&#34;/&gt; &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Capsule组件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;根组件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Arrow组件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;角色的前进方向&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Camera组件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;C++中添加&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Mesh组件&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;skeletal mesh&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Character Movement&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;纯逻辑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+为Mesh组件绑定HeroTPP
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Mesh绑定HeroTPP&lt;/p&gt;
+&lt;p width=&#34;1400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh-HeroTPP-Lookup.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh-HeroTPP-Lookup.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh-HeroTPP-Lookup.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;材质自动应用HeroTPP&lt;/p&gt;
+&lt;p width=&#34;1400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh-HeroTPP.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh-HeroTPP.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh-HeroTPP.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;移动到合适位置，旋转模型与前进方向一致&lt;/p&gt;
+&lt;p width=&#34;1400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/BP_STBaseCharacter-Mesh.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+第三视角
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;分离Camera组件和Mesh组件&lt;/p&gt;
+&lt;p width=&#34;1400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/分离Camera和Mesh.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/分离Camera和Mesh.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/分离Camera和Mesh.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;运行效果图&lt;/p&gt;
+&lt;p width=&#34;800&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/设置BP_STBaseCharacter/效果图.png&#34; alt=&#34;/pic/设置BP_STBaseCharacter/效果图.png&#34; title=&#34;/pic/设置BP_STBaseCharacter/效果图.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

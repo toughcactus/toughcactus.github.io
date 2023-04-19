@@ -1,0 +1,741 @@
+<!DOCTYPE html>
+
+
+<html lang="en-us" data-theme="">
+<head>
+    
+        
+<meta charset="utf-8">
+<meta name="HandheldFriendly" content="True">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="referrer" content="no-referrer-when-downgrade">
+
+<title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 4.AActor类型 - 苔滑非关雨，松鸣不假风。</title>
+
+<meta name="description" content="
+UObjectBaseUtility
+
+      ^
+
+
+
+
+
+UObject
+
+  ^
+
+
+
+
+
+AActor  ">
+
+
+
+
+
+<link rel="icon" type="image/x-icon" href="https://toughcactus.github.io/favicon.ico">
+<link rel="apple-touch-icon-precomposed" href="https://toughcactus.github.io/favicon.png">
+
+
+<style>
+  body {
+    visibility: hidden;
+    opacity: 0;
+  }
+</style>
+
+<noscript>
+  <style>
+    body {
+      visibility: visible;
+      opacity: 1;
+    }
+  </style>
+</noscript>
+
+
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <link rel="stylesheet" href="https://toughcactus.github.io/css/style.min.aac3b3a2a3235d20a652d9ccde7ec59be09f74c45de387513f681d02f3912b95.css" integrity="sha256-qsOzoqMjXSCmUtnM3n7Fm&#43;CfdMRd44dRP2gdAvORK5U=">
+    
+
+
+
+
+
+    
+
+    
+
+
+
+
+
+    
+    
+        
+    
+    
+
+    
+        <script src="https://toughcactus.github.io/js/script.min.74bf1a3fcf1af396efa4acf3e660e876b61a2153ab9cbe1893ac24ea6d4f94ee.js" type="text/javascript" charset="utf-8" integrity="sha256-dL8aP88a85bvpKzz5mDodrYaIVOrnL4Yk6wk6m1PlO4="></script>
+    
+
+
+
+
+
+
+
+<meta property="og:title" content="虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 4.AActor类型" />
+<meta property="og:description" content="
+UObjectBaseUtility
+
+      ^
+
+
+
+
+
+UObject
+
+  ^
+
+
+
+
+
+AActor  " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/post/4.aactor%E7%B1%BB%E5%9E%8B/" /><meta property="article:section" content="post" />
+
+
+
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 4.AActor类型"/>
+<meta name="twitter:description" content="
+UObjectBaseUtility
+
+      ^
+
+
+
+
+
+UObject
+
+  ^
+
+
+
+
+
+AActor  "/>
+
+
+
+
+
+
+
+
+
+
+
+    
+</head>
+<body>
+    <a class="skip-main" href="#main">Skip to main content</a>
+    <div class="container">
+        <header class="common-header"> 
+            
+                <div class="header-top">
+    <h1 class="site-title">
+    <a href="/">苔滑非关雨，松鸣不假风。</a>
+</h1>
+    <ul class="social-icons">
+
+
+
+
+    <li>
+            <a href="https://toughcactus.github.io/index.xml" title="RSS" rel="me">
+            <span class="inline-svg" >
+
+
+
+
+    
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><path fill="currentColor" d="M128.081 415.959c0 35.369-28.672 64.041-64.041 64.041S0 451.328 0 415.959s28.672-64.041 64.041-64.041 64.04 28.673 64.04 64.041zm175.66 47.25c-8.354-154.6-132.185-278.587-286.95-286.95C7.656 175.765 0 183.105 0 192.253v48.069c0 8.415 6.49 15.472 14.887 16.018 111.832 7.284 201.473 96.702 208.772 208.772.547 8.397 7.604 14.887 16.018 14.887h48.069c9.149.001 16.489-7.655 15.995-16.79zm144.249.288C439.596 229.677 251.465 40.445 16.503 32.01 7.473 31.686 0 38.981 0 48.016v48.068c0 8.625 6.835 15.645 15.453 15.999 191.179 7.839 344.627 161.316 352.465 352.465.353 8.618 7.373 15.453 15.999 15.453h48.068c9.034-.001 16.329-7.474 16.005-16.504z"/></svg>
+
+</span>
+
+            </a>
+        </li>
+    
+
+</ul>
+</div>
+
+    <nav>
+        
+        
+        <a class="" href="https://toughcactus.github.io/about/" title="">About</a>
+        
+        <a class="" href="https://toughcactus.github.io/handbook/" title="">手册</a>
+        
+        <a class="" href="https://toughcactus.github.io/tags/" title="">Tags</a>
+        
+        <a class="" href="https://toughcactus.github.io/posts/" title="">Archive</a>
+        
+        <a class="" href="https://toughcactus.github.io/%E9%98%BF%E6%9F%94/" title="">阿柔</a>
+        
+    </nav>
+
+
+
+
+
+
+            
+        </header>
+        <main id="main" tabindex="-1"> 
+            
+    
+
+    <article class="post h-entry">
+        <div class="post-header">
+            <header>
+                <h1 class="p-name post-title">虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 4.AActor类型</h1>
+
+                
+            </header>
+        </div>
+        <div class="content e-content">
+            <p>
+UObjectBaseUtility</p>
+<p>
+      ^</p>
+<table>
+<tbody>
+</tbody>
+</table>
+<p>
+UObject</p>
+<p>
+  ^</p>
+<table>
+<tbody>
+</tbody>
+</table>
+<p>
+AActor  </p>
+<div id="outline-container-headline-1" class="outline-2">
+<h2 id="headline-1">
+一、AActor类型
+</h2>
+<div id="outline-text-headline-1" class="outline-text-2">
+<ul>
+<li>虚幻C++基础类型</li>
+<li>能放置到世界场景中的物体，具有相同的基类，AActor</li>
+<li>初始状态不具有Gizmo(不可移动)，也无法绑定模型</li>
+<li>
+<p>Actor对象代指所有能添加到世界场景中的物体</p>
+<ul>
+<li>几何体，特效，声音，都派生自AActor</li>
+</ul>
+</li>
+<li>可以在虚幻编辑器中添加AActor对象，也可以在代码中动态生成Actor对象</li>
+<li>Actor对象有无实体均可</li>
+<li>
+<p>由Component组成</p>
+<ul>
+<li>所有的组件可以根据需求进行组装，方便重用</li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+二、UObject类型
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<ul>
+<li>虚幻引擎中最基础的类型，AActor类型的父类</li>
+<li>不能在场景中添加UObject对象</li>
+<li>可以在代码中创建UObject对象并对逻辑进行封装</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+三、获得Actor对象描述 UObjectBaseUtility::GetName
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<ul>
+<li>
+<p>保存在FString对象中</p>
+<img src="/pic/AActor类型/UObjectBaseUtility-GetName.png" alt="/pic/AActor类型/UObjectBaseUtility-GetName.png" title="/pic/AActor类型/UObjectBaseUtility-GetName.png" width="300"/>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  UE_LOG(LogSimpleGeometry, Display, TEXT(<span style="color:#e6db74">&#34;Name: %s&#34;</span>), <span style="color:#f92672">*</span>GetName());</span></span></code></pre></div>
+</div>
+<img src="/pic/AActor类型/UObjectBaseUtility-GetName-Output.png" alt="/pic/AActor类型/UObjectBaseUtility-GetName-Output.png" title="/pic/AActor类型/UObjectBaseUtility-GetName-Output.png" width="400"/>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+四、组件 Component
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+创建组件 UObject::CreateDefaultSubobject&lt;T&gt;
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<ul>
+<li>返回指向给定类型对象的指针</li>
+</ul>
+<img src="/pic/AActor类型/UObject-CreateDefaultSubobject.png" alt="/pic/AActor类型/UObject-CreateDefaultSubobject.png" title="/pic/AActor类型/UObject-CreateDefaultSubobject.png" width="1100"/>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  StaticMesh <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>UStaticMeshComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;StaticMeshInEditor&#34;</span>);</span></span></code></pre></div>
+</div>
+<ol>
+<li>
+<p>SubobjectName</p>
+<ul>
+<li>FName类型</li>
+<li>虚幻编辑器中对应的属性名</li>
+<li>在C++中对变量StaticMesh做设置，在虚幻编辑器中对名为&#34;StaticMeshInEditor&#34;的属性做设置</li>
+<li>二者相对应</li>
+<li>可以在C++中修改变量名</li>
+<li>如果修改属性名，虚幻编辑器中该属性的已有设置会因找不到目标载体而无法生效</li>
+</ul>
+</li>
+<li>
+<p>BTransient</p>
+<ul>
+<li>使用默认值</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+注册为根组件 AActor::SetRootComponent
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<ul>
+<li>根组件的设置会影响到变换矩阵求值</li>
+</ul>
+<img src="/pic/AActor类型/AActor-SetRootComponent.png" alt="/pic/AActor类型/AActor-SetRootComponent.png" title="/pic/AActor类型/AActor-SetRootComponent.png" width="600"/>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  SetRootComponent(StaticMesh);</span></span></code></pre></div>
+</div>
+<ol>
+<li>
+<p>NewRootComponent</p>
+<ul>
+<li>指向组件的指针      </li>
+<li>
+<p>USceneComponent *类型，可以接受UStaticMeshCompoent *(动态绑定)</p>
+<ul>
+<li>UStaticMeshComponent派生自UMeshComponent</li>
+<li>UMeshComponent派生自UPrimitiveComponent</li>
+<li>UPrimitiveComponent派生自USceneComponent</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+获取指向根组件的指针 AActor::GetRootComponent
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<img src="/pic/AActor类型/AActor-GetRootComponent.png" alt="/pic/AActor类型/AActor-GetRootComponent.png" title="/pic/AActor类型/AActor-GetRootComponent.png" width="400"/>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  GetRootComponent();</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
+输入组件 AActor::InputComponent
+</h3>
+<div id="outline-text-headline-8" class="outline-text-3">
+<ul>
+<li>
+<p>数据成员</p>
+<img src="/pic/AActor类型/AActor-InputComponent.png" alt="/pic/AActor类型/AActor-InputComponent.png" title="/pic/AActor类型/AActor-InputComponent.png" width="500"/>
+</li>
+</ul>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-2">
+<h2 id="headline-9">
+五、Actor变换信息
+</h2>
+<div id="outline-text-headline-9" class="outline-text-2">
+<div id="outline-container-headline-10" class="outline-3">
+<h3 id="headline-10">
+获得Actor对象的变换信息 AActor::GetActorTransform
+</h3>
+<div id="outline-text-headline-10" class="outline-text-3">
+<img src="/pic/AActor类型/AActor-GetActorTransform.png" alt="/pic/AActor类型/AActor-GetActorTransform.png" title="/pic/AActor类型/AActor-GetActorTransform.png" width="400"/>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  MoveSetting.InitialTransform <span style="color:#f92672">=</span> GetActorTransform();</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-3">
+<h3 id="headline-11">
+获得Actor对象位置信息 AActor::GetActorLocation
+</h3>
+<div id="outline-text-headline-11" class="outline-text-3">
+<img src="/pic/AActor类型/AActor-GetActorLocation.png" alt="/pic/AActor类型/AActor-GetActorLocation.png" title="/pic/AActor类型/AActor-GetActorLocation.png" width="400"/>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  FVector CurrentLocation <span style="color:#f92672">=</span> GetActorLocation();</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-12" class="outline-3">
+<h3 id="headline-12">
+获得Actor对象旋转信息 AActor::GetActorRotation
+</h3>
+<div id="outline-text-headline-12" class="outline-text-3">
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  FRotator CurrentRotation <span style="color:#f92672">=</span> GetActorRotation();</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-13" class="outline-3">
+<h3 id="headline-13">
+设置Actor对象位置信息 AActor::SetActorLocation
+</h3>
+<div id="outline-text-headline-13" class="outline-text-3">
+<img src="/pic/AActor类型/AActor-SetActorLocation1.png" alt="/pic/AActor类型/AActor-SetActorLocation1.png" title="/pic/AActor类型/AActor-SetActorLocation1.png" width="1200"/>
+<img src="/pic/AActor类型/AActor-SetActorLocation2.png" alt="/pic/AActor类型/AActor-SetActorLocation2.png" title="/pic/AActor类型/AActor-SetActorLocation2.png" width="1200"/>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  SetActorLocation(CurrentLocation);</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-14" class="outline-3">
+<h3 id="headline-14">
+设置Actor对象旋转信息 AActor::SetActorRotation
+</h3>
+<div id="outline-text-headline-14" class="outline-text-3">
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  SetActorRotation(CurrentRotation);</span></span></code></pre></div>
+</div>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-15" class="outline-2">
+<h2 id="headline-15">
+六、获取指向世界对象的指针 AActor::GetWorld
+</h2>
+<div id="outline-text-headline-15" class="outline-text-2">
+<img src="/pic/AActor类型/AActor-GetWorld.png" alt="/pic/AActor类型/AActor-GetWorld.png" title="/pic/AActor类型/AActor-GetWorld.png" width="600"/>
+</div>
+</div>
+<div id="outline-container-headline-16" class="outline-2">
+<h2 id="headline-16">
+七、获取定时器管理对象的引用 AActor::GetWorldTimerManager
+</h2>
+<div id="outline-text-headline-16" class="outline-text-2">
+<img src="/pic/AActor类型/AActor-GetWorldTimerManager.png" alt="/pic/AActor类型/AActor-GetWorldTimerManager.png" title="/pic/AActor类型/AActor-GetWorldTimerManager.png" width="400"/>
+</div>
+</div>
+<div id="outline-container-headline-17" class="outline-2">
+<h2 id="headline-17">
+八、对Actor对象调用BeginPlay AActor::FinishSpawning
+</h2>
+<div id="outline-text-headline-17" class="outline-text-2">
+<p>和UWorld::SpawnActorDeferred配合使用</p>
+<img src="/pic/AActor类型/AActor-FinishSpawning.png" alt="/pic/AActor类型/AActor-FinishSpawning.png" title="/pic/AActor类型/AActor-FinishSpawning.png" width="1200"/>
+</div>
+</div>
+<div id="outline-container-headline-18" class="outline-2">
+<h2 id="headline-18">
+九、销毁Actor对象
+</h2>
+<div id="outline-text-headline-18" class="outline-text-2">
+<div id="outline-container-headline-19" class="outline-3">
+<h3 id="headline-19">
+销毁Actor对象 AActor::Destroy
+</h3>
+<div id="outline-text-headline-19" class="outline-text-3">
+<ul>
+<li>不支持重载</li>
+<li>对对象调用Destroy时，会将其PendingKill标志置1，等到Garbage Collector被触发时，再回收内存</li>
+</ul>
+<img src="/pic/AActor类型/AActor-Destroy1.png" alt="/pic/AActor类型/AActor-Destroy1.png" title="/pic/AActor类型/AActor-Destroy1.png" width="800"/>
+<img src="/pic/AActor类型/AActor-Destroy2.png" alt="/pic/AActor类型/AActor-Destroy2.png" title="/pic/AActor类型/AActor-Destroy2.png" width="800"/>
+</div>
+</div>
+<div id="outline-container-headline-20" class="outline-3">
+<h3 id="headline-20">
+等待若干秒后销毁Actor对象 AActor::SetLifeSpan
+</h3>
+<div id="outline-text-headline-20" class="outline-text-3">
+<ul>
+<li>单位为秒</li>
+<li>通过定时器实现</li>
+</ul>
+<img src="/pic/AActor类型/AActor-SetLifeSpan.png" alt="/pic/AActor类型/AActor-SetLifeSpan.png" title="/pic/AActor类型/AActor-SetLifeSpan.png" width="900"/>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-21" class="outline-2">
+<h2 id="headline-21">
+十、从场景中移除Actor对象之前进行收尾工作 AActor::EndPlay
+</h2>
+<div id="outline-text-headline-21" class="outline-text-2">
+<ul>
+<li>将Actor对象从场景中移除之前，会对其调用EndPlay函数</li>
+<li>对Actor对象调用Destroy函数，包含EndPlay函数的调用</li>
+</ul>
+<img src="/pic/AActor类型/AActor-EndPlay.png" alt="/pic/AActor类型/AActor-EndPlay.png" title="/pic/AActor类型/AActor-EndPlay.png" width="500"/>
+</div>
+</div>
+<div id="outline-container-headline-22" class="outline-2">
+<h2 id="headline-22">
+十一、Actor对象是否有效 IsValid
+</h2>
+<div id="outline-text-headline-22" class="outline-text-2">
+<ul>
+<li>返回true则未被销毁</li>
+</ul>
+<p width="800"><img src="/pic/AActor类型/IsValid.png" alt="/pic/AActor类型/IsValid.png" title="/pic/AActor类型/IsValid.png"/>  </p>
+<ul>
+<li>
+<p>除了判断指针是否为空，还会检查对象的Flag；对对象调用Destroy时，会将其PendingKill标志置1，此时即认为Actor对象不再有效</p>
+<p width="1400"><img src="/pic/AActor类型/PendingKillFlag.png" alt="/pic/AActor类型/PendingKillFlag.png" title="/pic/AActor类型/PendingKillFlag.png"/>  </p>
+</li>
+</ul>
+</div>
+</div>
+        </div>
+        
+
+    
+
+
+<div class="post-info">
+    
+
+    <a class="post-hidden-url u-url" href="https://toughcactus.github.io/post/4.aactor%E7%B1%BB%E5%9E%8B/">https://toughcactus.github.io/post/4.aactor%E7%B1%BB%E5%9E%8B/</a>
+    <a href="https://toughcactus.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">Dorothy</a>
+
+
+    <div class="post-taxonomies">
+        
+            <ul class="post-categories">
+                
+                    
+                    <li><a href="https://toughcactus.github.io/categories/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/">虚幻引擎</a></li>
+                
+            </ul>
+            
+            
+                <ul class="post-tags">
+                    
+                        
+                        <li><a href="https://toughcactus.github.io/tags/api/">#API</a></li>
+                    
+                        
+                        <li><a href="https://toughcactus.github.io/tags/%E8%99%9A%E5%B9%BBc&#43;&#43;/">#虚幻C&#43;&#43;</a></li>
+                    
+                </ul>
+        
+    </div>
+</div>
+
+    </article>
+
+    
+        
+        
+            <h3 class="read-next-title">Read next</h3>
+            <ul class="read-next-posts">
+                
+                <li><a href="/post/1.%E6%97%A5%E5%BF%97%E7%B1%BB%E5%88%AB/">虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 1.日志类别</a></li>
+                
+                <li><a href="/post/10.uenum%E5%AE%8F/">虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 10.UENUM宏</a></li>
+                
+            </ul>
+        
+    
+
+    
+        
+    <div class="pagination post-pagination">
+        <div class="left pagination-item ">
+            
+                <a href="/post/3.ue_log%E5%AE%8F/">虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 3.UE_LOG宏</a>
+            
+        </div>
+        <div class="right pagination-item ">
+            
+                <a href="/post/5.%E9%A2%9C%E8%89%B2%E7%BB%93%E6%9E%84%E4%BD%93/">虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 5.颜色结构体</a>
+            
+        </div>
+    </div>
+
+
+
+
+    
+
+    
+        
+
+
+
+
+
+
+
+    
+
+        </main>
+        
+            <footer class="common-footer">
+    
+    
+
+    <div class="common-footer-bottom">
+        
+        <div class="copyright">
+            <p>© Dorothy, 2023<br>
+            Powered by <a target="_blank" rel="noopener noreferrer" href="https://gohugo.io/">Hugo</a>, theme <a target="_blank" rel="noopener noreferrer" href="https://github.com/mitrichius/hugo-theme-anubis">Anubis</a>.<br>
+            
+            </p>  
+        </div> 
+
+        
+
+    
+
+
+
+    <button class="theme-switcher">
+        Dark theme
+    </button>
+
+
+<script>
+const STORAGE_KEY = 'user-color-scheme'
+const defaultTheme = "auto"
+
+let currentTheme
+let switchButton
+let autoDefinedScheme = window.matchMedia('(prefers-color-scheme: dark)')
+
+const autoChangeScheme = e => {
+    currentTheme = e.matches ? 'dark' : 'light'
+    document.documentElement.setAttribute('data-theme', currentTheme)
+    changeButtonText()
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+    switchButton = document.querySelector('.theme-switcher')
+    currentTheme = detectCurrentScheme()
+    if (currentTheme == 'dark') {
+        document.documentElement.setAttribute('data-theme', 'dark')
+    }
+    if (currentTheme == 'auto') {
+        autoChangeScheme(autoDefinedScheme);
+        autoDefinedScheme.addListener(autoChangeScheme);
+    }
+
+    if (switchButton) {
+        changeButtonText()
+        switchButton.addEventListener('click', switchTheme, false)
+    }
+  
+    showContent()
+})
+
+function detectCurrentScheme() {
+    if (localStorage.getItem(STORAGE_KEY)) {
+        return localStorage.getItem(STORAGE_KEY)
+    } 
+    if (defaultTheme) {
+        return defaultTheme
+    } 
+    if (!window.matchMedia) {
+        return 'light'
+    } 
+    if (window.matchMedia('(prefers-color-scheme: dark)').matches) {
+        return 'dark'
+    }
+    return 'light'
+}
+
+function changeButtonText()
+{   
+    if (switchButton) {
+        switchButton.textContent = currentTheme == 'dark' ?  "Light theme" : "Dark theme"
+    }
+}
+
+function switchTheme(e) {
+    if (currentTheme == 'dark') {
+        localStorage.setItem(STORAGE_KEY, 'light')
+        document.documentElement.setAttribute('data-theme', 'light')
+        currentTheme = 'light'
+    } else {
+        localStorage.setItem(STORAGE_KEY, 'dark')
+        document.documentElement.setAttribute('data-theme', 'dark')
+        currentTheme = 'dark'
+    }
+    changeButtonText()
+}
+
+function showContent() {
+    document.body.style.visibility = 'visible';
+    document.body.style.opacity = 1;
+}
+</script>   
+    </div>
+
+    <p class="h-card vcard">
+
+    <a href=https://toughcactus.github.io/ class="p-name u-url url fn" rel="me">Dorothy</a> 
+
+    
+
+    
+</p> 
+</footer>
+
+        
+    </div>
+</body>
+</html>

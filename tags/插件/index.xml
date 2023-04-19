@@ -1,0 +1,1504 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>插件 on 苔滑非关雨，松鸣不假风。</title>
+    <link>https://toughcactus.github.io/tags/%E6%8F%92%E4%BB%B6/</link>
+    <description>苔滑非关雨，松鸣不假风。 (插件)</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <copyright>All Rights Reserved.</copyright>
+    
+    <atom:link href="https://toughcactus.github.io/tags/%E6%8F%92%E4%BB%B6/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; Buffer</title>
+      <link>https://toughcactus.github.io/post/buffer/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/buffer/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;buffer名提示 | ido-mode&lt;/li&gt;
+&lt;li&gt;优化list-buffer显示 | ibuffer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、buffer名提示 | ido-mode
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.masteringemacs.org/article/introduction-to-ido-mode&#34;&gt;Mickey Peterson&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (setq indo-enable-flex-matching &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (setq ido-everywhere &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (ido-mode &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;说明&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (ido-switch-buffer) &lt;span style=&#34;color:#75715e&#34;&gt;;; 原switch-to-buffer | C-x b&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (ido-kill-buffer) &lt;span style=&#34;color:#75715e&#34;&gt;;; 原kill-buffer | C-x k&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、优化list-buffer显示 | ibuffer
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;优化list-buffer显示 | ibuffer&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (defalias &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;list-buffers&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ibuffer&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; C-x C-b&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; LSP</title>
+      <link>https://toughcactus.github.io/post/lsp/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/lsp/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;Language Server Protocol 语言服务协议&lt;/li&gt;
+&lt;li&gt;C++语言服务器 - clangd&lt;/li&gt;
+&lt;li&gt;代码补全工具&lt;/li&gt;
+&lt;li&gt;compile_commands.json文件生成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、Language Server Protocol 语言服务协议
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;用于编辑器（或IDE）和语言服务器之间的协议，提供自动补全、定义跳转、查询引用等功能。&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;编辑器安装支持LSP协议的插件，该插件与语言服务器建立连接，并将获取的信息在编辑器中显示。&lt;/li&gt;
+&lt;li&gt;在Emacs，有lsp-mode，eglot提供前端功能。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://microsoft.github.io/language-server-protocol/&#34;&gt;Intro to LSP&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、C++语言服务器 - clangd
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;C++的语言服务器，和各种编译器的lsp插件进行连接，提供补全和符号查询功能。&lt;/li&gt;
+&lt;li&gt;基于Clang C++编译器，是LLVM项目的一部分。&lt;/li&gt;
+&lt;li&gt;提供代码补全，编译检查，跳转到定义等功能。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://clangd.llvm.org&#34;&gt;Intro to clangd&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+使用compile_commands.json
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;工具生成&lt;/li&gt;
+&lt;li&gt;为项目中的每个源文件提供编译命令&lt;/li&gt;
+&lt;li&gt;clangd会在源文件所在目录下，同级目录的build文件夹内，根目录，根目录的build文件夹内查找对应的compile_commands.json文件&lt;/li&gt;
+&lt;li&gt;可由bear ｜ bazel ｜ compiledb ｜ cmake生成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+三、代码补全
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;使用company&lt;/li&gt;
+&lt;li&gt;见 Emacs | 插件篇 | 文本补全&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;尝试过使用auto-complete，但auto-complete-clang最后一次更新在2014年4月9日，这也是我文本补全改为company的原因&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/brianjcj/auto-complete-clang&#34;&gt;auto-complete-clang on Github&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+四、compile_commands.json文件生成
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+1. 使用CMake
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;根据CMakeList.txt生成&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  cmake -DCMAKE_EXPORT_COMPILE_COMMANDS&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;&lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+2. compiledb
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;根据makefile生成&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/nickdiego/compiledb&#34;&gt;compiledb on Github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用python安装compiledb&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  pip3 install compiledb&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;生成compile_commands.json文件&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  compiledb -n make&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; LSP &gt; 前端</title>
+      <link>https://toughcactus.github.io/post/%E5%89%8D%E7%AB%AF/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/%E5%89%8D%E7%AB%AF/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;lsp-mode&lt;/li&gt;
+&lt;li&gt;eglot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、lsp-mode
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;默认使用Emacs自带的flymake做语法检查&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;会同时安装&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;lsp-ui | 提供函数列表&lt;/li&gt;
+&lt;li&gt;lsp-treemacs | 可在treemacs中查看文件包含的符号&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/emacs-lsp/lsp-mode&#34;&gt;lsp-mode on Github&lt;/a&gt; | &lt;a href=&#34;https://emacs-lsp.github.io/lsp-mode/&#34;&gt;HomePage&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-2&#34;&gt;
+1. lsp-mode的安装和配置
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package lsp-mode
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :init
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (setq lsp-keymap-prefix &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-c l&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (setq lsp-clangd-binary-path &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;/Volumes/Programs/clang+llvm-15.0.4/bin/clangd&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; 设置clangd路径&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :hook (&lt;span style=&#34;color:#75715e&#34;&gt;;; replace XXX-mode with concrete major-mode(e. g. python-mode)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           (c-mode &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; lsp)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           (c++-mode &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; lsp) &lt;span style=&#34;color:#75715e&#34;&gt;;; 打开C++代码时自动加载lsp-mode&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           &lt;span style=&#34;color:#75715e&#34;&gt;;; if you want which-key integration&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           (lsp-mode &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; lsp-enable-which-key-integration))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :commands (lsp lsp-deferred))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+2. lsp-ui
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用lsp-ui-imenu打开函数列表，用C-n/C-p移动，RET跳转&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package lsp-ui
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :commands lsp-ui-mode)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+3. lsp-treemacs
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package lsp-treemacs
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :after (treemacs lsp))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+4. 配置lsp-mode | 无compile_commands.json文件则不加载lsp
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://emacs.stackexchange.com/questions/70634/how-to-disable-lsp-clangd-server-if-there-is-no-dominating-compile-commands-json&#34;&gt;参考&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (defvar bg-clangd-compilation-database-file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;compile_commands.json&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Basename of the compilation database used by clangd.&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (defun bg-clangd-is-compilation-database-file-available ()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Return t when there is a compilation database file in a dominating directory.&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (and (derived-mode-p &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c++-mode&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         (locate-dominating-file default-directory bg-clangd-compilation-database-file)))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (defun bg-lsp-deferred-when-compilation-database-file-available ()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Only call lsp-deferred if there is a compilation database file in a dominating directory.&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (when (derived-mode-p &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c++-mode&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (if (not (bg-clangd-is-compilation-database-file-available))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          (&lt;span style=&#34;color:#a6e22e&#34;&gt;message&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;No compilation database file found relative to %S which is needed for lsp mode configuration.&amp;#34;&lt;/span&gt; default-directory)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        (lsp-deferred))))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+5. 使用lsp-mode查找函数或引用
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (lsp-find-function)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (lsp-find-references)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-7&#34;&gt;
+二、eglot
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/joaotavora/eglot&#34;&gt;eglot on Github&lt;/a&gt; | &lt;a href=&#34;https://joaotavora.github.io/eglot/&#34;&gt;manual&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;需要添加gnu-devel源&lt;/li&gt;
+&lt;li&gt;使用use-package安装失败，放在安装列表&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (require &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;eglot&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (add-to-list &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;eglot-server-programs&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#39;&lt;/span&gt;((c-mode c++-mode) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;clangd&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;; (add-to-list &amp;#39;eglot-server-programs &amp;#39;((c-mode c++-mode) &amp;#34;/usr/local/bin/ccls&amp;#34;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c-mode-hook&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;eglot-ensure&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c++-mode-hook&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;eglot-ensure&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;和语言服务器建立连接 | M-x eglot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; LSP &gt; 语言服务器</title>
+      <link>https://toughcactus.github.io/post/%E8%AF%AD%E8%A8%80%E6%9C%8D%E5%8A%A1%E5%99%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/%E8%AF%AD%E8%A8%80%E6%9C%8D%E5%8A%A1%E5%99%A8/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;clangd&lt;/li&gt;
+&lt;li&gt;ccls&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、clangd
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-2&#34;&gt;
+1. MacOS
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;自带clang和clangd&lt;/li&gt;
+&lt;li&gt;gcc和clang都是编译器，在MacOS上运行g++命令实际用的clang&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+2. 下载编译好的LLVM
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://github.com/llvm/llvm-project/releases/tag/llvmorg-15.0.4&#34;&gt;clang+llvm-15.0.4下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;15.0.5起不提供apple-x86_64的已编译版本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加环境变量&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;# llvm&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  export LLVMBIN&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;/Users/USERNAME/Packages/clang+llvm-15.0.4/bin
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  export PATH&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;$LLVMBIN:$PATH&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;生效&lt;/p&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  vi ~/.zshrc
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  source ~/.zshrc&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+二、ccls
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;起源于cquery，可作为C/C++/Objective-C的语言服务器。&lt;/li&gt;
+&lt;li&gt;支持代码补全，定义和引用查询，以及交叉引用等功能。&lt;/li&gt;
+&lt;li&gt;基于Clangd+LLVM的C++库。&lt;/li&gt;
+&lt;li&gt;国人开发。&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/MaskRay/ccls&#34;&gt;ccls on Github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;需要编译ccls这个程序，以及在Emacs上安装ccls插件。&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+1. 使用cmake编译ccls，使用make install安装，程序路径/usr/local/bin/ccls
+&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+2. 安装插件
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package ccls
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :hook ((c-mode c++-mode objc-mode cuda-mode) &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           (lambda () (require &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ccls&lt;/span&gt;) (lsp))))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; 命令提示</title>
+      <link>https://toughcactus.github.io/post/%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/%E5%91%BD%E4%BB%A4%E6%8F%90%E7%A4%BA/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;M-x提示 | smex&lt;/li&gt;
+&lt;li&gt;M-x提示 | counsel-M-x&lt;/li&gt;
+&lt;li&gt;命令提示 | which-key&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、M-x提示 | smex
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package smex
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config ((smex-initialize)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;M-x&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;smex&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;M-X&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;smex-major-mode-commands&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-c C-c M-x&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;execute-extended-command&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; This is your old M-x.&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;             ))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、M-x提示 | counsel-M-x
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;见 Emacs | 插件篇 | 搜索&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、命令提示 | which-key
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;命令提示 | which-key&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package which-key
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config (which-key-mode))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; 多功能插件</title>
+      <link>https://toughcactus.github.io/post/%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%8F%92%E4%BB%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/%E5%A4%9A%E5%8A%9F%E8%83%BD%E6%8F%92%E4%BB%B6/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;counsel&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、counsel
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package counsel
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;:ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;使用说明&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;M-x提示&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(counsel-M-x) &lt;span style=&#34;color:#75715e&#34;&gt;;; M-x&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;buffer切换&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(counsel-switch-buffer) &lt;span style=&#34;color:#75715e&#34;&gt;;; C-x b&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;打开文件&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(counsel-find-file) &lt;span style=&#34;color:#75715e&#34;&gt;;; C-x C-f&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;版本控制 | 列出版本控制文件&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(counsel-git) &lt;span style=&#34;color:#75715e&#34;&gt;;; C-c g&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;目录中搜索 | counsel-ag&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(counsel-ag)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;counsel-ag&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;使用the_silver_searcher包提供的ag命令 | 在Emacs执行shell命令&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ag和grep比较&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;支持目录中搜索 | 速度快 | 高亮&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-bash&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-bash&#34; data-lang=&#34;bash&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  grep fact *.cpp
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ag fact&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (counsel-ag &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;fact&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; C-c k&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (ivy-occur) &lt;span style=&#34;color:#75715e&#34;&gt;;; 在新窗口输出查询结果 | C-c C-o&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;; 跳转&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (next-error) &lt;span style=&#34;color:#75715e&#34;&gt;;; 下一个 | C-x ` | M-g n&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (previous-error) &lt;span style=&#34;color:#75715e&#34;&gt;;; 上一个 | M-g p&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; 字符图标</title>
+      <link>https://toughcactus.github.io/post/%E5%AD%97%E7%AC%A6%E5%9B%BE%E6%A0%87/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/%E5%AD%97%E7%AC%A6%E5%9B%BE%E6%A0%87/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;all-the-icons&lt;/li&gt;
+&lt;li&gt;icons-in-terminal&lt;/li&gt;
+&lt;li&gt;icons-in-terminal.el&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、all-the-icons
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/domtronn/all-the-icons.el/tree/d922aff57ac8308d3ed067f9151cc76d342855f2&#34;&gt;Github&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;使用字体中的字符作为图标 | 和多个插件联动&lt;/li&gt;
+&lt;li&gt;安装fonts文件夹中的字体&lt;/li&gt;
+&lt;li&gt;使用use-package安装all-the-icons失败 | 列表安装&lt;/li&gt;
+&lt;li&gt;配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (when (display-graphic-p)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (require &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;all-the-icons&lt;/span&gt;))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;使用&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;打印指定集全部符号&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (all-the-icons-insert-icons-for &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;alltheicon&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; oction | faicon | wicon | fileicon | material&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;输出指定符号 | 可设置样式&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;v-adjust | 垂直调整&lt;/li&gt;
+&lt;li&gt;face | 颜色&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#a6e22e&#34;&gt;insert&lt;/span&gt; (all-the-icons-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-binary&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;all-the-icons-dblue&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#a6e22e&#34;&gt;insert&lt;/span&gt; (all-the-icons-wicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;tornado&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#a6e22e&#34;&gt;insert&lt;/span&gt; (all-the-icons-faicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;cogs&amp;#34;&lt;/span&gt;))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;输出某类型文件对应图标&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#a6e22e&#34;&gt;insert&lt;/span&gt; (all-the-icons-icon-for-file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name.org&amp;#34;&lt;/span&gt;))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、icons-in-terminal
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/sebastiencs/icons-in-terminal&#34;&gt;安装包&lt;/a&gt; | 安装fonts文件夹中的字体&lt;/li&gt;
+&lt;li&gt;插件路径 | ~/.local/share/icons-in-terminal&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/emacsmirror/font-lock-plus&#34;&gt;依赖font-lock+&lt;/a&gt; | 拷贝font-lock+.el到插件路径&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (add-to-list &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;load-path&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/.local/share/icons-in-terminal/&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (require &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用 | 只提供一个函数 | 去源文件查图标名&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#a6e22e&#34;&gt;insert&lt;/span&gt; (icons-in-terminal &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;file_org&lt;/span&gt;))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、icons-in-terminal.el
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/seagle0128/icons-in-terminal.el&#34;&gt;插件&lt;/a&gt; | 安装fonts文件夹中的字体&lt;/li&gt;
+&lt;li&gt;拷贝到~/.emacs.d/路径下&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;依赖memoize&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package memoize
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;修改feture名&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;修改icons-in-terminal.el文件名为icons-in-terminal-re.el&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;将feature名更改为icons-in-terminal-re&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;;(provide &amp;#39;icons-in-terminal)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (provide &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-re&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;配置&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (add-to-list &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;load-path&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;~/.emacs.d/icons-in-terminal/&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (require &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-re&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;查询指定集字符&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (icons-in-terminal-insert-wicon)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (icons-in-terminal-insert-faicon)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (icons-in-terminal-insert-fileicon)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (icons-in-terminal-insert-octicon)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (icons-in-terminal-insert-material)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用字符&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#a6e22e&#34;&gt;insert&lt;/span&gt; (icons-in-terminal-fileicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;org&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#a6e22e&#34;&gt;insert&lt;/span&gt; (icons-in-terminal-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-directory&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (&lt;span style=&#34;color:#a6e22e&#34;&gt;insert&lt;/span&gt; (icons-in-terminal-faicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;folder-open&amp;#34;&lt;/span&gt;))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; 搜索</title>
+      <link>https://toughcactus.github.io/post/%E6%90%9C%E7%B4%A2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/%E6%90%9C%E7%B4%A2/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;文本查找 | isearch-forward | isearch-backward&lt;/li&gt;
+&lt;li&gt;查找优化 | swiper&lt;/li&gt;
+&lt;li&gt;简单查找 | avy&lt;/li&gt;
+&lt;li&gt;目录下查找 | counsel-ag&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、文本查找 | isearch-forward | isearch-backward
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;内置功能&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (isearch-forward) &lt;span style=&#34;color:#75715e&#34;&gt;;; 向下查找 | C-s&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (isearch-backward) &lt;span style=&#34;color:#75715e&#34;&gt;;; 向上查找 | C-r&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、查找优化 | swiper 
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;依赖 | ivy | counsel&lt;/li&gt;
+&lt;li&gt;列出文件内所有匹配结果&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package swiper
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (progn
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (ivy-mode)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (setq ivy-use-virtual-buffers &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (setq enable-recursive-minibuffers &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;;; enable this if you want `swiper&amp;#39; to use it&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;;; (setq search-default-mode #&amp;#39;char-fold-to-regexp)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;\C-s&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;swiper&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-c C-r&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ivy-resume&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;M-x&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-M-x&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; M-x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-x C-f&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-find-file&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; 查找文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;f1&amp;gt; f&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-describe-function&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;f1&amp;gt; v&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-describe-variable&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;f1&amp;gt; o&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-describe-symbol&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;f1&amp;gt; l&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-find-library&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;f2&amp;gt; i&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-info-lookup-symbol&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;&amp;lt;f2&amp;gt; u&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-unicode-char&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-c g&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-git&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-c j&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-git-grep&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-c k&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-ag&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; 目录下查找&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-x l&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-locate&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-S-o&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-rhythmbox&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (&lt;span style=&#34;color:#a6e22e&#34;&gt;define-key&lt;/span&gt; minibuffer-local-map (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-r&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;counsel-minibuffer-history&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;下一个 / 上一个 | C-n / C-p&lt;/li&gt;
+&lt;li&gt;选中跳转 | RET&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+二、简单查找 | avy
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package avy
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :bind ((&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-:&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; avy-goto-char)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-&amp;#39;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; avy-goto-char-2)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;           ))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+三、目录下查找 | counsel-ag
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;见 Emacs | 插件篇 | 多功能插件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; 文件管理</title>
+      <link>https://toughcactus.github.io/post/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;文件管理 | speedbar&lt;/li&gt;
+&lt;li&gt;文件管理 | neotree&lt;/li&gt;
+&lt;li&gt;工作区管理 | treemacs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、文件管理 | speedbar
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;内置功能&lt;/li&gt;
+&lt;li&gt;可以浏览文件内符号&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (semantic-mode) &lt;span style=&#34;color:#75715e&#34;&gt;;; 进行语义分析&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (speedbar)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、文件管理 | neotree
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package neotree
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (global-set-key [f8] &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;neotree-toggle&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (setq neo-theme &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; 无需安装all-the-icons&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;/p&gt;
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;上级目录&lt;/td&gt;
+&lt;td&gt;U&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;设为根目录&lt;/td&gt;
+&lt;td&gt;C-c C-c&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;显示 / 隐藏&lt;/td&gt;
+&lt;td&gt;H&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;上一行 / 下一行&lt;/td&gt;
+&lt;td&gt;p / n&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;打开文件&lt;/td&gt;
+&lt;td&gt;SPC / RET&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;打开 / 关闭 目录&lt;/td&gt;
+&lt;td&gt;TAB&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;刷新目录&lt;/td&gt;
+&lt;td&gt;g&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;最大化 / 最小化 窗口&lt;/td&gt;
+&lt;td&gt;A&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;删除文件&lt;/td&gt;
+&lt;td&gt;C-c C-d&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、工作区管理 | treemacs
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;可以浏览文件内符号 | 配合tags文件&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package treemacs
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :defer &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :init
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (with-eval-after-load &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;winum&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (&lt;span style=&#34;color:#a6e22e&#34;&gt;define-key&lt;/span&gt; winum-keymap (kbd &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;M-0&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#a6e22e&#34;&gt;#&amp;#39;&lt;/span&gt;treemacs-select-window))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (progn
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;;	(setq treemacs-show-cursor -1)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-resize-icons &lt;span style=&#34;color:#ae81ff&#34;&gt;15&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (with-eval-after-load &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;treemacs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        (&lt;span style=&#34;color:#a6e22e&#34;&gt;define-key&lt;/span&gt; treemacs-mode-map [mouse-1] &lt;span style=&#34;color:#a6e22e&#34;&gt;#&amp;#39;&lt;/span&gt;treemacs-single-click-expand-action)) &lt;span style=&#34;color:#75715e&#34;&gt;;; 单击打开文件&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      )
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :bind
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (:map global-map
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;M-0&amp;#34;&lt;/span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; treemacs-select-window)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-x t 1&amp;#34;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; treemacs-delete-other-windows)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-x t t&amp;#34;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; treemacs)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-x t d&amp;#34;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; treemacs-select-directory)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-x t B&amp;#34;&lt;/span&gt;   &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; treemacs-bookmark)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-x t C-t&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; treemacs-find-file)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          ))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;配置主题 treemacs-load-theme&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;主题 | treemacs-all-the-icons | 无需安装all-the-icons | 需要安装all-the-icons字体&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package treemacs-all-the-icons
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (treemacs-load-theme &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;all-the-icons&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;使用RET在固定窗口打开文件 | 默认双击则在前一个窗口打开文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+使用 | workspace
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;创建工作区 | M-x treemacs-create-workspace&lt;/li&gt;
+&lt;li&gt;给工作区添加项目 | M-x treemacs-add-project-to-workspace&lt;/li&gt;
+&lt;li&gt;切换工作区 | M-x treemacs-switch-workspace&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+使用
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;t h&lt;/td&gt;
+&lt;td&gt;显示/隐藏 隐藏文件&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+四、为treemacs设置主题 | 使用all-the-icons或icons-in-terminal-re
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;提供类型名和对应的文件&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (treemacs-icons-catalogue)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为指定类型文件设置图标 | 有文件后缀&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (defvar treemacs-custom-org-icon (all-the-icons-fileicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;org&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;;(defvar treemacs-custom-org-icon (all-the-icons-icon-for-file &amp;#34;name.org&amp;#34;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (treemacs-define-custom-icon treemacs-custom-org-icon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;org&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;org_archive&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (defvar treemacs-custom-elisp-icon (all-the-icons-fileicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;elisp&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;;(defvar treemacs-custom-elisp-icon (all-the-icons-icon-for-file &amp;#34;name.el&amp;#34;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (treemacs-define-custom-icon treemacs-custom-elisp-icon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;el&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;eln&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;elc&amp;#34;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为指定类型设置图标 | 有无后缀均可&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用treemacs-all-the-icons-tab控制缩进&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (treemacs-create-icon :icon (all-the-icons-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-directory&amp;#34;&lt;/span&gt;) :extensions (dir-closed))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (all-the-icons-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-directory&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;all-the-icons-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (dir-closed dir-open) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%s%s&amp;#34;&lt;/span&gt; (all-the-icons-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-directory&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (root-closed root-open) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;创建主题 treemacs-create-theme&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;必须设置 root-open root closed | 其他类型未设置则无图标&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用all-the-icons&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (treemacs-create-theme &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Use-all-the-icons&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (progn
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%s%s&amp;#34;&lt;/span&gt; (all-the-icons-icon-for-file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name.org&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;org&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%s%s&amp;#34;&lt;/span&gt; (all-the-icons-icon-for-file &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;name.el&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;el&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;%s%s&amp;#34;&lt;/span&gt; (all-the-icons-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-directory&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (dir-closed dir-open root-open root-closed))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (all-the-icons-fileicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;go&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;all-the-icons-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;go&amp;#34;&lt;/span&gt;) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (all-the-icons-fileicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;markdownlint&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;all-the-icons-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;markdown&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;md&amp;#34;&lt;/span&gt;) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (all-the-icons-alltheicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;python&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;all-the-icons-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;py&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pyc&amp;#34;&lt;/span&gt;) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (all-the-icons-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-code&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;all-the-icons-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (fallback) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (all-the-icons-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-code&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;all-the-icons-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;png&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;gif&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;jpg&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;jpeg&amp;#34;&lt;/span&gt;) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (all-the-icons-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-code&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;all-the-icons-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.gitignore&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;cache&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;apk&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pptx&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ppt&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;xls&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;xlsx&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pl&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;dmg&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;xmind&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;desktop&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;eld&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;dap-breakpoints&amp;#34;&lt;/span&gt; ) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (all-the-icons-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-code&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;all-the-icons-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.lsp-session-v1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;amx-items&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;recentf&amp;#34;&lt;/span&gt; ) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (treemacs-load-theme &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Use-all-the-icons&amp;#34;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用icons-in-terminal&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (treemacs-create-theme &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Use-icons-in-terminal&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (progn
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (icons-in-terminal-fileicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;org&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;org&amp;#34;&lt;/span&gt;) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (icons-in-terminal-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-directory&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (root-open root-closed) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (icons-in-terminal-faicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;folder-open&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (dir-open) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (icons-in-terminal-faicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;folder&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (dir-closed) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (icons-in-terminal-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;note&amp;#34;&lt;/span&gt;) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (icons-in-terminal-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;markdown&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;markdown&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;md&amp;#34;&lt;/span&gt;) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (icons-in-terminal-fileicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;elisp&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;el&amp;#34;&lt;/span&gt;) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (icons-in-terminal-fileicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;python&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;py&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pyc&amp;#34;&lt;/span&gt;) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (icons-in-terminal-faicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-text&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (fallback) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (icons-in-terminal-faicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;image&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;png&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;gif&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;jpg&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;jpeg&amp;#34;&lt;/span&gt;) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (icons-in-terminal-octicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;file-text&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.gitignore&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;cache&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;apk&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pptx&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ppt&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;xls&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;xlsx&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;pl&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;dmg&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;xmind&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;desktop&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;eld&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;dap-breakpoints&amp;#34;&lt;/span&gt; ) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (treemacs-create-icon :icon (&lt;span style=&#34;color:#a6e22e&#34;&gt;format&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;  %s%s&amp;#34;&lt;/span&gt; (icons-in-terminal-faicon &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;book&amp;#34;&lt;/span&gt; :v-adjust &lt;span style=&#34;color:#ae81ff&#34;&gt;0&lt;/span&gt; :face &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;icons-in-terminal-dblue&lt;/span&gt;) treemacs-all-the-icons-tab) :extensions (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;.lsp-session-v1&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;amx-items&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;recentf&amp;#34;&lt;/span&gt; ) :fallback &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;same-as-icon&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (treemacs-load-theme &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Use-icons-in-terminal&amp;#34;&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;修改主题 treemacs-modify-theme &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; 文本编辑</title>
+      <link>https://toughcactus.github.io/post/%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/%E6%96%87%E6%9C%AC%E7%BC%96%E8%BE%91/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;删除连续空格 | hungry-delete&lt;/li&gt;
+&lt;li&gt;智能括号 | smartparens&lt;/li&gt;
+&lt;li&gt;彩虹括号 | rainbow-delimiters&lt;/li&gt;
+&lt;li&gt;符号高亮 | highlight-symbol  &lt;/li&gt;
+&lt;li&gt;随机插入 段 / 句 / 标题 | lorem-ipsum&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、删除连续空格 | hungry-delete
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package hungry-delete
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (global-hungry-delete-mode)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、智能括号 | smartparens
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;匹配括号高亮 | 成对键入&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;删除函数 | 括号内语句删除 | kill-line | C-k | 严格模式&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package smartparens
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :hook
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    ((prog-mode &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; smartparens-mode)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     (c-mode &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; smartparens-strict-mode)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;     (c++-mode &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; smartparens-strict-mode))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :custom
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (sp-escape-quotes-after-insert &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (require &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;smartparens-config&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (smartparens-global-mode &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;;  (smartparens-global-strict-mode t)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、彩虹括号 | rainbow-delimiters
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package rainbow-delimiters
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :init
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (progn
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (rainbow-delimiters-mode &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;org-mode-hook&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;#&amp;#39;&lt;/span&gt;rainbow-delimiters-mode)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;prog-mode-hook&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;#&amp;#39;&lt;/span&gt;rainbow-delimiters-mode)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、符号高亮 | highlight-symbol
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package highlight-symbol
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :init (highlight-symbol-mode)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :bind (&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;C-&amp;lt;f5&amp;gt;&amp;#34;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; highlight-symbol) &lt;span style=&#34;color:#75715e&#34;&gt;;; 按下 F5 键就可高亮当前符号&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (progn
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key [f9] &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;highlight-symbol-next&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; 前进&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key [(shift f9)] &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;highlight-symbol-prev&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; 后退&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;;	  (global-set-key [(meta f9)] &amp;#39;highlight-symbol-query-replace) ;; 替换&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+五、随机插入 段 / 句 / 标题 | lorem-ipsum
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (lorem-ipsum-insert-paragraphs) &lt;span style=&#34;color:#75715e&#34;&gt;;; C-c l p&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (lorem-ipsum-insert-sentences) &lt;span style=&#34;color:#75715e&#34;&gt;;; C-c l s&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (lorem-ipsum-insert-list) &lt;span style=&#34;color:#75715e&#34;&gt;;; C-c l l&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; 文本补全</title>
+      <link>https://toughcactus.github.io/post/%E6%96%87%E6%9C%AC%E8%A1%A5%E5%85%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/%E6%96%87%E6%9C%AC%E8%A1%A5%E5%85%A8/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;文本补全 | dabbrev-expand&lt;/li&gt;
+&lt;li&gt;文本补全 | company | company-box&lt;/li&gt;
+&lt;li&gt;文本补全 | auto-complete&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、文本补全 | dabbrev-expand
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;内置功能&lt;/li&gt;
+&lt;li&gt;快捷键 | M-.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、文本补全 | company | company-box
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装 | company&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package company
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :init (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;after-init-hook&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;global-company-mode&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; 全局有效&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (setq company-idle-delay                 &lt;span style=&#34;color:#ae81ff&#34;&gt;0.08&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;;; 提示时延&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          company-minimum-prefix-length      &lt;span style=&#34;color:#ae81ff&#34;&gt;2&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;;; 触发提示的字符数&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          company-show-numbers               &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;;; 给选项编号 M-编号选择&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;;        company-tooltip-limit           10 ;; 选项个数，超出10个无编号&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          company-dabbrev-downcase &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;;; 关闭转小写&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          ))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;安装 | company-box&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package company-box
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :if &lt;span style=&#34;color:#a6e22e&#34;&gt;window-system&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :hook (company-mode &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; company-box-mode))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;默认配置中，补全时忽略大小写&lt;/li&gt;
+&lt;li&gt;也可使用M-x customize-group进行插件配置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、文本补全 | auto-complete
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package auto-complete
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :init
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (progn
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (ac-config-default)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-auto-complete-mode &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config (add-to-list &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ac-modes&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;org-mode&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; 添加org-mode有效&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; 窗口管理</title>
+      <link>https://toughcactus.github.io/post/%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/%E7%AA%97%E5%8F%A3%E7%AE%A1%E7%90%86/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;窗口记录 | winner-mode&lt;/li&gt;
+&lt;li&gt;切换窗口 | ace-window&lt;/li&gt;
+&lt;li&gt;标签页窗口 | tabbar | tabbar-ruler&lt;/li&gt;
+&lt;li&gt;查询窗口优化 | popwin&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、窗口记录 | winner-mode
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;配置&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (winner-mode &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;关闭最近新建窗口&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(winner-undo) &lt;span style=&#34;color:#75715e&#34;&gt;;; C-c LEFT&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;恢复到当前窗口&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;(winner-redo) &lt;span style=&#34;color:#75715e&#34;&gt;;; C-c RIGHT&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、切换窗口 | ace-window
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package ace-window
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :init
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (progn
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (global-set-key [remap other-window] &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ace-window&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      (custom-set-faces
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;       &lt;span style=&#34;color:#f92672&#34;&gt;&amp;#39;&lt;/span&gt;(aw-leading-char-face
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;         ((&lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt; (:inherit ace-jump-face-foreground :height &lt;span style=&#34;color:#ae81ff&#34;&gt;3.0&lt;/span&gt;))))) &lt;span style=&#34;color:#75715e&#34;&gt;;; 配置标识样式&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ))&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、标签页窗口 | tabbar | tabbar-ruler
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;tabbar在每个窗口上方罗列buffer&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package tabbar
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (tabbar-mode &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;tabbar-ruler提供标签页窗口，增强状态栏 | 和treemacs-all-the-icons的图标冲突 | 和all-the-icons的图标冲突&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package tabbar-ruler
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、查询窗口优化 | popwin  
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;针对查询 函数 / 变量 / 快捷键 描述，在下方新建窗口显示，且聚焦跟随&lt;/li&gt;
+&lt;li&gt;会关掉其他窗口&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package popwin
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (popwin-mode &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>Emacs &gt; 插件 &gt; 编程</title>
+      <link>https://toughcactus.github.io/post/%E7%BC%96%E7%A8%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/%E7%BC%96%E7%A8%8B/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;预设代码段 | yasnippet&lt;/li&gt;
+&lt;li&gt;语法检查 | flycheck&lt;/li&gt;
+&lt;li&gt;在Emacs中编译代码 | 支持错误跳转&lt;/li&gt;
+&lt;li&gt;代码折叠 | hs-minor-mode&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、预设代码段 | yasnippet
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;yasnippet提供插入机制 | 代码段由 yasnippet-snippets / auto-yasnippet 提供&lt;/li&gt;
+&lt;li&gt;显示 | minor-mode | yas&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;使用 | 输入 io / string / main / for TAB&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package yasnippet
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (yas-global-mode &lt;span style=&#34;color:#ae81ff&#34;&gt;1&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;;  (use-package yasnippet-snippets :ensure t) &lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (use-package auto-yasnippet :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;)      
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、语法检查 | flycheck
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;安装&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (use-package flycheck
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :ensure &lt;span style=&#34;color:#66d9ef&#34;&gt;t&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;;  :init&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;;  (global-flycheck-mode)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :config
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (setq truncate-lines &lt;span style=&#34;color:#66d9ef&#34;&gt;nil&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; 单行过长自动换行&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    :hook
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    (prog-mode &lt;span style=&#34;color:#f92672&#34;&gt;.&lt;/span&gt; flycheck-mode) &lt;span style=&#34;color:#75715e&#34;&gt;;; 编程模式开&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    )&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、在Emacs中编译代码 | 支持错误跳转
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;支持错误跳转&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (compile &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;make -q&amp;#34;&lt;/span&gt;) &lt;span style=&#34;color:#75715e&#34;&gt;;; 使用makefile&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;; 输出错误 | 跳转&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (next-error) &lt;span style=&#34;color:#75715e&#34;&gt;;; 下一个 | C-x ` | M-g n&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (previous-error) &lt;span style=&#34;color:#75715e&#34;&gt;;; 上一个 | M-g p&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、代码折叠 | hs-minor-mode
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;配置&lt;/p&gt;
+&lt;div class=&#34;src src-elisp&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-elisp&#34; data-lang=&#34;elisp&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;; hs-show-all:显示所有的代码 | C-c @ C-M-s&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;; hs-hide-all:折叠所有的代码 | C-c @ C-M-h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;; hs-show-block:显示当前代码区 | C-c @ C-s&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;; hs-hide-block:折叠当前代码区 | C-c @ C-h&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;; hs-toggle-hiding: 折叠/显示当前代码区 | C-c @ C-c&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;;;代码折叠&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;c-mode-common-hook&lt;/span&gt;   &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hs-minor-mode&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;emacs-lisp-mode-hook&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hs-minor-mode&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;java-mode-hook&lt;/span&gt;       &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hs-minor-mode&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;ess-mode-hook&lt;/span&gt;       &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hs-minor-mode&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;perl-mode-hook&lt;/span&gt;       &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hs-minor-mode&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;sh-mode-hook&lt;/span&gt;         &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hs-minor-mode&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (add-hook &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;python-mode-hook&lt;/span&gt;         &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hs-minor-mode&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  (global-set-key [f2] &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#39;hs-toggle-hiding&lt;/span&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
