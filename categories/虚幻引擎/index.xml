@@ -1033,7 +1033,7 @@ DECLARE_MULTICAST_DELEGATE_OneParam
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-7&#34;&gt;
-七、Pawn响应指定方向的移动 APawn::AddMovementInput
+七、Pawn响应指定方向的平移 APawn::AddMovementInput
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddMovementInput1.png&#34; alt=&#34;/pic/APawn类型/APawn-AddMovementInput1.png&#34; title=&#34;/pic/APawn类型/APawn-AddMovementInput1.png&#34; width=&#34;900&#34;/&gt;
@@ -1055,6 +1055,62 @@ DECLARE_MULTICAST_DELEGATE_OneParam
 &lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddMovementInput-Definition.png&#34; alt=&#34;/pic/APawn类型/APawn-AddMovementInput-Definition.png&#34; title=&#34;/pic/APawn类型/APawn-AddMovementInput-Definition.png&#34; width=&#34;600&#34;/&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+八、在指定平面旋转PlayerController
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;旋转的控制权不在Pawn，在PlayerController&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对PlayerController的旋转进行了封装    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;X轴向前，Z轴向上，Y轴向右&lt;/li&gt;
+&lt;li&gt;Roll，绕X轴旋转，YOZ，顺时针为正方向&lt;/li&gt;
+&lt;li&gt;Pitch，绕Y轴旋转，XOZ，向上为正方向&lt;/li&gt;
+&lt;li&gt;Yaw，绕Z轴旋转，XOY，向右为正方向&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-9&#34;&gt;
+XOZ平面旋转 APawn::AddControllerPitchInput
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;XOZ平面旋转Controller，只旋转Camera，且还需在虚幻编辑器设置Camera组件&lt;/li&gt;
+&lt;li&gt;Pitch增加时向上旋转     &lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddControllerPitchInput.png&#34; alt=&#34;/pic/APawn类型/APawn-AddControllerPitchInput.png&#34; title=&#34;/pic/APawn类型/APawn-AddControllerPitchInput.png&#34; width=&#34;600&#34;/&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddControllerPitchInput-Definition.png&#34; alt=&#34;/pic/APawn类型/APawn-AddControllerPitchInput-Definition.png&#34; title=&#34;/pic/APawn类型/APawn-AddControllerPitchInput-Definition.png&#34;/&gt;   &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-10&#34;&gt;
+XOY平面旋转 APawn::AddControllerYawInput
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-10&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;XOY平面旋转Controller，会同时旋转Camera和Mesh&lt;/li&gt;
+&lt;li&gt;Yaw增加时，向右旋转&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddControllerYawInput.png&#34; alt=&#34;/pic/APawn类型/APawn-AddControllerYawInput.png&#34; title=&#34;/pic/APawn类型/APawn-AddControllerYawInput.png&#34; width=&#34;600&#34;/&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddControllerYawInput-Definition.png&#34; alt=&#34;/pic/APawn类型/APawn-AddControllerYawInput-Definition.png&#34; title=&#34;/pic/APawn类型/APawn-AddControllerYawInput-Definition.png&#34;/&gt;   &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-11&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-11&#34;&gt;
+YOZ平面旋转 APawn::AddControllerRollInput
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-11&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Roll增加时，顺时针旋转&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddControllerRollInput.png&#34; alt=&#34;/pic/APawn类型/APawn-AddControllerRollInput.png&#34; title=&#34;/pic/APawn类型/APawn-AddControllerRollInput.png&#34; width=&#34;600&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -1233,6 +1289,17 @@ DECLARE_MULTICAST_DELEGATE_OneParam
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Camera/CameraComponent.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、跟随Pawn旋转标志位 UCameraComponent::bUsePawnControlRotation
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;为true则跟随&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/UCameraComponent类型/UCameraComponent-bUsePawnControlRotation.png&#34; alt=&#34;/pic/UCameraComponent类型/UCameraComponent-bUsePawnControlRotation.png&#34; title=&#34;/pic/UCameraComponent类型/UCameraComponent-bUsePawnControlRotation.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -1316,6 +1383,37 @@ DECLARE_MULTICAST_DELEGATE_OneParam
 &lt;/ul&gt;
 &lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-StaticClass.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-StaticClass.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-StaticClass.png&#34;/&gt;  &lt;/p&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、增减PlayerController旋转角度
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+XOZ平面
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-AddPitchInput-Definition.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-AddPitchInput-Definition.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-AddPitchInput-Definition.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+XOY平面
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-AddYawInput-Definition.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-AddYawInput-Definition.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-AddYawInput-Definition.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+YOZ平面
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -1328,6 +1426,35 @@ DECLARE_MULTICAST_DELEGATE_OneParam
       <description>&lt;ul&gt;
 &lt;li&gt;派生自APawn，实现了角色的动作(motion)，动画(animation)和物理交互(physical interaction)&lt;/li&gt;
 &lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 29.USpringArmComponent类型</title>
+      <link>https://toughcactus.github.io/post/29.uspringarmcomponent%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/29.uspringarmcomponent%E7%B1%BB%E5%9E%8B/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、头文件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;GameFrameWork/SpringArmComponent.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、跟随Pawn旋转标志位 USpringArmComponent::bUsePawnControlRotation
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;为true则跟随&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/USpringArmComponent类型/USpringArmComponent-bUsePawnControlRotation.png&#34; alt=&#34;/pic/USpringArmComponent类型/USpringArmComponent-bUsePawnControlRotation.png&#34; title=&#34;/pic/USpringArmComponent类型/USpringArmComponent-bUsePawnControlRotation.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -1693,7 +1820,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-23&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-23&#34;&gt;
-十二、获取Actor朝向
+十二、获取Actor方向向量在各轴的分量
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-23&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div id=&#34;outline-container-headline-24&#34; class=&#34;outline-3&#34;&gt;
@@ -7409,6 +7536,209 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.6.2为Camera实现旋转</title>
+      <link>https://toughcactus.github.io/post/1.6.2%E4%B8%BAcamera%E5%AE%9E%E7%8E%B0%E6%97%8B%E8%BD%AC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.6.2%E4%B8%BAcamera%E5%AE%9E%E7%8E%B0%E6%97%8B%E8%BD%AC/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、搭建框架
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p&gt;添加空函数并绑定函数描述和回调函数&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加函数成员但不实现&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;private&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;LookUp&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Amount);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;TurnAround&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Amount);&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加函数成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在SetupPlayerInputComponent中调用&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitCameraRotate(UInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; PlayerInputComponent)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Lookup&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;LookUp);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;TurnAround&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;TurnAround);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、添加静态日志类型
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter, All, All)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、实现Lookup和TurnAround
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;LookUp(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Amount)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      AddControllerPitchInput(Amount);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      UE_LOG(LogBaseCharacter, Log, TEXT(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;LookUp Amount: %f&amp;#34;&lt;/span&gt;), Amount);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;TurnAround(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Amount)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      AddControllerYawInput(Amount);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.6.4为Character添加SpringArm组件</title>
+      <link>https://toughcactus.github.io/post/1.6.4%E4%B8%BAcharacter%E6%B7%BB%E5%8A%A0springarm%E7%BB%84%E4%BB%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.6.4%E4%B8%BAcharacter%E6%B7%BB%E5%8A%A0springarm%E7%BB%84%E4%BB%B6/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、在头文件进行前向声明
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;USpringArmComponent&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在源文件包含头文件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;GameFrameWork/SpringArmComponent.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、添加数据成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;protected&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Components&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  USpringArmComponent &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;SpringArm;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置的是原型的默认值&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitSpringArmAndCamera()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      SpringArm &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; CreateDefaultSubobject&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;USpringArmComponent&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SpringArmComponent&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      SpringArm&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;SetupAttachment(GetRootComponent());	
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      SpringArm&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;bUsePawnControlRotation &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; true;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      Camera &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; CreateDefaultSubobject&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;UCameraComponent&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;CameraComponent&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      Camera&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;SetupAttachment(SpringArm);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      Camera&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;bUsePawnControlRotation &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; false;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;在默认构造函数中调用&lt;/li&gt;
+&lt;li&gt;不再在默认构造函数中调用InitCameraComponent&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.6.7优化LookUp和TurnAround绑定</title>
+      <link>https://toughcactus.github.io/post/1.6.7%E4%BC%98%E5%8C%96lookup%E5%92%8Cturnaround%E7%BB%91%E5%AE%9A/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.6.7%E4%BC%98%E5%8C%96lookup%E5%92%8Cturnaround%E7%BB%91%E5%AE%9A/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、比对InitCameraRotate，LookUp，TurnAround三个函数
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;LookUp(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Amount)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      AddControllerPitchInput(Amount);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;//	UE_LOG(LogBaseCharacter, Log, TEXT(&amp;#34;LookUp Amount: %f&amp;#34;), Amount);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;TurnAround(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Amount)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      AddControllerYawInput(Amount);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitCameraRotate(UInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; PlayerInputComponent)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Lookup&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;LookUp);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;TurnAround&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;TurnAround);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;LookUp，TurnAround，AddControllerPitchInput，AddControllerYawInput的签名是一致的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在SetupPlayerInputComponent中调用&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitCameraRotateFinal(UInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; PlayerInputComponent)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Lookup&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;AddControllerPitchInput);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;TurnAround&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;AddControllerYawInput);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;不再在SetupPlayerInputComponent中调用InitCameraRotate&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.2初始化ShootTraining项目</title>
       <link>https://toughcactus.github.io/post/1.2%E5%88%9D%E5%A7%8B%E5%8C%96shoottraining%E9%A1%B9%E7%9B%AE/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -7827,6 +8157,212 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/绑定前后左右移动键位/键位.png&#34; alt=&#34;/pic/绑定前后左右移动键位/键位.png&#34; title=&#34;/pic/绑定前后左右移动键位/键位.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.6.1绑定Camera旋转的鼠标键位</title>
+      <link>https://toughcactus.github.io/post/1.6.1%E7%BB%91%E5%AE%9Acamera%E6%97%8B%E8%BD%AC%E7%9A%84%E9%BC%A0%E6%A0%87%E9%94%AE%E4%BD%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.6.1%E7%BB%91%E5%AE%9Acamera%E6%97%8B%E8%BD%AC%E7%9A%84%E9%BC%A0%E6%A0%87%E9%94%AE%E4%BD%8D/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+在虚幻编辑器绑定键位
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;项目设置 &amp;gt; Engine &amp;gt; Input  &lt;/li&gt;
+&lt;li&gt;轴映射&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;Lookup和MouseY&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;鼠标垂直方向的移动决定抬头角度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;TurnAround和MouseX&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;鼠标水平方向的移动决定身体旋转角度     &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/绑定Camera旋转的鼠标键位/鼠标键位.png&#34; alt=&#34;/pic/绑定Camera旋转的鼠标键位/鼠标键位.png&#34; title=&#34;/pic/绑定Camera旋转的鼠标键位/鼠标键位.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.6.3调整Camera垂直方向上旋转</title>
+      <link>https://toughcactus.github.io/post/1.6.3%E8%B0%83%E6%95%B4camera%E5%9E%82%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E6%97%8B%E8%BD%AC/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.6.3%E8%B0%83%E6%95%B4camera%E5%9E%82%E7%9B%B4%E6%96%B9%E5%90%91%E4%B8%8A%E6%97%8B%E8%BD%AC/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、在虚幻编辑器中查看
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;当水平移动鼠标时，Character和摄像机一齐左右旋转&lt;/li&gt;
+&lt;li&gt;当垂直移动鼠标时，Character无旋转&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、为Camera使能旋转
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;在蓝图编辑器中打开BP_STBaseCharacter&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选中Camera，细节面板，CameraOptions，使能UsePawnControlRotation，保存并编译&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整Camera垂直方向上旋转/BP_STBaseCharacter-UsePawnControlRotation-Enable.png&#34; alt=&#34;/pic/调整Camera垂直方向上旋转/BP_STBaseCharacter-UsePawnControlRotation-Enable.png&#34; title=&#34;/pic/调整Camera垂直方向上旋转/BP_STBaseCharacter-UsePawnControlRotation-Enable.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;此时向下移动鼠标时，摄像机向上旋转，向上移动鼠标时，摄像机向下旋转&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可以看到，鼠标向上移动时，Amount的确是正数&lt;/p&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/调整Camera垂直方向上旋转/MouseY-Up.png&#34; alt=&#34;/pic/调整Camera垂直方向上旋转/MouseY-Up.png&#34; title=&#34;/pic/调整Camera垂直方向上旋转/MouseY-Up.png&#34;/&gt;     &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、InputPitchScale
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;引擎版本5.1之前，可以在PlayerController蓝图类的细节面板看到InputPitchScale为负数，这就是XOZ平面旋转Camera反向的原因&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.unrealengine.com/5.1/en-US/BlueprintAPI/PlayerController/GetDeprecatedInputPitchScale/&#34;&gt;参考&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;可以在BP_STPlayerController中打印InputPitchScale&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整Camera垂直方向上旋转/BP_PlayerController-打印InputScale.png&#34; alt=&#34;/pic/调整Camera垂直方向上旋转/BP_PlayerController-打印InputScale.png&#34; title=&#34;/pic/调整Camera垂直方向上旋转/BP_PlayerController-打印InputScale.png&#34; width=&#34;700&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整Camera垂直方向上旋转/BP_PlayerController-打印InputScale-Output.png&#34; alt=&#34;/pic/调整Camera垂直方向上旋转/BP_PlayerController-打印InputScale-Output.png&#34; title=&#34;/pic/调整Camera垂直方向上旋转/BP_PlayerController-打印InputScale-Output.png&#34; width=&#34;150&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;尝试设置InputPitchScale，可以使XOZ平面旋转Camera正常&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整Camera垂直方向上旋转/BP_PlayerController-设置InputPitchScale.png&#34; alt=&#34;/pic/调整Camera垂直方向上旋转/BP_PlayerController-设置InputPitchScale.png&#34; title=&#34;/pic/调整Camera垂直方向上旋转/BP_PlayerController-设置InputPitchScale.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;去除BP_STPlayerController中的打印和设置&lt;/li&gt;
+&lt;li&gt;去除LookUp中的日志打印&lt;/li&gt;
+&lt;li&gt;另外，InputPitchScale，InputYawScale，InputRollScale的绝对值对应旋转的速度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、将LookUp的Scale改为-1
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整Camera垂直方向上旋转/将LookUp的Scale改为-1.png&#34; alt=&#34;/pic/调整Camera垂直方向上旋转/将LookUp的Scale改为-1.png&#34; title=&#34;/pic/调整Camera垂直方向上旋转/将LookUp的Scale改为-1.png&#34; width=&#34;400&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;此时，向上移动鼠标时，摄像机向上旋转&lt;/li&gt;
+&lt;li&gt;可以注意到，垂直方向移动鼠标时，旋转的中心点是Camera&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.6.5调整SpringArm和Camera</title>
+      <link>https://toughcactus.github.io/post/1.6.5%E8%B0%83%E6%95%B4springarm%E5%92%8Ccamera/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.6.5%E8%B0%83%E6%95%B4springarm%E5%92%8Ccamera/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、查看BP_BaseCharacter组件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整SpringArm和Camera/BP_STBaseCharacter-Component.png&#34; alt=&#34;/pic/调整SpringArm和Camera/BP_STBaseCharacter-Component.png&#34; title=&#34;/pic/调整SpringArm和Camera/BP_STBaseCharacter-Component.png&#34; width=&#34;300&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、关于bUsePawnControlRotation
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;UCameraComponent类型有该数据成员&lt;/li&gt;
+&lt;li&gt;USpringArmComponent类型也有该数据成员&lt;/li&gt;
+&lt;li&gt;在代码中设置bUsePawnControlRotation是设置原型的数据成员初始值&lt;/li&gt;
+&lt;li&gt;在蓝图编辑器中，基于C++类的蓝图类，如果恢复默认值，则是原型中给出的初始值&lt;/li&gt;
+&lt;li&gt;也可以在蓝图类中设置新值&lt;/li&gt;
+&lt;li&gt;当前，BP_BaseCharacter中，SpringArm的bUsePawnControlRotation使用默认值，而Camera的bUsePawnControlRotation仍使用我们之前设置的值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、设置Spring和Camera的相对变换
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;清除Camera的相对变换&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整SpringArm和Camera/BP_STBaseCharacter-Camera-Transform.png&#34; alt=&#34;/pic/调整SpringArm和Camera/BP_STBaseCharacter-Camera-Transform.png&#34; title=&#34;/pic/调整SpringArm和Camera/BP_STBaseCharacter-Camera-Transform.png&#34; width=&#34;1400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整SpringArm和Camera/BP_STBaseCharacter-Camera-Transform-Reset.png&#34; alt=&#34;/pic/调整SpringArm和Camera/BP_STBaseCharacter-Camera-Transform-Reset.png&#34; title=&#34;/pic/调整SpringArm和Camera/BP_STBaseCharacter-Camera-Transform-Reset.png&#34; width=&#34;1400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;调整臂长&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整SpringArm和Camera/BP_STBaseCharacter-SpringArm-TargetArmLength.png&#34; alt=&#34;/pic/调整SpringArm和Camera/BP_STBaseCharacter-SpringArm-TargetArmLength.png&#34; title=&#34;/pic/调整SpringArm和Camera/BP_STBaseCharacter-SpringArm-TargetArmLength.png&#34; width=&#34;1400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置偏移&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整SpringArm和Camera/BP_STBaseCharacter-SpringArm-SocketOffset.png&#34; alt=&#34;/pic/调整SpringArm和Camera/BP_STBaseCharacter-SpringArm-SocketOffset.png&#34; title=&#34;/pic/调整SpringArm和Camera/BP_STBaseCharacter-SpringArm-SocketOffset.png&#34; width=&#34;1400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、Camera和SpringArm的bUsePawnControlRotation生效问题
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;二者均为true，以SpringArm为主，摄像机以Character为中心上下移动&lt;/li&gt;
+&lt;li&gt;二者均为false，摄像机不可上下移动&lt;/li&gt;
+&lt;li&gt;仅Camera的为true，摄像机以Camera为中心上下移动&lt;/li&gt;
+&lt;li&gt;去除Camera的bUsePawnControlRotation&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.6.6为Character添加跑步动画</title>
+      <link>https://toughcactus.github.io/post/1.6.6%E4%B8%BAcharacter%E6%B7%BB%E5%8A%A0%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.6.6%E4%B8%BAcharacter%E6%B7%BB%E5%8A%A0%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、绑定动画
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;在蓝图编辑器打开BP_STBaseCharacter，选中Mesh，到Animation，为AnimationMode选择UseAnimationAsset&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/为Character添加跑步动画/BP_STBaseCharacter-Mesh-Animation-AnimationMode.png&#34; alt=&#34;/pic/为Character添加跑步动画/BP_STBaseCharacter-Mesh-Animation-AnimationMode.png&#34; title=&#34;/pic/为Character添加跑步动画/BP_STBaseCharacter-Mesh-Animation-AnimationMode.png&#34; width=&#34;1400&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为AnimToPlay选择Run_Fwd&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/为Character添加跑步动画/BP_STBaseCharacter-Mesh-AnimToPlay.png&#34; alt=&#34;/pic/为Character添加跑步动画/BP_STBaseCharacter-Mesh-AnimToPlay.png&#34; title=&#34;/pic/为Character添加跑步动画/BP_STBaseCharacter-Mesh-AnimToPlay.png&#34; width=&#34;1400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、效果图
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/为Character添加跑步动画/效果图.png&#34; alt=&#34;/pic/为Character添加跑步动画/效果图.png&#34; title=&#34;/pic/为Character添加跑步动画/效果图.png&#34; width=&#34;500&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>

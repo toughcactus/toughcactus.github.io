@@ -239,7 +239,7 @@
 </div>
 <div id="outline-container-headline-7" class="outline-2">
 <h2 id="headline-7">
-七、Pawn响应指定方向的移动 APawn::AddMovementInput
+七、Pawn响应指定方向的平移 APawn::AddMovementInput
 </h2>
 <div id="outline-text-headline-7" class="outline-text-2">
 <img src="/pic/APawn类型/APawn-AddMovementInput1.png" alt="/pic/APawn类型/APawn-AddMovementInput1.png" title="/pic/APawn类型/APawn-AddMovementInput1.png" width="900"/>
@@ -261,6 +261,62 @@
 <img src="/pic/APawn类型/APawn-AddMovementInput-Definition.png" alt="/pic/APawn类型/APawn-AddMovementInput-Definition.png" title="/pic/APawn类型/APawn-AddMovementInput-Definition.png" width="600"/>
 </li>
 </ul>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
+八、在指定平面旋转PlayerController
+</h2>
+<div id="outline-text-headline-8" class="outline-text-2">
+<ul>
+<li>
+<p>旋转的控制权不在Pawn，在PlayerController</p>
+<ul>
+<li>对PlayerController的旋转进行了封装    </li>
+</ul>
+</li>
+<li>X轴向前，Z轴向上，Y轴向右</li>
+<li>Roll，绕X轴旋转，YOZ，顺时针为正方向</li>
+<li>Pitch，绕Y轴旋转，XOZ，向上为正方向</li>
+<li>Yaw，绕Z轴旋转，XOY，向右为正方向</li>
+</ul>
+<div id="outline-container-headline-9" class="outline-3">
+<h3 id="headline-9">
+XOZ平面旋转 APawn::AddControllerPitchInput
+</h3>
+<div id="outline-text-headline-9" class="outline-text-3">
+<ul>
+<li>XOZ平面旋转Controller，只旋转Camera，且还需在虚幻编辑器设置Camera组件</li>
+<li>Pitch增加时向上旋转     </li>
+</ul>
+<img src="/pic/APawn类型/APawn-AddControllerPitchInput.png" alt="/pic/APawn类型/APawn-AddControllerPitchInput.png" title="/pic/APawn类型/APawn-AddControllerPitchInput.png" width="600"/>
+<p width="500"><img src="/pic/APawn类型/APawn-AddControllerPitchInput-Definition.png" alt="/pic/APawn类型/APawn-AddControllerPitchInput-Definition.png" title="/pic/APawn类型/APawn-AddControllerPitchInput-Definition.png"/>   </p>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-3">
+<h3 id="headline-10">
+XOY平面旋转 APawn::AddControllerYawInput
+</h3>
+<div id="outline-text-headline-10" class="outline-text-3">
+<ul>
+<li>XOY平面旋转Controller，会同时旋转Camera和Mesh</li>
+<li>Yaw增加时，向右旋转</li>
+</ul>
+<img src="/pic/APawn类型/APawn-AddControllerYawInput.png" alt="/pic/APawn类型/APawn-AddControllerYawInput.png" title="/pic/APawn类型/APawn-AddControllerYawInput.png" width="600"/>
+<p width="500"><img src="/pic/APawn类型/APawn-AddControllerYawInput-Definition.png" alt="/pic/APawn类型/APawn-AddControllerYawInput-Definition.png" title="/pic/APawn类型/APawn-AddControllerYawInput-Definition.png"/>   </p>
+</div>
+</div>
+<div id="outline-container-headline-11" class="outline-3">
+<h3 id="headline-11">
+YOZ平面旋转 APawn::AddControllerRollInput
+</h3>
+<div id="outline-text-headline-11" class="outline-text-3">
+<ul>
+<li>Roll增加时，顺时针旋转</li>
+</ul>
+<img src="/pic/APawn类型/APawn-AddControllerRollInput.png" alt="/pic/APawn类型/APawn-AddControllerRollInput.png" title="/pic/APawn类型/APawn-AddControllerRollInput.png" width="600"/>
+</div>
+</div>
 </div>
 </div>
         </div>

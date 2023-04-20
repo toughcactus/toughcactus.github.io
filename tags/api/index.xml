@@ -1033,7 +1033,7 @@ DECLARE_MULTICAST_DELEGATE_OneParam
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-7&#34;&gt;
-七、Pawn响应指定方向的移动 APawn::AddMovementInput
+七、Pawn响应指定方向的平移 APawn::AddMovementInput
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddMovementInput1.png&#34; alt=&#34;/pic/APawn类型/APawn-AddMovementInput1.png&#34; title=&#34;/pic/APawn类型/APawn-AddMovementInput1.png&#34; width=&#34;900&#34;/&gt;
@@ -1055,6 +1055,62 @@ DECLARE_MULTICAST_DELEGATE_OneParam
 &lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddMovementInput-Definition.png&#34; alt=&#34;/pic/APawn类型/APawn-AddMovementInput-Definition.png&#34; title=&#34;/pic/APawn类型/APawn-AddMovementInput-Definition.png&#34; width=&#34;600&#34;/&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+八、在指定平面旋转PlayerController
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;旋转的控制权不在Pawn，在PlayerController&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;对PlayerController的旋转进行了封装    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;X轴向前，Z轴向上，Y轴向右&lt;/li&gt;
+&lt;li&gt;Roll，绕X轴旋转，YOZ，顺时针为正方向&lt;/li&gt;
+&lt;li&gt;Pitch，绕Y轴旋转，XOZ，向上为正方向&lt;/li&gt;
+&lt;li&gt;Yaw，绕Z轴旋转，XOY，向右为正方向&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-9&#34;&gt;
+XOZ平面旋转 APawn::AddControllerPitchInput
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;XOZ平面旋转Controller，只旋转Camera，且还需在虚幻编辑器设置Camera组件&lt;/li&gt;
+&lt;li&gt;Pitch增加时向上旋转     &lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddControllerPitchInput.png&#34; alt=&#34;/pic/APawn类型/APawn-AddControllerPitchInput.png&#34; title=&#34;/pic/APawn类型/APawn-AddControllerPitchInput.png&#34; width=&#34;600&#34;/&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddControllerPitchInput-Definition.png&#34; alt=&#34;/pic/APawn类型/APawn-AddControllerPitchInput-Definition.png&#34; title=&#34;/pic/APawn类型/APawn-AddControllerPitchInput-Definition.png&#34;/&gt;   &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-10&#34;&gt;
+XOY平面旋转 APawn::AddControllerYawInput
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-10&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;XOY平面旋转Controller，会同时旋转Camera和Mesh&lt;/li&gt;
+&lt;li&gt;Yaw增加时，向右旋转&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddControllerYawInput.png&#34; alt=&#34;/pic/APawn类型/APawn-AddControllerYawInput.png&#34; title=&#34;/pic/APawn类型/APawn-AddControllerYawInput.png&#34; width=&#34;600&#34;/&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddControllerYawInput-Definition.png&#34; alt=&#34;/pic/APawn类型/APawn-AddControllerYawInput-Definition.png&#34; title=&#34;/pic/APawn类型/APawn-AddControllerYawInput-Definition.png&#34;/&gt;   &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-11&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-11&#34;&gt;
+YOZ平面旋转 APawn::AddControllerRollInput
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-11&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Roll增加时，顺时针旋转&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddControllerRollInput.png&#34; alt=&#34;/pic/APawn类型/APawn-AddControllerRollInput.png&#34; title=&#34;/pic/APawn类型/APawn-AddControllerRollInput.png&#34; width=&#34;600&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -1233,6 +1289,17 @@ DECLARE_MULTICAST_DELEGATE_OneParam
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Camera/CameraComponent.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、跟随Pawn旋转标志位 UCameraComponent::bUsePawnControlRotation
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;为true则跟随&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/UCameraComponent类型/UCameraComponent-bUsePawnControlRotation.png&#34; alt=&#34;/pic/UCameraComponent类型/UCameraComponent-bUsePawnControlRotation.png&#34; title=&#34;/pic/UCameraComponent类型/UCameraComponent-bUsePawnControlRotation.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -1316,6 +1383,37 @@ DECLARE_MULTICAST_DELEGATE_OneParam
 &lt;/ul&gt;
 &lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-StaticClass.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-StaticClass.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-StaticClass.png&#34;/&gt;  &lt;/p&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、增减PlayerController旋转角度
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+XOZ平面
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-AddPitchInput-Definition.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-AddPitchInput-Definition.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-AddPitchInput-Definition.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+XOY平面
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-AddYawInput-Definition.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-AddYawInput-Definition.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-AddYawInput-Definition.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+YOZ平面
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -1328,6 +1426,35 @@ DECLARE_MULTICAST_DELEGATE_OneParam
       <description>&lt;ul&gt;
 &lt;li&gt;派生自APawn，实现了角色的动作(motion)，动画(animation)和物理交互(physical interaction)&lt;/li&gt;
 &lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 29.USpringArmComponent类型</title>
+      <link>https://toughcactus.github.io/post/29.uspringarmcomponent%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/29.uspringarmcomponent%E7%B1%BB%E5%9E%8B/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、头文件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;GameFrameWork/SpringArmComponent.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、跟随Pawn旋转标志位 USpringArmComponent::bUsePawnControlRotation
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;为true则跟随&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/USpringArmComponent类型/USpringArmComponent-bUsePawnControlRotation.png&#34; alt=&#34;/pic/USpringArmComponent类型/USpringArmComponent-bUsePawnControlRotation.png&#34; title=&#34;/pic/USpringArmComponent类型/USpringArmComponent-bUsePawnControlRotation.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -1693,7 +1820,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-23&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-23&#34;&gt;
-十二、获取Actor朝向
+十二、获取Actor方向向量在各轴的分量
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-23&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div id=&#34;outline-container-headline-24&#34; class=&#34;outline-3&#34;&gt;

@@ -184,13 +184,17 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Player/STBaseCharacter.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Camera/CameraComponent.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/InputComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFrameWork/SpringArmComponent.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter, All, All)
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Sets default values
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ASTBaseCharacter<span style="color:#f92672">::</span>ASTBaseCharacter()
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span> 	<span style="color:#75715e">// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don&#39;t need it.
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	PrimaryActorTick.bCanEverTick <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>	InitCameraComponent();
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// InitCameraComponent();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	InitSpringArmAndCamera();
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Called when the game starts or when spawned
@@ -212,7 +216,8 @@
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>SetupPlayerInputComponent(PlayerInputComponent);
 </span></span><span style="display:flex;"><span>	BindMoveHandler(PlayerInputComponent);
-</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// InitCameraRotate(PlayerInputComponent);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    InitCameraRotateFinal(PlayerInputComponent);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitCameraComponent()
@@ -235,6 +240,40 @@
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>	PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAxis(<span style="color:#e6db74">&#34;MoveForward&#34;</span>, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>MoveForward);
 </span></span><span style="display:flex;"><span>    PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAxis(<span style="color:#e6db74">&#34;MoveRight&#34;</span>, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>MoveRight);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>LookUp(<span style="color:#66d9ef">float</span> Amount)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	AddControllerPitchInput(Amount);
+</span></span><span style="display:flex;"><span><span style="color:#75715e">//	UE_LOG(LogBaseCharacter, Log, TEXT(&#34;LookUp Amount: %f&#34;), Amount);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>TurnAround(<span style="color:#66d9ef">float</span> Amount)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	AddControllerYawInput(Amount);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitCameraRotate(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAxis(<span style="color:#e6db74">&#34;Lookup&#34;</span>, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>LookUp);
+</span></span><span style="display:flex;"><span>    PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAxis(<span style="color:#e6db74">&#34;TurnAround&#34;</span>, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>TurnAround);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitSpringArmAndCamera()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	SpringArm <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>USpringArmComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;SpringArmComponent&#34;</span>);
+</span></span><span style="display:flex;"><span>	SpringArm<span style="color:#f92672">-&gt;</span>SetupAttachment(GetRootComponent());	
+</span></span><span style="display:flex;"><span>	SpringArm<span style="color:#f92672">-&gt;</span>bUsePawnControlRotation <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	Camera <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>UCameraComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;CameraComponent&#34;</span>);
+</span></span><span style="display:flex;"><span>	Camera<span style="color:#f92672">-&gt;</span>SetupAttachment(SpringArm);
+</span></span><span style="display:flex;"><span>	Camera<span style="color:#f92672">-&gt;</span>bUsePawnControlRotation <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitCameraRotateFinal(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAxis(<span style="color:#e6db74">&#34;Lookup&#34;</span>, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>AddControllerPitchInput);
+</span></span><span style="display:flex;"><span>    PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAxis(<span style="color:#e6db74">&#34;TurnAround&#34;</span>, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>AddControllerYawInput);
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -249,6 +288,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;STBaseCharacter.generated.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UCameraComponent</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">USpringArmComponent</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>UCLASS()
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SHOOTTRAINING_API</span> ASTBaseCharacter : <span style="color:#66d9ef">public</span> ACharacter
@@ -281,6 +321,18 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">MoveRight</span>(<span style="color:#66d9ef">float</span> Amount);	
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">BindMoveHandler</span>(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">LookUp</span>(<span style="color:#66d9ef">float</span> Amount);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">TurnAround</span>(<span style="color:#66d9ef">float</span> Amount);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitCameraRotate</span>(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Components&#34;</span>)
+</span></span><span style="display:flex;"><span>    USpringArmComponent <span style="color:#f92672">*</span>SpringArm;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> InitSpringArmAndCamera();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitCamerRotateFinal</span>(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent);
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
