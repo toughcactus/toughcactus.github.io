@@ -11670,7 +11670,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-10&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;告诉Git，排除哪些文件和文件夹&lt;/li&gt;
+&lt;li&gt;告诉Git，repository排除哪些文件和文件夹&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://github.com/github/gitignore/blob/main/UnrealEngine.gitignore&#34;&gt;参考&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
