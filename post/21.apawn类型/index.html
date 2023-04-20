@@ -237,6 +237,32 @@
 <img src="/pic/APawn类型/APawn-IsPawnControlled-Definition.png" alt="/pic/APawn类型/APawn-IsPawnControlled-Definition.png" title="/pic/APawn类型/APawn-IsPawnControlled-Definition.png" width="300"/>
 </div>
 </div>
+<div id="outline-container-headline-7" class="outline-2">
+<h2 id="headline-7">
+七、Pawn响应指定方向的移动 APawn::AddMovementInput
+</h2>
+<div id="outline-text-headline-7" class="outline-text-2">
+<img src="/pic/APawn类型/APawn-AddMovementInput1.png" alt="/pic/APawn类型/APawn-AddMovementInput1.png" title="/pic/APawn类型/APawn-AddMovementInput1.png" width="900"/>
+<p width="900"><img src="/pic/APawn类型/APawn-AddMovementInput2.png" alt="/pic/APawn类型/APawn-AddMovementInput2.png" title="/pic/APawn类型/APawn-AddMovementInput2.png"/>  </p>
+<ol>
+<li>移动角色的方向 WorldDirection</li>
+<li>方向向量和步长 ScaleValue</li>
+<li>使用默认值 bForce</li>
+</ol>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  AddMovementInput(GetActorForwardVector(), Amount);</span></span></code></pre></div>
+</div>
+<ul>
+<li>
+<p>定义</p>
+<ul>
+<li>AddMovementInput对MovementComponent-&gt;AddInputVector进行封装，修改3D坐标</li>
+</ul>
+<img src="/pic/APawn类型/APawn-AddMovementInput-Definition.png" alt="/pic/APawn类型/APawn-AddMovementInput-Definition.png" title="/pic/APawn类型/APawn-AddMovementInput-Definition.png" width="700"/>
+</li>
+</ul>
+</div>
+</div>
         </div>
         
 

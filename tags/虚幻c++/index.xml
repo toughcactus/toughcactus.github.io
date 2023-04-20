@@ -1030,6 +1030,32 @@ DECLARE_MULTICAST_DELEGATE_OneParam
 &lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-IsPawnControlled.png&#34; alt=&#34;/pic/APawn类型/APawn-IsPawnControlled.png&#34; title=&#34;/pic/APawn类型/APawn-IsPawnControlled.png&#34; width=&#34;1000&#34;/&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-IsPawnControlled-Definition.png&#34; alt=&#34;/pic/APawn类型/APawn-IsPawnControlled-Definition.png&#34; title=&#34;/pic/APawn类型/APawn-IsPawnControlled-Definition.png&#34; width=&#34;300&#34;/&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-7&#34;&gt;
+七、Pawn响应指定方向的移动 APawn::AddMovementInput
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddMovementInput1.png&#34; alt=&#34;/pic/APawn类型/APawn-AddMovementInput1.png&#34; title=&#34;/pic/APawn类型/APawn-AddMovementInput1.png&#34; width=&#34;900&#34;/&gt;
+&lt;p width=&#34;900&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddMovementInput2.png&#34; alt=&#34;/pic/APawn类型/APawn-AddMovementInput2.png&#34; title=&#34;/pic/APawn类型/APawn-AddMovementInput2.png&#34;/&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;移动角色的方向 WorldDirection&lt;/li&gt;
+&lt;li&gt;方向向量和步长 ScaleValue&lt;/li&gt;
+&lt;li&gt;使用默认值 bForce&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  AddMovementInput(GetActorForwardVector(), Amount);&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;定义&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;AddMovementInput对MovementComponent-&amp;gt;AddInputVector进行封装，修改3D坐标&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-AddMovementInput-Definition.png&#34; alt=&#34;/pic/APawn类型/APawn-AddMovementInput-Definition.png&#34; title=&#34;/pic/APawn类型/APawn-AddMovementInput-Definition.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -1663,6 +1689,37 @@ AActor  &lt;/p&gt;
 &lt;p width=&#34;1400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/PendingKillFlag.png&#34; alt=&#34;/pic/AActor类型/PendingKillFlag.png&#34; title=&#34;/pic/AActor类型/PendingKillFlag.png&#34;/&gt;  &lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-23&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-23&#34;&gt;
+十二、获取Actor朝向
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-23&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-24&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-24&#34;&gt;
+向前 Actor::GetActorForwardVector
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-24&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/AActor-GetActorForwardVector.png&#34; alt=&#34;/pic/AActor类型/AActor-GetActorForwardVector.png&#34; title=&#34;/pic/AActor类型/AActor-GetActorForwardVector.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-25&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-25&#34;&gt;
+向右 Actor::GetActorRightVector
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-25&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/AActor-GetActorRightVector.png&#34; alt=&#34;/pic/AActor类型/AActor-GetActorRightVector.png&#34; title=&#34;/pic/AActor类型/AActor-GetActorRightVector.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-26&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-26&#34;&gt;
+向上 Actor::GetActorUpVector
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-26&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/AActor-GetActorUpVector.png&#34; alt=&#34;/pic/AActor类型/AActor-GetActorUpVector.png&#34; title=&#34;/pic/AActor类型/AActor-GetActorUpVector.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -4603,6 +4660,68 @@ UStaticMeshComponent&lt;/p&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.5.2为Character实现前后左右移动</title>
+      <link>https://toughcactus.github.io/post/1.5.2%E4%B8%BAcharacter%E5%AE%9E%E7%8E%B0%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.5.2%E4%B8%BAcharacter%E5%AE%9E%E7%8E%B0%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加头文件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Components/InputComponent.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;private&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;MoveForward(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Amount)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      AddMovementInput(GetActorForwardVector(), Amount);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;MoveRight(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Amount)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      AddMovementInput(GetActorRightVector(), Amount);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;绑定函数描述和回调函数&lt;/li&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在SetupPlayerInputComponent中调用&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;BindMoveHandler(UInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; PlayerInputComponent)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MoveForward&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;MoveForward);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;MoveRight&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;MoveRight);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
