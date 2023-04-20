@@ -8376,7 +8376,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
       <description>&lt;ul&gt;
 &lt;li&gt;动画随着Character运动速度变化&lt;/li&gt;
 &lt;li&gt;brush类型是最简单的可编辑几何体，我们可以修改其顶点位置，调整其他参数，然后将其转换成静态网格体&lt;/li&gt;
-&lt;li&gt;CharacterMovement组件负责角色运动，其各种属性均有关角色运动&lt;/li&gt;
+&lt;li&gt;CharacterMovement组件负责Character运动，其各种属性均和Character运动有关&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
@@ -8398,7 +8398,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-2&#34;&gt;
-二、Character速度
+二、Character最大速度
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ol&gt;
@@ -8444,6 +8444,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;img src=&#34;https://toughcactus.github.io/pic/动画蓝图/在屏幕上输出实时速度.png&#34; alt=&#34;/pic/动画蓝图/在屏幕上输出实时速度.png&#34; title=&#34;/pic/动画蓝图/在屏幕上输出实时速度.png&#34; width=&#34;700&#34;/&gt;
 &lt;/li&gt;
 &lt;li&gt;可以修改MaxWalkSpeed，当速度改为1600时，可以看到单位时间内移动的距离增加，但跑步动画的速度一直不变&lt;/li&gt;
+&lt;li&gt;移除打印&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -8510,7 +8511,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;ul&gt;
 &lt;li&gt;处理各种动画事件&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;EventBlueprintUpdateAnimation即Tick&lt;/p&gt;
+&lt;p&gt;像使用Tick一样使用EventBlueprintUpdateAnimation&lt;/p&gt;
 &lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/动画蓝图/ABP_BaseCharacter-EventGraph-EventBlueprintUpdateAnimation.png&#34; alt=&#34;/pic/动画蓝图/ABP_BaseCharacter-EventGraph-EventBlueprintUpdateAnimation.png&#34; title=&#34;/pic/动画蓝图/ABP_BaseCharacter-EventGraph-EventBlueprintUpdateAnimation.png&#34;/&gt;  &lt;/p&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -8520,7 +8521,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;ul&gt;
 &lt;li&gt;处理所有动画&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;将动画输出到OutputPose&lt;/p&gt;
+&lt;p&gt;将动画作为OutputPose的输入&lt;/p&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/动画蓝图/ABP_BaseCharacter-AnimGraph-OutputPose.png&#34; alt=&#34;/pic/动画蓝图/ABP_BaseCharacter-AnimGraph-OutputPose.png&#34; title=&#34;/pic/动画蓝图/ABP_BaseCharacter-AnimGraph-OutputPose.png&#34; width=&#34;300&#34;/&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -8594,7 +8595,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;li&gt;使用插值，动画姿势的中间值&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;1维混合即Blend Space 1D&lt;/li&gt;
+&lt;li&gt;1维混合空间即Blend Space 1D&lt;/li&gt;
 &lt;li&gt;混合空间也和Skeleton Mesh有关&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;命名&lt;/p&gt;
@@ -8711,7 +8712,7 @@ AnimGraph
 &lt;img src=&#34;https://toughcactus.github.io/pic/动画蓝图/ABP_BaseCharacter-添加变量-Float-Velocity.png&#34; alt=&#34;/pic/动画蓝图/ABP_BaseCharacter-添加变量-Float-Velocity.png&#34; title=&#34;/pic/动画蓝图/ABP_BaseCharacter-添加变量-Float-Velocity.png&#34; width=&#34;400&#34;/&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;在AnimGraph添加变量Velocity，此处只能获取变量值，我们要做的也是获取变量值&lt;/p&gt;
+&lt;p&gt;在AnimGraph添加变量Velocity，此处只能获取变量值，我们要的就是获取变量值&lt;/p&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/动画蓝图/ABP_BaseCharacter-AnimGraph-Velocity.png&#34; alt=&#34;/pic/动画蓝图/ABP_BaseCharacter-AnimGraph-Velocity.png&#34; title=&#34;/pic/动画蓝图/ABP_BaseCharacter-AnimGraph-Velocity.png&#34; width=&#34;100&#34;/&gt;
 &lt;/li&gt;
 &lt;li&gt;

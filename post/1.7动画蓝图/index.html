@@ -15,7 +15,7 @@
 <meta name="description" content="
 动画随着Character运动速度变化
 brush类型是最简单的可编辑几何体，我们可以修改其顶点位置，调整其他参数，然后将其转换成静态网格体
-CharacterMovement组件负责角色运动，其各种属性均有关角色运动
+CharacterMovement组件负责Character运动，其各种属性均和Character运动有关
 ">
 
 
@@ -92,7 +92,7 @@ CharacterMovement组件负责角色运动，其各种属性均有关角色运动
 <meta property="og:description" content="
 动画随着Character运动速度变化
 brush类型是最简单的可编辑几何体，我们可以修改其顶点位置，调整其他参数，然后将其转换成静态网格体
-CharacterMovement组件负责角色运动，其各种属性均有关角色运动
+CharacterMovement组件负责Character运动，其各种属性均和Character运动有关
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/post/1.7%E5%8A%A8%E7%94%BB%E8%93%9D%E5%9B%BE/" /><meta property="article:section" content="post" />
@@ -104,7 +104,7 @@ CharacterMovement组件负责角色运动，其各种属性均有关角色运动
 <meta name="twitter:description" content="
 动画随着Character运动速度变化
 brush类型是最简单的可编辑几何体，我们可以修改其顶点位置，调整其他参数，然后将其转换成静态网格体
-CharacterMovement组件负责角色运动，其各种属性均有关角色运动
+CharacterMovement组件负责Character运动，其各种属性均和Character运动有关
 "/>
 
 
@@ -190,7 +190,7 @@ CharacterMovement组件负责角色运动，其各种属性均有关角色运动
             <ul>
 <li>动画随着Character运动速度变化</li>
 <li>brush类型是最简单的可编辑几何体，我们可以修改其顶点位置，调整其他参数，然后将其转换成静态网格体</li>
-<li>CharacterMovement组件负责角色运动，其各种属性均有关角色运动</li>
+<li>CharacterMovement组件负责Character运动，其各种属性均和Character运动有关</li>
 </ul>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
@@ -212,7 +212,7 @@ CharacterMovement组件负责角色运动，其各种属性均有关角色运动
 </div>
 <div id="outline-container-headline-2" class="outline-2">
 <h2 id="headline-2">
-二、Character速度
+二、Character最大速度
 </h2>
 <div id="outline-text-headline-2" class="outline-text-2">
 <ol>
@@ -258,6 +258,7 @@ CharacterMovement组件负责角色运动，其各种属性均有关角色运动
 <img src="/pic/动画蓝图/在屏幕上输出实时速度.png" alt="/pic/动画蓝图/在屏幕上输出实时速度.png" title="/pic/动画蓝图/在屏幕上输出实时速度.png" width="700"/>
 </li>
 <li>可以修改MaxWalkSpeed，当速度改为1600时，可以看到单位时间内移动的距离增加，但跑步动画的速度一直不变</li>
+<li>移除打印</li>
 </ol>
 </div>
 </div>
@@ -324,7 +325,7 @@ CharacterMovement组件负责角色运动，其各种属性均有关角色运动
 <ul>
 <li>处理各种动画事件</li>
 <li>
-<p>EventBlueprintUpdateAnimation即Tick</p>
+<p>像使用Tick一样使用EventBlueprintUpdateAnimation</p>
 <p width="400"><img src="/pic/动画蓝图/ABP_BaseCharacter-EventGraph-EventBlueprintUpdateAnimation.png" alt="/pic/动画蓝图/ABP_BaseCharacter-EventGraph-EventBlueprintUpdateAnimation.png" title="/pic/动画蓝图/ABP_BaseCharacter-EventGraph-EventBlueprintUpdateAnimation.png"/>  </p>
 </li>
 </ul>
@@ -334,7 +335,7 @@ CharacterMovement组件负责角色运动，其各种属性均有关角色运动
 <ul>
 <li>处理所有动画</li>
 <li>
-<p>将动画输出到OutputPose</p>
+<p>将动画作为OutputPose的输入</p>
 <img src="/pic/动画蓝图/ABP_BaseCharacter-AnimGraph-OutputPose.png" alt="/pic/动画蓝图/ABP_BaseCharacter-AnimGraph-OutputPose.png" title="/pic/动画蓝图/ABP_BaseCharacter-AnimGraph-OutputPose.png" width="300"/>
 </li>
 </ul>
@@ -408,7 +409,7 @@ CharacterMovement组件负责角色运动，其各种属性均有关角色运动
 <li>使用插值，动画姿势的中间值</li>
 </ul>
 </li>
-<li>1维混合即Blend Space 1D</li>
+<li>1维混合空间即Blend Space 1D</li>
 <li>混合空间也和Skeleton Mesh有关</li>
 <li>
 <p>命名</p>
@@ -525,7 +526,7 @@ AnimGraph
 <img src="/pic/动画蓝图/ABP_BaseCharacter-添加变量-Float-Velocity.png" alt="/pic/动画蓝图/ABP_BaseCharacter-添加变量-Float-Velocity.png" title="/pic/动画蓝图/ABP_BaseCharacter-添加变量-Float-Velocity.png" width="400"/>
 </li>
 <li>
-<p>在AnimGraph添加变量Velocity，此处只能获取变量值，我们要做的也是获取变量值</p>
+<p>在AnimGraph添加变量Velocity，此处只能获取变量值，我们要的就是获取变量值</p>
 <img src="/pic/动画蓝图/ABP_BaseCharacter-AnimGraph-Velocity.png" alt="/pic/动画蓝图/ABP_BaseCharacter-AnimGraph-Velocity.png" title="/pic/动画蓝图/ABP_BaseCharacter-AnimGraph-Velocity.png" width="100"/>
 </li>
 <li>
