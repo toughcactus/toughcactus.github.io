@@ -638,7 +638,7 @@
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;ul&gt;
-&lt;li&gt;LookUp，TurnAround，AddControllerPitchInput，AddControllerYawInput的签名是一致的&lt;/li&gt;
+&lt;li&gt;LookUp，TurnAround，AddControllerPitchInput，AddControllerYawInput的函数签名是一致的&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
