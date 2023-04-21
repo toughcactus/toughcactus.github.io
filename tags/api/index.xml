@@ -1425,7 +1425,19 @@ YOZ平面
       <guid>https://toughcactus.github.io/post/28.acharacter%E7%B1%BB%E5%9E%8B/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;派生自APawn，实现了角色的动作(motion)，动画(animation)和物理交互(physical interaction)&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+跳跃回调函数 ACharacter::Jump
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-Jump.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-Jump.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-Jump.png&#34; width=&#34;500&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;将bPressedJump置为true，在下次调用Tick函数时，让Actor在Z轴跳跃&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; width=&#34;200&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
     </item>
     
     <item>

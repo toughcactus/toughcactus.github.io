@@ -5286,7 +5286,27 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;li&gt;1.6.6 &lt;a href=&#34;https://toughcactus.github.io/post/1.6.6为character添加跑步动画/&#34;&gt;为Character添加跑步动画&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;虚幻C++ &amp;gt; 1.6.7 &lt;a href=&#34;https://toughcactus.github.io/post/1.6.7优化lookup和turnaround绑定/&#34;&gt;优化LookUp和TurnAround绑定&lt;/a&gt;            &lt;/li&gt;
+&lt;li&gt;虚幻C++ &amp;gt; 1.6.7 &lt;a href=&#34;https://toughcactus.github.io/post/1.6.7优化lookup和turnaround绑定/&#34;&gt;优化LookUp和TurnAround绑定&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻编辑器 &amp;gt; 动画蓝图&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1.7 &lt;a href=&#34;https://toughcactus.github.io/post/1.7动画蓝图/&#34;&gt;动画蓝图&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;跳跃动画&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 1.8.1 &lt;a href=&#34;https://toughcactus.github.io/post/1.8.1绑定跳跃键位/&#34;&gt;绑定跳跃键位&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; ACharacter类型&lt;/li&gt;
+&lt;li&gt;1.8.2 &lt;a href=&#34;https://toughcactus.github.io/post/1.8.2为character实现跳跃/&#34;&gt;为Character实现跳跃&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 1.8.3 &lt;a href=&#34;https://toughcactus.github.io/post/1.8.3添加跳跃动画/&#34;&gt;添加跳跃动画&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -5544,6 +5564,7 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	BindMoveHandler(PlayerInputComponent);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#75715e&#34;&gt;// InitCameraRotate(PlayerInputComponent);
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    InitCameraRotateFinal(PlayerInputComponent);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    InitJump(PlayerInputComponent);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitCameraComponent()
@@ -5600,6 +5621,11 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Lookup&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;AddControllerPitchInput);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;TurnAround&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;AddControllerYawInput);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitJump(UInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; PlayerInputComponent)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAction(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Jump&amp;#34;&lt;/span&gt;, IE_Pressed, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Jump);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -5659,6 +5685,8 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; InitSpringArmAndCamera();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;InitCameraRotateFinal&lt;/span&gt;(UInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; PlayerInputComponent);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;InitJump&lt;/span&gt;(UInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; PlayerInputComponent);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -7532,6 +7560,20 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;li&gt;1.7 &lt;a href=&#34;https://toughcactus.github.io/post/1.7动画蓝图/&#34;&gt;动画蓝图&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;跳跃动画&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 1.8.1 &lt;a href=&#34;https://toughcactus.github.io/post/1.8.1绑定跳跃键位/&#34;&gt;绑定跳跃键位&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; ACharacter类型&lt;/li&gt;
+&lt;li&gt;1.8.2 &lt;a href=&#34;https://toughcactus.github.io/post/1.8.2为character实现跳跃/&#34;&gt;为Character实现跳跃&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 1.8.3 &lt;a href=&#34;https://toughcactus.github.io/post/1.8.3添加跳跃动画/&#34;&gt;添加跳跃动画&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -8954,7 +8996,19 @@ YOZ平面
       <guid>https://toughcactus.github.io/post/28.acharacter%E7%B1%BB%E5%9E%8B/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;派生自APawn，实现了角色的动作(motion)，动画(animation)和物理交互(physical interaction)&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+跳跃回调函数 ACharacter::Jump
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-Jump.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-Jump.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-Jump.png&#34; width=&#34;500&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;将bPressedJump置为true，在下次调用Tick函数时，让Actor在Z轴跳跃&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; width=&#34;200&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -15098,7 +15152,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;div class=&#34;src src-c++&#34;&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitCameraRotate(UInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; PlayerInputComponent)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Lookup&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;LookUp);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;LookUp&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;LookUp);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAxis(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;TurnAround&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;TurnAround);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -15263,6 +15317,34 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/li&gt;
 &lt;li&gt;不再在SetupPlayerInputComponent中调用InitCameraRotate&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.8.2为Character实现跳跃</title>
+      <link>https://toughcactus.github.io/post/1.8.2%E4%B8%BAcharacter%E5%AE%9E%E7%8E%B0%E8%B7%B3%E8%B7%83/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.8.2%E4%B8%BAcharacter%E5%AE%9E%E7%8E%B0%E8%B7%B3%E8%B7%83/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;使用虚幻引擎提供的跳跃回调函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;在SetupPlayerInputComponent中调用    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitJump(UInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; PlayerInputComponent)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAction(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Jump&amp;#34;&lt;/span&gt;, IE_Pressed, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Jump);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -16281,6 +16363,242 @@ EventGraph
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.8.1绑定跳跃键位</title>
+      <link>https://toughcactus.github.io/post/1.8.1%E7%BB%91%E5%AE%9A%E8%B7%B3%E8%B7%83%E9%94%AE%E4%BD%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.8.1%E7%BB%91%E5%AE%9A%E8%B7%B3%E8%B7%83%E9%94%AE%E4%BD%8D/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+在虚幻编辑器绑定键位
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;项目设置 &amp;gt; Engine &amp;gt; Input&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;动作映射&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Jump&lt;/li&gt;
+&lt;li&gt;SpaceBar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/绑定跳跃键位/跳跃键位.png&#34; alt=&#34;/pic/绑定跳跃键位/跳跃键位.png&#34; title=&#34;/pic/绑定跳跃键位/跳跃键位.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.8.3添加跳跃动画</title>
+      <link>https://toughcactus.github.io/post/1.8.3%E6%B7%BB%E5%8A%A0%E8%B7%B3%E8%B7%83%E5%8A%A8%E7%94%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.8.3%E6%B7%BB%E5%8A%A0%E8%B7%B3%E8%B7%83%E5%8A%A8%E7%94%BB/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;跳跃动画分3部分，JumpStart，JumpLoop和JumpEnd&lt;/li&gt;
+&lt;li&gt;使用了ACharacter::IsFalling，返回true则Character在空中，返回false则说明Character在地面上&lt;/li&gt;
+&lt;li&gt;状态机部分转换条件使用ACharacter::IsFalling返回值&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;上一小节中，Velocity横跨ABP_BaseCharacter的EventGraph和AnimGraph，这里，布尔类型变量IsFalling也一样&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在EventGraph设置变量值，而变量作为AnimGraph的输入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;状态机&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在一个动画蓝图中管理多个动画，并且定义动画之间的转换条件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、在ABP_BaseCharacter的EventGraph中设置布尔型变量IsFalling
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;将Pawn转换成Character，紧接着SetVelocity，执行转换&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不能同时从EventBlueprintUpdateAnimation出发&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-将Pawn转换成Character.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-将Pawn转换成Character.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-将Pawn转换成Character.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置IsFalling变量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;IsFalling函数的输入是Character的MovementComponent，从AsCharacter到Target，自动添加提取数据成员&lt;/li&gt;
+&lt;li&gt;IsFalling函数的返回类型是布尔，作为SetIsFalling的输入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-设置变量IsFalling.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-设置变量IsFalling.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-设置变量IsFalling.png&#34; width=&#34;900&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;完整EventGraph&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-EventGraph.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-EventGraph.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-EventGraph.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在ABP_BaseCharacter的AnimGraph中完成状态机
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加状态机(StateMechine)，命名为Locomotion，作为OutputPose的输入&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;双击Locomotion，进入状态机&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;仅一个入口 Entry&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Default.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Default.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Default.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为Entry添加State，命名为Walk&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Entry-AddState.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Entry-AddState.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Entry-AddState.png&#34; width=&#34;300&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Entry-Walk.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Entry-Walk.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Entry-Walk.png&#34; width=&#34;200&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;双击Walk，为其设置输入动画&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk.png&#34; width=&#34;150&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;之前AnimGraph，OutputPose的输入&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion.png&#34; width=&#34;600&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;此时，Character的运动动画和上一小节一致&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;直接从AssetBrowser把Jump的三个动画拖入Locomotion&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;动画自动被封装为State，和之前AddState，再将动画作为输入达到的效果一样&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-添加Jump.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-添加Jump.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-添加Jump.png&#34; width=&#34;900&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-添加转换.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-添加转换.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-添加转换.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+双击图标，添加转换条件
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;当IsFalling为true时，Walk &amp;gt; JumpStart&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-JumpStart.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-JumpStart.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-JumpStart.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;JumpStart将近结束，JumpStart &amp;gt; JumpLoop&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JumpStart最多播放一次&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Less.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Less.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Less.png&#34; width=&#34;350&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpStart-JumpLoop.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpStart-JumpLoop.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpStart-JumpLoop.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当IsFalling为false时，JumpLoop &amp;gt; JumpEnd&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JumpLoop播放多次&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Not.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Not.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Not.png&#34; width=&#34;350&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpLoop-JumpEnd.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpLoop-JumpEnd.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpLoop-JumpEnd.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;JumpEnd将近结束，JumpEnd &amp;gt; Walk&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JumpEnd至多播放一次&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;800&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpEnd-Walk.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpEnd-Walk.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpEnd-Walk.png&#34;/&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+三、设置状态机State动画
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;拿JumpStart状态举例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+JumpStart状态
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;选中JumpStart动画 &amp;gt; Details &amp;gt; Settings &amp;gt; LoopAnimation&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;默认循环动画&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Locomotion-JumpStart.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Locomotion-JumpStart.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Locomotion-JumpStart.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;Jump动画的三部分，设计时，JumpStart和JumpEnd只播放一次，JumpLoop可循环&lt;/li&gt;
+&lt;li&gt;调整JumpStart，JumpEnd，JumpLoop的LoopAnimation，可以修复Character跳跃时的卡顿&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+四、添加楼梯，确认Jump三阶段是否正常显示
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加楼梯&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;PlaceActors &amp;gt; Geometry &amp;gt; LinearStair&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/LevelEditor-添加楼梯.png&#34; alt=&#34;/pic/添加跳跃动画/LevelEditor-添加楼梯.png&#34; title=&#34;/pic/添加跳跃动画/LevelEditor-添加楼梯.png&#34; width=&#34;200&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选中LinearStairBrush &amp;gt; Details &amp;gt; BrushSettings &amp;gt; NumSteps&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/LevelEditor-Details-设置楼梯阶数.png&#34; alt=&#34;/pic/添加跳跃动画/LevelEditor-Details-设置楼梯阶数.png&#34; title=&#34;/pic/添加跳跃动画/LevelEditor-Details-设置楼梯阶数.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Character从楼梯跳到平面时，一直保持JumpLoop&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-7&#34;&gt;
+五、跑步时跳跃，落地平滑
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;可以减少JumpEnd &amp;gt; Walk的TimeRemaining来缩短平滑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+六、跳跃高度
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在BP_STBaseCharacter中设置&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/BP_STBaseCharacter-CharacterMovement-Dtails-JumpZVelocity.png&#34; alt=&#34;/pic/添加跳跃动画/BP_STBaseCharacter-CharacterMovement-Dtails-JumpZVelocity.png&#34; title=&#34;/pic/添加跳跃动画/BP_STBaseCharacter-CharacterMovement-Dtails-JumpZVelocity.png&#34; width=&#34;1200&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;JumpZVelocity和JumpStart的时长有关，JumpLoop动画更适合从临界点落下    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 API</title>
       <link>https://toughcactus.github.io/handbook/ue/api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -16744,6 +17062,20 @@ EventGraph
 &lt;p&gt;虚幻编辑器 &amp;gt; 动画蓝图&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;1.7 &lt;a href=&#34;https://toughcactus.github.io/post/1.7动画蓝图/&#34;&gt;动画蓝图&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;跳跃动画&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 1.8.1 &lt;a href=&#34;https://toughcactus.github.io/post/1.8.1绑定跳跃键位/&#34;&gt;绑定跳跃键位&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; ACharacter类型&lt;/li&gt;
+&lt;li&gt;1.8.2 &lt;a href=&#34;https://toughcactus.github.io/post/1.8.2为character实现跳跃/&#34;&gt;为Character实现跳跃&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 1.8.3 &lt;a href=&#34;https://toughcactus.github.io/post/1.8.3添加跳跃动画/&#34;&gt;添加跳跃动画&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;

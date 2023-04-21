@@ -2643,5 +2643,241 @@ EventGraph
 &lt;/div&gt;</description>
     </item>
     
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.8.1绑定跳跃键位</title>
+      <link>https://toughcactus.github.io/post/1.8.1%E7%BB%91%E5%AE%9A%E8%B7%B3%E8%B7%83%E9%94%AE%E4%BD%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.8.1%E7%BB%91%E5%AE%9A%E8%B7%B3%E8%B7%83%E9%94%AE%E4%BD%8D/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+在虚幻编辑器绑定键位
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;项目设置 &amp;gt; Engine &amp;gt; Input&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;动作映射&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Jump&lt;/li&gt;
+&lt;li&gt;SpaceBar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/绑定跳跃键位/跳跃键位.png&#34; alt=&#34;/pic/绑定跳跃键位/跳跃键位.png&#34; title=&#34;/pic/绑定跳跃键位/跳跃键位.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.8.3添加跳跃动画</title>
+      <link>https://toughcactus.github.io/post/1.8.3%E6%B7%BB%E5%8A%A0%E8%B7%B3%E8%B7%83%E5%8A%A8%E7%94%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.8.3%E6%B7%BB%E5%8A%A0%E8%B7%B3%E8%B7%83%E5%8A%A8%E7%94%BB/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;跳跃动画分3部分，JumpStart，JumpLoop和JumpEnd&lt;/li&gt;
+&lt;li&gt;使用了ACharacter::IsFalling，返回true则Character在空中，返回false则说明Character在地面上&lt;/li&gt;
+&lt;li&gt;状态机部分转换条件使用ACharacter::IsFalling返回值&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;上一小节中，Velocity横跨ABP_BaseCharacter的EventGraph和AnimGraph，这里，布尔类型变量IsFalling也一样&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在EventGraph设置变量值，而变量作为AnimGraph的输入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;状态机&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在一个动画蓝图中管理多个动画，并且定义动画之间的转换条件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、在ABP_BaseCharacter的EventGraph中设置布尔型变量IsFalling
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;将Pawn转换成Character，紧接着SetVelocity，执行转换&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;不能同时从EventBlueprintUpdateAnimation出发&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-将Pawn转换成Character.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-将Pawn转换成Character.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-将Pawn转换成Character.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置IsFalling变量&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;IsFalling函数的输入是Character的MovementComponent，从AsCharacter到Target，自动添加提取数据成员&lt;/li&gt;
+&lt;li&gt;IsFalling函数的返回类型是布尔，作为SetIsFalling的输入&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-设置变量IsFalling.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-设置变量IsFalling.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-设置变量IsFalling.png&#34; width=&#34;900&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;完整EventGraph&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-EventGraph.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-EventGraph.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-EventGraph.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在ABP_BaseCharacter的AnimGraph中完成状态机
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加状态机(StateMechine)，命名为Locomotion，作为OutputPose的输入&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;双击Locomotion，进入状态机&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;仅一个入口 Entry&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Default.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Default.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Default.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为Entry添加State，命名为Walk&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Entry-AddState.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Entry-AddState.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Entry-AddState.png&#34; width=&#34;300&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Entry-Walk.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Entry-Walk.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Entry-Walk.png&#34; width=&#34;200&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;双击Walk，为其设置输入动画&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk.png&#34; width=&#34;150&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;之前AnimGraph，OutputPose的输入&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion.png&#34; width=&#34;600&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;此时，Character的运动动画和上一小节一致&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;直接从AssetBrowser把Jump的三个动画拖入Locomotion&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;动画自动被封装为State，和之前AddState，再将动画作为输入达到的效果一样&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-添加Jump.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-添加Jump.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-添加Jump.png&#34; width=&#34;900&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-添加转换.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-添加转换.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-添加转换.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+双击图标，添加转换条件
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;当IsFalling为true时，Walk &amp;gt; JumpStart&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-JumpStart.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-JumpStart.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-JumpStart.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;JumpStart将近结束，JumpStart &amp;gt; JumpLoop&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JumpStart最多播放一次&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Less.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Less.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Less.png&#34; width=&#34;350&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpStart-JumpLoop.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpStart-JumpLoop.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpStart-JumpLoop.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当IsFalling为false时，JumpLoop &amp;gt; JumpEnd&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JumpLoop播放多次&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Not.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Not.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Not.png&#34; width=&#34;350&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpLoop-JumpEnd.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpLoop-JumpEnd.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpLoop-JumpEnd.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;JumpEnd将近结束，JumpEnd &amp;gt; Walk&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;JumpEnd至多播放一次&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;800&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpEnd-Walk.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpEnd-Walk.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpEnd-Walk.png&#34;/&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+三、设置状态机State动画
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;拿JumpStart状态举例&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+JumpStart状态
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;选中JumpStart动画 &amp;gt; Details &amp;gt; Settings &amp;gt; LoopAnimation&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;默认循环动画&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Locomotion-JumpStart.png&#34; alt=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Locomotion-JumpStart.png&#34; title=&#34;/pic/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Locomotion-JumpStart.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;Jump动画的三部分，设计时，JumpStart和JumpEnd只播放一次，JumpLoop可循环&lt;/li&gt;
+&lt;li&gt;调整JumpStart，JumpEnd，JumpLoop的LoopAnimation，可以修复Character跳跃时的卡顿&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+四、添加楼梯，确认Jump三阶段是否正常显示
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加楼梯&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;PlaceActors &amp;gt; Geometry &amp;gt; LinearStair&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/LevelEditor-添加楼梯.png&#34; alt=&#34;/pic/添加跳跃动画/LevelEditor-添加楼梯.png&#34; title=&#34;/pic/添加跳跃动画/LevelEditor-添加楼梯.png&#34; width=&#34;200&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选中LinearStairBrush &amp;gt; Details &amp;gt; BrushSettings &amp;gt; NumSteps&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/LevelEditor-Details-设置楼梯阶数.png&#34; alt=&#34;/pic/添加跳跃动画/LevelEditor-Details-设置楼梯阶数.png&#34; title=&#34;/pic/添加跳跃动画/LevelEditor-Details-设置楼梯阶数.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Character从楼梯跳到平面时，一直保持JumpLoop&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-7&#34;&gt;
+五、跑步时跳跃，落地平滑
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;可以减少JumpEnd &amp;gt; Walk的TimeRemaining来缩短平滑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+六、跳跃高度
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在BP_STBaseCharacter中设置&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跳跃动画/BP_STBaseCharacter-CharacterMovement-Dtails-JumpZVelocity.png&#34; alt=&#34;/pic/添加跳跃动画/BP_STBaseCharacter-CharacterMovement-Dtails-JumpZVelocity.png&#34; title=&#34;/pic/添加跳跃动画/BP_STBaseCharacter-CharacterMovement-Dtails-JumpZVelocity.png&#34; width=&#34;1200&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;JumpZVelocity和JumpStart的时长有关，JumpLoop动画更适合从临界点落下    &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
   </channel>
 </rss>

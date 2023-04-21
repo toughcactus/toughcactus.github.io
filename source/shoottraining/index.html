@@ -218,6 +218,7 @@
 </span></span><span style="display:flex;"><span>	BindMoveHandler(PlayerInputComponent);
 </span></span><span style="display:flex;"><span>	<span style="color:#75715e">// InitCameraRotate(PlayerInputComponent);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    InitCameraRotateFinal(PlayerInputComponent);
+</span></span><span style="display:flex;"><span>    InitJump(PlayerInputComponent);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitCameraComponent()
@@ -274,6 +275,11 @@
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>	PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAxis(<span style="color:#e6db74">&#34;Lookup&#34;</span>, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>AddControllerPitchInput);
 </span></span><span style="display:flex;"><span>    PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAxis(<span style="color:#e6db74">&#34;TurnAround&#34;</span>, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>AddControllerYawInput);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitJump(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAction(<span style="color:#e6db74">&#34;Jump&#34;</span>, IE_Pressed, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>Jump);
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -333,6 +339,8 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> InitSpringArmAndCamera();
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitCameraRotateFinal</span>(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitJump</span>(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent);
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
