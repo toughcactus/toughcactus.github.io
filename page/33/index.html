@@ -174,7 +174,7 @@
             <article class="post-list h-feed">
     <div class="post-header">
         <header>
-            <h1 class="p-name post-title"><a class="u-url" href="/post/4.2%E4%B8%BA%E9%9D%99%E6%80%81%E7%BD%91%E6%A0%BC%E7%BB%84%E4%BB%B6%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/">虚幻引擎 &gt; 基础课程 &gt; 虚幻编辑器 &gt; 4.2为静态网格组件绑定模型</a></h1>
+            <h1 class="p-name post-title"><a class="u-url" href="/post/12.2%E5%9C%A8%E8%93%9D%E5%9B%BE%E4%B8%AD%E8%AE%A2%E9%98%85%E5%A7%94%E6%89%98%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/">虚幻引擎 &gt; 基础课程 &gt; 虚幻编辑器 &gt; 12.2在蓝图中订阅委托并实现处理函数</a></h1>
         </header>
         
     </div>
@@ -182,7 +182,8 @@
     
         <div class="content post-summary p-summary">
             <ul>
-<li>使用新手包里的模型或引擎提供的模型</li>
+<li>C++侧订阅委托并注册处理函数是在对Actor对象调用BeginPlay函数之前完成的</li>
+<li>蓝图侧在BeginPlay函数之后订阅委托并注册处理函数</li>
 </ul>
         </div>
     
@@ -196,7 +197,7 @@
 <div class="post-info">
     
 
-    <a class="post-hidden-url u-url" href="https://toughcactus.github.io/post/4.2%E4%B8%BA%E9%9D%99%E6%80%81%E7%BD%91%E6%A0%BC%E7%BB%84%E4%BB%B6%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/">https://toughcactus.github.io/post/4.2%E4%B8%BA%E9%9D%99%E6%80%81%E7%BD%91%E6%A0%BC%E7%BB%84%E4%BB%B6%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/</a>
+    <a class="post-hidden-url u-url" href="https://toughcactus.github.io/post/12.2%E5%9C%A8%E8%93%9D%E5%9B%BE%E4%B8%AD%E8%AE%A2%E9%98%85%E5%A7%94%E6%89%98%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/">https://toughcactus.github.io/post/12.2%E5%9C%A8%E8%93%9D%E5%9B%BE%E4%B8%AD%E8%AE%A2%E9%98%85%E5%A7%94%E6%89%98%E5%B9%B6%E5%AE%9E%E7%8E%B0%E5%A4%84%E7%90%86%E5%87%BD%E6%95%B0/</a>
     <a href="https://toughcactus.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">Dorothy</a>
 
 
@@ -228,35 +229,14 @@
             <article class="post-list h-feed">
     <div class="post-header">
         <header>
-            <h1 class="p-name post-title"><a class="u-url" href="/post/5.1%E6%9D%90%E8%B4%A8%E7%B1%BB%E5%92%8C%E6%9D%90%E8%B4%A8%E5%AE%9E%E4%BE%8B%E7%B1%BB/">虚幻引擎 &gt; 基础课程 &gt; 虚幻编辑器 &gt; 5.1材质类和材质实例类</a></h1>
+            <h1 class="p-name post-title"><a class="u-url" href="/post/13.2%E7%86%9F%E6%82%89gamemode/">虚幻引擎 &gt; 基础课程 &gt; 虚幻编辑器 &gt; 13.2熟悉GameMode</a></h1>
         </header>
         
     </div>
 
     
         <div class="content post-summary p-summary">
-            <ul>
-<li>应用材质，使Actor对象具有图案和纹理</li>
-<li>使用基础颜色</li>
-</ul>
-<ul>
-<li>材质类以M_打头</li>
-<li>修改材质参数后，需要手动保存</li>
-<li>
-<p>材质</p>
-<ul>
-<li>虚幻引擎中的一种资产，负责视觉部分，如静态网格物体 static mesh，骨骼网格物体 skeletal mesh，粒子系统particle system，以及其他物体的外观</li>
-<li>更确切地说，材质是一种着色器，即一个微型子例程，可以GPU上运行并计算场景中像素点的颜色和位置</li>
-</ul>
-</li>
-<li>
-<p>材质实例类</p>
-<ul>
-<li>材质实例类派生自材质类</li>
-<li>派生自同一材质类的材质实例类，可以分别对材质类的参数进行设置</li>
-</ul>
-</li>
-</ul>
+            
         </div>
     
     
@@ -269,7 +249,7 @@
 <div class="post-info">
     
 
-    <a class="post-hidden-url u-url" href="https://toughcactus.github.io/post/5.1%E6%9D%90%E8%B4%A8%E7%B1%BB%E5%92%8C%E6%9D%90%E8%B4%A8%E5%AE%9E%E4%BE%8B%E7%B1%BB/">https://toughcactus.github.io/post/5.1%E6%9D%90%E8%B4%A8%E7%B1%BB%E5%92%8C%E6%9D%90%E8%B4%A8%E5%AE%9E%E4%BE%8B%E7%B1%BB/</a>
+    <a class="post-hidden-url u-url" href="https://toughcactus.github.io/post/13.2%E7%86%9F%E6%82%89gamemode/">https://toughcactus.github.io/post/13.2%E7%86%9F%E6%82%89gamemode/</a>
     <a href="https://toughcactus.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">Dorothy</a>
 
 
@@ -301,17 +281,25 @@
             <article class="post-list h-feed">
     <div class="post-header">
         <header>
-            <h1 class="p-name post-title"><a class="u-url" href="/post/5.2%E5%9F%BA%E4%BA%8Ec&#43;&#43;%E7%B1%BB%E7%9A%84%E8%93%9D%E5%9B%BE%E7%B1%BB/">虚幻引擎 &gt; 基础课程 &gt; 虚幻编辑器 &gt; 5.2基于C&#43;&#43;类的蓝图类</a></h1>
+            <h1 class="p-name post-title"><a class="u-url" href="/post/14.1%E9%94%AE%E4%BD%8D%E7%BB%91%E5%AE%9A/">虚幻引擎 &gt; 基础课程 &gt; 虚幻编辑器 &gt; 14.1键位绑定</a></h1>
         </header>
         
     </div>
 
     
         <div class="content post-summary p-summary">
-            <p>
-可以在虚幻编辑器中创建蓝图类，使其派生自C++类。</p>
-<p>
-可以在虚幻编辑器中编辑蓝图类，设置数据成员初始值及其他。</p>
+            <ul>
+<li>
+<p>入口</p>
+<ul>
+<li>项目设置 &gt; 引擎 &gt; 输入 &gt; Bindings</li>
+</ul>
+</li>
+<li>
+<p>键位绑定有两种，动作映射和轴映射，其触发机制不同</p>
+<img src="/pic/键位绑定/ProjectSettings-Bindings.png" alt="/pic/键位绑定/ProjectSettings-Bindings.png" title="/pic/键位绑定/ProjectSettings-Bindings.png" width="700"/>
+</li>
+</ul>
         </div>
     
     
@@ -324,7 +312,7 @@
 <div class="post-info">
     
 
-    <a class="post-hidden-url u-url" href="https://toughcactus.github.io/post/5.2%E5%9F%BA%E4%BA%8Ec&#43;&#43;%E7%B1%BB%E7%9A%84%E8%93%9D%E5%9B%BE%E7%B1%BB/">https://toughcactus.github.io/post/5.2%E5%9F%BA%E4%BA%8Ec&#43;&#43;%E7%B1%BB%E7%9A%84%E8%93%9D%E5%9B%BE%E7%B1%BB/</a>
+    <a class="post-hidden-url u-url" href="https://toughcactus.github.io/post/14.1%E9%94%AE%E4%BD%8D%E7%BB%91%E5%AE%9A/">https://toughcactus.github.io/post/14.1%E9%94%AE%E4%BD%8D%E7%BB%91%E5%AE%9A/</a>
     <a href="https://toughcactus.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">Dorothy</a>
 
 

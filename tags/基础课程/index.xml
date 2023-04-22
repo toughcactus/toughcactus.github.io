@@ -1446,11 +1446,11 @@
     </item>
     
     <item>
-      <title>虚幻引擎 &gt; 基础课程 &gt; 虚幻C&#43;&#43; &gt; 14.2实现GeometryPawn</title>
-      <link>https://toughcactus.github.io/post/14.2%E5%AE%9E%E7%8E%B0geometrypawn/</link>
+      <title>虚幻引擎 &gt; 基础课程 &gt; 虚幻C&#43;&#43; &gt; 14.3实现GeometryPawn</title>
+      <link>https://toughcactus.github.io/post/14.3%E5%AE%9E%E7%8E%B0geometrypawn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://toughcactus.github.io/post/14.2%E5%AE%9E%E7%8E%B0geometrypawn/</guid>
+      <guid>https://toughcactus.github.io/post/14.3%E5%AE%9E%E7%8E%B0geometrypawn/</guid>
       <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
 一、添加静态日志类型
@@ -1619,11 +1619,11 @@
     </item>
     
     <item>
-      <title>虚幻引擎 &gt; 基础课程 &gt; 虚幻C&#43;&#43; &gt; 14.3使用GeometryPawn</title>
-      <link>https://toughcactus.github.io/post/14.3%E4%BD%BF%E7%94%A8geometrypawn/</link>
+      <title>虚幻引擎 &gt; 基础课程 &gt; 虚幻C&#43;&#43; &gt; 14.4使用GeometryPawn</title>
+      <link>https://toughcactus.github.io/post/14.4%E4%BD%BF%E7%94%A8geometrypawn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://toughcactus.github.io/post/14.3%E4%BD%BF%E7%94%A8geometrypawn/</guid>
+      <guid>https://toughcactus.github.io/post/14.4%E4%BD%BF%E7%94%A8geometrypawn/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;在GameModeBase中完成设置&lt;/li&gt;
 &lt;/ul&gt;
@@ -3867,11 +3867,69 @@
     </item>
     
     <item>
-      <title>虚幻引擎 &gt; 基础课程 &gt; 虚幻编辑器 &gt; 14.1创建派生自APawn的C&#43;&#43;类并为其绑定键位</title>
-      <link>https://toughcactus.github.io/post/14.1%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAapawn%E7%9A%84c&#43;&#43;%E7%B1%BB%E5%B9%B6%E4%B8%BA%E5%85%B6%E7%BB%91%E5%AE%9A%E9%94%AE%E4%BD%8D/</link>
+      <title>虚幻引擎 &gt; 基础课程 &gt; 虚幻编辑器 &gt; 14.1键位绑定</title>
+      <link>https://toughcactus.github.io/post/14.1%E9%94%AE%E4%BD%8D%E7%BB%91%E5%AE%9A/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://toughcactus.github.io/post/14.1%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAapawn%E7%9A%84c&#43;&#43;%E7%B1%BB%E5%B9%B6%E4%B8%BA%E5%85%B6%E7%BB%91%E5%AE%9A%E9%94%AE%E4%BD%8D/</guid>
+      <guid>https://toughcactus.github.io/post/14.1%E9%94%AE%E4%BD%8D%E7%BB%91%E5%AE%9A/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;入口&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;项目设置 &amp;gt; 引擎 &amp;gt; 输入 &amp;gt; Bindings&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;键位绑定有两种，动作映射和轴映射，其触发机制不同&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/键位绑定/ProjectSettings-Bindings.png&#34; alt=&#34;/pic/键位绑定/ProjectSettings-Bindings.png&#34; title=&#34;/pic/键位绑定/ProjectSettings-Bindings.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、动作映射
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;一次完整的按下并松开按键，触发一次回调函数&lt;/li&gt;
+&lt;li&gt;具有离散性&lt;/li&gt;
+&lt;li&gt;如，跳跃&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、轴映射
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;按下键位之后，松开之前的这段时间，持续触发回调函数&lt;/li&gt;
+&lt;li&gt;每次刷新帧时，调用回调函数&lt;/li&gt;
+&lt;li&gt;具有连续性&lt;/li&gt;
+&lt;li&gt;如，前后左右移动&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、绑定
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;在虚幻编辑器中，将键位和函数描述绑定在一起；稍后在C++中，再将回调函数和函数描述绑定在一起&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/键位绑定/ProjectSettings-Bindings-Example.png&#34; alt=&#34;/pic/键位绑定/ProjectSettings-Bindings-Example.png&#34; title=&#34;/pic/键位绑定/ProjectSettings-Bindings-Example.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 基础课程 &gt; 虚幻编辑器 &gt; 14.2创建派生自APawn的C&#43;&#43;类并为其绑定键位</title>
+      <link>https://toughcactus.github.io/post/14.2%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAapawn%E7%9A%84c&#43;&#43;%E7%B1%BB%E5%B9%B6%E4%B8%BA%E5%85%B6%E7%BB%91%E5%AE%9A%E9%94%AE%E4%BD%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/14.2%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAapawn%E7%9A%84c&#43;&#43;%E7%B1%BB%E5%B9%B6%E4%B8%BA%E5%85%B6%E7%BB%91%E5%AE%9A%E9%94%AE%E4%BD%8D/</guid>
       <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
 一、创建派生自APawn的C++类 GeometryPawn

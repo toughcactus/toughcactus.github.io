@@ -694,6 +694,203 @@
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.9.2实现键位逻辑</title>
+      <link>https://toughcactus.github.io/post/1.9.2%E5%AE%9E%E7%8E%B0%E9%94%AE%E4%BD%8D%E9%80%BB%E8%BE%91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.9.2%E5%AE%9E%E7%8E%B0%E9%94%AE%E4%BD%8D%E9%80%BB%E8%BE%91/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;虽然是跑步键位，但是限制方向为向前 &amp;gt; 同时按下W或Up&lt;/li&gt;
+&lt;li&gt;要求速度不为0 &amp;gt; 前方有障碍物时，不应该由走路转换成跑步动画&lt;/li&gt;
+&lt;li&gt;动作映射的回调函数参数列表为空&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加数据成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;private&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; IsForward &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; false;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; AbleRun &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; false;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在SetupPlayerInputComponent中调用InitRun&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RunEnable()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      AbleRun &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; true;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RunDisable()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      AbleRun &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; false;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitRun(UInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; PlayerInputComponent)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAction(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Run&amp;#34;&lt;/span&gt;, IE_Pressed, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RunEnable);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAction(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Run&amp;#34;&lt;/span&gt;, IE_Released, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RunDisable);	
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在MoveForward中调用  &lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;SetIsForward(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Amount)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      IsForward &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Amount &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0f&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;public&lt;/li&gt;
+&lt;li&gt;可在蓝图中调用&lt;/li&gt;
+&lt;li&gt;const函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UFUNCTION(BlueprintCallable)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; IsRunning() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;IsRunning() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; AbleRun &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; IsForward &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;GetVelocity().IsZero();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.9.5设置MaxSpeed</title>
+      <link>https://toughcactus.github.io/post/1.9.5%E8%AE%BE%E7%BD%AEmaxspeed/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.9.5%E8%AE%BE%E7%BD%AEmaxspeed/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加头文件路径
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ShootTraining.Build.cs&lt;/p&gt;
+&lt;div class=&#34;src src-c#&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  PublicIncludePaths.AddRange(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;[] { &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining/Public/Player&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining/Public/Components&amp;#34;&lt;/span&gt; });&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、添加数据成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;public&lt;/li&gt;
+&lt;li&gt;加速参数&lt;/li&gt;
+&lt;li&gt;原型(STBaseCharacter)中可修改&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;范围 1.5 - 10&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditDefaultsOnly, meta &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ClampMin &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1.5&amp;#34;&lt;/span&gt;, ClampMax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10.0&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; SpeedAcceleration &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2.0f&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、包含头文件 STCharacterMovementComponent.cpp
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Player/STBaseCharacter.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、覆写UCharacterMovementComponent::GetMaxSpeed
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;并不直接修改MaxWalkSpeed&lt;/li&gt;
+&lt;li&gt;某个地方会调用GetMaxSpeed来确定Character运动速度的上限，当获取的MaxSpeed增加，速度增加的幅度也变大，用来实现加速&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; USTCharacterMovementComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;GetMaxSpeed() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; MaxSpeed &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Super&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;GetMaxSpeed();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ASTBaseCharacter &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;Player &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Cast&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;(GetPawnOwner());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Player &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; Player&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;IsRunning() &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt; SpeedAcceleration &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; MaxSpeed : MaxSpeed;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+五、让STBaseCharacter使用STCharacterMovementComponent
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;屏蔽默认构造函数&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重新实现构造函数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;区别在于设置了基类子组件类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;ASTBaseCharacter(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FObjectInitializer &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ObjInit)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; Super(ObjInit.SetDefaultSubobjectClass&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;USTCharacterMovementComponent&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;(ACharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;CharacterMovementComponentName))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don&amp;#39;t need it.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      PrimaryActorTick.bCanEverTick &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; true;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;// InitCameraComponent();
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      InitSpringArmAndCamera();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.2初始化ShootTraining项目</title>
       <link>https://toughcactus.github.io/post/1.2%E5%88%9D%E5%A7%8B%E5%8C%96shoottraining%E9%A1%B9%E7%9B%AE/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -1280,9 +1477,9 @@
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;二者均为true，以SpringArm为主，摄像机以Character为中心上下移动&lt;/li&gt;
-&lt;li&gt;二者均为false，摄像机不可上下移动&lt;/li&gt;
-&lt;li&gt;仅Camera的为true，摄像机以Camera为中心上下移动&lt;/li&gt;
+&lt;li&gt;二者均为true，SpringArm的生效，摄像机以Character为中心绕Y轴旋转&lt;/li&gt;
+&lt;li&gt;二者均为false，摄像机不可绕Y轴旋转&lt;/li&gt;
+&lt;li&gt;仅Camera的为true，摄像机以Camera为中心绕Y轴旋转&lt;/li&gt;
 &lt;li&gt;去除Camera的bUsePawnControlRotation&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -1938,6 +2135,186 @@ JumpStart状态
 &lt;/li&gt;
 &lt;li&gt;JumpZVelocity和JumpStart的时长有关，JumpLoop动画更适合从临界点落下    &lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.9.1绑定跑步键位</title>
+      <link>https://toughcactus.github.io/post/1.9.1%E7%BB%91%E5%AE%9A%E8%B7%91%E6%AD%A5%E9%94%AE%E4%BD%8D/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.9.1%E7%BB%91%E5%AE%9A%E8%B7%91%E6%AD%A5%E9%94%AE%E4%BD%8D/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+在虚幻编辑器绑定键位
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;项目设置 &amp;gt; Engine &amp;gt; Input&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;动作映射&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Run&lt;/li&gt;
+&lt;li&gt;LeftShift&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/绑定跑步键位/跑步键位.png&#34; alt=&#34;/pic/绑定跑步键位/跑步键位.png&#34; title=&#34;/pic/绑定跑步键位/跑步键位.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.9.3添加跑步动画</title>
+      <link>https://toughcactus.github.io/post/1.9.3%E6%B7%BB%E5%8A%A0%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.9.3%E6%B7%BB%E5%8A%A0%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加一维混合空间 BS_Run
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;设置轴&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Name &amp;gt; Velocity&lt;/li&gt;
+&lt;li&gt;MaxinumAxisValue &amp;gt; 600&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置动画&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;起点Idle，终点RoadieRun_Fwd&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、修改状态机 ABP_STBaseCharacter
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+1. 设置EventGraph &amp;gt; 添加变量IsRunning用作状态迁移条件
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;输入来自STBaseCharacter::IsRunning&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;STBaseCharacter&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/ABP_BaseCharacter-EventGraph-STBaseCharacter.png&#34; alt=&#34;/pic/添加跑步动画/ABP_BaseCharacter-EventGraph-STBaseCharacter.png&#34; title=&#34;/pic/添加跑步动画/ABP_BaseCharacter-EventGraph-STBaseCharacter.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;IsRunning&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/ABP_BaseCharacter-EventGraph-IsRunning.png&#34; alt=&#34;/pic/添加跑步动画/ABP_BaseCharacter-EventGraph-IsRunning.png&#34; title=&#34;/pic/添加跑步动画/ABP_BaseCharacter-EventGraph-IsRunning.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;完整EventGraph，可以合并Character和STBaseCharacter&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/ABP_BaseCharacter-EventGraph.png&#34; alt=&#34;/pic/添加跑步动画/ABP_BaseCharacter-EventGraph.png&#34; title=&#34;/pic/添加跑步动画/ABP_BaseCharacter-EventGraph.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+2. 设置AnimGraph     
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;添加状态Run，使用BS_Run作为输入&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-AddRun.png&#34; alt=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-AddRun.png&#34; title=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-AddRun.png&#34; width=&#34;600&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-Run.png&#34; alt=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-Run.png&#34; title=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-Run.png&#34; width=&#34;600&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当满足IsRunning条件时，从Walk迁移到Run，否则，从Run迁移到Walk&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-WalkAndRun.png&#34; alt=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-WalkAndRun.png&#34; title=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-WalkAndRun.png&#34; width=&#34;600&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-WalkToRun.png&#34; alt=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-WalkToRun.png&#34; title=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-WalkToRun.png&#34; width=&#34;400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-RunToWalk.png&#34; alt=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-RunToWalk.png&#34; title=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-RunToWalk.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Run和Jump的转换&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;初稿&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-RunAndJump-Draft.png&#34; alt=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-RunAndJump-Draft.png&#34; title=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-RunAndJump-Draft.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;从JumpEnd回到Walk时，如果IsRunning为true，会立即切换到Run &amp;gt; 可以省略JumpEnd到Run的转换，降低状态机复杂度&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-RunAndJump.png&#34; alt=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-RunAndJump.png&#34; title=&#34;/pic/添加跑步动画/ABP_BaseCharacter-AnimGraph-Locomotion-RunAndJump.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-4&#34;&gt;
+&lt;h4 id=&#34;headline-5&#34;&gt;
+Run到JumpStart的转换复用Walk到JumpStart
+&lt;/h4&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-4&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;选中Walk到JumpStart的条件 &amp;gt; Details &amp;gt; Transiton &amp;gt; Transition Rule Sharing &amp;gt; Promote To Share&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/WalkToJumpStart-Condition-PromoteToShare.png&#34; alt=&#34;/pic/添加跑步动画/WalkToJumpStart-Condition-PromoteToShare.png&#34; title=&#34;/pic/添加跑步动画/WalkToJumpStart-Condition-PromoteToShare.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;命名为IsFalling&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/WalkToJumpStart-Condition-IsFalling.png&#34; alt=&#34;/pic/添加跑步动画/WalkToJumpStart-Condition-IsFalling.png&#34; title=&#34;/pic/添加跑步动画/WalkToJumpStart-Condition-IsFalling.png&#34; width=&#34;350&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;共享条件显示为红色&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/WalkToJumpStart-Condition-IsFalling-Result.png&#34; alt=&#34;/pic/添加跑步动画/WalkToJumpStart-Condition-IsFalling-Result.png&#34; title=&#34;/pic/添加跑步动画/WalkToJumpStart-Condition-IsFalling-Result.png&#34; width=&#34;1100&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选中Run到JumpStart的条件 &amp;gt; Details &amp;gt; Transition &amp;gt; Transition Rule Sharing &amp;gt; Use Shared &amp;gt; 选择IsFalling&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/RunToJumpStart-Condition-UseShare.png&#34; alt=&#34;/pic/添加跑步动画/RunToJumpStart-Condition-UseShare.png&#34; title=&#34;/pic/添加跑步动画/RunToJumpStart-Condition-UseShare.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;完整状态机&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加跑步动画/RunToJumpStart-Condition-UseShare-IsFalling.png&#34; alt=&#34;/pic/添加跑步动画/RunToJumpStart-Condition-UseShare-IsFalling.png&#34; title=&#34;/pic/添加跑步动画/RunToJumpStart-Condition-UseShare-IsFalling.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;运行游戏，跑步动画正常切换，但跑步和走路的速度一样&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.9.4创建派生自CharacterMovementComponent的C&#43;&#43;类</title>
+      <link>https://toughcactus.github.io/post/1.9.4%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAcharactermovementcomponent%E7%9A%84c&#43;&#43;%E7%B1%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.9.4%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAcharactermovementcomponent%E7%9A%84c&#43;&#43;%E7%B1%BB/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;用以实现跑步时提升速度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+创建派生自CharacterMovementComponent的C++类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;基类&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自CharacterMovementComponent的C++类/基类CharacterMovementComponent.png&#34; alt=&#34;/pic/创建派生自CharacterMovementComponent的C++类/基类CharacterMovementComponent.png&#34; title=&#34;/pic/创建派生自CharacterMovementComponent的C++类/基类CharacterMovementComponent.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;保存到Components目录下，命名为STCharacterMovementComponent&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自CharacterMovementComponent的C++类/Components-STCharacterMovementComponent.png&#34; alt=&#34;/pic/创建派生自CharacterMovementComponent的C++类/Components-STCharacterMovementComponent.png&#34; title=&#34;/pic/创建派生自CharacterMovementComponent的C++类/Components-STCharacterMovementComponent.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>

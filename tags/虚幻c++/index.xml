@@ -841,6 +841,122 @@ TArray
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 2.字符串</title>
+      <link>https://toughcactus.github.io/post/2.%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.%E5%AD%97%E7%AC%A6%E4%B8%B2/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++提供3种字符串结构体&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;FString&lt;/li&gt;
+&lt;li&gt;FName&lt;/li&gt;
+&lt;li&gt;FText&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、TCHAR
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.unrealengine.com/4.26/en-US/API/Runtime/Core/HAL/TCHAR/&#34;&gt;API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;ANSICHAR 或 WIDECHAR，取决于平台&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以把ANSICHAR理解为char，WIDECHAR当作wchar&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻C++支持跨平台，当我们使用其提供的类型时，可以忽略平台差异(如编码和字体)&lt;/li&gt;
+&lt;li&gt;格式化输出中的%s匹配TCHAR *&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、TEXT宏
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p&gt;包裹字符串，返回TCHAR *&lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、FString结构体
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.unrealengine.com/5.1/zh-CN/fstring-in-unreal-engine/&#34;&gt;API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;容器类型，元素类型是TCHAR&lt;/li&gt;
+&lt;li&gt;格式化输出中的%s无法匹配FString&lt;/li&gt;
+&lt;li&gt;输出FString时，需将其显式转换为TCHAR *&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+返回可输出字符串 FString::operator* 
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;返回TCHAR *&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/字符串/FString-Operator.png&#34; alt=&#34;/pic/字符串/FString-Operator.png&#34; title=&#34;/pic/字符串/FString-Operator.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+字符串连接 FString::operator+
+&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+整型转字符串 FString::FromInt
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/字符串/FString-FromInt.png&#34; alt=&#34;/pic/字符串/FString-FromInt.png&#34; title=&#34;/pic/字符串/FString-FromInt.png&#34; width=&#34;350&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+浮点数转字符串 FString::SanitizeFloat
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/字符串/FString-SanitizeFloat.png&#34; alt=&#34;/pic/字符串/FString-SanitizeFloat.png&#34; title=&#34;/pic/字符串/FString-SanitizeFloat.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-8&#34;&gt;
+构造函数 接受cstring
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/字符串/FString-Construct.png&#34; alt=&#34;/pic/字符串/FString-Construct.png&#34; title=&#34;/pic/字符串/FString-Construct.png&#34; width=&#34;300&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-9&#34;&gt;
+格式化输出 FString::Printf
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/字符串/FString-Printf.png&#34; alt=&#34;/pic/字符串/FString-Printf.png&#34; title=&#34;/pic/字符串/FString-Printf.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-10&#34;&gt;
+四、FName结构体
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-10&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;和FString相比，FName是一个轻量级的字符串，其功能较少，不包含字符串操作&lt;/li&gt;
+&lt;li&gt;用于设置组件名，玩家名，材质参数，骨骼身体部分等&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 20.委托</title>
       <link>https://toughcactus.github.io/post/20.%E5%A7%94%E6%89%98/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -1112,6 +1228,14 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-12&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-12&#34;&gt;
+九、获取Pawn速度 APawn::GetVelocity
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-12&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-GetVelocity.png&#34; alt=&#34;/pic/APawn类型/APawn-GetVelocity.png&#34; title=&#34;/pic/APawn类型/APawn-GetVelocity.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -1292,11 +1416,12 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-2&#34;&gt;
-二、跟随Pawn旋转标志位 UCameraComponent::bUsePawnControlRotation
+二、跟随Pawn绕Y轴旋转标志位 UCameraComponent::bUsePawnControlRotation
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;为true则跟随&lt;/li&gt;
+&lt;li&gt;以Camera为中心&lt;/li&gt;
 &lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/UCameraComponent类型/UCameraComponent-bUsePawnControlRotation.png&#34; alt=&#34;/pic/UCameraComponent类型/UCameraComponent-bUsePawnControlRotation.png&#34; title=&#34;/pic/UCameraComponent类型/UCameraComponent-bUsePawnControlRotation.png&#34; width=&#34;700&#34;/&gt;
 &lt;/div&gt;
@@ -1428,7 +1553,7 @@ YOZ平面
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-跳跃回调函数 ACharacter::Jump
+一、跳跃回调函数 ACharacter::Jump
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-Jump.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-Jump.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-Jump.png&#34; width=&#34;500&#34;/&gt;
@@ -1436,6 +1561,14 @@ YOZ平面
 &lt;li&gt;将bPressedJump置为true，在下次调用Tick函数时，让Actor在Z轴跳跃&lt;/li&gt;
 &lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; width=&#34;200&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、默认构造函数 ACharacter::ACharacter
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-ACharacter.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-ACharacter.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-ACharacter.png&#34; width=&#34;600&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -1458,11 +1591,12 @@ YOZ平面
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-2&#34;&gt;
-二、跟随Pawn旋转标志位 USpringArmComponent::bUsePawnControlRotation
+二、跟随Pawn绕Y轴旋转标志位 USpringArmComponent::bUsePawnControlRotation
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;为true则跟随&lt;/li&gt;
+&lt;li&gt;以Pawn为中心&lt;/li&gt;
 &lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/USpringArmComponent类型/USpringArmComponent-bUsePawnControlRotation.png&#34; alt=&#34;/pic/USpringArmComponent类型/USpringArmComponent-bUsePawnControlRotation.png&#34; title=&#34;/pic/USpringArmComponent类型/USpringArmComponent-bUsePawnControlRotation.png&#34; width=&#34;700&#34;/&gt;
 &lt;/div&gt;
@@ -1508,6 +1642,119 @@ CategoryName: Verbosity: TEXT    &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 30.UCharacterMovementComponent类型</title>
+      <link>https://toughcactus.github.io/post/30.ucharactermovementcomponent%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/30.ucharactermovementcomponent%E7%B1%BB%E5%9E%8B/</guid>
+      <description>&lt;p&gt;
+UPawnMovementComponent&lt;/p&gt;
+&lt;p&gt;
+         ^&lt;/p&gt;
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;p&gt;
+UCharacterMovementComponent         &lt;/p&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、路径
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/CharacterMovementComponent.h&lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/Components/CharacterMovementComponent.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、步行允许的最大速度 UCharacterMovementComponent::MaxWalkSpeed
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;原型中可见&lt;/li&gt;
+&lt;li&gt;Character速度从0增加到MaxWalkSpeed，当MaxWalkSpeed数值越大，Character就能达到更大的速度&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/UCharacterMovementComponent类型/UCharacterMovementComponent-MaxWalkSpeed.png&#34; alt=&#34;/pic/UCharacterMovementComponent类型/UCharacterMovementComponent-MaxWalkSpeed.png&#34; title=&#34;/pic/UCharacterMovementComponent类型/UCharacterMovementComponent-MaxWalkSpeed.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、获取最大速度 UCharacterMovementComponent::GetMaxSpeed
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;公有成员&lt;/li&gt;
+&lt;li&gt;如果当前是步行，返回MaxWalkSpeed&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/UCharacterMovementComponent类型/UCharacterMovementComponent-GetMaxSpeed-Definition.png&#34; alt=&#34;/pic/UCharacterMovementComponent类型/UCharacterMovementComponent-GetMaxSpeed-Definition.png&#34; title=&#34;/pic/UCharacterMovementComponent类型/UCharacterMovementComponent-GetMaxSpeed-Definition.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、获取指向Pawn的指针 UPawnMovementComponent::GetPawnOwner
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/UCharacterMovementComponent类型/UPawnMovementComponent-GetPawnOwner.png&#34; alt=&#34;/pic/UCharacterMovementComponent类型/UPawnMovementComponent-GetPawnOwner.png&#34; title=&#34;/pic/UCharacterMovementComponent类型/UPawnMovementComponent-GetPawnOwner.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 31.FObjectInitializer结构体</title>
+      <link>https://toughcactus.github.io/post/31.fobjectinitializer%E7%BB%93%E6%9E%84%E4%BD%93/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/31.fobjectinitializer%E7%BB%93%E6%9E%84%E4%BD%93/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、路径
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;UE5/Engine/Source/Runtime/CoreUObject/Public/UObject/UObjectGlobals.h&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、设置基类中子组件的类型 FObjectInitializer::SetDefaultSubobjectClass
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;如果基类中有该组件，更新子组件类型&lt;/li&gt;
+&lt;li&gt;如果基类中无该组件，添加该组件并设置对应类型&lt;/li&gt;
+&lt;li&gt;返回本对象&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FObjectInitializer结构体/FObjectInitializer-SetDefaultSubobjectClass.png&#34; alt=&#34;/pic/FObjectInitializer结构体/FObjectInitializer-SetDefaultSubobjectClass.png&#34; title=&#34;/pic/FObjectInitializer结构体/FObjectInitializer-SetDefaultSubobjectClass.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、设置基类中子组件的类型 FObjectInitializer::SetDefaultSubobjectClass&amp;lt;T&amp;gt;
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;基类 ACharacter&lt;/li&gt;
+&lt;li&gt;子组件原类型 ACharacter::CharacterMovementComponent&lt;/li&gt;
+&lt;li&gt;子组件新类型 T::StaticClass&lt;/li&gt;
+&lt;li&gt;要求子组件新类型是原类型的派生类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FObjectInitializer结构体/FObjectInitializer-SetDefaultSubobjectClass-Template.png&#34; alt=&#34;/pic/FObjectInitializer结构体/FObjectInitializer-SetDefaultSubobjectClass-Template.png&#34; title=&#34;/pic/FObjectInitializer结构体/FObjectInitializer-SetDefaultSubobjectClass-Template.png&#34; width=&#34;1000&#34;/&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ObjInit.SetDefaultSubobjectClass&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;USTCharacterMovementComponent&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;(ACharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;CharacterMovementComponentName);&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;ol&gt;
+&lt;li&gt;子组件类型名 SubobjectName&lt;/li&gt;
+&lt;li&gt;子组件新类型 T&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
     </item>
     
     <item>
@@ -2139,7 +2386,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-5&#34;&gt;
-五、元信息
+五、元信息 分组
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -2187,6 +2434,17 @@ AActor  &lt;/p&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-7&#34;&gt;
+七、元信息 值范围
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditDefaultsOnly, meta &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ClampMin &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1.5&amp;#34;&lt;/span&gt;, ClampMax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10.0&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; SpeedAcceleration &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2.0f&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -2950,11 +3208,11 @@ UStaticMeshComponent&lt;/p&gt;
     </item>
     
     <item>
-      <title>虚幻引擎 &gt; 基础课程 &gt; 虚幻C&#43;&#43; &gt; 14.2实现GeometryPawn</title>
-      <link>https://toughcactus.github.io/post/14.2%E5%AE%9E%E7%8E%B0geometrypawn/</link>
+      <title>虚幻引擎 &gt; 基础课程 &gt; 虚幻C&#43;&#43; &gt; 14.3实现GeometryPawn</title>
+      <link>https://toughcactus.github.io/post/14.3%E5%AE%9E%E7%8E%B0geometrypawn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://toughcactus.github.io/post/14.2%E5%AE%9E%E7%8E%B0geometrypawn/</guid>
+      <guid>https://toughcactus.github.io/post/14.3%E5%AE%9E%E7%8E%B0geometrypawn/</guid>
       <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
 一、添加静态日志类型
@@ -3123,11 +3381,11 @@ UStaticMeshComponent&lt;/p&gt;
     </item>
     
     <item>
-      <title>虚幻引擎 &gt; 基础课程 &gt; 虚幻C&#43;&#43; &gt; 14.3使用GeometryPawn</title>
-      <link>https://toughcactus.github.io/post/14.3%E4%BD%BF%E7%94%A8geometrypawn/</link>
+      <title>虚幻引擎 &gt; 基础课程 &gt; 虚幻C&#43;&#43; &gt; 14.4使用GeometryPawn</title>
+      <link>https://toughcactus.github.io/post/14.4%E4%BD%BF%E7%94%A8geometrypawn/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://toughcactus.github.io/post/14.3%E4%BD%BF%E7%94%A8geometrypawn/</guid>
+      <guid>https://toughcactus.github.io/post/14.4%E4%BD%BF%E7%94%A8geometrypawn/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;在GameModeBase中完成设置&lt;/li&gt;
 &lt;/ul&gt;
@@ -5092,6 +5350,203 @@ UStaticMeshComponent&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAction(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Jump&amp;#34;&lt;/span&gt;, IE_Pressed, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Jump);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.9.2实现键位逻辑</title>
+      <link>https://toughcactus.github.io/post/1.9.2%E5%AE%9E%E7%8E%B0%E9%94%AE%E4%BD%8D%E9%80%BB%E8%BE%91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.9.2%E5%AE%9E%E7%8E%B0%E9%94%AE%E4%BD%8D%E9%80%BB%E8%BE%91/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;虽然是跑步键位，但是限制方向为向前 &amp;gt; 同时按下W或Up&lt;/li&gt;
+&lt;li&gt;要求速度不为0 &amp;gt; 前方有障碍物时，不应该由走路转换成跑步动画&lt;/li&gt;
+&lt;li&gt;动作映射的回调函数参数列表为空&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加数据成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;private&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; IsForward &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; false;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; AbleRun &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; false;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在SetupPlayerInputComponent中调用InitRun&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RunEnable()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      AbleRun &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; true;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RunDisable()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      AbleRun &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; false;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitRun(UInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; PlayerInputComponent)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAction(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Run&amp;#34;&lt;/span&gt;, IE_Pressed, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RunEnable);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      PlayerInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;BindAction(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Run&amp;#34;&lt;/span&gt;, IE_Released, &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RunDisable);	
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在MoveForward中调用  &lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;SetIsForward(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Amount)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      IsForward &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Amount &lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0f&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;public&lt;/li&gt;
+&lt;li&gt;可在蓝图中调用&lt;/li&gt;
+&lt;li&gt;const函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UFUNCTION(BlueprintCallable)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; IsRunning() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;IsRunning() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;        &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; AbleRun &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; IsForward &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;!&lt;/span&gt;GetVelocity().IsZero();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;    }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.9.5设置MaxSpeed</title>
+      <link>https://toughcactus.github.io/post/1.9.5%E8%AE%BE%E7%BD%AEmaxspeed/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.9.5%E8%AE%BE%E7%BD%AEmaxspeed/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加头文件路径
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ShootTraining.Build.cs&lt;/p&gt;
+&lt;div class=&#34;src src-c#&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  PublicIncludePaths.AddRange(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;[] { &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining/Public/Player&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining/Public/Components&amp;#34;&lt;/span&gt; });&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、添加数据成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;public&lt;/li&gt;
+&lt;li&gt;加速参数&lt;/li&gt;
+&lt;li&gt;原型(STBaseCharacter)中可修改&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;范围 1.5 - 10&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditDefaultsOnly, meta &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ClampMin &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1.5&amp;#34;&lt;/span&gt;, ClampMax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10.0&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; SpeedAcceleration &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2.0f&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、包含头文件 STCharacterMovementComponent.cpp
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Player/STBaseCharacter.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、覆写UCharacterMovementComponent::GetMaxSpeed
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;并不直接修改MaxWalkSpeed&lt;/li&gt;
+&lt;li&gt;某个地方会调用GetMaxSpeed来确定Character运动速度的上限，当获取的MaxSpeed增加，速度增加的幅度也变大，用来实现加速&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; USTCharacterMovementComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;GetMaxSpeed() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; MaxSpeed &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Super&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;GetMaxSpeed();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ASTBaseCharacter &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;Player &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; Cast&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;(GetPawnOwner());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Player &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&amp;amp;&lt;/span&gt; Player&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;IsRunning() &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt; SpeedAcceleration &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; MaxSpeed : MaxSpeed;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+五、让STBaseCharacter使用STCharacterMovementComponent
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;屏蔽默认构造函数&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;重新实现构造函数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;区别在于设置了基类子组件类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;ASTBaseCharacter(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FObjectInitializer &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ObjInit)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt; Super(ObjInit.SetDefaultSubobjectClass&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;USTCharacterMovementComponent&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;(ACharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;CharacterMovementComponentName))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don&amp;#39;t need it.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      PrimaryActorTick.bCanEverTick &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; true;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;// InitCameraComponent();
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      InitSpringArmAndCamera();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>

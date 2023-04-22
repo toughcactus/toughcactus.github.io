@@ -184,18 +184,22 @@
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Player/STBaseCharacter.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Camera/CameraComponent.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/InputComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Engine/EngineBaseTypes.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFrameWork/SpringArmComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/STCharacterMovementComponent.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span>DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter, All, All)
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sets default values
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ASTBaseCharacter<span style="color:#f92672">::</span>ASTBaseCharacter()
-</span></span><span style="display:flex;"><span>{
-</span></span><span style="display:flex;"><span> 	<span style="color:#75715e">// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don&#39;t need it.
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	PrimaryActorTick.bCanEverTick <span style="color:#f92672">=</span> true;
-</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// InitCameraComponent();
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	InitSpringArmAndCamera();
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/*
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Sets default values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">ASTBaseCharacter::ASTBaseCharacter()
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">{
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> 	// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don&#39;t need it.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	PrimaryActorTick.bCanEverTick = true;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	// InitCameraComponent();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">	InitSpringArmAndCamera();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">}
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">*/</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Called when the game starts or when spawned
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>BeginPlay()
@@ -219,6 +223,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#75715e">// InitCameraRotate(PlayerInputComponent);
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    InitCameraRotateFinal(PlayerInputComponent);
 </span></span><span style="display:flex;"><span>    InitJump(PlayerInputComponent);
+</span></span><span style="display:flex;"><span>	InitRun(PlayerInputComponent);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitCameraComponent()
@@ -229,6 +234,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>MoveForward(<span style="color:#66d9ef">float</span> Amount)
 </span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	SetIsForward(Amount);
 </span></span><span style="display:flex;"><span>    AddMovementInput(GetActorForwardVector(), Amount);
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
@@ -280,6 +286,41 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitJump(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>    PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAction(<span style="color:#e6db74">&#34;Jump&#34;</span>, IE_Pressed, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>Jump);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>RunEnable()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    AbleRun <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>RunDisable()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    AbleRun <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitRun(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAction(<span style="color:#e6db74">&#34;Run&#34;</span>, IE_Pressed, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>RunEnable);
+</span></span><span style="display:flex;"><span>    PlayerInputComponent<span style="color:#f92672">-&gt;</span>BindAction(<span style="color:#e6db74">&#34;Run&#34;</span>, IE_Released, <span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>RunDisable);	
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>SetIsForward(<span style="color:#66d9ef">float</span> Amount)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	IsForward <span style="color:#f92672">=</span> Amount <span style="color:#f92672">&gt;</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> ASTBaseCharacter<span style="color:#f92672">::</span>IsRunning() <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> AbleRun <span style="color:#f92672">&amp;&amp;</span> IsForward <span style="color:#f92672">&amp;&amp;</span> <span style="color:#f92672">!</span>GetVelocity().IsZero();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>ASTBaseCharacter<span style="color:#f92672">::</span>ASTBaseCharacter(<span style="color:#66d9ef">const</span> FObjectInitializer <span style="color:#f92672">&amp;</span>ObjInit) 
+</span></span><span style="display:flex;"><span>	<span style="color:#f92672">:</span> Super(ObjInit.SetDefaultSubobjectClass<span style="color:#f92672">&lt;</span>USTCharacterMovementComponent<span style="color:#f92672">&gt;</span>(ACharacter<span style="color:#f92672">::</span>CharacterMovementComponentName))
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Set this character to call Tick() every frame.  You can turn this off to improve performance if you don&#39;t need it.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	PrimaryActorTick.bCanEverTick <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// InitCameraComponent();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	InitSpringArmAndCamera();
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -303,8 +344,8 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Sets default values for this character&#39;s properties
-</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	ASTBaseCharacter();
-</span></span><span style="display:flex;"><span>
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">//ASTBaseCharacter();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called when the game starts or when spawned
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> BeginPlay() <span style="color:#66d9ef">override</span>;
@@ -341,6 +382,62 @@
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitCameraRotateFinal</span>(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitJump</span>(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> IsForward <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> AbleRun <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">RunEnable</span>();
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">RunDisable</span>();
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">InitRun</span>(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">SetIsForward</span>(<span style="color:#66d9ef">float</span> Amount);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	UFUNCTION(BlueprintCallable)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> IsRunning() <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	ASTBaseCharacter(<span style="color:#66d9ef">const</span> FObjectInitializer <span style="color:#f92672">&amp;</span>ObjInit);
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// STCharacterMovementComponent.cpp
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Shoot Training Game, All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/STCharacterMovementComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Player/STBaseCharacter.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> USTCharacterMovementComponent<span style="color:#f92672">::</span>GetMaxSpeed() <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> MaxSpeed <span style="color:#f92672">=</span> Super<span style="color:#f92672">::</span>GetMaxSpeed();
+</span></span><span style="display:flex;"><span>    ASTBaseCharacter <span style="color:#f92672">*</span>Player <span style="color:#f92672">=</span> Cast<span style="color:#f92672">&lt;</span>ASTBaseCharacter<span style="color:#f92672">&gt;</span>(GetPawnOwner());
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> Player <span style="color:#f92672">&amp;&amp;</span> Player<span style="color:#f92672">-&gt;</span>IsRunning() <span style="color:#f92672">?</span> SpeedAcceleration <span style="color:#f92672">*</span> MaxSpeed : MaxSpeed;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// STCharacterMovementComponent.h
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Shoot Training Game, All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma once
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;CoreMinimal.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFramework/CharacterMovementComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;STCharacterMovementComponent.generated.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">/**
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> * 
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"> */</span>
+</span></span><span style="display:flex;"><span>UCLASS()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SHOOTTRAINING_API</span> USTCharacterMovementComponent : <span style="color:#66d9ef">public</span> UCharacterMovementComponent
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	GENERATED_BODY()
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> GetMaxSpeed() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	UPROPERTY(EditDefaultsOnly, meta <span style="color:#f92672">=</span> (ClampMin <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1.5&#34;</span>, ClampMax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10.0&#34;</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> SpeedAcceleration <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0f</span>;
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
