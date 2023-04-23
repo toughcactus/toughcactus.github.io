@@ -56,7 +56,7 @@ theta为0，PI和-PI时，叉乘结果为0 &gt; 无法通过向量确定平面�
 
 
 
-夹角的计算通过夹角和sign(c.z)的乘积完成，分析特殊情形
+夹角的计算通过反余弦结果和sign(c.z)的乘积实现，分析特殊情形
 
 坐标 ( Velocity, Angle )
 
@@ -157,7 +157,7 @@ o
 
 Blend Space
 
-二维空间
+2D混合空间
 两个轴，vertial axis和horizontal axis
 
 
@@ -278,7 +278,7 @@ theta为0，PI和-PI时，叉乘结果为0 &gt; 无法通过向量确定平面�
 
 
 
-夹角的计算通过夹角和sign(c.z)的乘积完成，分析特殊情形
+夹角的计算通过反余弦结果和sign(c.z)的乘积实现，分析特殊情形
 
 坐标 ( Velocity, Angle )
 
@@ -379,7 +379,7 @@ o
 
 Blend Space
 
-二维空间
+2D混合空间
 两个轴，vertial axis和horizontal axis
 
 
@@ -435,7 +435,7 @@ theta为0，PI和-PI时，叉乘结果为0 &gt; 无法通过向量确定平面�
 
 
 
-夹角的计算通过夹角和sign(c.z)的乘积完成，分析特殊情形
+夹角的计算通过反余弦结果和sign(c.z)的乘积实现，分析特殊情形
 
 坐标 ( Velocity, Angle )
 
@@ -536,7 +536,7 @@ o
 
 Blend Space
 
-二维空间
+2D混合空间
 两个轴，vertial axis和horizontal axis
 
 
@@ -666,7 +666,7 @@ Blend Space
 </ul>
 </li>
 <li>
-<p>夹角的计算通过夹角和sign(c.z)的乘积完成，分析特殊情形</p>
+<p>夹角的计算通过反余弦结果和sign(c.z)的乘积实现，分析特殊情形</p>
 <ul>
 <li>坐标 ( Velocity, Angle )</li>
 <li>
@@ -767,7 +767,7 @@ Blend Space
 <li>
 <p>Blend Space</p>
 <ul>
-<li>二维空间</li>
+<li>2D混合空间</li>
 <li>两个轴，vertial axis和horizontal axis</li>
 </ul>
 </li>
@@ -978,7 +978,7 @@ Blend Space
 <div id="outline-text-headline-15" class="outline-text-2">
 <ul>
 <li>计算点乘时，ForwardVector和VelocityVector都是单位向量</li>
-<li>当前并未在反余弦值为0时做处理，后退动画偶有闪动但看似正常</li>
+<li>当前并未在夹角为PI时做处理，后退动画偶有闪动但看似正常</li>
 </ul>
 <p width="1200"><img src="/pic/实现转向动画/在蓝图中计算夹角.png" alt="/pic/实现转向动画/在蓝图中计算夹角.png" title="/pic/实现转向动画/在蓝图中计算夹角.png"/>   </p>
 <div id="outline-container-headline-16" class="outline-3">

@@ -13342,7 +13342,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;夹角的计算通过夹角和sign(c.z)的乘积完成，分析特殊情形&lt;/p&gt;
+&lt;p&gt;夹角的计算通过反余弦结果和sign(c.z)的乘积实现，分析特殊情形&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;坐标 ( Velocity, Angle )&lt;/li&gt;
 &lt;li&gt;
@@ -13443,7 +13443,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;li&gt;
 &lt;p&gt;Blend Space&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;二维空间&lt;/li&gt;
+&lt;li&gt;2D混合空间&lt;/li&gt;
 &lt;li&gt;两个轴，vertial axis和horizontal axis&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
@@ -13654,7 +13654,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;div id=&#34;outline-text-headline-15&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;计算点乘时，ForwardVector和VelocityVector都是单位向量&lt;/li&gt;
-&lt;li&gt;当前并未在反余弦值为0时做处理，后退动画偶有闪动但看似正常&lt;/li&gt;
+&lt;li&gt;当前并未在夹角为PI时做处理，后退动画偶有闪动但看似正常&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p width=&#34;1200&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/在蓝图中计算夹角.png&#34; alt=&#34;/pic/实现转向动画/在蓝图中计算夹角.png&#34; title=&#34;/pic/实现转向动画/在蓝图中计算夹角.png&#34;/&gt;   &lt;/p&gt;
 &lt;div id=&#34;outline-container-headline-16&#34; class=&#34;outline-3&#34;&gt;
