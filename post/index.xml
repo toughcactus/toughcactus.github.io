@@ -9970,7 +9970,18 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;TheBasics/Saved/Logs&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Windows&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;TheBasics/Saved/Logs/&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;MacOS&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;em&gt;Users/XX/Library/Logs/Unreal Engine/ShootTrainingEditor&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -11349,7 +11360,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-4&#34;&gt;
-四、在关卡中添加SimpleGeometry对象 ｜ 正方体
+四、在关卡中添加SimpleGeometry对象 &amp;gt; 正方体
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -13673,7 +13684,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/h3&gt;
 &lt;div id=&#34;outline-text-headline-18&#34; class=&#34;outline-text-3&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;可以做出如下推测，显示为0但不意味着为0，数值过于小了但是有正负&lt;/li&gt;
+&lt;li&gt;可以做出如下推测 &amp;gt; 显示为0但不意味着为0，数值过于小了但是有正负&lt;/li&gt;
 &lt;li&gt;叉乘时传入未单位化的Velocity无改善&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -13756,7 +13767,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中使用C++函数计算夹角/添加打印名.png&#34; alt=&#34;/pic/在蓝图中使用C++函数计算夹角/添加打印名.png&#34; title=&#34;/pic/在蓝图中使用C++函数计算夹角/添加打印名.png&#34; width=&#34;800&#34;/&gt;
 &lt;ul&gt;
 &lt;li&gt;
-&lt;p&gt;未在虚幻编辑器运行游戏，保持动画蓝图不在后台，日志窗口一直有输出&lt;/p&gt;
+&lt;p&gt;未在虚幻编辑器运行游戏，保持动画蓝图在前台，日志窗口一直有输出&lt;/p&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中使用C++函数计算夹角/添加打印名-日志.png&#34; alt=&#34;/pic/在蓝图中使用C++函数计算夹角/添加打印名-日志.png&#34; title=&#34;/pic/在蓝图中使用C++函数计算夹角/添加打印名-日志.png&#34; width=&#34;500&#34;/&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -13776,6 +13787,123 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;p&gt;检查Pawn有效性&lt;/p&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中使用C++函数计算夹角/检查游戏是否运行.png&#34; alt=&#34;/pic/在蓝图中使用C++函数计算夹角/检查游戏是否运行.png&#34; title=&#34;/pic/在蓝图中使用C++函数计算夹角/检查游戏是否运行.png&#34; width=&#34;1000&#34;/&gt;
 &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.11打包游戏</title>
+      <link>https://toughcactus.github.io/post/1.11%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.11%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;打包游戏，从二进制文件运行&lt;/li&gt;
+&lt;li&gt;定期打包游戏，确保所做改动能正常运行&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、设置游戏首页
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;项目设置 &amp;gt; Project &amp;gt; Maps &amp;amp; Modes&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;设置 GameDefaultMap&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、设置编译选项
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;项目设置 &amp;gt; Packaging &amp;gt; Project &amp;gt; Build Configuration&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;选择 发行(Shipping)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、设置玩家出发点
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.unrealengine.com/4.27/zh-CN/Basics/Actors/PlayerStart/&#34;&gt;参考&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;LevelEditor &amp;gt; PlaceActors &amp;gt; Basic &amp;gt; PlayerStart&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;添加到关卡中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/打包游戏/PlayerStart.png&#34; alt=&#34;/pic/打包游戏/PlayerStart.png&#34; title=&#34;/pic/打包游戏/PlayerStart.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、编译游戏
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.unrealengine.com/4.26/zh-CN/Basics/Projects/Packaging/&#34;&gt;参考&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;创建文件夹 Projects/5.1.1/ShootTraining/Build&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;工具栏 &amp;gt; Platforms &amp;gt; Mac &amp;gt; Package Project&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;选择Build文件夹&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;可在日志窗口查看过程&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+metal-ar报错
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/打包游戏/metal-ar报错.png&#34; alt=&#34;/pic/打包游戏/metal-ar报错.png&#34; title=&#34;/pic/打包游戏/metal-ar报错.png&#34; width=&#34;1000&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;项目路径不包含空格，但包含汉字&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;菜单栏 &amp;gt; File &amp;gt; Zip Project&lt;/li&gt;
+&lt;li&gt;移动到不含空格的英文路径&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+打包成功
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;生成 Build/Mac/ShootTraining-Shipping.app&lt;/p&gt;
+&lt;p width=&#34;600&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/打包游戏/运行Shipping.png&#34; alt=&#34;/pic/打包游戏/运行Shipping.png&#34; title=&#34;/pic/打包游戏/运行Shipping.png&#34;/&gt; &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+尝试Development和DebugGame选项，均可
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;纯蓝图没有DebugGame选项&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
