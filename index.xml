@@ -5333,7 +5333,38 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;li&gt;API &amp;gt; 30. &lt;a href=&#34;https://toughcactus.github.io/post/30.ucharactermovementcomponent类型/&#34;&gt;UCharacterMovementComponent类型&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;API &amp;gt; ACharacter类型&lt;/li&gt;
 &lt;li&gt;API &amp;gt; 31. &lt;a href=&#34;https://toughcactus.github.io/post/31.fobjectinitializer结构体/&#34;&gt;FObjectInitializer结构体&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;1.9.5 &lt;a href=&#34;https://toughcactus.github.io/post/1.9.5设置maxspeed/&#34;&gt;设置MaxSpeed&lt;/a&gt;          &lt;/li&gt;
+&lt;li&gt;1.9.5 &lt;a href=&#34;https://toughcactus.github.io/post/1.9.5设置maxspeed/&#34;&gt;设置MaxSpeed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;转向动画&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻编辑器&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; 蓝图Actor&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 蓝图KismetMathLibrary            &lt;/li&gt;
+&lt;li&gt;API &amp;gt; 8. &lt;a href=&#34;https://toughcactus.github.io/post/8.蓝图uaniminstance/&#34;&gt;蓝图UAnimInstance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 9. &lt;a href=&#34;https://toughcactus.github.io/post/9.蓝图kismetsystemlibrary/&#34;&gt;蓝图KismetSystemLibrary&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;1.10.1 &lt;a href=&#34;https://toughcactus.github.io/post/1.10.1实现转向动画/&#34;&gt;实现转向动画&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; FMath库&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 向量结构体&lt;/li&gt;
+&lt;li&gt;1.10.2 &lt;a href=&#34;https://toughcactus.github.io/post/1.10.2在c++中计算forwardvector和velocityvector的夹角/&#34;&gt;在C++中计算ForwardVector和VelocityVector的夹角&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻编辑器&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; 蓝图KismetSystemLibrary&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 10. &lt;a href=&#34;https://toughcactus.github.io/post/10.蓝图宏/&#34;&gt;蓝图宏&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;1.10.3 &lt;a href=&#34;https://toughcactus.github.io/post/1.10.3在蓝图中使用c++函数计算夹角/&#34;&gt;在蓝图中使用C++函数计算夹角&lt;/a&gt;                 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -5696,6 +5727,22 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	PrimaryActorTick.bCanEverTick &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; true;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#75715e&#34;&gt;// InitCameraComponent();
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	InitSpringArmAndCamera();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;} 
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;GetAngleBetweenForwardAndVelocity() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (GetVelocity().IsZero())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0f&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FVector ForwardVector &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GetActorForwardVector();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FVector VelocityNormalizedVector &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GetVelocity().GetSafeNormal();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; DotProductResult &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; FVector&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;DotProduct(ForwardVector, VelocityNormalizedVector);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Theta &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; FMath&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RadiansToDegrees(FMath&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Acos(DotProductResult));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FVector CrossProductResult &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; FVector&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;CrossProduct(ForwardVector, VelocityNormalizedVector);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (CrossProductResult.IsZero()) &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt; Theta : FMath&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Sign(CrossProductResult.Z) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; Theta;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -5771,6 +5818,9 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; IsRunning() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	ASTBaseCharacter(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FObjectInitializer &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ObjInit);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UFUNCTION(BlueprintCallable)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; GetAngleBetweenForwardAndVelocity() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -5809,7 +5859,7 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	GENERATED_BODY()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;	
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; GetMaxSpeed() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; GetMaxSpeed() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UPROPERTY(EditDefaultsOnly, meta &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ClampMin &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1.5&amp;#34;&lt;/span&gt;, ClampMax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10.0&amp;#34;&lt;/span&gt;))
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; SpeedAcceleration &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2.0f&lt;/span&gt;;
@@ -7729,6 +7779,37 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;转向动画&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻编辑器&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; 蓝图Actor&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 蓝图KismetMathLibrary            &lt;/li&gt;
+&lt;li&gt;API &amp;gt; 8. &lt;a href=&#34;https://toughcactus.github.io/post/8.蓝图uaniminstance/&#34;&gt;蓝图UAnimInstance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 9. &lt;a href=&#34;https://toughcactus.github.io/post/9.蓝图kismetsystemlibrary/&#34;&gt;蓝图KismetSystemLibrary&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;1.10.1 &lt;a href=&#34;https://toughcactus.github.io/post/1.10.1实现转向动画/&#34;&gt;实现转向动画&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; FMath库&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 向量结构体&lt;/li&gt;
+&lt;li&gt;1.10.2 &lt;a href=&#34;https://toughcactus.github.io/post/1.10.2在c++中计算forwardvector和velocityvector的夹角/&#34;&gt;在C++中计算ForwardVector和VelocityVector的夹角&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻编辑器&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; 蓝图KismetSystemLibrary&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 10. &lt;a href=&#34;https://toughcactus.github.io/post/10.蓝图宏/&#34;&gt;蓝图宏&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;1.10.3 &lt;a href=&#34;https://toughcactus.github.io/post/1.10.3在蓝图中使用c++函数计算夹角/&#34;&gt;在蓝图中使用C++函数计算夹角&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -8121,15 +8202,20 @@ FTransform::ToHumanReadableString
       <description>&lt;ul&gt;
 &lt;li&gt;定义了多种数学函数，包括sine, cosine, 和其他三角函数(trigonometric functions)&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://docs.unrealengine.com/5.1/en-US/API/Runtime/Core/Math/FMath/&#34;&gt;API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;通过命名空间FMath使用  &lt;/li&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Core/Public/Math/UnrealMathUtility.h  &lt;/li&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Core/Public/GenericPlatform/GenericPlatformMath.h&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-计算正弦值 FMath::Sin
+计算正弦值 FGenericPlatformMath::Sin
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;静态成员&lt;/li&gt;
 &lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Sin.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Sin.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Sin.png&#34; width=&#34;400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Sin-Definition.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Sin-Definition.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Sin-Definition.png&#34; width=&#34;500&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
@@ -8141,6 +8227,32 @@ FTransform::ToHumanReadableString
 &lt;li&gt;静态成员&lt;/li&gt;
 &lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-RandBool.png&#34; alt=&#34;/pic/FMath库/FMath-RandBool.png&#34; title=&#34;/pic/FMath库/FMath-RandBool.png&#34; width=&#34;300&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+弧度转角度 FMath::RadiansToDegrees
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-RadiansToDegrees.png&#34; alt=&#34;/pic/FMath库/FMath-RadiansToDegrees.png&#34; title=&#34;/pic/FMath库/FMath-RadiansToDegrees.png&#34; width=&#34;500&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-RadiansToDegrees-Definition.png&#34; alt=&#34;/pic/FMath库/FMath-RadiansToDegrees-Definition.png&#34; title=&#34;/pic/FMath库/FMath-RadiansToDegrees-Definition.png&#34; width=&#34;800&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+取符号 FGenericPlatformMath::Sign
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Sign.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Sign.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Sign.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+计算反余弦 FGenericPlatformMath::Acos
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Acos.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Acos.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Acos.png&#34; width=&#34;400&#34;/&gt;
+&lt;p width=&#34;800&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Acos-Definition.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Acos-Definition.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Acos-Definition.png&#34;/&gt;  &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -8359,6 +8471,30 @@ FTransform::ToHumanReadableString
 &lt;li&gt;为0返回true&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/向量结构体/FVector-IsZero.png&#34; alt=&#34;/pic/向量结构体/FVector-IsZero.png&#34; title=&#34;/pic/向量结构体/FVector-IsZero.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+安全单位化向量 FVector::GetSafeNormal
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/向量结构体/FVector-GetSafeNormal.png&#34; alt=&#34;/pic/向量结构体/FVector-GetSafeNormal.png&#34; title=&#34;/pic/向量结构体/FVector-GetSafeNormal.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+向量点乘 FVector::DotProduct
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/向量结构体/FVector-DotProduct.png&#34; alt=&#34;/pic/向量结构体/FVector-DotProduct.png&#34; title=&#34;/pic/向量结构体/FVector-DotProduct.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-8&#34;&gt;
+向量叉乘 FVector::CrossProduct
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/向量结构体/FVector-CrossProduct.png&#34; alt=&#34;/pic/向量结构体/FVector-CrossProduct.png&#34; title=&#34;/pic/向量结构体/FVector-CrossProduct.png&#34;/&gt;  &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -9004,6 +9140,7 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;img src=&#34;https://toughcactus.github.io/pic/UInputComponent类型/EInputEvent.png&#34; alt=&#34;/pic/UInputComponent类型/EInputEvent.png&#34; title=&#34;/pic/UInputComponent类型/EInputEvent.png&#34; width=&#34;350&#34;/&gt;
 &lt;ol&gt;
 &lt;li&gt;按下时触发 IE_Pressed&lt;/li&gt;
+&lt;li&gt;松开时触发 IE_Released&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -9279,9 +9416,20 @@ YOZ平面
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、跳跃回调函数 ACharacter::Jump
+一、路径
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;源文件 &amp;gt; UE5/Engine/Source/Runtime/Engine/Private/Character.cpp&lt;/li&gt;
+&lt;li&gt;头文件 &amp;gt; UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/Character.h&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、跳跃回调函数 ACharacter::Jump
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-Jump.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-Jump.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-Jump.png&#34; width=&#34;500&#34;/&gt;
 &lt;ul&gt;
 &lt;li&gt;将bPressedJump置为true，在下次调用Tick函数时，让Actor在Z轴跳跃&lt;/li&gt;
@@ -9289,12 +9437,48 @@ YOZ平面
 &lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; width=&#34;200&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
-&lt;h2 id=&#34;headline-2&#34;&gt;
-二、默认构造函数 ACharacter::ACharacter
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、默认构造函数 ACharacter::ACharacter
 &lt;/h2&gt;
-&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-ACharacter.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-ACharacter.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-ACharacter.png&#34; width=&#34;600&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、子组件类型名
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;保存在FName中&lt;/li&gt;
+&lt;li&gt;静态成员&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-组件名初始化.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-组件名初始化.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-组件名初始化.png&#34;/&gt;  &lt;/p&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+CharacterMovementComponent类型名 ACharacter::CharacterMovementComponentName
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-CharacterMovementComponentName.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-CharacterMovementComponentName.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-CharacterMovementComponentName.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+MeshComponent类型名 ACharacter::MeshComponentName
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-MeshComponentName.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-MeshComponentName.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-MeshComponentName.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+CapsuleComponent类型名 ACharacter::CapsuleComponentName
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;270&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-CapsuleComponentName.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-CapsuleComponentName.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-CapsuleComponentName.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -10377,6 +10561,23 @@ UStaticMeshComponent&lt;/p&gt;
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 10.蓝图宏</title>
+      <link>https://toughcactus.github.io/post/10.%E8%93%9D%E5%9B%BE%E5%AE%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/10.%E8%93%9D%E5%9B%BE%E5%AE%8F/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+Object是否有效 IsValid
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图宏/IsValid宏.png&#34; alt=&#34;/pic/蓝图宏/IsValid宏.png&#34; title=&#34;/pic/蓝图宏/IsValid宏.png&#34; width=&#34;500&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图宏/在蓝图编辑器查看IsValid宏.png&#34; alt=&#34;/pic/蓝图宏/在蓝图编辑器查看IsValid宏.png&#34; title=&#34;/pic/蓝图宏/在蓝图编辑器查看IsValid宏.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 2.蓝图字符串</title>
       <link>https://toughcactus.github.io/post/2.%E8%93%9D%E5%9B%BE%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -10412,9 +10613,7 @@ UStaticMeshComponent&lt;/p&gt;
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;所在源文件 UE5/Engine/Source/Runtime/Engine/Private/KismetSystemLibrary.cpp&lt;/li&gt;
-&lt;li&gt;所在头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/KismetSystemLibrary.h&lt;/li&gt;
-&lt;li&gt;调用了AddOnScreenDebugMessage&lt;/li&gt;
+&lt;li&gt;迁移到 蓝图KismetSystemLibrary&lt;/li&gt;
 &lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/蓝图字符串/Blueprint-Search-String-PrintString.png&#34; alt=&#34;/pic/蓝图字符串/Blueprint-Search-String-PrintString.png&#34; title=&#34;/pic/蓝图字符串/Blueprint-Search-String-PrintString.png&#34; width=&#34;350&#34;/&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/蓝图字符串/Blueprint-String-PrintString.png&#34; alt=&#34;/pic/蓝图字符串/Blueprint-String-PrintString.png&#34; title=&#34;/pic/蓝图字符串/Blueprint-String-PrintString.png&#34; width=&#34;200&#34;/&gt;
@@ -10454,6 +10653,43 @@ UStaticMeshComponent&lt;/p&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/AActor-GetVelocity.png&#34; alt=&#34;/pic/蓝图Actor/AActor-GetVelocity.png&#34; title=&#34;/pic/蓝图Actor/AActor-GetVelocity.png&#34; width=&#34;200&#34;/&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、AActor类型
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+获取Actor位置 GetActorLocation
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/AActor-K2_GetActorLocation.png&#34; alt=&#34;/pic/蓝图Actor/AActor-K2_GetActorLocation.png&#34; title=&#34;/pic/蓝图Actor/AActor-K2_GetActorLocation.png&#34; width=&#34;1200&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/GetActorLocation.png&#34; alt=&#34;/pic/蓝图Actor/GetActorLocation.png&#34; title=&#34;/pic/蓝图Actor/GetActorLocation.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+获取前进方向单位向量  GetActorForwardVector
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/AActor-GetActorForwardVector.png&#34; alt=&#34;/pic/蓝图Actor/AActor-GetActorForwardVector.png&#34; title=&#34;/pic/蓝图Actor/AActor-GetActorForwardVector.png&#34; width=&#34;600&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/GetActorForwardVector.png&#34; alt=&#34;/pic/蓝图Actor/GetActorForwardVector.png&#34; title=&#34;/pic/蓝图Actor/GetActorForwardVector.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+获取向右方向单位向量  GetActorRightVector
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/AActor-GetActorRightVector.png&#34; alt=&#34;/pic/蓝图Actor/AActor-GetActorRightVector.png&#34; title=&#34;/pic/蓝图Actor/AActor-GetActorRightVector.png&#34; width=&#34;600&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/GetActorRightVector.png&#34; alt=&#34;/pic/蓝图Actor/GetActorRightVector.png&#34; title=&#34;/pic/蓝图Actor/GetActorRightVector.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -10472,7 +10708,7 @@ UStaticMeshComponent&lt;/p&gt;
 &lt;li&gt;所在头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/NavMovementComponent.h&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;在空中返回true，在地面返回false&lt;/p&gt;
-&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图MovementComponent/IsFalling.png&#34; alt=&#34;/pic/蓝图MovementComponent/IsFalling.png&#34; title=&#34;/pic/蓝图MovementComponent/IsFalling.png&#34; width=&#34;250&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图MovementComponent/IsFalling.png&#34; alt=&#34;/pic/蓝图MovementComponent/IsFalling.png&#34; title=&#34;/pic/蓝图MovementComponent/IsFalling.png&#34; width=&#34;210&#34;/&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -10480,17 +10716,21 @@ UStaticMeshComponent&lt;/p&gt;
     </item>
     
     <item>
-      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 6.蓝图运算符</title>
-      <link>https://toughcactus.github.io/post/6.%E8%93%9D%E5%9B%BE%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 6.蓝图KismetMathLibrary</title>
+      <link>https://toughcactus.github.io/post/6.%E8%93%9D%E5%9B%BEkismetmathlibrary/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://toughcactus.github.io/post/6.%E8%93%9D%E5%9B%BE%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
-      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+      <guid>https://toughcactus.github.io/post/6.%E8%93%9D%E5%9B%BEkismetmathlibrary/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/KismetMathLibrary.h&lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/KismetMathLibrary.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、小于运算符 less
+一、小于运算符 Less
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
-&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图运算符/Less.png&#34; alt=&#34;/pic/蓝图运算符/Less.png&#34; title=&#34;/pic/蓝图运算符/Less.png&#34; width=&#34;100&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Less.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Less.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Less.png&#34; width=&#34;100&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
@@ -10498,7 +10738,82 @@ UStaticMeshComponent&lt;/p&gt;
 二、取非 NotBoolean
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
-&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图运算符/NotBoolean.png&#34; alt=&#34;/pic/蓝图运算符/NotBoolean.png&#34; title=&#34;/pic/蓝图运算符/NotBoolean.png&#34; width=&#34;100&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/NotBoolean.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/NotBoolean.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/NotBoolean.png&#34; width=&#34;100&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、加法 Add
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Add.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Add.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Add.png&#34; width=&#34;100&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、乘法 Multiply
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Multiply.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Multiply.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Multiply.png&#34; width=&#34;100&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+五、减法 Subtract
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;100&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Subtract.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Subtract.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Subtract.png&#34;/&gt;    &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+六、规范化 Normalize
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Normalize.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Normalize.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Normalize.png&#34;/&gt;    &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-7&#34;&gt;
+七、点乘 DotProduct
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/DotProduct.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/DotProduct.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/DotProduct.png&#34;/&gt;    &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+八、叉乘 CrossProduct
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/CrossProduct.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/CrossProduct.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/CrossProduct.png&#34;/&gt;    &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-9&#34;&gt;
+九、取符号 Sign
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Sign-Search.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Sign-Search.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Sign-Search.png&#34;/&gt;    &lt;/p&gt;
+&lt;p width=&#34;200&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Sign-float.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Sign-float.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Sign-float.png&#34;/&gt;    &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-10&#34;&gt;
+十、反余弦 Acos
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-10&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Acos-Search.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Acos-Search.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Acos-Search.png&#34;/&gt;    &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;返回角度(Degree)&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Acos-Degree.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Acos-Degree.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Acos-Degree.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;返回弧度(Radians)&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Acos-Radians.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Acos-Radians.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Acos-Radians.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -10516,6 +10831,78 @@ UStaticMeshComponent&lt;/p&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/动画蓝图/TimeRemaining.png&#34; alt=&#34;/pic/动画蓝图/TimeRemaining.png&#34; title=&#34;/pic/动画蓝图/TimeRemaining.png&#34; width=&#34;200&#34;/&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/动画蓝图/TimeRemaining-Search.png&#34; alt=&#34;/pic/动画蓝图/TimeRemaining-Search.png&#34; title=&#34;/pic/动画蓝图/TimeRemaining-Search.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 8.蓝图UAnimInstance</title>
+      <link>https://toughcactus.github.io/post/8.%E8%93%9D%E5%9B%BEuaniminstance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/8.%E8%93%9D%E5%9B%BEuaniminstance/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/Animation/AnimInstance.h&lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/Animation/AnimInstance.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、获取指向Pawn的指针
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图UAnimInstance/TryGetPawnOwner.png&#34; alt=&#34;/pic/蓝图UAnimInstance/TryGetPawnOwner.png&#34; title=&#34;/pic/蓝图UAnimInstance/TryGetPawnOwner.png&#34; width=&#34;200&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图UAnimInstance/UAnimInstance-TryGetPawnOwner.png&#34; alt=&#34;/pic/蓝图UAnimInstance/UAnimInstance-TryGetPawnOwner.png&#34; title=&#34;/pic/蓝图UAnimInstance/UAnimInstance-TryGetPawnOwner.png&#34; width=&#34;200&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 9.蓝图KismetSystemLibrary</title>
+      <link>https://toughcactus.github.io/post/9.%E8%93%9D%E5%9B%BEkismetsystemlibrary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/9.%E8%93%9D%E5%9B%BEkismetsystemlibrary/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;所在头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/KismetSystemLibrary.h&lt;/li&gt;
+&lt;li&gt;所在源文件 UE5/Engine/Source/Runtime/Engine/Private/KismetSystemLibrary.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/x/.png&#34; alt=&#34;/pic/x/.png&#34; title=&#34;/pic/x/.png&#34; width=&#34;700&#34;/&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、输出字符串 PrintString
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;调用了AddOnScreenDebugMessage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-PrintString.png&#34; alt=&#34;/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-PrintString.png&#34; title=&#34;/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-PrintString.png&#34; width=&#34;1400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetSystemLibrary/PrintString.png&#34; alt=&#34;/pic/蓝图KismetSystemLibrary/PrintString.png&#34; title=&#34;/pic/蓝图KismetSystemLibrary/PrintString.png&#34; width=&#34;200&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在3D空间绘制向量 DrawDebugArrow
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-DrawDebugArrow.png&#34; alt=&#34;/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-DrawDebugArrow.png&#34; title=&#34;/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-DrawDebugArrow.png&#34; width=&#34;1200&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetSystemLibrary/DrawDebugArrow.png&#34; alt=&#34;/pic/蓝图KismetSystemLibrary/DrawDebugArrow.png&#34; title=&#34;/pic/蓝图KismetSystemLibrary/DrawDebugArrow.png&#34; width=&#34;200&#34;/&gt;
+&lt;ol&gt;
+&lt;li&gt;箭头起点 LineStart&lt;/li&gt;
+&lt;li&gt;箭头终点 LineEnd&lt;/li&gt;
+&lt;li&gt;箭头大小 ArrowSize&lt;/li&gt;
+&lt;li&gt;颜色 LineColor&lt;/li&gt;
+&lt;li&gt;显示时长 Duration&lt;/li&gt;
+&lt;li&gt;宽度 Thickness&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、获取名称 GetDisplayName
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-GetDisplayName.png&#34; alt=&#34;/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-GetDisplayName.png&#34; title=&#34;/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-GetDisplayName.png&#34; width=&#34;1200&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetSystemLibrary/GetDisplayName.png&#34; alt=&#34;/pic/蓝图KismetSystemLibrary/GetDisplayName.png&#34; title=&#34;/pic/蓝图KismetSystemLibrary/GetDisplayName.png&#34; width=&#34;200&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -15390,6 +15777,61 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.10.2在C&#43;&#43;中计算ForwardVector和VelocityVector的夹角</title>
+      <link>https://toughcactus.github.io/post/1.10.2%E5%9C%A8c&#43;&#43;%E4%B8%AD%E8%AE%A1%E7%AE%97forwardvector%E5%92%8Cvelocityvector%E7%9A%84%E5%A4%B9%E8%A7%92/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.10.2%E5%9C%A8c&#43;&#43;%E4%B8%AD%E8%AE%A1%E7%AE%97forwardvector%E5%92%8Cvelocityvector%E7%9A%84%E5%A4%B9%E8%A7%92/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;public&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;蓝图可调用，const函数&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UFUNCTION(BlueprintCallable)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; GetAngleBetweenForwardAndVelocity() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;速度为0时，夹角为0&lt;/li&gt;
+&lt;li&gt;夹角为PI或-PI时，叉乘结果为0，返回反余弦结果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;GetAngleBetweenForwardAndVelocity() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (GetVelocity().IsZero())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0f&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FVector ForwardVector &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GetActorForwardVector();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FVector VelocityNormalizedVector &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GetVelocity().GetSafeNormal();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; DotProductResult &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; FVector&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;DotProduct(ForwardVector, VelocityNormalizedVector);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Theta &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; FMath&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RadiansToDegrees(FMath&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Acos(DotProductResult));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FVector CrossProductResult &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; FVector&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;CrossProduct(ForwardVector, VelocityNormalizedVector);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; (CrossProductResult.IsZero()) &lt;span style=&#34;color:#f92672&#34;&gt;?&lt;/span&gt; Theta : FMath&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Sign(CrossProductResult.Z) &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; Theta;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、代码优化
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;可选&lt;/li&gt;
+&lt;li&gt;实现前后左右移动回调函数MoveForward和MoveRight时，如果Amount为0，直接返回即可，不用设置方向向量的方向&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 1.1在本地运行ShooterGame示例项目</title>
       <link>https://toughcactus.github.io/post/1.1%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8Cshootergame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -15875,6 +16317,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;li&gt;虽然是跑步键位，但是限制方向为向前 &amp;gt; 同时按下W或Up&lt;/li&gt;
 &lt;li&gt;要求速度不为0 &amp;gt; 前方有障碍物时，不应该由走路转换成跑步动画&lt;/li&gt;
 &lt;li&gt;动作映射的回调函数参数列表为空&lt;/li&gt;
+&lt;li&gt;判断是否为前进方向时，还可根据速度矢量和朝向的夹角  &lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
@@ -16036,9 +16479,19 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-5&#34;&gt;
-五、让STBaseCharacter使用STCharacterMovementComponent
+五、包含头文件 STBaseCharacter.cpp
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Components/STCharacterMovementComponent.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+六、让STBaseCharacter使用STCharacterMovementComponent
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ol&gt;
 &lt;li&gt;屏蔽默认构造函数&lt;/li&gt;
 &lt;li&gt;
@@ -16058,6 +16511,497 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/div&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.10.1实现转向动画</title>
+      <link>https://toughcactus.github.io/post/1.10.1%E5%AE%9E%E7%8E%B0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.10.1%E5%AE%9E%E7%8E%B0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;当前实现了3种动作，走路，跑步和跳跃&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;走路这块，从静止到跑起来支持加速，使用BS_Locomotion&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;本小节会重新实现混合空间，根据速度方向，加载转向和后退动画&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;之后还有装弹(Reloading)，死亡(Death)，瞄准(Aiming)动画    &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Actor有ForwardVector和RightVector，这个是TurnAround回调函数中会修改的&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当我们水平移动鼠标，ForwardVector和RightVector随之发生改变&lt;/li&gt;
+&lt;li&gt;在视觉上，ForwardVector一直向前，RightVector一直向右，二者垂直&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Actor的速度是一个矢量，其表现是单位时间内的位移方向&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;当速度不为0时，VelocityVector和ForwardVector的夹角与此时Actor应该展现的动画息息相关&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/夹角说明.png&#34; alt=&#34;/pic/实现转向动画/夹角说明.png&#34; title=&#34;/pic/实现转向动画/夹角说明.png&#34; width=&#34;600&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;点乘&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/点乘.png&#34; alt=&#34;/pic/实现转向动画/点乘.png&#34; title=&#34;/pic/实现转向动画/点乘.png&#34; width=&#34;600&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;其中一个向量为0向量时，点乘结果为0，而反余弦计算得到其夹角为PI/2&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;叉乘&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/叉乘.png&#34; alt=&#34;/pic/实现转向动画/叉乘.png&#34; title=&#34;/pic/实现转向动画/叉乘.png&#34; width=&#34;600&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;c.z(向量的z坐标)的符号说明向量c的方向&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;theta为0，PI和-PI时，叉乘结果为0 &amp;gt; 无法通过向量确定平面，也就无法得到平面法向量&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/叉乘说明.png&#34; alt=&#34;/pic/实现转向动画/叉乘说明.png&#34; title=&#34;/pic/实现转向动画/叉乘说明.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;夹角的计算通过夹角和sign(c.z)的乘积完成，分析特殊情形&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;坐标 ( Velocity, Angle )&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;速度为0，计算夹角得到PI/2，由于此时Velocity为0，( 0, 任意 ) 对应Idle&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;( 600, PI/2 ) 对应满速向右&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;速度不为0，夹角为0或PI，sign(c.z)为0&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;此时乘积为0，只能使用RunFwd&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;夹角为0使用Fwd正确，夹角为PI应该使用Bwd&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;夹角为PI时，不使用乘积，使用反余弦结果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;table&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;夹角&lt;/td&gt;
+&lt;td&gt;反余弦结果&lt;/td&gt;
+&lt;td class=&#34;align-right&#34;&gt;理论上的sign(c.z)&lt;/td&gt;
+&lt;td&gt;目的动画&lt;/td&gt;
+&lt;td&gt;使用乘积效果&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td&gt;0&lt;/td&gt;
+&lt;td class=&#34;align-right&#34;&gt;0&lt;/td&gt;
+&lt;td&gt;Fwd&lt;/td&gt;
+&lt;td&gt;o&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;( 0, PI/2 )&lt;/td&gt;
+&lt;td&gt;( 0, PI/2 )&lt;/td&gt;
+&lt;td class=&#34;align-right&#34;&gt;1&lt;/td&gt;
+&lt;td&gt;Fwd &amp;gt; Right&lt;/td&gt;
+&lt;td&gt;o&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PI/2&lt;/td&gt;
+&lt;td&gt;PI/2&lt;/td&gt;
+&lt;td class=&#34;align-right&#34;&gt;1&lt;/td&gt;
+&lt;td&gt;Right&lt;/td&gt;
+&lt;td&gt;o&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;( PI/2, PI )&lt;/td&gt;
+&lt;td&gt;( PI/2, PI )&lt;/td&gt;
+&lt;td class=&#34;align-right&#34;&gt;1&lt;/td&gt;
+&lt;td&gt;Right &amp;gt; Bwd&lt;/td&gt;
+&lt;td&gt;o&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;PI&lt;/td&gt;
+&lt;td&gt;PI&lt;/td&gt;
+&lt;td class=&#34;align-right&#34;&gt;0&lt;/td&gt;
+&lt;td&gt;Bwd&lt;/td&gt;
+&lt;td&gt;x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-PI&lt;/td&gt;
+&lt;td&gt;PI&lt;/td&gt;
+&lt;td class=&#34;align-right&#34;&gt;0&lt;/td&gt;
+&lt;td&gt;Bwd&lt;/td&gt;
+&lt;td&gt;x&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;( -PI, -PI/2 )&lt;/td&gt;
+&lt;td&gt;( PI/2, PI )&lt;/td&gt;
+&lt;td class=&#34;align-right&#34;&gt;-1&lt;/td&gt;
+&lt;td&gt;Left &amp;gt; Bwd&lt;/td&gt;
+&lt;td&gt;o&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;-PI/2&lt;/td&gt;
+&lt;td&gt;PI/2&lt;/td&gt;
+&lt;td class=&#34;align-right&#34;&gt;-1&lt;/td&gt;
+&lt;td&gt;Left&lt;/td&gt;
+&lt;td&gt;o&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;( -PI/2, 0 )&lt;/td&gt;
+&lt;td&gt;( 0, PI/2 )&lt;/td&gt;
+&lt;td class=&#34;align-right&#34;&gt;-1&lt;/td&gt;
+&lt;td&gt;Fwd &amp;gt; Left&lt;/td&gt;
+&lt;td&gt;o&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;可以在蓝图中实现夹角的计算，也可以在C++中实现    &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Blend Space&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;二维空间&lt;/li&gt;
+&lt;li&gt;两个轴，vertial axis和horizontal axis&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、绘制ForwardVector，RightVector和VelocityVector
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;使用DrawDebugArrow&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Duration为0，每帧都进行绘画&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-2&#34;&gt;
+绘制ForwardVector
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;起点 Actor当前位置&lt;/li&gt;
+&lt;li&gt;偏移 放大的前进方向向量  &lt;/li&gt;
+&lt;li&gt;终点 起点 + 偏移&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/绘制ForwardVector.png&#34; alt=&#34;/pic/实现转向动画/绘制ForwardVector.png&#34; title=&#34;/pic/实现转向动画/绘制ForwardVector.png&#34; width=&#34;900&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+绘制RightVector
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;起点 Actor当前位置&lt;/li&gt;
+&lt;li&gt;偏移 放大的向右方向向量  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/绘制RightVector.png&#34; alt=&#34;/pic/实现转向动画/绘制RightVector.png&#34; title=&#34;/pic/实现转向动画/绘制RightVector.png&#34; width=&#34;900&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+绘制VelocityVector
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;起点 Actor当前位置&lt;/li&gt;
+&lt;li&gt;偏移 放大的速度方向单位向量  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/绘制VelocityVector.png&#34; alt=&#34;/pic/实现转向动画/绘制VelocityVector.png&#34; title=&#34;/pic/实现转向动画/绘制VelocityVector.png&#34; width=&#34;900&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+效果图
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;一直显示ForwardVector和RightVector&lt;/p&gt;
+&lt;p width=&#34;700&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/ForwardVector和RightVector效果图.png&#34; alt=&#34;/pic/实现转向动画/ForwardVector和RightVector效果图.png&#34; title=&#34;/pic/实现转向动画/ForwardVector和RightVector效果图.png&#34;/&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;有速度才会显示VelocityVector&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+二、优化显示
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;项目设置 &amp;gt; Engine &amp;gt; Rendering &amp;gt; Default Settings &amp;gt; Auto Exposure&lt;/li&gt;
+&lt;li&gt;旨在模拟人眼适应不同亮度&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;取消勾选&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;看不出区别&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-7&#34;&gt;
+三、重新实现Walk动画
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;使用Blend Space，命名为BS_Locomotion_Walk&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;水平轴(horizontal axis)和1D一样，表示速度&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;命名为Velocity&lt;/li&gt;
+&lt;li&gt;[ 0, 600 ]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;垂直轴(vertical axis)，表示ForwardVector和VelocityVector的夹角&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;命名为Direction&lt;/li&gt;
+&lt;li&gt;[ -180, 180 ]&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/BS_Locomotion_Walk-Axis.png&#34; alt=&#34;/pic/实现转向动画/BS_Locomotion_Walk-Axis.png&#34; title=&#34;/pic/实现转向动画/BS_Locomotion_Walk-Axis.png&#34;/&gt;    &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;坐标 ( Velocity, Direction )&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/BS_Locomotion_Walk.png&#34; alt=&#34;/pic/实现转向动画/BS_Locomotion_Walk.png&#34; title=&#34;/pic/实现转向动画/BS_Locomotion_Walk.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-8&#34;&gt;
+1. 动画资产
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Idle&lt;/li&gt;
+&lt;li&gt;Run_Fwd&lt;/li&gt;
+&lt;li&gt;Run_Bwd&lt;/li&gt;
+&lt;li&gt;Run_Rt&lt;/li&gt;
+&lt;li&gt;Run_Lt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-9&#34;&gt;
+2. 初始状态 ( 0, 0 )
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Idle&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-10&#34;&gt;
+3. 满速前进 ( 600, 0 )
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-10&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Run_Fwd&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-11&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-11&#34;&gt;
+4. 满速后退 ( 600, -180 ) 和 ( 600, 180 )
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-11&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Run_Bwd&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-12&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-12&#34;&gt;
+5. 满速向右 ( 600, 90 )
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-12&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Run_Rt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-13&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-13&#34;&gt;
+6. 满速向左 ( 600, -90 )
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-13&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Run_Lt&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-14&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-14&#34;&gt;
+四、将BS_Locomotion_Walk作为ABP_BaseCharacter &amp;gt; AnimGraph &amp;gt; 状态机 &amp;gt; Walk状态的输入
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-14&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;添加变量 AngleBetweenForwardAndVelocity&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;float类型&lt;/li&gt;
+&lt;li&gt;作为Direction的输入&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;默认值为0&lt;/p&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/AngleBetweenForwardAndVelocity-DefaultValue.png&#34; alt=&#34;/pic/实现转向动画/AngleBetweenForwardAndVelocity-DefaultValue.png&#34; title=&#34;/pic/实现转向动画/AngleBetweenForwardAndVelocity-DefaultValue.png&#34;/&gt;   &lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/ABP_BaseCharacter-AnimGraph-Locomotion-Walk.png&#34; alt=&#34;/pic/实现转向动画/ABP_BaseCharacter-AnimGraph-Locomotion-Walk.png&#34; title=&#34;/pic/实现转向动画/ABP_BaseCharacter-AnimGraph-Locomotion-Walk.png&#34;/&gt;   &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-15&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-15&#34;&gt;
+五、在蓝图中计算夹角并设置变量
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-15&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;计算点乘时，ForwardVector和VelocityVector都是单位向量&lt;/li&gt;
+&lt;li&gt;当前并未在反余弦值为0时做处理，后退动画偶有闪动但看似正常&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;1200&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/在蓝图中计算夹角.png&#34; alt=&#34;/pic/实现转向动画/在蓝图中计算夹角.png&#34; title=&#34;/pic/实现转向动画/在蓝图中计算夹角.png&#34;/&gt;   &lt;/p&gt;
+&lt;div id=&#34;outline-container-headline-16&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-16&#34;&gt;
+1. 输出DotProduct结果，静止时输出90
+&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-17&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-17&#34;&gt;
+2. 输出CrossProduct结果，静止、前进或后退时，坐标为0但是有正负
+&lt;/h3&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-18&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-18&#34;&gt;
+3. 输出Sign结果，静止时为0，前进或后退时，其结果或为1或为-1，飘忽不定，但不为0，所以后退动画看似正常
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-18&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;可以做出如下推测，显示为0但不意味着为0，数值过于小了但是有正负&lt;/li&gt;
+&lt;li&gt;叉乘时传入未单位化的Velocity无改善&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-19&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-19&#34;&gt;
+4. 同时按下后退和向左，或者后退和向右，正负3PI/4的动画较为刻意
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-19&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;( PI/2, PI ) 和 ( -PI, -PI/2 ) 时可以只显示Run_Bwd&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-20&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-20&#34;&gt;
+六、绘制ForwardVectro和VelocityVector的叉乘结果
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-20&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;起点 Actor当前位置&lt;/li&gt;
+&lt;li&gt;偏移 放大的叉乘结果&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/绘制叉乘结果.png&#34; alt=&#34;/pic/实现转向动画/绘制叉乘结果.png&#34; title=&#34;/pic/实现转向动画/绘制叉乘结果.png&#34; width=&#34;900&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;运动时才有向量显示&lt;/li&gt;
+&lt;li&gt;向前和向后运动时，偶有不明显的显示&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-21&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-21&#34;&gt;
+七、取消变量的设置
+&lt;/h2&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.10.3在蓝图中使用C&#43;&#43;函数计算夹角</title>
+      <link>https://toughcactus.github.io/post/1.10.3%E5%9C%A8%E8%93%9D%E5%9B%BE%E4%B8%AD%E4%BD%BF%E7%94%A8c&#43;&#43;%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97%E5%A4%B9%E8%A7%92/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/1.10.3%E5%9C%A8%E8%93%9D%E5%9B%BE%E4%B8%AD%E4%BD%BF%E7%94%A8c&#43;&#43;%E5%87%BD%E6%95%B0%E8%AE%A1%E7%AE%97%E5%A4%B9%E8%A7%92/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、在蓝图中使用C++函数计算夹角
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ABP_BaseCharacter &amp;gt; EventGraph&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中使用C++函数计算夹角/在蓝图中使用C++函数计算夹角.png&#34; alt=&#34;/pic/在蓝图中使用C++函数计算夹角/在蓝图中使用C++函数计算夹角.png&#34; title=&#34;/pic/在蓝图中使用C++函数计算夹角/在蓝图中使用C++函数计算夹角.png&#34; width=&#34;800&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、当我们打开动画蓝图时，其以standalone方式运行
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;即使未在虚幻编辑器中运行游戏，在蓝图编辑器打开ABP_BaseCharacter，其处于运行状态&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以看到动画蓝图视口的Actor是有动画的&lt;/li&gt;
+&lt;li&gt;从EventBlueprintUpdateAnimation出发&lt;/li&gt;
+&lt;li&gt;TryGetPawnOwner得到空指针时，停在CastToCharacter&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中使用C++函数计算夹角/ABP_BaseCharacter处于运行状态.png&#34; alt=&#34;/pic/在蓝图中使用C++函数计算夹角/ABP_BaseCharacter处于运行状态.png&#34; title=&#34;/pic/在蓝图中使用C++函数计算夹角/ABP_BaseCharacter处于运行状态.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+添加打印名
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中使用C++函数计算夹角/添加打印名.png&#34; alt=&#34;/pic/在蓝图中使用C++函数计算夹角/添加打印名.png&#34; title=&#34;/pic/在蓝图中使用C++函数计算夹角/添加打印名.png&#34; width=&#34;800&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;未在虚幻编辑器运行游戏，保持动画蓝图不在后台，日志窗口一直有输出&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中使用C++函数计算夹角/添加打印名-日志.png&#34; alt=&#34;/pic/在蓝图中使用C++函数计算夹角/添加打印名-日志.png&#34; title=&#34;/pic/在蓝图中使用C++函数计算夹角/添加打印名-日志.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+未运行游戏时，阻断动画蓝图
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;从EventBlueprintUpdateAnimation出发&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中使用C++函数计算夹角/IsValid宏-Search.png&#34; alt=&#34;/pic/在蓝图中使用C++函数计算夹角/IsValid宏-Search.png&#34; title=&#34;/pic/在蓝图中使用C++函数计算夹角/IsValid宏-Search.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;检查Pawn有效性&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在蓝图中使用C++函数计算夹角/检查游戏是否运行.png&#34; alt=&#34;/pic/在蓝图中使用C++函数计算夹角/检查游戏是否运行.png&#34; title=&#34;/pic/在蓝图中使用C++函数计算夹角/检查游戏是否运行.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -17542,8 +18486,11 @@ Run到JumpStart的转换复用Walk到JumpStart
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/3.蓝图向量/&#34;&gt;蓝图向量&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/4.蓝图actor/&#34;&gt;蓝图Actor&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/5.蓝图movementcomponent/&#34;&gt;蓝图MovementComponent&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/6.蓝图运算符/&#34;&gt;蓝图运算符&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/6.蓝图kismetmathlibrary/&#34;&gt;蓝图KismetMathLibrary&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/7.动画蓝图/&#34;&gt;动画蓝图&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/8.蓝图uaniminstance/&#34;&gt;蓝图UAnimInstance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/9.蓝图kismetsystemlibrary/&#34;&gt;蓝图KismetSystemLibrary&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/10.蓝图宏/&#34;&gt;蓝图宏&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -17981,7 +18928,7 @@ Run到JumpStart的转换复用Walk到JumpStart
 &lt;p&gt;虚幻编辑器&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;API &amp;gt; 5. &lt;a href=&#34;https://toughcactus.github.io/post/5.蓝图movementcomponent/&#34;&gt;蓝图MovementComponent&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;API &amp;gt; 6. &lt;a href=&#34;https://toughcactus.github.io/post/6.蓝图运算符/&#34;&gt;蓝图运算符&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 6. &lt;a href=&#34;https://toughcactus.github.io/post/6.蓝图kismetmathlibrary/&#34;&gt;蓝图KismetMathLibrary&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;API &amp;gt; 7. &lt;a href=&#34;https://toughcactus.github.io/post/7.动画蓝图/&#34;&gt;动画蓝图&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;1.8.3 &lt;a href=&#34;https://toughcactus.github.io/post/1.8.3添加跳跃动画/&#34;&gt;添加跳跃动画&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -18003,6 +18950,37 @@ Run到JumpStart的转换复用Walk到JumpStart
 &lt;li&gt;API &amp;gt; ACharacter类型&lt;/li&gt;
 &lt;li&gt;API &amp;gt; 31. &lt;a href=&#34;https://toughcactus.github.io/post/31.fobjectinitializer结构体/&#34;&gt;FObjectInitializer结构体&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;1.9.5 &lt;a href=&#34;https://toughcactus.github.io/post/1.9.5设置maxspeed/&#34;&gt;设置MaxSpeed&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;转向动画&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻编辑器&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; 蓝图Actor&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 蓝图KismetMathLibrary            &lt;/li&gt;
+&lt;li&gt;API &amp;gt; 8. &lt;a href=&#34;https://toughcactus.github.io/post/8.蓝图uaniminstance/&#34;&gt;蓝图UAnimInstance&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 9. &lt;a href=&#34;https://toughcactus.github.io/post/9.蓝图kismetsystemlibrary/&#34;&gt;蓝图KismetSystemLibrary&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;1.10.1 &lt;a href=&#34;https://toughcactus.github.io/post/1.10.1实现转向动画/&#34;&gt;实现转向动画&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; FMath库&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 向量结构体&lt;/li&gt;
+&lt;li&gt;1.10.2 &lt;a href=&#34;https://toughcactus.github.io/post/1.10.2在c++中计算forwardvector和velocityvector的夹角/&#34;&gt;在C++中计算ForwardVector和VelocityVector的夹角&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻编辑器&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; 蓝图KismetSystemLibrary&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 10. &lt;a href=&#34;https://toughcactus.github.io/post/10.蓝图宏/&#34;&gt;蓝图宏&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;1.10.3 &lt;a href=&#34;https://toughcactus.github.io/post/1.10.3在蓝图中使用c++函数计算夹角/&#34;&gt;在蓝图中使用C++函数计算夹角&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;

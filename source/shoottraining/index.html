@@ -321,6 +321,22 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	PrimaryActorTick.bCanEverTick <span style="color:#f92672">=</span> true;
 </span></span><span style="display:flex;"><span>	<span style="color:#75715e">// InitCameraComponent();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	InitSpringArmAndCamera();
+</span></span><span style="display:flex;"><span>} 
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> ASTBaseCharacter<span style="color:#f92672">::</span>GetAngleBetweenForwardAndVelocity() <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (GetVelocity().IsZero())
+</span></span><span style="display:flex;"><span>		<span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">const</span> FVector ForwardVector <span style="color:#f92672">=</span> GetActorForwardVector();
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">const</span> FVector VelocityNormalizedVector <span style="color:#f92672">=</span> GetVelocity().GetSafeNormal();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> DotProductResult <span style="color:#f92672">=</span> FVector<span style="color:#f92672">::</span>DotProduct(ForwardVector, VelocityNormalizedVector);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> Theta <span style="color:#f92672">=</span> FMath<span style="color:#f92672">::</span>RadiansToDegrees(FMath<span style="color:#f92672">::</span>Acos(DotProductResult));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">const</span> FVector CrossProductResult <span style="color:#f92672">=</span> FVector<span style="color:#f92672">::</span>CrossProduct(ForwardVector, VelocityNormalizedVector);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> (CrossProductResult.IsZero()) <span style="color:#f92672">?</span> Theta : FMath<span style="color:#f92672">::</span>Sign(CrossProductResult.Z) <span style="color:#f92672">*</span> Theta;
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -396,6 +412,9 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> IsRunning() <span style="color:#66d9ef">const</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	ASTBaseCharacter(<span style="color:#66d9ef">const</span> FObjectInitializer <span style="color:#f92672">&amp;</span>ObjInit);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	UFUNCTION(BlueprintCallable)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> GetAngleBetweenForwardAndVelocity() <span style="color:#66d9ef">const</span>;
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -434,7 +453,7 @@
 </span></span><span style="display:flex;"><span>	GENERATED_BODY()
 </span></span><span style="display:flex;"><span>	
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> GetMaxSpeed() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">float</span> GetMaxSpeed() <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">override</span>;
 </span></span><span style="display:flex;"><span>	
 </span></span><span style="display:flex;"><span>	UPROPERTY(EditDefaultsOnly, meta <span style="color:#f92672">=</span> (ClampMin <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1.5&#34;</span>, ClampMax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10.0&#34;</span>))
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> SpeedAcceleration <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0f</span>;

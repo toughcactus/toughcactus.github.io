@@ -395,15 +395,20 @@ FTransform::ToHumanReadableString
       <description>&lt;ul&gt;
 &lt;li&gt;定义了多种数学函数，包括sine, cosine, 和其他三角函数(trigonometric functions)&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://docs.unrealengine.com/5.1/en-US/API/Runtime/Core/Math/FMath/&#34;&gt;API&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;通过命名空间FMath使用  &lt;/li&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Core/Public/Math/UnrealMathUtility.h  &lt;/li&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Core/Public/GenericPlatform/GenericPlatformMath.h&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-计算正弦值 FMath::Sin
+计算正弦值 FGenericPlatformMath::Sin
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
 &lt;li&gt;静态成员&lt;/li&gt;
 &lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Sin.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Sin.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Sin.png&#34; width=&#34;400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Sin-Definition.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Sin-Definition.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Sin-Definition.png&#34; width=&#34;500&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
@@ -415,6 +420,32 @@ FTransform::ToHumanReadableString
 &lt;li&gt;静态成员&lt;/li&gt;
 &lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-RandBool.png&#34; alt=&#34;/pic/FMath库/FMath-RandBool.png&#34; title=&#34;/pic/FMath库/FMath-RandBool.png&#34; width=&#34;300&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+弧度转角度 FMath::RadiansToDegrees
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-RadiansToDegrees.png&#34; alt=&#34;/pic/FMath库/FMath-RadiansToDegrees.png&#34; title=&#34;/pic/FMath库/FMath-RadiansToDegrees.png&#34; width=&#34;500&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-RadiansToDegrees-Definition.png&#34; alt=&#34;/pic/FMath库/FMath-RadiansToDegrees-Definition.png&#34; title=&#34;/pic/FMath库/FMath-RadiansToDegrees-Definition.png&#34; width=&#34;800&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+取符号 FGenericPlatformMath::Sign
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Sign.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Sign.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Sign.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+计算反余弦 FGenericPlatformMath::Acos
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Acos.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Acos.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Acos.png&#34; width=&#34;400&#34;/&gt;
+&lt;p width=&#34;800&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Acos-Definition.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Acos-Definition.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Acos-Definition.png&#34;/&gt;  &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -633,6 +664,30 @@ FTransform::ToHumanReadableString
 &lt;li&gt;为0返回true&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/向量结构体/FVector-IsZero.png&#34; alt=&#34;/pic/向量结构体/FVector-IsZero.png&#34; title=&#34;/pic/向量结构体/FVector-IsZero.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+安全单位化向量 FVector::GetSafeNormal
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/向量结构体/FVector-GetSafeNormal.png&#34; alt=&#34;/pic/向量结构体/FVector-GetSafeNormal.png&#34; title=&#34;/pic/向量结构体/FVector-GetSafeNormal.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+向量点乘 FVector::DotProduct
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/向量结构体/FVector-DotProduct.png&#34; alt=&#34;/pic/向量结构体/FVector-DotProduct.png&#34; title=&#34;/pic/向量结构体/FVector-DotProduct.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-8&#34;&gt;
+向量叉乘 FVector::CrossProduct
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/向量结构体/FVector-CrossProduct.png&#34; alt=&#34;/pic/向量结构体/FVector-CrossProduct.png&#34; title=&#34;/pic/向量结构体/FVector-CrossProduct.png&#34;/&gt;  &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1278,6 +1333,7 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;img src=&#34;https://toughcactus.github.io/pic/UInputComponent类型/EInputEvent.png&#34; alt=&#34;/pic/UInputComponent类型/EInputEvent.png&#34; title=&#34;/pic/UInputComponent类型/EInputEvent.png&#34; width=&#34;350&#34;/&gt;
 &lt;ol&gt;
 &lt;li&gt;按下时触发 IE_Pressed&lt;/li&gt;
+&lt;li&gt;松开时触发 IE_Released&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -1553,9 +1609,20 @@ YOZ平面
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、跳跃回调函数 ACharacter::Jump
+一、路径
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;源文件 &amp;gt; UE5/Engine/Source/Runtime/Engine/Private/Character.cpp&lt;/li&gt;
+&lt;li&gt;头文件 &amp;gt; UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/Character.h&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、跳跃回调函数 ACharacter::Jump
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-Jump.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-Jump.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-Jump.png&#34; width=&#34;500&#34;/&gt;
 &lt;ul&gt;
 &lt;li&gt;将bPressedJump置为true，在下次调用Tick函数时，让Actor在Z轴跳跃&lt;/li&gt;
@@ -1563,12 +1630,48 @@ YOZ平面
 &lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-Jump-Definition.png&#34; width=&#34;200&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
-&lt;h2 id=&#34;headline-2&#34;&gt;
-二、默认构造函数 ACharacter::ACharacter
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、默认构造函数 ACharacter::ACharacter
 &lt;/h2&gt;
-&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-ACharacter.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-ACharacter.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-ACharacter.png&#34; width=&#34;600&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、子组件类型名
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;保存在FName中&lt;/li&gt;
+&lt;li&gt;静态成员&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-组件名初始化.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-组件名初始化.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-组件名初始化.png&#34;/&gt;  &lt;/p&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+CharacterMovementComponent类型名 ACharacter::CharacterMovementComponentName
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-CharacterMovementComponentName.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-CharacterMovementComponentName.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-CharacterMovementComponentName.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+MeshComponent类型名 ACharacter::MeshComponentName
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-MeshComponentName.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-MeshComponentName.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-MeshComponentName.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+CapsuleComponent类型名 ACharacter::CapsuleComponentName
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;270&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-CapsuleComponentName.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-CapsuleComponentName.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-CapsuleComponentName.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -2651,6 +2754,23 @@ UStaticMeshComponent&lt;/p&gt;
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 10.蓝图宏</title>
+      <link>https://toughcactus.github.io/post/10.%E8%93%9D%E5%9B%BE%E5%AE%8F/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/10.%E8%93%9D%E5%9B%BE%E5%AE%8F/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+Object是否有效 IsValid
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图宏/IsValid宏.png&#34; alt=&#34;/pic/蓝图宏/IsValid宏.png&#34; title=&#34;/pic/蓝图宏/IsValid宏.png&#34; width=&#34;500&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图宏/在蓝图编辑器查看IsValid宏.png&#34; alt=&#34;/pic/蓝图宏/在蓝图编辑器查看IsValid宏.png&#34; title=&#34;/pic/蓝图宏/在蓝图编辑器查看IsValid宏.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 2.蓝图字符串</title>
       <link>https://toughcactus.github.io/post/2.%E8%93%9D%E5%9B%BE%E5%AD%97%E7%AC%A6%E4%B8%B2/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -2686,9 +2806,7 @@ UStaticMeshComponent&lt;/p&gt;
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;所在源文件 UE5/Engine/Source/Runtime/Engine/Private/KismetSystemLibrary.cpp&lt;/li&gt;
-&lt;li&gt;所在头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/KismetSystemLibrary.h&lt;/li&gt;
-&lt;li&gt;调用了AddOnScreenDebugMessage&lt;/li&gt;
+&lt;li&gt;迁移到 蓝图KismetSystemLibrary&lt;/li&gt;
 &lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/蓝图字符串/Blueprint-Search-String-PrintString.png&#34; alt=&#34;/pic/蓝图字符串/Blueprint-Search-String-PrintString.png&#34; title=&#34;/pic/蓝图字符串/Blueprint-Search-String-PrintString.png&#34; width=&#34;350&#34;/&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/蓝图字符串/Blueprint-String-PrintString.png&#34; alt=&#34;/pic/蓝图字符串/Blueprint-String-PrintString.png&#34; title=&#34;/pic/蓝图字符串/Blueprint-String-PrintString.png&#34; width=&#34;200&#34;/&gt;
@@ -2728,6 +2846,43 @@ UStaticMeshComponent&lt;/p&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/AActor-GetVelocity.png&#34; alt=&#34;/pic/蓝图Actor/AActor-GetVelocity.png&#34; title=&#34;/pic/蓝图Actor/AActor-GetVelocity.png&#34; width=&#34;200&#34;/&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、AActor类型
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+获取Actor位置 GetActorLocation
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/AActor-K2_GetActorLocation.png&#34; alt=&#34;/pic/蓝图Actor/AActor-K2_GetActorLocation.png&#34; title=&#34;/pic/蓝图Actor/AActor-K2_GetActorLocation.png&#34; width=&#34;1200&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/GetActorLocation.png&#34; alt=&#34;/pic/蓝图Actor/GetActorLocation.png&#34; title=&#34;/pic/蓝图Actor/GetActorLocation.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+获取前进方向单位向量  GetActorForwardVector
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/AActor-GetActorForwardVector.png&#34; alt=&#34;/pic/蓝图Actor/AActor-GetActorForwardVector.png&#34; title=&#34;/pic/蓝图Actor/AActor-GetActorForwardVector.png&#34; width=&#34;600&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/GetActorForwardVector.png&#34; alt=&#34;/pic/蓝图Actor/GetActorForwardVector.png&#34; title=&#34;/pic/蓝图Actor/GetActorForwardVector.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+获取向右方向单位向量  GetActorRightVector
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/AActor-GetActorRightVector.png&#34; alt=&#34;/pic/蓝图Actor/AActor-GetActorRightVector.png&#34; title=&#34;/pic/蓝图Actor/AActor-GetActorRightVector.png&#34; width=&#34;600&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图Actor/GetActorRightVector.png&#34; alt=&#34;/pic/蓝图Actor/GetActorRightVector.png&#34; title=&#34;/pic/蓝图Actor/GetActorRightVector.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -2746,7 +2901,7 @@ UStaticMeshComponent&lt;/p&gt;
 &lt;li&gt;所在头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/NavMovementComponent.h&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;在空中返回true，在地面返回false&lt;/p&gt;
-&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图MovementComponent/IsFalling.png&#34; alt=&#34;/pic/蓝图MovementComponent/IsFalling.png&#34; title=&#34;/pic/蓝图MovementComponent/IsFalling.png&#34; width=&#34;250&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图MovementComponent/IsFalling.png&#34; alt=&#34;/pic/蓝图MovementComponent/IsFalling.png&#34; title=&#34;/pic/蓝图MovementComponent/IsFalling.png&#34; width=&#34;210&#34;/&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
@@ -2754,17 +2909,21 @@ UStaticMeshComponent&lt;/p&gt;
     </item>
     
     <item>
-      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 6.蓝图运算符</title>
-      <link>https://toughcactus.github.io/post/6.%E8%93%9D%E5%9B%BE%E8%BF%90%E7%AE%97%E7%AC%A6/</link>
+      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 6.蓝图KismetMathLibrary</title>
+      <link>https://toughcactus.github.io/post/6.%E8%93%9D%E5%9B%BEkismetmathlibrary/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://toughcactus.github.io/post/6.%E8%93%9D%E5%9B%BE%E8%BF%90%E7%AE%97%E7%AC%A6/</guid>
-      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+      <guid>https://toughcactus.github.io/post/6.%E8%93%9D%E5%9B%BEkismetmathlibrary/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/KismetMathLibrary.h&lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/KismetMathLibrary.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、小于运算符 less
+一、小于运算符 Less
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
-&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图运算符/Less.png&#34; alt=&#34;/pic/蓝图运算符/Less.png&#34; title=&#34;/pic/蓝图运算符/Less.png&#34; width=&#34;100&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Less.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Less.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Less.png&#34; width=&#34;100&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
@@ -2772,7 +2931,82 @@ UStaticMeshComponent&lt;/p&gt;
 二、取非 NotBoolean
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
-&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图运算符/NotBoolean.png&#34; alt=&#34;/pic/蓝图运算符/NotBoolean.png&#34; title=&#34;/pic/蓝图运算符/NotBoolean.png&#34; width=&#34;100&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/NotBoolean.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/NotBoolean.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/NotBoolean.png&#34; width=&#34;100&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、加法 Add
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Add.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Add.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Add.png&#34; width=&#34;100&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、乘法 Multiply
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Multiply.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Multiply.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Multiply.png&#34; width=&#34;100&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+五、减法 Subtract
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;100&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Subtract.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Subtract.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Subtract.png&#34;/&gt;    &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+六、规范化 Normalize
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Normalize.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Normalize.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Normalize.png&#34;/&gt;    &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-7&#34;&gt;
+七、点乘 DotProduct
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/DotProduct.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/DotProduct.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/DotProduct.png&#34;/&gt;    &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+八、叉乘 CrossProduct
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/CrossProduct.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/CrossProduct.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/CrossProduct.png&#34;/&gt;    &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-9&#34;&gt;
+九、取符号 Sign
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;400&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Sign-Search.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Sign-Search.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Sign-Search.png&#34;/&gt;    &lt;/p&gt;
+&lt;p width=&#34;200&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Sign-float.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Sign-float.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Sign-float.png&#34;/&gt;    &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-10&#34;&gt;
+十、反余弦 Acos
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-10&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Acos-Search.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Acos-Search.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Acos-Search.png&#34;/&gt;    &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;返回角度(Degree)&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Acos-Degree.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Acos-Degree.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Acos-Degree.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;返回弧度(Radians)&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetMathLibrary/Acos-Radians.png&#34; alt=&#34;/pic/蓝图KismetMathLibrary/Acos-Radians.png&#34; title=&#34;/pic/蓝图KismetMathLibrary/Acos-Radians.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -2790,6 +3024,78 @@ UStaticMeshComponent&lt;/p&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/动画蓝图/TimeRemaining.png&#34; alt=&#34;/pic/动画蓝图/TimeRemaining.png&#34; title=&#34;/pic/动画蓝图/TimeRemaining.png&#34; width=&#34;200&#34;/&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/动画蓝图/TimeRemaining-Search.png&#34; alt=&#34;/pic/动画蓝图/TimeRemaining-Search.png&#34; title=&#34;/pic/动画蓝图/TimeRemaining-Search.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 8.蓝图UAnimInstance</title>
+      <link>https://toughcactus.github.io/post/8.%E8%93%9D%E5%9B%BEuaniminstance/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/8.%E8%93%9D%E5%9B%BEuaniminstance/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/Animation/AnimInstance.h&lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/Animation/AnimInstance.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、获取指向Pawn的指针
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图UAnimInstance/TryGetPawnOwner.png&#34; alt=&#34;/pic/蓝图UAnimInstance/TryGetPawnOwner.png&#34; title=&#34;/pic/蓝图UAnimInstance/TryGetPawnOwner.png&#34; width=&#34;200&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图UAnimInstance/UAnimInstance-TryGetPawnOwner.png&#34; alt=&#34;/pic/蓝图UAnimInstance/UAnimInstance-TryGetPawnOwner.png&#34; title=&#34;/pic/蓝图UAnimInstance/UAnimInstance-TryGetPawnOwner.png&#34; width=&#34;200&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻编辑器 &gt; 9.蓝图KismetSystemLibrary</title>
+      <link>https://toughcactus.github.io/post/9.%E8%93%9D%E5%9B%BEkismetsystemlibrary/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/9.%E8%93%9D%E5%9B%BEkismetsystemlibrary/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;所在头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/KismetSystemLibrary.h&lt;/li&gt;
+&lt;li&gt;所在源文件 UE5/Engine/Source/Runtime/Engine/Private/KismetSystemLibrary.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/x/.png&#34; alt=&#34;/pic/x/.png&#34; title=&#34;/pic/x/.png&#34; width=&#34;700&#34;/&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、输出字符串 PrintString
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;调用了AddOnScreenDebugMessage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-PrintString.png&#34; alt=&#34;/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-PrintString.png&#34; title=&#34;/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-PrintString.png&#34; width=&#34;1400&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetSystemLibrary/PrintString.png&#34; alt=&#34;/pic/蓝图KismetSystemLibrary/PrintString.png&#34; title=&#34;/pic/蓝图KismetSystemLibrary/PrintString.png&#34; width=&#34;200&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在3D空间绘制向量 DrawDebugArrow
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-DrawDebugArrow.png&#34; alt=&#34;/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-DrawDebugArrow.png&#34; title=&#34;/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-DrawDebugArrow.png&#34; width=&#34;1200&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetSystemLibrary/DrawDebugArrow.png&#34; alt=&#34;/pic/蓝图KismetSystemLibrary/DrawDebugArrow.png&#34; title=&#34;/pic/蓝图KismetSystemLibrary/DrawDebugArrow.png&#34; width=&#34;200&#34;/&gt;
+&lt;ol&gt;
+&lt;li&gt;箭头起点 LineStart&lt;/li&gt;
+&lt;li&gt;箭头终点 LineEnd&lt;/li&gt;
+&lt;li&gt;箭头大小 ArrowSize&lt;/li&gt;
+&lt;li&gt;颜色 LineColor&lt;/li&gt;
+&lt;li&gt;显示时长 Duration&lt;/li&gt;
+&lt;li&gt;宽度 Thickness&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、获取名称 GetDisplayName
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-GetDisplayName.png&#34; alt=&#34;/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-GetDisplayName.png&#34; title=&#34;/pic/蓝图KismetSystemLibrary/UKismetSystemLibrary-GetDisplayName.png&#34; width=&#34;1200&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/蓝图KismetSystemLibrary/GetDisplayName.png&#34; alt=&#34;/pic/蓝图KismetSystemLibrary/GetDisplayName.png&#34; title=&#34;/pic/蓝图KismetSystemLibrary/GetDisplayName.png&#34; width=&#34;200&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
