@@ -3973,5 +3973,102 @@ Run到JumpStart的转换复用Walk到JumpStart
 &lt;/div&gt;</description>
     </item>
     
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 2.1.1创建派生自ActorComponent的C&#43;&#43;类</title>
+      <link>https://toughcactus.github.io/post/2.1.1%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAactorcomponent%E7%9A%84c&#43;&#43;%E7%B1%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.1.1%E5%88%9B%E5%BB%BA%E6%B4%BE%E7%94%9F%E8%87%AAactorcomponent%E7%9A%84c&#43;&#43;%E7%B1%BB/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建创建派生自ActorComponent的C++类
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;基类ActorComponent&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自ActorComponent的C++类/创建C++类-ActorComponent.png&#34; alt=&#34;/pic/创建派生自ActorComponent的C++类/创建C++类-ActorComponent.png&#34; title=&#34;/pic/创建派生自ActorComponent的C++类/创建C++类-ActorComponent.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;公有类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Components/&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建派生自ActorComponent的C++类/创建C++类-STHealthComponent.png&#34; alt=&#34;/pic/创建派生自ActorComponent的C++类/创建C++类-STHealthComponent.png&#34; title=&#34;/pic/创建派生自ActorComponent的C++类/创建C++类-STHealthComponent.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 2.1.5调整TextRender组件</title>
+      <link>https://toughcactus.github.io/post/2.1.5%E8%B0%83%E6%95%B4textrender%E7%BB%84%E4%BB%B6/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.1.5%E8%B0%83%E6%95%B4textrender%E7%BB%84%E4%BB%B6/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、查看BP_STBaseCharacter的组件  
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整TextRender组件/BP_STBaseCharacter-组件列表.png&#34; alt=&#34;/pic/调整TextRender组件/BP_STBaseCharacter-组件列表.png&#34; title=&#34;/pic/调整TextRender组件/BP_STBaseCharacter-组件列表.png&#34; width=&#34;400&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Health和CharacterMovement无层级&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;二者均无表示，纯逻辑&lt;/li&gt;
+&lt;li&gt;创建后无需挂在其他组件下面&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、查看Health组件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整TextRender组件/Health组件.png&#34; alt=&#34;/pic/调整TextRender组件/Health组件.png&#34; title=&#34;/pic/调整TextRender组件/Health组件.png&#34; width=&#34;300&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、调整TextRender组件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/调整TextRender组件/TextRender.png&#34; alt=&#34;/pic/调整TextRender组件/TextRender.png&#34; title=&#34;/pic/调整TextRender组件/TextRender.png&#34; width=&#34;1000&#34;/&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;修改默认值 Text&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;0&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;设置水平对齐 Horizontal Alignment&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Center&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;设置文本颜色 Text Render Color&lt;/li&gt;
+&lt;li&gt;移动到Character上方&lt;/li&gt;
+&lt;li&gt;因为运行时摄像机对着Character背面，旋转RendText&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p width=&#34;300&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/调整TextRender组件/TextRender-设置.png&#34; alt=&#34;/pic/调整TextRender组件/TextRender-设置.png&#34; title=&#34;/pic/调整TextRender组件/TextRender-设置.png&#34;/&gt;     &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、效果图
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;800&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/调整TextRender组件/效果图.png&#34; alt=&#34;/pic/调整TextRender组件/效果图.png&#34; title=&#34;/pic/调整TextRender组件/效果图.png&#34;/&gt;     &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
   </channel>
 </rss>

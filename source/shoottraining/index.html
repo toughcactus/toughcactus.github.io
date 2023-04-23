@@ -187,6 +187,8 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Engine/EngineBaseTypes.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFrameWork/SpringArmComponent.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/STCharacterMovementComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/STHealthComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/TextRenderComponent.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span>DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter, All, All)
 </span></span><span style="display:flex;"><span>
@@ -205,14 +207,14 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>BeginPlay()
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>BeginPlay();
-</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	CheckHealth();
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Called every frame
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>Tick(<span style="color:#66d9ef">float</span> DeltaTime)
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>Tick(DeltaTime);
-</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	DisplayHealthText();
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Called to bind functionality to input
@@ -321,6 +323,8 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	PrimaryActorTick.bCanEverTick <span style="color:#f92672">=</span> true;
 </span></span><span style="display:flex;"><span>	<span style="color:#75715e">// InitCameraComponent();
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	InitSpringArmAndCamera();
+</span></span><span style="display:flex;"><span>	InitHealthComponent();
+</span></span><span style="display:flex;"><span>	InitHealthTextComponent();
 </span></span><span style="display:flex;"><span>} 
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> ASTBaseCharacter<span style="color:#f92672">::</span>GetAngleBetweenForwardAndVelocity() <span style="color:#66d9ef">const</span>
@@ -337,6 +341,28 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">const</span> FVector CrossProductResult <span style="color:#f92672">=</span> FVector<span style="color:#f92672">::</span>CrossProduct(ForwardVector, VelocityNormalizedVector);
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">return</span> (CrossProductResult.IsZero()) <span style="color:#f92672">?</span> Theta : FMath<span style="color:#f92672">::</span>Sign(CrossProductResult.Z) <span style="color:#f92672">*</span> Theta;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitHealthComponent()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Health <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>USTHealthComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;HealthComponent&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitHealthTextComponent()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	HealthText <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>UTextRenderComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;HealthTextComponent&#34;</span>);
+</span></span><span style="display:flex;"><span>	HealthText<span style="color:#f92672">-&gt;</span>SetupAttachment(GetRootComponent());	
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>DisplayHealthText()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	HealthText<span style="color:#f92672">-&gt;</span>SetText(FText<span style="color:#f92672">::</span>FromString(FString<span style="color:#f92672">::</span>Printf(TEXT(<span style="color:#e6db74">&#34;%.0f&#34;</span>), Health<span style="color:#f92672">-&gt;</span>GetHealth())));
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>CheckHealth()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	check(Health);
+</span></span><span style="display:flex;"><span>	check(HealthText);
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -352,6 +378,8 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UCameraComponent</span>;
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">USpringArmComponent</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">USTHealthComponent</span>;
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UTextRenderComponent</span>;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>UCLASS()
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SHOOTTRAINING_API</span> ASTBaseCharacter : <span style="color:#66d9ef">public</span> ACharacter
@@ -415,6 +443,22 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	UFUNCTION(BlueprintCallable)
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> GetAngleBetweenForwardAndVelocity() <span style="color:#66d9ef">const</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Health&#34;</span>)
+</span></span><span style="display:flex;"><span>    USTHealthComponent <span style="color:#f92672">*</span>Health;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> InitHealthComponent();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>    UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Health&#34;</span>)
+</span></span><span style="display:flex;"><span>    UTextRenderComponent <span style="color:#f92672">*</span>HealthText;	
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> InitHealthTextComponent();	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">DisplayHealthText</span>();
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">CheckHealth</span>();
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -504,6 +548,95 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span>	ASTGameModeBase();		
 </span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// STHealthComponent.cpp
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Shoot Training Game, All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/STHealthComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sets default values for this component&#39;s properties
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>USTHealthComponent<span style="color:#f92672">::</span>USTHealthComponent()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Set this component to be initialized when the game starts, and to be ticked every frame.  You can turn these features
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// off to improve performance if you don&#39;t need them.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	PrimaryComponentTick.bCanEverTick <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called when the game starts
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> USTHealthComponent<span style="color:#f92672">::</span>BeginPlay()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>BeginPlay();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	InitHealth();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called every frame
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// void USTHealthComponent::TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction)
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// {
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// 	Super::TickComponent(DeltaTime, TickType, ThisTickFunction);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// 	// ...
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// }
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> USTHealthComponent<span style="color:#f92672">::</span>InitHealth()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Health <span style="color:#f92672">=</span> MaxHealth;
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// STHealthComponent.h
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Shoot Training Game, All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma once
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;CoreMinimal.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/ActorComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;STHealthComponent.generated.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UCLASS( ClassGroup<span style="color:#f92672">=</span>(Custom), meta<span style="color:#f92672">=</span>(BlueprintSpawnableComponent) )
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SHOOTTRAINING_API</span> USTHealthComponent : <span style="color:#66d9ef">public</span> UActorComponent
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	GENERATED_BODY()
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Sets default values for this component&#39;s properties
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	USTHealthComponent();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called when the game starts
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> BeginPlay() <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called every frame
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#75715e">// virtual void TickComponent(float DeltaTime, ELevelTick TickType, FActorComponentTickFunction* ThisTickFunction) override;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> Health <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;		
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	UPROPERTY(EditDefaultsOnly, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Health&#34;</span>, meta <span style="color:#f92672">=</span> (ClampMin <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0.0&#34;</span>, ClampMax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1000.0&#34;</span>))
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> MaxHealth <span style="color:#f92672">=</span> <span style="color:#ae81ff">100.0f</span>;	
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	UFUNCTION(BlueprintCallable)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> GetHealth() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> Health; }
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> InitHealth();
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
