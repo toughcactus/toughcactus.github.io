@@ -215,6 +215,8 @@
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>Tick(DeltaTime);
 </span></span><span style="display:flex;"><span>	DisplayHealthText();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	CharacterTakeDamage();
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Called to bind functionality to input
@@ -363,6 +365,11 @@
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>	check(Health);
 </span></span><span style="display:flex;"><span>	check(HealthText);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>CharacterTakeDamage()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	TakeDamage(<span style="color:#ae81ff">0.1f</span>, FDamageEvent{}, GetController(), <span style="color:#66d9ef">this</span>);
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -459,6 +466,7 @@
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> InitHealthTextComponent();	
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">DisplayHealthText</span>();
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">CheckHealth</span>();
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">CharacterTakeDamage</span>();
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -557,7 +565,10 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/STHealthComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFramework/Actor.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>DEFINE_LOG_CATEGORY_STATIC(LogHealthComponent, All, All)
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Sets default values for this component&#39;s properties
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>USTHealthComponent<span style="color:#f92672">::</span>USTHealthComponent()
 </span></span><span style="display:flex;"><span>{
@@ -576,6 +587,8 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	InitHealth();
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	RegisterDamageHandler();
+</span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	<span style="color:#75715e">// ...
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	
 </span></span><span style="display:flex;"><span>}
@@ -592,6 +605,17 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> USTHealthComponent<span style="color:#f92672">::</span>InitHealth()
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>	Health <span style="color:#f92672">=</span> MaxHealth;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> USTHealthComponent<span style="color:#f92672">::</span>OnTakeAnyDamage(AActor<span style="color:#f92672">*</span> DamagedActor, <span style="color:#66d9ef">float</span> Damage, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDamageType</span><span style="color:#f92672">*</span> DamageType, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AController</span><span style="color:#f92672">*</span> InstigatedBy, AActor<span style="color:#f92672">*</span> DamageCauser)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Health <span style="color:#f92672">-=</span> Damage;
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> USTHealthComponent<span style="color:#f92672">::</span>RegisterDamageHandler()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	AActor <span style="color:#f92672">*</span>ThisActor <span style="color:#f92672">=</span> GetOwner();
+</span></span><span style="display:flex;"><span>	ThisActor<span style="color:#f92672">-&gt;</span>OnTakeAnyDamage.AddDynamic(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>USTHealthComponent<span style="color:#f92672">::</span>OnTakeAnyDamage);
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -637,6 +661,10 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> InitHealth();
 </span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	UFUNCTION()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> OnTakeAnyDamage(AActor<span style="color:#f92672">*</span> DamagedActor, <span style="color:#66d9ef">float</span> Damage, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDamageType</span><span style="color:#f92672">*</span> DamageType, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AController</span><span style="color:#f92672">*</span> InstigatedBy, AActor<span style="color:#f92672">*</span> DamageCauser);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">RegisterDamageHandler</span>();
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 </div>
 <div class="src src-c++">

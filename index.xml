@@ -47,9 +47,6 @@
       
       <guid>https://toughcactus.github.io/handbook/cpp/</guid>
       <description>&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;C++&lt;/p&gt;
-&lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/表达式/&#34;&gt;表达式&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;类型&lt;/p&gt;
@@ -100,8 +97,6 @@
 &lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/post/构造函数/&#34;&gt;构造函数&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/委托构造函数/&#34;&gt;委托构造函数&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -2626,14 +2621,14 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/handbook/emacs/init-files&#34;&gt;配置文件&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/myemacs/&#34;&gt;MyEmacs&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/source/init/&#34;&gt;源码 ｜ init.el&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/source/myemacs/&#34;&gt;源码 ｜ MyEmacs.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/init/&#34;&gt;init.el&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/myemacs/&#34;&gt;MyEmacs.org&lt;/a&gt;      &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/handbook/emacs/packages/&#34;&gt;插件&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/插件篇/&#34;&gt;插件篇&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/插件/&#34;&gt;插件&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/多功能插件/&#34;&gt;多功能插件&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/命令提示/&#34;&gt;命令提示&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/搜索/&#34;&gt;搜索&lt;/a&gt;&lt;/li&gt;
@@ -4851,6 +4846,86 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
       <guid>https://toughcactus.github.io/handbook/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;
+&lt;p&gt;C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/表达式/&#34;&gt;表达式&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;类型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/指针和引用/&#34;&gt;指针和引用&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/post/const限定符/&#34;&gt;const限定符&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/具有全局作用域的顶层const对象和具有文件作用域的顶层const对象存在于同一个文件/&#34;&gt;具有全局作用域的顶层const对象和具有文件作用域的顶层const对象存在于同一个文件&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/auto和decltype/&#34;&gt;auto和decltype&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;动态内存&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/new和delete/&#34;&gt;new和delete&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/动态数组/&#34;&gt;动态数组&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/智能指针/&#34;&gt;智能指针&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/post/shared_ptr/&#34;&gt;shared_ptr&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/strblob-共享字符串数组/&#34;&gt;StrBlob-共享字符串数组&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/shared_ptr指定删除器/&#34;&gt;shared_ptr指定删除器&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/shared_ptr的reset操作/&#34;&gt;shared_ptr的reset操作&lt;/a&gt;  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/post/weak_ptr/&#34;&gt;weak_ptr&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;源码 &amp;gt;  &lt;a href=&#34;https://toughcactus.github.io/source/weak_ptr和shared_ptr/&#34;&gt;weak_ptr和shared_ptr&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/post/allocator/&#34;&gt;allocator&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/使用uninitialized系列初始化allocator/&#34;&gt;使用uninitialized系列初始化allocator&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/使用allocator管理字符数组-strvec/&#34;&gt;使用allocator管理字符数组-StrVec&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;类&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/post/构造函数/&#34;&gt;构造函数&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/委托构造函数/&#34;&gt;委托构造函数&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/handbook/dev-tools&#34;&gt;开发工具&lt;/a&gt;  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/git/&#34;&gt;Git&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;CMake&lt;/li&gt;
+&lt;li&gt;Makefile&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Shell脚本&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;sed&lt;/li&gt;
+&lt;li&gt;awk&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/handbook/share&#34;&gt;分享&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/搭建个人blog/&#34;&gt;搭建个人Blog&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
 &lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/handbook/emacs&#34;&gt;Emacs&lt;/a&gt;&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;
@@ -4858,7 +4933,7 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/myemacs/&#34;&gt;MyEmacs&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/init/&#34;&gt;init.el&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/myemacs/&#34;&gt;MyEmacs.org&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/myemacs/&#34;&gt;MyEmacs.org&lt;/a&gt;      &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -4892,7 +4967,7 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/使用emacs开发unrealc++项目/&#34;&gt;使用Emacs开发Unreal C++项目&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;基础课程 笔记&lt;/p&gt;
+&lt;p&gt;虚幻基础课程 笔记&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/thebasics/&#34;&gt;TheBasics&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -5195,7 +5270,7 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;进阶课程 笔记&lt;/p&gt;
+&lt;p&gt;虚幻进阶课程 笔记&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/shoottraining/&#34;&gt;ShootTraining&lt;/a&gt;        &lt;/li&gt;
 &lt;li&gt;
@@ -5312,7 +5387,7 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;p&gt;虚幻编辑器&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;API &amp;gt; 5. &lt;a href=&#34;https://toughcactus.github.io/post/5.蓝图movementcomponent/&#34;&gt;蓝图MovementComponent&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;API &amp;gt; 6. &lt;a href=&#34;https://toughcactus.github.io/post/6.蓝图运算符/&#34;&gt;蓝图运算符&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 6. &lt;a href=&#34;https://toughcactus.github.io/post/6.蓝图kismetmathlibrary/&#34;&gt;蓝图KismetMathLibrary&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;API &amp;gt; 7. &lt;a href=&#34;https://toughcactus.github.io/post/7.动画蓝图/&#34;&gt;动画蓝图&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;1.8.3 &lt;a href=&#34;https://toughcactus.github.io/post/1.8.3添加跳跃动画/&#34;&gt;添加跳跃动画&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -5395,93 +5470,23 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;li&gt;2.1.4 &lt;a href=&#34;https://toughcactus.github.io/post/2.1.4在character上方显示生命值/&#34;&gt;在Character上方显示生命值&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;虚幻编辑器 &amp;gt; 2.1.5 &lt;a href=&#34;https://toughcactus.github.io/post/2.1.5调整textrender组件/&#34;&gt;调整TextRender组件&lt;/a&gt;                     &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.1.5 &lt;a href=&#34;https://toughcactus.github.io/post/2.1.5调整textrender组件/&#34;&gt;调整TextRender组件&lt;/a&gt;                               &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/handbook/dev-tools&#34;&gt;开发工具&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;虚幻C++ &amp;gt; 计算伤害&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/git/&#34;&gt;Git&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;CMake&lt;/li&gt;
-&lt;li&gt;Makefile&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/handbook/share&#34;&gt;分享&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/搭建个人blog/&#34;&gt;搭建个人Blog&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;C++&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/表达式/&#34;&gt;表达式&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;类型&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/指针和引用/&#34;&gt;指针和引用&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/post/const限定符/&#34;&gt;const限定符&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/具有全局作用域的顶层const对象和具有文件作用域的顶层const对象存在于同一个文件/&#34;&gt;具有全局作用域的顶层const对象和具有文件作用域的顶层const对象存在于同一个文件&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/auto和decltype/&#34;&gt;auto和decltype&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;动态内存&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/new和delete/&#34;&gt;new和delete&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/动态数组/&#34;&gt;动态数组&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/智能指针/&#34;&gt;智能指针&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/post/shared_ptr/&#34;&gt;shared_ptr&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/strblob-共享字符串数组/&#34;&gt;StrBlob-共享字符串数组&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/shared_ptr指定删除器/&#34;&gt;shared_ptr指定删除器&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/shared_ptr的reset操作/&#34;&gt;shared_ptr的reset操作&lt;/a&gt;  &lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/post/weak_ptr/&#34;&gt;weak_ptr&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;源码 &amp;gt;  &lt;a href=&#34;https://toughcactus.github.io/source/weak_ptr和shared_ptr/&#34;&gt;weak_ptr和shared_ptr&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/post/allocator/&#34;&gt;allocator&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/使用uninitialized系列初始化allocator/&#34;&gt;使用uninitialized系列初始化allocator&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/使用allocator管理字符数组-strvec/&#34;&gt;使用allocator管理字符数组-StrVec&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;类&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/post/构造函数/&#34;&gt;构造函数&lt;/a&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;源码 &amp;gt; &lt;a href=&#34;https://toughcactus.github.io/source/委托构造函数/&#34;&gt;委托构造函数&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 34. &lt;a href=&#34;https://toughcactus.github.io/post/34.fdamageevent结构体/&#34;&gt;FDamageEvent结构体&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; AActor类型&lt;/li&gt;
+&lt;li&gt;API &amp;gt; APawn类型&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 35. &lt;a href=&#34;https://toughcactus.github.io/post/35.uactorcomponent类型/&#34;&gt;UActorComponent类型&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2.2 &lt;a href=&#34;https://toughcactus.github.io/post/2.2计算伤害/&#34;&gt;计算伤害&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Shell脚本&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;sed&lt;/li&gt;
-&lt;li&gt;awk&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -5650,6 +5655,8 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Super&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Tick(DeltaTime);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	DisplayHealthText();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	CharacterTakeDamage();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Called to bind functionality to input
@@ -5798,6 +5805,11 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	check(Health);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	check(HealthText);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;CharacterTakeDamage()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	TakeDamage(&lt;span style=&#34;color:#ae81ff&#34;&gt;0.1f&lt;/span&gt;, FDamageEvent{}, GetController(), &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -5894,6 +5906,7 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; InitHealthTextComponent();	
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;DisplayHealthText&lt;/span&gt;();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CheckHealth&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CharacterTakeDamage&lt;/span&gt;();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -5992,7 +6005,10 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Components/STHealthComponent.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;GameFramework/Actor.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;DEFINE_LOG_CATEGORY_STATIC(LogHealthComponent, All, All)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Sets default values for this component&amp;#39;s properties
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;USTHealthComponent()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
@@ -6011,6 +6027,8 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	InitHealth();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	RegisterDamageHandler();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#75715e&#34;&gt;// ...
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
@@ -6027,6 +6045,17 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitHealth()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Health &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; MaxHealth;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage(AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamagedActor, &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Damage, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UDamageType&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageType, &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AController&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; InstigatedBy, AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageCauser)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Health &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; Damage;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RegisterDamageHandler()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	AActor &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;ThisActor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GetOwner();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	ThisActor&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;OnTakeAnyDamage.AddDynamic(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -6072,6 +6101,10 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; InitHealth();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UFUNCTION()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; OnTakeAnyDamage(AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamagedActor, &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Damage, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UDamageType&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageType, &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AController&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; InstigatedBy, AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageCauser);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;RegisterDamageHandler&lt;/span&gt;();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -7790,7 +7823,7 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;li&gt;
 &lt;p&gt;虚幻编辑器&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;17.2 &lt;a href=&#34;https://toughcactus.github.io/post/17.2垃圾回收器/&#34;&gt;垃圾回收器&lt;/a&gt;    &lt;/li&gt;
+&lt;li&gt;17.2 &lt;a href=&#34;https://toughcactus.github.io/post/17.2垃圾回收器/&#34;&gt;垃圾回收器&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -7915,7 +7948,7 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;p&gt;虚幻编辑器&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;API &amp;gt; 5. &lt;a href=&#34;https://toughcactus.github.io/post/5.蓝图movementcomponent/&#34;&gt;蓝图MovementComponent&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;API &amp;gt; 6. &lt;a href=&#34;https://toughcactus.github.io/post/6.蓝图运算符/&#34;&gt;蓝图运算符&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 6. &lt;a href=&#34;https://toughcactus.github.io/post/6.蓝图kismetmathlibrary/&#34;&gt;蓝图KismetMathLibrary&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;API &amp;gt; 7. &lt;a href=&#34;https://toughcactus.github.io/post/7.动画蓝图/&#34;&gt;动画蓝图&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;1.8.3 &lt;a href=&#34;https://toughcactus.github.io/post/1.8.3添加跳跃动画/&#34;&gt;添加跳跃动画&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
@@ -7998,7 +8031,17 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;li&gt;2.1.4 &lt;a href=&#34;https://toughcactus.github.io/post/2.1.4在character上方显示生命值/&#34;&gt;在Character上方显示生命值&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
-&lt;li&gt;虚幻编辑器 &amp;gt; 2.1.5 &lt;a href=&#34;https://toughcactus.github.io/post/2.1.5调整textrender组件/&#34;&gt;调整TextRender组件&lt;/a&gt;                     &lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.1.5 &lt;a href=&#34;https://toughcactus.github.io/post/2.1.5调整textrender组件/&#34;&gt;调整TextRender组件&lt;/a&gt;                               &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++ &amp;gt; 计算伤害&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; 34. &lt;a href=&#34;https://toughcactus.github.io/post/34.fdamageevent结构体/&#34;&gt;FDamageEvent结构体&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; AActor类型&lt;/li&gt;
+&lt;li&gt;API &amp;gt; APawn类型&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 35. &lt;a href=&#34;https://toughcactus.github.io/post/35.uactorcomponent类型/&#34;&gt;UActorComponent类型&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2.2 &lt;a href=&#34;https://toughcactus.github.io/post/2.2计算伤害/&#34;&gt;计算伤害&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -9159,7 +9202,10 @@ DECLARE_MULTICAST_DELEGATE_OneParam
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://toughcactus.github.io/post/21.apawn%E7%B1%BB%E5%9E%8B/</guid>
-      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+      <description>&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Pawn.h&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
 一、配置用户输入 APawn::SetupPlayerInputComponent
 &lt;/h2&gt;
@@ -9309,6 +9355,28 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-12&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-GetVelocity.png&#34; alt=&#34;/pic/APawn类型/APawn-GetVelocity.png&#34; title=&#34;/pic/APawn类型/APawn-GetVelocity.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-13&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-13&#34;&gt;
+十、计算伤害 APawn::TakeDamage
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-13&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;参考AActor::TakeDamage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-TakeDamage.png&#34; alt=&#34;/pic/APawn类型/APawn-TakeDamage.png&#34; title=&#34;/pic/APawn类型/APawn-TakeDamage.png&#34; width=&#34;800&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-14&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-14&#34;&gt;
+十一、获取指向AController的指针 APawn::GetController
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-14&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;可以是PlayerController，也可以是AIController&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-GetController.png&#34; alt=&#34;/pic/APawn类型/APawn-GetController.png&#34; title=&#34;/pic/APawn类型/APawn-GetController.png&#34; width=&#34;400&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -9932,6 +10000,117 @@ check宏
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 34.FDamageEvent结构体</title>
+      <link>https://toughcactus.github.io/post/34.fdamageevent%E7%BB%93%E6%9E%84%E4%BD%93/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/34.fdamageevent%E7%BB%93%E6%9E%84%E4%BD%93/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;伤害事件，包含伤害相关信息&lt;/li&gt;
+&lt;li&gt;我们可以创建FDamageEvent的派生类，定义自己的伤害事件&lt;/li&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/Engine/DamageEvents.h  &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;伤害计算模型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点伤害 FPointDamageEvent&lt;/li&gt;
+&lt;li&gt;半径伤害 FRadialDamageEvent&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数值伤害&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;量化结果&lt;/li&gt;
+&lt;li&gt;较简单，生命值直接减去数值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、FDamageEvent
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;包含伤害信息&lt;/li&gt;
+&lt;li&gt;FPointDamageEvent和FRadialDamageEvent派生自FDamageEvent&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FDamageEvent结构体/FDamageEvent.png&#34; alt=&#34;/pic/FDamageEvent结构体/FDamageEvent.png&#34; title=&#34;/pic/FDamageEvent结构体/FDamageEvent.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、UDamageType类型
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/DamageType.h&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;伤害会有声效，动画和对Character造成的伤害数值&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;爆炸(explosion)&lt;/li&gt;
+&lt;li&gt;火(fire)&lt;/li&gt;
+&lt;li&gt;岩浆(lava)  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、点伤害事件 FPointDamageEvent
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;子弹和砍式武器造成&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;信息包含伤害方向，身体的受伤部位&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用以播放Character对应的骨骼动画&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FDamageEvent结构体/FPointDamageEvent.png&#34; alt=&#34;/pic/FDamageEvent结构体/FPointDamageEvent.png&#34; title=&#34;/pic/FDamageEvent结构体/FPointDamageEvent.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、半径伤害事件 FRadialDamageEvent
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;如榴弹爆炸(grenade expolosion)&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;信息包含球(sphere)的参数，空间位置(position)，半径&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用以计算伤害&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FDamageEvent结构体/FRadialDamageEvent.png&#34; alt=&#34;/pic/FDamageEvent结构体/FRadialDamageEvent.png&#34; title=&#34;/pic/FDamageEvent结构体/FRadialDamageEvent.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 35.UActorComponent类型</title>
+      <link>https://toughcactus.github.io/post/35.uactorcomponent%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/35.uactorcomponent%E7%B1%BB%E5%9E%8B/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;自定义ActorComponent类型&lt;/li&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/Components/ActorComponent.h&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、获取指向Actor的指针 UActorComponent::GetOwner
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; alt=&#34;/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; title=&#34;/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 4.AActor类型</title>
       <link>https://toughcactus.github.io/post/4.aactor%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -9955,6 +10134,10 @@ UObject&lt;/p&gt;
 &lt;/table&gt;
 &lt;p&gt;
 AActor  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h&lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/Actor.cpp&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
 一、AActor类型
@@ -10278,6 +10461,81 @@ AActor  &lt;/p&gt;
 &lt;/h3&gt;
 &lt;div id=&#34;outline-text-headline-26&#34; class=&#34;outline-text-3&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/AActor-GetActorUpVector.png&#34; alt=&#34;/pic/AActor类型/AActor-GetActorUpVector.png&#34; title=&#34;/pic/AActor类型/AActor-GetActorUpVector.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-27&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-27&#34;&gt;
+十三、伤害
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-27&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-28&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-28&#34;&gt;
+伤害委托类型
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-28&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;FTakeAnyDamageSignature&lt;/li&gt;
+&lt;li&gt;FTakePointDamageSignature&lt;/li&gt;
+&lt;li&gt;FTakeRadialDamageSignature&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/伤害委托类型.png&#34; alt=&#34;/pic/AActor类型/伤害委托类型.png&#34; title=&#34;/pic/AActor类型/伤害委托类型.png&#34; width=&#34;1700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-29&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-29&#34;&gt;
+伤害委托成员
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-29&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;伤害事件通过委托实现&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为Actor设置伤害委托的处理函数，在伤害发生时，调用处理函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;可以在蓝图中设置&lt;/li&gt;
+&lt;li&gt;AActor::OnTakeAnyDamage&lt;/li&gt;
+&lt;li&gt;AActor::OnTakePoingDamage&lt;/li&gt;
+&lt;li&gt;AActor::OnTakeRadialDamage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/伤害委托成员.png&#34; alt=&#34;/pic/AActor类型/伤害委托成员.png&#34; title=&#34;/pic/AActor类型/伤害委托成员.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-30&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-30&#34;&gt;
+计算伤害 AActor::TakeDamage
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-30&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;根据伤害事件类型做相应处理，并调用委托处理函数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点伤害 FPointDamageEvent&lt;/li&gt;
+&lt;li&gt;半径伤害 FRadialDamageEvent&lt;/li&gt;
+&lt;li&gt;其他类型伤害&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/AActor-TakeDamage.png&#34; alt=&#34;/pic/AActor类型/AActor-TakeDamage.png&#34; title=&#34;/pic/AActor类型/AActor-TakeDamage.png&#34; width=&#34;800&#34;/&gt;
+&lt;ol&gt;
+&lt;li&gt;伤害值 DamageAmout&lt;/li&gt;
+&lt;li&gt;伤害事件 DamageEvent&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;伤害来源所属Controller EventInstigator&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;伤害来源，Character或Pawn的上级Controller&lt;/li&gt;
+&lt;li&gt;如果划分队伍，判断伤害来自敌人还是友方&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;武器 DamageCauser&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;榴弹，子弹或是刀&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -17070,6 +17328,122 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 2.2计算伤害</title>
+      <link>https://toughcactus.github.io/post/2.2%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.2%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;虚幻引擎提供一组函数，用来对Actor造成伤害&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、每帧对Character造成伤害
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;在Tick中调用&lt;/li&gt;
+&lt;li&gt;伤害来源 自己&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;CharacterTakeDamage()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      TakeDamage(&lt;span style=&#34;color:#ae81ff&#34;&gt;0.1f&lt;/span&gt;, FDamageEvent{}, GetController(), &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、定义空的伤害委托处理函数，并注册
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;在HealthComponent中完成&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+1. 包含头文件
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;GameFramework/Actor.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+2. 定义日志类型
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  DEFINE_LOG_CATEGORY_STATIC(LogHealthComponent, All, All)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+3. 添加函数成员
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;委托类型FTakeAnyDamageSignature&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;从委托类型的定义获取处理函数签名&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;委托属性多播，支持蓝图，需要UFUNCTION宏&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UFUNCTION()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; OnTakeAnyDamage(AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamagedActor, &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Damage, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UDamageType&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageType, &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AController&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; InstigatedBy, AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageCauser);&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+4. 添加函数成员
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;在BeginPlay中调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RegisterDamageHandler()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      AActor &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;ThisActor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GetOwner();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ThisActor&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;OnTakeAnyDamage.AddDynamic(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-7&#34;&gt;
+三、实现伤害委托处理函数
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;Health减为0，作为负数仍在减&lt;/li&gt;
+&lt;li&gt;差不多一秒10帧&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage(AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamagedActor, &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Damage, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UDamageType&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageType, &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AController&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; InstigatedBy, AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageCauser)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      Health &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; Damage;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.10.1实现转向动画</title>
       <link>https://toughcactus.github.io/post/1.10.1%E5%AE%9E%E7%8E%B0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -17111,7 +17485,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;p&gt;叉乘&lt;/p&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/叉乘.png&#34; alt=&#34;/pic/实现转向动画/叉乘.png&#34; title=&#34;/pic/实现转向动画/叉乘.png&#34; width=&#34;600&#34;/&gt;
 &lt;ul&gt;
-&lt;li&gt;c.z(向量的z坐标)的符号说明向量c的方向&lt;/li&gt;
+&lt;li&gt;c.z(向量c的z坐标)的符号说明向量c的方向&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;theta为0，PI和-PI时，叉乘结果为0 &amp;gt; 无法通过向量确定平面，也就无法得到平面法向量&lt;/p&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/叉乘说明.png&#34; alt=&#34;/pic/实现转向动画/叉乘说明.png&#34; title=&#34;/pic/实现转向动画/叉乘说明.png&#34; width=&#34;400&#34;/&gt;
@@ -19244,6 +19618,10 @@ Run到JumpStart的转换复用Walk到JumpStart
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/29.uspringarmcomponent类型/&#34;&gt;USpringArmComponent类型&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/30.ucharactermovementcomponent类型/&#34;&gt;UCharacterMovementComponent类型&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/31.fobjectinitializer结构体/&#34;&gt;FObjectInitializer结构体&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/32.utextrendercomponent类型/&#34;&gt;UTextRenderComponent类型&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/33.宏/&#34;&gt;宏&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/34.fdamageevent结构体/&#34;&gt;FDamageEvent结构体&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/35.uactorcomponent类型/&#34;&gt;UActorComponent类型&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -19780,6 +20158,16 @@ Run到JumpStart的转换复用Walk到JumpStart
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;虚幻编辑器 &amp;gt; 2.1.5 &lt;a href=&#34;https://toughcactus.github.io/post/2.1.5调整textrender组件/&#34;&gt;调整TextRender组件&lt;/a&gt;                               &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++ &amp;gt; 计算伤害&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; 34. &lt;a href=&#34;https://toughcactus.github.io/post/34.fdamageevent结构体/&#34;&gt;FDamageEvent结构体&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; AActor类型&lt;/li&gt;
+&lt;li&gt;API &amp;gt; APawn类型&lt;/li&gt;
+&lt;li&gt;API &amp;gt; 35. &lt;a href=&#34;https://toughcactus.github.io/post/35.uactorcomponent类型/&#34;&gt;UActorComponent类型&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2.2 &lt;a href=&#34;https://toughcactus.github.io/post/2.2计算伤害/&#34;&gt;计算伤害&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;

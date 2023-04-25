@@ -29,7 +29,11 @@ UObject
 
 
 
-AActor  ">
+AActor  
+
+头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h
+源文件 UE5/Engine/Source/Runtime/Engine/Private/Actor.cpp
+">
 
 
 
@@ -119,7 +123,11 @@ UObject
 
 
 
-AActor  " />
+AActor  
+
+头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h
+源文件 UE5/Engine/Source/Runtime/Engine/Private/Actor.cpp
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/post/4.aactor%E7%B1%BB%E5%9E%8B/" /><meta property="article:section" content="post" />
 
@@ -144,7 +152,11 @@ UObject
 
 
 
-AActor  "/>
+AActor  
+
+头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h
+源文件 UE5/Engine/Source/Runtime/Engine/Private/Actor.cpp
+"/>
 
 
 
@@ -244,6 +256,10 @@ UObject</p>
 </table>
 <p>
 AActor  </p>
+<ul>
+<li>头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h</li>
+<li>源文件 UE5/Engine/Source/Runtime/Engine/Private/Actor.cpp</li>
+</ul>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
 一、AActor类型
@@ -571,6 +587,81 @@ AActor  </p>
 </div>
 </div>
 </div>
+<div id="outline-container-headline-27" class="outline-2">
+<h2 id="headline-27">
+十三、伤害
+</h2>
+<div id="outline-text-headline-27" class="outline-text-2">
+<div id="outline-container-headline-28" class="outline-3">
+<h3 id="headline-28">
+伤害委托类型
+</h3>
+<div id="outline-text-headline-28" class="outline-text-3">
+<ul>
+<li>FTakeAnyDamageSignature</li>
+<li>FTakePointDamageSignature</li>
+<li>FTakeRadialDamageSignature</li>
+</ul>
+<img src="/pic/AActor类型/伤害委托类型.png" alt="/pic/AActor类型/伤害委托类型.png" title="/pic/AActor类型/伤害委托类型.png" width="1700"/>
+</div>
+</div>
+<div id="outline-container-headline-29" class="outline-3">
+<h3 id="headline-29">
+伤害委托成员
+</h3>
+<div id="outline-text-headline-29" class="outline-text-3">
+<ul>
+<li>
+<p>伤害事件通过委托实现</p>
+<ul>
+<li>为Actor设置伤害委托的处理函数，在伤害发生时，调用处理函数</li>
+</ul>
+</li>
+<li>可以在蓝图中设置</li>
+<li>AActor::OnTakeAnyDamage</li>
+<li>AActor::OnTakePoingDamage</li>
+<li>AActor::OnTakeRadialDamage</li>
+</ul>
+<img src="/pic/AActor类型/伤害委托成员.png" alt="/pic/AActor类型/伤害委托成员.png" title="/pic/AActor类型/伤害委托成员.png" width="400"/>
+</div>
+</div>
+<div id="outline-container-headline-30" class="outline-3">
+<h3 id="headline-30">
+计算伤害 AActor::TakeDamage
+</h3>
+<div id="outline-text-headline-30" class="outline-text-3">
+<ul>
+<li>
+<p>根据伤害事件类型做相应处理，并调用委托处理函数</p>
+<ul>
+<li>点伤害 FPointDamageEvent</li>
+<li>半径伤害 FRadialDamageEvent</li>
+<li>其他类型伤害</li>
+</ul>
+</li>
+</ul>
+<img src="/pic/AActor类型/AActor-TakeDamage.png" alt="/pic/AActor类型/AActor-TakeDamage.png" title="/pic/AActor类型/AActor-TakeDamage.png" width="800"/>
+<ol>
+<li>伤害值 DamageAmout</li>
+<li>伤害事件 DamageEvent</li>
+<li>
+<p>伤害来源所属Controller EventInstigator</p>
+<ul>
+<li>伤害来源，Character或Pawn的上级Controller</li>
+<li>如果划分队伍，判断伤害来自敌人还是友方</li>
+</ul>
+</li>
+<li>
+<p>武器 DamageCauser</p>
+<ul>
+<li>榴弹，子弹或是刀</li>
+</ul>
+</li>
+</ol>
+</div>
+</div>
+</div>
+</div>
         </div>
         
 
@@ -628,7 +719,7 @@ AActor  </p>
     <div class="pagination post-pagination">
         <div class="left pagination-item ">
             
-                <a href="/post/33.%E5%AE%8F/">虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 33.宏</a>
+                <a href="/post/35.uactorcomponent%E7%B1%BB%E5%9E%8B/">虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 35.UActorComponent类型</a>
             
         </div>
         <div class="right pagination-item ">

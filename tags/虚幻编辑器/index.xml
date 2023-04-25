@@ -1978,7 +1978,7 @@ Object是否有效 IsValid
 &lt;p&gt;叉乘&lt;/p&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/叉乘.png&#34; alt=&#34;/pic/实现转向动画/叉乘.png&#34; title=&#34;/pic/实现转向动画/叉乘.png&#34; width=&#34;600&#34;/&gt;
 &lt;ul&gt;
-&lt;li&gt;c.z(向量的z坐标)的符号说明向量c的方向&lt;/li&gt;
+&lt;li&gt;c.z(向量c的z坐标)的符号说明向量c的方向&lt;/li&gt;
 &lt;li&gt;
 &lt;p&gt;theta为0，PI和-PI时，叉乘结果为0 &amp;gt; 无法通过向量确定平面，也就无法得到平面法向量&lt;/p&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/实现转向动画/叉乘说明.png&#34; alt=&#34;/pic/实现转向动画/叉乘说明.png&#34; title=&#34;/pic/实现转向动画/叉乘说明.png&#34; width=&#34;400&#34;/&gt;

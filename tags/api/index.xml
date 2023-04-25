@@ -1161,7 +1161,10 @@ DECLARE_MULTICAST_DELEGATE_OneParam
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://toughcactus.github.io/post/21.apawn%E7%B1%BB%E5%9E%8B/</guid>
-      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+      <description>&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Pawn.h&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
 一、配置用户输入 APawn::SetupPlayerInputComponent
 &lt;/h2&gt;
@@ -1311,6 +1314,28 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-12&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-GetVelocity.png&#34; alt=&#34;/pic/APawn类型/APawn-GetVelocity.png&#34; title=&#34;/pic/APawn类型/APawn-GetVelocity.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-13&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-13&#34;&gt;
+十、计算伤害 APawn::TakeDamage
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-13&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;参考AActor::TakeDamage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-TakeDamage.png&#34; alt=&#34;/pic/APawn类型/APawn-TakeDamage.png&#34; title=&#34;/pic/APawn类型/APawn-TakeDamage.png&#34; width=&#34;800&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-14&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-14&#34;&gt;
+十一、获取指向AController的指针 APawn::GetController
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-14&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;可以是PlayerController，也可以是AIController&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-GetController.png&#34; alt=&#34;/pic/APawn类型/APawn-GetController.png&#34; title=&#34;/pic/APawn类型/APawn-GetController.png&#34; width=&#34;400&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -1934,6 +1959,117 @@ check宏
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 34.FDamageEvent结构体</title>
+      <link>https://toughcactus.github.io/post/34.fdamageevent%E7%BB%93%E6%9E%84%E4%BD%93/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/34.fdamageevent%E7%BB%93%E6%9E%84%E4%BD%93/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;伤害事件，包含伤害相关信息&lt;/li&gt;
+&lt;li&gt;我们可以创建FDamageEvent的派生类，定义自己的伤害事件&lt;/li&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/Engine/DamageEvents.h  &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;伤害计算模型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点伤害 FPointDamageEvent&lt;/li&gt;
+&lt;li&gt;半径伤害 FRadialDamageEvent&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;数值伤害&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;量化结果&lt;/li&gt;
+&lt;li&gt;较简单，生命值直接减去数值&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、FDamageEvent
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;包含伤害信息&lt;/li&gt;
+&lt;li&gt;FPointDamageEvent和FRadialDamageEvent派生自FDamageEvent&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FDamageEvent结构体/FDamageEvent.png&#34; alt=&#34;/pic/FDamageEvent结构体/FDamageEvent.png&#34; title=&#34;/pic/FDamageEvent结构体/FDamageEvent.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、UDamageType类型
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/DamageType.h&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;伤害会有声效，动画和对Character造成的伤害数值&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;爆炸(explosion)&lt;/li&gt;
+&lt;li&gt;火(fire)&lt;/li&gt;
+&lt;li&gt;岩浆(lava)  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、点伤害事件 FPointDamageEvent
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;子弹和砍式武器造成&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;信息包含伤害方向，身体的受伤部位&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用以播放Character对应的骨骼动画&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FDamageEvent结构体/FPointDamageEvent.png&#34; alt=&#34;/pic/FDamageEvent结构体/FPointDamageEvent.png&#34; title=&#34;/pic/FDamageEvent结构体/FPointDamageEvent.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、半径伤害事件 FRadialDamageEvent
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;如榴弹爆炸(grenade expolosion)&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;信息包含球(sphere)的参数，空间位置(position)，半径&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;用以计算伤害&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FDamageEvent结构体/FRadialDamageEvent.png&#34; alt=&#34;/pic/FDamageEvent结构体/FRadialDamageEvent.png&#34; title=&#34;/pic/FDamageEvent结构体/FRadialDamageEvent.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 35.UActorComponent类型</title>
+      <link>https://toughcactus.github.io/post/35.uactorcomponent%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/35.uactorcomponent%E7%B1%BB%E5%9E%8B/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;自定义ActorComponent类型&lt;/li&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/Components/ActorComponent.h&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、获取指向Actor的指针 UActorComponent::GetOwner
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; alt=&#34;/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; title=&#34;/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 4.AActor类型</title>
       <link>https://toughcactus.github.io/post/4.aactor%E7%B1%BB%E5%9E%8B/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -1957,6 +2093,10 @@ UObject&lt;/p&gt;
 &lt;/table&gt;
 &lt;p&gt;
 AActor  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h&lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/Actor.cpp&lt;/li&gt;
+&lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
 一、AActor类型
@@ -2280,6 +2420,81 @@ AActor  &lt;/p&gt;
 &lt;/h3&gt;
 &lt;div id=&#34;outline-text-headline-26&#34; class=&#34;outline-text-3&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/AActor-GetActorUpVector.png&#34; alt=&#34;/pic/AActor类型/AActor-GetActorUpVector.png&#34; title=&#34;/pic/AActor类型/AActor-GetActorUpVector.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-27&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-27&#34;&gt;
+十三、伤害
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-27&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-28&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-28&#34;&gt;
+伤害委托类型
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-28&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;FTakeAnyDamageSignature&lt;/li&gt;
+&lt;li&gt;FTakePointDamageSignature&lt;/li&gt;
+&lt;li&gt;FTakeRadialDamageSignature&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/伤害委托类型.png&#34; alt=&#34;/pic/AActor类型/伤害委托类型.png&#34; title=&#34;/pic/AActor类型/伤害委托类型.png&#34; width=&#34;1700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-29&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-29&#34;&gt;
+伤害委托成员
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-29&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;伤害事件通过委托实现&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;为Actor设置伤害委托的处理函数，在伤害发生时，调用处理函数&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;可以在蓝图中设置&lt;/li&gt;
+&lt;li&gt;AActor::OnTakeAnyDamage&lt;/li&gt;
+&lt;li&gt;AActor::OnTakePoingDamage&lt;/li&gt;
+&lt;li&gt;AActor::OnTakeRadialDamage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/伤害委托成员.png&#34; alt=&#34;/pic/AActor类型/伤害委托成员.png&#34; title=&#34;/pic/AActor类型/伤害委托成员.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-30&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-30&#34;&gt;
+计算伤害 AActor::TakeDamage
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-30&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;根据伤害事件类型做相应处理，并调用委托处理函数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;点伤害 FPointDamageEvent&lt;/li&gt;
+&lt;li&gt;半径伤害 FRadialDamageEvent&lt;/li&gt;
+&lt;li&gt;其他类型伤害&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/AActor-TakeDamage.png&#34; alt=&#34;/pic/AActor类型/AActor-TakeDamage.png&#34; title=&#34;/pic/AActor类型/AActor-TakeDamage.png&#34; width=&#34;800&#34;/&gt;
+&lt;ol&gt;
+&lt;li&gt;伤害值 DamageAmout&lt;/li&gt;
+&lt;li&gt;伤害事件 DamageEvent&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;伤害来源所属Controller EventInstigator&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;伤害来源，Character或Pawn的上级Controller&lt;/li&gt;
+&lt;li&gt;如果划分队伍，判断伤害来自敌人还是友方&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;武器 DamageCauser&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;榴弹，子弹或是刀&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
