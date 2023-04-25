@@ -5483,6 +5483,28 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;li&gt;2.2 &lt;a href=&#34;https://toughcactus.github.io/post/2.2计算伤害/&#34;&gt;计算伤害&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加伤害源Actor 半径伤害&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.3.1 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.1创建stdevdamageactor/&#34;&gt;创建STDevDamageActor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; 36. &lt;a href=&#34;https://toughcactus.github.io/post/36.drawdebughelpers库/&#34;&gt;DrawDebugHelpers库&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2.3.2 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.2绘制半径伤害球体/&#34;&gt;绘制半径伤害球体&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.3.3 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.3在关卡中添加stdevdamageactor/&#34;&gt;在关卡中添加STDevDamageActor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; UGameplayStatics类型&lt;/li&gt;
+&lt;li&gt;2.3.4 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.4对半径伤害球体内actor造成伤害/&#34;&gt;对半径伤害球体内Actor造成伤害&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.3.5 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.5查看半径伤害效果/&#34;&gt;查看半径伤害效果&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -5656,8 +5678,8 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Super&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Tick(DeltaTime);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	DisplayHealthText();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	CharacterTakeDamage();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#75715e&#34;&gt;// CharacterTakeDamage();
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Called to bind functionality to input
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;SetupPlayerInputComponent(UInputComponent&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; PlayerInputComponent)
@@ -5953,6 +5975,125 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// STDevDamageActor.cpp
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Shoot Training Game, All Rights Reserved.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Dev/STDevDamageActor.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;DrawDebugHelpers.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Engine/World.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Kismet/GameplayStatics.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Sets default values
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;ASTDevDamageActor&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;ASTDevDamageActor()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt; 	&lt;span style=&#34;color:#75715e&#34;&gt;// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don&amp;#39;t need it.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	PrimaryActorTick.bCanEverTick &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; true;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	InitSceneComponent();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Called when the game starts or when spawned
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTDevDamageActor&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;BeginPlay()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Super&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;BeginPlay();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Called every frame
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTDevDamageActor&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Tick(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; DeltaTime)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Super&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Tick(DeltaTime);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	DrawSphere();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	DevTakeDamage();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTDevDamageActor&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitSceneComponent()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	SceneComponent &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; CreateDefaultSubobject&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;USceneComponent&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SceneComponent&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	SetRootComponent(SceneComponent);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTDevDamageActor&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;DrawSphere()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	DrawDebugSphere(GetWorld(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;					GetActorLocation(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;					Radius,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;					&lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;					SphereColor);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTDevDamageActor&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;DevTakeDamage()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UGameplayStatics&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;ApplyRadialDamage(GetWorld(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;										Damage,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;										GetActorLocation(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;										Radius,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;										&lt;span style=&#34;color:#66d9ef&#34;&gt;nullptr&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;										{},
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;										&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;										&lt;span style=&#34;color:#66d9ef&#34;&gt;nullptr&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;										DoFullDamage);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// STDevDamageActor.h
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Shoot Training Game, All Rights Reserved.
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#pragma once
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;CoreMinimal.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;GameFramework/Actor.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;STDevDamageActor.generated.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;UCLASS()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;SHOOTTRAINING_API&lt;/span&gt; ASTDevDamageActor : &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; AActor
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	GENERATED_BODY()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;	
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#75715e&#34;&gt;// Sets default values for this actor&amp;#39;s properties
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	ASTDevDamageActor();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#75715e&#34;&gt;// Called when the game starts or when spawned
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; BeginPlay() &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;	
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#75715e&#34;&gt;// Called every frame
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;virtual&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; Tick(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; DeltaTime) &lt;span style=&#34;color:#66d9ef&#34;&gt;override&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	USceneComponent &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;SceneComponent;	
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; InitSceneComponent();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UPROPERTY(EditAnywhere)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Radius &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;300.0f&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UPROPERTY(EditAnywhere)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	FColor SphereColor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; FColor&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Red;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; DrawSphere();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UPROPERTY(EditAnywhere)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Damage &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10.0f&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UPROPERTY(EditAnywhere)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; DoFullDamage &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; false;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;private&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; DevTakeDamage();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// STGameModeBase.cpp
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Shoot Training Game, All Rights Reserved.
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
@@ -6049,13 +6190,17 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage(AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamagedActor, &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Damage, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UDamageType&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageType, &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AController&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; InstigatedBy, AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageCauser)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UE_LOG(LogHealthComponent, Display, TEXT(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Damage: %.0f&amp;#34;&lt;/span&gt;), Damage);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Health &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; Damage;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RegisterDamageHandler()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	AActor &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;ThisActor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GetOwner();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	ThisActor&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;OnTakeAnyDamage.AddDynamic(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (ThisActor)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		ThisActor&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;OnTakeAnyDamage.AddDynamic(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -8044,6 +8189,28 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;li&gt;2.2 &lt;a href=&#34;https://toughcactus.github.io/post/2.2计算伤害/&#34;&gt;计算伤害&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加伤害源Actor 半径伤害&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.3.1 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.1创建stdevdamageactor/&#34;&gt;创建STDevDamageActor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; 36. &lt;a href=&#34;https://toughcactus.github.io/post/36.drawdebughelpers库/&#34;&gt;DrawDebugHelpers库&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2.3.2 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.2绘制半径伤害球体/&#34;&gt;绘制半径伤害球体&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.3.3 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.3在关卡中添加stdevdamageactor/&#34;&gt;在关卡中添加STDevDamageActor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; UGameplayStatics类型&lt;/li&gt;
+&lt;li&gt;2.3.4 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.4对半径伤害球体内actor造成伤害/&#34;&gt;对半径伤害球体内Actor造成伤害&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.3.5 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.5查看半径伤害效果/&#34;&gt;查看半径伤害效果&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -9378,6 +9545,14 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-GetController.png&#34; alt=&#34;/pic/APawn类型/APawn-GetController.png&#34; title=&#34;/pic/APawn类型/APawn-GetController.png&#34; width=&#34;400&#34;/&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-15&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-15&#34;&gt;
+十二、指向AController的指针 APawn::Controller
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-15&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APawn类型/APawn-Controller.png&#34; alt=&#34;/pic/APawn类型/APawn-Controller.png&#34; title=&#34;/pic/APawn类型/APawn-Controller.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -9580,6 +9755,8 @@ YOZ平面旋转 APawn::AddControllerRollInput
       <description>&lt;ul&gt;
 &lt;li&gt;虚幻引擎提供的辅助类&lt;/li&gt;
 &lt;li&gt;提供多种静态函数，均可在蓝图中使用&lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/GameplayStatics.cpp&lt;/li&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/GameplayStatics.h&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
@@ -9611,6 +9788,130 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/ol&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UGameplayStatics&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;GetAllActorsOfClass(GetWorld(), AGeometryPawn&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;StaticClass(), Pawns);&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+二、计算伤害
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+半径伤害 UGameplayStatics::ApplyRadialDamageWithFalloff
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;静态成员&lt;/li&gt;
+&lt;li&gt;调用OverlapMultiByObjectType搜索和球体重叠的Actor，对这些Actor调用TakeDamage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamageWithFalloff-参数说明.png&#34; alt=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamageWithFalloff-参数说明.png&#34; title=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamageWithFalloff-参数说明.png&#34;/&gt;  &lt;/p&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamageWithFalloff.png&#34; alt=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamageWithFalloff.png&#34; title=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamageWithFalloff.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+三、计算伤害 包裹函数
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-6&#34;&gt;
+半径伤害 UGameplayStatics::ApplyRadialDamage
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;静态成员&lt;/li&gt;
+&lt;li&gt;包裹函数，封装UGameplayStatics::ApplyRadialDamageWithFalloff&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamage-参数说明.png&#34; alt=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamage-参数说明.png&#34; title=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamage-参数说明.png&#34;/&gt;  &lt;/p&gt;
+&lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamage.png&#34; alt=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamage.png&#34; title=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamage.png&#34;/&gt;  &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;可以传入指向UWorld对象的指针 WorldContextObject&lt;/li&gt;
+&lt;li&gt;伤害的数量特征(quantitative characteristic) BaseDamage&lt;/li&gt;
+&lt;li&gt;半径伤害的中心位置 Origin&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;伤害类型 DamageTypeClass&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;UDamageType及其派生类 类型变量&lt;/li&gt;
+&lt;li&gt;处理函数根据伤害类型做出相应处理&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;不受伤害的Actor数组 IgnoreActors&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;伤害来源 DamageCauser&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;可以是武器&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;伤害来源的上级Controller InstigatedByController&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;当伤害来源是Pawn或Character时，传入上级Controller，用以判断阵营&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;计算半径伤害用标志 DoFullDamage&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;为true时，处于伤害半径球体内的Actor，受到相同伤害值&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;计算半径伤害模型简单&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;为false时，离球体中心越近，伤害值越大&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;需要一定开销&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;减免伤害用枚举变量 DamagePreventionChannel&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;碰撞系数&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当Character和伤害中心有隔挡时，如何计算伤害&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;在某些情形，允许Character不受伤害&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UGameplayStatics&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;ApplyRadialDamage(GetWorld(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                      Damage,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                      GetActorLocation(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                      Radius,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                      &lt;span style=&#34;color:#66d9ef&#34;&gt;nullptr&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                      {},
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                      &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                      &lt;span style=&#34;color:#66d9ef&#34;&gt;nullptr&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                      DoFullDamage);&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+点伤害 UGameplayStatics::ApplyPointDamage
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;存在碰撞，需要知道目标Actor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/UGameplayStatics类型/UGameplayStatics-ApplyPointDamage.png&#34; alt=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyPointDamage.png&#34; title=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyPointDamage.png&#34; width=&#34;1400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-8&#34;&gt;
+其他类型 UGameplayStatics::ApplyDamage
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/UGameplayStatics类型/UGameplayStatics-ApplyDamage.png&#34; alt=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyDamage.png&#34; title=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyDamage.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
@@ -10048,9 +10349,10 @@ check宏
 &lt;ul&gt;
 &lt;li&gt;爆炸(explosion)&lt;/li&gt;
 &lt;li&gt;火(fire)&lt;/li&gt;
-&lt;li&gt;岩浆(lava)  &lt;/li&gt;
+&lt;li&gt;岩浆(lava)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;处理函数中，根据UDamageType值做出相应处理&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -10106,6 +10408,61 @@ check宏
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; alt=&#34;/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; title=&#34;/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 36.DrawDebugHelpers库</title>
+      <link>https://toughcactus.github.io/post/36.drawdebughelpers%E5%BA%93/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/36.drawdebughelpers%E5%BA%93/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Public/DrawDebugHelpers.h&lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/DrawDebugHelpers.cpp&lt;/li&gt;
+&lt;li&gt;绘制图形基元(graphic primitives)库&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、头文件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;DrawDebugHelpers.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、绘制球体 DrawDebugSphere
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/DrawDebugHelpers库/DrawDebugSphere.png&#34; alt=&#34;/pic/DrawDebugHelpers库/DrawDebugSphere.png&#34; title=&#34;/pic/DrawDebugHelpers库/DrawDebugSphere.png&#34; width=&#34;700&#34;/&gt;
+&lt;ol&gt;
+&lt;li&gt;指向UWorld对象的指针 InWorld&lt;/li&gt;
+&lt;li&gt;球体中心坐标 Center&lt;/li&gt;
+&lt;li&gt;球体半径 Radius&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;细分参数(tessellation parameter) Segments&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;随着Segments的增大，球体棱角越少，绘制开销愈大&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;颜色 Color&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;FColor类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  DrawDebugSphere(GetWorld(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                  GetActorLocation(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                  Radius,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                  &lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                  FColor&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Red);&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -17416,7 +17773,10 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RegisterDamageHandler()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      AActor &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;ThisActor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GetOwner();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      ThisActor&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;OnTakeAnyDamage.AddDynamic(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (ThisActor)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          ThisActor&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;OnTakeAnyDamage.AddDynamic(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -17432,6 +17792,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;li&gt;private&lt;/li&gt;
 &lt;li&gt;Health减为0，作为负数仍在减&lt;/li&gt;
 &lt;li&gt;差不多一秒10帧&lt;/li&gt;
+&lt;li&gt;触发处理函数时，不会传入整个FDamageEvent变量，而是传入UDamageType&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage(AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamagedActor, &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Damage, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UDamageType&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageType, &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AController&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; InstigatedBy, AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageCauser)
@@ -17439,6 +17800,212 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      Health &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; Damage;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 2.3.2绘制半径伤害球体</title>
+      <link>https://toughcactus.github.io/post/2.3.2%E7%BB%98%E5%88%B6%E5%8D%8A%E5%BE%84%E4%BC%A4%E5%AE%B3%E7%90%83%E4%BD%93/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.3.2%E7%BB%98%E5%88%B6%E5%8D%8A%E5%BE%84%E4%BC%A4%E5%AE%B3%E7%90%83%E4%BD%93/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;STDevDamageActor模拟榴弹在Character附近爆炸&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、屏蔽ASTBaseCharacter::Tick中调用CharacterTakeDamage
+&lt;/h2&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、添加头文件路径
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;ShootTraining/Source/ShootTraining/ShootTraining.Build.cs&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c#&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c#&#34; data-lang=&#34;c#&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  PublicIncludePaths.AddRange(&lt;span style=&#34;color:#66d9ef&#34;&gt;new&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;string&lt;/span&gt;[] { &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining/Public/Player&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining/Public/Components&amp;#34;&lt;/span&gt;, &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;ShootTraining/Public/Dev&amp;#34;&lt;/span&gt; });&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、使STDevDamageActor具有变换属性
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-4&#34;&gt;
+1. 添加数据成员
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;protected&lt;/li&gt;
+&lt;li&gt;蓝图可设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  USceneComponent &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;SceneComponent;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-5&#34;&gt;
+2. 添加函数成员
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在构造函数中调用&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTDevDamageActor&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InitSceneComponent()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      SceneComponent &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; CreateDefaultSubobject&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;USceneComponent&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;SceneComponent&amp;#34;&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      SetRootComponent(SceneComponent);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+四、绘制球体，模拟爆炸
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-7&#34;&gt;
+1. 添加头文件
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;DrawDebugHelpers.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-8&#34;&gt;
+2. 添加数据成员
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;protected&lt;/li&gt;
+&lt;li&gt;蓝图可设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditAnywhere)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Radius &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;300.0f&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditAnywhere)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  FColor SphereColor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; FColor&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Red;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-9&#34;&gt;
+3. 添加函数成员
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;在Tick中调用，每帧都绘制球体&lt;/li&gt;
+&lt;li&gt;DrawDebugSphere的第一个参数类型为UWorld，所以不用包含UWorld的头文件&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTDevDamageActor&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;DrawSphere()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      DrawDebugSphere(GetWorld(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                      GetActorLocation(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                      Radius,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                      &lt;span style=&#34;color:#ae81ff&#34;&gt;24&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                      SphereColor);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 2.3.4对半径伤害球体内Actor造成伤害</title>
+      <link>https://toughcactus.github.io/post/2.3.4%E5%AF%B9%E5%8D%8A%E5%BE%84%E4%BC%A4%E5%AE%B3%E7%90%83%E4%BD%93%E5%86%85actor%E9%80%A0%E6%88%90%E4%BC%A4%E5%AE%B3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.3.4%E5%AF%B9%E5%8D%8A%E5%BE%84%E4%BC%A4%E5%AE%B3%E7%90%83%E4%BD%93%E5%86%85actor%E9%80%A0%E6%88%90%E4%BC%A4%E5%AE%B3/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加头文件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Engine/World.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Kismet/GameplayStatics.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、添加数据成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;protected&lt;/li&gt;
+&lt;li&gt;蓝图可设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditAnywhere)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Damage &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;10.0f&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditAnywhere)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; DoFullDamage &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; false;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;在Tick中调用&lt;/li&gt;
+&lt;li&gt;ApplyRadialDamage的第一个参数类型为UObject，此时传入UWorld，需包含UWorld头文件  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTDevDamageActor&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;DevTakeDamage()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      UGameplayStatics&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;ApplyRadialDamage(GetWorld(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                          Damage,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                          GetActorLocation(),
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                          Radius,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                          &lt;span style=&#34;color:#66d9ef&#34;&gt;nullptr&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                          {},
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                          &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                          &lt;span style=&#34;color:#66d9ef&#34;&gt;nullptr&lt;/span&gt;,
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;                                          DoFullDamage);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-4&#34;&gt;
+四、在伤害处理函数USTHealthComponent::OnTakeAnyDamage中输出伤害值
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;验证DoFullDamage机制&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UE_LOG(LogHealthComponent, Display, TEXT(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Damage: %.0f&amp;#34;&lt;/span&gt;), Damage);&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -19578,6 +20145,125 @@ Run到JumpStart的转换复用Walk到JumpStart
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 2.3.1创建STDevDamageActor</title>
+      <link>https://toughcactus.github.io/post/2.3.1%E5%88%9B%E5%BB%BAstdevdamageactor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.3.1%E5%88%9B%E5%BB%BAstdevdamageactor/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;伤害来源Actor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建派生自Actor的C++类 &amp;gt; STDevDamageActor
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;公有类&lt;/li&gt;
+&lt;li&gt;头文件 Projects/5.1.1/SHootTraining/Source/ShootTraining/Public/Dev/ASTDevDamageActor&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/创建STDevDamageActor/创建STDevDamageActor.png&#34; alt=&#34;/pic/创建STDevDamageActor/创建STDevDamageActor.png&#34; title=&#34;/pic/创建STDevDamageActor/创建STDevDamageActor.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 2.3.3在关卡中添加STDevDamageActor</title>
+      <link>https://toughcactus.github.io/post/2.3.3%E5%9C%A8%E5%85%B3%E5%8D%A1%E4%B8%AD%E6%B7%BB%E5%8A%A0stdevdamageactor/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.3.3%E5%9C%A8%E5%85%B3%E5%8D%A1%E4%B8%AD%E6%B7%BB%E5%8A%A0stdevdamageactor/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、调整BP_STBaseCharacter的Camera位置
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;向上，向后&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在关卡中添加STDevDamageActor/调整Camera.png&#34; alt=&#34;/pic/在关卡中添加STDevDamageActor/调整Camera.png&#34; title=&#34;/pic/在关卡中添加STDevDamageActor/调整Camera.png&#34; width=&#34;1000&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在关卡中添加STDevDamageActor
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;一个使用默认设置&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在关卡中添加STDevDamageActor/DamageSphere-Red.png&#34; alt=&#34;/pic/在关卡中添加STDevDamageActor/DamageSphere-Red.png&#34; title=&#34;/pic/在关卡中添加STDevDamageActor/DamageSphere-Red.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;另一个设置半径和颜色&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在关卡中添加STDevDamageActor/DamageSphere-Blue.png&#34; alt=&#34;/pic/在关卡中添加STDevDamageActor/DamageSphere-Blue.png&#34; title=&#34;/pic/在关卡中添加STDevDamageActor/DamageSphere-Blue.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;调整STDevDamageActor的位置&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;效果图&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在关卡中添加STDevDamageActor/效果图.png&#34; alt=&#34;/pic/在关卡中添加STDevDamageActor/效果图.png&#34; title=&#34;/pic/在关卡中添加STDevDamageActor/效果图.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 2.3.5查看半径伤害效果</title>
+      <link>https://toughcactus.github.io/post/2.3.5%E6%9F%A5%E7%9C%8B%E5%8D%8A%E5%BE%84%E4%BC%A4%E5%AE%B3%E6%95%88%E6%9E%9C/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.3.5%E6%9F%A5%E7%9C%8B%E5%8D%8A%E5%BE%84%E4%BC%A4%E5%AE%B3%E6%95%88%E6%9E%9C/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、设置STDevDamageActor
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;DamageSphere-Red使用默认设置&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/查看半径伤害效果/DamageSphere-Red.png&#34; alt=&#34;/pic/查看半径伤害效果/DamageSphere-Red.png&#34; title=&#34;/pic/查看半径伤害效果/DamageSphere-Red.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;DamageSphere-Blue勾选DoFullDamage&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/查看半径伤害效果/DamageSphere-Blue.png&#34; alt=&#34;/pic/查看半径伤害效果/DamageSphere-Blue.png&#34; title=&#34;/pic/查看半径伤害效果/DamageSphere-Blue.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、验证DoFullDamage
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;处于蓝色球内，伤害值一致&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/查看半径伤害效果/Blue日志.png&#34; alt=&#34;/pic/查看半径伤害效果/Blue日志.png&#34; title=&#34;/pic/查看半径伤害效果/Blue日志.png&#34; width=&#34;700&#34;/&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;处于红色球内，离球心越近，伤害值越大&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;球心在空中，跳跃也会缩短到球心的距离&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/查看半径伤害效果/Red日志.png&#34; alt=&#34;/pic/查看半径伤害效果/Red日志.png&#34; title=&#34;/pic/查看半径伤害效果/Red日志.png&#34; width=&#34;300&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、伤害球内的所有Actor都会受到伤害
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/查看半径伤害效果/伤害球内所有Actor均受到伤害.png&#34; alt=&#34;/pic/查看半径伤害效果/伤害球内所有Actor均受到伤害.png&#34; title=&#34;/pic/查看半径伤害效果/伤害球内所有Actor均受到伤害.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 API</title>
       <link>https://toughcactus.github.io/handbook/ue/api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -19622,6 +20308,7 @@ Run到JumpStart的转换复用Walk到JumpStart
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/33.宏/&#34;&gt;宏&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/34.fdamageevent结构体/&#34;&gt;FDamageEvent结构体&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/35.uactorcomponent类型/&#34;&gt;UActorComponent类型&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://toughcactus.github.io/post/36.drawdebughelpers库/&#34;&gt;DrawDebugHelpers库&lt;/a&gt;      &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;li&gt;
@@ -20168,6 +20855,28 @@ Run到JumpStart的转换复用Walk到JumpStart
 &lt;li&gt;API &amp;gt; APawn类型&lt;/li&gt;
 &lt;li&gt;API &amp;gt; 35. &lt;a href=&#34;https://toughcactus.github.io/post/35.uactorcomponent类型/&#34;&gt;UActorComponent类型&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;2.2 &lt;a href=&#34;https://toughcactus.github.io/post/2.2计算伤害/&#34;&gt;计算伤害&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加伤害源Actor 半径伤害&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.3.1 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.1创建stdevdamageactor/&#34;&gt;创建STDevDamageActor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; 36. &lt;a href=&#34;https://toughcactus.github.io/post/36.drawdebughelpers库/&#34;&gt;DrawDebugHelpers库&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;2.3.2 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.2绘制半径伤害球体/&#34;&gt;绘制半径伤害球体&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.3.3 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.3在关卡中添加stdevdamageactor/&#34;&gt;在关卡中添加STDevDamageActor&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++  &lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; UGameplayStatics类型&lt;/li&gt;
+&lt;li&gt;2.3.4 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.4对半径伤害球体内actor造成伤害/&#34;&gt;对半径伤害球体内Actor造成伤害&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.3.5 &lt;a href=&#34;https://toughcactus.github.io/post/2.3.5查看半径伤害效果/&#34;&gt;查看半径伤害效果&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;

@@ -216,8 +216,8 @@
 </span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>Tick(DeltaTime);
 </span></span><span style="display:flex;"><span>	DisplayHealthText();
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	CharacterTakeDamage();
-</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// CharacterTakeDamage();
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Called to bind functionality to input
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>SetupPlayerInputComponent(UInputComponent<span style="color:#f92672">*</span> PlayerInputComponent)
@@ -513,6 +513,125 @@
 </div>
 <div class="src src-c++">
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// STDevDamageActor.cpp
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Shoot Training Game, All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Dev/STDevDamageActor.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;DrawDebugHelpers.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Engine/World.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Kismet/GameplayStatics.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Sets default values
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>ASTDevDamageActor<span style="color:#f92672">::</span>ASTDevDamageActor()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span> 	<span style="color:#75715e">// Set this actor to call Tick() every frame.  You can turn this off to improve performance if you don&#39;t need it.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	PrimaryActorTick.bCanEverTick <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>	InitSceneComponent();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called when the game starts or when spawned
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASTDevDamageActor<span style="color:#f92672">::</span>BeginPlay()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>BeginPlay();
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// Called every frame
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span><span style="color:#66d9ef">void</span> ASTDevDamageActor<span style="color:#f92672">::</span>Tick(<span style="color:#66d9ef">float</span> DeltaTime)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	Super<span style="color:#f92672">::</span>Tick(DeltaTime);
+</span></span><span style="display:flex;"><span>	DrawSphere();
+</span></span><span style="display:flex;"><span>	DevTakeDamage();
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTDevDamageActor<span style="color:#f92672">::</span>InitSceneComponent()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	SceneComponent <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>USceneComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;SceneComponent&#34;</span>);
+</span></span><span style="display:flex;"><span>	SetRootComponent(SceneComponent);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTDevDamageActor<span style="color:#f92672">::</span>DrawSphere()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	DrawDebugSphere(GetWorld(),
+</span></span><span style="display:flex;"><span>					GetActorLocation(),
+</span></span><span style="display:flex;"><span>					Radius,
+</span></span><span style="display:flex;"><span>					<span style="color:#ae81ff">24</span>,
+</span></span><span style="display:flex;"><span>					SphereColor);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTDevDamageActor<span style="color:#f92672">::</span>DevTakeDamage()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	UGameplayStatics<span style="color:#f92672">::</span>ApplyRadialDamage(GetWorld(),
+</span></span><span style="display:flex;"><span>										Damage,
+</span></span><span style="display:flex;"><span>										GetActorLocation(),
+</span></span><span style="display:flex;"><span>										Radius,
+</span></span><span style="display:flex;"><span>										<span style="color:#66d9ef">nullptr</span>,
+</span></span><span style="display:flex;"><span>										{},
+</span></span><span style="display:flex;"><span>										<span style="color:#66d9ef">this</span>,
+</span></span><span style="display:flex;"><span>										<span style="color:#66d9ef">nullptr</span>,
+</span></span><span style="display:flex;"><span>										DoFullDamage);
+</span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">// STDevDamageActor.h
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Shoot Training Game, All Rights Reserved.
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#pragma once
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;CoreMinimal.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFramework/Actor.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;STDevDamageActor.generated.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
+</span></span><span style="display:flex;"><span>UCLASS()
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">SHOOTTRAINING_API</span> ASTDevDamageActor : <span style="color:#66d9ef">public</span> AActor
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	GENERATED_BODY()
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Sets default values for this actor&#39;s properties
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	ASTDevDamageActor();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called when the game starts or when spawned
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> BeginPlay() <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">public</span><span style="color:#f92672">:</span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// Called every frame
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	<span style="color:#66d9ef">virtual</span> <span style="color:#66d9ef">void</span> Tick(<span style="color:#66d9ef">float</span> DeltaTime) <span style="color:#66d9ef">override</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+</span></span><span style="display:flex;"><span>	USceneComponent <span style="color:#f92672">*</span>SceneComponent;	
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> InitSceneComponent();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> Radius <span style="color:#f92672">=</span> <span style="color:#ae81ff">300.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span>	FColor SphereColor <span style="color:#f92672">=</span> FColor<span style="color:#f92672">::</span>Red;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> DrawSphere();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> Damage <span style="color:#f92672">=</span> <span style="color:#ae81ff">10.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">bool</span> DoFullDamage <span style="color:#f92672">=</span> false;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> DevTakeDamage();
+</span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
+</div>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// STGameModeBase.cpp
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">// Shoot Training Game, All Rights Reserved.
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
@@ -609,13 +728,17 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> USTHealthComponent<span style="color:#f92672">::</span>OnTakeAnyDamage(AActor<span style="color:#f92672">*</span> DamagedActor, <span style="color:#66d9ef">float</span> Damage, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDamageType</span><span style="color:#f92672">*</span> DamageType, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AController</span><span style="color:#f92672">*</span> InstigatedBy, AActor<span style="color:#f92672">*</span> DamageCauser)
 </span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	UE_LOG(LogHealthComponent, Display, TEXT(<span style="color:#e6db74">&#34;Damage: %.0f&#34;</span>), Damage);
 </span></span><span style="display:flex;"><span>	Health <span style="color:#f92672">-=</span> Damage;
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> USTHealthComponent<span style="color:#f92672">::</span>RegisterDamageHandler()
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>	AActor <span style="color:#f92672">*</span>ThisActor <span style="color:#f92672">=</span> GetOwner();
-</span></span><span style="display:flex;"><span>	ThisActor<span style="color:#f92672">-&gt;</span>OnTakeAnyDamage.AddDynamic(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>USTHealthComponent<span style="color:#f92672">::</span>OnTakeAnyDamage);
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (ThisActor)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		ThisActor<span style="color:#f92672">-&gt;</span>OnTakeAnyDamage.AddDynamic(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>USTHealthComponent<span style="color:#f92672">::</span>OnTakeAnyDamage);
+</span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
 </div>
 <div class="src src-c++">

@@ -15,6 +15,8 @@
 <meta name="description" content="
 虚幻引擎提供的辅助类
 提供多种静态函数，均可在蓝图中使用
+源文件 UE5/Engine/Source/Runtime/Engine/Private/GameplayStatics.cpp
+头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/GameplayStatics.h
 ">
 
 
@@ -91,6 +93,8 @@
 <meta property="og:description" content="
 虚幻引擎提供的辅助类
 提供多种静态函数，均可在蓝图中使用
+源文件 UE5/Engine/Source/Runtime/Engine/Private/GameplayStatics.cpp
+头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/GameplayStatics.h
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/post/26.ugameplaystatics%E7%B1%BB%E5%9E%8B/" /><meta property="article:section" content="post" />
@@ -102,6 +106,8 @@
 <meta name="twitter:description" content="
 虚幻引擎提供的辅助类
 提供多种静态函数，均可在蓝图中使用
+源文件 UE5/Engine/Source/Runtime/Engine/Private/GameplayStatics.cpp
+头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/GameplayStatics.h
 "/>
 
 
@@ -187,6 +193,8 @@
             <ul>
 <li>虚幻引擎提供的辅助类</li>
 <li>提供多种静态函数，均可在蓝图中使用</li>
+<li>源文件 UE5/Engine/Source/Runtime/Engine/Private/GameplayStatics.cpp</li>
+<li>头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/GameplayStatics.h</li>
 </ul>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
@@ -218,6 +226,130 @@
 </ol>
 <div class="src src-c++">
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  UGameplayStatics<span style="color:#f92672">::</span>GetAllActorsOfClass(GetWorld(), AGeometryPawn<span style="color:#f92672">::</span>StaticClass(), Pawns);</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+二、计算伤害
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<div id="outline-container-headline-4" class="outline-3">
+<h3 id="headline-4">
+半径伤害 UGameplayStatics::ApplyRadialDamageWithFalloff
+</h3>
+<div id="outline-text-headline-4" class="outline-text-3">
+<ul>
+<li>静态成员</li>
+<li>调用OverlapMultiByObjectType搜索和球体重叠的Actor，对这些Actor调用TakeDamage</li>
+</ul>
+<p width="1000"><img src="/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamageWithFalloff-参数说明.png" alt="/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamageWithFalloff-参数说明.png" title="/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamageWithFalloff-参数说明.png"/>  </p>
+<p width="1000"><img src="/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamageWithFalloff.png" alt="/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamageWithFalloff.png" title="/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamageWithFalloff.png"/>  </p>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
+三、计算伤害 包裹函数
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+半径伤害 UGameplayStatics::ApplyRadialDamage
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
+<ul>
+<li>静态成员</li>
+<li>包裹函数，封装UGameplayStatics::ApplyRadialDamageWithFalloff</li>
+</ul>
+<p width="1000"><img src="/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamage-参数说明.png" alt="/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamage-参数说明.png" title="/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamage-参数说明.png"/>  </p>
+<p width="1000"><img src="/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamage.png" alt="/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamage.png" title="/pic/UGameplayStatics类型/UGameplayStatics-ApplyRadialDamage.png"/>  </p>
+<ol>
+<li>可以传入指向UWorld对象的指针 WorldContextObject</li>
+<li>伤害的数量特征(quantitative characteristic) BaseDamage</li>
+<li>半径伤害的中心位置 Origin</li>
+<li>
+<p>伤害类型 DamageTypeClass</p>
+<ul>
+<li>UDamageType及其派生类 类型变量</li>
+<li>处理函数根据伤害类型做出相应处理</li>
+</ul>
+</li>
+<li>不受伤害的Actor数组 IgnoreActors</li>
+<li>
+<p>伤害来源 DamageCauser</p>
+<ul>
+<li>可以是武器</li>
+</ul>
+</li>
+<li>
+<p>伤害来源的上级Controller InstigatedByController</p>
+<ul>
+<li>当伤害来源是Pawn或Character时，传入上级Controller，用以判断阵营</li>
+</ul>
+</li>
+<li>
+<p>计算半径伤害用标志 DoFullDamage</p>
+<ul>
+<li>
+<p>为true时，处于伤害半径球体内的Actor，受到相同伤害值</p>
+<ul>
+<li>计算半径伤害模型简单</li>
+</ul>
+</li>
+<li>
+<p>为false时，离球体中心越近，伤害值越大</p>
+<ul>
+<li>需要一定开销</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>减免伤害用枚举变量 DamagePreventionChannel</p>
+<ul>
+<li>碰撞系数</li>
+<li>
+<p>当Character和伤害中心有隔挡时，如何计算伤害</p>
+<ul>
+<li>在某些情形，允许Character不受伤害</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  UGameplayStatics<span style="color:#f92672">::</span>ApplyRadialDamage(GetWorld(),
+</span></span><span style="display:flex;"><span>                                      Damage,
+</span></span><span style="display:flex;"><span>                                      GetActorLocation(),
+</span></span><span style="display:flex;"><span>                                      Radius,
+</span></span><span style="display:flex;"><span>                                      <span style="color:#66d9ef">nullptr</span>,
+</span></span><span style="display:flex;"><span>                                      {},
+</span></span><span style="display:flex;"><span>                                      <span style="color:#66d9ef">this</span>,
+</span></span><span style="display:flex;"><span>                                      <span style="color:#66d9ef">nullptr</span>,
+</span></span><span style="display:flex;"><span>                                      DoFullDamage);</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+点伤害 UGameplayStatics::ApplyPointDamage
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
+<ul>
+<li>存在碰撞，需要知道目标Actor</li>
+</ul>
+<img src="/pic/UGameplayStatics类型/UGameplayStatics-ApplyPointDamage.png" alt="/pic/UGameplayStatics类型/UGameplayStatics-ApplyPointDamage.png" title="/pic/UGameplayStatics类型/UGameplayStatics-ApplyPointDamage.png" width="1400"/>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
+其他类型 UGameplayStatics::ApplyDamage
+</h3>
+<div id="outline-text-headline-8" class="outline-text-3">
+<img src="/pic/UGameplayStatics类型/UGameplayStatics-ApplyDamage.png" alt="/pic/UGameplayStatics类型/UGameplayStatics-ApplyDamage.png" title="/pic/UGameplayStatics类型/UGameplayStatics-ApplyDamage.png" width="1000"/>
+</div>
 </div>
 </div>
 </div>

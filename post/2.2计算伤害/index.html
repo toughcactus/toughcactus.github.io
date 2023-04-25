@@ -264,7 +264,10 @@
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> USTHealthComponent<span style="color:#f92672">::</span>RegisterDamageHandler()
 </span></span><span style="display:flex;"><span>  {
 </span></span><span style="display:flex;"><span>      AActor <span style="color:#f92672">*</span>ThisActor <span style="color:#f92672">=</span> GetOwner();
-</span></span><span style="display:flex;"><span>      ThisActor<span style="color:#f92672">-&gt;</span>OnTakeAnyDamage.AddDynamic(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>USTHealthComponent<span style="color:#f92672">::</span>OnTakeAnyDamage);
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">if</span> (ThisActor)
+</span></span><span style="display:flex;"><span>      {
+</span></span><span style="display:flex;"><span>          ThisActor<span style="color:#f92672">-&gt;</span>OnTakeAnyDamage.AddDynamic(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>USTHealthComponent<span style="color:#f92672">::</span>OnTakeAnyDamage);
+</span></span><span style="display:flex;"><span>      }
 </span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
 </div>
 </div>
@@ -280,6 +283,7 @@
 <li>private</li>
 <li>Health减为0，作为负数仍在减</li>
 <li>差不多一秒10帧</li>
+<li>触发处理函数时，不会传入整个FDamageEvent变量，而是传入UDamageType</li>
 </ul>
 <div class="src src-c++">
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> USTHealthComponent<span style="color:#f92672">::</span>OnTakeAnyDamage(AActor<span style="color:#f92672">*</span> DamagedActor, <span style="color:#66d9ef">float</span> Damage, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDamageType</span><span style="color:#f92672">*</span> DamageType, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AController</span><span style="color:#f92672">*</span> InstigatedBy, AActor<span style="color:#f92672">*</span> DamageCauser)
@@ -351,7 +355,7 @@
         </div>
         <div class="right pagination-item ">
             
-                <a href="/post/1.10.1%E5%AE%9E%E7%8E%B0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/">虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.10.1实现转向动画</a>
+                <a href="/post/2.3.2%E7%BB%98%E5%88%B6%E5%8D%8A%E5%BE%84%E4%BC%A4%E5%AE%B3%E7%90%83%E4%BD%93/">虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 2.3.2绘制半径伤害球体</a>
             
         </div>
     </div>
