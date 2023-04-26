@@ -5519,6 +5519,31 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;li&gt;虚幻编辑器 &amp;gt; 2.4.3 &lt;a href=&#34;https://toughcactus.github.io/post/2.4.3查看udamagetype生效/&#34;&gt;查看UDamageType生效&lt;/a&gt;      &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;死亡动画&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2.5.1 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.1使用委托修改healthtext/&#34;&gt;使用委托修改HealthText&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; FMath库  &lt;/li&gt;
+&lt;li&gt;2.5.2 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.2限制生命值范围/&#34;&gt;限制生命值范围&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; UCharacterMovementComponent类型&lt;/li&gt;
+&lt;li&gt;API &amp;gt; ACharacter类型&lt;/li&gt;
+&lt;li&gt;2.5.3 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.3生命值为0时销毁character/&#34;&gt;生命值为0时销毁Character&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.5.4 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.4添加死亡动画/&#34;&gt;添加死亡动画&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; ACharacter类型&lt;/li&gt;
+&lt;li&gt;2.5.5 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.5在c++中播放动画剪辑/&#34;&gt;在C++中播放动画剪辑&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.5.6 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.6查看死亡动画/&#34;&gt;查看死亡动画&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -5666,6 +5691,7 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Components/STHealthComponent.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Components/TextRenderComponent.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter, All, All)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;/*
@@ -5684,14 +5710,20 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Super&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;BeginPlay();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	CheckHealth();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	DisplayHealthText();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	BindOnHealthChanged();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	CheckCharacterMovement();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	BindOnDeath();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Called every frame
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Tick(&lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; DeltaTime)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Super&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Tick(DeltaTime);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	DisplayHealthText();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#75715e&#34;&gt;// DisplayHealthText();
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#75715e&#34;&gt;// CharacterTakeDamage();
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
@@ -5846,6 +5878,35 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;CharacterTakeDamage()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	TakeDamage(&lt;span style=&#34;color:#ae81ff&#34;&gt;0.1f&lt;/span&gt;, FDamageEvent{}, GetController(), &lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnHealthChanged()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	DisplayHealthText();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;BindOnHealthChanged()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Health&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;OnHealthChanged.AddUObject(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnHealthChanged);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnDeath()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	PlayAnimMontage(DeathAnimMontage);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	GetCharacterMovement()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;DisableMovement();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	SetLifeSpan(&lt;span style=&#34;color:#ae81ff&#34;&gt;5.0f&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;BindOnDeath()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	Health&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;OnDeath.AddUObject(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnDeath);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;CheckCharacterMovement()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	check(GetCharacterMovement());
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -5943,6 +6004,17 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;DisplayHealthText&lt;/span&gt;();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CheckHealth&lt;/span&gt;();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CharacterTakeDamage&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OnHealthChanged&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BindOnHealthChanged&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;OnDeath&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;BindOnDeath&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;CheckCharacterMovement&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;protected&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UPROPERTY(EditDefaultsOnly)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UAnimMontage &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;DeathAnimMontage;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -6188,6 +6260,7 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;DEFINE_LOG_CATEGORY_STATIC(LogHealthComponent, All, All)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;// Sets default values for this component&amp;#39;s properties
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;USTHealthComponent()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
@@ -6228,9 +6301,28 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage(AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamagedActor, &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Damage, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UDamageType&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageType, &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AController&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; InstigatedBy, AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageCauser)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (Damage &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0f&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; IsDead()) &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#75715e&#34;&gt;// UE_LOG(LogHealthComponent, Display, TEXT(&amp;#34;Damage: %.0f&amp;#34;), Damage);
-&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	Health &lt;span style=&#34;color:#f92672&#34;&gt;-=&lt;/span&gt; Damage;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;    &lt;span style=&#34;color:#75715e&#34;&gt;// Health -= Damage;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;	Health &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; FMath&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Clamp(Health &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; Damage, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0f&lt;/span&gt;, MaxHealth);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	HandleDamage(DamageType);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	OnHealthChanged.Broadcast();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	InformClientOnDeath();	
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RegisterDamageHandler()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	AActor &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;ThisActor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GetOwner();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (ThisActor)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		ThisActor&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;OnTakeAnyDamage.AddDynamic(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;HandleDamage(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; UDamageType &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;DamageType)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (DamageType)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (DamageType&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;IsA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;USTFireDamageType&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;())
@@ -6242,15 +6334,13 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;			UE_LOG(LogHealthComponent, Display, TEXT(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;So Cooooooooold !!!&amp;#34;&lt;/span&gt;));
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;RegisterDamageHandler()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InformClientOnDeath()
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	AActor &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;ThisActor &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; GetOwner();
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (ThisActor)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (IsDead())
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	{
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		ThisActor&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;OnTakeAnyDamage.AddDynamic(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;		OnDeath.Broadcast();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	}
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;}&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
@@ -6265,6 +6355,8 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;Components/ActorComponent.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;STHealthComponent.generated.h&amp;#34;&lt;/span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;DECLARE_MULTICAST_DELEGATE(FOnHealthChanged)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;DECLARE_MULTICAST_DELEGATE(FOnDeath)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;UCLASS( ClassGroup&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(Custom), meta&lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt;(BlueprintSpawnableComponent) )
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;SHOOTTRAINING_API&lt;/span&gt; USTHealthComponent : &lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt; UActorComponent
@@ -6301,6 +6393,17 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; OnTakeAnyDamage(AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamagedActor, &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Damage, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UDamageType&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageType, &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AController&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; InstigatedBy, AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageCauser);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;RegisterDamageHandler&lt;/span&gt;();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;HandleDamage&lt;/span&gt;(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; UDamageType &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;DamageType);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#66d9ef&#34;&gt;public&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	FOnHealthChanged OnHealthChanged;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	UFUNCTION(BlueprintCallable)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; IsDead() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Health &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0f&lt;/span&gt;; }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	FOnDeath OnDeath;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;	&lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;InformClientOnDeath&lt;/span&gt;();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;};&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -8276,6 +8379,31 @@ unique_ptr同一时间只允许一个指针管理动态对象，不允许对对�
 &lt;li&gt;虚幻编辑器 &amp;gt; 2.4.3 &lt;a href=&#34;https://toughcactus.github.io/post/2.4.3查看udamagetype生效/&#34;&gt;查看UDamageType生效&lt;/a&gt;      &lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;死亡动画&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2.5.1 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.1使用委托修改healthtext/&#34;&gt;使用委托修改HealthText&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; FMath库  &lt;/li&gt;
+&lt;li&gt;2.5.2 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.2限制生命值范围/&#34;&gt;限制生命值范围&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; UCharacterMovementComponent类型&lt;/li&gt;
+&lt;li&gt;API &amp;gt; ACharacter类型&lt;/li&gt;
+&lt;li&gt;2.5.3 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.3生命值为0时销毁character/&#34;&gt;生命值为0时销毁Character&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.5.4 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.4添加死亡动画/&#34;&gt;添加死亡动画&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; ACharacter类型&lt;/li&gt;
+&lt;li&gt;2.5.5 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.5在c++中播放动画剪辑/&#34;&gt;在C++中播放动画剪辑&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.5.6 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.6查看死亡动画/&#34;&gt;查看死亡动画&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -8719,6 +8847,19 @@ FTransform::ToHumanReadableString
 &lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Acos.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Acos.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Acos.png&#34; width=&#34;400&#34;/&gt;
 &lt;p width=&#34;800&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Acos-Definition.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Acos-Definition.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Acos-Definition.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+获取合乎范围的数值 FMath::Clamp
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;若 Min &amp;lt;= X &amp;lt;= Max，返回X&lt;/li&gt;
+&lt;li&gt;若 X &amp;lt; Min，返回Min&lt;/li&gt;
+&lt;li&gt;若 Max &amp;lt; X，返回Max&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-Clamp.png&#34; alt=&#34;/pic/FMath库/FMath-Clamp.png&#34; title=&#34;/pic/FMath库/FMath-Clamp.png&#34; width=&#34;500&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -10065,7 +10206,7 @@ YOZ平面
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、路径
+路径
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -10076,7 +10217,7 @@ YOZ平面
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-2&#34;&gt;
-二、跳跃回调函数 ACharacter::Jump
+跳跃回调函数 ACharacter::Jump
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-Jump.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-Jump.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-Jump.png&#34; width=&#34;500&#34;/&gt;
@@ -10088,7 +10229,7 @@ YOZ平面
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-3&#34;&gt;
-三、默认构造函数 ACharacter::ACharacter
+默认构造函数 ACharacter::ACharacter
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-ACharacter.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-ACharacter.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-ACharacter.png&#34; width=&#34;600&#34;/&gt;
@@ -10096,7 +10237,7 @@ YOZ平面
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-4&#34;&gt;
-四、子组件类型名
+子组件类型名
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -10128,6 +10269,32 @@ CapsuleComponent类型名 ACharacter::CapsuleComponentName
 &lt;p width=&#34;270&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-CapsuleComponentName.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-CapsuleComponentName.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-CapsuleComponentName.png&#34;/&gt;  &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+获取指向CharacterMovement组件的指针 ACharacter::GetCharacterMovement
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;CharacterMovementComponent或其派生类&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-GetCharacterMovement.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-GetCharacterMovement.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-GetCharacterMovement.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-9&#34;&gt;
+播放动画剪辑 ACharacter::PlayAnimMontage
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-PlayAnimMontage.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-PlayAnimMontage.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-PlayAnimMontage.png&#34; width=&#34;600&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;不需要在调用前检查动画剪辑指针的有效性，函数内检查&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/ACharacter类型/ACharacter-PlayAnimMontage-Definition.png&#34; alt=&#34;/pic/ACharacter类型/ACharacter-PlayAnimMontage-Definition.png&#34; title=&#34;/pic/ACharacter类型/ACharacter-PlayAnimMontage-Definition.png&#34;/&gt; &lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;指向动画剪辑的指针 AnimMontage&lt;/li&gt;
+&lt;/ol&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -10218,10 +10385,10 @@ UPawnMovementComponent&lt;/p&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
 &lt;p&gt;
-UCharacterMovementComponent         &lt;/p&gt;
+UCharacterMovementComponent&lt;/p&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、路径
+路径
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -10232,11 +10399,11 @@ UCharacterMovementComponent         &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-2&#34;&gt;
-二、步行允许的最大速度 UCharacterMovementComponent::MaxWalkSpeed
+步行允许的最大速度 UCharacterMovementComponent::MaxWalkSpeed
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;原型中可见&lt;/li&gt;
+&lt;li&gt;蓝图可用&lt;/li&gt;
 &lt;li&gt;Character速度从0增加到MaxWalkSpeed，当MaxWalkSpeed数值越大，Character就能达到更大的速度&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p width=&#34;1000&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/UCharacterMovementComponent类型/UCharacterMovementComponent-MaxWalkSpeed.png&#34; alt=&#34;/pic/UCharacterMovementComponent类型/UCharacterMovementComponent-MaxWalkSpeed.png&#34; title=&#34;/pic/UCharacterMovementComponent类型/UCharacterMovementComponent-MaxWalkSpeed.png&#34;/&gt;  &lt;/p&gt;
@@ -10244,7 +10411,7 @@ UCharacterMovementComponent         &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-3&#34;&gt;
-三、获取最大速度 UCharacterMovementComponent::GetMaxSpeed
+获取最大速度 UCharacterMovementComponent::GetMaxSpeed
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -10256,10 +10423,18 @@ UCharacterMovementComponent         &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-4&#34;&gt;
-四、获取指向Pawn的指针 UPawnMovementComponent::GetPawnOwner
+获取指向Pawn的指针 UPawnMovementComponent::GetPawnOwner
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/UCharacterMovementComponent类型/UPawnMovementComponent-GetPawnOwner.png&#34; alt=&#34;/pic/UCharacterMovementComponent类型/UPawnMovementComponent-GetPawnOwner.png&#34; title=&#34;/pic/UCharacterMovementComponent类型/UPawnMovementComponent-GetPawnOwner.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+禁止操作CharacterMovement组件 UCharacterMovementComponent::DisableMovement
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/UCharacterMovementComponent类型/UCharacterMovementComponent-DisableMovement.png&#34; alt=&#34;/pic/UCharacterMovementComponent类型/UCharacterMovementComponent-DisableMovement.png&#34; title=&#34;/pic/UCharacterMovementComponent类型/UCharacterMovementComponent-DisableMovement.png&#34; width=&#34;500&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -11801,7 +11976,7 @@ Object是否有效 IsValid
       <guid>https://toughcactus.github.io/post/7.%E5%8A%A8%E7%94%BB%E8%93%9D%E5%9B%BE/</guid>
       <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、动画剩余时间
+动画剩余时间 TimeRemaining
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/动画蓝图/TimeRemaining.png&#34; alt=&#34;/pic/动画蓝图/TimeRemaining.png&#34; title=&#34;/pic/动画蓝图/TimeRemaining.png&#34; width=&#34;200&#34;/&gt;
@@ -18182,22 +18357,323 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/div&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;为处理函数添加分支&lt;/p&gt;
+&lt;p&gt;添加函数成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在OnTakeAnyDamage中调用&lt;/p&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (DamageType)
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;HandleDamage(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; UDamageType &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;DamageType)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (DamageType&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;IsA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;USTFireDamageType&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (DamageType)
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          UE_LOG(LogHealthComponent, Display, TEXT(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;So Hooooooot !!!&amp;#34;&lt;/span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (DamageType&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;IsA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;USTFireDamageType&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              UE_LOG(LogHealthComponent, Display, TEXT(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;So Hooooooot !!!&amp;#34;&lt;/span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;if&lt;/span&gt; (DamageType&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;IsA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;USTIceDamageType&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;              UE_LOG(LogHealthComponent, Display, TEXT(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;So Cooooooooold !!!&amp;#34;&lt;/span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      }
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;else&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;if&lt;/span&gt; (DamageType&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;IsA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;USTIceDamageType&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 2.5.1使用委托修改HealthText</title>
+      <link>https://toughcactus.github.io/post/2.5.1%E4%BD%BF%E7%94%A8%E5%A7%94%E6%89%98%E4%BF%AE%E6%94%B9healthtext/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.5.1%E4%BD%BF%E7%94%A8%E5%A7%94%E6%89%98%E4%BF%AE%E6%94%B9healthtext/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;当声明值发生改变时，设置HealthText文本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、屏蔽当前HealthText的同步
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;ASTBaseCharacter::Tick中，屏蔽DisplayHealthText&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在ASTBaseCharacter::BeginPlay中，调用DisplayHealthText初始化设置&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;先调用Component的BeginPlay，而后调用Character的BeginPlay&lt;/li&gt;
+&lt;li&gt;如果在HealthComponent的BeginPlay中广播，在Character的BeginPlay中注册服务，广播在前，注册在后，无法初始化HealthText文本&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、使用委托修改HealthText，服务端修改
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;USTHealthComponent::OnTakeAnyDamage中，屏蔽HandleDamage&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;STHealthComponent.h中，定义委托类型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;多播，仅C++&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  DECLARE_MULTICAST_DELEGATE(FOnHealthChanged)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;USTHealthComponent添加数据成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;public&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  FOnHealthChanged OnHealthChanged;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在USTHealthComponent::OnTakeAnyDamage通知客户端&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  OnHealthChanged.Broadcast();&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、使用委托修改HealthText，客户端修改
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加函数成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnHealthChanged()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      DisplayHealthText();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加函数成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;在ASTBaseCharacter::BeginPlay中调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;BindOnHealthChanged()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      Health&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;OnHealthChanged.AddUObject(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnHealthChanged);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 2.5.2限制生命值范围</title>
+      <link>https://toughcactus.github.io/post/2.5.2%E9%99%90%E5%88%B6%E7%94%9F%E5%91%BD%E5%80%BC%E8%8C%83%E5%9B%B4/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.5.2%E9%99%90%E5%88%B6%E7%94%9F%E5%91%BD%E5%80%BC%E8%8C%83%E5%9B%B4/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;生命值不会小于0&lt;/li&gt;
+&lt;li&gt;USTHealthComponent::OnTakeAnyDamage中，若伤害数量特征不大于0，或者当前生命值不大于0，无法继续对Character造成伤害&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加函数成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;public&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;蓝图可调用，const函数&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UFUNCTION(BlueprintCallable)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; IsDead() &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; { &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt; Health &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0f&lt;/span&gt;; }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、重新实现的OnTakeAnyDamage
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnTakeAnyDamage(AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamagedActor, &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Damage, &lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;UDamageType&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageType, &lt;span style=&#34;color:#66d9ef&#34;&gt;class&lt;/span&gt; &lt;span style=&#34;color:#a6e22e&#34;&gt;AController&lt;/span&gt;&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; InstigatedBy, AActor&lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt; DamageCauser)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (Damage &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0f&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;||&lt;/span&gt; IsDead()) &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;// UE_LOG(LogHealthComponent, Display, TEXT(&amp;#34;Damage: %.0f&amp;#34;), Damage);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;// Health -= Damage;
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      Health &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; FMath&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Clamp(Health &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; Damage, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0f&lt;/span&gt;, MaxHealth);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      HandleDamage(DamageType);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      OnHealthChanged.Broadcast();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 2.5.3生命值为0时销毁Character</title>
+      <link>https://toughcactus.github.io/post/2.5.3%E7%94%9F%E5%91%BD%E5%80%BC%E4%B8%BA0%E6%97%B6%E9%94%80%E6%AF%81character/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.5.3%E7%94%9F%E5%91%BD%E5%80%BC%E4%B8%BA0%E6%97%B6%E9%94%80%E6%AF%81character/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;使用委托完成&lt;/li&gt;
+&lt;li&gt;当生命值发生改变时修改HealthText文本，当生命值变为0时销毁Character，一码归一码&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、服务端设置
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;STHealthComponent&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;定义委托类型&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  DECLARE_MULTICAST_DELEGATE(FOnDeath)&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加数据成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;public&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  FOnDeath OnDeath;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加函数成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;在OnTakeAnyDamage中调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; USTHealthComponent&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;InformClientOnDeath()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (IsDead())
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      {
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          UE_LOG(LogHealthComponent, Display, TEXT(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;So Cooooooooold !!!&amp;#34;&lt;/span&gt;));
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          OnDeath.Broadcast();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      }
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、设置客户端
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;STBaseCharacter&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加函数成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;在BeginPlay中调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;CheckCharacterMovement()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      check(GetCharacterMovement());
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加函数成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnDeath()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      GetCharacterMovement()&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;DisableMovement();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      SetLifeSpan(&lt;span style=&#34;color:#ae81ff&#34;&gt;5.0f&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加函数成员&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;在BeginPlay中调用&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;BindOnDeath()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      Health&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;OnDeath.AddUObject(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnDeath);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 2.5.5在C&#43;&#43;中播放动画剪辑</title>
+      <link>https://toughcactus.github.io/post/2.5.5%E5%9C%A8c&#43;&#43;%E4%B8%AD%E6%92%AD%E6%94%BE%E5%8A%A8%E7%94%BB%E5%89%AA%E8%BE%91/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.5.5%E5%9C%A8c&#43;&#43;%E4%B8%AD%E6%92%AD%E6%94%BE%E5%8A%A8%E7%94%BB%E5%89%AA%E8%BE%91/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;动画剪辑(AnimMontage)在C++中的类型为UAnimMontage&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加数据成员
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;protected&lt;/li&gt;
+&lt;li&gt;原型可设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditDefaultsOnly)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UAnimMontage &lt;span style=&#34;color:#f92672&#34;&gt;*&lt;/span&gt;DeathAnimMontage;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、在Character死亡时，播放动画剪辑
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;ASTBaseCharacter::OnDeath中开始处添加如下语句&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  PlayAnimMontage(DeathAnimMontage);&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -20535,6 +21011,148 @@ Run到JumpStart的转换复用Walk到JumpStart
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 2.5.4添加死亡动画</title>
+      <link>https://toughcactus.github.io/post/2.5.4%E6%B7%BB%E5%8A%A0%E6%AD%BB%E4%BA%A1%E5%8A%A8%E7%94%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.5.4%E6%B7%BB%E5%8A%A0%E6%AD%BB%E4%BA%A1%E5%8A%A8%E7%94%BB/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;参考之前的跳跃动画，跑步动画，转向动画，均对应状态机中的一个状态&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;当事件发生时，每个状态都可迁移到死亡状态&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;麻烦&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;动画剪辑(AnimMontage)&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;组合多个动画&lt;/li&gt;
+&lt;li&gt;将希望连续播放的动画添加到时间线(timeline)&lt;/li&gt;
+&lt;li&gt;我们可以在代码或蓝图中播放动画剪辑&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;使用动画剪辑(AnimMontage)资产，当事件发生时，播放死亡动画&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;slot&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;若此时有动画剪辑正在播放，输出输入动画和动画剪辑的拼接&lt;/li&gt;
+&lt;li&gt;若无动画剪辑在播放，输出输入动画&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、创建AnimMontage资产
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/Allar/ue5-style-guide&#34;&gt;命名参考&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加死亡动画/命名.png&#34; alt=&#34;/pic/添加死亡动画/命名.png&#34; title=&#34;/pic/添加死亡动画/命名.png&#34; width=&#34;300&#34;/&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;跑步动画资产 路径&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;ExternalContent/Animations/TTP_Animations/Death&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;选中跑步动画资产 &amp;gt; 右键 &amp;gt; 创建 动画剪辑(AnimMontage)&lt;/p&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/添加死亡动画/创建AM_Death.png&#34; alt=&#34;/pic/添加死亡动画/创建AM_Death.png&#34; title=&#34;/pic/添加死亡动画/创建AM_Death.png&#34;/&gt;  &lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;命名为AM_Death&lt;/li&gt;
+&lt;li&gt;移动到Content/Player/Animations/路径下&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、设置ABP_BaseCharacter
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;AnimGraph&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-3&#34;&gt;
+在Locomotion和OutputPose之间添加Slot
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加死亡动画/添加slot.png&#34; alt=&#34;/pic/添加死亡动画/添加slot.png&#34; title=&#34;/pic/添加死亡动画/添加slot.png&#34; width=&#34;500&#34;/&gt;
+&lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-4&#34;&gt;
+&lt;h4 id=&#34;headline-4&#34;&gt;
+slot和AM_Death中分组应该一致
+&lt;/h4&gt;
+&lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-4&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;SlotName&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;为DefaultGroup.DefaultSlot&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加死亡动画/slot-Details.png&#34; alt=&#34;/pic/添加死亡动画/slot-Details.png&#34; title=&#34;/pic/添加死亡动画/slot-Details.png&#34; width=&#34;400&#34;/&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Montage&lt;/p&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加死亡动画/AM_Death-Montage.png&#34; alt=&#34;/pic/添加死亡动画/AM_Death-Montage.png&#34; title=&#34;/pic/添加死亡动画/AM_Death-Montage.png&#34; width=&#34;500&#34;/&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-5&#34;&gt;
+三、设置AM_Death
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Asset Details &amp;gt; BlendOptions &amp;gt; EnableAutoBlendOut&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;取消勾选&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;死亡动画结束后，不再播放其他动画&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/添加死亡动画/AM_Death-EnableAutoBlendOut-Disable.png&#34; alt=&#34;/pic/添加死亡动画/AM_Death-EnableAutoBlendOut-Disable.png&#34; title=&#34;/pic/添加死亡动画/AM_Death-EnableAutoBlendOut-Disable.png&#34; width=&#34;300&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 2.5.6查看死亡动画</title>
+      <link>https://toughcactus.github.io/post/2.5.6%E6%9F%A5%E7%9C%8B%E6%AD%BB%E4%BA%A1%E5%8A%A8%E7%94%BB/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.5.6%E6%9F%A5%E7%9C%8B%E6%AD%BB%E4%BA%A1%E5%8A%A8%E7%94%BB/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、设置BP_STBaseCharacter的DeathAnimMontage属性
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;AM_Death&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/查看死亡动画/BP_STBaseCharacter-DeathAnimMontage设置.png&#34; alt=&#34;/pic/查看死亡动画/BP_STBaseCharacter-DeathAnimMontage设置.png&#34; title=&#34;/pic/查看死亡动画/BP_STBaseCharacter-DeathAnimMontage设置.png&#34; width=&#34;1200&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、效果图
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/查看死亡动画/效果图.png&#34; alt=&#34;/pic/查看死亡动画/效果图.png&#34; title=&#34;/pic/查看死亡动画/效果图.png&#34; width=&#34;800&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 API</title>
       <link>https://toughcactus.github.io/handbook/ue/api/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -21162,6 +21780,31 @@ Run到JumpStart的转换复用Walk到JumpStart
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;虚幻编辑器 &amp;gt; 2.4.3 &lt;a href=&#34;https://toughcactus.github.io/post/2.4.3查看udamagetype生效/&#34;&gt;查看UDamageType生效&lt;/a&gt;      &lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;死亡动画&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;2.5.1 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.1使用委托修改healthtext/&#34;&gt;使用委托修改HealthText&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; FMath库  &lt;/li&gt;
+&lt;li&gt;2.5.2 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.2限制生命值范围/&#34;&gt;限制生命值范围&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;API &amp;gt; UCharacterMovementComponent类型&lt;/li&gt;
+&lt;li&gt;API &amp;gt; ACharacter类型&lt;/li&gt;
+&lt;li&gt;2.5.3 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.3生命值为0时销毁character/&#34;&gt;生命值为0时销毁Character&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.5.4 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.4添加死亡动画/&#34;&gt;添加死亡动画&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;虚幻C++&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;API &amp;gt; ACharacter类型&lt;/li&gt;
+&lt;li&gt;2.5.5 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.5在c++中播放动画剪辑/&#34;&gt;在C++中播放动画剪辑&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;虚幻编辑器 &amp;gt; 2.5.6 &lt;a href=&#34;https://toughcactus.github.io/post/2.5.6查看死亡动画/&#34;&gt;查看死亡动画&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
