@@ -31,8 +31,19 @@ UObject
 
 AActor  
 
+
+AActor类型
+
 头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h
 源文件 UE5/Engine/Source/Runtime/Engine/Private/Actor.cpp
+
+
+
+UObjectBaseUtility类型
+
+头文件 UE5/Engine/Source/Runtime/CoreUObject/Public/UObject/UObjectBaseUtility.h
+
+
 ">
 
 
@@ -125,8 +136,19 @@ UObject
 
 AActor  
 
+
+AActor类型
+
 头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h
 源文件 UE5/Engine/Source/Runtime/Engine/Private/Actor.cpp
+
+
+
+UObjectBaseUtility类型
+
+头文件 UE5/Engine/Source/Runtime/CoreUObject/Public/UObject/UObjectBaseUtility.h
+
+
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/post/4.aactor%E7%B1%BB%E5%9E%8B/" /><meta property="article:section" content="post" />
@@ -154,8 +176,19 @@ UObject
 
 AActor  
 
+
+AActor类型
+
 头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h
 源文件 UE5/Engine/Source/Runtime/Engine/Private/Actor.cpp
+
+
+
+UObjectBaseUtility类型
+
+头文件 UE5/Engine/Source/Runtime/CoreUObject/Public/UObject/UObjectBaseUtility.h
+
+
 "/>
 
 
@@ -257,8 +290,19 @@ UObject</p>
 <p>
 AActor  </p>
 <ul>
+<li>
+<p>AActor类型</p>
+<ul>
 <li>头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h</li>
 <li>源文件 UE5/Engine/Source/Runtime/Engine/Private/Actor.cpp</li>
+</ul>
+</li>
+<li>
+<p>UObjectBaseUtility类型</p>
+<ul>
+<li>头文件 UE5/Engine/Source/Runtime/CoreUObject/Public/UObject/UObjectBaseUtility.h</li>
+</ul>
+</li>
 </ul>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
@@ -659,6 +703,23 @@ AActor  </p>
 </li>
 </ol>
 </div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-31" class="outline-2">
+<h2 id="headline-31">
+十四、判断指针基础类型 UObjectBaseUtility::IsA&lt;T&gt;
+</h2>
+<div id="outline-text-headline-31" class="outline-text-2">
+<ul>
+<li>指针的基础类型是否为给定的模版类型</li>
+</ul>
+<img src="/pic/AActor类型/UObjectBaseUtility-IsA-T.png" alt="/pic/AActor类型/UObjectBaseUtility-IsA-T.png" title="/pic/AActor类型/UObjectBaseUtility-IsA-T.png" width="500"/>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  <span style="color:#66d9ef">if</span> (DamageType<span style="color:#f92672">-&gt;</span>IsA<span style="color:#f92672">&lt;</span>USTFireDamageType<span style="color:#f92672">&gt;</span>())
+</span></span><span style="display:flex;"><span>  {
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">//
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>  }</span></span></code></pre></div>
 </div>
 </div>
 </div>

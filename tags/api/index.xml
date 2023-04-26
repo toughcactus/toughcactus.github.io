@@ -1692,7 +1692,7 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/h3&gt;
 &lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-3&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;存在碰撞，需要知道目标Actor&lt;/li&gt;
+&lt;li&gt;存在碰撞，需要知道指向目标Actor的指针&lt;/li&gt;
 &lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/UGameplayStatics类型/UGameplayStatics-ApplyPointDamage.png&#34; alt=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyPointDamage.png&#34; title=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyPointDamage.png&#34; width=&#34;1400&#34;/&gt;
 &lt;/div&gt;
@@ -1702,6 +1702,9 @@ YOZ平面旋转 APawn::AddControllerRollInput
 其他类型 UGameplayStatics::ApplyDamage
 &lt;/h3&gt;
 &lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;需要知道指向目标Actor的指针&lt;/li&gt;
+&lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/UGameplayStatics类型/UGameplayStatics-ApplyDamage.png&#34; alt=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyDamage.png&#34; title=&#34;/pic/UGameplayStatics类型/UGameplayStatics-ApplyDamage.png&#34; width=&#34;1000&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -2284,8 +2287,19 @@ UObject&lt;/p&gt;
 &lt;p&gt;
 AActor  &lt;/p&gt;
 &lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;AActor类型&lt;/p&gt;
+&lt;ul&gt;
 &lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/Actor.h&lt;/li&gt;
 &lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/Actor.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;UObjectBaseUtility类型&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/CoreUObject/Public/UObject/UObjectBaseUtility.h&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
@@ -2686,6 +2700,23 @@ AActor  &lt;/p&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-31&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-31&#34;&gt;
+十四、判断指针基础类型 UObjectBaseUtility::IsA&amp;lt;T&amp;gt;
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-31&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;指针的基础类型是否为给定的模版类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/UObjectBaseUtility-IsA-T.png&#34; alt=&#34;/pic/AActor类型/UObjectBaseUtility-IsA-T.png&#34; title=&#34;/pic/AActor类型/UObjectBaseUtility-IsA-T.png&#34; width=&#34;500&#34;/&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (DamageType&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;IsA&lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt;USTFireDamageType&lt;span style=&#34;color:#f92672&#34;&gt;&amp;gt;&lt;/span&gt;())
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;//
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
