@@ -190,7 +190,7 @@
 </ul>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
-一、原型 Default
+原型 Default
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
 <ul>
@@ -212,7 +212,7 @@
 </div>
 <div id="outline-container-headline-2" class="outline-2">
 <h2 id="headline-2">
-二、实例 Instance
+实例 Instance
 </h2>
 <div id="outline-text-headline-2" class="outline-text-2">
 <ul>
@@ -224,7 +224,7 @@
 </div>
 <div id="outline-container-headline-3" class="outline-2">
 <h2 id="headline-3">
-三、UPROPERTY宏
+UPROPERTY宏
 </h2>
 <div id="outline-text-headline-3" class="outline-text-2">
 <img src="/pic/UPROPERTY宏/UPROPERTY宏.png" alt="/pic/UPROPERTY宏/UPROPERTY宏.png" title="/pic/UPROPERTY宏/UPROPERTY宏.png" width="500"/>
@@ -261,7 +261,7 @@
 </div>
 <div id="outline-container-headline-4" class="outline-2">
 <h2 id="headline-4">
-四、访问说明符
+访问说明符
 </h2>
 <div id="outline-text-headline-4" class="outline-text-2">
 <ul>
@@ -309,7 +309,7 @@
 </div>
 <div id="outline-container-headline-5" class="outline-2">
 <h2 id="headline-5">
-五、元信息 分组
+元信息 分组
 </h2>
 <div id="outline-text-headline-5" class="outline-text-2">
 <ul>
@@ -331,7 +331,7 @@
 </div>
 <div id="outline-container-headline-6" class="outline-2">
 <h2 id="headline-6">
-六、蓝图属性
+蓝图属性
 </h2>
 <div id="outline-text-headline-6" class="outline-text-2">
 <ul>
@@ -361,12 +361,26 @@
 </div>
 <div id="outline-container-headline-7" class="outline-2">
 <h2 id="headline-7">
-七、元信息 值范围
+元信息 值范围
 </h2>
 <div id="outline-text-headline-7" class="outline-text-2">
 <div class="src src-c++">
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  UPROPERTY(EditDefaultsOnly, meta <span style="color:#f92672">=</span> (ClampMin <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1.5&#34;</span>, ClampMax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;10.0&#34;</span>))
 </span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">float</span> SpeedAcceleration <span style="color:#f92672">=</span> <span style="color:#ae81ff">2.0f</span>;</span></span></code></pre></div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
+元信息 编辑条件
+</h2>
+<div id="outline-text-headline-8" class="outline-text-2">
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  UPROPERTY(EditDefaultsOnly, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Auto Heal&#34;</span>)
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">bool</span> AutoHeal <span style="color:#f92672">=</span> true;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>  UPROPERTY(EditDefaultsOnly, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Auto Heal&#34;</span>, meta <span style="color:#f92672">=</span> (EditCondition <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;AutoHeal&#34;</span>))
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">float</span> HealRate <span style="color:#f92672">=</span> <span style="color:#ae81ff">1.0f</span>;</span></span></code></pre></div>
 </div>
 </div>
 </div>

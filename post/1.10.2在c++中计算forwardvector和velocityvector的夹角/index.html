@@ -206,7 +206,7 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">const</span> FVector CrossProductResult <span style="color:#f92672">=</span> FVector<span style="color:#f92672">::</span>CrossProduct(ForwardVector, VelocityNormalizedVector);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> (CrossProductResult.IsZero()) <span style="color:#f92672">?</span> Theta : FMath<span style="color:#f92672">::</span>Sign(CrossProductResult.Z) <span style="color:#f92672">*</span> Theta;
+</span></span><span style="display:flex;"><span>      <span style="color:#66d9ef">return</span> (CrossProductResult.IsZero() <span style="color:#f92672">?</span> Theta : FMath<span style="color:#f92672">::</span>Sign(CrossProductResult.Z) <span style="color:#f92672">*</span> Theta);
 </span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
 </div>
 </div>

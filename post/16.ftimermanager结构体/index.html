@@ -191,45 +191,32 @@
 <div id="outline-text-headline-1" class="outline-text-2">
 <img src="/pic/FTimerManager结构体/FTimerManager-SetTimer.png" alt="/pic/FTimerManager结构体/FTimerManager-SetTimer.png" title="/pic/FTimerManager结构体/FTimerManager-SetTimer.png" width="1500"/>
 <ol>
+<li>计时器描述符 InOutHandle</li>
+<li>指向受计时器约束的Actor对象 InObj</li>
 <li>
-<p>InOutHandle</p>
+<p>回调函数 InTimerMethod</p>
 <ul>
-<li>计时器描述符</li>
-</ul>
-</li>
-<li>
-<p>InObj</p>
-<ul>
-<li>指向受计时器约束的Actor对象</li>
-</ul>
-</li>
-<li>
-<p>InTimerMethod</p>
-<ul>
-<li>回调函数</li>
 <li>到时间后调用回调函数</li>
 <li>参数为函数指针，需要对回调函数取地址，直接传函数名报错</li>
 </ul>
 </li>
 <li>
-<p>InRate</p>
+<p>时间间隔 InRate</p>
 <ul>
-<li>时间间隔</li>
 <li>单位为秒</li>
 </ul>
 </li>
 <li>
-<p>InbLoop</p>
+<p>循环计时 标志 InbLoop</p>
 <ul>
-<li>循环计时 标志</li>
 <li>布尔类型</li>
 <li>为true则循环计时</li>
 </ul>
 </li>
 <li>
-<p>InFirstDelay</p>
+<p>首次触发延后时长 InFirstDelay</p>
 <ul>
-<li>使用默认值</li>
+<li>使用默认值则不延后</li>
 </ul>
 </li>
 </ol>

@@ -454,7 +454,7 @@ FTransform::ToHumanReadableString
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
-&lt;li&gt;模版函数，自动推测类型&lt;/li&gt;
+&lt;li&gt;模版函数，自动推测类型，要求三个参数类型一致&lt;/li&gt;
 &lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-Clamp.png&#34; alt=&#34;/pic/FMath库/FMath-Clamp.png&#34; title=&#34;/pic/FMath库/FMath-Clamp.png&#34; width=&#34;500&#34;/&gt;
 &lt;ul&gt;
@@ -462,6 +462,30 @@ FTransform::ToHumanReadableString
 &lt;li&gt;若 X &amp;lt; Min，返回Min&lt;/li&gt;
 &lt;li&gt;若 Max &amp;lt; X，返回Max&lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-7&#34;&gt;
+获取二者中较小值 FGenericPlatformMath::Min
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FGenericPlatformMath-Min.png&#34; alt=&#34;/pic/FMath库/FGenericPlatformMath-Min.png&#34; title=&#34;/pic/FMath库/FGenericPlatformMath-Min.png&#34; width=&#34;500&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+浮点数在允许误差范围内判等 FMath::IsNearlyEqual
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-IsNearlyEqual.png&#34; alt=&#34;/pic/FMath库/FMath-IsNearlyEqual.png&#34; title=&#34;/pic/FMath库/FMath-IsNearlyEqual.png&#34; width=&#34;600&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-9&#34;&gt;
+浮点数在允许误差范围内判断是否为0 FMath::IsNearlyZero
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-IsNearlyZero.png&#34; alt=&#34;/pic/FMath库/FMath-IsNearlyZero.png&#34; title=&#34;/pic/FMath库/FMath-IsNearlyZero.png&#34; width=&#34;600&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -613,6 +637,14 @@ FTransform::ToHumanReadableString
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-6&#34;&gt;
+获取定时器管理对象的引用 UWorld::GetTimerManager
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/UWorld类型/UWorld-GetTimerManager.png&#34; alt=&#34;/pic/UWorld类型/UWorld-GetTimerManager.png&#34; title=&#34;/pic/UWorld类型/UWorld-GetTimerManager.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
     
@@ -624,7 +656,7 @@ FTransform::ToHumanReadableString
       <guid>https://toughcactus.github.io/post/15.%E5%90%91%E9%87%8F%E7%BB%93%E6%9E%84%E4%BD%93/</guid>
       <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、FVector2D
+FVector2D
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -636,7 +668,7 @@ FTransform::ToHumanReadableString
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-2&#34;&gt;
-二、FVector
+FVector
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -706,6 +738,14 @@ FTransform::ToHumanReadableString
 &lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/向量结构体/FVector-CrossProduct.png&#34; alt=&#34;/pic/向量结构体/FVector-CrossProduct.png&#34; title=&#34;/pic/向量结构体/FVector-CrossProduct.png&#34;/&gt;  &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-3&#34;&gt;
+&lt;h3 id=&#34;headline-9&#34;&gt;
+向量在允许误差范围内为0向量 FVector::IsNearlyZero
+&lt;/h3&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-3&#34;&gt;
+&lt;p width=&#34;500&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/向量结构体/FVector-IsNearlyZero.png&#34; alt=&#34;/pic/向量结构体/FVector-IsNearlyZero.png&#34; title=&#34;/pic/向量结构体/FVector-IsNearlyZero.png&#34;/&gt;  &lt;/p&gt;
+&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -726,45 +766,32 @@ FTransform::ToHumanReadableString
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/FTimerManager结构体/FTimerManager-SetTimer.png&#34; alt=&#34;/pic/FTimerManager结构体/FTimerManager-SetTimer.png&#34; title=&#34;/pic/FTimerManager结构体/FTimerManager-SetTimer.png&#34; width=&#34;1500&#34;/&gt;
 &lt;ol&gt;
+&lt;li&gt;计时器描述符 InOutHandle&lt;/li&gt;
+&lt;li&gt;指向受计时器约束的Actor对象 InObj&lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;InOutHandle&lt;/p&gt;
+&lt;p&gt;回调函数 InTimerMethod&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;计时器描述符&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;InObj&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;指向受计时器约束的Actor对象&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;InTimerMethod&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;回调函数&lt;/li&gt;
 &lt;li&gt;到时间后调用回调函数&lt;/li&gt;
 &lt;li&gt;参数为函数指针，需要对回调函数取地址，直接传函数名报错&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;InRate&lt;/p&gt;
+&lt;p&gt;时间间隔 InRate&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;时间间隔&lt;/li&gt;
 &lt;li&gt;单位为秒&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;InbLoop&lt;/p&gt;
+&lt;p&gt;循环计时 标志 InbLoop&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;循环计时 标志&lt;/li&gt;
 &lt;li&gt;布尔类型&lt;/li&gt;
 &lt;li&gt;为true则循环计时&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;li&gt;
-&lt;p&gt;InFirstDelay&lt;/p&gt;
+&lt;p&gt;首次触发延后时长 InFirstDelay&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;使用默认值&lt;/li&gt;
+&lt;li&gt;使用默认值则不延后&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
@@ -2306,10 +2333,18 @@ check宏
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、获取指向Actor的指针 UActorComponent::GetOwner
+获取指向Actor的指针 UActorComponent::GetOwner
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
-&lt;img src=&#34;https://toughcactus.github.io/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; alt=&#34;/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; title=&#34;/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; width=&#34;500&#34;/&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; alt=&#34;/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; title=&#34;/pic/UActorComponent类型/UActorComponent-GetOwner.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+获取指向世界对象的指针 UActorComponent::GetWorld
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;p width=&#34;600&#34;&gt;&lt;img src=&#34;https://toughcactus.github.io/pic/UActorComponent类型/UActorComponent-GetWorld.png&#34; alt=&#34;/pic/UActorComponent类型/UActorComponent-GetWorld.png&#34; title=&#34;/pic/UActorComponent类型/UActorComponent-GetWorld.png&#34;/&gt;  &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -2410,7 +2445,7 @@ AActor  &lt;/p&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、AActor类型
+AActor类型
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -2436,7 +2471,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-2&#34;&gt;
-二、UObject类型
+UObject类型
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -2448,7 +2483,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-3&#34;&gt;
-三、获得Actor对象描述 UObjectBaseUtility::GetName
+获得Actor对象描述 UObjectBaseUtility::GetName
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -2465,7 +2500,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-4&#34;&gt;
-四、组件 Component
+组件 Component
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
@@ -2559,7 +2594,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-9&#34;&gt;
-五、Actor变换信息
+Actor变换信息
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-3&#34;&gt;
@@ -2620,7 +2655,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-15&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-15&#34;&gt;
-六、获取指向世界对象的指针 AActor::GetWorld
+获取指向世界对象的指针 AActor::GetWorld
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-15&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/AActor-GetWorld.png&#34; alt=&#34;/pic/AActor类型/AActor-GetWorld.png&#34; title=&#34;/pic/AActor类型/AActor-GetWorld.png&#34; width=&#34;600&#34;/&gt;
@@ -2628,7 +2663,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-16&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-16&#34;&gt;
-七、获取定时器管理对象的引用 AActor::GetWorldTimerManager
+获取定时器管理对象的引用 AActor::GetWorldTimerManager
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-16&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/AActor类型/AActor-GetWorldTimerManager.png&#34; alt=&#34;/pic/AActor类型/AActor-GetWorldTimerManager.png&#34; title=&#34;/pic/AActor类型/AActor-GetWorldTimerManager.png&#34; width=&#34;400&#34;/&gt;
@@ -2636,7 +2671,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-17&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-17&#34;&gt;
-八、对Actor对象调用BeginPlay AActor::FinishSpawning
+对Actor对象调用BeginPlay AActor::FinishSpawning
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-17&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;p&gt;和UWorld::SpawnActorDeferred配合使用&lt;/p&gt;
@@ -2645,7 +2680,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-18&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-18&#34;&gt;
-九、销毁Actor对象
+销毁Actor对象
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-18&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div id=&#34;outline-container-headline-19&#34; class=&#34;outline-3&#34;&gt;
@@ -2677,7 +2712,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-21&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-21&#34;&gt;
-十、从场景中移除Actor对象之前进行收尾工作 AActor::EndPlay
+从场景中移除Actor对象之前进行收尾工作 AActor::EndPlay
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-21&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -2689,7 +2724,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-22&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-22&#34;&gt;
-十一、Actor对象是否有效 IsValid
+Actor对象是否有效 IsValid
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-22&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -2706,7 +2741,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-23&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-23&#34;&gt;
-十二、获取Actor方向向量在各轴的分量
+获取Actor方向向量在各轴的分量
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-23&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div id=&#34;outline-container-headline-24&#34; class=&#34;outline-3&#34;&gt;
@@ -2737,7 +2772,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-27&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-27&#34;&gt;
-十三、伤害
+伤害
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-27&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div id=&#34;outline-container-headline-28&#34; class=&#34;outline-3&#34;&gt;
@@ -2812,7 +2847,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-31&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-31&#34;&gt;
-十四、判断指针基础类型 UObjectBaseUtility::IsA&amp;lt;T&amp;gt;
+判断指针基础类型 UObjectBaseUtility::IsA&amp;lt;T&amp;gt;
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-31&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -2986,7 +3021,7 @@ AActor  &lt;/p&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、原型 Default
+原型 Default
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -3008,7 +3043,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-2&#34;&gt;
-二、实例 Instance
+实例 Instance
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -3020,7 +3055,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-3&#34;&gt;
-三、UPROPERTY宏
+UPROPERTY宏
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/UPROPERTY宏/UPROPERTY宏.png&#34; alt=&#34;/pic/UPROPERTY宏/UPROPERTY宏.png&#34; title=&#34;/pic/UPROPERTY宏/UPROPERTY宏.png&#34; width=&#34;500&#34;/&gt;
@@ -3057,7 +3092,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-4&#34;&gt;
-四、访问说明符
+访问说明符
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -3105,7 +3140,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-5&#34;&gt;
-五、元信息 分组
+元信息 分组
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -3127,7 +3162,7 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-6&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-6&#34;&gt;
-六、蓝图属性
+蓝图属性
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -3157,12 +3192,26 @@ AActor  &lt;/p&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-7&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-7&#34;&gt;
-七、元信息 值范围
+元信息 值范围
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditDefaultsOnly, meta &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (ClampMin &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;1.5&amp;#34;&lt;/span&gt;, ClampMax &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;10.0&amp;#34;&lt;/span&gt;))
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; SpeedAcceleration &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;2.0f&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+元信息 编辑条件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditDefaultsOnly, Category &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Auto Heal&amp;#34;&lt;/span&gt;)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;bool&lt;/span&gt; AutoHeal &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; true;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditDefaultsOnly, Category &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Auto Heal&amp;#34;&lt;/span&gt;, meta &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; (EditCondition &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;AutoHeal&amp;#34;&lt;/span&gt;))
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; HealRate &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#ae81ff&#34;&gt;1.0f&lt;/span&gt;;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
