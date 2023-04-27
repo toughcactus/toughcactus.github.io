@@ -12,7 +12,22 @@
 
 <title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 27.APlayerController类型 - 苔滑非关雨，松鸣不假风。</title>
 
-<meta name="description" content="">
+<meta name="description" content="
+
+Controller
+
+头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/Controller.h
+源文件 UE5/Engine/Source/Runtime/Engine/Private/Controller.cpp
+
+
+
+PlayerController
+
+头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/PlayerController.h  
+源文件 UE5/Engine/Source/Runtime/Engine/Private/PlayerController.cpp
+
+
+">
 
 
 
@@ -85,7 +100,22 @@
 
 
 <meta property="og:title" content="虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 27.APlayerController类型" />
-<meta property="og:description" content="" />
+<meta property="og:description" content="
+
+Controller
+
+头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/Controller.h
+源文件 UE5/Engine/Source/Runtime/Engine/Private/Controller.cpp
+
+
+
+PlayerController
+
+头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/PlayerController.h  
+源文件 UE5/Engine/Source/Runtime/Engine/Private/PlayerController.cpp
+
+
+" />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/post/27.aplayercontroller%E7%B1%BB%E5%9E%8B/" /><meta property="article:section" content="post" />
 
@@ -93,7 +123,22 @@
 
 <meta name="twitter:card" content="summary"/>
 <meta name="twitter:title" content="虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 27.APlayerController类型"/>
-<meta name="twitter:description" content=""/>
+<meta name="twitter:description" content="
+
+Controller
+
+头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/Controller.h
+源文件 UE5/Engine/Source/Runtime/Engine/Private/Controller.cpp
+
+
+
+PlayerController
+
+头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/PlayerController.h  
+源文件 UE5/Engine/Source/Runtime/Engine/Private/PlayerController.cpp
+
+
+"/>
 
 
 
@@ -175,9 +220,25 @@
             </header>
         </div>
         <div class="content e-content">
-            <div id="outline-container-headline-1" class="outline-2">
+            <ul>
+<li>
+<p>Controller</p>
+<ul>
+<li>头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/Controller.h</li>
+<li>源文件 UE5/Engine/Source/Runtime/Engine/Private/Controller.cpp</li>
+</ul>
+</li>
+<li>
+<p>PlayerController</p>
+<ul>
+<li>头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/PlayerController.h  </li>
+<li>源文件 UE5/Engine/Source/Runtime/Engine/Private/PlayerController.cpp</li>
+</ul>
+</li>
+</ul>
+<div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
-一、切换Pawn AController::Possess
+切换Pawn AController::Possess
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
 <img src="/pic/APlayerController类型/AController-Possess1.png" alt="/pic/APlayerController类型/AController-Possess1.png" title="/pic/APlayerController类型/AController-Possess1.png" width="800"/>
@@ -186,7 +247,7 @@
 </div>
 <div id="outline-container-headline-2" class="outline-2">
 <h2 id="headline-2">
-二、处理输入 APlayerController::SetupInputComponent
+处理输入 APlayerController::SetupInputComponent
 </h2>
 <div id="outline-text-headline-2" class="outline-text-2">
 <img src="/pic/APlayerController类型/APlayerController-SetupInputComponent.png" alt="/pic/APlayerController类型/APlayerController-SetupInputComponent.png" title="/pic/APlayerController类型/APlayerController-SetupInputComponent.png" width="400"/>
@@ -194,7 +255,7 @@
 </div>
 <div id="outline-container-headline-3" class="outline-2">
 <h2 id="headline-3">
-三、获取类型 APlayerController::StaticClass
+获取类型 APlayerController::StaticClass
 </h2>
 <div id="outline-text-headline-3" class="outline-text-2">
 <ul>
@@ -207,7 +268,7 @@
 </div>
 <div id="outline-container-headline-4" class="outline-2">
 <h2 id="headline-4">
-四、增减PlayerController旋转角度
+增减PlayerController旋转角度
 </h2>
 <div id="outline-text-headline-4" class="outline-text-2">
 <div id="outline-container-headline-5" class="outline-3">
@@ -234,6 +295,47 @@ YOZ平面
 <img src="/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png" alt="/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png" title="/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png" width="1000"/>
 </div>
 </div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-2">
+<h2 id="headline-8">
+设置Controller状态 AController::ChangeState
+</h2>
+<div id="outline-text-headline-8" class="outline-text-2">
+<ul>
+<li>修改StateName值并做相应修改</li>
+</ul>
+<img src="/pic/APlayerController类型/AController-GetStateName.png" alt="/pic/APlayerController类型/AController-GetStateName.png" title="/pic/APlayerController类型/AController-GetStateName.png" width="300"/>
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-2">
+<h2 id="headline-9">
+使新Controller状态生效 APlayerController::ChangeState
+</h2>
+<div id="outline-text-headline-9" class="outline-text-2">
+<ul>
+<li>对先前状态进行收尾，为新状态做相应设置</li>
+<li>
+<p>NAME_Spectating对应观察Pawn，NAME_Playing对应常规Pawn</p>
+<ul>
+<li>二者都是常量</li>
+</ul>
+</li>
+</ul>
+<img src="/pic/APlayerController类型/APlayerController-GetStateName.png" alt="/pic/APlayerController类型/APlayerController-GetStateName.png" title="/pic/APlayerController类型/APlayerController-GetStateName.png" width="700"/>
+</div>
+</div>
+<div id="outline-container-headline-10" class="outline-2">
+<h2 id="headline-10">
+使观察者状态生效 APlayerController::BeginSpectatingState
+</h2>
+<div id="outline-text-headline-10" class="outline-text-2">
+<ul>
+<li>Controller释放当前Pawn</li>
+<li>销毁当前SpectatorPawn</li>
+<li>生成新SpectatorPawn并由Controller控制</li>
+</ul>
+<img src="/pic/APlayerController类型/APlayerController-BeginSpectatingState.png" alt="/pic/APlayerController类型/APlayerController-BeginSpectatingState.png" title="/pic/APlayerController类型/APlayerController-BeginSpectatingState.png" width="700"/>
 </div>
 </div>
         </div>

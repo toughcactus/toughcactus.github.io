@@ -189,6 +189,7 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/STCharacterMovementComponent.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/STHealthComponent.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/TextRenderComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;GameFramework/Controller.h&#34;</span><span style="color:#75715e">
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter, All, All)
@@ -396,6 +397,8 @@
 </span></span><span style="display:flex;"><span>	GetCharacterMovement()<span style="color:#f92672">-&gt;</span>DisableMovement();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	SetLifeSpan(<span style="color:#ae81ff">5.0f</span>);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	SwitchToSpectatorPawn();	
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>BindOnDeath()
@@ -406,6 +409,14 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>CheckCharacterMovement()
 </span></span><span style="display:flex;"><span>{
 </span></span><span style="display:flex;"><span>	check(GetCharacterMovement());
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>SwitchToSpectatorPawn()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (Controller)
+</span></span><span style="display:flex;"><span>	{
+</span></span><span style="display:flex;"><span>		Controller<span style="color:#f92672">-&gt;</span>ChangeState(NAME_Spectating);
+</span></span><span style="display:flex;"><span>	}
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -514,6 +525,9 @@
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
 </span></span><span style="display:flex;"><span>	UPROPERTY(EditDefaultsOnly)
 </span></span><span style="display:flex;"><span>	UAnimMontage <span style="color:#f92672">*</span>DeathAnimMontage;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> SwitchToSpectatorPawn();	
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -805,8 +819,8 @@
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// Health -= Damage;
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	Health <span style="color:#f92672">=</span> FMath<span style="color:#f92672">::</span>Clamp(Health <span style="color:#f92672">-</span> Damage, <span style="color:#ae81ff">0.0f</span>, MaxHealth);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>	HandleDamage(DamageType);
-</span></span><span style="display:flex;"><span>	OnHealthChanged.Broadcast();
+</span></span><span style="display:flex;"><span>	<span style="color:#75715e">// HandleDamage(DamageType);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>	OnHealthChanged.Broadcast();
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	InformClientOnDeath();	
 </span></span><span style="display:flex;"><span>}

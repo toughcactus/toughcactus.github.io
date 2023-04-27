@@ -14,7 +14,7 @@
 
 <meta name="description" content="
 生命值不会小于0
-USTHealthComponent::OnTakeAnyDamage中，若伤害数量特征不大于0，或者当前生命值不大于0，无法继续对Character造成伤害
+USTHealthComponent::OnTakeAnyDamage中，若伤害的数量特征不大于0，或者当前生命值不大于0，无法继续对Character造成伤害
 ">
 
 
@@ -90,7 +90,7 @@ USTHealthComponent::OnTakeAnyDamage中，若伤害数量特征不大于0，或�
 <meta property="og:title" content="虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 2.5.2限制生命值范围" />
 <meta property="og:description" content="
 生命值不会小于0
-USTHealthComponent::OnTakeAnyDamage中，若伤害数量特征不大于0，或者当前生命值不大于0，无法继续对Character造成伤害
+USTHealthComponent::OnTakeAnyDamage中，若伤害的数量特征不大于0，或者当前生命值不大于0，无法继续对Character造成伤害
 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/post/2.5.2%E9%99%90%E5%88%B6%E7%94%9F%E5%91%BD%E5%80%BC%E8%8C%83%E5%9B%B4/" /><meta property="article:section" content="post" />
@@ -101,7 +101,7 @@ USTHealthComponent::OnTakeAnyDamage中，若伤害数量特征不大于0，或�
 <meta name="twitter:title" content="虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 2.5.2限制生命值范围"/>
 <meta name="twitter:description" content="
 生命值不会小于0
-USTHealthComponent::OnTakeAnyDamage中，若伤害数量特征不大于0，或者当前生命值不大于0，无法继续对Character造成伤害
+USTHealthComponent::OnTakeAnyDamage中，若伤害的数量特征不大于0，或者当前生命值不大于0，无法继续对Character造成伤害
 "/>
 
 
@@ -186,7 +186,7 @@ USTHealthComponent::OnTakeAnyDamage中，若伤害数量特征不大于0，或�
         <div class="content e-content">
             <ul>
 <li>生命值不会小于0</li>
-<li>USTHealthComponent::OnTakeAnyDamage中，若伤害数量特征不大于0，或者当前生命值不大于0，无法继续对Character造成伤害</li>
+<li>USTHealthComponent::OnTakeAnyDamage中，若伤害的数量特征不大于0，或者当前生命值不大于0，无法继续对Character造成伤害</li>
 </ul>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
@@ -218,8 +218,8 @@ USTHealthComponent::OnTakeAnyDamage中，若伤害数量特征不大于0，或�
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      <span style="color:#75715e">// Health -= Damage;
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      Health <span style="color:#f92672">=</span> FMath<span style="color:#f92672">::</span>Clamp(Health <span style="color:#f92672">-</span> Damage, <span style="color:#ae81ff">0.0f</span>, MaxHealth);
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>      HandleDamage(DamageType);
-</span></span><span style="display:flex;"><span>      OnHealthChanged.Broadcast();
+</span></span><span style="display:flex;"><span>      <span style="color:#75715e">// HandleDamage(DamageType);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>      OnHealthChanged.Broadcast();
 </span></span><span style="display:flex;"><span>  }</span></span></code></pre></div>
 </div>
 </div>

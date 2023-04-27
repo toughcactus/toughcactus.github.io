@@ -4405,7 +4405,47 @@ slot和AM_Death中分组应该一致
 二、效果图
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;禁止移动Character之后，销毁Character之前，仍可以移动摄像机&lt;/li&gt;
+&lt;li&gt;即，可以旋转Character(TurnAround)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/查看死亡动画/效果图.png&#34; alt=&#34;/pic/查看死亡动画/效果图.png&#34; title=&#34;/pic/查看死亡动画/效果图.png&#34; width=&#34;800&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 2.6.2在编辑器中查看观察视角</title>
+      <link>https://toughcactus.github.io/post/2.6.2%E5%9C%A8%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E6%9F%A5%E7%9C%8B%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.6.2%E5%9C%A8%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E6%9F%A5%E7%9C%8B%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、查看WorldSetting
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在编辑器中查看观察视角/WorldSetting-SpectatorClass.png&#34; alt=&#34;/pic/在编辑器中查看观察视角/WorldSetting-SpectatorClass.png&#34; title=&#34;/pic/在编辑器中查看观察视角/WorldSetting-SpectatorClass.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、Pawn也可选择SpectatorPawn
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在编辑器中查看观察视角/WorldSetting-为Pawn选择SpectatorPawn.png&#34; alt=&#34;/pic/在编辑器中查看观察视角/WorldSetting-为Pawn选择SpectatorPawn.png&#34; title=&#34;/pic/在编辑器中查看观察视角/WorldSetting-为Pawn选择SpectatorPawn.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、观察视角
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Character死亡后，世界大纲新增SpectatorPawn1&lt;/li&gt;
+&lt;li&gt;因为Character死亡的处理函数中，立即切换到SpectatorPawn，在Character销毁之前，无法继续操作Character，也就无法旋转Character的Camera&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在编辑器中查看观察视角/Outliner-SpectatorPawn1.png&#34; alt=&#34;/pic/在编辑器中查看观察视角/Outliner-SpectatorPawn1.png&#34; title=&#34;/pic/在编辑器中查看观察视角/Outliner-SpectatorPawn1.png&#34; width=&#34;1000&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>

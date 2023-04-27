@@ -454,11 +454,14 @@ FTransform::ToHumanReadableString
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
+&lt;li&gt;模版函数，自动推测类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-Clamp.png&#34; alt=&#34;/pic/FMath库/FMath-Clamp.png&#34; title=&#34;/pic/FMath库/FMath-Clamp.png&#34; width=&#34;500&#34;/&gt;
+&lt;ul&gt;
 &lt;li&gt;若 Min &amp;lt;= X &amp;lt;= Max，返回X&lt;/li&gt;
 &lt;li&gt;若 X &amp;lt; Min，返回Min&lt;/li&gt;
 &lt;li&gt;若 Max &amp;lt; X，返回Max&lt;/li&gt;
 &lt;/ul&gt;
-&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-Clamp.png&#34; alt=&#34;/pic/FMath库/FMath-Clamp.png&#34; title=&#34;/pic/FMath库/FMath-Clamp.png&#34; width=&#34;500&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -1731,9 +1734,25 @@ YOZ平面旋转 APawn::AddControllerRollInput
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://toughcactus.github.io/post/27.aplayercontroller%E7%B1%BB%E5%9E%8B/</guid>
-      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Controller&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/Controller.h&lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/Controller.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PlayerController&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/PlayerController.h  &lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/PlayerController.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、切换Pawn AController::Possess
+切换Pawn AController::Possess
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/AController-Possess1.png&#34; alt=&#34;/pic/APlayerController类型/AController-Possess1.png&#34; title=&#34;/pic/APlayerController类型/AController-Possess1.png&#34; width=&#34;800&#34;/&gt;
@@ -1742,7 +1761,7 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-2&#34;&gt;
-二、处理输入 APlayerController::SetupInputComponent
+处理输入 APlayerController::SetupInputComponent
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-SetupInputComponent.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-SetupInputComponent.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-SetupInputComponent.png&#34; width=&#34;400&#34;/&gt;
@@ -1750,7 +1769,7 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-3&#34;&gt;
-三、获取类型 APlayerController::StaticClass
+获取类型 APlayerController::StaticClass
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -1763,7 +1782,7 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-4&#34;&gt;
-四、增减PlayerController旋转角度
+增减PlayerController旋转角度
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
@@ -1790,6 +1809,47 @@ YOZ平面
 &lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png&#34; width=&#34;1000&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+设置Controller状态 AController::ChangeState
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;修改StateName值并做相应修改&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/AController-GetStateName.png&#34; alt=&#34;/pic/APlayerController类型/AController-GetStateName.png&#34; title=&#34;/pic/APlayerController类型/AController-GetStateName.png&#34; width=&#34;300&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-9&#34;&gt;
+使新Controller状态生效 APlayerController::ChangeState
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;对先前状态进行收尾，为新状态做相应设置&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;NAME_Spectating对应观察Pawn，NAME_Playing对应常规Pawn&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;二者都是常量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-GetStateName.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-GetStateName.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-GetStateName.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-10&#34;&gt;
+使观察者状态生效 APlayerController::BeginSpectatingState
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-10&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Controller释放当前Pawn&lt;/li&gt;
+&lt;li&gt;销毁当前SpectatorPawn&lt;/li&gt;
+&lt;li&gt;生成新SpectatorPawn并由Controller控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-BeginSpectatingState.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-BeginSpectatingState.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-BeginSpectatingState.png&#34; width=&#34;700&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -9992,7 +10052,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
       
       <guid>https://toughcactus.github.io/post/2.5.1%E4%BD%BF%E7%94%A8%E5%A7%94%E6%89%98%E4%BF%AE%E6%94%B9healthtext/</guid>
       <description>&lt;ul&gt;
-&lt;li&gt;当声明值发生改变时，设置HealthText文本&lt;/li&gt;
+&lt;li&gt;当生命值发生改变时，设置HealthText文本&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
@@ -10089,7 +10149,7 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
       <guid>https://toughcactus.github.io/post/2.5.2%E9%99%90%E5%88%B6%E7%94%9F%E5%91%BD%E5%80%BC%E8%8C%83%E5%9B%B4/</guid>
       <description>&lt;ul&gt;
 &lt;li&gt;生命值不会小于0&lt;/li&gt;
-&lt;li&gt;USTHealthComponent::OnTakeAnyDamage中，若伤害数量特征不大于0，或者当前生命值不大于0，无法继续对Character造成伤害&lt;/li&gt;
+&lt;li&gt;USTHealthComponent::OnTakeAnyDamage中，若伤害的数量特征不大于0，或者当前生命值不大于0，无法继续对Character造成伤害&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
@@ -10121,8 +10181,8 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;// Health -= Damage;
 &lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      Health &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; FMath&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;Clamp(Health &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt; Damage, &lt;span style=&#34;color:#ae81ff&#34;&gt;0.0f&lt;/span&gt;, MaxHealth);
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      HandleDamage(DamageType);
-&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      OnHealthChanged.Broadcast();
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#75715e&#34;&gt;// HandleDamage(DamageType);
+&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;&lt;span style=&#34;color:#75715e&#34;&gt;&lt;/span&gt;      OnHealthChanged.Broadcast();
 &lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -10273,6 +10333,62 @@ The key parameter is -projectfiles, it tells UBT to generate project files accor
 &lt;/div&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 2.6.1Character死亡后使用观察视角</title>
+      <link>https://toughcactus.github.io/post/2.6.1character%E6%AD%BB%E4%BA%A1%E5%90%8E%E4%BD%BF%E7%94%A8%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.6.1character%E6%AD%BB%E4%BA%A1%E5%90%8E%E4%BD%BF%E7%94%A8%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;当Character死亡并销毁，Controller无其他Pawn可控制&lt;/li&gt;
+&lt;li&gt;观察视角的实现，对应一个APawn派生类，ASpectatorPawn&lt;/li&gt;
+&lt;li&gt;关卡的默认类型里，观察者类即使用ASpectatorPawn&lt;/li&gt;
+&lt;li&gt;场景中的SpectatorPawn，即漂浮的摄像机，可以前后左右上下移动，键位控制可以旋转，由鼠标控制&lt;/li&gt;
+&lt;li&gt;观察视角的存在，使得玩家死亡后，仍能继续观看游戏&lt;/li&gt;
+&lt;li&gt;当Character死亡后，使Controller切换到ASpectatorPawn对象&lt;/li&gt;
+&lt;li&gt;本小节使用默认的观察者类，所做的修改在STBaseCharacter中&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加头文件
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;先前我们已设置STBaseCharacter使用STPlayerController类&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;APawn::Controller成员和具体的Controller对象动态绑定&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;由于其声明里使用AController，所以我们包含AController的头文件而非STPlayerController的&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#75715e&#34;&gt;#include&lt;/span&gt; &lt;span style=&#34;color:#75715e&#34;&gt;&amp;#34;GameFramework/Controller.h&amp;#34;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、Character死亡时，使用观察视角
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;在Character死亡处理函数中调用 ASTBaseCharacter::OnDeath&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;SwitchToSpectatorPawn()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (Controller)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;          Controller&lt;span style=&#34;color:#f92672&#34;&gt;-&amp;gt;&lt;/span&gt;ChangeState(NAME_Spectating);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      }
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -12746,7 +12862,47 @@ slot和AM_Death中分组应该一致
 二、效果图
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;禁止移动Character之后，销毁Character之前，仍可以移动摄像机&lt;/li&gt;
+&lt;li&gt;即，可以旋转Character(TurnAround)&lt;/li&gt;
+&lt;/ul&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/查看死亡动画/效果图.png&#34; alt=&#34;/pic/查看死亡动画/效果图.png&#34; title=&#34;/pic/查看死亡动画/效果图.png&#34; width=&#34;800&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 2.6.2在编辑器中查看观察视角</title>
+      <link>https://toughcactus.github.io/post/2.6.2%E5%9C%A8%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E6%9F%A5%E7%9C%8B%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.6.2%E5%9C%A8%E7%BC%96%E8%BE%91%E5%99%A8%E4%B8%AD%E6%9F%A5%E7%9C%8B%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/</guid>
+      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、查看WorldSetting
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在编辑器中查看观察视角/WorldSetting-SpectatorClass.png&#34; alt=&#34;/pic/在编辑器中查看观察视角/WorldSetting-SpectatorClass.png&#34; title=&#34;/pic/在编辑器中查看观察视角/WorldSetting-SpectatorClass.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、Pawn也可选择SpectatorPawn
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在编辑器中查看观察视角/WorldSetting-为Pawn选择SpectatorPawn.png&#34; alt=&#34;/pic/在编辑器中查看观察视角/WorldSetting-为Pawn选择SpectatorPawn.png&#34; title=&#34;/pic/在编辑器中查看观察视角/WorldSetting-为Pawn选择SpectatorPawn.png&#34; width=&#34;400&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-3&#34;&gt;
+三、观察视角
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Character死亡后，世界大纲新增SpectatorPawn1&lt;/li&gt;
+&lt;li&gt;因为Character死亡的处理函数中，立即切换到SpectatorPawn，在Character销毁之前，无法继续操作Character，也就无法旋转Character的Camera&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/在编辑器中查看观察视角/Outliner-SpectatorPawn1.png&#34; alt=&#34;/pic/在编辑器中查看观察视角/Outliner-SpectatorPawn1.png&#34; title=&#34;/pic/在编辑器中查看观察视角/Outliner-SpectatorPawn1.png&#34; width=&#34;1000&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>

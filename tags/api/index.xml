@@ -454,11 +454,14 @@ FTransform::ToHumanReadableString
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-6&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
+&lt;li&gt;模版函数，自动推测类型&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-Clamp.png&#34; alt=&#34;/pic/FMath库/FMath-Clamp.png&#34; title=&#34;/pic/FMath库/FMath-Clamp.png&#34; width=&#34;500&#34;/&gt;
+&lt;ul&gt;
 &lt;li&gt;若 Min &amp;lt;= X &amp;lt;= Max，返回X&lt;/li&gt;
 &lt;li&gt;若 X &amp;lt; Min，返回Min&lt;/li&gt;
 &lt;li&gt;若 Max &amp;lt; X，返回Max&lt;/li&gt;
 &lt;/ul&gt;
-&lt;img src=&#34;https://toughcactus.github.io/pic/FMath库/FMath-Clamp.png&#34; alt=&#34;/pic/FMath库/FMath-Clamp.png&#34; title=&#34;/pic/FMath库/FMath-Clamp.png&#34; width=&#34;500&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -1731,9 +1734,25 @@ YOZ平面旋转 APawn::AddControllerRollInput
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://toughcactus.github.io/post/27.aplayercontroller%E7%B1%BB%E5%9E%8B/</guid>
-      <description>&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+      <description>&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;Controller&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/Controller.h&lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/Controller.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;PlayerController&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFrameWork/PlayerController.h  &lt;/li&gt;
+&lt;li&gt;源文件 UE5/Engine/Source/Runtime/Engine/Private/PlayerController.cpp&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-1&#34;&gt;
-一、切换Pawn AController::Possess
+切换Pawn AController::Possess
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/AController-Possess1.png&#34; alt=&#34;/pic/APlayerController类型/AController-Possess1.png&#34; title=&#34;/pic/APlayerController类型/AController-Possess1.png&#34; width=&#34;800&#34;/&gt;
@@ -1742,7 +1761,7 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-2&#34;&gt;
-二、处理输入 APlayerController::SetupInputComponent
+处理输入 APlayerController::SetupInputComponent
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-SetupInputComponent.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-SetupInputComponent.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-SetupInputComponent.png&#34; width=&#34;400&#34;/&gt;
@@ -1750,7 +1769,7 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-3&#34;&gt;
-三、获取类型 APlayerController::StaticClass
+获取类型 APlayerController::StaticClass
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -1763,7 +1782,7 @@ YOZ平面旋转 APawn::AddControllerRollInput
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-4&#34;&gt;
-四、增减PlayerController旋转角度
+增减PlayerController旋转角度
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-3&#34;&gt;
@@ -1790,6 +1809,47 @@ YOZ平面
 &lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-AddRollInput-Definition.png&#34; width=&#34;1000&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-8&#34;&gt;
+设置Controller状态 AController::ChangeState
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;修改StateName值并做相应修改&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/AController-GetStateName.png&#34; alt=&#34;/pic/APlayerController类型/AController-GetStateName.png&#34; title=&#34;/pic/APlayerController类型/AController-GetStateName.png&#34; width=&#34;300&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-9&#34;&gt;
+使新Controller状态生效 APlayerController::ChangeState
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;对先前状态进行收尾，为新状态做相应设置&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;NAME_Spectating对应观察Pawn，NAME_Playing对应常规Pawn&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;二者都是常量&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-GetStateName.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-GetStateName.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-GetStateName.png&#34; width=&#34;700&#34;/&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-10&#34;&gt;
+使观察者状态生效 APlayerController::BeginSpectatingState
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-10&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;Controller释放当前Pawn&lt;/li&gt;
+&lt;li&gt;销毁当前SpectatorPawn&lt;/li&gt;
+&lt;li&gt;生成新SpectatorPawn并由Controller控制&lt;/li&gt;
+&lt;/ul&gt;
+&lt;img src=&#34;https://toughcactus.github.io/pic/APlayerController类型/APlayerController-BeginSpectatingState.png&#34; alt=&#34;/pic/APlayerController类型/APlayerController-BeginSpectatingState.png&#34; title=&#34;/pic/APlayerController类型/APlayerController-BeginSpectatingState.png&#34; width=&#34;700&#34;/&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
