@@ -289,6 +289,34 @@ API
 <img src="/pic/FMath库/FMath-IsNearlyZero.png" alt="/pic/FMath库/FMath-IsNearlyZero.png" title="/pic/FMath库/FMath-IsNearlyZero.png" width="600"/>
 </div>
 </div>
+<div id="outline-container-headline-10" class="outline-2">
+<h2 id="headline-10">
+计算线性值 FMath::GetMappedRangeValueClamped&lt;T&gt;
+</h2>
+<div id="outline-text-headline-10" class="outline-text-2">
+<ul>
+<li>
+<p>Value &lt; InputRange.X</p>
+<ul>
+<li>OutputRange.X</li>
+</ul>
+</li>
+<li>
+<p>Value &gt; InputRange.Y</p>
+<ul>
+<li>OutputRange.Y</li>
+</ul>
+</li>
+<li>
+<p>Value [InputRange.X, InputRange.Y]</p>
+<ul>
+<li>OutputRange.Y + (Value - InputRange.X) (OutputRange.Y - OutputRange.X)/(InputRange.Y - InputRange.X)</li>
+</ul>
+</li>
+</ul>
+<img src="/pic/FMath库/FMath-GetMappedRangeValueClamped.png" alt="/pic/FMath库/FMath-GetMappedRangeValueClamped.png" title="/pic/FMath库/FMath-GetMappedRangeValueClamped.png" width="600"/>
+</div>
+</div>
         </div>
         
 

@@ -2182,6 +2182,113 @@
     </item>
     
     <item>
+      <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻C&#43;&#43; &gt; 2.8高处坠落伤害</title>
+      <link>https://toughcactus.github.io/post/2.8%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/post/2.8%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/</guid>
+      <description>&lt;ul&gt;
+&lt;li&gt;在STBaseCharacter中实现&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;落地时获取Z方向的速度，其和坠落高度相关&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;t = sqrt(2*h/g) = v/g&lt;/li&gt;
+&lt;li&gt;速度越大，坠落高度越大&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;跳跃时落地，也符合坠落定义&lt;/li&gt;
+&lt;li&gt;在一定范围内，坠落无伤害&lt;/li&gt;
+&lt;li&gt;坠落伤害范围 [c, d] LandedDamageRange&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;落地时速度范围 [a, b] LandedDamageVelocityRange&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;速度小于a无伤&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;在[a, b]范围内，对应伤害[c, d]&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;c + (Velocity - a) (d - c) / (b - a)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;速度大于b，伤害为d&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-1&#34;&gt;
+一、添加属性
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-1&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ul&gt;
+&lt;li&gt;原型可设置&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditDefaultsOnly)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  FVector2D LandedDamageVelocityRange &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#ae81ff&#34;&gt;900.0f&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;1200.0f&lt;/span&gt;};
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UPROPERTY(EditDefaultsOnly)	
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  FVector2D LandedDamageRange &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; {&lt;span style=&#34;color:#ae81ff&#34;&gt;10.0f&lt;/span&gt;, &lt;span style=&#34;color:#ae81ff&#34;&gt;100.0f&lt;/span&gt;};&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
+&lt;h2 id=&#34;headline-2&#34;&gt;
+二、订阅委托
+&lt;/h2&gt;
+&lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
+&lt;ol&gt;
+&lt;li&gt;
+&lt;p&gt;添加函数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;委托支持蓝图&lt;/p&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  UFUNCTION()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; OnGroundLanded(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FHitResult&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; Hit);&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;委托处理函数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;OnLanded已被使用&lt;/li&gt;
+&lt;li&gt;坠落伤害属于环境伤害，无伤害源(Actor)和阵营(Controller)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnGroundLanded(&lt;span style=&#34;color:#66d9ef&#34;&gt;const&lt;/span&gt; FHitResult&lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt; Hit)
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; Velocity &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; &lt;span style=&#34;color:#f92672&#34;&gt;-&lt;/span&gt;GetVelocity().Z;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      UE_LOG(LogBaseCharacter, Log, TEXT(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Velocity: %0.f&amp;#34;&lt;/span&gt;), Velocity);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;if&lt;/span&gt; (Velocity &lt;span style=&#34;color:#f92672&#34;&gt;&amp;lt;&lt;/span&gt; LandedDamageVelocityRange.X) &lt;span style=&#34;color:#66d9ef&#34;&gt;return&lt;/span&gt;;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      &lt;span style=&#34;color:#66d9ef&#34;&gt;float&lt;/span&gt; LandedDamage &lt;span style=&#34;color:#f92672&#34;&gt;=&lt;/span&gt; FMath&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;GetMappedRangeValueClamped(LandedDamageVelocityRange, LandedDamageRange, Velocity);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      UE_LOG(LogBaseCharacter, Log, TEXT(&lt;span style=&#34;color:#e6db74&#34;&gt;&amp;#34;Damage: %0.f&amp;#34;&lt;/span&gt;), LandedDamage);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      TakeDamage(LandedDamage, FDamageEvent{}, &lt;span style=&#34;color:#66d9ef&#34;&gt;nullptr&lt;/span&gt;, &lt;span style=&#34;color:#66d9ef&#34;&gt;nullptr&lt;/span&gt;);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;添加函数&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;private&lt;/li&gt;
+&lt;li&gt;在BeginPlay中调用  &lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;src src-c++&#34;&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; style=&#34;color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;&#34;&gt;&lt;code class=&#34;language-c++&#34; data-lang=&#34;c++&#34;&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  &lt;span style=&#34;color:#66d9ef&#34;&gt;void&lt;/span&gt; ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;BindOnLanded()
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  {
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;      LandedDelegate.AddDynamic(&lt;span style=&#34;color:#66d9ef&#34;&gt;this&lt;/span&gt;, &lt;span style=&#34;color:#f92672&#34;&gt;&amp;amp;&lt;/span&gt;ASTBaseCharacter&lt;span style=&#34;color:#f92672&#34;&gt;::&lt;/span&gt;OnGroundLanded);
+&lt;/span&gt;&lt;/span&gt;&lt;span style=&#34;display:flex;&#34;&gt;&lt;span&gt;  }&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/div&gt;
+&lt;/div&gt;</description>
+    </item>
+    
+    <item>
       <title>虚幻引擎 &gt; 进阶课程 &gt; 虚幻编辑器 &gt; 1.10.1实现转向动画</title>
       <link>https://toughcactus.github.io/post/1.10.1%E5%AE%9E%E7%8E%B0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>

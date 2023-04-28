@@ -250,21 +250,9 @@
 </ul>
 <div id="outline-container-headline-1" class="outline-2">
 <h2 id="headline-1">
-一、FDamageEvent
+UDamageType类型
 </h2>
 <div id="outline-text-headline-1" class="outline-text-2">
-<ul>
-<li>包含伤害信息</li>
-<li>FPointDamageEvent和FRadialDamageEvent派生自FDamageEvent</li>
-</ul>
-<img src="/pic/FDamageEvent结构体/FDamageEvent.png" alt="/pic/FDamageEvent结构体/FDamageEvent.png" title="/pic/FDamageEvent结构体/FDamageEvent.png" width="400"/>
-</div>
-</div>
-<div id="outline-container-headline-2" class="outline-2">
-<h2 id="headline-2">
-二、UDamageType类型
-</h2>
-<div id="outline-text-headline-2" class="outline-text-2">
 <ul>
 <li>头文件 UE5/Engine/Source/Runtime/Engine/Classes/GameFramework/DamageType.h</li>
 <li>
@@ -275,15 +263,40 @@
 <li>岩浆(lava)</li>
 </ul>
 </li>
-<li>处理函数中，根据UDamageType值做出相应处理</li>
 </ul>
+<img src="/pic/FDamageEvent结构体/UDamageType.png" alt="/pic/FDamageEvent结构体/UDamageType.png" title="/pic/FDamageEvent结构体/UDamageType.png" width="600"/>
+</div>
+</div>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+FDamageEvent
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<ul>
+<li>包含伤害信息</li>
+<li>FPointDamageEvent和FRadialDamageEvent派生自FDamageEvent</li>
+<li>处理函数中，根据UDamageType值做出相应处理    </li>
+</ul>
+<img src="/pic/FDamageEvent结构体/FDamageEvent.png" alt="/pic/FDamageEvent结构体/FDamageEvent.png" title="/pic/FDamageEvent结构体/FDamageEvent.png" width="400"/>
 </div>
 </div>
 <div id="outline-container-headline-3" class="outline-2">
 <h2 id="headline-3">
-三、点伤害事件 FPointDamageEvent
+碰撞信息 FHitResult
 </h2>
 <div id="outline-text-headline-3" class="outline-text-2">
+<ul>
+<li>头文件 UE5/Engine/Source/Runtime/Engine/Classes/Engine/HitResult.h</li>
+<li>包含两物体接触信息，如接触点，法向量等</li>
+</ul>
+<img src="/pic/FDamageEvent结构体/FHItResult.png" alt="/pic/FDamageEvent结构体/FHItResult.png" title="/pic/FDamageEvent结构体/FHItResult.png" width="600"/>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+点伤害事件 FPointDamageEvent
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
 <ul>
 <li>子弹和砍式武器造成</li>
 <li>
@@ -292,15 +305,27 @@
 <li>用以播放Character对应的骨骼动画</li>
 </ul>
 </li>
+<li>处理函数中，根据HitInfo处理事件</li>
 </ul>
 <img src="/pic/FDamageEvent结构体/FPointDamageEvent.png" alt="/pic/FDamageEvent结构体/FPointDamageEvent.png" title="/pic/FDamageEvent结构体/FPointDamageEvent.png" width="500"/>
+<div id="outline-container-headline-5" class="outline-3">
+<h3 id="headline-5">
+伤害轨迹或伤害部位 FPointDamageEvent::HitInfo
+</h3>
+<div id="outline-text-headline-5" class="outline-text-3">
+<ul>
+<li>FHitResult类型</li>
+</ul>
+<img src="/pic/FDamageEvent结构体/FPointDamageEvent-HitInfo.png" alt="/pic/FDamageEvent结构体/FPointDamageEvent-HitInfo.png" title="/pic/FDamageEvent结构体/FPointDamageEvent-HitInfo.png" width="500"/>
 </div>
 </div>
-<div id="outline-container-headline-4" class="outline-2">
-<h2 id="headline-4">
-四、半径伤害事件 FRadialDamageEvent
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-2">
+<h2 id="headline-6">
+半径伤害事件 FRadialDamageEvent
 </h2>
-<div id="outline-text-headline-4" class="outline-text-2">
+<div id="outline-text-headline-6" class="outline-text-2">
 <ul>
 <li>如榴弹爆炸(grenade expolosion)</li>
 <li>

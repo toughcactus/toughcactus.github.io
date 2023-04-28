@@ -216,6 +216,8 @@
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>	CheckCharacterMovement();
 </span></span><span style="display:flex;"><span>	BindOnDeath();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	BindOnLanded();
 </span></span><span style="display:flex;"><span>}
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#75715e">// Called every frame
@@ -417,6 +419,24 @@
 </span></span><span style="display:flex;"><span>	{
 </span></span><span style="display:flex;"><span>		Controller<span style="color:#f92672">-&gt;</span>ChangeState(NAME_Spectating);
 </span></span><span style="display:flex;"><span>	}
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>OnGroundLanded(<span style="color:#66d9ef">const</span> FHitResult<span style="color:#f92672">&amp;</span> Hit)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> Velocity <span style="color:#f92672">=</span> <span style="color:#f92672">-</span>GetVelocity().Z;
+</span></span><span style="display:flex;"><span>	UE_LOG(LogBaseCharacter, Log, TEXT(<span style="color:#e6db74">&#34;Velocity: %0.f&#34;</span>), Velocity);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">if</span> (Velocity <span style="color:#f92672">&lt;</span> LandedDamageVelocityRange.X) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">float</span> LandedDamage <span style="color:#f92672">=</span> FMath<span style="color:#f92672">::</span>GetMappedRangeValueClamped(LandedDamageVelocityRange, LandedDamageRange, Velocity);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	UE_LOG(LogBaseCharacter, Log, TEXT(<span style="color:#e6db74">&#34;Damage: %0.f&#34;</span>), LandedDamage);
+</span></span><span style="display:flex;"><span>	TakeDamage(LandedDamage, FDamageEvent{}, <span style="color:#66d9ef">nullptr</span>, <span style="color:#66d9ef">nullptr</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>BindOnLanded()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>	LandedDelegate.AddDynamic(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>OnGroundLanded);
 </span></span><span style="display:flex;"><span>}</span></span></code></pre></div>
 </div>
 <div class="src src-c++">
@@ -527,7 +547,20 @@
 </span></span><span style="display:flex;"><span>	UAnimMontage <span style="color:#f92672">*</span>DeathAnimMontage;
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
-</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> SwitchToSpectatorPawn();	
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> SwitchToSpectatorPawn();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">protected</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	UPROPERTY(EditDefaultsOnly)
+</span></span><span style="display:flex;"><span>	FVector2D LandedDamageVelocityRange <span style="color:#f92672">=</span> {<span style="color:#ae81ff">900.0f</span>, <span style="color:#ae81ff">1200.0f</span>};
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	UPROPERTY(EditDefaultsOnly)	
+</span></span><span style="display:flex;"><span>	FVector2D LandedDamageRange <span style="color:#f92672">=</span> {<span style="color:#ae81ff">10.0f</span>, <span style="color:#ae81ff">100.0f</span>};
+</span></span><span style="display:flex;"><span>	
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">private</span><span style="color:#f92672">:</span>
+</span></span><span style="display:flex;"><span>	UFUNCTION()
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> OnGroundLanded(<span style="color:#66d9ef">const</span> FHitResult<span style="color:#f92672">&amp;</span> Hit);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>	<span style="color:#66d9ef">void</span> <span style="color:#a6e22e">BindOnLanded</span>();
 </span></span><span style="display:flex;"><span>};</span></span></code></pre></div>
 </div>
 <div class="src src-c++">

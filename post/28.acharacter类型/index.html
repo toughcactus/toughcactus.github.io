@@ -277,6 +277,52 @@ CapsuleComponent类型名 ACharacter::CapsuleComponentName
 </ol>
 </div>
 </div>
+<div id="outline-container-headline-10" class="outline-2">
+<h2 id="headline-10">
+落地事件
+</h2>
+<div id="outline-text-headline-10" class="outline-text-2">
+<div id="outline-container-headline-11" class="outline-3">
+<h3 id="headline-11">
+落地委托类型 FLandedSignature
+</h3>
+<div id="outline-text-headline-11" class="outline-text-3">
+<ul>
+<li>多播，支持蓝图</li>
+</ul>
+<img src="/pic/ACharacter类型/落地委托类型.png" alt="/pic/ACharacter类型/落地委托类型.png" title="/pic/ACharacter类型/落地委托类型.png" width="600"/>
+<ul>
+<li>
+<p>处理函数格式</p>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnGroundLanded</span>(<span style="color:#66d9ef">const</span> FHitResult<span style="color:#f92672">&amp;</span> Hit);</span></span></code></pre></div>
+</div>
+</li>
+</ul>
+</div>
+</div>
+<div id="outline-container-headline-12" class="outline-3">
+<h3 id="headline-12">
+落地委托类型数据成员 ACharacter::LandedDelegate
+</h3>
+<div id="outline-text-headline-12" class="outline-text-3">
+<p width="600"><img src="/pic/ACharacter类型/ACharacter-LandedDelegate.png" alt="/pic/ACharacter类型/ACharacter-LandedDelegate.png" title="/pic/ACharacter类型/ACharacter-LandedDelegate.png"/> </p>
+</div>
+</div>
+<div id="outline-container-headline-13" class="outline-3">
+<h3 id="headline-13">
+Character坠落接触地面时调用 ACharacter::Landed
+</h3>
+<div id="outline-text-headline-13" class="outline-text-3">
+<img src="/pic/ACharacter类型/ACharacter-Landed.png" alt="/pic/ACharacter类型/ACharacter-Landed.png" title="/pic/ACharacter类型/ACharacter-Landed.png" width="600"/>
+<ul>
+<li>处理落地事件时，可订阅委托，也可覆写Landed</li>
+</ul>
+<img src="/pic/ACharacter类型/ACharacter-Landed-Definition.png" alt="/pic/ACharacter类型/ACharacter-Landed-Definition.png" title="/pic/ACharacter类型/ACharacter-Landed-Definition.png" width="400"/>
+</div>
+</div>
+</div>
+</div>
         </div>
         
 

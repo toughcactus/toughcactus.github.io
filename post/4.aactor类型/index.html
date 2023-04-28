@@ -645,6 +645,32 @@ Actor对象是否有效 IsValid
 <li>FTakeAnyDamageSignature</li>
 <li>FTakePointDamageSignature</li>
 <li>FTakeRadialDamageSignature</li>
+<li>
+<p>处理函数格式</p>
+<div class="src src-c++">
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnTakeAnyDamage</span>(AActor<span style="color:#f92672">*</span> DamagedActor,
+</span></span><span style="display:flex;"><span>                       <span style="color:#66d9ef">float</span> Damage,
+</span></span><span style="display:flex;"><span>                       <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDamageType</span><span style="color:#f92672">*</span> DamageType,
+</span></span><span style="display:flex;"><span>                       <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AController</span><span style="color:#f92672">*</span> InstigatedBy,
+</span></span><span style="display:flex;"><span>                       AActor<span style="color:#f92672">*</span> DamageCauser);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnTakePointDamage</span>(AActor<span style="color:#f92672">*</span> DamagedActor,
+</span></span><span style="display:flex;"><span>                         <span style="color:#66d9ef">float</span> Damage,
+</span></span><span style="display:flex;"><span>                         <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AController</span><span style="color:#f92672">*</span> InstigatedBy,
+</span></span><span style="display:flex;"><span>                         FVector HitLocation,
+</span></span><span style="display:flex;"><span>                         <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UPrimitiveComponent</span><span style="color:#f92672">*</span> FHitComponent,
+</span></span><span style="display:flex;"><span>                         FName BoneName,
+</span></span><span style="display:flex;"><span>                         FVector ShotFromDirection,
+</span></span><span style="display:flex;"><span>                         <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDamageType</span><span style="color:#f92672">*</span> DamageType,
+</span></span><span style="display:flex;"><span>                         AActor<span style="color:#f92672">*</span> DamageCauser);
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnTakeRadialDamage</span>(AActor<span style="color:#f92672">*</span> DamagedActor,
+</span></span><span style="display:flex;"><span>                          <span style="color:#66d9ef">float</span> Damage,
+</span></span><span style="display:flex;"><span>                          <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDamageType</span><span style="color:#f92672">*</span> DamageType,
+</span></span><span style="display:flex;"><span>                          FVector Origin,
+</span></span><span style="display:flex;"><span>                          FHitResult HitInfo,
+</span></span><span style="display:flex;"><span>                          <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AController</span><span style="color:#f92672">*</span> InstigatedBy,
+</span></span><span style="display:flex;"><span>                          AActor<span style="color:#f92672">*</span> DamageCauser);</span></span></code></pre></div>
+</div>
+</li>
 </ul>
 <img src="/pic/AActor类型/伤害委托类型.png" alt="/pic/AActor类型/伤害委托类型.png" title="/pic/AActor类型/伤害委托类型.png" width="1700"/>
 </div>
@@ -663,7 +689,7 @@ Actor对象是否有效 IsValid
 </li>
 <li>可以在蓝图中设置</li>
 <li>AActor::OnTakeAnyDamage</li>
-<li>AActor::OnTakePoingDamage</li>
+<li>AActor::OnTakePointDamage</li>
 <li>AActor::OnTakeRadialDamage</li>
 </ul>
 <img src="/pic/AActor类型/伤害委托成员.png" alt="/pic/AActor类型/伤害委托成员.png" title="/pic/AActor类型/伤害委托成员.png" width="400"/>
@@ -696,8 +722,9 @@ Actor对象是否有效 IsValid
 </ul>
 </li>
 <li>
-<p>武器 DamageCauser</p>
+<p>伤害源 DamageCauser</p>
 <ul>
+<li>敌人</li>
 <li>榴弹，子弹或是刀</li>
 </ul>
 </li>
