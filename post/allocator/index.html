@@ -16,10 +16,10 @@
 
 allocator对象的4个操作
 
-申请未构造的动态内存 ｜ allocate
-有序构造动态对象 ｜ construct
-逆序析构动态对象 ｜ destroy
-释放动态内存 ｜ deallocate
+申请未构造的动态内存 &gt; allocate
+有序构造动态对象 &gt; construct
+逆序析构动态对象 &gt; destroy
+释放动态内存 &gt; deallocate
 
 
 ">
@@ -99,10 +99,10 @@ allocator对象的4个操作
 
 allocator对象的4个操作
 
-申请未构造的动态内存 ｜ allocate
-有序构造动态对象 ｜ construct
-逆序析构动态对象 ｜ destroy
-释放动态内存 ｜ deallocate
+申请未构造的动态内存 &gt; allocate
+有序构造动态对象 &gt; construct
+逆序析构动态对象 &gt; destroy
+释放动态内存 &gt; deallocate
 
 
 " />
@@ -117,10 +117,10 @@ allocator对象的4个操作
 
 allocator对象的4个操作
 
-申请未构造的动态内存 ｜ allocate
-有序构造动态对象 ｜ construct
-逆序析构动态对象 ｜ destroy
-释放动态内存 ｜ deallocate
+申请未构造的动态内存 &gt; allocate
+有序构造动态对象 &gt; construct
+逆序析构动态对象 &gt; destroy
+释放动态内存 &gt; deallocate
 
 
 "/>
@@ -209,10 +209,10 @@ allocator对象的4个操作
 <li>
 <p>allocator对象的4个操作</p>
 <ul>
-<li>申请未构造的动态内存 ｜ allocate</li>
-<li>有序构造动态对象 ｜ construct</li>
-<li>逆序析构动态对象 ｜ destroy</li>
-<li>释放动态内存 ｜ deallocate</li>
+<li>申请未构造的动态内存 &gt; allocate</li>
+<li>有序构造动态对象 &gt; construct</li>
+<li>逆序析构动态对象 &gt; destroy</li>
+<li>释放动态内存 &gt; deallocate</li>
 </ul>
 </li>
 </ul>
@@ -231,7 +231,7 @@ allocator对象的4个操作
 </div>
 <div id="outline-container-headline-2" class="outline-2">
 <h2 id="headline-2">
-二、allocate | 申请动态对象个数为n的动态内存
+二、申请动态对象个数为n的动态内存 &gt; allocate
 </h2>
 <div id="outline-text-headline-2" class="outline-text-2">
 <ul>
@@ -246,7 +246,7 @@ allocator对象的4个操作
 </div>
 <div id="outline-container-headline-3" class="outline-2">
 <h2 id="headline-3">
-三、deallocate | 释放allocate申请的动态内存
+三、释放allocate申请的动态内存 &gt; deallocate
 </h2>
 <div id="outline-text-headline-3" class="outline-text-2">
 <ul>
@@ -262,7 +262,7 @@ allocator对象的4个操作
 </div>
 <div id="outline-container-headline-4" class="outline-2">
 <h2 id="headline-4">
-四、construct | 使用参数匹配构造函数，在p指向的位置构造动态对象
+四、使用参数匹配构造函数，在p指向的位置构造动态对象 &gt; construct
 </h2>
 <div id="outline-text-headline-4" class="outline-text-2">
 <div class="src src-c++">
@@ -272,7 +272,7 @@ allocator对象的4个操作
 </div>
 <div id="outline-container-headline-5" class="outline-2">
 <h2 id="headline-5">
-五、destroy | 对p所指向的对象调用析构函数
+五、对p所指向的对象调用析构函数 &gt; destroy
 </h2>
 <div id="outline-text-headline-5" class="outline-text-2">
 <div class="src src-c++">
@@ -308,7 +308,7 @@ allocator对象的4个操作
 <div id="outline-text-headline-7" class="outline-text-2">
 <div id="outline-container-headline-8" class="outline-3">
 <h3 id="headline-8">
-1. uninitialized_copy | 使用迭代器范围[b, e)初始化allocator管理的动态内存
+1. 使用迭代器范围[b, e)初始化allocator管理的动态内存 &gt; uninitialized_copy
 </h3>
 <div id="outline-text-headline-8" class="outline-text-3">
 <ul>
@@ -323,7 +323,7 @@ allocator对象的4个操作
 </div>
 <div id="outline-container-headline-9" class="outline-3">
 <h3 id="headline-9">
-2. uninitialized_copy_n | 使用迭代器范围[b, b + n)初始化allocator管理的动态内存
+2. 使用迭代器范围[b, b + n)初始化allocator管理的动态内存 &gt; uninitialized_copy_n
 </h3>
 <div id="outline-text-headline-9" class="outline-text-3">
 <ul>
@@ -339,7 +339,7 @@ allocator对象的4个操作
 </div>
 <div id="outline-container-headline-10" class="outline-3">
 <h3 id="headline-10">
-3. uninitialized_fill | 为迭代器范围[b, e)中的动态对象赋值
+3. 为迭代器范围[b, e)中的动态对象赋值 &gt; uninitialized_fill
 </h3>
 <div id="outline-text-headline-10" class="outline-text-3">
 <ul>
@@ -352,7 +352,7 @@ allocator对象的4个操作
 </div>
 <div id="outline-container-headline-11" class="outline-3">
 <h3 id="headline-11">
-4. uninitialized_fill_n | 为迭代器范围[b, b + n)中的动态对象赋值
+4. 为迭代器范围[b, b + n)中的动态对象赋值 &gt; uninitialized_fill_n
 </h3>
 <div id="outline-text-headline-11" class="outline-text-3">
 <ul>
@@ -363,23 +363,23 @@ allocator对象的4个操作
 </div>
 <p><a href="/source/使用uninitialized系列初始化allocator/">使用uninitialized系列初始化allocator</a></p>
 <p>
-  <a href="/code/使用uninitialized系列初始化allocator.cpp">使用uninitialized系列初始化allocator.cpp ｜ 下载</a></p>
+  <a href="/code/使用uninitialized系列初始化allocator.cpp">使用uninitialized系列初始化allocator.cpp &gt; 下载</a></p>
 </div>
 </div>
 </div>
 </div>
 <div id="outline-container-headline-12" class="outline-2">
 <h2 id="headline-12">
-八、使用allocator管理字符数组 | StrVec
+八、使用allocator管理字符数组 &gt; StrVec
 </h2>
 <div id="outline-text-headline-12" class="outline-text-2">
 <p><a href="/source/使用allocator管理字符数组-strvec/">使用allocator管理字符数组-StrVec</a></p>
 <p>
-  <a href="/code/使用allocator管理字符数组-StrVec/strVec.cpp">使用allocator管理字符数组-StrVec/strVec.cpp ｜ 下载</a></p>
+  <a href="/code/使用allocator管理字符数组-StrVec/strVec.cpp">使用allocator管理字符数组-StrVec/strVec.cpp &gt; 下载</a></p>
 <p>
-  <a href="/code/使用allocator管理字符数组-StrVec/strVec.hpp">使用allocator管理字符数组-StrVec/strVec.hpp ｜ 下载</a></p>
+  <a href="/code/使用allocator管理字符数组-StrVec/strVec.hpp">使用allocator管理字符数组-StrVec/strVec.hpp &gt; 下载</a></p>
 <p>
-  <a href="/code/使用allocator管理字符数组-StrVec/main.cpp">使用allocator管理字符数组-StrVec/main.cpp | 下载</a>  </p>
+  <a href="/code/使用allocator管理字符数组-StrVec/main.cpp">使用allocator管理字符数组-StrVec/main.cpp &gt; 下载</a>  </p>
 </div>
 </div>
         </div>

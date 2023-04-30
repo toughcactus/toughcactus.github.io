@@ -21,10 +21,10 @@
 &lt;li&gt;
 &lt;p&gt;allocator对象的4个操作&lt;/p&gt;
 &lt;ul&gt;
-&lt;li&gt;申请未构造的动态内存 ｜ allocate&lt;/li&gt;
-&lt;li&gt;有序构造动态对象 ｜ construct&lt;/li&gt;
-&lt;li&gt;逆序析构动态对象 ｜ destroy&lt;/li&gt;
-&lt;li&gt;释放动态内存 ｜ deallocate&lt;/li&gt;
+&lt;li&gt;申请未构造的动态内存 &amp;gt; allocate&lt;/li&gt;
+&lt;li&gt;有序构造动态对象 &amp;gt; construct&lt;/li&gt;
+&lt;li&gt;逆序析构动态对象 &amp;gt; destroy&lt;/li&gt;
+&lt;li&gt;释放动态内存 &amp;gt; deallocate&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
@@ -43,7 +43,7 @@
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-2&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-2&#34;&gt;
-二、allocate | 申请动态对象个数为n的动态内存
+二、申请动态对象个数为n的动态内存 &amp;gt; allocate
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-2&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -58,7 +58,7 @@
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-3&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-3&#34;&gt;
-三、deallocate | 释放allocate申请的动态内存
+三、释放allocate申请的动态内存 &amp;gt; deallocate
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-3&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;
@@ -74,7 +74,7 @@
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-4&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-4&#34;&gt;
-四、construct | 使用参数匹配构造函数，在p指向的位置构造动态对象
+四、使用参数匹配构造函数，在p指向的位置构造动态对象 &amp;gt; construct
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-4&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -84,7 +84,7 @@
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-5&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-5&#34;&gt;
-五、destroy | 对p所指向的对象调用析构函数
+五、对p所指向的对象调用析构函数 &amp;gt; destroy
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-5&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div class=&#34;src src-c++&#34;&gt;
@@ -120,7 +120,7 @@
 &lt;div id=&#34;outline-text-headline-7&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;div id=&#34;outline-container-headline-8&#34; class=&#34;outline-3&#34;&gt;
 &lt;h3 id=&#34;headline-8&#34;&gt;
-1. uninitialized_copy | 使用迭代器范围[b, e)初始化allocator管理的动态内存
+1. 使用迭代器范围[b, e)初始化allocator管理的动态内存 &amp;gt; uninitialized_copy
 &lt;/h3&gt;
 &lt;div id=&#34;outline-text-headline-8&#34; class=&#34;outline-text-3&#34;&gt;
 &lt;ul&gt;
@@ -135,7 +135,7 @@
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-9&#34; class=&#34;outline-3&#34;&gt;
 &lt;h3 id=&#34;headline-9&#34;&gt;
-2. uninitialized_copy_n | 使用迭代器范围[b, b + n)初始化allocator管理的动态内存
+2. 使用迭代器范围[b, b + n)初始化allocator管理的动态内存 &amp;gt; uninitialized_copy_n
 &lt;/h3&gt;
 &lt;div id=&#34;outline-text-headline-9&#34; class=&#34;outline-text-3&#34;&gt;
 &lt;ul&gt;
@@ -151,7 +151,7 @@
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-10&#34; class=&#34;outline-3&#34;&gt;
 &lt;h3 id=&#34;headline-10&#34;&gt;
-3. uninitialized_fill | 为迭代器范围[b, e)中的动态对象赋值
+3. 为迭代器范围[b, e)中的动态对象赋值 &amp;gt; uninitialized_fill
 &lt;/h3&gt;
 &lt;div id=&#34;outline-text-headline-10&#34; class=&#34;outline-text-3&#34;&gt;
 &lt;ul&gt;
@@ -164,7 +164,7 @@
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-11&#34; class=&#34;outline-3&#34;&gt;
 &lt;h3 id=&#34;headline-11&#34;&gt;
-4. uninitialized_fill_n | 为迭代器范围[b, b + n)中的动态对象赋值
+4. 为迭代器范围[b, b + n)中的动态对象赋值 &amp;gt; uninitialized_fill_n
 &lt;/h3&gt;
 &lt;div id=&#34;outline-text-headline-11&#34; class=&#34;outline-text-3&#34;&gt;
 &lt;ul&gt;
@@ -175,23 +175,23 @@
 &lt;/div&gt;
 &lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/source/使用uninitialized系列初始化allocator/&#34;&gt;使用uninitialized系列初始化allocator&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;
-  &lt;a href=&#34;https://toughcactus.github.io/code/使用uninitialized系列初始化allocator.cpp&#34;&gt;使用uninitialized系列初始化allocator.cpp ｜ 下载&lt;/a&gt;&lt;/p&gt;
+  &lt;a href=&#34;https://toughcactus.github.io/code/使用uninitialized系列初始化allocator.cpp&#34;&gt;使用uninitialized系列初始化allocator.cpp &amp;gt; 下载&lt;/a&gt;&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-12&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-12&#34;&gt;
-八、使用allocator管理字符数组 | StrVec
+八、使用allocator管理字符数组 &amp;gt; StrVec
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-12&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;p&gt;&lt;a href=&#34;https://toughcactus.github.io/source/使用allocator管理字符数组-strvec/&#34;&gt;使用allocator管理字符数组-StrVec&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;
-  &lt;a href=&#34;https://toughcactus.github.io/code/使用allocator管理字符数组-StrVec/strVec.cpp&#34;&gt;使用allocator管理字符数组-StrVec/strVec.cpp ｜ 下载&lt;/a&gt;&lt;/p&gt;
+  &lt;a href=&#34;https://toughcactus.github.io/code/使用allocator管理字符数组-StrVec/strVec.cpp&#34;&gt;使用allocator管理字符数组-StrVec/strVec.cpp &amp;gt; 下载&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;
-  &lt;a href=&#34;https://toughcactus.github.io/code/使用allocator管理字符数组-StrVec/strVec.hpp&#34;&gt;使用allocator管理字符数组-StrVec/strVec.hpp ｜ 下载&lt;/a&gt;&lt;/p&gt;
+  &lt;a href=&#34;https://toughcactus.github.io/code/使用allocator管理字符数组-StrVec/strVec.hpp&#34;&gt;使用allocator管理字符数组-StrVec/strVec.hpp &amp;gt; 下载&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;
-  &lt;a href=&#34;https://toughcactus.github.io/code/使用allocator管理字符数组-StrVec/main.cpp&#34;&gt;使用allocator管理字符数组-StrVec/main.cpp | 下载&lt;/a&gt;  &lt;/p&gt;
+  &lt;a href=&#34;https://toughcactus.github.io/code/使用allocator管理字符数组-StrVec/main.cpp&#34;&gt;使用allocator管理字符数组-StrVec/main.cpp &amp;gt; 下载&lt;/a&gt;  &lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;</description>
     </item>
@@ -206,7 +206,7 @@
 &lt;li&gt;new运算符&lt;/li&gt;
 &lt;li&gt;使用auto指示类型&lt;/li&gt;
 &lt;li&gt;创建具有顶层const的动态对象&lt;/li&gt;
-&lt;li&gt;定位new | nothrow&lt;/li&gt;
+&lt;li&gt;定位new &amp;gt; nothrow&lt;/li&gt;
 &lt;li&gt;delete运算符&lt;/li&gt;
 &lt;/ul&gt;
 &lt;div id=&#34;outline-container-headline-1&#34; class=&#34;outline-2&#34;&gt;
@@ -443,7 +443,7 @@
 &lt;/div&gt;
 &lt;div id=&#34;outline-container-headline-16&#34; class=&#34;outline-2&#34;&gt;
 &lt;h2 id=&#34;headline-16&#34;&gt;
-四、定位new | placement new
+四、定位new &amp;gt; placement new
 &lt;/h2&gt;
 &lt;div id=&#34;outline-text-headline-16&#34; class=&#34;outline-text-2&#34;&gt;
 &lt;ul&gt;

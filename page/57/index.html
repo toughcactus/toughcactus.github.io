@@ -3,6 +3,7 @@
 
 <html lang="en-us" data-theme="">
 <head>
+	<meta name="generator" content="Hugo 0.111.3">
     
         
 <meta charset="utf-8">
@@ -10,18 +11,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <meta name="referrer" content="no-referrer-when-downgrade">
 
-<title>虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 10.UENUM宏 - 苔滑非关雨，松鸣不假风。</title>
+<title>苔滑非关雨，松鸣不假风。</title>
 
-<meta name="description" content="
-如果只在源码中使用数据成员，无需使用宏
-如果想在虚幻编辑器中使用枚举类，定义枚举类时，需使用UENUM宏对其进行封装
-虚幻C&#43;&#43;中所有枚举类型以大写E开头
-">
+<meta name="description" content="">
 
 
 
 
 
+<link rel="alternate" type="application/rss+xml" href="https://toughcactus.github.io/index.xml" title="苔滑非关雨，松鸣不假风。" />
 <link rel="icon" type="image/x-icon" href="https://toughcactus.github.io/favicon.ico">
 <link rel="apple-touch-icon-precomposed" href="https://toughcactus.github.io/favicon.png">
 
@@ -88,24 +86,14 @@
 
 
 
-<meta property="og:title" content="虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 10.UENUM宏" />
-<meta property="og:description" content="
-如果只在源码中使用数据成员，无需使用宏
-如果想在虚幻编辑器中使用枚举类，定义枚举类时，需使用UENUM宏对其进行封装
-虚幻C&#43;&#43;中所有枚举类型以大写E开头
-" />
-<meta property="og:type" content="article" />
-<meta property="og:url" content="https://toughcactus.github.io/post/10.uenum%E5%AE%8F/" /><meta property="article:section" content="post" />
-
-
+<meta property="og:title" content="" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://toughcactus.github.io/" />
 
 <meta name="twitter:card" content="summary"/>
-<meta name="twitter:title" content="虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 10.UENUM宏"/>
-<meta name="twitter:description" content="
-如果只在源码中使用数据成员，无需使用宏
-如果想在虚幻编辑器中使用枚举类，定义枚举类时，需使用UENUM宏对其进行封装
-虚幻C&#43;&#43;中所有枚举类型以大写E开头
-"/>
+<meta name="twitter:title" content=""/>
+<meta name="twitter:description" content=""/>
 
 
 
@@ -176,70 +164,29 @@
         </header>
         <main id="main" tabindex="-1"> 
             
-    
-
-    <article class="post h-entry">
-        <div class="post-header">
-            <header>
-                <h1 class="p-name post-title">虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 10.UENUM宏</h1>
-
-                
-            </header>
-        </div>
-        <div class="content e-content">
-            <ul>
-<li>如果只在源码中使用数据成员，无需使用宏</li>
-<li>如果想在虚幻编辑器中使用枚举类，定义枚举类时，需使用UENUM宏对其进行封装</li>
-<li>虚幻C++中所有枚举类型以大写E开头</li>
-</ul>
-<div id="outline-container-headline-1" class="outline-2">
-<h2 id="headline-1">
-&gt; 枚举类
-</h2>
-<div id="outline-text-headline-1" class="outline-text-2">
-<ul>
-<li>对枚举类变量赋值时，只能使用枚举类成员</li>
-<li>
-<p>虚幻C++中所有的枚举类都必须指定强类型，且必须为uint8（受到蓝图类限制）</p>
-<ul>
-<li>不能使用强类型变量为枚举类对象赋值</li>
-</ul>
-</li>
-</ul>
-</div>
-</div>
-<div id="outline-container-headline-2" class="outline-2">
-<h2 id="headline-2">
-&gt; UENUM宏
-</h2>
-<div id="outline-text-headline-2" class="outline-text-2">
-<ul>
-<li>定义枚举类时，在上一行使用UENUM宏标记</li>
-</ul>
-<img src="/pic/UENUM宏/UENUM宏.png" alt="/pic/UENUM宏/UENUM宏.png" title="/pic/UENUM宏/UENUM宏.png" width="400"/>
-</div>
-</div>
-<div id="outline-container-headline-3" class="outline-2">
-<h2 id="headline-3">
-&gt; 使用BlueprintType说明符
-</h2>
-<div id="outline-text-headline-3" class="outline-text-2">
-<ul>
-<li>可将该枚举类作为蓝图类使用</li>
-</ul>
-<div class="src src-c++">
-<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-c++" data-lang="c++"><span style="display:flex;"><span>  UENUM(BlueprintType)
-</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">enum</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">EMoveType</span> <span style="color:#f92672">:</span> uint8
-</span></span><span style="display:flex;"><span>  {
-</span></span><span style="display:flex;"><span>      Static,
-</span></span><span style="display:flex;"><span>      Sin,
-</span></span><span style="display:flex;"><span>      Rotate
-</span></span><span style="display:flex;"><span>  };</span></span></code></pre></div>
-</div>
-</div>
-</div>
-        </div>
+    <div class="homepage-content">
         
+    </div>
+
+    <div class="articles h-feed">
+        
+        
+            <article class="post-list h-feed">
+    <div class="post-header">
+        <header>
+            <h1 class="p-name post-title"><a class="u-url" href="/post/myemacs/">配置 &gt; MyEmacs</a></h1>
+        </header>
+        
+    </div>
+
+    
+        <div class="content post-summary p-summary">
+            
+        </div>
+    
+    
+    
+    
 
     
 
@@ -247,7 +194,7 @@
 <div class="post-info">
     
 
-    <a class="post-hidden-url u-url" href="https://toughcactus.github.io/post/10.uenum%E5%AE%8F/">https://toughcactus.github.io/post/10.uenum%E5%AE%8F/</a>
+    <a class="post-hidden-url u-url" href="https://toughcactus.github.io/post/myemacs/">https://toughcactus.github.io/post/myemacs/</a>
     <a href="https://toughcactus.github.io/" class="p-name p-author post-hidden-author h-card" rel="me">Louie</a>
 
 
@@ -256,70 +203,33 @@
             <ul class="post-categories">
                 
                     
-                    <li><a href="https://toughcactus.github.io/categories/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/">虚幻引擎</a></li>
+                    <li><a href="https://toughcactus.github.io/categories/%E9%85%8D%E7%BD%AE/">配置</a></li>
                 
             </ul>
             
             
-                <ul class="post-tags">
-                    
-                        
-                        <li><a href="https://toughcactus.github.io/tags/api/">#API</a></li>
-                    
-                        
-                        <li><a href="https://toughcactus.github.io/tags/%E8%99%9A%E5%B9%BBc&#43;&#43;/">#虚幻C&#43;&#43;</a></li>
-                    
-                </ul>
-        
     </div>
 </div>
 
-    </article>
-
-    
+</article>
         
-        
-            <h3 class="read-next-title">Read next</h3>
-            <ul class="read-next-posts">
-                
-                <li><a href="/post/1.%E6%97%A5%E5%BF%97%E7%B1%BB%E5%88%AB/">虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 1.日志类别</a></li>
-                
-                <li><a href="/post/11.ftransform%E7%BB%93%E6%9E%84%E4%BD%93/">虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 11.FTransform结构体</a></li>
-                
-            </ul>
         
     
-
     
-        
-    <div class="pagination post-pagination">
+    <div class="pagination">
         <div class="left pagination-item ">
             
-                <a href="/post/1.%E6%97%A5%E5%BF%97%E7%B1%BB%E5%88%AB/">虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 1.日志类别</a>
+                <a href="/page/56/">to new posts</a>
             
         </div>
-        <div class="right pagination-item ">
-            
-                <a href="/post/11.ftransform%E7%BB%93%E6%9E%84%E4%BD%93/">虚幻引擎 &gt; API &gt; 虚幻C&#43;&#43; &gt; 11.FTransform结构体</a>
+        <div class="right pagination-item disabled">
             
         </div>
     </div>
 
 
+    </div>
 
-
-    
-
-    
-        
-
-
-
-
-
-
-
-    
 
         </main>
         
