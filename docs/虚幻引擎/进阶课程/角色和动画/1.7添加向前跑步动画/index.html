@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="虚幻编辑器 Overview # 动画随着Character运动速度变化 brush 是最简单的可编辑几何体，我们可以修改其顶点位置，调整其他参数，然后将其转换成静态网格体 CharacterMovement 组件负责 Character 运动，其各种属性均和 Character 运动有关 一、重新设置平台 # 从场景中移除Floor 添加 Geometry/Box 恢复默认位置，设置 brush 长宽高 二、Character运动速度上限 # BP_STBaseCharacter CharacterMovement组件 选择CharacterMovement组件 &gt; 细节面板 &gt; Character Movement: Walking &gt; MaxWalkSpeed Character 的最大运动速度 单位 cm/s 虚幻引擎里的步长使用 cm 修改 MaxWalkSpeed ，当速度改为 1600 时，可以看到单位时间内移动的距离增加，而跑步动画没有加速过程 三、打印实时速度 # BP_STBaseCharacter EventGraph 获得Character速度 GetVelocity函数 获得Actor各个方向上的速度，保存在FVector中 获得速度标量 FVector::VectorLength 在屏幕上输出实时速度 PrintString 使用 AddOnScreenDebugMessage 移除打印 四、创建动画蓝图 # Animation Blueprint 动画蓝图和 Skeleton Mesh 有关 创建文件夹 Content/Players/Animations 动画蓝图命名 ABP_打头 方法一 基于 Skeleton Mesh 创建动画蓝图 # 选中ExternalContent/Characters/HeroTPP/HeroTPP &gt; 右键 &gt; Create &gt; AnimBlueprint 方法二 在指定位置创建动画蓝图 # 去到 Content/Player/Animations &gt; 右键 &gt; Animation &gt; 选择Animation Blueprint 选择 HeroTPP_Skeleton ，命名为 ABP_BaseCharacter 五、在蓝图编辑器中查看动画蓝图 # ABP_BaseCharacter 1.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="为Character添加跑步动画" />
+<meta property="og:description" content="虚幻编辑器 Overview # 动画随着Character运动速度变化 brush 是最简单的可编辑几何体，我们可以修改其顶点位置，调整其他参数，然后将其转换成静态网格体 CharacterMovement 组件负责 Character 运动，其各种属性均和 Character 运动有关 一、重新设置平台 # 从场景中移除Floor 添加 Geometry/Box 恢复默认位置，设置 brush 长宽高 二、Character运动速度上限 # BP_STBaseCharacter CharacterMovement组件 选择CharacterMovement组件 &gt; 细节面板 &gt; Character Movement: Walking &gt; MaxWalkSpeed Character 的最大运动速度 单位 cm/s 虚幻引擎里的步长使用 cm 修改 MaxWalkSpeed ，当速度改为 1600 时，可以看到单位时间内移动的距离增加，而跑步动画没有加速过程 三、打印实时速度 # BP_STBaseCharacter EventGraph 获得Character速度 GetVelocity函数 获得Actor各个方向上的速度，保存在FVector中 获得速度标量 FVector::VectorLength 在屏幕上输出实时速度 PrintString 使用 AddOnScreenDebugMessage 移除打印 四、创建动画蓝图 # Animation Blueprint 动画蓝图和 Skeleton Mesh 有关 创建文件夹 Content/Players/Animations 动画蓝图命名 ABP_打头 方法一 基于 Skeleton Mesh 创建动画蓝图 # 选中ExternalContent/Characters/HeroTPP/HeroTPP &gt; 右键 &gt; Create &gt; AnimBlueprint 方法二 在指定位置创建动画蓝图 # 去到 Content/Player/Animations &gt; 右键 &gt; Animation &gt; 选择Animation Blueprint 选择 HeroTPP_Skeleton ，命名为 ABP_BaseCharacter 五、在蓝图编辑器中查看动画蓝图 # ABP_BaseCharacter 1." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" /><meta property="article:section" content="docs" />
+
+
+<title>为Character添加跑步动画 | ToughCactus</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.ad0899be44f42ef336a949276df2520691c8797547ba8ceaf8a2f42aecc19d36.js" integrity="sha256-rQiZvkT0LvM2qUknbfJSBpHIeXVHuozq&#43;KL0KuzBnTY=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>ToughCactus</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>虚幻引擎</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a30b888d97cedd0e72fd98dd83a446d9" class="toggle"  />
+    <label for="section-a30b888d97cedd0e72fd98dd83a446d9" class="flex justify-between">
+      <a role="button" class="">基础课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c55d44374101bd87d8c4761c8d07c64" class="toggle" checked />
+    <label for="section-9c55d44374101bd87d8c4761c8d07c64" class="flex justify-between">
+      <a role="button" class="">进阶课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1d099f39b37c7d342e94ef6f0f3007bb" class="toggle" checked />
+    <label for="section-1d099f39b37c7d342e94ef6f0f3007bb" class="flex justify-between">
+      <a role="button" class="">角色和动画</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.1%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8CShooterGame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/" class="">运行ShooterGame示例项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.2%E5%88%9D%E5%A7%8B%E5%8C%96ShootTraining%E9%A1%B9%E7%9B%AE/" class="">初始化ShootTraining项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" class="">代码规范</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为Character绑定模型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现Character前后左右移动</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现Character视角旋转</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="active">为Character添加跑步动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现Character跳跃</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现Character跑步</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加转向动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.b%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/" class="">打包游戏</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.c%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-abf72c0556c5506bfc005dd76784c9b5" class="toggle"  />
+    <label for="section-abf72c0556c5506bfc005dd76784c9b5" class="flex justify-between">
+      <a role="button" class="">健康系统</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>为Character添加跑步动画</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#一-重新设置平台">一、重新设置平台</a></li>
+        <li><a href="#二-character运动速度上限">二、Character运动速度上限</a></li>
+        <li><a href="#三-打印实时速度">三、打印实时速度</a></li>
+        <li><a href="#四-创建动画蓝图">四、创建动画蓝图</a>
+          <ul>
+            <li><a href="#方法一-基于-skeleton-mesh-创建动画蓝图"><code>方法一</code> 基于 <code>Skeleton Mesh</code> 创建动画蓝图</a></li>
+            <li><a href="#方法二-在指定位置创建动画蓝图"><code>方法二</code> 在指定位置创建动画蓝图</a></li>
+          </ul>
+        </li>
+        <li><a href="#五-在蓝图编辑器中查看动画蓝图">五、在蓝图编辑器中查看动画蓝图</a>
+          <ul>
+            <li><a href="#1-dot-事件图表">1. 事件图表</a></li>
+            <li><a href="#2-dot-动画图表">2. 动画图表</a></li>
+            <li><a href="#3-dot-动画资产窗口">3. 动画资产窗口</a></li>
+          </ul>
+        </li>
+        <li><a href="#六-让character使用动画蓝图">六、让Character使用动画蓝图</a></li>
+        <li><a href="#七-查看动画资产">七、查看动画资产</a></li>
+        <li><a href="#八-创建-混合空间-资产">八、创建 <code>混合空间</code> 资产</a>
+          <ul>
+            <li><a href="#1-dot-创建-bs-locomotion">1. 创建 <code>BS_Locomotion</code></a></li>
+            <li><a href="#2-dot-配置-bs-locomotion">2. 配置 <code>BS_Locomotion</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#九-将混合空间作为动画蓝图输入">九、将混合空间作为动画蓝图输入</a>
+          <ul>
+            <li><a href="#1-dot-获取实时速度-velocity">1. 获取实时速度 <code>velocity</code></a></li>
+            <li><a href="#2-dot-设置动画蓝图输入">2. 设置动画蓝图输入</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><p><code>虚幻编辑器</code> <br/></p>
+<h2 id="overview">
+  Overview
+  <a class="anchor" href="#overview">#</a>
+</h2>
+<ul>
+<li>动画随着Character运动速度变化 <br/></li>
+<li><code>brush</code> 是最简单的可编辑几何体，我们可以修改其顶点位置，调整其他参数，然后将其转换成静态网格体 <br/></li>
+<li><code>CharacterMovement</code> 组件负责 <code>Character</code> 运动，其各种属性均和 <code>Character</code> 运动有关 <br/></li>
+</ul>
+<h2 id="一-重新设置平台">
+  一、重新设置平台
+  <a class="anchor" href="#%e4%b8%80-%e9%87%8d%e6%96%b0%e8%ae%be%e7%bd%ae%e5%b9%b3%e5%8f%b0">#</a>
+</h2>
+<ol>
+<li>
+<p>从场景中移除Floor <br/></p>
+</li>
+<li>
+<p>添加 <code>Geometry/Box</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/PlaceActors-Geometry-Box.png" width="200"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>恢复默认位置，设置 <code>brush</code> 长宽高 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/BoxBrush-Details.png" width="400"/>
+    </figure>
+ <br/></p>
+</li>
+</ol>
+<h2 id="二-character运动速度上限">
+  二、Character运动速度上限
+  <a class="anchor" href="#%e4%ba%8c-character%e8%bf%90%e5%8a%a8%e9%80%9f%e5%ba%a6%e4%b8%8a%e9%99%90">#</a>
+</h2>
+<p><code>BP_STBaseCharacter</code> <code>CharacterMovement组件</code> <br/>
+<code>选择CharacterMovement组件 &gt; 细节面板 &gt; Character Movement: Walking &gt; MaxWalkSpeed</code> <br/></p>
+<ul>
+<li><code>Character</code> 的最大运动速度 <br/></li>
+<li>单位 <code>cm/s</code> <br/></li>
+<li>虚幻引擎里的步长使用 <code>cm</code> <br/></li>
+</ul>
+<p>修改 <code>MaxWalkSpeed</code> ，当速度改为 <code>1600</code> 时，可以看到单位时间内移动的距离增加，而跑步动画没有加速过程 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/CharacterMovement-Details-MaxWalkSpeed.png" width="1200"/>
+</figure>
+ <br/></p>
+<h2 id="三-打印实时速度">
+  三、打印实时速度
+  <a class="anchor" href="#%e4%b8%89-%e6%89%93%e5%8d%b0%e5%ae%9e%e6%97%b6%e9%80%9f%e5%ba%a6">#</a>
+</h2>
+<p><code>BP_STBaseCharacter</code> <code>EventGraph</code> <br/></p>
+<ol>
+<li>
+<p>获得Character速度 <br/>
+<code>GetVelocity函数</code> <br/>
+获得Actor各个方向上的速度，保存在FVector中 <br/></p>
+</li>
+<li>
+<p>获得速度标量 <br/>
+<code>FVector::VectorLength</code> <br/></p>
+</li>
+<li>
+<p>在屏幕上输出实时速度 <br/>
+<code>PrintString</code> 使用 <code>AddOnScreenDebugMessage</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/%e5%9c%a8%e5%b1%8f%e5%b9%95%e4%b8%8a%e8%be%93%e5%87%ba%e5%ae%9e%e6%97%b6%e9%80%9f%e5%ba%a6.png" width="700"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>移除打印 <br/></p>
+</li>
+</ol>
+<h2 id="四-创建动画蓝图">
+  四、创建动画蓝图
+  <a class="anchor" href="#%e5%9b%9b-%e5%88%9b%e5%bb%ba%e5%8a%a8%e7%94%bb%e8%93%9d%e5%9b%be">#</a>
+</h2>
+<p><code>Animation Blueprint</code> <br/>
+动画蓝图和 <code>Skeleton Mesh</code> 有关 <br/>
+创建文件夹 <code>Content/Players/Animations</code> <br/>
+动画蓝图命名 ABP_打头 <br/></p>
+<h3 id="方法一-基于-skeleton-mesh-创建动画蓝图">
+  <code>方法一</code> 基于 <code>Skeleton Mesh</code> 创建动画蓝图
+  <a class="anchor" href="#%e6%96%b9%e6%b3%95%e4%b8%80-%e5%9f%ba%e4%ba%8e-skeleton-mesh-%e5%88%9b%e5%bb%ba%e5%8a%a8%e7%94%bb%e8%93%9d%e5%9b%be">#</a>
+</h3>
+<p><code>选中ExternalContent/Characters/HeroTPP/HeroTPP &gt; 右键 &gt; Create &gt; AnimBlueprint</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/HeroTPP-Create-AnimBlueprint.png" width="600"/>
+</figure>
+ <br/></p>
+<h3 id="方法二-在指定位置创建动画蓝图">
+  <code>方法二</code> 在指定位置创建动画蓝图
+  <a class="anchor" href="#%e6%96%b9%e6%b3%95%e4%ba%8c-%e5%9c%a8%e6%8c%87%e5%ae%9a%e4%bd%8d%e7%bd%ae%e5%88%9b%e5%bb%ba%e5%8a%a8%e7%94%bb%e8%93%9d%e5%9b%be">#</a>
+</h3>
+<ol>
+<li>
+<p><code>去到 Content/Player/Animations &gt; 右键 &gt; Animation &gt; 选择Animation Blueprint</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/%e5%9c%a8%e6%8c%87%e5%ae%9a%e4%bd%8d%e7%bd%ae%e5%88%9b%e5%bb%ba%e5%8a%a8%e7%94%bb%e8%93%9d%e5%9b%be.png" width="700"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>选择 <code>HeroTPP_Skeleton</code> ，命名为 <code>ABP_BaseCharacter</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/AnimationBlueprint-HeroTPP_Skeleton.png" width="400"/>
+    </figure>
+ <br/></p>
+</li>
+</ol>
+<h2 id="五-在蓝图编辑器中查看动画蓝图">
+  五、在蓝图编辑器中查看动画蓝图
+  <a class="anchor" href="#%e4%ba%94-%e5%9c%a8%e8%93%9d%e5%9b%be%e7%bc%96%e8%be%91%e5%99%a8%e4%b8%ad%e6%9f%a5%e7%9c%8b%e5%8a%a8%e7%94%bb%e8%93%9d%e5%9b%be">#</a>
+</h2>
+<p><code>ABP_BaseCharacter</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter.png" width="900"/>
+</figure>
+   <br/></p>
+<h3 id="1-dot-事件图表">
+  1. 事件图表
+  <a class="anchor" href="#1-dot-%e4%ba%8b%e4%bb%b6%e5%9b%be%e8%a1%a8">#</a>
+</h3>
+<p><code>EventGraph</code> <br/>
+处理各种动画事件 <br/>
+像使用 <code>Tick</code> 一样使用 <code>EventBlueprintUpdateAnimation</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-EventGraph-EventBlueprintUpdateAnimation.png" width="400"/>
+</figure>
+ <br/></p>
+<h3 id="2-dot-动画图表">
+  2. 动画图表
+  <a class="anchor" href="#2-dot-%e5%8a%a8%e7%94%bb%e5%9b%be%e8%a1%a8">#</a>
+</h3>
+<p><code>AnimGraph</code> <br/>
+处理所有动画 <br/>
+可以将动画作为 <code>OutputPose</code> 的输入 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-OutputPose.png" width="300"/>
+</figure>
+ <br/></p>
+<ol>
+<li>
+<p>将 <code>Run_Fwd</code> 作为 <code>OutputPose</code> 的输入 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/%e5%b0%86Run_Fwd%e4%bd%9c%e4%b8%baOutputPose%e7%9a%84%e8%be%93%e5%85%a5.png" width="400"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>设置 <code>Run_Fwd</code> 重复播放 <br/>
+<code>选中Run_Fwd &gt; Details &gt; Settings &gt; 使能 LoopAnimation</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-RunFwd-LoopAnimation.png" width="300"/>
+    </figure>
+      <br/></p>
+</li>
+</ol>
+<h3 id="3-dot-动画资产窗口">
+  3. 动画资产窗口
+  <a class="anchor" href="#3-dot-%e5%8a%a8%e7%94%bb%e8%b5%84%e4%ba%a7%e7%aa%97%e5%8f%a3">#</a>
+</h3>
+<p><code>AssetBrowser</code> <br/>
+可以从 <code>Window &gt; AssetBrowser</code> 打开 <br/>
+罗列了 <code>SkeletonMesh</code> 所有相关动画 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AssetBrowser.png" width="1200"/>
+</figure>
+ <br/></p>
+<h2 id="六-让character使用动画蓝图">
+  六、让Character使用动画蓝图
+  <a class="anchor" href="#%e5%85%ad-%e8%ae%a9character%e4%bd%bf%e7%94%a8%e5%8a%a8%e7%94%bb%e8%93%9d%e5%9b%be">#</a>
+</h2>
+<p><code>BP_STBaseCharacter</code> <code>ABP_BaseCharacter</code> <br/>
+之前 <code>AnimationMode</code> 的设置是 <code>UseAnimationAsset</code> ，而后选择 <code>Run_Fwd</code> <br/></p>
+<ol>
+<li>
+<p>设置 <code>AnimationMode</code> 为 <code>UseAnimationBlueprint</code> <br/>
+<code>BP_STBaseCharacter &gt; Details &gt; Animation &gt; AnimationMode，选择 UseAnimationBlueprint</code> <br/></p>
+</li>
+<li>
+<p>使用 <code>ABP_BaseCharacter</code> <br/>
+<code>Animation &gt; AnimClass，选择ABP_BaseCharacter</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/BP_STBaseCharacter-UseAnimationBlueprint-ABP_BaseCharacter.png" width="1200"/>
+    </figure>
+ <br/></p>
+</li>
+</ol>
+<h2 id="七-查看动画资产">
+  七、查看动画资产
+  <a class="anchor" href="#%e4%b8%83-%e6%9f%a5%e7%9c%8b%e5%8a%a8%e7%94%bb%e8%b5%84%e4%ba%a7">#</a>
+</h2>
+<p><code>Run_Fwd</code> <br/></p>
+<ol>
+<li>
+<p><code>去到Content/ExternalContent/Animations/TTP_Animations</code> <br/></p>
+</li>
+<li>
+<p>双击 <code>Run_Fwd</code> <br/></p>
+</li>
+<li>
+<p>可在 <code>AssetBrowser</code> 中选择其他动画 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/Run_Fwd.png" width="1200"/>
+    </figure>
+ <br/></p>
+</li>
+</ol>
+<h2 id="八-创建-混合空间-资产">
+  八、创建 <code>混合空间</code> 资产
+  <a class="anchor" href="#%e5%85%ab-%e5%88%9b%e5%bb%ba-%e6%b7%b7%e5%90%88%e7%a9%ba%e9%97%b4-%e8%b5%84%e4%ba%a7">#</a>
+</h2>
+<p><code>Blend Space</code> <br/>
+目标是，速度从 <code>0</code> - <code>600</code> ，动画从 <code>Idle</code> 过渡到 <code>Run_Fwd</code> <br/></p>
+<ul>
+<li><code>动画混合</code> <br/>
+<code>Animation Blend</code> <br/>
+流畅地从一个动画切入到另一个动画 <br/></li>
+<li><code>混合空间</code> <br/>
+能在两个骨骼动画之间创建过渡动画 <br/>
+使用插值来得到动画姿势的中间值 <br/>
+和 <code>Skeleton Mesh</code> 有关 <br/></li>
+<li><code>一维混合空间</code> <br/>
+<code>Blend Space 1D</code> <br/></li>
+<li>命名 <br/>
+<code>混合空间</code> 和 <code>1D混合空间</code> 均以BS_打头 <br/></li>
+</ul>
+<h3 id="1-dot-创建-bs-locomotion">
+  1. 创建 <code>BS_Locomotion</code>
+  <a class="anchor" href="#1-dot-%e5%88%9b%e5%bb%ba-bs-locomotion">#</a>
+</h3>
+<ol>
+<li>
+<p><code>去到Content/Player/Animations &gt; 右键</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/%e5%88%9b%e5%bb%baBlendSpace1D.png" width="700"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>选择 <code>HeroTPP_Skeleton</code> ，命名为 <code>BS_Locomotion</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/BS_Locomotion-HeroTPP_Skeleton.png" width="400"/>
+    </figure>
+ <br/></p>
+</li>
+</ol>
+<h3 id="2-dot-配置-bs-locomotion">
+  2. 配置 <code>BS_Locomotion</code>
+  <a class="anchor" href="#2-dot-%e9%85%8d%e7%bd%ae-bs-locomotion">#</a>
+</h3>
+<ol>
+<li>
+<p>双击打开 <code>BS_Locomotion</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/BS_Locomotion.png" width="1200"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>配置轴 <br/>
+<code>Asset Details &gt; Axis Settings &gt; Horizontal Axis</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/BS_Locomotion-AssetDetails-%e9%85%8d%e7%bd%ae%e8%bd%b4.png" width="300"/>
+    </figure>
+ <br/></p>
+<ul>
+<li>设置名字 <br/>
+<code>Name</code> 设置为 <code>Velocity</code> <br/></li>
+<li>设置轴最大值 <br/>
+<code>Maximum Axis Value</code> 设置为 <code>600</code> <br/></li>
+<li>过渡区间 <br/>
+<code>Grid Divisions</code> <br/>
+和可以添加的动画个数有关 <br/></li>
+</ul>
+</li>
+<li>
+<p>配置动画 <br/></p>
+<ul>
+<li>
+<p>起点 <code>Idle</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/BS_Locomotion-Start.png" width="900"/>
+        </figure>
+ <br/></p>
+</li>
+<li>
+<p>终点 <code>Run_Fwd</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/BS_Locomotion-End.png" width="900"/>
+        </figure>
+ <br/></p>
+</li>
+<li>
+<p>查看插值 <br/>
+<code>Windows</code> 按下 <code>Control</code> 键 <br/>
+<code>MacOS</code> 按下 <code>Command</code> 键 <br/>
+水平移动鼠标，绿色X随之在起点和终点间移动，视口展示过渡动画 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/BS_Locomotion-%e8%bf%87%e6%b8%a1%e5%8a%a8%e7%94%bb.png" width="700"/>
+        </figure>
+ <br/></p>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="九-将混合空间作为动画蓝图输入">
+  九、将混合空间作为动画蓝图输入
+  <a class="anchor" href="#%e4%b9%9d-%e5%b0%86%e6%b7%b7%e5%90%88%e7%a9%ba%e9%97%b4%e4%bd%9c%e4%b8%ba%e5%8a%a8%e7%94%bb%e8%93%9d%e5%9b%be%e8%be%93%e5%85%a5">#</a>
+</h2>
+<p><code>ABP_BaseCharacter</code> <code>BS_Locomotion</code> <br/></p>
+<h3 id="1-dot-获取实时速度-velocity">
+  1. 获取实时速度 <code>velocity</code>
+  <a class="anchor" href="#1-dot-%e8%8e%b7%e5%8f%96%e5%ae%9e%e6%97%b6%e9%80%9f%e5%ba%a6-velocity">#</a>
+</h3>
+<p><code>事件图表</code> <code>EventGraph</code> <br/></p>
+<ol>
+<li>
+<p>添加变量 <code>Velocity</code> <br/>
+<code>Float</code> <code>在细节面板进行设置</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-%e6%b7%bb%e5%8a%a0%e5%8f%98%e9%87%8f-Float-Velocity.png" width="400"/>
+    </figure>
+       <br/></p>
+</li>
+<li>
+<p>在 <code>事件图表</code> 中使用变量 <code>Velocity</code> ，选择设置变量值 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-EventGraph-Velocity.png" width="100"/>
+    </figure>
+ <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-EventGraph-Velocity-Result.png" width="150"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>在 <code>EventBlueprintUpdateAnimation</code> 之后，执行 <code>SetVelocity</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-EventGraph-SetVelocity.png" width="400"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>变量 <code>Velocity</code> 的输入是 <code>Actor</code> 实时速度 <br/>
+使用 <code>GetPawnOwner</code> 获得 <code>Pawn</code> 实例的引用 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-EventGraph-Final.png" width="800"/>
+    </figure>
+ <br/></p>
+</li>
+</ol>
+<h3 id="2-dot-设置动画蓝图输入">
+  2. 设置动画蓝图输入
+  <a class="anchor" href="#2-dot-%e8%ae%be%e7%bd%ae%e5%8a%a8%e7%94%bb%e8%93%9d%e5%9b%be%e8%be%93%e5%85%a5">#</a>
+</h3>
+<p><code>动画图表</code> <code>AnimGraph</code> <br/>
+将BS_Locomotion作为OutputPose的输入，并将变量Velocity作为BS_Locomotion的输入 <br/></p>
+<ol>
+<li>
+<p>将 <code>BS_Locomotion</code> 设做 <code>OutputPose</code> 输入 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-BS_Locomotion%e4%bd%9c%e4%b8%baOutputPose%e8%be%93%e5%85%a5.png" width="700"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>在 <code>动画图表</code> 中使用变量 <code>Velocity</code> ，此处只能获取变量值，我们要的就是获取变量值 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Velocity.png" width="100"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>将变量 <code>Velocity</code> 作为 <code>BS_Locomotion</code> 的输入 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e5%90%91%e5%89%8d%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Final.png" width="400"/>
+    </figure>
+ <br/></p>
+</li>
+</ol>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#一-重新设置平台">一、重新设置平台</a></li>
+        <li><a href="#二-character运动速度上限">二、Character运动速度上限</a></li>
+        <li><a href="#三-打印实时速度">三、打印实时速度</a></li>
+        <li><a href="#四-创建动画蓝图">四、创建动画蓝图</a>
+          <ul>
+            <li><a href="#方法一-基于-skeleton-mesh-创建动画蓝图"><code>方法一</code> 基于 <code>Skeleton Mesh</code> 创建动画蓝图</a></li>
+            <li><a href="#方法二-在指定位置创建动画蓝图"><code>方法二</code> 在指定位置创建动画蓝图</a></li>
+          </ul>
+        </li>
+        <li><a href="#五-在蓝图编辑器中查看动画蓝图">五、在蓝图编辑器中查看动画蓝图</a>
+          <ul>
+            <li><a href="#1-dot-事件图表">1. 事件图表</a></li>
+            <li><a href="#2-dot-动画图表">2. 动画图表</a></li>
+            <li><a href="#3-dot-动画资产窗口">3. 动画资产窗口</a></li>
+          </ul>
+        </li>
+        <li><a href="#六-让character使用动画蓝图">六、让Character使用动画蓝图</a></li>
+        <li><a href="#七-查看动画资产">七、查看动画资产</a></li>
+        <li><a href="#八-创建-混合空间-资产">八、创建 <code>混合空间</code> 资产</a>
+          <ul>
+            <li><a href="#1-dot-创建-bs-locomotion">1. 创建 <code>BS_Locomotion</code></a></li>
+            <li><a href="#2-dot-配置-bs-locomotion">2. 配置 <code>BS_Locomotion</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#九-将混合空间作为动画蓝图输入">九、将混合空间作为动画蓝图输入</a>
+          <ul>
+            <li><a href="#1-dot-获取实时速度-velocity">1. 获取实时速度 <code>velocity</code></a></li>
+            <li><a href="#2-dot-设置动画蓝图输入">2. 设置动画蓝图输入</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

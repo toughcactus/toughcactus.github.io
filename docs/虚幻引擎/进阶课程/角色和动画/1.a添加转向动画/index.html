@@ -1,0 +1,972 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Overview # 当前实现了3种动作，走路，跑步和跳跃 走路这块，从静止到跑起来支持加速，使用 BS_Locomotion 本小节会重新实现走路动画，根据速度方向，加载转向和后退动画 之后还有 装弹 Reloading 、死亡 Death 、瞄准 Aiming 动画 Blend Space 2D混合空间 # 两个轴 Vertial Axis Horizontal Axis Part 1 建模 # 一、 ForwardVector 和 RightVector # Actor 有 ForwardVector 和 RightVector ， Character 前后左右移动有使用到这两个方向向量 若我们水平移动鼠标， ForwardVector 和 RightVector 随之发生改变 在视觉上， ForwardVector 一直向前， RightVector 一直向右，二者在水平面垂直 二、数学基础 # 1. 点乘 # 计算向量夹角 其中一个向量为 0向量 时，点乘结果为 0 ，而反余弦计算得到其夹角为 PI/2 2. 叉乘 # 用来将向量夹角从[0, PI]扩充到[-PI, PI] c.z 向量c的z坐标 其符号说明向量c的方向 theta 为 0 PI 和 -PI 时，叉乘结果为 0 无法通过向量确定平面，也就无法得到平面法向量 三、 VelocityVector # Actor 的速度是一个矢量，其表现是单位时间内的位移方向 当速度不为 0 ， VelocityVector 和 ForwardVector 的夹角与此时 Actor 应该展现的动画息息相关 四、计算夹角 # 坐标 ( Velocity , Angle ) VelocityVector 和 ForwardVector 夹角的计算通过反余弦结果和 sign(c.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="添加转向动画" />
+<meta property="og:description" content="Overview # 当前实现了3种动作，走路，跑步和跳跃 走路这块，从静止到跑起来支持加速，使用 BS_Locomotion 本小节会重新实现走路动画，根据速度方向，加载转向和后退动画 之后还有 装弹 Reloading 、死亡 Death 、瞄准 Aiming 动画 Blend Space 2D混合空间 # 两个轴 Vertial Axis Horizontal Axis Part 1 建模 # 一、 ForwardVector 和 RightVector # Actor 有 ForwardVector 和 RightVector ， Character 前后左右移动有使用到这两个方向向量 若我们水平移动鼠标， ForwardVector 和 RightVector 随之发生改变 在视觉上， ForwardVector 一直向前， RightVector 一直向右，二者在水平面垂直 二、数学基础 # 1. 点乘 # 计算向量夹角 其中一个向量为 0向量 时，点乘结果为 0 ，而反余弦计算得到其夹角为 PI/2 2. 叉乘 # 用来将向量夹角从[0, PI]扩充到[-PI, PI] c.z 向量c的z坐标 其符号说明向量c的方向 theta 为 0 PI 和 -PI 时，叉乘结果为 0 无法通过向量确定平面，也就无法得到平面法向量 三、 VelocityVector # Actor 的速度是一个矢量，其表现是单位时间内的位移方向 当速度不为 0 ， VelocityVector 和 ForwardVector 的夹角与此时 Actor 应该展现的动画息息相关 四、计算夹角 # 坐标 ( Velocity , Angle ) VelocityVector 和 ForwardVector 夹角的计算通过反余弦结果和 sign(c." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" /><meta property="article:section" content="docs" />
+
+
+<title>添加转向动画 | ToughCactus</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.ad0899be44f42ef336a949276df2520691c8797547ba8ceaf8a2f42aecc19d36.js" integrity="sha256-rQiZvkT0LvM2qUknbfJSBpHIeXVHuozq&#43;KL0KuzBnTY=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>ToughCactus</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>虚幻引擎</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a30b888d97cedd0e72fd98dd83a446d9" class="toggle"  />
+    <label for="section-a30b888d97cedd0e72fd98dd83a446d9" class="flex justify-between">
+      <a role="button" class="">基础课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c55d44374101bd87d8c4761c8d07c64" class="toggle" checked />
+    <label for="section-9c55d44374101bd87d8c4761c8d07c64" class="flex justify-between">
+      <a role="button" class="">进阶课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1d099f39b37c7d342e94ef6f0f3007bb" class="toggle" checked />
+    <label for="section-1d099f39b37c7d342e94ef6f0f3007bb" class="flex justify-between">
+      <a role="button" class="">角色和动画</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.1%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8CShooterGame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/" class="">运行ShooterGame示例项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.2%E5%88%9D%E5%A7%8B%E5%8C%96ShootTraining%E9%A1%B9%E7%9B%AE/" class="">初始化ShootTraining项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" class="">代码规范</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为Character绑定模型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现Character前后左右移动</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现Character视角旋转</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为Character添加跑步动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现Character跳跃</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现Character跑步</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="active">添加转向动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.b%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/" class="">打包游戏</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.c%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-abf72c0556c5506bfc005dd76784c9b5" class="toggle"  />
+    <label for="section-abf72c0556c5506bfc005dd76784c9b5" class="flex justify-between">
+      <a role="button" class="">健康系统</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>添加转向动画</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a>
+          <ul>
+            <li><a href="#blend-space-2d混合空间"><code>Blend Space</code> <code>2D混合空间</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-1-建模">Part 1 建模</a>
+          <ul>
+            <li><a href="#一-forwardvector-和-rightvector">一、 <code>ForwardVector</code> 和 <code>RightVector</code></a></li>
+            <li><a href="#二-数学基础">二、数学基础</a>
+              <ul>
+                <li><a href="#1-dot-点乘">1. 点乘</a></li>
+                <li><a href="#2-dot-叉乘">2. 叉乘</a></li>
+              </ul>
+            </li>
+            <li><a href="#三-velocityvector">三、 <code>VelocityVector</code></a></li>
+            <li><a href="#四-计算夹角">四、计算夹角</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-2-绘制-forwardvector-rightvector-和-velocityvector">Part 2 绘制 <code>ForwardVector</code> <code>RightVector</code> 和 <code>VelocityVector</code></a>
+          <ul>
+            <li><a href="#1-dot-绘制-forwardvector">1. 绘制 <code>ForwardVector</code></a></li>
+            <li><a href="#2-dot-绘制-rightvector">2. 绘制 <code>RightVector</code></a></li>
+            <li><a href="#3-dot-绘制-velocityvector">3. 绘制 <code>VelocityVector</code></a></li>
+            <li><a href="#4-dot-效果图">4. 效果图</a></li>
+            <li><a href="#5-dot-优化显示">5. 优化显示</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-使用-混合空间-实现walk动画">Part 3 使用 <code>混合空间</code> 实现Walk动画</a>
+          <ul>
+            <li><a href="#一-创建-bs-locomotion-walk">一、创建 <code>BS_Locomotion_Walk</code></a></li>
+            <li><a href="#二-将-bs-locomotion-walk-用作走路动画">二、将 <code>BS_Locomotion_Walk</code> 用作走路动画</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-4-在蓝图计算-forwardvector-和-velocityvector-的夹角">Part 4 在蓝图计算 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角</a>
+          <ul>
+            <li><a href="#1-dot-在蓝图中计算夹角并设置变量">1. 在蓝图中计算夹角并设置变量</a></li>
+            <li><a href="#2-dot-绘制-forwardvectr-和-velocityvector-的叉乘结果">2. 绘制 <code>ForwardVectr</code> 和 <code>VelocityVector</code> 的叉乘结果</a></li>
+            <li><a href="#3-dot-取消变量的设置">3. 取消变量的设置</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-5-在代码中计算-forwardvector-和-velocityvector-的夹角">Part 5 在代码中计算 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角</a>
+          <ul>
+            <li><a href="#1-dot-计算夹角">1. 计算夹角</a></li>
+            <li><a href="#2-dot-代码优化">2. 代码优化</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-6-使用-c-plus-plus-函数设置夹角值">Part 6 使用 <code>C++</code> 函数设置夹角值</a>
+          <ul>
+            <li><a href="#1-dot-在蓝图中使用c-plus-plus-函数计算夹角">1. 在蓝图中使用C++函数计算夹角</a></li>
+            <li><a href="#2-dot-阻断动画蓝图无效状态">2. 阻断动画蓝图无效状态</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="overview">
+  Overview
+  <a class="anchor" href="#overview">#</a>
+</h2>
+<p>当前实现了3种动作，走路，跑步和跳跃 <br/>
+走路这块，从静止到跑起来支持加速，使用 <code>BS_Locomotion</code> <br/>
+本小节会重新实现走路动画，根据速度方向，加载转向和后退动画 <br/>
+之后还有 装弹 <code>Reloading</code> 、死亡 <code>Death</code> 、瞄准 <code>Aiming</code> 动画 <br/></p>
+<h3 id="blend-space-2d混合空间">
+  <code>Blend Space</code> <code>2D混合空间</code>
+  <a class="anchor" href="#blend-space-2d%e6%b7%b7%e5%90%88%e7%a9%ba%e9%97%b4">#</a>
+</h3>
+<p>两个轴 <code>Vertial Axis</code> <code>Horizontal Axis</code> <br/></p>
+<h2 id="part-1-建模">
+  Part 1 建模
+  <a class="anchor" href="#part-1-%e5%bb%ba%e6%a8%a1">#</a>
+</h2>
+<h3 id="一-forwardvector-和-rightvector">
+  一、 <code>ForwardVector</code> 和 <code>RightVector</code>
+  <a class="anchor" href="#%e4%b8%80-forwardvector-%e5%92%8c-rightvector">#</a>
+</h3>
+<p><code>Actor</code> 有 <code>ForwardVector</code> 和 <code>RightVector</code> ， <code>Character</code> 前后左右移动有使用到这两个方向向量 <br/>
+若我们水平移动鼠标， <code>ForwardVector</code> 和 <code>RightVector</code> 随之发生改变 <br/>
+在视觉上， <code>ForwardVector</code> 一直向前， <code>RightVector</code> 一直向右，二者在水平面垂直 <br/></p>
+<h3 id="二-数学基础">
+  二、数学基础
+  <a class="anchor" href="#%e4%ba%8c-%e6%95%b0%e5%ad%a6%e5%9f%ba%e7%a1%80">#</a>
+</h3>
+<h4 id="1-dot-点乘">
+  1. 点乘
+  <a class="anchor" href="#1-dot-%e7%82%b9%e4%b9%98">#</a>
+</h4>
+<p><code>计算向量夹角</code> <br/></p>
+<p><img src="/pic/添加转向动画/实现转向动画/点乘.png" alt="点乘.png" width="600" /> <br/>
+其中一个向量为 <code>0向量</code> 时，点乘结果为 <code>0</code> ，而反余弦计算得到其夹角为 <code>PI/2</code> <br/></p>
+<h4 id="2-dot-叉乘">
+  2. 叉乘
+  <a class="anchor" href="#2-dot-%e5%8f%89%e4%b9%98">#</a>
+</h4>
+<p><code>用来将向量夹角从[0, PI]扩充到[-PI, PI]</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%8f%89%e4%b9%98.png" width="600"/>
+</figure>
+ <br/></p>
+<ul>
+<li>
+<p><code>c.z</code> <code>向量c的z坐标</code> <br/>
+其符号说明向量c的方向 <br/></p>
+</li>
+<li>
+<p><code>theta</code> 为 <code>0</code> <code>PI</code> 和 <code>-PI</code> 时，叉乘结果为 <code>0</code> <br/>
+无法通过向量确定平面，也就无法得到平面法向量 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%8f%89%e4%b9%98%e8%af%b4%e6%98%8e.png" width="300"/>
+    </figure>
+ <br/></p>
+</li>
+</ul>
+<h3 id="三-velocityvector">
+  三、 <code>VelocityVector</code>
+  <a class="anchor" href="#%e4%b8%89-velocityvector">#</a>
+</h3>
+<p><code>Actor</code> 的速度是一个矢量，其表现是单位时间内的位移方向 <br/>
+当速度不为 <code>0</code> ， <code>VelocityVector</code> 和 <code>ForwardVector</code> 的夹角与此时 <code>Actor</code> 应该展现的动画息息相关 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%a4%b9%e8%a7%92%e8%af%b4%e6%98%8e.png" width="600"/>
+</figure>
+ <br/></p>
+<h3 id="四-计算夹角">
+  四、计算夹角
+  <a class="anchor" href="#%e5%9b%9b-%e8%ae%a1%e7%ae%97%e5%a4%b9%e8%a7%92">#</a>
+</h3>
+<p>坐标 ( <code>Velocity</code> , <code>Angle</code> ) <br/>
+<code>VelocityVector</code> 和 <code>ForwardVector</code> 夹角的计算通过反余弦结果和 <code>sign(c.z)</code> 的乘积实现，分析特殊情形 <br/></p>
+<ul>
+<li>速度为 <code>0</code> ，真实夹角应该为 <code>0</code> <br/>
+计算夹角得到 <code>PI/2</code> <br/>
+由于此时 <code>Velocity</code> 为 <code>0</code> ，( 0, 任意 ) 对应 <code>Idle</code> ，可以显示正确动画 <br/></li>
+<li>速度不为 <code>0</code> ，夹角为 <code>0</code> 或 <code>PI</code> <br/>
+叉乘结果为 <code>0</code> ，即sign(c.z)为 <code>0</code> ，即计算夹角得到 <code>0</code> ，对应动画 <code>RunFwd</code> <br/>
+夹角为 <code>0</code> 使用 <code>RunFwd</code> 正确，夹角为 <code>PI</code> 应该使用 <code>RunBwd</code> <br/>
+夹角为 <code>PI</code> 时，不使用乘积，使用反余弦结果 <br/></li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>夹角</th>
+<th>反余弦结果</th>
+<th>理论上的sign(c.z)</th>
+<th>目的动画</th>
+<th>使用乘积效果</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>0</td>
+<td>0</td>
+<td>Fwd</td>
+<td>o</td>
+</tr>
+<tr>
+<td>( 0, PI/2 )</td>
+<td>( 0, PI/2 )</td>
+<td>1</td>
+<td>Fwd &gt; Right</td>
+<td>o</td>
+</tr>
+<tr>
+<td>PI/2</td>
+<td>PI/2</td>
+<td>1</td>
+<td>Right</td>
+<td>o</td>
+</tr>
+<tr>
+<td>( PI/2, PI )</td>
+<td>( PI/2, PI )</td>
+<td>1</td>
+<td>Right &gt; Bwd</td>
+<td>o</td>
+</tr>
+<tr>
+<td>PI</td>
+<td>PI</td>
+<td>0</td>
+<td>Bwd</td>
+<td>x</td>
+</tr>
+<tr>
+<td>-PI</td>
+<td>PI</td>
+<td>0</td>
+<td>Bwd</td>
+<td>x</td>
+</tr>
+<tr>
+<td>( -PI, -PI/2 )</td>
+<td>( PI/2, PI )</td>
+<td>-1</td>
+<td>Left &gt; Bwd</td>
+<td>o</td>
+</tr>
+<tr>
+<td>-PI/2</td>
+<td>PI/2</td>
+<td>-1</td>
+<td>Left</td>
+<td>o</td>
+</tr>
+<tr>
+<td>( -PI/2, 0 )</td>
+<td>( 0, PI/2 )</td>
+<td>-1</td>
+<td>Fwd &gt; Left</td>
+<td>o</td>
+</tr>
+</tbody>
+</table>
+<p>可以在蓝图中实现夹角的计算，也可以在C++中实现 <br/></p>
+<h2 id="part-2-绘制-forwardvector-rightvector-和-velocityvector">
+  Part 2 绘制 <code>ForwardVector</code> <code>RightVector</code> 和 <code>VelocityVector</code>
+  <a class="anchor" href="#part-2-%e7%bb%98%e5%88%b6-forwardvector-rightvector-%e5%92%8c-velocityvector">#</a>
+</h2>
+<p><code>虚幻编辑器</code> <br/>
+使用 <code>DrawDebugArrow</code> ， <code>Duration</code> 为 <code>0</code> ，每帧都进行绘画 <br/></p>
+<h3 id="1-dot-绘制-forwardvector">
+  1. 绘制 <code>ForwardVector</code>
+  <a class="anchor" href="#1-dot-%e7%bb%98%e5%88%b6-forwardvector">#</a>
+</h3>
+<ul>
+<li>起点 <br/>
+<code>Actor</code> 当前位置 <br/></li>
+<li>偏移 <br/>
+放大的前进方向向量 <br/></li>
+<li>终点 <br/>
+起点 + 偏移 <br/></li>
+</ul>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e7%bb%98%e5%88%b6ForwardVector.png" width="900"/>
+</figure>
+ <br/></p>
+<h3 id="2-dot-绘制-rightvector">
+  2. 绘制 <code>RightVector</code>
+  <a class="anchor" href="#2-dot-%e7%bb%98%e5%88%b6-rightvector">#</a>
+</h3>
+<ul>
+<li>起点 <br/>
+<code>Actor</code> 当前位置 <br/></li>
+<li>偏移 <br/>
+放大的向右方向向量 <br/></li>
+</ul>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e7%bb%98%e5%88%b6RightVector.png" width="900"/>
+</figure>
+ <br/></p>
+<h3 id="3-dot-绘制-velocityvector">
+  3. 绘制 <code>VelocityVector</code>
+  <a class="anchor" href="#3-dot-%e7%bb%98%e5%88%b6-velocityvector">#</a>
+</h3>
+<ul>
+<li>起点 <br/>
+<code>Actor</code> 当前位置 <br/></li>
+<li>偏移 <br/>
+放大的速度方向单位向量 <br/></li>
+</ul>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e7%bb%98%e5%88%b6VelocityVector.png" width="900"/>
+</figure>
+ <br/></p>
+<h3 id="4-dot-效果图">
+  4. 效果图
+  <a class="anchor" href="#4-dot-%e6%95%88%e6%9e%9c%e5%9b%be">#</a>
+</h3>
+<p>一直显示 <code>ForwardVector</code> 和 <code>RightVector</code> <br/>
+有速度才会显示 <code>VelocityVector</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/ForwardVector%e5%92%8cRightVector%e6%95%88%e6%9e%9c%e5%9b%be.png" width="700"/>
+</figure>
+ <br/></p>
+<h3 id="5-dot-优化显示">
+  5. 优化显示
+  <a class="anchor" href="#5-dot-%e4%bc%98%e5%8c%96%e6%98%be%e7%a4%ba">#</a>
+</h3>
+<p><code>项目设置 &gt; Engine &gt; Rendering &gt; Default Settings &gt; Auto Exposure，取消勾选</code> <br/>
+旨在模拟人眼适应不同亮度 <br/>
+看不出区别 <br/></p>
+<h2 id="part-3-使用-混合空间-实现walk动画">
+  Part 3 使用 <code>混合空间</code> 实现Walk动画
+  <a class="anchor" href="#part-3-%e4%bd%bf%e7%94%a8-%e6%b7%b7%e5%90%88%e7%a9%ba%e9%97%b4-%e5%ae%9e%e7%8e%b0walk%e5%8a%a8%e7%94%bb">#</a>
+</h2>
+<p><code>虚幻编辑器</code> <br/>
+<code>Blend Space</code> <br/></p>
+<h3 id="一-创建-bs-locomotion-walk">
+  一、创建 <code>BS_Locomotion_Walk</code>
+  <a class="anchor" href="#%e4%b8%80-%e5%88%9b%e5%bb%ba-bs-locomotion-walk">#</a>
+</h3>
+<ol>
+<li>
+<p>设置轴 <br/></p>
+<ul>
+<li>水平轴表示 <code>速度</code> <br/>
+命名为 <code>Velocity</code> <br/>
+[ 0, 600 ] <br/></li>
+<li>垂直轴表示 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角 <br/>
+命名为 <code>Direction</code> <br/>
+[ -180, 180 ] <br/></li>
+</ul>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/BS_Locomotion_Walk-Axis.png" width="400"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>坐标 <br/>
+( <code>Velocity</code> , <code>Direction</code> ) <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/BS_Locomotion_Walk.png" width="700"/>
+    </figure>
+ <br/></p>
+<ul>
+<li>动画资产 <br/>
+<code>Idle</code> <code>Run_Fwd</code> <code>Run_Bwd</code> <code>Run_Rt</code> <code>Run_Lt</code> <br/></li>
+<li>初始状态 <br/>
+<code>Idle</code> ( 0, 0 ) <br/></li>
+<li>满速前进 <br/>
+<code>Run_Fwd</code> ( 600, 0 ) <br/></li>
+<li>满速后退 <br/>
+<code>Run_Bwd</code> ( 600, -180 ) 和 ( 600, 180 ) <br/></li>
+<li>满速向右 <br/>
+<code>Run_Rt</code> ( 600, 90 ) <br/></li>
+<li>满速向左 <br/>
+<code>Run_Lt</code> ( 600, -90 ) <br/></li>
+</ul>
+</li>
+</ol>
+<h3 id="二-将-bs-locomotion-walk-用作走路动画">
+  二、将 <code>BS_Locomotion_Walk</code> 用作走路动画
+  <a class="anchor" href="#%e4%ba%8c-%e5%b0%86-bs-locomotion-walk-%e7%94%a8%e4%bd%9c%e8%b5%b0%e8%b7%af%e5%8a%a8%e7%94%bb">#</a>
+</h3>
+<p><code>ABP_BaseCharacter</code> <br/></p>
+<ol>
+<li>
+<p>添加变量 <code>AngleBetweenForwardAndVelocity</code> <br/>
+<code>float类型</code> <br/>
+<code>默认值为0</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/AngleBetweenForwardAndVelocity-DefaultValue.png" width="300"/>
+    </figure>
+    <br/></p>
+</li>
+<li>
+<p><code>AngleBetweenForwardAndVelocity</code> 作为 <code>Direction</code> 的输入 <br/>
+<code>AnimGraph &gt; 状态机 &gt; Walk状态</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Locomotion-Walk.png" width="1000"/>
+    </figure>
+    <br/></p>
+</li>
+</ol>
+<h2 id="part-4-在蓝图计算-forwardvector-和-velocityvector-的夹角">
+  Part 4 在蓝图计算 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角
+  <a class="anchor" href="#part-4-%e5%9c%a8%e8%93%9d%e5%9b%be%e8%ae%a1%e7%ae%97-forwardvector-%e5%92%8c-velocityvector-%e7%9a%84%e5%a4%b9%e8%a7%92">#</a>
+</h2>
+<p><code>虚幻编辑器</code> <br/></p>
+<h3 id="1-dot-在蓝图中计算夹角并设置变量">
+  1. 在蓝图中计算夹角并设置变量
+  <a class="anchor" href="#1-dot-%e5%9c%a8%e8%93%9d%e5%9b%be%e4%b8%ad%e8%ae%a1%e7%ae%97%e5%a4%b9%e8%a7%92%e5%b9%b6%e8%ae%be%e7%bd%ae%e5%8f%98%e9%87%8f">#</a>
+</h3>
+<p>计算点乘时， <code>ForwardVector</code> 和 <code>VelocityVector</code> 都是单位向量 <br/>
+当前并未在夹角为PI时做处理，后退动画偶有闪动但看似正常 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%9c%a8%e8%93%9d%e5%9b%be%e4%b8%ad%e8%ae%a1%e7%ae%97%e5%a4%b9%e8%a7%92.png" width="1200"/>
+</figure>
+ <br/></p>
+<ol>
+<li>输出 <code>DotProduct</code> 结果，静止时输出 <code>90</code> <br/></li>
+<li>输出 <code>CrossProduct</code> 结果，静止、前进或后退时，坐标为 <code>0</code> 但是有正负 <br/></li>
+<li>输出 <code>Sign</code> 结果，静止时为 <code>0</code> ，前进或后退时，其结果或为 <code>1</code> 或为 <code>-1</code> ，飘忽不定，但不为 <code>0</code> ，所以后退动画看似正常 <br/>
+可以做出合理推测：显示为 <code>0</code> 但不意味着为 <code>0</code> ，数值过于小了但是有正负 <br/>
+叉乘时传入未单位化的 <code>Velocity</code> 无改善 <br/></li>
+<li>同时按下后退和向左，或者后退和向右，正负 <code>3PI/4</code> 的动画较为刻意 <br/>
+( PI/2, PI ) 和 ( -PI, -PI/2 ) 时可以只显示 <code>Run_Bwd</code> <br/></li>
+</ol>
+<h3 id="2-dot-绘制-forwardvectr-和-velocityvector-的叉乘结果">
+  2. 绘制 <code>ForwardVectr</code> 和 <code>VelocityVector</code> 的叉乘结果
+  <a class="anchor" href="#2-dot-%e7%bb%98%e5%88%b6-forwardvectr-%e5%92%8c-velocityvector-%e7%9a%84%e5%8f%89%e4%b9%98%e7%bb%93%e6%9e%9c">#</a>
+</h3>
+<ul>
+<li>起点 <br/>
+<code>Actor</code> 当前位置 <br/></li>
+<li>偏移 <br/>
+放大的叉乘结果 <br/></li>
+</ul>
+<p><img src="/pic/添加转向动画/实现转向动画/绘制叉乘结果.png" alt="绘制叉乘结果.png" width="900" /> <br/>
+运动时才有向量显示 <br/>
+向前和向后运动时，偶有不明显的显示 <br/></p>
+<h3 id="3-dot-取消变量的设置">
+  3. 取消变量的设置
+  <a class="anchor" href="#3-dot-%e5%8f%96%e6%b6%88%e5%8f%98%e9%87%8f%e7%9a%84%e8%ae%be%e7%bd%ae">#</a>
+</h3>
+<p>接下来在代码计算夹角 <br/></p>
+<h2 id="part-5-在代码中计算-forwardvector-和-velocityvector-的夹角">
+  Part 5 在代码中计算 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角
+  <a class="anchor" href="#part-5-%e5%9c%a8%e4%bb%a3%e7%a0%81%e4%b8%ad%e8%ae%a1%e7%ae%97-forwardvector-%e5%92%8c-velocityvector-%e7%9a%84%e5%a4%b9%e8%a7%92">#</a>
+</h2>
+<p><code>C++</code> <br/></p>
+<h3 id="1-dot-计算夹角">
+  1. 计算夹角
+  <a class="anchor" href="#1-dot-%e8%ae%a1%e7%ae%97%e5%a4%b9%e8%a7%92">#</a>
+</h3>
+<p><code>函数成员</code> <code>public</code> <code>蓝图可调用</code> <code>const函数</code> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> ASTBaseCharacter<span style="color:#f92672">::</span>GetAngleBetweenForwardAndVelocity() <span style="color:#66d9ef">const</span>
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (GetVelocity().IsZero())
+</span></span><span style="display:flex;"><span>        <span style="color:#66d9ef">return</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> FVector ForwardVector <span style="color:#f92672">=</span> GetActorForwardVector();
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> FVector VelocityNormalizedVector <span style="color:#f92672">=</span> GetVelocity().GetSafeNormal();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> DotProductResult <span style="color:#f92672">=</span> FVector<span style="color:#f92672">::</span>DotProduct(ForwardVector, VelocityNormalizedVector);
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">float</span> Theta <span style="color:#f92672">=</span> FMath<span style="color:#f92672">::</span>RadiansToDegrees(FMath<span style="color:#f92672">::</span>Acos(DotProductResult));
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">const</span> FVector CrossProductResult <span style="color:#f92672">=</span> FVector<span style="color:#f92672">::</span>CrossProduct(ForwardVector, VelocityNormalizedVector);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">return</span> (CrossProductResult.IsZero() <span style="color:#f92672">?</span> Theta : FMath<span style="color:#f92672">::</span>Sign(CrossProductResult.Z) <span style="color:#f92672">*</span> Theta);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><p>速度为 <code>0</code> 时，夹角为 <code>0</code> <br/>
+夹角为 <code>PI</code> 或 <code>-PI</code> 时，叉乘结果为0，返回反余弦结果 <br/></p>
+<h3 id="2-dot-代码优化">
+  2. 代码优化
+  <a class="anchor" href="#2-dot-%e4%bb%a3%e7%a0%81%e4%bc%98%e5%8c%96">#</a>
+</h3>
+<p><code>可选</code> <br/>
+实现前后左右移动回调函数 <code>MoveForward</code> 和 <code>MoveRight</code> 时，如果 <code>Amount</code> 为0，直接返回 <br/></p>
+<h2 id="part-6-使用-c-plus-plus-函数设置夹角值">
+  Part 6 使用 <code>C++</code> 函数设置夹角值
+  <a class="anchor" href="#part-6-%e4%bd%bf%e7%94%a8-c-plus-plus-%e5%87%bd%e6%95%b0%e8%ae%be%e7%bd%ae%e5%a4%b9%e8%a7%92%e5%80%bc">#</a>
+</h2>
+<p><code>虚幻编辑器</code> <br/></p>
+<h3 id="1-dot-在蓝图中使用c-plus-plus-函数计算夹角">
+  1. 在蓝图中使用C++函数计算夹角
+  <a class="anchor" href="#1-dot-%e5%9c%a8%e8%93%9d%e5%9b%be%e4%b8%ad%e4%bd%bf%e7%94%a8c-plus-plus-%e5%87%bd%e6%95%b0%e8%ae%a1%e7%ae%97%e5%a4%b9%e8%a7%92">#</a>
+</h3>
+<p><code>ABP_BaseCharacter &gt; EventGraph</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%9c%a8%e8%93%9d%e5%9b%be%e4%b8%ad%e4%bd%bf%e7%94%a8C&#43;&#43;%e5%87%bd%e6%95%b0%e8%ae%a1%e7%ae%97%e5%a4%b9%e8%a7%92/%e5%9c%a8%e8%93%9d%e5%9b%be%e4%b8%ad%e4%bd%bf%e7%94%a8C&#43;&#43;%e5%87%bd%e6%95%b0%e8%ae%a1%e7%ae%97%e5%a4%b9%e8%a7%92.png" width="800"/>
+</figure>
+ <br/></p>
+<h3 id="2-dot-阻断动画蓝图无效状态">
+  2. 阻断动画蓝图无效状态
+  <a class="anchor" href="#2-dot-%e9%98%bb%e6%96%ad%e5%8a%a8%e7%94%bb%e8%93%9d%e5%9b%be%e6%97%a0%e6%95%88%e7%8a%b6%e6%80%81">#</a>
+</h3>
+<p>当我们打开动画蓝图时，其以standalone方式运行 <br/>
+即使未在虚幻编辑器中运行游戏，在蓝图编辑器打开ABP_BaseCharacter，其处于运行状态 <br/>
+可以看到动画蓝图视口的 <code>Actor</code> 是有动画的 <br/>
+从 <code>EventBlueprintUpdateAnimation</code> 出发， <code>TryGetPawnOwner</code> 得到空指针时，停在 <code>CastToCharacter</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%9c%a8%e8%93%9d%e5%9b%be%e4%b8%ad%e4%bd%bf%e7%94%a8C&#43;&#43;%e5%87%bd%e6%95%b0%e8%ae%a1%e7%ae%97%e5%a4%b9%e8%a7%92/ABP_BaseCharacter%e5%a4%84%e4%ba%8e%e8%bf%90%e8%a1%8c%e7%8a%b6%e6%80%81.png" width="1000"/>
+</figure>
+ <br/></p>
+<ol>
+<li>
+<p>添加打印名，验证动画蓝图运行 <br/></p>
+<p><img src="/pic/添加转向动画/在蓝图中使用C++函数计算夹角/添加打印名.png" alt="添加打印名.png" width="800" /> <br/>
+未在虚幻编辑器运行游戏，保持动画蓝图在前台，日志窗口一直有输出 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%9c%a8%e8%93%9d%e5%9b%be%e4%b8%ad%e4%bd%bf%e7%94%a8C&#43;&#43;%e5%87%bd%e6%95%b0%e8%ae%a1%e7%ae%97%e5%a4%b9%e8%a7%92/%e6%b7%bb%e5%8a%a0%e6%89%93%e5%8d%b0%e5%90%8d-%e6%97%a5%e5%bf%97.png" width="500"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>未运行游戏时，阻断动画蓝图 <br/>
+从 <code>EventBlueprintUpdateAnimation</code> 出发，添加 <code>IsValid</code> 宏，检查 <code>Pawn</code> 有效性 <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%9c%a8%e8%93%9d%e5%9b%be%e4%b8%ad%e4%bd%bf%e7%94%a8C&#43;&#43;%e5%87%bd%e6%95%b0%e8%ae%a1%e7%ae%97%e5%a4%b9%e8%a7%92/IsValid%e5%ae%8f-Search.png" width="500"/>
+    </figure>
+ <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%9c%a8%e8%93%9d%e5%9b%be%e4%b8%ad%e4%bd%bf%e7%94%a8C&#43;&#43;%e5%87%bd%e6%95%b0%e8%ae%a1%e7%ae%97%e5%a4%b9%e8%a7%92/%e6%a3%80%e6%9f%a5%e6%b8%b8%e6%88%8f%e6%98%af%e5%90%a6%e8%bf%90%e8%a1%8c.png" width="1000"/>
+    </figure>
+ <br/></p>
+</li>
+</ol>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a>
+          <ul>
+            <li><a href="#blend-space-2d混合空间"><code>Blend Space</code> <code>2D混合空间</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-1-建模">Part 1 建模</a>
+          <ul>
+            <li><a href="#一-forwardvector-和-rightvector">一、 <code>ForwardVector</code> 和 <code>RightVector</code></a></li>
+            <li><a href="#二-数学基础">二、数学基础</a>
+              <ul>
+                <li><a href="#1-dot-点乘">1. 点乘</a></li>
+                <li><a href="#2-dot-叉乘">2. 叉乘</a></li>
+              </ul>
+            </li>
+            <li><a href="#三-velocityvector">三、 <code>VelocityVector</code></a></li>
+            <li><a href="#四-计算夹角">四、计算夹角</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-2-绘制-forwardvector-rightvector-和-velocityvector">Part 2 绘制 <code>ForwardVector</code> <code>RightVector</code> 和 <code>VelocityVector</code></a>
+          <ul>
+            <li><a href="#1-dot-绘制-forwardvector">1. 绘制 <code>ForwardVector</code></a></li>
+            <li><a href="#2-dot-绘制-rightvector">2. 绘制 <code>RightVector</code></a></li>
+            <li><a href="#3-dot-绘制-velocityvector">3. 绘制 <code>VelocityVector</code></a></li>
+            <li><a href="#4-dot-效果图">4. 效果图</a></li>
+            <li><a href="#5-dot-优化显示">5. 优化显示</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-使用-混合空间-实现walk动画">Part 3 使用 <code>混合空间</code> 实现Walk动画</a>
+          <ul>
+            <li><a href="#一-创建-bs-locomotion-walk">一、创建 <code>BS_Locomotion_Walk</code></a></li>
+            <li><a href="#二-将-bs-locomotion-walk-用作走路动画">二、将 <code>BS_Locomotion_Walk</code> 用作走路动画</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-4-在蓝图计算-forwardvector-和-velocityvector-的夹角">Part 4 在蓝图计算 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角</a>
+          <ul>
+            <li><a href="#1-dot-在蓝图中计算夹角并设置变量">1. 在蓝图中计算夹角并设置变量</a></li>
+            <li><a href="#2-dot-绘制-forwardvectr-和-velocityvector-的叉乘结果">2. 绘制 <code>ForwardVectr</code> 和 <code>VelocityVector</code> 的叉乘结果</a></li>
+            <li><a href="#3-dot-取消变量的设置">3. 取消变量的设置</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-5-在代码中计算-forwardvector-和-velocityvector-的夹角">Part 5 在代码中计算 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角</a>
+          <ul>
+            <li><a href="#1-dot-计算夹角">1. 计算夹角</a></li>
+            <li><a href="#2-dot-代码优化">2. 代码优化</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-6-使用-c-plus-plus-函数设置夹角值">Part 6 使用 <code>C++</code> 函数设置夹角值</a>
+          <ul>
+            <li><a href="#1-dot-在蓝图中使用c-plus-plus-函数计算夹角">1. 在蓝图中使用C++函数计算夹角</a></li>
+            <li><a href="#2-dot-阻断动画蓝图无效状态">2. 阻断动画蓝图无效状态</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

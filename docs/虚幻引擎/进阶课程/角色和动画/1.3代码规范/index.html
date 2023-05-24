@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Overview # .clang-format .gitignore 按个人习惯来，非建议 参考 大括号 放在新行 缩进 虚幻引擎建议使用制表符，也可以使用空格 一、定义格式化代码规则 # .clang-format YAML标记文件 参考 作为项目的一部分，描述管理代码文件的统一格式 每行遵循格式 key: value 1. 设置受约束的开发语言 # 如果项目中只一种开发语言，或者所有开发语言使用相同规范，可忽略该配置 Language: Cpp 2. 通用样式 # Google 一个制表符对应2个空格，大括号不在新行 BasedOnStyle: Google Microsoft 一个制表符对应4个空格，大括号在新行 BasedOnStyle: Microsoft 3. 缩进宽度 # IndentWidth: &#39;4&#39; 4. 缩进样式 # 空格 UseTab: Never 制表符 源文件中既有空格又有制表符 UseTab: Always 5. 制表符宽度 # 每6个空格替换一个制表符，若缩进使用制表符，效果很糟糕 TabWidth: &#39;6&#39; 6. 设置大括号位置 # 行尾 BreakBeforeBraces: Attach 新行 BreakBeforeBraces: Allman 7. 其他设置 # ColumnLimit: &#39;140&#39; AccessModifierOffset: &#39;-4&#39; SortIncludes: false AllowShortBlocksOnASingleLine: false AlignAfterOpenBracket: DontAlign AllowShortFunctionsOnASingleLine: Inline PointerAlignment: Left 二、Git仓库同步 # .">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="代码规范" />
+<meta property="og:description" content="Overview # .clang-format .gitignore 按个人习惯来，非建议 参考 大括号 放在新行 缩进 虚幻引擎建议使用制表符，也可以使用空格 一、定义格式化代码规则 # .clang-format YAML标记文件 参考 作为项目的一部分，描述管理代码文件的统一格式 每行遵循格式 key: value 1. 设置受约束的开发语言 # 如果项目中只一种开发语言，或者所有开发语言使用相同规范，可忽略该配置 Language: Cpp 2. 通用样式 # Google 一个制表符对应2个空格，大括号不在新行 BasedOnStyle: Google Microsoft 一个制表符对应4个空格，大括号在新行 BasedOnStyle: Microsoft 3. 缩进宽度 # IndentWidth: &#39;4&#39; 4. 缩进样式 # 空格 UseTab: Never 制表符 源文件中既有空格又有制表符 UseTab: Always 5. 制表符宽度 # 每6个空格替换一个制表符，若缩进使用制表符，效果很糟糕 TabWidth: &#39;6&#39; 6. 设置大括号位置 # 行尾 BreakBeforeBraces: Attach 新行 BreakBeforeBraces: Allman 7. 其他设置 # ColumnLimit: &#39;140&#39; AccessModifierOffset: &#39;-4&#39; SortIncludes: false AllowShortBlocksOnASingleLine: false AlignAfterOpenBracket: DontAlign AllowShortFunctionsOnASingleLine: Inline PointerAlignment: Left 二、Git仓库同步 # ." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" /><meta property="article:section" content="docs" />
+
+
+<title>代码规范 | ToughCactus</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.ad0899be44f42ef336a949276df2520691c8797547ba8ceaf8a2f42aecc19d36.js" integrity="sha256-rQiZvkT0LvM2qUknbfJSBpHIeXVHuozq&#43;KL0KuzBnTY=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>ToughCactus</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>虚幻引擎</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a30b888d97cedd0e72fd98dd83a446d9" class="toggle"  />
+    <label for="section-a30b888d97cedd0e72fd98dd83a446d9" class="flex justify-between">
+      <a role="button" class="">基础课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c55d44374101bd87d8c4761c8d07c64" class="toggle" checked />
+    <label for="section-9c55d44374101bd87d8c4761c8d07c64" class="flex justify-between">
+      <a role="button" class="">进阶课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1d099f39b37c7d342e94ef6f0f3007bb" class="toggle" checked />
+    <label for="section-1d099f39b37c7d342e94ef6f0f3007bb" class="flex justify-between">
+      <a role="button" class="">角色和动画</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.1%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8CShooterGame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/" class="">运行ShooterGame示例项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.2%E5%88%9D%E5%A7%8B%E5%8C%96ShootTraining%E9%A1%B9%E7%9B%AE/" class="">初始化ShootTraining项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" class="active">代码规范</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为Character绑定模型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现Character前后左右移动</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现Character视角旋转</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为Character添加跑步动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现Character跳跃</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现Character跑步</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加转向动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.b%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/" class="">打包游戏</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.c%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-abf72c0556c5506bfc005dd76784c9b5" class="toggle"  />
+    <label for="section-abf72c0556c5506bfc005dd76784c9b5" class="flex justify-between">
+      <a role="button" class="">健康系统</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>代码规范</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#一-定义格式化代码规则">一、定义格式化代码规则</a>
+          <ul>
+            <li><a href="#1-dot-设置受约束的开发语言">1. 设置受约束的开发语言</a></li>
+            <li><a href="#2-dot-通用样式">2. 通用样式</a></li>
+            <li><a href="#3-dot-缩进宽度">3. 缩进宽度</a></li>
+            <li><a href="#4-dot-缩进样式">4. 缩进样式</a></li>
+            <li><a href="#5-dot-制表符宽度">5. 制表符宽度</a></li>
+            <li><a href="#6-dot-设置大括号位置">6. 设置大括号位置</a></li>
+            <li><a href="#7-dot-其他设置">7. 其他设置</a></li>
+          </ul>
+        </li>
+        <li><a href="#二-git仓库同步">二、Git仓库同步</a></li>
+        <li><a href="#三-命名约定">三、命名约定</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="overview">
+  Overview
+  <a class="anchor" href="#overview">#</a>
+</h2>
+<p><code>.clang-format</code> <br/>
+<code>.gitignore</code> <br/>
+按个人习惯来，非建议 <br/>
+
+  <a href="https://docs.unrealengine.com/5.1/en-US/epic-cplusplus-coding-standard-for-unreal-engine/">参考</a> <br/></p>
+<ol>
+<li>大括号 <br/>
+放在新行 <br/></li>
+<li>缩进 <br/>
+虚幻引擎建议使用制表符，也可以使用空格 <br/></li>
+</ol>
+<h2 id="一-定义格式化代码规则">
+  一、定义格式化代码规则
+  <a class="anchor" href="#%e4%b8%80-%e5%ae%9a%e4%b9%89%e6%a0%bc%e5%bc%8f%e5%8c%96%e4%bb%a3%e7%a0%81%e8%a7%84%e5%88%99">#</a>
+</h2>
+<p><code>.clang-format</code> <code>YAML标记文件</code> <br/>
+
+  <a href="https://clang.llvm.org/docs/ClangFormatStyleOptions.html">参考</a> <br/>
+作为项目的一部分，描述管理代码文件的统一格式 <br/>
+每行遵循格式 <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>key: value
+</span></span></code></pre></div><h3 id="1-dot-设置受约束的开发语言">
+  1. 设置受约束的开发语言
+  <a class="anchor" href="#1-dot-%e8%ae%be%e7%bd%ae%e5%8f%97%e7%ba%a6%e6%9d%9f%e7%9a%84%e5%bc%80%e5%8f%91%e8%af%ad%e8%a8%80">#</a>
+</h3>
+<ul>
+<li>如果项目中只一种开发语言，或者所有开发语言使用相同规范，可忽略该配置 <br/></li>
+</ul>
+<!--listend-->
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">Language</span>: <span style="color:#ae81ff">Cpp</span>
+</span></span></code></pre></div><h3 id="2-dot-通用样式">
+  2. 通用样式
+  <a class="anchor" href="#2-dot-%e9%80%9a%e7%94%a8%e6%a0%b7%e5%bc%8f">#</a>
+</h3>
+<p><code>Google</code> <br/>
+一个制表符对应2个空格，大括号不在新行 <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">BasedOnStyle</span>: <span style="color:#ae81ff">Google</span>
+</span></span></code></pre></div><p><code>Microsoft</code> <br/>
+一个制表符对应4个空格，大括号在新行 <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">BasedOnStyle</span>: <span style="color:#ae81ff">Microsoft</span>
+</span></span></code></pre></div><h3 id="3-dot-缩进宽度">
+  3. 缩进宽度
+  <a class="anchor" href="#3-dot-%e7%bc%a9%e8%bf%9b%e5%ae%bd%e5%ba%a6">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">IndentWidth</span>: <span style="color:#e6db74">&#39;4&#39;</span>
+</span></span></code></pre></div><h3 id="4-dot-缩进样式">
+  4. 缩进样式
+  <a class="anchor" href="#4-dot-%e7%bc%a9%e8%bf%9b%e6%a0%b7%e5%bc%8f">#</a>
+</h3>
+<p><code>空格</code> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">UseTab</span>: <span style="color:#ae81ff">Never</span>
+</span></span></code></pre></div><p><code>制表符</code> <br/>
+源文件中既有空格又有制表符 <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">UseTab</span>: <span style="color:#ae81ff">Always</span>
+</span></span></code></pre></div><h3 id="5-dot-制表符宽度">
+  5. 制表符宽度
+  <a class="anchor" href="#5-dot-%e5%88%b6%e8%a1%a8%e7%ac%a6%e5%ae%bd%e5%ba%a6">#</a>
+</h3>
+<p>每6个空格替换一个制表符，若缩进使用制表符，效果很糟糕 <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">TabWidth</span>: <span style="color:#e6db74">&#39;6&#39;</span>
+</span></span></code></pre></div><h3 id="6-dot-设置大括号位置">
+  6. 设置大括号位置
+  <a class="anchor" href="#6-dot-%e8%ae%be%e7%bd%ae%e5%a4%a7%e6%8b%ac%e5%8f%b7%e4%bd%8d%e7%bd%ae">#</a>
+</h3>
+<p><code>行尾</code> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">BreakBeforeBraces</span>: <span style="color:#ae81ff">Attach</span>
+</span></span></code></pre></div><p><code>新行</code> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">BreakBeforeBraces</span>: <span style="color:#ae81ff">Allman</span>
+</span></span></code></pre></div><h3 id="7-dot-其他设置">
+  7. 其他设置
+  <a class="anchor" href="#7-dot-%e5%85%b6%e4%bb%96%e8%ae%be%e7%bd%ae">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ColumnLimit</span>: <span style="color:#e6db74">&#39;140&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">AccessModifierOffset</span>: <span style="color:#e6db74">&#39;-4&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">SortIncludes</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">AllowShortBlocksOnASingleLine</span>: <span style="color:#66d9ef">false</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">AlignAfterOpenBracket</span>: <span style="color:#ae81ff">DontAlign</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">AllowShortFunctionsOnASingleLine</span>: <span style="color:#ae81ff">Inline</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">PointerAlignment</span>: <span style="color:#ae81ff">Left</span>
+</span></span></code></pre></div><h2 id="二-git仓库同步">
+  二、Git仓库同步
+  <a class="anchor" href="#%e4%ba%8c-git%e4%bb%93%e5%ba%93%e5%90%8c%e6%ad%a5">#</a>
+</h2>
+<p><code>.gitignore</code> <br/>
+
+  <a href="https://github.com/github/gitignore/blob/main/UnrealEngine.gitignore">参考</a> <br/>
+告诉Git，同步时忽略的文件和文件夹 <br/></p>
+<h2 id="三-命名约定">
+  三、命名约定
+  <a class="anchor" href="#%e4%b8%89-%e5%91%bd%e5%90%8d%e7%ba%a6%e5%ae%9a">#</a>
+</h2>
+<p><code>虚幻编辑器</code> <br/>
+
+  <a href="https://github.com/Allar/ue5-style-guide">参考</a> <br/></p>
+<table>
+<thead>
+<tr>
+<th>虚幻编辑器</th>
+<th>首</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>材质</td>
+<td>M_</td>
+</tr>
+<tr>
+<td>材质实例</td>
+<td>MI_</td>
+</tr>
+<tr>
+<td>基于C++的蓝图类</td>
+<td>BP_</td>
+</tr>
+<tr>
+<td>动画蓝图</td>
+<td>ABP_</td>
+</tr>
+<tr>
+<td>混合空间</td>
+<td>BS_</td>
+</tr>
+</tbody>
+</table>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#一-定义格式化代码规则">一、定义格式化代码规则</a>
+          <ul>
+            <li><a href="#1-dot-设置受约束的开发语言">1. 设置受约束的开发语言</a></li>
+            <li><a href="#2-dot-通用样式">2. 通用样式</a></li>
+            <li><a href="#3-dot-缩进宽度">3. 缩进宽度</a></li>
+            <li><a href="#4-dot-缩进样式">4. 缩进样式</a></li>
+            <li><a href="#5-dot-制表符宽度">5. 制表符宽度</a></li>
+            <li><a href="#6-dot-设置大括号位置">6. 设置大括号位置</a></li>
+            <li><a href="#7-dot-其他设置">7. 其他设置</a></li>
+          </ul>
+        </li>
+        <li><a href="#二-git仓库同步">二、Git仓库同步</a></li>
+        <li><a href="#三-命名约定">三、命名约定</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
