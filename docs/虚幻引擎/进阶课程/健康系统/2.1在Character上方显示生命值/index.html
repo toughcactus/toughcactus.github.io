@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Overview # 自定义健康组件 ActorComponent 纯逻辑 显示生命值 TextRenderComponent Part 1 创建健康组件 # 虚幻编辑器 ActorComponent 一、创建 Component/STHealthComponent # ActorComponent 公有类 Part 2 调整健康组件框架并给出初步实现 # C&#43;&#43; 一、调整框架 # 默认构造函数 将每帧调用TickComponent函数标志置为false PrimaryComponentTick.bCanEverTick = false; BeginPlay 屏蔽派生类 TickComponent 函数，使用基类实现 二、新增逻辑：实时生命值和最大生命值 # 数据成员 实时生命值 private float float Health = 0.0f; 最大生命值 protected 可设置类成员初始值 分组Health ( 0, 1000 ) UPROPERTY(EditDefaultsOnly, Category = &#34;Health&#34;, meta = (ClampMin = &#34;0.0&#34;, ClampMax = &#34;1000.0&#34;)) float MaxHealth = 100.0f;	三、新增逻辑：获取生命值和初始化生命值 # 函数成员 获取生命值 public 蓝图可调用 const函数 隐式inline UFUNCTION(BlueprintCallable) float GetHealth() const { return Health; } 初始化生命值 private 在BeginPlay中调用 void USTHealthComponent::InitHealth() { Health = MaxHealth; } Part 3 为 Character 添加健康组件 # C&#43;&#43; STBaseCharacter 包含健康组件头文件 头文件 前向声明 class USTHealthComponent; 源文件 #include &#34;Components/STHealthComponent.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="实时显示游戏角色生命值" />
+<meta property="og:description" content="Overview # 自定义健康组件 ActorComponent 纯逻辑 显示生命值 TextRenderComponent Part 1 创建健康组件 # 虚幻编辑器 ActorComponent 一、创建 Component/STHealthComponent # ActorComponent 公有类 Part 2 调整健康组件框架并给出初步实现 # C&#43;&#43; 一、调整框架 # 默认构造函数 将每帧调用TickComponent函数标志置为false PrimaryComponentTick.bCanEverTick = false; BeginPlay 屏蔽派生类 TickComponent 函数，使用基类实现 二、新增逻辑：实时生命值和最大生命值 # 数据成员 实时生命值 private float float Health = 0.0f; 最大生命值 protected 可设置类成员初始值 分组Health ( 0, 1000 ) UPROPERTY(EditDefaultsOnly, Category = &#34;Health&#34;, meta = (ClampMin = &#34;0.0&#34;, ClampMax = &#34;1000.0&#34;)) float MaxHealth = 100.0f;	三、新增逻辑：获取生命值和初始化生命值 # 函数成员 获取生命值 public 蓝图可调用 const函数 隐式inline UFUNCTION(BlueprintCallable) float GetHealth() const { return Health; } 初始化生命值 private 在BeginPlay中调用 void USTHealthComponent::InitHealth() { Health = MaxHealth; } Part 3 为 Character 添加健康组件 # C&#43;&#43; STBaseCharacter 包含健康组件头文件 头文件 前向声明 class USTHealthComponent; 源文件 #include &#34;Components/STHealthComponent." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.1%E5%9C%A8Character%E4%B8%8A%E6%96%B9%E6%98%BE%E7%A4%BA%E7%94%9F%E5%91%BD%E5%80%BC/" /><meta property="article:section" content="docs" />
+
+
+<title>实时显示游戏角色生命值 | ToughCactus</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.76b93651dd2f575470b0067bb537b3b7f1d42a13cec268d3b918c049e33a1273.js" integrity="sha256-drk2Ud0vV1RwsAZ7tTezt/HUKhPOwmjTuRjASeM6EnM=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>ToughCactus</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>分享</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="toggle"  />
+    <label for="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="flex justify-between">
+      <a role="button" class="">开发工具</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/" class="">VSCode</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f3b1b01ebe1f17bcb23615417646b6e6" class="toggle"  />
+    <label for="section-f3b1b01ebe1f17bcb23615417646b6e6" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="toggle"  />
+    <label for="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="flex justify-between">
+      <a role="button" class="">Emacs</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/" class="">org-mode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="">插件篇 | 文件管理</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8f0677a94903c7e3083dad01e58ed439" class="toggle"  />
+    <label for="section-8f0677a94903c7e3083dad01e58ed439" class="flex justify-between">
+      <a role="button" class="">博客</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>虚幻引擎</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle"  />
+    <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
+      <a role="button" class="">API</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle"  />
+    <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
+      <a role="button" class="">虚幻C&#43;&#43;</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c25abc278a6873a94fa212bff746344" class="toggle"  />
+    <label for="section-9c25abc278a6873a94fa212bff746344" class="flex justify-between">
+      <a role="button" class="">Actor及其派生类</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="">AActor类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6ec12d43fc21edcca4a92356f25ab919" class="toggle"  />
+    <label for="section-6ec12d43fc21edcca4a92356f25ab919" class="flex justify-between">
+      <a role="button" class="">虚幻编辑器</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a30b888d97cedd0e72fd98dd83a446d9" class="toggle"  />
+    <label for="section-a30b888d97cedd0e72fd98dd83a446d9" class="flex justify-between">
+      <a role="button" class="">基础课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c55d44374101bd87d8c4761c8d07c64" class="toggle" checked />
+    <label for="section-9c55d44374101bd87d8c4761c8d07c64" class="flex justify-between">
+      <a role="button" class="">进阶课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1d099f39b37c7d342e94ef6f0f3007bb" class="toggle"  />
+    <label for="section-1d099f39b37c7d342e94ef6f0f3007bb" class="flex justify-between">
+      <a role="button" class="">角色和动画</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.1%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8CShooterGame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/" class="">运行ShooterGame示例项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.2%E5%88%9D%E5%A7%8B%E5%8C%96ShootTraining%E9%A1%B9%E7%9B%AE/" class="">初始化ShootTraining项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" class="">代码规范</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为游戏角色绑定模型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现游戏角色前后左右移动</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现游戏角色视角旋转</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为游戏角色添加向前跑步动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现游戏角色跳跃</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现游戏角色跑步</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加走路时转向动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.b%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/" class="">打包游戏</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.c%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-abf72c0556c5506bfc005dd76784c9b5" class="toggle" checked />
+    <label for="section-abf72c0556c5506bfc005dd76784c9b5" class="flex justify-between">
+      <a role="button" class="">健康系统</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.1%E5%9C%A8Character%E4%B8%8A%E6%96%B9%E6%98%BE%E7%A4%BA%E7%94%9F%E5%91%BD%E5%80%BC/" class="active">实时显示游戏角色生命值</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.2%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/" class="">计算伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.3%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/" class="">模拟榴弹爆炸</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.4%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/" class="">使用伤害类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.5%E6%B7%BB%E5%8A%A0Character%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/" class="">为游戏角色添加死亡逻辑</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.6%E5%AE%9E%E7%8E%B0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/" class="">添加观察视角</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.7%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/" class="">自动治疗</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.8%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/" class="">高处坠落伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.9%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/" class="">打包游戏和收尾</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/about/"  >
+        关于
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>实时显示游戏角色生命值</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#part-1-创建健康组件">Part 1 创建健康组件</a>
+          <ul>
+            <li><a href="#一-创建-component-sthealthcomponent">一、创建 <code>Component/STHealthComponent</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-2-调整健康组件框架并给出初步实现">Part 2 调整健康组件框架并给出初步实现</a>
+          <ul>
+            <li><a href="#一-调整框架">一、调整框架</a></li>
+            <li><a href="#二-新增逻辑-实时生命值和最大生命值">二、新增逻辑：实时生命值和最大生命值</a></li>
+            <li><a href="#三-新增逻辑-获取生命值和初始化生命值">三、新增逻辑：获取生命值和初始化生命值</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-为-character-添加健康组件">Part 3 为 <code>Character</code> 添加健康组件</a></li>
+        <li><a href="#part-4-为-character-添加文本组件">Part 4 为 <code>Character</code> 添加文本组件</a></li>
+        <li><a href="#part-5-调整文本组件">Part 5 调整文本组件</a>
+          <ul>
+            <li><a href="#一-查看无表示的组件">一、查看无表示的组件</a></li>
+            <li><a href="#二-查看health组件">二、查看Health组件</a></li>
+            <li><a href="#三-调整textrender组件">三、调整TextRender组件</a></li>
+            <li><a href="#四-效果图">四、效果图</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="overview">
+  Overview
+  <a class="anchor" href="#overview">#</a>
+</h2>
+<ol>
+<li>自定义健康组件 <br/>
+<code>ActorComponent</code> <code>纯逻辑</code> <br/></li>
+<li>显示生命值 <br/>
+<code>TextRenderComponent</code> <br/></li>
+</ol>
+<h2 id="part-1-创建健康组件">
+  Part 1 创建健康组件
+  <a class="anchor" href="#part-1-%e5%88%9b%e5%bb%ba%e5%81%a5%e5%ba%b7%e7%bb%84%e4%bb%b6">#</a>
+</h2>
+<p><code>虚幻编辑器</code> <code>ActorComponent</code> <br/></p>
+<h3 id="一-创建-component-sthealthcomponent">
+  一、创建 <code>Component/STHealthComponent</code>
+  <a class="anchor" href="#%e4%b8%80-%e5%88%9b%e5%bb%ba-component-sthealthcomponent">#</a>
+</h3>
+<p><code>ActorComponent</code> <br/></p>
+<p><img src="/pic/在Character上方显示生命值/创建派生自ActorComponent的C++类/创建C++类-ActorComponent.png" alt="创建C++类-ActorComponent.png" width="700" /> <br/>
+<code>公有类</code> <br/></p>
+<p><figure><img src="/pic/%e5%9c%a8Character%e4%b8%8a%e6%96%b9%e6%98%be%e7%a4%ba%e7%94%9f%e5%91%bd%e5%80%bc/%e5%88%9b%e5%bb%ba%e6%b4%be%e7%94%9f%e8%87%aaActorComponent%e7%9a%84C&#43;&#43;%e7%b1%bb/%e5%88%9b%e5%bb%baC&#43;&#43;%e7%b1%bb-STHealthComponent.png" width="700"/>
+</figure>
+ <br/></p>
+<h2 id="part-2-调整健康组件框架并给出初步实现">
+  Part 2 调整健康组件框架并给出初步实现
+  <a class="anchor" href="#part-2-%e8%b0%83%e6%95%b4%e5%81%a5%e5%ba%b7%e7%bb%84%e4%bb%b6%e6%a1%86%e6%9e%b6%e5%b9%b6%e7%bb%99%e5%87%ba%e5%88%9d%e6%ad%a5%e5%ae%9e%e7%8e%b0">#</a>
+</h2>
+<p><code>C++</code> <br/></p>
+<h3 id="一-调整框架">
+  一、调整框架
+  <a class="anchor" href="#%e4%b8%80-%e8%b0%83%e6%95%b4%e6%a1%86%e6%9e%b6">#</a>
+</h3>
+<ol>
+<li>默认构造函数 <br/>
+将每帧调用TickComponent函数标志置为false <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>PrimaryComponentTick.bCanEverTick <span style="color:#f92672">=</span> false;
+</span></span></code></pre></div></li>
+<li>BeginPlay <br/></li>
+<li>屏蔽派生类 <code>TickComponent</code> 函数，使用基类实现 <br/></li>
+</ol>
+<h3 id="二-新增逻辑-实时生命值和最大生命值">
+  二、新增逻辑：实时生命值和最大生命值
+  <a class="anchor" href="#%e4%ba%8c-%e6%96%b0%e5%a2%9e%e9%80%bb%e8%be%91-%e5%ae%9e%e6%97%b6%e7%94%9f%e5%91%bd%e5%80%bc%e5%92%8c%e6%9c%80%e5%a4%a7%e7%94%9f%e5%91%bd%e5%80%bc">#</a>
+</h3>
+<p><code>数据成员</code> <br/></p>
+<ol>
+<li>实时生命值 <br/>
+<code>private</code> <code>float</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">float</span> Health <span style="color:#f92672">=</span> <span style="color:#ae81ff">0.0f</span>;
+</span></span></code></pre></div></li>
+<li>最大生命值 <br/>
+<code>protected</code> <code>可设置类成员初始值</code> <code>分组Health</code> <code>( 0, 1000 )</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UPROPERTY(EditDefaultsOnly, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Health&#34;</span>, meta <span style="color:#f92672">=</span> (ClampMin <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;0.0&#34;</span>, ClampMax <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;1000.0&#34;</span>))
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> MaxHealth <span style="color:#f92672">=</span> <span style="color:#ae81ff">100.0f</span>;	
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="三-新增逻辑-获取生命值和初始化生命值">
+  三、新增逻辑：获取生命值和初始化生命值
+  <a class="anchor" href="#%e4%b8%89-%e6%96%b0%e5%a2%9e%e9%80%bb%e8%be%91-%e8%8e%b7%e5%8f%96%e7%94%9f%e5%91%bd%e5%80%bc%e5%92%8c%e5%88%9d%e5%a7%8b%e5%8c%96%e7%94%9f%e5%91%bd%e5%80%bc">#</a>
+</h3>
+<p><code>函数成员</code> <br/></p>
+<ol>
+<li>获取生命值 <br/>
+<code>public</code> <code>蓝图可调用</code> <code>const函数</code> <code>隐式inline</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UFUNCTION(BlueprintCallable)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> GetHealth() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> Health; }
+</span></span></code></pre></div></li>
+<li>初始化生命值 <br/>
+<code>private</code> <code>在BeginPlay中调用</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> USTHealthComponent<span style="color:#f92672">::</span>InitHealth()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Health <span style="color:#f92672">=</span> MaxHealth;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="part-3-为-character-添加健康组件">
+  Part 3 为 <code>Character</code> 添加健康组件
+  <a class="anchor" href="#part-3-%e4%b8%ba-character-%e6%b7%bb%e5%8a%a0%e5%81%a5%e5%ba%b7%e7%bb%84%e4%bb%b6">#</a>
+</h2>
+<p><code>C++</code> <code>STBaseCharacter</code> <br/></p>
+<ol>
+<li>包含健康组件头文件 <br/>
+<code>头文件</code> <code>前向声明</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">USTHealthComponent</span>;
+</span></span></code></pre></div><code>源文件</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/STHealthComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span></code></pre></div></li>
+<li>添加健康组件 <br/>
+<code>数据成员</code> <code>protected</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Health&#34;</span>)
+</span></span><span style="display:flex;"><span>USTHealthComponent <span style="color:#f92672">*</span>Health;
+</span></span></code></pre></div></li>
+<li>初始化组件 <br/>
+<code>函数成员</code> <code>private</code> <code>在构造函数中调用</code> <br/>
+<code>无表示，不用设置上级组件</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitHealthComponent()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Health <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>USTHealthComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;HealthComponent&#34;</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="part-4-为-character-添加文本组件">
+  Part 4 为 <code>Character</code> 添加文本组件
+  <a class="anchor" href="#part-4-%e4%b8%ba-character-%e6%b7%bb%e5%8a%a0%e6%96%87%e6%9c%ac%e7%bb%84%e4%bb%b6">#</a>
+</h2>
+<p><code>C++</code> <code>STBaseCharacter</code> <code>使用UTextRenderComponent</code> <br/></p>
+<ol>
+<li>包含头文件 <br/>
+<code>头文件</code> <code>前向声明</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UTextRenderComponent</span>;
+</span></span></code></pre></div><code>源文件</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Components/TextRenderComponent.h&#34;</span><span style="color:#75715e">
+</span></span></span></code></pre></div></li>
+<li>添加TextRender组件 <br/>
+<code>数据成员</code> <code>protected</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category <span style="color:#f92672">=</span> <span style="color:#e6db74">&#34;Health&#34;</span>)
+</span></span><span style="display:flex;"><span>UTextRenderComponent <span style="color:#f92672">*</span>HealthText;	
+</span></span></code></pre></div></li>
+<li>初始化组件 <br/>
+<code>函数成员</code> <code>private</code> <code>在构造函数中调用</code> <br/>
+<code>有视觉表示，挂到根组件下面</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>InitHealthTextComponent()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    HealthText <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>UTextRenderComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;HealthTextComponent&#34;</span>);
+</span></span><span style="display:flex;"><span>    HealthText<span style="color:#f92672">-&gt;</span>SetupAttachment(GetRootComponent());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>每帧更新显示文本 <br/>
+<code>函数成员</code> <code>private</code> <code>在Tick函数中调用</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>DisplayHealthText()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    HealthText<span style="color:#f92672">-&gt;</span>SetText(FText<span style="color:#f92672">::</span>FromString(FString<span style="color:#f92672">::</span>Printf(TEXT(<span style="color:#e6db74">&#34;%.0f&#34;</span>), Health<span style="color:#f92672">-&gt;</span>GetHealth())));
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>检查组件是否成功初始化 <br/>
+<code>函数成员</code> <code>private</code> <code>在BeginPlay中调用</code> <br/>
+<code>使用IDE编译时，若运行游戏崩溃，可在IDE中查看断点</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>CheckHealth()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    check(Health);
+</span></span><span style="display:flex;"><span>    check(HealthText);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="part-5-调整文本组件">
+  Part 5 调整文本组件
+  <a class="anchor" href="#part-5-%e8%b0%83%e6%95%b4%e6%96%87%e6%9c%ac%e7%bb%84%e4%bb%b6">#</a>
+</h2>
+<p><code>虚幻编辑器</code> <code>BP_STBaseCharacter</code> <br/></p>
+<h3 id="一-查看无表示的组件">
+  一、查看无表示的组件
+  <a class="anchor" href="#%e4%b8%80-%e6%9f%a5%e7%9c%8b%e6%97%a0%e8%a1%a8%e7%a4%ba%e7%9a%84%e7%bb%84%e4%bb%b6">#</a>
+</h3>
+<p><img src="/pic/在Character上方显示生命值/调整TextRender组件/BP_STBaseCharacter-组件列表.png" alt="BP_STBaseCharacter-组件列表.png" width="400" /> <br/>
+<code>Health</code> 组件和 <code>CharacterMovementComponent</code> 无层级： <br/>
+二者均无表示，纯逻辑 <br/>
+创建后无需挂在其他组件下面 <br/></p>
+<h3 id="二-查看health组件">
+  二、查看Health组件
+  <a class="anchor" href="#%e4%ba%8c-%e6%9f%a5%e7%9c%8bhealth%e7%bb%84%e4%bb%b6">#</a>
+</h3>
+<p><figure><img src="/pic/%e5%9c%a8Character%e4%b8%8a%e6%96%b9%e6%98%be%e7%a4%ba%e7%94%9f%e5%91%bd%e5%80%bc/%e8%b0%83%e6%95%b4TextRender%e7%bb%84%e4%bb%b6/Health%e7%bb%84%e4%bb%b6.png" width="300"/>
+</figure>
+ <br/></p>
+<h3 id="三-调整textrender组件">
+  三、调整TextRender组件
+  <a class="anchor" href="#%e4%b8%89-%e8%b0%83%e6%95%b4textrender%e7%bb%84%e4%bb%b6">#</a>
+</h3>
+<p><figure><img src="/pic/%e5%9c%a8Character%e4%b8%8a%e6%96%b9%e6%98%be%e7%a4%ba%e7%94%9f%e5%91%bd%e5%80%bc/%e8%b0%83%e6%95%b4TextRender%e7%bb%84%e4%bb%b6/TextRender.png" width="1000"/>
+</figure>
+ <br/></p>
+<ol>
+<li>设置属性 <br/>
+<table>
+<thead>
+<tr>
+<th>默认值 Text</th>
+<th>水平对齐 Horizontal Alignment</th>
+<th>文本颜色 Text Render Color</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>Center</td>
+<td>天青色</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>将文本组件移动到 <code>Character</code> 上方 <br/>
+<code>Location</code> <br/></li>
+<li>因为运行时摄像机对着 <code>Character</code> 背面，旋转 <code>RenderText</code> <br/>
+<code>Rotation</code> <br/></li>
+</ol>
+<p><figure><img src="/pic/%e5%9c%a8Character%e4%b8%8a%e6%96%b9%e6%98%be%e7%a4%ba%e7%94%9f%e5%91%bd%e5%80%bc/%e8%b0%83%e6%95%b4TextRender%e7%bb%84%e4%bb%b6/TextRender-%e8%ae%be%e7%bd%ae.png" width="300"/>
+</figure>
+      <br/></p>
+<h3 id="四-效果图">
+  四、效果图
+  <a class="anchor" href="#%e5%9b%9b-%e6%95%88%e6%9e%9c%e5%9b%be">#</a>
+</h3>
+<p><figure><img src="/pic/%e5%9c%a8Character%e4%b8%8a%e6%96%b9%e6%98%be%e7%a4%ba%e7%94%9f%e5%91%bd%e5%80%bc/%e8%b0%83%e6%95%b4TextRender%e7%bb%84%e4%bb%b6/%e6%95%88%e6%9e%9c%e5%9b%be.png" width="800"/>
+</figure>
+      <br/></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#part-1-创建健康组件">Part 1 创建健康组件</a>
+          <ul>
+            <li><a href="#一-创建-component-sthealthcomponent">一、创建 <code>Component/STHealthComponent</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-2-调整健康组件框架并给出初步实现">Part 2 调整健康组件框架并给出初步实现</a>
+          <ul>
+            <li><a href="#一-调整框架">一、调整框架</a></li>
+            <li><a href="#二-新增逻辑-实时生命值和最大生命值">二、新增逻辑：实时生命值和最大生命值</a></li>
+            <li><a href="#三-新增逻辑-获取生命值和初始化生命值">三、新增逻辑：获取生命值和初始化生命值</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-为-character-添加健康组件">Part 3 为 <code>Character</code> 添加健康组件</a></li>
+        <li><a href="#part-4-为-character-添加文本组件">Part 4 为 <code>Character</code> 添加文本组件</a></li>
+        <li><a href="#part-5-调整文本组件">Part 5 调整文本组件</a>
+          <ul>
+            <li><a href="#一-查看无表示的组件">一、查看无表示的组件</a></li>
+            <li><a href="#二-查看health组件">二、查看Health组件</a></li>
+            <li><a href="#三-调整textrender组件">三、调整TextRender组件</a></li>
+            <li><a href="#四-效果图">四、效果图</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

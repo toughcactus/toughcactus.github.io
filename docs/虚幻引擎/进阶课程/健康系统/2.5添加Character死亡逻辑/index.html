@@ -1,0 +1,1185 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Part 1 使用委托：当生命值发生改变时，更新 TextRender 文本 # C&#43;&#43; 一、屏蔽当前 HealthText 的设置 # 之前，每帧都会根据生命值设置 TextRender 组件 ASTBaseCharacter::Tick中，屏蔽DisplayHealthText 在ASTBaseCharacter::BeginPlay中，调用DisplayHealthText初始化设置 先调用Component的BeginPlay，而后调用Character的BeginPlay 当前委托机制中，Character在BeginPlay中注册服务。如果由HealthComponent的BeginPlay中初始化生命值并广播，此时Character还未注册服务，广播在前，注册在后，则Character无法收到通知并初始化 TextRender 组件文本 二、使用委托修改HealthText，服务端修改 # Components/STHealthComponent OnTakeAnyDamage中，屏蔽HandleDamage 伤害类型仅做示例 定义委托类型 头文件 多播 仅C&#43;&#43; DECLARE_MULTICAST_DELEGATE(FOnHealthChanged) 添加委托类型成员 数据成员 public FOnHealthChanged OnHealthChanged; 生命值改变时，通知客户端 OnTakeAnyDamage OnHealthChanged.Broadcast(); 三、使用委托修改HealthText，客户端修改 # STBaseCharacter 处理函数 函数成员 private void ASTBaseCharacter::OnHealthChanged() { DisplayHealthText(); } 注册处理函数 函数成员 private 在BeginPlay中调用 void ASTBaseCharacter::BindOnHealthChanged() { Health-&gt;OnHealthChanged.AddUObject(this, &amp;ASTBaseCharacter::OnHealthChanged); } Part 2 若Character死亡，不再造成伤害 # C&#43;&#43; 一、判断Character死亡 # 函数成员 public 蓝图可调用，const函数 UFUNCTION(BlueprintCallable) bool IsDead() const { return Health &lt;= 0.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="为游戏角色添加死亡逻辑" />
+<meta property="og:description" content="Part 1 使用委托：当生命值发生改变时，更新 TextRender 文本 # C&#43;&#43; 一、屏蔽当前 HealthText 的设置 # 之前，每帧都会根据生命值设置 TextRender 组件 ASTBaseCharacter::Tick中，屏蔽DisplayHealthText 在ASTBaseCharacter::BeginPlay中，调用DisplayHealthText初始化设置 先调用Component的BeginPlay，而后调用Character的BeginPlay 当前委托机制中，Character在BeginPlay中注册服务。如果由HealthComponent的BeginPlay中初始化生命值并广播，此时Character还未注册服务，广播在前，注册在后，则Character无法收到通知并初始化 TextRender 组件文本 二、使用委托修改HealthText，服务端修改 # Components/STHealthComponent OnTakeAnyDamage中，屏蔽HandleDamage 伤害类型仅做示例 定义委托类型 头文件 多播 仅C&#43;&#43; DECLARE_MULTICAST_DELEGATE(FOnHealthChanged) 添加委托类型成员 数据成员 public FOnHealthChanged OnHealthChanged; 生命值改变时，通知客户端 OnTakeAnyDamage OnHealthChanged.Broadcast(); 三、使用委托修改HealthText，客户端修改 # STBaseCharacter 处理函数 函数成员 private void ASTBaseCharacter::OnHealthChanged() { DisplayHealthText(); } 注册处理函数 函数成员 private 在BeginPlay中调用 void ASTBaseCharacter::BindOnHealthChanged() { Health-&gt;OnHealthChanged.AddUObject(this, &amp;ASTBaseCharacter::OnHealthChanged); } Part 2 若Character死亡，不再造成伤害 # C&#43;&#43; 一、判断Character死亡 # 函数成员 public 蓝图可调用，const函数 UFUNCTION(BlueprintCallable) bool IsDead() const { return Health &lt;= 0." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.5%E6%B7%BB%E5%8A%A0Character%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/" /><meta property="article:section" content="docs" />
+
+
+<title>为游戏角色添加死亡逻辑 | ToughCactus</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.76b93651dd2f575470b0067bb537b3b7f1d42a13cec268d3b918c049e33a1273.js" integrity="sha256-drk2Ud0vV1RwsAZ7tTezt/HUKhPOwmjTuRjASeM6EnM=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>ToughCactus</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>分享</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="toggle"  />
+    <label for="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="flex justify-between">
+      <a role="button" class="">开发工具</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/" class="">VSCode</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f3b1b01ebe1f17bcb23615417646b6e6" class="toggle"  />
+    <label for="section-f3b1b01ebe1f17bcb23615417646b6e6" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="toggle"  />
+    <label for="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="flex justify-between">
+      <a role="button" class="">Emacs</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/" class="">org-mode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="">插件篇 | 文件管理</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8f0677a94903c7e3083dad01e58ed439" class="toggle"  />
+    <label for="section-8f0677a94903c7e3083dad01e58ed439" class="flex justify-between">
+      <a role="button" class="">博客</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>虚幻引擎</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle"  />
+    <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
+      <a role="button" class="">API</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle"  />
+    <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
+      <a role="button" class="">虚幻C&#43;&#43;</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c25abc278a6873a94fa212bff746344" class="toggle"  />
+    <label for="section-9c25abc278a6873a94fa212bff746344" class="flex justify-between">
+      <a role="button" class="">Actor及其派生类</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="">AActor类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6ec12d43fc21edcca4a92356f25ab919" class="toggle"  />
+    <label for="section-6ec12d43fc21edcca4a92356f25ab919" class="flex justify-between">
+      <a role="button" class="">虚幻编辑器</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a30b888d97cedd0e72fd98dd83a446d9" class="toggle"  />
+    <label for="section-a30b888d97cedd0e72fd98dd83a446d9" class="flex justify-between">
+      <a role="button" class="">基础课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c55d44374101bd87d8c4761c8d07c64" class="toggle" checked />
+    <label for="section-9c55d44374101bd87d8c4761c8d07c64" class="flex justify-between">
+      <a role="button" class="">进阶课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1d099f39b37c7d342e94ef6f0f3007bb" class="toggle"  />
+    <label for="section-1d099f39b37c7d342e94ef6f0f3007bb" class="flex justify-between">
+      <a role="button" class="">角色和动画</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.1%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8CShooterGame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/" class="">运行ShooterGame示例项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.2%E5%88%9D%E5%A7%8B%E5%8C%96ShootTraining%E9%A1%B9%E7%9B%AE/" class="">初始化ShootTraining项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" class="">代码规范</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为游戏角色绑定模型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现游戏角色前后左右移动</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现游戏角色视角旋转</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为游戏角色添加向前跑步动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现游戏角色跳跃</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现游戏角色跑步</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加走路时转向动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.b%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/" class="">打包游戏</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.c%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-abf72c0556c5506bfc005dd76784c9b5" class="toggle" checked />
+    <label for="section-abf72c0556c5506bfc005dd76784c9b5" class="flex justify-between">
+      <a role="button" class="">健康系统</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.1%E5%9C%A8Character%E4%B8%8A%E6%96%B9%E6%98%BE%E7%A4%BA%E7%94%9F%E5%91%BD%E5%80%BC/" class="">实时显示游戏角色生命值</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.2%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/" class="">计算伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.3%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/" class="">模拟榴弹爆炸</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.4%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/" class="">使用伤害类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.5%E6%B7%BB%E5%8A%A0Character%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/" class="active">为游戏角色添加死亡逻辑</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.6%E5%AE%9E%E7%8E%B0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/" class="">添加观察视角</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.7%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/" class="">自动治疗</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.8%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/" class="">高处坠落伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.9%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/" class="">打包游戏和收尾</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/about/"  >
+        关于
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>为游戏角色添加死亡逻辑</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-使用委托-当生命值发生改变时-更新-textrender-文本">Part 1 使用委托：当生命值发生改变时，更新 <code>TextRender</code> 文本</a>
+          <ul>
+            <li><a href="#一-屏蔽当前-healthtext-的设置">一、屏蔽当前 <code>HealthText</code> 的设置</a></li>
+            <li><a href="#二-使用委托修改healthtext-服务端修改">二、使用委托修改HealthText，服务端修改</a></li>
+            <li><a href="#三-使用委托修改healthtext-客户端修改">三、使用委托修改HealthText，客户端修改</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-2-若character死亡-不再造成伤害">Part 2 若Character死亡，不再造成伤害</a>
+          <ul>
+            <li><a href="#一-判断character死亡">一、判断Character死亡</a></li>
+            <li><a href="#二-重新实现的ontakeanydamage">二、重新实现的OnTakeAnyDamage</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-若character死亡-销毁character">Part 3 若Character死亡，销毁Character</a>
+          <ul>
+            <li><a href="#一-服务端设置">一、服务端设置</a></li>
+            <li><a href="#二-设置客户端">二、设置客户端</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-4-创建死亡动画剪辑">Part 4 创建死亡动画剪辑</a>
+          <ul>
+            <li><a href="#一-创建animmontage资产">一、创建AnimMontage资产</a></li>
+            <li><a href="#二-设置动画蓝图的输入">二、设置动画蓝图的输入</a></li>
+            <li><a href="#三-设置动画剪辑">三、设置动画剪辑</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-5-character死亡时-播放动画剪辑">Part 5 Character死亡时，播放动画剪辑</a>
+          <ul>
+            <li><a href="#一-添加可配置动画剪辑属性">一、添加可配置动画剪辑属性</a></li>
+            <li><a href="#二-在character死亡时-播放动画剪辑">二、在Character死亡时，播放动画剪辑</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-6-查看">Part 6 查看</a>
+          <ul>
+            <li><a href="#一-设置游戏角色死亡时播放的动画剪辑">一、设置游戏角色死亡时播放的动画剪辑</a></li>
+            <li><a href="#二-效果图">二、效果图</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="part-1-使用委托-当生命值发生改变时-更新-textrender-文本">
+  Part 1 使用委托：当生命值发生改变时，更新 <code>TextRender</code> 文本
+  <a class="anchor" href="#part-1-%e4%bd%bf%e7%94%a8%e5%a7%94%e6%89%98-%e5%bd%93%e7%94%9f%e5%91%bd%e5%80%bc%e5%8f%91%e7%94%9f%e6%94%b9%e5%8f%98%e6%97%b6-%e6%9b%b4%e6%96%b0-textrender-%e6%96%87%e6%9c%ac">#</a>
+</h2>
+<p><code>C++</code> <br/></p>
+<h3 id="一-屏蔽当前-healthtext-的设置">
+  一、屏蔽当前 <code>HealthText</code> 的设置
+  <a class="anchor" href="#%e4%b8%80-%e5%b1%8f%e8%94%bd%e5%bd%93%e5%89%8d-healthtext-%e7%9a%84%e8%ae%be%e7%bd%ae">#</a>
+</h3>
+<ol>
+<li>之前，每帧都会根据生命值设置 <code>TextRender</code> 组件 <br/>
+ASTBaseCharacter::Tick中，屏蔽DisplayHealthText <br/></li>
+<li>在ASTBaseCharacter::BeginPlay中，调用DisplayHealthText初始化设置 <br/>
+先调用Component的BeginPlay，而后调用Character的BeginPlay <br/>
+当前委托机制中，Character在BeginPlay中注册服务。如果由HealthComponent的BeginPlay中初始化生命值并广播，此时Character还未注册服务，广播在前，注册在后，则Character无法收到通知并初始化 <code>TextRender</code> 组件文本 <br/></li>
+</ol>
+<h3 id="二-使用委托修改healthtext-服务端修改">
+  二、使用委托修改HealthText，服务端修改
+  <a class="anchor" href="#%e4%ba%8c-%e4%bd%bf%e7%94%a8%e5%a7%94%e6%89%98%e4%bf%ae%e6%94%b9healthtext-%e6%9c%8d%e5%8a%a1%e7%ab%af%e4%bf%ae%e6%94%b9">#</a>
+</h3>
+<p><code>Components/STHealthComponent</code> <br/></p>
+<ol>
+<li>OnTakeAnyDamage中，屏蔽HandleDamage <br/>
+伤害类型仅做示例 <br/></li>
+<li>定义委托类型 <br/>
+<code>头文件</code> <br/>
+<code>多播</code> <code>仅C++</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>DECLARE_MULTICAST_DELEGATE(FOnHealthChanged)
+</span></span></code></pre></div></li>
+<li>添加委托类型成员 <br/>
+<code>数据成员</code> <code>public</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>FOnHealthChanged OnHealthChanged;
+</span></span></code></pre></div></li>
+<li>生命值改变时，通知客户端 <br/>
+<code>OnTakeAnyDamage</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>OnHealthChanged.Broadcast();
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="三-使用委托修改healthtext-客户端修改">
+  三、使用委托修改HealthText，客户端修改
+  <a class="anchor" href="#%e4%b8%89-%e4%bd%bf%e7%94%a8%e5%a7%94%e6%89%98%e4%bf%ae%e6%94%b9healthtext-%e5%ae%a2%e6%88%b7%e7%ab%af%e4%bf%ae%e6%94%b9">#</a>
+</h3>
+<p><code>STBaseCharacter</code> <br/></p>
+<ol>
+<li>处理函数 <br/>
+<code>函数成员</code> <code>private</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>OnHealthChanged()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    DisplayHealthText();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>注册处理函数 <br/>
+<code>函数成员</code> <code>private</code> <code>在BeginPlay中调用</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>BindOnHealthChanged()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Health<span style="color:#f92672">-&gt;</span>OnHealthChanged.AddUObject(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>OnHealthChanged);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="part-2-若character死亡-不再造成伤害">
+  Part 2 若Character死亡，不再造成伤害
+  <a class="anchor" href="#part-2-%e8%8b%a5character%e6%ad%bb%e4%ba%a1-%e4%b8%8d%e5%86%8d%e9%80%a0%e6%88%90%e4%bc%a4%e5%ae%b3">#</a>
+</h2>
+<p><code>C++</code> <br/></p>
+<h3 id="一-判断character死亡">
+  一、判断Character死亡
+  <a class="anchor" href="#%e4%b8%80-%e5%88%a4%e6%96%adcharacter%e6%ad%bb%e4%ba%a1">#</a>
+</h3>
+<p><code>函数成员</code> <code>public</code> <code>蓝图可调用，const函数</code> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UFUNCTION(BlueprintCallable)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> IsDead() <span style="color:#66d9ef">const</span> { <span style="color:#66d9ef">return</span> Health <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.0f</span>; }
+</span></span></code></pre></div><h3 id="二-重新实现的ontakeanydamage">
+  二、重新实现的OnTakeAnyDamage
+  <a class="anchor" href="#%e4%ba%8c-%e9%87%8d%e6%96%b0%e5%ae%9e%e7%8e%b0%e7%9a%84ontakeanydamage">#</a>
+</h3>
+<p>Character生命值不会小于0：OnTakeAnyDamage中，若伤害的数量特征不大于0，或者当前生命值不大于0，无法继续对Character造成伤害 <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> USTHealthComponent<span style="color:#f92672">::</span>OnTakeAnyDamage(AActor<span style="color:#f92672">*</span> DamagedActor, <span style="color:#66d9ef">float</span> Damage, <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDamageType</span><span style="color:#f92672">*</span> DamageType, <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AController</span><span style="color:#f92672">*</span> InstigatedBy, AActor<span style="color:#f92672">*</span> DamageCauser)
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (Damage <span style="color:#f92672">&lt;=</span> <span style="color:#ae81ff">0.0f</span> <span style="color:#f92672">||</span> IsDead()) <span style="color:#66d9ef">return</span>;
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// UE_LOG(LogHealthComponent, Display, TEXT(&#34;Damage: %.0f&#34;), Damage);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    <span style="color:#75715e">// Health -= Damage;
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    Health <span style="color:#f92672">=</span> FMath<span style="color:#f92672">::</span>Clamp(Health <span style="color:#f92672">-</span> Damage, <span style="color:#ae81ff">0.0f</span>, MaxHealth);
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">// HandleDamage(DamageType);
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>    OnHealthChanged.Broadcast();
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h2 id="part-3-若character死亡-销毁character">
+  Part 3 若Character死亡，销毁Character
+  <a class="anchor" href="#part-3-%e8%8b%a5character%e6%ad%bb%e4%ba%a1-%e9%94%80%e6%af%81character">#</a>
+</h2>
+<p><code>C++</code> <br/>
+使用委托完成。当生命值发生改变时修改HealthText文本，当生命值变为0时销毁Character，一码归一码 <br/></p>
+<h3 id="一-服务端设置">
+  一、服务端设置
+  <a class="anchor" href="#%e4%b8%80-%e6%9c%8d%e5%8a%a1%e7%ab%af%e8%ae%be%e7%bd%ae">#</a>
+</h3>
+<p><code>STHealthComponent</code> <br/></p>
+<ol>
+<li>定义委托类型 <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>DECLARE_MULTICAST_DELEGATE(FOnDeath)
+</span></span></code></pre></div></li>
+<li>添加委托类型数据成员 <br/>
+<code>public</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>FOnDeath OnDeath;
+</span></span></code></pre></div></li>
+<li>如Character死亡，通知客户端 <br/>
+<code>函数成员</code> <code>private</code> <code>在OnTakeAnyDamage中调用</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> USTHealthComponent<span style="color:#f92672">::</span>InformClientOnDeath()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#66d9ef">if</span> (IsDead())
+</span></span><span style="display:flex;"><span>    {
+</span></span><span style="display:flex;"><span>        OnDeath.Broadcast();
+</span></span><span style="display:flex;"><span>    }
+</span></span><span style="display:flex;"><span>}	
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="二-设置客户端">
+  二、设置客户端
+  <a class="anchor" href="#%e4%ba%8c-%e8%ae%be%e7%bd%ae%e5%ae%a2%e6%88%b7%e7%ab%af">#</a>
+</h3>
+<p><code>STBaseCharacter</code> <br/></p>
+<ol>
+<li>判断CharacterMovementComponent有效性 <br/>
+<code>函数成员</code> <code>private</code> <code>在BeginPlay中调用</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>CheckCharacterMovement()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    check(GetCharacterMovement());
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>实现处理函数：玩家失去对游戏角色的控制，定时销毁Character <br/>
+<code>函数成员</code> <code>private</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>OnDeath()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    GetCharacterMovement()<span style="color:#f92672">-&gt;</span>DisableMovement();
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>    SetLifeSpan(<span style="color:#ae81ff">5.0f</span>);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>注册服务 <br/>
+<code>函数成员</code> <code>private</code> <code>在BeginPlay中调用</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTBaseCharacter<span style="color:#f92672">::</span>BindOnDeath()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    Health<span style="color:#f92672">-&gt;</span>OnDeath.AddUObject(<span style="color:#66d9ef">this</span>, <span style="color:#f92672">&amp;</span>ASTBaseCharacter<span style="color:#f92672">::</span>OnDeath);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="part-4-创建死亡动画剪辑">
+  Part 4 创建死亡动画剪辑
+  <a class="anchor" href="#part-4-%e5%88%9b%e5%bb%ba%e6%ad%bb%e4%ba%a1%e5%8a%a8%e7%94%bb%e5%89%aa%e8%be%91">#</a>
+</h2>
+<p><code>虚幻编辑器</code> <br/>
+参考之前的跳跃动画，跑步动画，转向动画，均对应状态机中的一个状态。如果当事件发生时，每个状态都可迁移到死亡状态，想想都觉得麻烦。 <br/></p>
+<ol>
+<li>动画剪辑 <code>AnimMontage</code> <br/>
+可以将多个动画组合播放。我们可以把希望连续播放的动画添加到时间线 <code>timeline</code> ，在代码或蓝图中播放动画剪辑。 <br/>
+使用动画剪辑 <code>AnimMontage</code> 资产，当事件发生时，播放死亡动画。 <br/></li>
+<li>Slot <br/>
+若此时有动画剪辑正在播放，输出输入动画和动画剪辑的拼接；若无动画剪辑在播放，输出输入动画 <br/></li>
+</ol>
+<h3 id="一-创建animmontage资产">
+  一、创建AnimMontage资产
+  <a class="anchor" href="#%e4%b8%80-%e5%88%9b%e5%bb%baanimmontage%e8%b5%84%e4%ba%a7">#</a>
+</h3>
+<p>
+  <a href="https://github.com/Allar/ue5-style-guide">命名参考</a> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0Character%e6%ad%bb%e4%ba%a1%e9%80%bb%e8%be%91/%e6%b7%bb%e5%8a%a0%e6%ad%bb%e4%ba%a1%e5%8a%a8%e7%94%bb/%e5%91%bd%e5%90%8d.png" width="300"/>
+</figure>
+ <br/></p>
+<ol>
+<li>
+<p>跑步动画资产 路径 <br/>
+<code>ExternalContent/Animations/TTP_Animations/Death</code> <br/></p>
+</li>
+<li>
+<p><code>选中跑步动画资产，右键 &gt; Create &gt; Create AnimMontage &gt; 命名为AM_Death</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0Character%e6%ad%bb%e4%ba%a1%e9%80%bb%e8%be%91/%e6%b7%bb%e5%8a%a0%e6%ad%bb%e4%ba%a1%e5%8a%a8%e7%94%bb/%e5%88%9b%e5%bb%baAM_Death.png" width="500"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>移动到Content/Player/Animations/路径下 <br/></p>
+</li>
+</ol>
+<h3 id="二-设置动画蓝图的输入">
+  二、设置动画蓝图的输入
+  <a class="anchor" href="#%e4%ba%8c-%e8%ae%be%e7%bd%ae%e5%8a%a8%e7%94%bb%e8%93%9d%e5%9b%be%e7%9a%84%e8%be%93%e5%85%a5">#</a>
+</h3>
+<p><code>ABP_BaseCharacter &gt; AnimGraph</code> <br/></p>
+<ol>
+<li>
+<p>在Locomotion和OutputPose之间添加Slot <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0Character%e6%ad%bb%e4%ba%a1%e9%80%bb%e8%be%91/%e6%b7%bb%e5%8a%a0%e6%ad%bb%e4%ba%a1%e5%8a%a8%e7%94%bb/%e6%b7%bb%e5%8a%a0slot.png" width="500"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>注意，Slot和AM_Death中分组应该一致 <br/>
+<code>SlotName</code> <code>DefaultGroup.DefaultSlot</code> <br/></p>
+<p><img src="/pic/添加Character死亡逻辑/添加死亡动画/slot-Details.png" alt="slot-Details.png" width="400" /> <br/>
+<code>Montage</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0Character%e6%ad%bb%e4%ba%a1%e9%80%bb%e8%be%91/%e6%b7%bb%e5%8a%a0%e6%ad%bb%e4%ba%a1%e5%8a%a8%e7%94%bb/AM_Death-Montage.png" width="500"/>
+    </figure>
+ <br/></p>
+</li>
+</ol>
+<h3 id="三-设置动画剪辑">
+  三、设置动画剪辑
+  <a class="anchor" href="#%e4%b8%89-%e8%ae%be%e7%bd%ae%e5%8a%a8%e7%94%bb%e5%89%aa%e8%be%91">#</a>
+</h3>
+<p><code>AM_Death</code> <br/>
+死亡动画结束后，不再播放其他动画 <br/>
+<code>Asset Details &gt; BlendOptions &gt; EnableAutoBlendOut，取消勾选</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0Character%e6%ad%bb%e4%ba%a1%e9%80%bb%e8%be%91/%e6%b7%bb%e5%8a%a0%e6%ad%bb%e4%ba%a1%e5%8a%a8%e7%94%bb/AM_Death-EnableAutoBlendOut-Disable.png" width="300"/>
+</figure>
+ <br/></p>
+<h2 id="part-5-character死亡时-播放动画剪辑">
+  Part 5 Character死亡时，播放动画剪辑
+  <a class="anchor" href="#part-5-character%e6%ad%bb%e4%ba%a1%e6%97%b6-%e6%92%ad%e6%94%be%e5%8a%a8%e7%94%bb%e5%89%aa%e8%be%91">#</a>
+</h2>
+<p><code>C++</code> <br/>
+<code>STBaseCharacter</code> <br/>
+动画剪辑(AnimMontage)在C++中的类型为UAnimMontage <br/></p>
+<h3 id="一-添加可配置动画剪辑属性">
+  一、添加可配置动画剪辑属性
+  <a class="anchor" href="#%e4%b8%80-%e6%b7%bb%e5%8a%a0%e5%8f%af%e9%85%8d%e7%bd%ae%e5%8a%a8%e7%94%bb%e5%89%aa%e8%be%91%e5%b1%9e%e6%80%a7">#</a>
+</h3>
+<p><code>数据成员</code> <code>protected</code> <code>原型可设置</code> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UPROPERTY(EditDefaultsOnly)
+</span></span><span style="display:flex;"><span>UAnimMontage <span style="color:#f92672">*</span>DeathAnimMontage;
+</span></span></code></pre></div><h3 id="二-在character死亡时-播放动画剪辑">
+  二、在Character死亡时，播放动画剪辑
+  <a class="anchor" href="#%e4%ba%8c-%e5%9c%a8character%e6%ad%bb%e4%ba%a1%e6%97%b6-%e6%92%ad%e6%94%be%e5%8a%a8%e7%94%bb%e5%89%aa%e8%be%91">#</a>
+</h3>
+<p><code>在OnDeath开始处添加如下语句</code> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>PlayAnimMontage(DeathAnimMontage);
+</span></span></code></pre></div><h2 id="part-6-查看">
+  Part 6 查看
+  <a class="anchor" href="#part-6-%e6%9f%a5%e7%9c%8b">#</a>
+</h2>
+<p><code>虚幻编辑器</code> <br/></p>
+<h3 id="一-设置游戏角色死亡时播放的动画剪辑">
+  一、设置游戏角色死亡时播放的动画剪辑
+  <a class="anchor" href="#%e4%b8%80-%e8%ae%be%e7%bd%ae%e6%b8%b8%e6%88%8f%e8%a7%92%e8%89%b2%e6%ad%bb%e4%ba%a1%e6%97%b6%e6%92%ad%e6%94%be%e7%9a%84%e5%8a%a8%e7%94%bb%e5%89%aa%e8%be%91">#</a>
+</h3>
+<p><code>BP_STBaseCharacter</code> <br/>
+<code>AM_Death</code> <br/></p>
+<p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0Character%e6%ad%bb%e4%ba%a1%e9%80%bb%e8%be%91/%e6%9f%a5%e7%9c%8b%e6%ad%bb%e4%ba%a1%e5%8a%a8%e7%94%bb/BP_STBaseCharacter-DeathAnimMontage%e8%ae%be%e7%bd%ae.png" width="1200"/>
+</figure>
+ <br/></p>
+<h3 id="二-效果图">
+  二、效果图
+  <a class="anchor" href="#%e4%ba%8c-%e6%95%88%e6%9e%9c%e5%9b%be">#</a>
+</h3>
+<p><img src="/pic/添加Character死亡逻辑/查看死亡动画/效果图.png" alt="效果图.png" width="800" /> <br/>
+禁止移动Character之后，销毁Character之前，仍可以移动摄像机；即，可以旋转Character(TurnAround) <br/></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-使用委托-当生命值发生改变时-更新-textrender-文本">Part 1 使用委托：当生命值发生改变时，更新 <code>TextRender</code> 文本</a>
+          <ul>
+            <li><a href="#一-屏蔽当前-healthtext-的设置">一、屏蔽当前 <code>HealthText</code> 的设置</a></li>
+            <li><a href="#二-使用委托修改healthtext-服务端修改">二、使用委托修改HealthText，服务端修改</a></li>
+            <li><a href="#三-使用委托修改healthtext-客户端修改">三、使用委托修改HealthText，客户端修改</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-2-若character死亡-不再造成伤害">Part 2 若Character死亡，不再造成伤害</a>
+          <ul>
+            <li><a href="#一-判断character死亡">一、判断Character死亡</a></li>
+            <li><a href="#二-重新实现的ontakeanydamage">二、重新实现的OnTakeAnyDamage</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-若character死亡-销毁character">Part 3 若Character死亡，销毁Character</a>
+          <ul>
+            <li><a href="#一-服务端设置">一、服务端设置</a></li>
+            <li><a href="#二-设置客户端">二、设置客户端</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-4-创建死亡动画剪辑">Part 4 创建死亡动画剪辑</a>
+          <ul>
+            <li><a href="#一-创建animmontage资产">一、创建AnimMontage资产</a></li>
+            <li><a href="#二-设置动画蓝图的输入">二、设置动画蓝图的输入</a></li>
+            <li><a href="#三-设置动画剪辑">三、设置动画剪辑</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-5-character死亡时-播放动画剪辑">Part 5 Character死亡时，播放动画剪辑</a>
+          <ul>
+            <li><a href="#一-添加可配置动画剪辑属性">一、添加可配置动画剪辑属性</a></li>
+            <li><a href="#二-在character死亡时-播放动画剪辑">二、在Character死亡时，播放动画剪辑</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-6-查看">Part 6 查看</a>
+          <ul>
+            <li><a href="#一-设置游戏角色死亡时播放的动画剪辑">一、设置游戏角色死亡时播放的动画剪辑</a></li>
+            <li><a href="#二-效果图">二、效果图</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="虚幻编辑器 Overview # 将ShooterGame作为内容包，基于此开发ShootTraining 如有室内设计师提供游戏资料，我们基于此开发游戏 一、创建ShootTraining项目 # Blank Blueprint 二、配置ShootTraining # 添加Copyright 项目设置 &gt; Project &gt; Description &gt; Legal &gt; Copyright Notice Shoot Training Game, All Rights Reserved. 关卡设置 添加关卡文件夹 Content/Levels 创建关卡 Content/Levels/DefaultMap Basic 设置EditorStartupMap和GameDefaultMap为DefaultMap 项目设置 &gt; Project &gt; Maps &amp; Modes 不使用预编译头文件 ShootTraining.Build.cs // PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs; PCHUsage = PCHUsageMode.NoPCHs; 添加外部资产文件夹 Content/ExternalContent 三、从ShooterGame导入资产 # 打开ShooterGame项目，在内容浏览器选中 Content/Animations/TTP_Animations 右键 &gt; Migrate 取消Sounds勾选 通过虚幻编辑器，将 Content 目录下的 Animations Characters Environment 移动到 ExternalContent 目录下 不能直接迁移到 ExternalContent ，虚幻引擎会检查目录，要求这些资产的上级目录是 Content ，即使根目录是 Content 也无法通过检查 不能直接将三个文件夹移动到 ExternalContent 中，会导致资产之间的相互引用路径出错 Animations Characters Environment 三个文件夹里的内容都与 TTP_Animations 相关 打开ShootTraining项目，为 ExternalContent 设置文件夹颜色 选中Content/ExternalContent &gt; 右键 效果图 外部资产结构 四、基于蓝图创建C&#43;&#43;项目 # 添加C&#43;&#43;类即可 创建蓝图项目的时间开销明显小于创建C&#43;&#43;项目的时间开销 1.">
+<meta name="description" content="虚幻编辑器 Overview # 将 ShooterGame 作为内容包，基于此开发 ShootTraining 。如有室内设计师提供游戏资料，我们基于此开发游戏。 一、创建 ShootTraining 项目 # Blank Blueprint 二、配置 ShootTraining # 添加 Copyright 项目设置 &gt; Project &gt; Description &gt; Legal &gt; Copyright Notice Shoot Training Game, All Rights Reserved. 关卡设置 添加关卡文件夹 Content/Levels 创建关卡 Content/Levels/DefaultMap Basic 设置 EditorStartupMap 和 GameDefaultMap 使用 DefaultMap 项目设置 &gt; Project &gt; Maps &amp; Modes 不使用预编译头文件 ShootTraining.Build.cs // PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs; PCHUsage = PCHUsageMode.NoPCHs; 添加外部资产文件夹 Content/ExternalContent 三、从 ShooterGame 导入资产 # 打开ShooterGame项目 &gt; 在内容浏览器选中Content/Animations/TTP_Animations，右键 &gt; Migrate 取消Sounds勾选 默认勾选的文件夹里的内容都与 TTP_Animations 相关 保存到 Content 目录下 不能直接迁移到 ExternalContent ，虚幻引擎会检查目录，要求这些资产的上级目录是 Content ，即使根目录是 Content 也无法通过检查 通过虚幻编辑器，将 Content 目录下的 Animations Characters Environment 移动到 ExternalContent 目录下 不能直接将三个文件夹移动到 ExternalContent 中，会导致资产之间的相互引用路径出错 打开 ShootTraining 项目，为 ExternalContent 设置文件夹颜色 选中Content/ExternalContent，右键 &gt; Set Color 效果图 外部资产结构 四、基于蓝图创建C&#43;&#43;项目 # 添加C&#43;&#43;类即可。创建蓝图项目的时间开销明显小于创建C&#43;&#43;项目的时间开销。 创建 GameModeBase STGameModeBase 不设置类类型 Content同级目录出现C&#43;&#43; Classes文件夹 设置关卡使用 STGameModeBase 五、脚本 # 编译项目 build.">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="初始化ShootTraining项目" />
-<meta property="og:description" content="虚幻编辑器 Overview # 将ShooterGame作为内容包，基于此开发ShootTraining 如有室内设计师提供游戏资料，我们基于此开发游戏 一、创建ShootTraining项目 # Blank Blueprint 二、配置ShootTraining # 添加Copyright 项目设置 &gt; Project &gt; Description &gt; Legal &gt; Copyright Notice Shoot Training Game, All Rights Reserved. 关卡设置 添加关卡文件夹 Content/Levels 创建关卡 Content/Levels/DefaultMap Basic 设置EditorStartupMap和GameDefaultMap为DefaultMap 项目设置 &gt; Project &gt; Maps &amp; Modes 不使用预编译头文件 ShootTraining.Build.cs // PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs; PCHUsage = PCHUsageMode.NoPCHs; 添加外部资产文件夹 Content/ExternalContent 三、从ShooterGame导入资产 # 打开ShooterGame项目，在内容浏览器选中 Content/Animations/TTP_Animations 右键 &gt; Migrate 取消Sounds勾选 通过虚幻编辑器，将 Content 目录下的 Animations Characters Environment 移动到 ExternalContent 目录下 不能直接迁移到 ExternalContent ，虚幻引擎会检查目录，要求这些资产的上级目录是 Content ，即使根目录是 Content 也无法通过检查 不能直接将三个文件夹移动到 ExternalContent 中，会导致资产之间的相互引用路径出错 Animations Characters Environment 三个文件夹里的内容都与 TTP_Animations 相关 打开ShootTraining项目，为 ExternalContent 设置文件夹颜色 选中Content/ExternalContent &gt; 右键 效果图 外部资产结构 四、基于蓝图创建C&#43;&#43;项目 # 添加C&#43;&#43;类即可 创建蓝图项目的时间开销明显小于创建C&#43;&#43;项目的时间开销 1." />
+<meta property="og:description" content="虚幻编辑器 Overview # 将 ShooterGame 作为内容包，基于此开发 ShootTraining 。如有室内设计师提供游戏资料，我们基于此开发游戏。 一、创建 ShootTraining 项目 # Blank Blueprint 二、配置 ShootTraining # 添加 Copyright 项目设置 &gt; Project &gt; Description &gt; Legal &gt; Copyright Notice Shoot Training Game, All Rights Reserved. 关卡设置 添加关卡文件夹 Content/Levels 创建关卡 Content/Levels/DefaultMap Basic 设置 EditorStartupMap 和 GameDefaultMap 使用 DefaultMap 项目设置 &gt; Project &gt; Maps &amp; Modes 不使用预编译头文件 ShootTraining.Build.cs // PCHUsage = PCHUsageMode.UseExplicitOrSharedPCHs; PCHUsage = PCHUsageMode.NoPCHs; 添加外部资产文件夹 Content/ExternalContent 三、从 ShooterGame 导入资产 # 打开ShooterGame项目 &gt; 在内容浏览器选中Content/Animations/TTP_Animations，右键 &gt; Migrate 取消Sounds勾选 默认勾选的文件夹里的内容都与 TTP_Animations 相关 保存到 Content 目录下 不能直接迁移到 ExternalContent ，虚幻引擎会检查目录，要求这些资产的上级目录是 Content ，即使根目录是 Content 也无法通过检查 通过虚幻编辑器，将 Content 目录下的 Animations Characters Environment 移动到 ExternalContent 目录下 不能直接将三个文件夹移动到 ExternalContent 中，会导致资产之间的相互引用路径出错 打开 ShootTraining 项目，为 ExternalContent 设置文件夹颜色 选中Content/ExternalContent，右键 &gt; Set Color 效果图 外部资产结构 四、基于蓝图创建C&#43;&#43;项目 # 添加C&#43;&#43;类即可。创建蓝图项目的时间开销明显小于创建C&#43;&#43;项目的时间开销。 创建 GameModeBase STGameModeBase 不设置类类型 Content同级目录出现C&#43;&#43; Classes文件夹 设置关卡使用 STGameModeBase 五、脚本 # 编译项目 build." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.2%E5%88%9D%E5%A7%8B%E5%8C%96ShootTraining%E9%A1%B9%E7%9B%AE/" /><meta property="article:section" content="docs" />
 
@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.abd259542d43c43933ed181a0447497951992ba99718a06e9076fdf00f8a5c9a.js" integrity="sha256-q9JZVC1DxDkz7RgaBEdJeVGZK6mXGKBukHb98A&#43;KXJo=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.76b93651dd2f575470b0067bb537b3b7f1d42a13cec268d3b918c049e33a1273.js" integrity="sha256-drk2Ud0vV1RwsAZ7tTezt/HUKhPOwmjTuRjASeM6EnM=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -70,11 +70,262 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <span>分享</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="toggle"  />
+    <label for="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="flex justify-between">
+      <a role="button" class="">开发工具</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/" class="">VSCode</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f3b1b01ebe1f17bcb23615417646b6e6" class="toggle"  />
+    <label for="section-f3b1b01ebe1f17bcb23615417646b6e6" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="toggle"  />
+    <label for="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="flex justify-between">
+      <a role="button" class="">Emacs</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/" class="">org-mode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="">插件篇 | 文件管理</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8f0677a94903c7e3083dad01e58ed439" class="toggle"  />
+    <label for="section-8f0677a94903c7e3083dad01e58ed439" class="flex justify-between">
+      <a role="button" class="">博客</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
     <span>虚幻引擎</span>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle"  />
+    <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
+      <a role="button" class="">API</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle"  />
+    <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
+      <a role="button" class="">虚幻C&#43;&#43;</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c25abc278a6873a94fa212bff746344" class="toggle"  />
+    <label for="section-9c25abc278a6873a94fa212bff746344" class="flex justify-between">
+      <a role="button" class="">Actor及其派生类</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="">AActor类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6ec12d43fc21edcca4a92356f25ab919" class="toggle"  />
+    <label for="section-6ec12d43fc21edcca4a92356f25ab919" class="flex justify-between">
+      <a role="button" class="">虚幻编辑器</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
     
       
         <li>
@@ -175,7 +426,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为Character绑定模型</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为游戏角色绑定模型</a>
   
 
         </li>
@@ -188,7 +439,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现Character前后左右移动</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现游戏角色前后左右移动</a>
   
 
         </li>
@@ -201,7 +452,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现Character视角旋转</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现游戏角色视角旋转</a>
   
 
         </li>
@@ -214,7 +465,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为Character添加跑步动画</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为游戏角色添加向前跑步动画</a>
   
 
         </li>
@@ -227,7 +478,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现Character跳跃</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现游戏角色跳跃</a>
   
 
         </li>
@@ -240,7 +491,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现Character跑步</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现游戏角色跑步</a>
   
 
         </li>
@@ -253,7 +504,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加转向动画</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加走路时转向动画</a>
   
 
         </li>
@@ -305,6 +556,136 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.1%E5%9C%A8Character%E4%B8%8A%E6%96%B9%E6%98%BE%E7%A4%BA%E7%94%9F%E5%91%BD%E5%80%BC/" class="">实时显示游戏角色生命值</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.2%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/" class="">计算伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.3%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/" class="">模拟榴弹爆炸</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.4%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/" class="">使用伤害类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.5%E6%B7%BB%E5%8A%A0Character%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/" class="">为游戏角色添加死亡逻辑</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.6%E5%AE%9E%E7%8E%B0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/" class="">添加观察视角</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.7%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/" class="">自动治疗</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.8%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/" class="">高处坠落伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.9%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/" class="">打包游戏和收尾</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -388,15 +769,10 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#overview">Overview</a></li>
-        <li><a href="#一-创建shoottraining项目">一、创建ShootTraining项目</a></li>
-        <li><a href="#二-配置shoottraining">二、配置ShootTraining</a></li>
-        <li><a href="#三-从shootergame导入资产">三、从ShooterGame导入资产</a></li>
-        <li><a href="#四-基于蓝图创建c-plus-plus-项目">四、基于蓝图创建C++项目</a>
-          <ul>
-            <li><a href="#1-dot-创建-gamemodebase">1. 创建 <code>GameModeBase</code></a></li>
-            <li><a href="#2-dot-设置关卡使用-stgamemodebase">2. 设置关卡使用 <code>STGameModeBase</code></a></li>
-          </ul>
-        </li>
+        <li><a href="#一-创建-shoottraining-项目">一、创建 <code>ShootTraining</code> 项目</a></li>
+        <li><a href="#二-配置-shoottraining">二、配置 <code>ShootTraining</code></a></li>
+        <li><a href="#三-从-shootergame-导入资产">三、从 <code>ShooterGame</code> 导入资产</a></li>
+        <li><a href="#四-基于蓝图创建c-plus-plus-项目">四、基于蓝图创建C++项目</a></li>
         <li><a href="#五-脚本">五、脚本</a></li>
         <li><a href="#六-查看项目源码中的版权信息">六、查看项目源码中的版权信息</a></li>
       </ul>
@@ -418,24 +794,19 @@ https://github.com/alex-shpak/hugo-book
   Overview
   <a class="anchor" href="#overview">#</a>
 </h2>
-<ul>
-<li>将ShooterGame作为内容包，基于此开发ShootTraining <br/>
-<ul>
-<li>如有室内设计师提供游戏资料，我们基于此开发游戏 <br/></li>
-</ul>
-</li>
-</ul>
-<h2 id="一-创建shoottraining项目">
-  一、创建ShootTraining项目
-  <a class="anchor" href="#%e4%b8%80-%e5%88%9b%e5%bb%bashoottraining%e9%a1%b9%e7%9b%ae">#</a>
+<p>将 <code>ShooterGame</code> 作为内容包，基于此开发 <code>ShootTraining</code> 。如有室内设计师提供游戏资料，我们基于此开发游戏。 <br/></p>
+<h2 id="一-创建-shoottraining-项目">
+  一、创建 <code>ShootTraining</code> 项目
+  <a class="anchor" href="#%e4%b8%80-%e5%88%9b%e5%bb%ba-shoottraining-%e9%a1%b9%e7%9b%ae">#</a>
 </h2>
-<p><code>Blank</code> <code>Blueprint</code> <br/></p>
-<h2 id="二-配置shoottraining">
-  二、配置ShootTraining
-  <a class="anchor" href="#%e4%ba%8c-%e9%85%8d%e7%bd%aeshoottraining">#</a>
+<p><code>Blank</code> <br/>
+<code>Blueprint</code> <br/></p>
+<h2 id="二-配置-shoottraining">
+  二、配置 <code>ShootTraining</code>
+  <a class="anchor" href="#%e4%ba%8c-%e9%85%8d%e7%bd%ae-shoottraining">#</a>
 </h2>
 <ol>
-<li>添加Copyright <br/>
+<li>添加 <code>Copyright</code> <br/>
 <code>项目设置 &gt; Project &gt; Description &gt; Legal &gt; Copyright Notice</code> <br/>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>Shoot Training Game, All Rights Reserved.     
 </span></span></code></pre></div></li>
@@ -453,7 +824,7 @@ https://github.com/alex-shpak/hugo-book
  <br/></p>
 </li>
 <li>
-<p>设置EditorStartupMap和GameDefaultMap为DefaultMap <br/>
+<p>设置 <code>EditorStartupMap</code> 和 <code>GameDefaultMap</code> 使用 <code>DefaultMap</code> <br/>
 <code>项目设置 &gt; Project &gt; Maps &amp; Modes</code> <br/></p>
 </li>
 </ul>
@@ -466,37 +837,35 @@ https://github.com/alex-shpak/hugo-book
 <li>添加外部资产文件夹 <br/>
 <code>Content/ExternalContent</code> <br/></li>
 </ol>
-<h2 id="三-从shootergame导入资产">
-  三、从ShooterGame导入资产
-  <a class="anchor" href="#%e4%b8%89-%e4%bb%8eshootergame%e5%af%bc%e5%85%a5%e8%b5%84%e4%ba%a7">#</a>
+<h2 id="三-从-shootergame-导入资产">
+  三、从 <code>ShooterGame</code> 导入资产
+  <a class="anchor" href="#%e4%b8%89-%e4%bb%8e-shootergame-%e5%af%bc%e5%85%a5%e8%b5%84%e4%ba%a7">#</a>
 </h2>
 <ol>
 <li>
-<p>打开ShooterGame项目，在内容浏览器选中 <code>Content/Animations/TTP_Animations</code> <br/>
-<code>右键 &gt; Migrate</code> <br/></p>
+<p><code>打开ShooterGame项目 &gt; 在内容浏览器选中Content/Animations/TTP_Animations，右键 &gt; Migrate</code> <br/></p>
 <p><figure><img src="/pic/%e5%88%9d%e5%a7%8b%e5%8c%96ShootTraining%e9%a1%b9%e7%9b%ae/ContentBrowser-Migrate.png" width="500"/>
     </figure>
  <br/></p>
 </li>
 <li>
 <p>取消Sounds勾选 <br/></p>
-<p><figure><img src="/pic/%e5%88%9d%e5%a7%8b%e5%8c%96ShootTraining%e9%a1%b9%e7%9b%ae/Migrate-%e5%8f%96%e6%b6%88Sounds%e5%8b%be%e9%80%89.png" width="400"/>
-    </figure>
- <br/></p>
+<p><img src="/pic/初始化ShootTraining项目/Migrate-取消Sounds勾选.png" alt="Migrate-取消Sounds勾选.png" width="400" /> <br/>
+默认勾选的文件夹里的内容都与 <code>TTP_Animations</code> 相关 <br/></p>
 </li>
 <li>
-<p>通过虚幻编辑器，将 <code>Content</code> 目录下的 <code>Animations</code> <code>Characters</code> <code>Environment</code> 移动到 <code>ExternalContent</code> 目录下 <br/></p>
-<ul>
-<li>不能直接迁移到 <code>ExternalContent</code> ，虚幻引擎会检查目录，要求这些资产的上级目录是 <code>Content</code> ，即使根目录是 <code>Content</code> 也无法通过检查 <br/></li>
-<li>不能直接将三个文件夹移动到 <code>ExternalContent</code> 中，会导致资产之间的相互引用路径出错 <br/></li>
-<li><code>Animations</code> <code>Characters</code> <code>Environment</code> 三个文件夹里的内容都与 <code>TTP_Animations</code> 相关 <br/></li>
-</ul>
+<p>保存到 <code>Content</code> 目录下 <br/>
+不能直接迁移到 <code>ExternalContent</code> ，虚幻引擎会检查目录，要求这些资产的上级目录是 <code>Content</code> ，即使根目录是 <code>Content</code> 也无法通过检查 <br/></p>
 </li>
 <li>
-<p>打开ShootTraining项目，为 <code>ExternalContent</code> 设置文件夹颜色 <br/>
-<code>选中Content/ExternalContent &gt; 右键</code> <br/></p>
+<p>通过虚幻编辑器，将 <code>Content</code> 目录下的 <code>Animations</code> <code>Characters</code> <code>Environment</code> 移动到 <code>ExternalContent</code> 目录下 <br/>
+不能直接将三个文件夹移动到 <code>ExternalContent</code> 中，会导致资产之间的相互引用路径出错 <br/></p>
+</li>
+<li>
+<p>打开 <code>ShootTraining</code> 项目，为 <code>ExternalContent</code> 设置文件夹颜色 <br/>
+<code>选中Content/ExternalContent，右键 &gt; Set Color</code> <br/></p>
 <p><img src="/pic/初始化ShootTraining项目/ContentBrowser-Folder-SetColor.png" alt="ContentBrowser-Folder-SetColor.png" width="400" /> <br/>
-<code>效果图</code> <br/></p>
+效果图 <br/></p>
 <p><figure><img src="/pic/%e5%88%9d%e5%a7%8b%e5%8c%96ShootTraining%e9%a1%b9%e7%9b%ae/ContentBrowser-Folder-SetColor-Result.png" width="200"/>
     </figure>
  <br/></p>
@@ -512,39 +881,36 @@ https://github.com/alex-shpak/hugo-book
   四、基于蓝图创建C++项目
   <a class="anchor" href="#%e5%9b%9b-%e5%9f%ba%e4%ba%8e%e8%93%9d%e5%9b%be%e5%88%9b%e5%bb%bac-plus-plus-%e9%a1%b9%e7%9b%ae">#</a>
 </h2>
-<ul>
-<li>添加C++类即可 <br/></li>
-<li>创建蓝图项目的时间开销明显小于创建C++项目的时间开销 <br/></li>
-</ul>
-<h3 id="1-dot-创建-gamemodebase">
-  1. 创建 <code>GameModeBase</code>
-  <a class="anchor" href="#1-dot-%e5%88%9b%e5%bb%ba-gamemodebase">#</a>
-</h3>
-<p><code>STGameModeBase</code> <code>不设置类类型</code> <br/></p>
+<p>添加C++类即可。创建蓝图项目的时间开销明显小于创建C++项目的时间开销。 <br/></p>
+<ol>
+<li>
+<p>创建 <code>GameModeBase</code> <br/>
+<code>STGameModeBase</code> <code>不设置类类型</code> <br/></p>
 <p><img src="/pic/初始化ShootTraining项目/STGameModeBase.png" alt="STGameModeBase.png" width="700" /> <br/>
 <code>Content同级目录出现C++ Classes文件夹</code> <br/></p>
 <p><figure><img src="/pic/%e5%88%9d%e5%a7%8b%e5%8c%96ShootTraining%e9%a1%b9%e7%9b%ae/ContentBrowser-C&#43;&#43;Classes.png" width="400"/>
-</figure>
+    </figure>
  <br/></p>
-<h3 id="2-dot-设置关卡使用-stgamemodebase">
-  2. 设置关卡使用 <code>STGameModeBase</code>
-  <a class="anchor" href="#2-dot-%e8%ae%be%e7%bd%ae%e5%85%b3%e5%8d%a1%e4%bd%bf%e7%94%a8-stgamemodebase">#</a>
-</h3>
+</li>
+<li>
+<p>设置关卡使用 <code>STGameModeBase</code> <br/></p>
 <p><figure><img src="/pic/%e5%88%9d%e5%a7%8b%e5%8c%96ShootTraining%e9%a1%b9%e7%9b%ae/WorldSettings-STGameModeBase.png" width="400"/>
-</figure>
+    </figure>
  <br/></p>
+</li>
+</ol>
 <h2 id="五-脚本">
   五、脚本
   <a class="anchor" href="#%e4%ba%94-%e8%84%9a%e6%9c%ac">#</a>
 </h2>
 <ol>
-<li>编辑项目 <br/>
+<li>编译项目 <br/>
 <code>build.sh</code> <br/>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span><span style="color:#75715e">#!/bin/bash
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>BuildScript<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;EpicGames/UE_5.1/Engine/Build/BatchFiles/Mac/Build.sh&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>ProjectName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ShootTraining&#34;</span>
-</span></span><span style="display:flex;"><span>Project<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Projects/5.1.1/&#34;</span>$ProjectName<span style="color:#e6db74">&#34;/&#34;</span>$ProjectName<span style="color:#e6db74">&#34;.uproject&#34;</span>
+</span></span><span style="display:flex;"><span>Project<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Projects/5.1.1/</span>$ProjectName<span style="color:#e6db74">/</span>$ProjectName<span style="color:#e6db74">.uproject&#34;</span>
 </span></span><span style="display:flex;"><span>Target<span style="color:#f92672">=</span>$ProjectName<span style="color:#e6db74">&#34;Editor&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$BuildScript $Target Mac Development <span style="color:#e6db74">&#34;</span>$Project<span style="color:#e6db74">&#34;</span> -waitmutex -NoHotReload 
@@ -555,9 +921,9 @@ https://github.com/alex-shpak/hugo-book
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>UnrealEditor<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;EpicGames/UE_5.1/Engine/Binaries/Mac/UnrealEditor.app&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>ProjectName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ShootTraining&#34;</span>
-</span></span><span style="display:flex;"><span>Project<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Projects/5.1.1/&#34;</span>$ProjectName<span style="color:#e6db74">&#34;/&#34;</span>$ProjectName<span style="color:#e6db74">&#34;.uproject&#34;</span>
+</span></span><span style="display:flex;"><span>Project<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Projects/5.1.1/</span>$ProjectName<span style="color:#e6db74">/</span>$ProjectName<span style="color:#e6db74">.uproject&#34;</span>
 </span></span><span style="display:flex;"><span>
-</span></span><span style="display:flex;"><span>open $Project
+</span></span><span style="display:flex;"><span>open -a $UnrealEditor $Project
 </span></span></code></pre></div></li>
 <li>生成项目文件 <br/>
 <code>generate_project_files.sh</code> <br/>
@@ -565,7 +931,7 @@ https://github.com/alex-shpak/hugo-book
 </span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>GenerateProjectFilesScript<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;EpicGames/UE_5.1/Engine/Build/BatchFiles/Mac/GenerateProjectFiles.sh&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>ProjectName<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;ShootTraining&#34;</span>
-</span></span><span style="display:flex;"><span>Project<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Projects/5.1.1/&#34;</span>$ProjectName<span style="color:#e6db74">&#34;/&#34;</span>$ProjectName<span style="color:#e6db74">&#34;.uproject&#34;</span>
+</span></span><span style="display:flex;"><span>Project<span style="color:#f92672">=</span><span style="color:#e6db74">&#34;Projects/5.1.1/</span>$ProjectName<span style="color:#e6db74">/</span>$ProjectName<span style="color:#e6db74">.uproject&#34;</span>
 </span></span><span style="display:flex;"><span>
 </span></span><span style="display:flex;"><span>$GenerateProjectFilesScript -projectfiles -project<span style="color:#f92672">=</span>$Project -game -rocket -progress -VSCode 
 </span></span><span style="display:flex;"><span><span style="color:#75715e"># $GenerateProjectFilesScript -projectfiles -project=$Project -game -rocket -progress -XCodeProjectFiles</span>
@@ -631,15 +997,10 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#overview">Overview</a></li>
-        <li><a href="#一-创建shoottraining项目">一、创建ShootTraining项目</a></li>
-        <li><a href="#二-配置shoottraining">二、配置ShootTraining</a></li>
-        <li><a href="#三-从shootergame导入资产">三、从ShooterGame导入资产</a></li>
-        <li><a href="#四-基于蓝图创建c-plus-plus-项目">四、基于蓝图创建C++项目</a>
-          <ul>
-            <li><a href="#1-dot-创建-gamemodebase">1. 创建 <code>GameModeBase</code></a></li>
-            <li><a href="#2-dot-设置关卡使用-stgamemodebase">2. 设置关卡使用 <code>STGameModeBase</code></a></li>
-          </ul>
-        </li>
+        <li><a href="#一-创建-shoottraining-项目">一、创建 <code>ShootTraining</code> 项目</a></li>
+        <li><a href="#二-配置-shoottraining">二、配置 <code>ShootTraining</code></a></li>
+        <li><a href="#三-从-shootergame-导入资产">三、从 <code>ShooterGame</code> 导入资产</a></li>
+        <li><a href="#四-基于蓝图创建c-plus-plus-项目">四、基于蓝图创建C++项目</a></li>
         <li><a href="#五-脚本">五、脚本</a></li>
         <li><a href="#六-查看项目源码中的版权信息">六、查看项目源码中的版权信息</a></li>
       </ul>

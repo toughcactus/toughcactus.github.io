@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MacOS on ToughCactus</title>
+    <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/MacOS/</link>
+    <description>Recent content in MacOS on ToughCactus</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/MacOS/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>终端</title>
+      <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/</guid>
+      <description>Part 1 iTerm2 # 官网下载 参考 一、窗口管理 # 快捷键 操作 Command-w 关闭窗口 分屏 快捷键 操作 Command-d 左右分屏 Command-Shift-d 上下分屏 Command-[ 标签页内切换窗口 Command-] Option-Command-UP 根据方向键切换窗口 Option-Command-Down Option-Command-Left Option-Command-Right 标签页 快捷键 操作 Command-t 新建标签页 Command-NUM 根据标号切换标签页 Command-Shift-[ 切换标签页 Command-Shift-] Command-Left 根据方向键切换标签页窗口 Command-Right 二、status bar # Preferences &amp;gt; Profiles &amp;gt; Session 勾选Status bar enabled，点击Configure Status Bar Preferences &amp;gt; Appearence &amp;gt; General &amp;gt; Status bar location Bottom 三、配色 # 官方提供的配色 常用配色 Dracula lovelace , lovelace文本 导入配色 Preferences Profiles Color &amp;gt; Color Presets &amp;gt; Import 四、窗口大小 # Preferences &amp;gt; Profiles &amp;gt; Window 设置 Columns 和 Rows 五、透明度 # Preferences &amp;gt; Profiles &amp;gt; Window &amp;gt; Transparency 3 六、字体 # Preferences &amp;gt; Profiles &amp;gt; Text &amp;gt; Font Victor Mono 14 Part 2 Homebrew # 官网 使用中科大 USTC 提供的安装脚本和软件源 参考 一、安装 # /bin/bash -c &amp;#34;$(curl -fsSL https://mirrors.</description>
+    </item>
+    
+  </channel>
+</rss>

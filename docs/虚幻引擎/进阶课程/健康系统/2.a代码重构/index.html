@@ -1,0 +1,1037 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content=" Part 1 新增 Components/STHealthComponent # C&#43;&#43; STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C&#43;&#43; STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C&#43;&#43; STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 添加角色死亡逻辑 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death去使能自动结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter BP_STPlayerController BP_STGameModeBase C&#43;&#43; ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter STPlayerController Dev/ STDevDamageActor ">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="代码重构" />
+<meta property="og:description" content=" Part 1 新增 Components/STHealthComponent # C&#43;&#43; STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C&#43;&#43; STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C&#43;&#43; STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 添加角色死亡逻辑 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death去使能自动结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter BP_STPlayerController BP_STGameModeBase C&#43;&#43; ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter STPlayerController Dev/ STDevDamageActor " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" /><meta property="article:section" content="docs" />
+
+
+<title>代码重构 | ToughCactus</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.76b93651dd2f575470b0067bb537b3b7f1d42a13cec268d3b918c049e33a1273.js" integrity="sha256-drk2Ud0vV1RwsAZ7tTezt/HUKhPOwmjTuRjASeM6EnM=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>ToughCactus</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>分享</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="toggle"  />
+    <label for="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="flex justify-between">
+      <a role="button" class="">开发工具</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/" class="">VSCode</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f3b1b01ebe1f17bcb23615417646b6e6" class="toggle"  />
+    <label for="section-f3b1b01ebe1f17bcb23615417646b6e6" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="toggle"  />
+    <label for="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="flex justify-between">
+      <a role="button" class="">Emacs</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/" class="">org-mode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="">插件篇 | 文件管理</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8f0677a94903c7e3083dad01e58ed439" class="toggle"  />
+    <label for="section-8f0677a94903c7e3083dad01e58ed439" class="flex justify-between">
+      <a role="button" class="">博客</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>虚幻引擎</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle"  />
+    <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
+      <a role="button" class="">API</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle"  />
+    <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
+      <a role="button" class="">虚幻C&#43;&#43;</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c25abc278a6873a94fa212bff746344" class="toggle"  />
+    <label for="section-9c25abc278a6873a94fa212bff746344" class="flex justify-between">
+      <a role="button" class="">Actor及其派生类</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="">AActor类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6ec12d43fc21edcca4a92356f25ab919" class="toggle"  />
+    <label for="section-6ec12d43fc21edcca4a92356f25ab919" class="flex justify-between">
+      <a role="button" class="">虚幻编辑器</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a30b888d97cedd0e72fd98dd83a446d9" class="toggle"  />
+    <label for="section-a30b888d97cedd0e72fd98dd83a446d9" class="flex justify-between">
+      <a role="button" class="">基础课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c55d44374101bd87d8c4761c8d07c64" class="toggle" checked />
+    <label for="section-9c55d44374101bd87d8c4761c8d07c64" class="flex justify-between">
+      <a role="button" class="">进阶课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1d099f39b37c7d342e94ef6f0f3007bb" class="toggle"  />
+    <label for="section-1d099f39b37c7d342e94ef6f0f3007bb" class="flex justify-between">
+      <a role="button" class="">角色和动画</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.1%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8CShooterGame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/" class="">运行ShooterGame示例项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.2%E5%88%9D%E5%A7%8B%E5%8C%96ShootTraining%E9%A1%B9%E7%9B%AE/" class="">初始化ShootTraining项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" class="">代码规范</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为游戏角色绑定模型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现游戏角色前后左右移动</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现游戏角色视角旋转</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为游戏角色添加向前跑步动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现游戏角色跳跃</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现游戏角色跑步</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加走路时转向动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.b%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/" class="">打包游戏</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.c%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-abf72c0556c5506bfc005dd76784c9b5" class="toggle" checked />
+    <label for="section-abf72c0556c5506bfc005dd76784c9b5" class="flex justify-between">
+      <a role="button" class="">健康系统</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.1%E5%9C%A8Character%E4%B8%8A%E6%96%B9%E6%98%BE%E7%A4%BA%E7%94%9F%E5%91%BD%E5%80%BC/" class="">实时显示游戏角色生命值</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.2%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/" class="">计算伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.3%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/" class="">模拟榴弹爆炸</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.4%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/" class="">使用伤害类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.5%E6%B7%BB%E5%8A%A0Character%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/" class="">为游戏角色添加死亡逻辑</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.6%E5%AE%9E%E7%8E%B0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/" class="">添加观察视角</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.7%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/" class="">自动治疗</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.8%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/" class="">高处坠落伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.9%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/" class="">打包游戏和收尾</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="active">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/about/"  >
+        关于
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>代码重构</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-新增-components-sthealthcomponent">Part 1 新增 Components/STHealthComponent</a></li>
+        <li><a href="#part-2-为character添加healthcomponent和textrender组件">Part 2 为Character添加HealthComponent和TextRender组件</a></li>
+        <li><a href="#part-3-新增-dev-stdevdamageactor">Part 3 新增 Dev/STDevDamageActor</a></li>
+        <li><a href="#part-4-添加角色死亡逻辑">Part 4 添加角色死亡逻辑</a></li>
+        <li><a href="#项目结构更新">项目结构更新</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="part-1-新增-components-sthealthcomponent">
+  Part 1 新增 Components/STHealthComponent
+  <a class="anchor" href="#part-1-%e6%96%b0%e5%a2%9e-components-sthealthcomponent">#</a>
+</h2>
+<p><code>C++</code> <code>STHEalthComponent</code> <br/></p>
+<ol>
+<li>
+<p>当前生命值和最大生命值 <br/>
+<code>数据成员</code> <br/>
+<code>Health</code> <code>MaxHealth</code> <br/></p>
+</li>
+<li>
+<p>提供 <code>public</code> 接口，可以获取当前生命值 <br/>
+<code>函数成员</code> <code>GetHealth</code> <br/></p>
+</li>
+<li>
+<p>提供 <code>public</code> 接口，判断角色是否死亡 <br/>
+<code>函数成员</code> <code>IsDead</code> <br/></p>
+</li>
+<li>
+<p>定义委托类型并添加数据成员，生命值改变时通知 <br/>
+<code>FOnHealthChangedSignature</code> <br/></p>
+</li>
+<li>
+<p>定义委托类型并添加数据成员，生命值为0时通知 <br/>
+<code>FOnDeathSignature</code> <br/></p>
+</li>
+<li>
+<p>提供 <code>private</code> 接口，更新生命值并通知 <br/>
+<code>SetHealth</code>      <br/></p>
+</li>
+<li>
+<p>添加定时器，受到伤害后延后治疗 <br/>
+<code>数据成员</code> <br/></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>使能自动治疗</td>
+<td>AutoHeal</td>
+</tr>
+<tr>
+<td>治疗量</td>
+<td>HealModifier</td>
+</tr>
+<tr>
+<td>治疗频率</td>
+<td>HealRate</td>
+</tr>
+<tr>
+<td>延后治疗时长</td>
+<td>HealDelay</td>
+</tr>
+</tbody>
+</table>
+<p><code>函数成员</code> <br/></p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>名称</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>回调函数</td>
+<td>OnHealTrigger</td>
+</tr>
+<tr>
+<td>开启定时器</td>
+<td>StartHealTimer</td>
+</tr>
+<tr>
+<td>关闭定时器</td>
+<td>StopHealTimer</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>注册受伤处理函数，更新生命值，死亡时广播 <br/>
+<code>函数成员</code> <code>OnTakeAnyDamage</code> <br/></p>
+</li>
+</ol>
+<h2 id="part-2-为character添加healthcomponent和textrender组件">
+  Part 2 为Character添加HealthComponent和TextRender组件
+  <a class="anchor" href="#part-2-%e4%b8%bacharacter%e6%b7%bb%e5%8a%a0healthcomponent%e5%92%8ctextrender%e7%bb%84%e4%bb%b6">#</a>
+</h2>
+<p><code>C++</code> <code>STBaseCharacter</code> <br/></p>
+<ol>
+<li>添加组件并初始化 <br/></li>
+<li>添加函数，修改HealthText组件文本；初始化和生命值改变时调用 <br/></li>
+<li>注册HealthComponent的OnHealthChanged <br/></li>
+<li>添加数据成员，蓝图可设置死亡动画剪辑 <br/></li>
+<li>添加数据成员，蓝图可设置角色死亡销毁延时 <br/></li>
+<li>注册HealthComponent的OnDeath <br/>
+角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 <br/></li>
+<li>添加数据成员，坠落伤害范围和受到伤害时落地速度范围 <br/></li>
+<li>添加函数成员，坠落时委托处理函数，并注册委托服务 <br/></li>
+</ol>
+<h2 id="part-3-新增-dev-stdevdamageactor">
+  Part 3 新增 Dev/STDevDamageActor
+  <a class="anchor" href="#part-3-%e6%96%b0%e5%a2%9e-dev-stdevdamageactor">#</a>
+</h2>
+<p><code>C++</code> <code>STDevDamageActor</code> <br/></p>
+<ol>
+<li>添加SceneComponent，使能变换 <br/></li>
+<li>添加数据成员，设置球体颜色和半径 <br/></li>
+<li>绘制球体，显示爆炸伤害范围 <br/></li>
+<li>添加数据成员，设置伤害数值特征和计算伤害选项 <br/></li>
+<li>对伤害半径内的角色造成伤害 <br/></li>
+</ol>
+<h2 id="part-4-添加角色死亡逻辑">
+  Part 4 添加角色死亡逻辑
+  <a class="anchor" href="#part-4-%e6%b7%bb%e5%8a%a0%e8%a7%92%e8%89%b2%e6%ad%bb%e4%ba%a1%e9%80%bb%e8%be%91">#</a>
+</h2>
+<p><code>虚幻编辑器</code> <br/></p>
+<ol>
+<li>调整TextRender组件 <br/></li>
+<li>创建死亡动画剪辑 AM_Death，并设置AM_Death去使能自动结束 <br/></li>
+<li>在动画蓝图中，通过Slot，连接状态机动画和OutputPose <br/>
+<code>ABP_BaseCharacter &gt; AnimGraph</code> <br/></li>
+<li>设置DeathAnimMontage属性 AM_Death <br/>
+<code>BP_STBaseCharacter</code> <br/></li>
+<li>在场景中添加伤害源 <br/></li>
+</ol>
+<h2 id="项目结构更新">
+  项目结构更新
+  <a class="anchor" href="#%e9%a1%b9%e7%9b%ae%e7%bb%93%e6%9e%84%e6%9b%b4%e6%96%b0">#</a>
+</h2>
+<ol>
+<li>资产 <code>Content/</code> <br/>
+<ul>
+<li><code>ExternalContent/</code> <br/></li>
+<li><code>Levels/</code> <br/>
+<code>DefaultMap</code> <br/></li>
+<li><code>Player/</code> <br/>
+<ul>
+<li><code>Animations/</code> <br/>
+<code>ABP_BaseCharacter</code> <br/>
+<code>BS_Run</code> <br/>
+<code>BS_Walk</code> <br/>
+<strong>AM_Death</strong> <br/></li>
+<li><code>BP_STBaseCharacter</code> <br/></li>
+<li><code>BP_STPlayerController</code> <br/></li>
+</ul>
+</li>
+<li><code>BP_STGameModeBase</code> <br/></li>
+</ul>
+</li>
+<li>C++ <code>ShootTrainingSecond/</code> <br/>
+<ul>
+<li><code>ShootTrainingSecondGameModeBase</code> <br/></li>
+<li><code>Public/</code> <br/>
+<ul>
+<li><code>Components/</code> <br/>
+<code>STCharacterMovementComponent</code> <br/>
+<strong>STHealthComponent</strong> <br/></li>
+<li><code>Player/</code> <br/>
+<code>STBaseCharacter</code> <br/>
+<code>STPlayerController</code> <br/></li>
+<li><strong>Dev/</strong> <br/>
+<strong>STDevDamageActor</strong> <br/></li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-新增-components-sthealthcomponent">Part 1 新增 Components/STHealthComponent</a></li>
+        <li><a href="#part-2-为character添加healthcomponent和textrender组件">Part 2 为Character添加HealthComponent和TextRender组件</a></li>
+        <li><a href="#part-3-新增-dev-stdevdamageactor">Part 3 新增 Dev/STDevDamageActor</a></li>
+        <li><a href="#part-4-添加角色死亡逻辑">Part 4 添加角色死亡逻辑</a></li>
+        <li><a href="#项目结构更新">项目结构更新</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Overview # .clang-format .gitignore 按个人习惯来，非建议 参考 大括号 放在新行 缩进 虚幻引擎建议使用制表符，也可以使用空格 一、定义格式化代码规则 # .clang-format YAML标记文件 参考 作为项目的一部分，描述管理代码文件的统一格式 每行遵循格式 key: value 1. 设置受约束的开发语言 # 如果项目中只一种开发语言，或者所有开发语言使用相同规范，可忽略该配置 Language: Cpp 2. 通用样式 # Google 一个制表符对应2个空格，大括号不在新行 BasedOnStyle: Google Microsoft 一个制表符对应4个空格，大括号在新行 BasedOnStyle: Microsoft 3. 缩进宽度 # IndentWidth: &#39;4&#39; 4. 缩进样式 # 空格 UseTab: Never 制表符 源文件中既有空格又有制表符 UseTab: Always 5. 制表符宽度 # 每6个空格替换一个制表符，若缩进使用制表符，效果很糟糕 TabWidth: &#39;6&#39; 6. 设置大括号位置 # 行尾 BreakBeforeBraces: Attach 新行 BreakBeforeBraces: Allman 7. 其他设置 # ColumnLimit: &#39;140&#39; AccessModifierOffset: &#39;-4&#39; SortIncludes: false AllowShortBlocksOnASingleLine: false AlignAfterOpenBracket: DontAlign AllowShortFunctionsOnASingleLine: Inline PointerAlignment: Left 二、Git仓库同步 # .">
+<meta name="description" content="Overview # .clang-format .gitignore 参考 按个人习惯来，非建议 大括号 放在新行 缩进 使用制表符，缩进宽度和制表符宽度一致 虚幻引擎建议使用制表符，也可以使用空格 缩进、制表符和空格 # 缩进 indent 编写代码时，按下tab键，即按格式留出空位，用以控制格式 默认使用制表符 tab 因为制表符的宽度可设置，不同平台制表符的宽度不一，视觉上，查看代码会有不习惯的感觉；可在本地设置使用空格，即用空格替换制表符 制表符宽度和缩进宽度 若缩进使用空格，制表符宽度参数无效，缩进对应的空格个数和缩进宽度一致 TabWidth参数无效；一次缩进对应7个空格 IndentWidth: &#39;7&#39; TabWidth: &#39;9&#39; UseTab: &#39;Never&#39; 若缩进使用制表符，当缩进对应的空格个数不小于制表符宽度，使用制表符替换对应个数个空格 一次缩进对应7个空格，不会被替换为制表符；两个缩进对应14个空格，会被替换为1个制表符加5个空格 IndentWidth: &#39;7&#39; TabWidth: &#39;9&#39; UseTab: &#39;Always&#39; 一、定义格式化代码规则 # .clang-format 参考 YAML标记文件 作为项目的一部分，描述管理代码文件的统一格式 每行遵循格式 key: value 1. 设置受约束的开发语言 # Language: Cpp 如果项目中只一种开发语言，或者所有开发语言使用相同规范，可忽略该配置 2. 通用样式 # Google 一个制表符对应2个空格，大括号不在新行 BasedOnStyle: Google Microsoft 一个制表符对应4个空格，大括号在新行 BasedOnStyle: Microsoft 3. 缩进宽度 # IndentWidth: &#39;4&#39; 4. 缩进样式 # 空格 UseTab: Never 制表符 源文件中既有空格又有制表符 UseTab: Always 5.">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="代码规范" />
-<meta property="og:description" content="Overview # .clang-format .gitignore 按个人习惯来，非建议 参考 大括号 放在新行 缩进 虚幻引擎建议使用制表符，也可以使用空格 一、定义格式化代码规则 # .clang-format YAML标记文件 参考 作为项目的一部分，描述管理代码文件的统一格式 每行遵循格式 key: value 1. 设置受约束的开发语言 # 如果项目中只一种开发语言，或者所有开发语言使用相同规范，可忽略该配置 Language: Cpp 2. 通用样式 # Google 一个制表符对应2个空格，大括号不在新行 BasedOnStyle: Google Microsoft 一个制表符对应4个空格，大括号在新行 BasedOnStyle: Microsoft 3. 缩进宽度 # IndentWidth: &#39;4&#39; 4. 缩进样式 # 空格 UseTab: Never 制表符 源文件中既有空格又有制表符 UseTab: Always 5. 制表符宽度 # 每6个空格替换一个制表符，若缩进使用制表符，效果很糟糕 TabWidth: &#39;6&#39; 6. 设置大括号位置 # 行尾 BreakBeforeBraces: Attach 新行 BreakBeforeBraces: Allman 7. 其他设置 # ColumnLimit: &#39;140&#39; AccessModifierOffset: &#39;-4&#39; SortIncludes: false AllowShortBlocksOnASingleLine: false AlignAfterOpenBracket: DontAlign AllowShortFunctionsOnASingleLine: Inline PointerAlignment: Left 二、Git仓库同步 # ." />
+<meta property="og:description" content="Overview # .clang-format .gitignore 参考 按个人习惯来，非建议 大括号 放在新行 缩进 使用制表符，缩进宽度和制表符宽度一致 虚幻引擎建议使用制表符，也可以使用空格 缩进、制表符和空格 # 缩进 indent 编写代码时，按下tab键，即按格式留出空位，用以控制格式 默认使用制表符 tab 因为制表符的宽度可设置，不同平台制表符的宽度不一，视觉上，查看代码会有不习惯的感觉；可在本地设置使用空格，即用空格替换制表符 制表符宽度和缩进宽度 若缩进使用空格，制表符宽度参数无效，缩进对应的空格个数和缩进宽度一致 TabWidth参数无效；一次缩进对应7个空格 IndentWidth: &#39;7&#39; TabWidth: &#39;9&#39; UseTab: &#39;Never&#39; 若缩进使用制表符，当缩进对应的空格个数不小于制表符宽度，使用制表符替换对应个数个空格 一次缩进对应7个空格，不会被替换为制表符；两个缩进对应14个空格，会被替换为1个制表符加5个空格 IndentWidth: &#39;7&#39; TabWidth: &#39;9&#39; UseTab: &#39;Always&#39; 一、定义格式化代码规则 # .clang-format 参考 YAML标记文件 作为项目的一部分，描述管理代码文件的统一格式 每行遵循格式 key: value 1. 设置受约束的开发语言 # Language: Cpp 如果项目中只一种开发语言，或者所有开发语言使用相同规范，可忽略该配置 2. 通用样式 # Google 一个制表符对应2个空格，大括号不在新行 BasedOnStyle: Google Microsoft 一个制表符对应4个空格，大括号在新行 BasedOnStyle: Microsoft 3. 缩进宽度 # IndentWidth: &#39;4&#39; 4. 缩进样式 # 空格 UseTab: Never 制表符 源文件中既有空格又有制表符 UseTab: Always 5." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" /><meta property="article:section" content="docs" />
 
@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.abd259542d43c43933ed181a0447497951992ba99718a06e9076fdf00f8a5c9a.js" integrity="sha256-q9JZVC1DxDkz7RgaBEdJeVGZK6mXGKBukHb98A&#43;KXJo=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.76b93651dd2f575470b0067bb537b3b7f1d42a13cec268d3b918c049e33a1273.js" integrity="sha256-drk2Ud0vV1RwsAZ7tTezt/HUKhPOwmjTuRjASeM6EnM=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -70,11 +70,262 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <span>分享</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="toggle"  />
+    <label for="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="flex justify-between">
+      <a role="button" class="">开发工具</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/" class="">VSCode</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f3b1b01ebe1f17bcb23615417646b6e6" class="toggle"  />
+    <label for="section-f3b1b01ebe1f17bcb23615417646b6e6" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="toggle"  />
+    <label for="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="flex justify-between">
+      <a role="button" class="">Emacs</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/" class="">org-mode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="">插件篇 | 文件管理</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8f0677a94903c7e3083dad01e58ed439" class="toggle"  />
+    <label for="section-8f0677a94903c7e3083dad01e58ed439" class="flex justify-between">
+      <a role="button" class="">博客</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
     <span>虚幻引擎</span>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle"  />
+    <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
+      <a role="button" class="">API</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle"  />
+    <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
+      <a role="button" class="">虚幻C&#43;&#43;</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c25abc278a6873a94fa212bff746344" class="toggle"  />
+    <label for="section-9c25abc278a6873a94fa212bff746344" class="flex justify-between">
+      <a role="button" class="">Actor及其派生类</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="">AActor类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6ec12d43fc21edcca4a92356f25ab919" class="toggle"  />
+    <label for="section-6ec12d43fc21edcca4a92356f25ab919" class="flex justify-between">
+      <a role="button" class="">虚幻编辑器</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
     
       
         <li>
@@ -175,7 +426,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为Character绑定模型</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为游戏角色绑定模型</a>
   
 
         </li>
@@ -188,7 +439,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现Character前后左右移动</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现游戏角色前后左右移动</a>
   
 
         </li>
@@ -201,7 +452,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现Character视角旋转</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现游戏角色视角旋转</a>
   
 
         </li>
@@ -214,7 +465,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为Character添加跑步动画</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为游戏角色添加向前跑步动画</a>
   
 
         </li>
@@ -227,7 +478,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现Character跳跃</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现游戏角色跳跃</a>
   
 
         </li>
@@ -240,7 +491,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现Character跑步</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现游戏角色跑步</a>
   
 
         </li>
@@ -253,7 +504,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加转向动画</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加走路时转向动画</a>
   
 
         </li>
@@ -305,6 +556,136 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.1%E5%9C%A8Character%E4%B8%8A%E6%96%B9%E6%98%BE%E7%A4%BA%E7%94%9F%E5%91%BD%E5%80%BC/" class="">实时显示游戏角色生命值</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.2%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/" class="">计算伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.3%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/" class="">模拟榴弹爆炸</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.4%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/" class="">使用伤害类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.5%E6%B7%BB%E5%8A%A0Character%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/" class="">为游戏角色添加死亡逻辑</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.6%E5%AE%9E%E7%8E%B0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/" class="">添加观察视角</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.7%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/" class="">自动治疗</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.8%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/" class="">高处坠落伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.9%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/" class="">打包游戏和收尾</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -388,6 +769,7 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#overview">Overview</a></li>
+        <li><a href="#缩进-制表符和空格">缩进、制表符和空格</a></li>
         <li><a href="#一-定义格式化代码规则">一、定义格式化代码规则</a>
           <ul>
             <li><a href="#1-dot-设置受约束的开发语言">1. 设置受约束的开发语言</a></li>
@@ -396,7 +778,13 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#4-dot-缩进样式">4. 缩进样式</a></li>
             <li><a href="#5-dot-制表符宽度">5. 制表符宽度</a></li>
             <li><a href="#6-dot-设置大括号位置">6. 设置大括号位置</a></li>
-            <li><a href="#7-dot-其他设置">7. 其他设置</a></li>
+            <li><a href="#7-dot-换行条件">7. 换行条件</a></li>
+            <li><a href="#8-dot-向前缩进">8. 向前缩进</a></li>
+            <li><a href="#9-dot-头文件排序">9. 头文件排序</a></li>
+            <li><a href="#10-dot-当语句较短时-是否允许写在单行">10. 当语句较短时，是否允许写在单行</a></li>
+            <li><a href="#11-dot-括号换行时-参数的对齐方式">11. 括号换行时，参数的对齐方式</a></li>
+            <li><a href="#12-dot-当函数语句较短时-是否允许写在单行">12. 当函数语句较短时，是否允许写在单行</a></li>
+            <li><a href="#13-dot-指针和引用的对齐方式">13. 指针和引用的对齐方式</a></li>
           </ul>
         </li>
         <li><a href="#二-git仓库同步">二、Git仓库同步</a></li>
@@ -421,45 +809,80 @@ https://github.com/alex-shpak/hugo-book
 </h2>
 <p><code>.clang-format</code> <br/>
 <code>.gitignore</code> <br/>
-按个人习惯来，非建议 <br/>
 
-  <a href="https://docs.unrealengine.com/5.1/en-US/epic-cplusplus-coding-standard-for-unreal-engine/">参考</a> <br/></p>
+  <a href="https://docs.unrealengine.com/5.1/en-US/epic-cplusplus-coding-standard-for-unreal-engine/">参考</a> <br/>
+<em>按个人习惯来，非建议</em>   <br/></p>
 <ol>
 <li>大括号 <br/>
 放在新行 <br/></li>
 <li>缩进 <br/>
-虚幻引擎建议使用制表符，也可以使用空格 <br/></li>
+使用制表符，缩进宽度和制表符宽度一致 <br/>
+<em>虚幻引擎建议使用制表符，也可以使用空格</em> <br/></li>
+</ol>
+<h2 id="缩进-制表符和空格">
+  缩进、制表符和空格
+  <a class="anchor" href="#%e7%bc%a9%e8%bf%9b-%e5%88%b6%e8%a1%a8%e7%ac%a6%e5%92%8c%e7%a9%ba%e6%a0%bc">#</a>
+</h2>
+<ol>
+<li>缩进 <code>indent</code> <br/>
+<ul>
+<li>编写代码时，按下tab键，即按格式留出空位，用以控制格式 <br/></li>
+<li>默认使用制表符 <code>tab</code> <br/></li>
+<li>因为制表符的宽度可设置，不同平台制表符的宽度不一，视觉上，查看代码会有不习惯的感觉；可在本地设置使用空格，即用空格替换制表符 <br/></li>
+</ul>
+</li>
+<li>制表符宽度和缩进宽度 <br/>
+<ul>
+<li>若缩进使用空格，制表符宽度参数无效，缩进对应的空格个数和缩进宽度一致 <br/>
+<em>TabWidth参数无效；一次缩进对应7个空格</em> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">IndentWidth</span>: <span style="color:#e6db74">&#39;7&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">TabWidth</span>: <span style="color:#e6db74">&#39;9&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">UseTab</span>: <span style="color:#e6db74">&#39;Never&#39;</span>
+</span></span></code></pre></div></li>
+<li>若缩进使用制表符，当缩进对应的空格个数不小于制表符宽度，使用制表符替换对应个数个空格 <br/>
+<em>一次缩进对应7个空格，不会被替换为制表符；两个缩进对应14个空格，会被替换为1个制表符加5个空格</em> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">IndentWidth</span>: <span style="color:#e6db74">&#39;7&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">TabWidth</span>: <span style="color:#e6db74">&#39;9&#39;</span>
+</span></span><span style="display:flex;"><span><span style="color:#f92672">UseTab</span>: <span style="color:#e6db74">&#39;Always&#39;</span>
+</span></span></code></pre></div></li>
+</ul>
+</li>
 </ol>
 <h2 id="一-定义格式化代码规则">
   一、定义格式化代码规则
   <a class="anchor" href="#%e4%b8%80-%e5%ae%9a%e4%b9%89%e6%a0%bc%e5%bc%8f%e5%8c%96%e4%bb%a3%e7%a0%81%e8%a7%84%e5%88%99">#</a>
 </h2>
-<p><code>.clang-format</code> <code>YAML标记文件</code> <br/>
+<p><code>.clang-format</code> <br/>
 
-  <a href="https://clang.llvm.org/docs/ClangFormatStyleOptions.html">参考</a> <br/>
-作为项目的一部分，描述管理代码文件的统一格式 <br/>
-每行遵循格式 <br/></p>
+  <a href="https://clang.llvm.org/docs/ClangFormatStyleOptions.html">参考</a> <br/></p>
+<ul>
+<li>YAML标记文件 <br/></li>
+<li>作为项目的一部分，描述管理代码文件的统一格式 <br/></li>
+<li>每行遵循格式 <br/>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-text" data-lang="text"><span style="display:flex;"><span>key: value
-</span></span></code></pre></div><h3 id="1-dot-设置受约束的开发语言">
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="1-dot-设置受约束的开发语言">
   1. 设置受约束的开发语言
   <a class="anchor" href="#1-dot-%e8%ae%be%e7%bd%ae%e5%8f%97%e7%ba%a6%e6%9d%9f%e7%9a%84%e5%bc%80%e5%8f%91%e8%af%ad%e8%a8%80">#</a>
 </h3>
-<ul>
-<li>如果项目中只一种开发语言，或者所有开发语言使用相同规范，可忽略该配置 <br/></li>
-</ul>
-<!--listend-->
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">Language</span>: <span style="color:#ae81ff">Cpp</span>
-</span></span></code></pre></div><h3 id="2-dot-通用样式">
+</span></span></code></pre></div><p><em>如果项目中只一种开发语言，或者所有开发语言使用相同规范，可忽略该配置</em>    <br/></p>
+<h3 id="2-dot-通用样式">
   2. 通用样式
   <a class="anchor" href="#2-dot-%e9%80%9a%e7%94%a8%e6%a0%b7%e5%bc%8f">#</a>
 </h3>
-<p><code>Google</code> <br/>
-一个制表符对应2个空格，大括号不在新行 <br/></p>
+<ul>
+<li>Google <br/>
+一个制表符对应2个空格，大括号不在新行 <br/>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">BasedOnStyle</span>: <span style="color:#ae81ff">Google</span>
-</span></span></code></pre></div><p><code>Microsoft</code> <br/>
-一个制表符对应4个空格，大括号在新行 <br/></p>
+</span></span></code></pre></div></li>
+<li>Microsoft <br/>
+一个制表符对应4个空格，大括号在新行 <br/>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">BasedOnStyle</span>: <span style="color:#ae81ff">Microsoft</span>
-</span></span></code></pre></div><h3 id="3-dot-缩进宽度">
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="3-dot-缩进宽度">
   3. 缩进宽度
   <a class="anchor" href="#3-dot-%e7%bc%a9%e8%bf%9b%e5%ae%bd%e5%ba%a6">#</a>
 </h3>
@@ -468,16 +891,20 @@ https://github.com/alex-shpak/hugo-book
   4. 缩进样式
   <a class="anchor" href="#4-dot-%e7%bc%a9%e8%bf%9b%e6%a0%b7%e5%bc%8f">#</a>
 </h3>
-<p><code>空格</code> <br/></p>
+<ul>
+<li>空格 <br/>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">UseTab</span>: <span style="color:#ae81ff">Never</span>
-</span></span></code></pre></div><p><code>制表符</code> <br/>
-源文件中既有空格又有制表符 <br/></p>
+</span></span></code></pre></div></li>
+<li>制表符 <br/>
+源文件中既有空格又有制表符 <br/>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">UseTab</span>: <span style="color:#ae81ff">Always</span>
-</span></span></code></pre></div><h3 id="5-dot-制表符宽度">
+</span></span></code></pre></div></li>
+</ul>
+<h3 id="5-dot-制表符宽度">
   5. 制表符宽度
   <a class="anchor" href="#5-dot-%e5%88%b6%e8%a1%a8%e7%ac%a6%e5%ae%bd%e5%ba%a6">#</a>
 </h3>
-<p>每6个空格替换一个制表符，若缩进使用制表符，效果很糟糕 <br/></p>
+<p><em>若缩进使用制表符，每6个空格替换一个制表符；当缩进宽度和制表符宽度不一致时，效果有点糟糕</em> <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">TabWidth</span>: <span style="color:#e6db74">&#39;6&#39;</span>
 </span></span></code></pre></div><h3 id="6-dot-设置大括号位置">
   6. 设置大括号位置
@@ -487,17 +914,67 @@ https://github.com/alex-shpak/hugo-book
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">BreakBeforeBraces</span>: <span style="color:#ae81ff">Attach</span>
 </span></span></code></pre></div><p><code>新行</code> <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">BreakBeforeBraces</span>: <span style="color:#ae81ff">Allman</span>
-</span></span></code></pre></div><h3 id="7-dot-其他设置">
-  7. 其他设置
-  <a class="anchor" href="#7-dot-%e5%85%b6%e4%bb%96%e8%ae%be%e7%bd%ae">#</a>
+</span></span></code></pre></div><h3 id="7-dot-换行条件">
+  7. 换行条件
+  <a class="anchor" href="#7-dot-%e6%8d%a2%e8%a1%8c%e6%9d%a1%e4%bb%b6">#</a>
 </h3>
+<p>为0时，按输入的实际情况显示 <br/></p>
 <div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">ColumnLimit</span>: <span style="color:#e6db74">&#39;140&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">AccessModifierOffset</span>: <span style="color:#e6db74">&#39;-4&#39;</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">SortIncludes</span>: <span style="color:#66d9ef">false</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">AllowShortBlocksOnASingleLine</span>: <span style="color:#66d9ef">false</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">AlignAfterOpenBracket</span>: <span style="color:#ae81ff">DontAlign</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">AllowShortFunctionsOnASingleLine</span>: <span style="color:#ae81ff">Inline</span>
-</span></span><span style="display:flex;"><span><span style="color:#f92672">PointerAlignment</span>: <span style="color:#ae81ff">Left</span>
+</span></span></code></pre></div><h3 id="8-dot-向前缩进">
+  8. 向前缩进
+  <a class="anchor" href="#8-dot-%e5%90%91%e5%89%8d%e7%bc%a9%e8%bf%9b">#</a>
+</h3>
+<p>控制访问说明符的缩进 <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">AccessModifierOffset</span>: <span style="color:#e6db74">&#39;-4&#39;</span>     
+</span></span></code></pre></div><h3 id="9-dot-头文件排序">
+  9. 头文件排序
+  <a class="anchor" href="#9-dot-%e5%a4%b4%e6%96%87%e4%bb%b6%e6%8e%92%e5%ba%8f">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">SortIncludes</span>: <span style="color:#66d9ef">false</span>
+</span></span></code></pre></div><h3 id="10-dot-当语句较短时-是否允许写在单行">
+  10. 当语句较短时，是否允许写在单行
+  <a class="anchor" href="#10-dot-%e5%bd%93%e8%af%ad%e5%8f%a5%e8%be%83%e7%9f%ad%e6%97%b6-%e6%98%af%e5%90%a6%e5%85%81%e8%ae%b8%e5%86%99%e5%9c%a8%e5%8d%95%e8%a1%8c">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">AllowShortBlocksOnASingleLine</span>: <span style="color:#66d9ef">false</span>     
+</span></span></code></pre></div><p><em>条件语句的执行部分为空，或只有一行语句时，可认为语句较短；为false则如下输出</em> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (true) {
+</span></span><span style="display:flex;"><span>}
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">while</span> (true) {
+</span></span><span style="display:flex;"><span>  <span style="color:#66d9ef">continue</span>;
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div><h3 id="11-dot-括号换行时-参数的对齐方式">
+  11. 括号换行时，参数的对齐方式
+  <a class="anchor" href="#11-dot-%e6%8b%ac%e5%8f%b7%e6%8d%a2%e8%a1%8c%e6%97%b6-%e5%8f%82%e6%95%b0%e7%9a%84%e5%af%b9%e9%bd%90%e6%96%b9%e5%bc%8f">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">AlignAfterOpenBracket</span>: <span style="color:#ae81ff">Align</span>
+</span></span></code></pre></div><p><em>不对齐 DontAlign</em> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>someLongFunction(argument1,
+</span></span><span style="display:flex;"><span>    argument2);
+</span></span></code></pre></div><p><em>Align</em> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>someLongFunction(argument1,
+</span></span><span style="display:flex;"><span>                 argument2);
+</span></span></code></pre></div><h3 id="12-dot-当函数语句较短时-是否允许写在单行">
+  12. 当函数语句较短时，是否允许写在单行
+  <a class="anchor" href="#12-dot-%e5%bd%93%e5%87%bd%e6%95%b0%e8%af%ad%e5%8f%a5%e8%be%83%e7%9f%ad%e6%97%b6-%e6%98%af%e5%90%a6%e5%85%81%e8%ae%b8%e5%86%99%e5%9c%a8%e5%8d%95%e8%a1%8c">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">AllowShortFunctionsOnASingleLine</span>: <span style="color:#ae81ff">Inline     </span>
+</span></span></code></pre></div><ol>
+<li>Inline <br/>
+若函数体为空，允许；若函数在类内定义，允许。 <br/></li>
+<li>InlineOnly <br/>
+只允许一种情况：函数在类内定义。 <br/></li>
+<li>Empty <br/>
+只允许一种情况：函数体为空。 <br/></li>
+</ol>
+<h3 id="13-dot-指针和引用的对齐方式">
+  13. 指针和引用的对齐方式
+  <a class="anchor" href="#13-dot-%e6%8c%87%e9%92%88%e5%92%8c%e5%bc%95%e7%94%a8%e7%9a%84%e5%af%b9%e9%bd%90%e6%96%b9%e5%bc%8f">#</a>
+</h3>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#f92672">PointerAlignment</span>: <span style="color:#ae81ff">Right</span>
+</span></span></code></pre></div><p><em>Right</em> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span> <span style="color:#f92672">*</span>a;
+</span></span></code></pre></div><p><em>Left</em> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">int</span><span style="color:#f92672">*</span> a;
 </span></span></code></pre></div><h2 id="二-git仓库同步">
   二、Git仓库同步
   <a class="anchor" href="#%e4%ba%8c-git%e4%bb%93%e5%ba%93%e5%90%8c%e6%ad%a5">#</a>
@@ -538,7 +1015,7 @@ https://github.com/alex-shpak/hugo-book
 <td>ABP_</td>
 </tr>
 <tr>
-<td>混合空间</td>
+<td>混合空间(1D)</td>
 <td>BS_</td>
 </tr>
 </tbody>
@@ -587,6 +1064,7 @@ https://github.com/alex-shpak/hugo-book
     <li>
       <ul>
         <li><a href="#overview">Overview</a></li>
+        <li><a href="#缩进-制表符和空格">缩进、制表符和空格</a></li>
         <li><a href="#一-定义格式化代码规则">一、定义格式化代码规则</a>
           <ul>
             <li><a href="#1-dot-设置受约束的开发语言">1. 设置受约束的开发语言</a></li>
@@ -595,7 +1073,13 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#4-dot-缩进样式">4. 缩进样式</a></li>
             <li><a href="#5-dot-制表符宽度">5. 制表符宽度</a></li>
             <li><a href="#6-dot-设置大括号位置">6. 设置大括号位置</a></li>
-            <li><a href="#7-dot-其他设置">7. 其他设置</a></li>
+            <li><a href="#7-dot-换行条件">7. 换行条件</a></li>
+            <li><a href="#8-dot-向前缩进">8. 向前缩进</a></li>
+            <li><a href="#9-dot-头文件排序">9. 头文件排序</a></li>
+            <li><a href="#10-dot-当语句较短时-是否允许写在单行">10. 当语句较短时，是否允许写在单行</a></li>
+            <li><a href="#11-dot-括号换行时-参数的对齐方式">11. 括号换行时，参数的对齐方式</a></li>
+            <li><a href="#12-dot-当函数语句较短时-是否允许写在单行">12. 当函数语句较短时，是否允许写在单行</a></li>
+            <li><a href="#13-dot-指针和引用的对齐方式">13. 指针和引用的对齐方式</a></li>
           </ul>
         </li>
         <li><a href="#二-git仓库同步">二、Git仓库同步</a></li>

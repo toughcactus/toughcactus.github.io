@@ -1,0 +1,1062 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Part 1 建模 # 添加伤害源，派生自Actor，模拟榴弹爆炸瞬间 绘制球体，使得伤害范围可视化 对处在爆炸半径内的游戏角色持续造成伤害，伤害数值与游戏角色所在位置到球心的距离有关 Part 2 创建伤害来源 Dev/STDevDamageActor # 虚幻编辑器 STDevDamageActor，模拟榴弹爆炸 Actor 公有类 Part 3 准备工作 # C&#43;&#43; 屏蔽 ASTBaseCharacter::Tick中调用CharacterTakeDamage 添加头文件路径 ShootTraining/Source/ShootTraining/ShootTraining.Build.cs PublicIncludePaths.AddRange(new string[] { &#34;ShootTraining/Public/Player&#34;, &#34;ShootTraining/Public/Components&#34;, &#34;ShootTraining/Public/Dev&#34; }); Part 4 实现 STDevDamageActor # C&#43;&#43; STDevDamageActor 一、添加可视化组件，使得伤害源可变换 # 添加 SceneComponent 数据成员 protected 蓝图可设置 UPROPERTY(VisibleAnywhere, BlueprintReadWrite) USceneComponent *SceneComponent;	初始化 SceneComponent 函数成员 private 在构造函数中调用 void ASTDevDamageActor::InitSceneComponent() { SceneComponent = CreateDefaultSubobject&lt;USceneComponent&gt;(&#34;SceneComponent&#34;); SetRootComponent(SceneComponent); } 二、绘制球体，爆炸范围可视化 # 包含头文件 源文件 #include &#34;DrawDebugHelpers.h&#34; 球体半径和颜色 数据成员 protected 蓝图可设置 UPROPERTY(EditAnywhere) float Radius = 300.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="模拟榴弹爆炸" />
+<meta property="og:description" content="Part 1 建模 # 添加伤害源，派生自Actor，模拟榴弹爆炸瞬间 绘制球体，使得伤害范围可视化 对处在爆炸半径内的游戏角色持续造成伤害，伤害数值与游戏角色所在位置到球心的距离有关 Part 2 创建伤害来源 Dev/STDevDamageActor # 虚幻编辑器 STDevDamageActor，模拟榴弹爆炸 Actor 公有类 Part 3 准备工作 # C&#43;&#43; 屏蔽 ASTBaseCharacter::Tick中调用CharacterTakeDamage 添加头文件路径 ShootTraining/Source/ShootTraining/ShootTraining.Build.cs PublicIncludePaths.AddRange(new string[] { &#34;ShootTraining/Public/Player&#34;, &#34;ShootTraining/Public/Components&#34;, &#34;ShootTraining/Public/Dev&#34; }); Part 4 实现 STDevDamageActor # C&#43;&#43; STDevDamageActor 一、添加可视化组件，使得伤害源可变换 # 添加 SceneComponent 数据成员 protected 蓝图可设置 UPROPERTY(VisibleAnywhere, BlueprintReadWrite) USceneComponent *SceneComponent;	初始化 SceneComponent 函数成员 private 在构造函数中调用 void ASTDevDamageActor::InitSceneComponent() { SceneComponent = CreateDefaultSubobject&lt;USceneComponent&gt;(&#34;SceneComponent&#34;); SetRootComponent(SceneComponent); } 二、绘制球体，爆炸范围可视化 # 包含头文件 源文件 #include &#34;DrawDebugHelpers.h&#34; 球体半径和颜色 数据成员 protected 蓝图可设置 UPROPERTY(EditAnywhere) float Radius = 300." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.3%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/" /><meta property="article:section" content="docs" />
+
+
+<title>模拟榴弹爆炸 | ToughCactus</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.76b93651dd2f575470b0067bb537b3b7f1d42a13cec268d3b918c049e33a1273.js" integrity="sha256-drk2Ud0vV1RwsAZ7tTezt/HUKhPOwmjTuRjASeM6EnM=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>ToughCactus</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>分享</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="toggle"  />
+    <label for="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="flex justify-between">
+      <a role="button" class="">开发工具</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/" class="">VSCode</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f3b1b01ebe1f17bcb23615417646b6e6" class="toggle"  />
+    <label for="section-f3b1b01ebe1f17bcb23615417646b6e6" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="toggle"  />
+    <label for="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="flex justify-between">
+      <a role="button" class="">Emacs</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/" class="">org-mode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="">插件篇 | 文件管理</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8f0677a94903c7e3083dad01e58ed439" class="toggle"  />
+    <label for="section-8f0677a94903c7e3083dad01e58ed439" class="flex justify-between">
+      <a role="button" class="">博客</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>虚幻引擎</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle"  />
+    <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
+      <a role="button" class="">API</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle"  />
+    <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
+      <a role="button" class="">虚幻C&#43;&#43;</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c25abc278a6873a94fa212bff746344" class="toggle"  />
+    <label for="section-9c25abc278a6873a94fa212bff746344" class="flex justify-between">
+      <a role="button" class="">Actor及其派生类</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="">AActor类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6ec12d43fc21edcca4a92356f25ab919" class="toggle"  />
+    <label for="section-6ec12d43fc21edcca4a92356f25ab919" class="flex justify-between">
+      <a role="button" class="">虚幻编辑器</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a30b888d97cedd0e72fd98dd83a446d9" class="toggle"  />
+    <label for="section-a30b888d97cedd0e72fd98dd83a446d9" class="flex justify-between">
+      <a role="button" class="">基础课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c55d44374101bd87d8c4761c8d07c64" class="toggle" checked />
+    <label for="section-9c55d44374101bd87d8c4761c8d07c64" class="flex justify-between">
+      <a role="button" class="">进阶课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1d099f39b37c7d342e94ef6f0f3007bb" class="toggle"  />
+    <label for="section-1d099f39b37c7d342e94ef6f0f3007bb" class="flex justify-between">
+      <a role="button" class="">角色和动画</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.1%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8CShooterGame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/" class="">运行ShooterGame示例项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.2%E5%88%9D%E5%A7%8B%E5%8C%96ShootTraining%E9%A1%B9%E7%9B%AE/" class="">初始化ShootTraining项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" class="">代码规范</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为游戏角色绑定模型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现游戏角色前后左右移动</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现游戏角色视角旋转</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为游戏角色添加向前跑步动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现游戏角色跳跃</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现游戏角色跑步</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加走路时转向动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.b%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/" class="">打包游戏</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.c%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-abf72c0556c5506bfc005dd76784c9b5" class="toggle" checked />
+    <label for="section-abf72c0556c5506bfc005dd76784c9b5" class="flex justify-between">
+      <a role="button" class="">健康系统</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.1%E5%9C%A8Character%E4%B8%8A%E6%96%B9%E6%98%BE%E7%A4%BA%E7%94%9F%E5%91%BD%E5%80%BC/" class="">实时显示游戏角色生命值</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.2%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/" class="">计算伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.3%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/" class="active">模拟榴弹爆炸</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.4%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/" class="">使用伤害类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.5%E6%B7%BB%E5%8A%A0Character%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/" class="">为游戏角色添加死亡逻辑</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.6%E5%AE%9E%E7%8E%B0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/" class="">添加观察视角</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.7%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/" class="">自动治疗</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.8%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/" class="">高处坠落伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.9%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/" class="">打包游戏和收尾</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/about/"  >
+        关于
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>模拟榴弹爆炸</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-建模">Part 1 建模</a></li>
+        <li><a href="#part-2-创建伤害来源-dev-stdevdamageactor">Part 2 创建伤害来源 <code>Dev/STDevDamageActor</code></a></li>
+        <li><a href="#part-3-准备工作">Part 3 准备工作</a></li>
+        <li><a href="#part-4-实现-stdevdamageactor">Part 4 实现 <code>STDevDamageActor</code></a>
+          <ul>
+            <li><a href="#一-添加可视化组件-使得伤害源可变换">一、添加可视化组件，使得伤害源可变换</a></li>
+            <li><a href="#二-绘制球体-爆炸范围可视化">二、绘制球体，爆炸范围可视化</a></li>
+            <li><a href="#三-对伤害范围内-actor-造成半径伤害">三、对伤害范围内 <code>Actor</code> 造成半径伤害</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-5-在关卡中添加伤害源">Part 5 在关卡中添加伤害源</a>
+          <ul>
+            <li><a href="#一-调整-bp-stbasecharacter-的-camera-组件位置">一、调整 <code>BP_STBaseCharacter</code> 的 <code>Camera</code> 组件位置</a></li>
+            <li><a href="#二-在关卡中添加-stdevdamageactor">二、在关卡中添加 <code>STDevDamageActor</code></a></li>
+            <li><a href="#三-验证-dofulldamage">三、验证 <code>DoFullDamage</code></a></li>
+            <li><a href="#四-伤害球内的所有actor都会受到伤害">四、伤害球内的所有Actor都会受到伤害</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="part-1-建模">
+  Part 1 建模
+  <a class="anchor" href="#part-1-%e5%bb%ba%e6%a8%a1">#</a>
+</h2>
+<p>添加伤害源，派生自Actor，模拟榴弹爆炸瞬间 <br/>
+绘制球体，使得伤害范围可视化 <br/>
+对处在爆炸半径内的游戏角色持续造成伤害，伤害数值与游戏角色所在位置到球心的距离有关 <br/></p>
+<h2 id="part-2-创建伤害来源-dev-stdevdamageactor">
+  Part 2 创建伤害来源 <code>Dev/STDevDamageActor</code>
+  <a class="anchor" href="#part-2-%e5%88%9b%e5%bb%ba%e4%bc%a4%e5%ae%b3%e6%9d%a5%e6%ba%90-dev-stdevdamageactor">#</a>
+</h2>
+<p><code>虚幻编辑器</code> <br/>
+<code>STDevDamageActor，模拟榴弹爆炸</code> <br/>
+<code>Actor</code> <code>公有类</code> <br/></p>
+<p><figure><img src="/pic/%e6%a8%a1%e6%8b%9f%e6%a6%b4%e5%bc%b9%e7%88%86%e7%82%b8/%e5%88%9b%e5%bb%baSTDevDamageActor/%e5%88%9b%e5%bb%baSTDevDamageActor.png" width="700"/>
+</figure>
+ <br/></p>
+<h2 id="part-3-准备工作">
+  Part 3 准备工作
+  <a class="anchor" href="#part-3-%e5%87%86%e5%a4%87%e5%b7%a5%e4%bd%9c">#</a>
+</h2>
+<p><code>C++</code> <br/></p>
+<ol>
+<li>屏蔽 <code>ASTBaseCharacter::Tick中调用CharacterTakeDamage</code> <br/></li>
+<li>添加头文件路径 <br/>
+<code>ShootTraining/Source/ShootTraining/ShootTraining.Build.cs</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-csharp" data-lang="csharp"><span style="display:flex;"><span>PublicIncludePaths.AddRange(<span style="color:#66d9ef">new</span> <span style="color:#66d9ef">string</span>[] { <span style="color:#e6db74">&#34;ShootTraining/Public/Player&#34;</span>, <span style="color:#e6db74">&#34;ShootTraining/Public/Components&#34;</span>, <span style="color:#e6db74">&#34;ShootTraining/Public/Dev&#34;</span> });
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="part-4-实现-stdevdamageactor">
+  Part 4 实现 <code>STDevDamageActor</code>
+  <a class="anchor" href="#part-4-%e5%ae%9e%e7%8e%b0-stdevdamageactor">#</a>
+</h2>
+<p><code>C++</code> <code>STDevDamageActor</code> <br/></p>
+<h3 id="一-添加可视化组件-使得伤害源可变换">
+  一、添加可视化组件，使得伤害源可变换
+  <a class="anchor" href="#%e4%b8%80-%e6%b7%bb%e5%8a%a0%e5%8f%af%e8%a7%86%e5%8c%96%e7%bb%84%e4%bb%b6-%e4%bd%bf%e5%be%97%e4%bc%a4%e5%ae%b3%e6%ba%90%e5%8f%af%e5%8f%98%e6%8d%a2">#</a>
+</h3>
+<ol>
+<li>添加 <code>SceneComponent</code> <br/>
+<code>数据成员</code> <code>protected</code> <code>蓝图可设置</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UPROPERTY(VisibleAnywhere, BlueprintReadWrite)
+</span></span><span style="display:flex;"><span>USceneComponent <span style="color:#f92672">*</span>SceneComponent;	
+</span></span></code></pre></div></li>
+<li>初始化 <code>SceneComponent</code> <br/>
+<code>函数成员</code> <code>private</code> <code>在构造函数中调用</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTDevDamageActor<span style="color:#f92672">::</span>InitSceneComponent()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    SceneComponent <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>USceneComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;SceneComponent&#34;</span>);
+</span></span><span style="display:flex;"><span>    SetRootComponent(SceneComponent);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="二-绘制球体-爆炸范围可视化">
+  二、绘制球体，爆炸范围可视化
+  <a class="anchor" href="#%e4%ba%8c-%e7%bb%98%e5%88%b6%e7%90%83%e4%bd%93-%e7%88%86%e7%82%b8%e8%8c%83%e5%9b%b4%e5%8f%af%e8%a7%86%e5%8c%96">#</a>
+</h3>
+<ol>
+<li>包含头文件 <br/>
+<code>源文件</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;DrawDebugHelpers.h&#34;</span><span style="color:#75715e">
+</span></span></span></code></pre></div></li>
+<li>球体半径和颜色 <br/>
+<code>数据成员</code> <code>protected</code> <code>蓝图可设置</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> Radius <span style="color:#f92672">=</span> <span style="color:#ae81ff">300.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span>FColor SphereColor <span style="color:#f92672">=</span> FColor<span style="color:#f92672">::</span>Red;
+</span></span></code></pre></div></li>
+<li>绘制球体 <br/>
+<code>函数成员</code> <code>private</code> <code>在Tick中调用，每帧都绘制球体</code> <br/>
+<code>DrawDebugSphere</code> 的第一个参数类型为 <code>UWorld</code> ，所以不用包含 <code>UWorld</code> 的头文件 <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTDevDamageActor<span style="color:#f92672">::</span>DrawSphere()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    DrawDebugSphere(GetWorld(),
+</span></span><span style="display:flex;"><span>                    GetActorLocation(),
+</span></span><span style="display:flex;"><span>                    Radius,
+</span></span><span style="display:flex;"><span>                    <span style="color:#ae81ff">24</span>,
+</span></span><span style="display:flex;"><span>                    SphereColor);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+</ol>
+<h3 id="三-对伤害范围内-actor-造成半径伤害">
+  三、对伤害范围内 <code>Actor</code> 造成半径伤害
+  <a class="anchor" href="#%e4%b8%89-%e5%af%b9%e4%bc%a4%e5%ae%b3%e8%8c%83%e5%9b%b4%e5%86%85-actor-%e9%80%a0%e6%88%90%e5%8d%8a%e5%be%84%e4%bc%a4%e5%ae%b3">#</a>
+</h3>
+<ol>
+<li>包含头文件 <br/>
+<code>源文件</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Engine/World.h&#34;</span><span style="color:#75715e">
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Kismet/GameplayStatics.h&#34;</span><span style="color:#75715e">
+</span></span></span></code></pre></div></li>
+<li>伤害数值特征和半径伤害计算选项 <br/>
+<code>数据成员</code> <code>protected</code> <code>蓝图可设置</code> <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">float</span> Damage <span style="color:#f92672">=</span> <span style="color:#ae81ff">10.0f</span>;
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>UPROPERTY(EditAnywhere)
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">bool</span> DoFullDamage <span style="color:#f92672">=</span> false;
+</span></span></code></pre></div></li>
+<li>对伤害范围内 <code>Actor</code> 造成半径伤害 <br/>
+<code>函数成员</code> <code>private</code> <code>在Tick中调用</code> <br/>
+<code>ApplyRadialDamage</code> 的第一个参数类型为 <code>UObject</code> ，此时传入 <code>UWorld</code> ，需包含 <code>UWorld</code> 头文件 <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> ASTDevDamageActor<span style="color:#f92672">::</span>DevTakeDamage()
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    UGameplayStatics<span style="color:#f92672">::</span>ApplyRadialDamage(GetWorld(),
+</span></span><span style="display:flex;"><span>                                        Damage,
+</span></span><span style="display:flex;"><span>                                        GetActorLocation(),
+</span></span><span style="display:flex;"><span>                                        Radius,
+</span></span><span style="display:flex;"><span>                                        <span style="color:#66d9ef">nullptr</span>,
+</span></span><span style="display:flex;"><span>                                        {},
+</span></span><span style="display:flex;"><span>                                        <span style="color:#66d9ef">this</span>,
+</span></span><span style="display:flex;"><span>                                        <span style="color:#66d9ef">nullptr</span>,
+</span></span><span style="display:flex;"><span>                                        DoFullDamage);
+</span></span><span style="display:flex;"><span>}
+</span></span></code></pre></div></li>
+<li>在伤害处理函数 <code>USTHealthComponent::OnTakeAnyDamage</code> 中输出伤害值，验证 <code>DoFullDamage</code> 机制 <br/>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UE_LOG(LogHealthComponent, Display, TEXT(<span style="color:#e6db74">&#34;Damage: %.0f&#34;</span>), Damage);
+</span></span></code></pre></div></li>
+</ol>
+<h2 id="part-5-在关卡中添加伤害源">
+  Part 5 在关卡中添加伤害源
+  <a class="anchor" href="#part-5-%e5%9c%a8%e5%85%b3%e5%8d%a1%e4%b8%ad%e6%b7%bb%e5%8a%a0%e4%bc%a4%e5%ae%b3%e6%ba%90">#</a>
+</h2>
+<p><code>虚幻编辑器</code> <br/></p>
+<h3 id="一-调整-bp-stbasecharacter-的-camera-组件位置">
+  一、调整 <code>BP_STBaseCharacter</code> 的 <code>Camera</code> 组件位置
+  <a class="anchor" href="#%e4%b8%80-%e8%b0%83%e6%95%b4-bp-stbasecharacter-%e7%9a%84-camera-%e7%bb%84%e4%bb%b6%e4%bd%8d%e7%bd%ae">#</a>
+</h3>
+<p>向上，向后 <br/></p>
+<p><figure><img src="/pic/%e6%a8%a1%e6%8b%9f%e6%a6%b4%e5%bc%b9%e7%88%86%e7%82%b8/%e5%9c%a8%e5%85%b3%e5%8d%a1%e4%b8%ad%e6%b7%bb%e5%8a%a0STDevDamageActor/%e8%b0%83%e6%95%b4Camera.png" width="1000"/>
+</figure>
+ <br/></p>
+<h3 id="二-在关卡中添加-stdevdamageactor">
+  二、在关卡中添加 <code>STDevDamageActor</code>
+  <a class="anchor" href="#%e4%ba%8c-%e5%9c%a8%e5%85%b3%e5%8d%a1%e4%b8%ad%e6%b7%bb%e5%8a%a0-stdevdamageactor">#</a>
+</h3>
+<p>一个使用默认设置，根据 <code>Character</code> 到球心的距离计算伤害 <br/></p>
+<p><img src="/pic/模拟榴弹爆炸/查看半径伤害效果/DamageSphere-Red.png" alt="DamageSphere-Red.png" width="300" /> <br/>
+另一个设置半径和颜色，处在伤害范围内受到伤害数值恒定（开销小） <br/></p>
+<p><img src="/pic/模拟榴弹爆炸/查看半径伤害效果/DamageSphere-Blue.png" alt="DamageSphere-Blue.png" width="300" /> <br/>
+调整 <code>STDevDamageActor</code> 的位置，效果图 <br/></p>
+<p><figure><img src="/pic/%e6%a8%a1%e6%8b%9f%e6%a6%b4%e5%bc%b9%e7%88%86%e7%82%b8/%e5%9c%a8%e5%85%b3%e5%8d%a1%e4%b8%ad%e6%b7%bb%e5%8a%a0STDevDamageActor/%e6%95%88%e6%9e%9c%e5%9b%be.png" width="700"/>
+</figure>
+ <br/></p>
+<h3 id="三-验证-dofulldamage">
+  三、验证 <code>DoFullDamage</code>
+  <a class="anchor" href="#%e4%b8%89-%e9%aa%8c%e8%af%81-dofulldamage">#</a>
+</h3>
+<ol>
+<li>
+<p>处于蓝色球内，伤害值一致 <br/></p>
+<p><figure><img src="/pic/%e6%a8%a1%e6%8b%9f%e6%a6%b4%e5%bc%b9%e7%88%86%e7%82%b8/%e6%9f%a5%e7%9c%8b%e5%8d%8a%e5%be%84%e4%bc%a4%e5%ae%b3%e6%95%88%e6%9e%9c/Blue%e6%97%a5%e5%bf%97.png" width="700"/>
+    </figure>
+ <br/></p>
+</li>
+<li>
+<p>处于红色球内，离球心越近，伤害值越大 <br/>
+球心在空中，跳跃也会缩短到球心的距离 <br/></p>
+<p><figure><img src="/pic/%e6%a8%a1%e6%8b%9f%e6%a6%b4%e5%bc%b9%e7%88%86%e7%82%b8/%e6%9f%a5%e7%9c%8b%e5%8d%8a%e5%be%84%e4%bc%a4%e5%ae%b3%e6%95%88%e6%9e%9c/Red%e6%97%a5%e5%bf%97.png" width="300"/>
+    </figure>
+ <br/></p>
+</li>
+</ol>
+<h3 id="四-伤害球内的所有actor都会受到伤害">
+  四、伤害球内的所有Actor都会受到伤害
+  <a class="anchor" href="#%e5%9b%9b-%e4%bc%a4%e5%ae%b3%e7%90%83%e5%86%85%e7%9a%84%e6%89%80%e6%9c%89actor%e9%83%bd%e4%bc%9a%e5%8f%97%e5%88%b0%e4%bc%a4%e5%ae%b3">#</a>
+</h3>
+<p><figure><img src="/pic/%e6%a8%a1%e6%8b%9f%e6%a6%b4%e5%bc%b9%e7%88%86%e7%82%b8/%e6%9f%a5%e7%9c%8b%e5%8d%8a%e5%be%84%e4%bc%a4%e5%ae%b3%e6%95%88%e6%9e%9c/%e4%bc%a4%e5%ae%b3%e7%90%83%e5%86%85%e6%89%80%e6%9c%89Actor%e5%9d%87%e5%8f%97%e5%88%b0%e4%bc%a4%e5%ae%b3.png" width="700"/>
+</figure>
+ <br/></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-建模">Part 1 建模</a></li>
+        <li><a href="#part-2-创建伤害来源-dev-stdevdamageactor">Part 2 创建伤害来源 <code>Dev/STDevDamageActor</code></a></li>
+        <li><a href="#part-3-准备工作">Part 3 准备工作</a></li>
+        <li><a href="#part-4-实现-stdevdamageactor">Part 4 实现 <code>STDevDamageActor</code></a>
+          <ul>
+            <li><a href="#一-添加可视化组件-使得伤害源可变换">一、添加可视化组件，使得伤害源可变换</a></li>
+            <li><a href="#二-绘制球体-爆炸范围可视化">二、绘制球体，爆炸范围可视化</a></li>
+            <li><a href="#三-对伤害范围内-actor-造成半径伤害">三、对伤害范围内 <code>Actor</code> 造成半径伤害</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-5-在关卡中添加伤害源">Part 5 在关卡中添加伤害源</a>
+          <ul>
+            <li><a href="#一-调整-bp-stbasecharacter-的-camera-组件位置">一、调整 <code>BP_STBaseCharacter</code> 的 <code>Camera</code> 组件位置</a></li>
+            <li><a href="#二-在关卡中添加-stdevdamageactor">二、在关卡中添加 <code>STDevDamageActor</code></a></li>
+            <li><a href="#三-验证-dofulldamage">三、验证 <code>DoFullDamage</code></a></li>
+            <li><a href="#四-伤害球内的所有actor都会受到伤害">四、伤害球内的所有Actor都会受到伤害</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

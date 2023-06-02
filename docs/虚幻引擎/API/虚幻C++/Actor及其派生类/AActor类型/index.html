@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Part 1 派生关系 # UObjectBaseUtility &lt; UObject &lt; AActor 1. AActor类型 # 虚幻C&#43;&#43;基础类型，能放置到世界场景中的物体，具有相同的基类AActor。 所有能添加到世界场景中的物体都可称作Actor，如几何体，特效，声音。Actor对象有无实体均可。 初始状态不具备变换属性(有Gizmo表示，移动后会复位)，无法绑定模型，变换需要USceneComponent组件，模型需要UStaticMeshComponent组件。 可以在虚幻编辑器中往关卡添加Actor对象，也可以在代码中动态生成Actor对象。 Actor对象由各种Component组成，所有组件可以根据需求进行组装，方便重用。 2. UObject类型 # 虚幻引擎中最基础的类型，AActor类型的父类。 不能在场景中添加UObject对象，可以在代码中创建UObject对象并对逻辑进行封装。 Part 2 组件 Component # 具有视觉表示的组件，需要为其设置上级组件，或将其注册为根组件 1. 创建组件 UObject::CreateDefaultSubobject&lt;T&gt; # 返回指向组件的指针 参数 含义 说明 SubobjectName 虚幻编辑器中显示的组件名 FName类型 BTransient 使用默认值 使用 StaticMesh = CreateDefaultSubobject&lt;UStaticMeshComponent&gt;(&#34;StaticMeshInEditor&#34;); 在C&#43;&#43;中对变量StaticMesh做设置，在虚幻编辑器中对名为&quot;StaticMeshInEditor&quot;的组件做设置；二者相对应。 可以在C&#43;&#43;中修改变量名；如果修改组件名，虚幻编辑器中该组件的已有设置会因找不到目标载体而无法生效。 2. 设置为根组件 AActor::SetRootComponent # 根组件的设置会影响到变换矩阵求值 参数 含义 说明 NewRootComponent 指向组件的指针 使用 SetRootComponent(StaticMesh); USceneComponent *类型，可以接受UStaticMeshCompoent *(动态绑定)。因为UStaticMeshComponent派生自UMeshComponent，UMeshComponent派生自UPrimitiveComponent，UPrimitiveComponent派生自USceneComponent。 3. 获取根组件 AActor::GetRootComponent # 返回指向根组件的指针 使用 GetRootComponent(); 4.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="AActor类型" />
+<meta property="og:description" content="Part 1 派生关系 # UObjectBaseUtility &lt; UObject &lt; AActor 1. AActor类型 # 虚幻C&#43;&#43;基础类型，能放置到世界场景中的物体，具有相同的基类AActor。 所有能添加到世界场景中的物体都可称作Actor，如几何体，特效，声音。Actor对象有无实体均可。 初始状态不具备变换属性(有Gizmo表示，移动后会复位)，无法绑定模型，变换需要USceneComponent组件，模型需要UStaticMeshComponent组件。 可以在虚幻编辑器中往关卡添加Actor对象，也可以在代码中动态生成Actor对象。 Actor对象由各种Component组成，所有组件可以根据需求进行组装，方便重用。 2. UObject类型 # 虚幻引擎中最基础的类型，AActor类型的父类。 不能在场景中添加UObject对象，可以在代码中创建UObject对象并对逻辑进行封装。 Part 2 组件 Component # 具有视觉表示的组件，需要为其设置上级组件，或将其注册为根组件 1. 创建组件 UObject::CreateDefaultSubobject&lt;T&gt; # 返回指向组件的指针 参数 含义 说明 SubobjectName 虚幻编辑器中显示的组件名 FName类型 BTransient 使用默认值 使用 StaticMesh = CreateDefaultSubobject&lt;UStaticMeshComponent&gt;(&#34;StaticMeshInEditor&#34;); 在C&#43;&#43;中对变量StaticMesh做设置，在虚幻编辑器中对名为&quot;StaticMeshInEditor&quot;的组件做设置；二者相对应。 可以在C&#43;&#43;中修改变量名；如果修改组件名，虚幻编辑器中该组件的已有设置会因找不到目标载体而无法生效。 2. 设置为根组件 AActor::SetRootComponent # 根组件的设置会影响到变换矩阵求值 参数 含义 说明 NewRootComponent 指向组件的指针 使用 SetRootComponent(StaticMesh); USceneComponent *类型，可以接受UStaticMeshCompoent *(动态绑定)。因为UStaticMeshComponent派生自UMeshComponent，UMeshComponent派生自UPrimitiveComponent，UPrimitiveComponent派生自USceneComponent。 3. 获取根组件 AActor::GetRootComponent # 返回指向根组件的指针 使用 GetRootComponent(); 4." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" /><meta property="article:section" content="docs" />
+
+
+<title>AActor类型 | ToughCactus</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.76b93651dd2f575470b0067bb537b3b7f1d42a13cec268d3b918c049e33a1273.js" integrity="sha256-drk2Ud0vV1RwsAZ7tTezt/HUKhPOwmjTuRjASeM6EnM=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>ToughCactus</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>分享</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="toggle"  />
+    <label for="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="flex justify-between">
+      <a role="button" class="">开发工具</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/" class="">VSCode</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f3b1b01ebe1f17bcb23615417646b6e6" class="toggle"  />
+    <label for="section-f3b1b01ebe1f17bcb23615417646b6e6" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="toggle"  />
+    <label for="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="flex justify-between">
+      <a role="button" class="">Emacs</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/" class="">org-mode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="">插件篇 | 文件管理</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8f0677a94903c7e3083dad01e58ed439" class="toggle"  />
+    <label for="section-8f0677a94903c7e3083dad01e58ed439" class="flex justify-between">
+      <a role="button" class="">博客</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>虚幻引擎</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle" checked />
+    <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
+      <a role="button" class="">API</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle" checked />
+    <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
+      <a role="button" class="">虚幻C&#43;&#43;</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c25abc278a6873a94fa212bff746344" class="toggle" checked />
+    <label for="section-9c25abc278a6873a94fa212bff746344" class="flex justify-between">
+      <a role="button" class="">Actor及其派生类</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="active">AActor类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6ec12d43fc21edcca4a92356f25ab919" class="toggle"  />
+    <label for="section-6ec12d43fc21edcca4a92356f25ab919" class="flex justify-between">
+      <a role="button" class="">虚幻编辑器</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a30b888d97cedd0e72fd98dd83a446d9" class="toggle"  />
+    <label for="section-a30b888d97cedd0e72fd98dd83a446d9" class="flex justify-between">
+      <a role="button" class="">基础课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c55d44374101bd87d8c4761c8d07c64" class="toggle"  />
+    <label for="section-9c55d44374101bd87d8c4761c8d07c64" class="flex justify-between">
+      <a role="button" class="">进阶课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1d099f39b37c7d342e94ef6f0f3007bb" class="toggle"  />
+    <label for="section-1d099f39b37c7d342e94ef6f0f3007bb" class="flex justify-between">
+      <a role="button" class="">角色和动画</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.1%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8CShooterGame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/" class="">运行ShooterGame示例项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.2%E5%88%9D%E5%A7%8B%E5%8C%96ShootTraining%E9%A1%B9%E7%9B%AE/" class="">初始化ShootTraining项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" class="">代码规范</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为游戏角色绑定模型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现游戏角色前后左右移动</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现游戏角色视角旋转</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为游戏角色添加向前跑步动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现游戏角色跳跃</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现游戏角色跑步</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加走路时转向动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.b%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/" class="">打包游戏</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.c%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-abf72c0556c5506bfc005dd76784c9b5" class="toggle"  />
+    <label for="section-abf72c0556c5506bfc005dd76784c9b5" class="flex justify-between">
+      <a role="button" class="">健康系统</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.1%E5%9C%A8Character%E4%B8%8A%E6%96%B9%E6%98%BE%E7%A4%BA%E7%94%9F%E5%91%BD%E5%80%BC/" class="">实时显示游戏角色生命值</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.2%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/" class="">计算伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.3%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/" class="">模拟榴弹爆炸</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.4%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/" class="">使用伤害类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.5%E6%B7%BB%E5%8A%A0Character%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/" class="">为游戏角色添加死亡逻辑</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.6%E5%AE%9E%E7%8E%B0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/" class="">添加观察视角</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.7%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/" class="">自动治疗</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.8%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/" class="">高处坠落伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.9%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/" class="">打包游戏和收尾</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/about/"  >
+        关于
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>AActor类型</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-派生关系">Part 1 派生关系</a>
+          <ul>
+            <li><a href="#1-dot-aactor类型">1. AActor类型</a></li>
+            <li><a href="#2-dot-uobject类型">2. UObject类型</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-2-组件-component">Part 2 组件 <code>Component</code></a>
+          <ul>
+            <li><a href="#1-dot-创建组件-uobject-createdefaultsubobject-t">1. 创建组件 <code>UObject::CreateDefaultSubobject&lt;T&gt;</code></a></li>
+            <li><a href="#2-dot-设置为根组件-aactor-setrootcomponent">2. 设置为根组件 <code>AActor::SetRootComponent</code></a></li>
+            <li><a href="#3-dot-获取根组件-aactor-getrootcomponent">3. 获取根组件 <code>AActor::GetRootComponent</code></a></li>
+            <li><a href="#4-dot-获取输入组件-aactor-inputcomponent">4. 获取输入组件 <code>AActor::InputComponent</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-actor变换信息">Part 3 Actor变换信息</a>
+          <ul>
+            <li><a href="#1-dot-获取actor变换信息-aactor-getactortransform">1. 获取Actor变换信息 <code>AActor::GetActorTransform</code></a></li>
+            <li><a href="#2-dot-获取actor位置信息-aactor-getactorlocation">2. 获取Actor位置信息 <code>AActor::GetActorLocation</code></a></li>
+            <li><a href="#3-dot-获取actor旋转信息-aactor-getactorrotation">3. 获取Actor旋转信息 <code>AActor::GetActorRotation</code></a></li>
+            <li><a href="#4-dot-设置actor位置-aactor-setactorlocation">4. 设置Actor位置 <code>AActor::SetActorLocation</code></a></li>
+            <li><a href="#5-dot-设置actor旋转-aactor-setactorrotation">5. 设置Actor旋转 <code>AActor::SetActorRotation</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-4-获取其他类型对象">Part 4 获取其他类型对象</a>
+          <ul>
+            <li><a href="#1-dot-uworld对象-aactor-getworld">1. UWorld对象 <code>AActor::GetWorld</code></a></li>
+            <li><a href="#2-dot-定时器管理对象-aactor-getworldtimermanager">2. 定时器管理对象 <code>AActor::GetWorldTimerManager</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-5-actor对象">Part 5 Actor对象</a>
+          <ul>
+            <li><a href="#1-dot-获取actor描述-uobjectbaseutility-getname">1. 获取Actor描述 <code>UObjectBaseUtility::GetName</code></a></li>
+            <li><a href="#2-dot-使actor出现在场景中-aactor-finishspawning">2. 使Actor出现在场景中 <code>AActor::FinishSpawning</code></a></li>
+            <li><a href="#3-dot-销毁actor-aactor-destroy">3. 销毁Actor <code>AActor::Destroy</code></a></li>
+            <li><a href="#4-dot-若干秒后销毁actor-aactor-setlifespan">4. 若干秒后销毁Actor <code>AActor::SetLifeSpan</code></a></li>
+            <li><a href="#5-dot-从场景中移除actor-aactor-endplay">5. 从场景中移除Actor <code>AActor::EndPlay</code></a></li>
+            <li><a href="#6-dot-判断actor有效性-isvalid">6. 判断Actor有效性 <code>IsValid</code></a></li>
+            <li><a href="#7-dot-判断指针基础类型-uobjectbaseutility-isa-t">7. 判断指针基础类型 <code>UObjectBaseUtility::IsA&lt;T&gt;</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-6-获取actor相对方向向量">Part 6 获取Actor相对方向向量</a>
+          <ul>
+            <li><a href="#1-dot-前进方向-actor-getactorforwardvector">1. 前进方向 <code>Actor::GetActorForwardVector</code></a></li>
+            <li><a href="#2-dot-向右-actor-getactorrightvector">2. 向右 <code>Actor::GetActorRightVector</code></a></li>
+            <li><a href="#3-dot-向上-actor-getactorupvector">3. 向上 <code>Actor::GetActorUpVector</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-7-对actor造成伤害">Part 7 对Actor造成伤害</a>
+          <ul>
+            <li><a href="#1-dot-aactor定义了三种伤害委托类型">1. AActor定义了三种伤害委托类型</a></li>
+            <li><a href="#2-dot-aactor还定义了这三种伤害委托类型的数据成员">2. AActor还定义了这三种伤害委托类型的数据成员</a></li>
+            <li><a href="#3-dot-对actor造成伤害-aactor-takedamage">3. 对Actor造成伤害 <code>AActor::TakeDamage</code></a></li>
+            <li><a href="#4-dot-处理流程">4. 处理流程</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="part-1-派生关系">
+  Part 1 派生关系
+  <a class="anchor" href="#part-1-%e6%b4%be%e7%94%9f%e5%85%b3%e7%b3%bb">#</a>
+</h2>
+<p>UObjectBaseUtility &lt; UObject &lt; AActor <br/></p>
+<h3 id="1-dot-aactor类型">
+  1. AActor类型
+  <a class="anchor" href="#1-dot-aactor%e7%b1%bb%e5%9e%8b">#</a>
+</h3>
+<p>虚幻C++基础类型，能放置到世界场景中的物体，具有相同的基类AActor。 <br/>
+所有能添加到世界场景中的物体都可称作Actor，如几何体，特效，声音。Actor对象有无实体均可。 <br/>
+初始状态不具备变换属性(有Gizmo表示，移动后会复位)，无法绑定模型，变换需要USceneComponent组件，模型需要UStaticMeshComponent组件。 <br/>
+可以在虚幻编辑器中往关卡添加Actor对象，也可以在代码中动态生成Actor对象。 <br/>
+Actor对象由各种Component组成，所有组件可以根据需求进行组装，方便重用。 <br/></p>
+<h3 id="2-dot-uobject类型">
+  2. UObject类型
+  <a class="anchor" href="#2-dot-uobject%e7%b1%bb%e5%9e%8b">#</a>
+</h3>
+<p>虚幻引擎中最基础的类型，AActor类型的父类。 <br/>
+不能在场景中添加UObject对象，可以在代码中创建UObject对象并对逻辑进行封装。 <br/></p>
+<h2 id="part-2-组件-component">
+  Part 2 组件 <code>Component</code>
+  <a class="anchor" href="#part-2-%e7%bb%84%e4%bb%b6-component">#</a>
+</h2>
+<p>具有视觉表示的组件，需要为其设置上级组件，或将其注册为根组件 <br/></p>
+<h3 id="1-dot-创建组件-uobject-createdefaultsubobject-t">
+  1. 创建组件 <code>UObject::CreateDefaultSubobject&lt;T&gt;</code>
+  <a class="anchor" href="#1-dot-%e5%88%9b%e5%bb%ba%e7%bb%84%e4%bb%b6-uobject-createdefaultsubobject-t">#</a>
+</h3>
+<p>返回指向组件的指针 <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/UObject-CreateDefaultSubobject.png" width="1100"/>
+</figure>
+ <br/></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SubobjectName</td>
+<td>虚幻编辑器中显示的组件名</td>
+<td>FName类型</td>
+</tr>
+<tr>
+<td>BTransient</td>
+<td></td>
+<td>使用默认值</td>
+</tr>
+</tbody>
+</table>
+<p><strong>使用</strong> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>StaticMesh <span style="color:#f92672">=</span> CreateDefaultSubobject<span style="color:#f92672">&lt;</span>UStaticMeshComponent<span style="color:#f92672">&gt;</span>(<span style="color:#e6db74">&#34;StaticMeshInEditor&#34;</span>);
+</span></span></code></pre></div><p>在C++中对变量StaticMesh做设置，在虚幻编辑器中对名为&quot;StaticMeshInEditor&quot;的组件做设置；二者相对应。 <br/>
+可以在C++中修改变量名；如果修改组件名，虚幻编辑器中该组件的已有设置会因找不到目标载体而无法生效。 <br/></p>
+<h3 id="2-dot-设置为根组件-aactor-setrootcomponent">
+  2. 设置为根组件 <code>AActor::SetRootComponent</code>
+  <a class="anchor" href="#2-dot-%e8%ae%be%e7%bd%ae%e4%b8%ba%e6%a0%b9%e7%bb%84%e4%bb%b6-aactor-setrootcomponent">#</a>
+</h3>
+<p>根组件的设置会影响到变换矩阵求值 <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-SetRootComponent.png" width="600"/>
+</figure>
+ <br/></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>NewRootComponent</td>
+<td>指向组件的指针</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><strong>使用</strong> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>SetRootComponent(StaticMesh);
+</span></span></code></pre></div><p>USceneComponent *类型，可以接受UStaticMeshCompoent *(动态绑定)。因为UStaticMeshComponent派生自UMeshComponent，UMeshComponent派生自UPrimitiveComponent，UPrimitiveComponent派生自USceneComponent。 <br/></p>
+<h3 id="3-dot-获取根组件-aactor-getrootcomponent">
+  3. 获取根组件 <code>AActor::GetRootComponent</code>
+  <a class="anchor" href="#3-dot-%e8%8e%b7%e5%8f%96%e6%a0%b9%e7%bb%84%e4%bb%b6-aactor-getrootcomponent">#</a>
+</h3>
+<p>返回指向根组件的指针 <br/></p>
+<p><img src="/pic/AActor类型/AActor-GetRootComponent.png" alt="AActor-GetRootComponent.png" width="400" /> <br/>
+<strong>使用</strong> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>GetRootComponent();
+</span></span></code></pre></div><h3 id="4-dot-获取输入组件-aactor-inputcomponent">
+  4. 获取输入组件 <code>AActor::InputComponent</code>
+  <a class="anchor" href="#4-dot-%e8%8e%b7%e5%8f%96%e8%be%93%e5%85%a5%e7%bb%84%e4%bb%b6-aactor-inputcomponent">#</a>
+</h3>
+<p><code>数据成员</code> <code>动态绑定</code> <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-InputComponent.png" width="500"/>
+</figure>
+ <br/></p>
+<h2 id="part-3-actor变换信息">
+  Part 3 Actor变换信息
+  <a class="anchor" href="#part-3-actor%e5%8f%98%e6%8d%a2%e4%bf%a1%e6%81%af">#</a>
+</h2>
+<h3 id="1-dot-获取actor变换信息-aactor-getactortransform">
+  1. 获取Actor变换信息 <code>AActor::GetActorTransform</code>
+  <a class="anchor" href="#1-dot-%e8%8e%b7%e5%8f%96actor%e5%8f%98%e6%8d%a2%e4%bf%a1%e6%81%af-aactor-getactortransform">#</a>
+</h3>
+<p><img src="/pic/AActor类型/AActor-GetActorTransform.png" alt="AActor-GetActorTransform.png" width="400" /> <br/>
+<strong>使用</strong> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>MoveSetting.InitialTransform <span style="color:#f92672">=</span> GetActorTransform();
+</span></span></code></pre></div><h3 id="2-dot-获取actor位置信息-aactor-getactorlocation">
+  2. 获取Actor位置信息 <code>AActor::GetActorLocation</code>
+  <a class="anchor" href="#2-dot-%e8%8e%b7%e5%8f%96actor%e4%bd%8d%e7%bd%ae%e4%bf%a1%e6%81%af-aactor-getactorlocation">#</a>
+</h3>
+<p><img src="/pic/AActor类型/AActor-GetActorLocation.png" alt="AActor-GetActorLocation.png" width="400" /> <br/>
+<strong>使用</strong> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>FVector CurrentLocation <span style="color:#f92672">=</span> GetActorLocation();
+</span></span></code></pre></div><h3 id="3-dot-获取actor旋转信息-aactor-getactorrotation">
+  3. 获取Actor旋转信息 <code>AActor::GetActorRotation</code>
+  <a class="anchor" href="#3-dot-%e8%8e%b7%e5%8f%96actor%e6%97%8b%e8%bd%ac%e4%bf%a1%e6%81%af-aactor-getactorrotation">#</a>
+</h3>
+<p><strong>使用</strong> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>FRotator CurrentRotation <span style="color:#f92672">=</span> GetActorRotation();
+</span></span></code></pre></div><h3 id="4-dot-设置actor位置-aactor-setactorlocation">
+  4. 设置Actor位置 <code>AActor::SetActorLocation</code>
+  <a class="anchor" href="#4-dot-%e8%ae%be%e7%bd%aeactor%e4%bd%8d%e7%bd%ae-aactor-setactorlocation">#</a>
+</h3>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-SetActorLocation1.png" width="1200"/>
+</figure>
+ <br/></p>
+<p><img src="/pic/AActor类型/AActor-SetActorLocation2.png" alt="AActor-SetActorLocation2.png" width="1200" /> <br/>
+<strong>使用</strong> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>SetActorLocation(CurrentLocation);
+</span></span></code></pre></div><h3 id="5-dot-设置actor旋转-aactor-setactorrotation">
+  5. 设置Actor旋转 <code>AActor::SetActorRotation</code>
+  <a class="anchor" href="#5-dot-%e8%ae%be%e7%bd%aeactor%e6%97%8b%e8%bd%ac-aactor-setactorrotation">#</a>
+</h3>
+<p><strong>使用</strong> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>SetActorRotation(CurrentRotation);
+</span></span></code></pre></div><h2 id="part-4-获取其他类型对象">
+  Part 4 获取其他类型对象
+  <a class="anchor" href="#part-4-%e8%8e%b7%e5%8f%96%e5%85%b6%e4%bb%96%e7%b1%bb%e5%9e%8b%e5%af%b9%e8%b1%a1">#</a>
+</h2>
+<h3 id="1-dot-uworld对象-aactor-getworld">
+  1. UWorld对象 <code>AActor::GetWorld</code>
+  <a class="anchor" href="#1-dot-uworld%e5%af%b9%e8%b1%a1-aactor-getworld">#</a>
+</h3>
+<p>获取指向UWorld对象的指针，使用前需判断指针是否为空 <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-GetWorld.png" width="600"/>
+</figure>
+ <br/></p>
+<h3 id="2-dot-定时器管理对象-aactor-getworldtimermanager">
+  2. 定时器管理对象 <code>AActor::GetWorldTimerManager</code>
+  <a class="anchor" href="#2-dot-%e5%ae%9a%e6%97%b6%e5%99%a8%e7%ae%a1%e7%90%86%e5%af%b9%e8%b1%a1-aactor-getworldtimermanager">#</a>
+</h3>
+<p>获取定时器管理对象的引用 <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-GetWorldTimerManager.png" width="400"/>
+</figure>
+ <br/></p>
+<h2 id="part-5-actor对象">
+  Part 5 Actor对象
+  <a class="anchor" href="#part-5-actor%e5%af%b9%e8%b1%a1">#</a>
+</h2>
+<h3 id="1-dot-获取actor描述-uobjectbaseutility-getname">
+  1. 获取Actor描述 <code>UObjectBaseUtility::GetName</code>
+  <a class="anchor" href="#1-dot-%e8%8e%b7%e5%8f%96actor%e6%8f%8f%e8%bf%b0-uobjectbaseutility-getname">#</a>
+</h3>
+<p>保存在FString对象中 <br/></p>
+<p><img src="/pic/AActor类型/UObjectBaseUtility-GetName.png" alt="UObjectBaseUtility-GetName.png" width="300" /> <br/>
+<strong>使用</strong> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UE_LOG(LogSimpleGeometry, Display, TEXT(<span style="color:#e6db74">&#34;Name: %s&#34;</span>), <span style="color:#f92672">*</span>GetName());
+</span></span></code></pre></div><p><strong>输出</strong> <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/UObjectBaseUtility-GetName-Output.png" width="400"/>
+</figure>
+ <br/></p>
+<h3 id="2-dot-使actor出现在场景中-aactor-finishspawning">
+  2. 使Actor出现在场景中 <code>AActor::FinishSpawning</code>
+  <a class="anchor" href="#2-dot-%e4%bd%bfactor%e5%87%ba%e7%8e%b0%e5%9c%a8%e5%9c%ba%e6%99%af%e4%b8%ad-aactor-finishspawning">#</a>
+</h3>
+<p>对Actor对象调用BeginPlay，和UWorld::SpawnActorDeferred配合使用。 <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-FinishSpawning.png" width="1200"/>
+</figure>
+ <br/></p>
+<h3 id="3-dot-销毁actor-aactor-destroy">
+  3. 销毁Actor <code>AActor::Destroy</code>
+  <a class="anchor" href="#3-dot-%e9%94%80%e6%af%81actor-aactor-destroy">#</a>
+</h3>
+<p>不支持重载。对对象调用Destroy时，会将其PendingKill标志置1，等到Garbage Collector被触发，再回收内存。 <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-Destroy1.png" width="800"/>
+</figure>
+ <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-Destroy2.png" width="800"/>
+</figure>
+ <br/></p>
+<h3 id="4-dot-若干秒后销毁actor-aactor-setlifespan">
+  4. 若干秒后销毁Actor <code>AActor::SetLifeSpan</code>
+  <a class="anchor" href="#4-dot-%e8%8b%a5%e5%b9%b2%e7%a7%92%e5%90%8e%e9%94%80%e6%af%81actor-aactor-setlifespan">#</a>
+</h3>
+<p>单位为秒，通过定时器实现 <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-SetLifeSpan.png" width="900"/>
+</figure>
+ <br/></p>
+<h3 id="5-dot-从场景中移除actor-aactor-endplay">
+  5. 从场景中移除Actor <code>AActor::EndPlay</code>
+  <a class="anchor" href="#5-dot-%e4%bb%8e%e5%9c%ba%e6%99%af%e4%b8%ad%e7%a7%bb%e9%99%a4actor-aactor-endplay">#</a>
+</h3>
+<p>销毁Actor之前的收尾工作。对Actor对象调用Destroy函数，包含EndPlay函数的调用。 <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-EndPlay.png" width="500"/>
+</figure>
+ <br/></p>
+<h3 id="6-dot-判断actor有效性-isvalid">
+  6. 判断Actor有效性 <code>IsValid</code>
+  <a class="anchor" href="#6-dot-%e5%88%a4%e6%96%adactor%e6%9c%89%e6%95%88%e6%80%a7-isvalid">#</a>
+</h3>
+<p>返回true则Actor未被销毁 <br/></p>
+<p><img src="/pic/AActor类型/IsValid.png" alt="IsValid.png" width="800" /> <br/>
+除了判断指针是否为空，还会检查对象的Flag；对对象调用Destroy时，会将其PendingKill标志置1，此时即认为Actor对象无效 <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/PendingKillFlag.png" width="1400"/>
+</figure>
+   <br/></p>
+<h3 id="7-dot-判断指针基础类型-uobjectbaseutility-isa-t">
+  7. 判断指针基础类型 <code>UObjectBaseUtility::IsA&lt;T&gt;</code>
+  <a class="anchor" href="#7-dot-%e5%88%a4%e6%96%ad%e6%8c%87%e9%92%88%e5%9f%ba%e7%a1%80%e7%b1%bb%e5%9e%8b-uobjectbaseutility-isa-t">#</a>
+</h3>
+<p>指针的基础类型是否为给定的模版类型 <br/></p>
+<p><img src="/pic/AActor类型/UObjectBaseUtility-IsA-T.png" alt="UObjectBaseUtility-IsA-T.png" width="500" /> <br/>
+<strong>使用</strong> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">if</span> (DamageType<span style="color:#f92672">-&gt;</span>IsA<span style="color:#f92672">&lt;</span>USTFireDamageType<span style="color:#f92672">&gt;</span>())
+</span></span><span style="display:flex;"><span>{
+</span></span><span style="display:flex;"><span>    <span style="color:#75715e">//
+</span></span></span><span style="display:flex;"><span><span style="color:#75715e"></span>}
+</span></span></code></pre></div><h2 id="part-6-获取actor相对方向向量">
+  Part 6 获取Actor相对方向向量
+  <a class="anchor" href="#part-6-%e8%8e%b7%e5%8f%96actor%e7%9b%b8%e5%af%b9%e6%96%b9%e5%90%91%e5%90%91%e9%87%8f">#</a>
+</h2>
+<p>以Actor为原点建立相对坐标系 <br/></p>
+<h3 id="1-dot-前进方向-actor-getactorforwardvector">
+  1. 前进方向 <code>Actor::GetActorForwardVector</code>
+  <a class="anchor" href="#1-dot-%e5%89%8d%e8%bf%9b%e6%96%b9%e5%90%91-actor-getactorforwardvector">#</a>
+</h3>
+<p><code>X轴</code> <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-GetActorForwardVector.png" width="400"/>
+</figure>
+ <br/></p>
+<h3 id="2-dot-向右-actor-getactorrightvector">
+  2. 向右 <code>Actor::GetActorRightVector</code>
+  <a class="anchor" href="#2-dot-%e5%90%91%e5%8f%b3-actor-getactorrightvector">#</a>
+</h3>
+<p><code>Y轴</code> <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-GetActorRightVector.png" width="400"/>
+</figure>
+ <br/></p>
+<h3 id="3-dot-向上-actor-getactorupvector">
+  3. 向上 <code>Actor::GetActorUpVector</code>
+  <a class="anchor" href="#3-dot-%e5%90%91%e4%b8%8a-actor-getactorupvector">#</a>
+</h3>
+<p><code>Z轴</code> <br/></p>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-GetActorUpVector.png" width="400"/>
+</figure>
+ <br/></p>
+<h2 id="part-7-对actor造成伤害">
+  Part 7 对Actor造成伤害
+  <a class="anchor" href="#part-7-%e5%af%b9actor%e9%80%a0%e6%88%90%e4%bc%a4%e5%ae%b3">#</a>
+</h2>
+<p>造成伤害使用委托实现 <br/></p>
+<h3 id="1-dot-aactor定义了三种伤害委托类型">
+  1. AActor定义了三种伤害委托类型
+  <a class="anchor" href="#1-dot-aactor%e5%ae%9a%e4%b9%89%e4%ba%86%e4%b8%89%e7%a7%8d%e4%bc%a4%e5%ae%b3%e5%a7%94%e6%89%98%e7%b1%bb%e5%9e%8b">#</a>
+</h3>
+<table>
+<thead>
+<tr>
+<th>伤害描述</th>
+<th>委托类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数值伤害</td>
+<td>FTakeAnyDamageSignature</td>
+</tr>
+<tr>
+<td>点伤害</td>
+<td>FTakePointDamageSignature</td>
+</tr>
+<tr>
+<td>半径伤害</td>
+<td>FTakeRadialDamageSignature</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/pic/AActor类型/伤害委托类型.png" alt="伤害委托类型.png" width="1700" /> <br/>
+处理函数格式 <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnTakeAnyDamage</span>(AActor<span style="color:#f92672">*</span> DamagedActor,
+</span></span><span style="display:flex;"><span>                     <span style="color:#66d9ef">float</span> Damage,
+</span></span><span style="display:flex;"><span>                     <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDamageType</span><span style="color:#f92672">*</span> DamageType,
+</span></span><span style="display:flex;"><span>                     <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AController</span><span style="color:#f92672">*</span> InstigatedBy,
+</span></span><span style="display:flex;"><span>                     AActor<span style="color:#f92672">*</span> DamageCauser);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnTakePointDamage</span>(AActor<span style="color:#f92672">*</span> DamagedActor,
+</span></span><span style="display:flex;"><span>                       <span style="color:#66d9ef">float</span> Damage,
+</span></span><span style="display:flex;"><span>                       <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AController</span><span style="color:#f92672">*</span> InstigatedBy,
+</span></span><span style="display:flex;"><span>                       FVector HitLocation,
+</span></span><span style="display:flex;"><span>                       <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UPrimitiveComponent</span><span style="color:#f92672">*</span> FHitComponent,
+</span></span><span style="display:flex;"><span>                       FName BoneName,
+</span></span><span style="display:flex;"><span>                       FVector ShotFromDirection,
+</span></span><span style="display:flex;"><span>                       <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDamageType</span><span style="color:#f92672">*</span> DamageType,
+</span></span><span style="display:flex;"><span>                       AActor<span style="color:#f92672">*</span> DamageCauser);
+</span></span><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnTakeRadialDamage</span>(AActor<span style="color:#f92672">*</span> DamagedActor,
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">float</span> Damage,
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">const</span> <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">UDamageType</span><span style="color:#f92672">*</span> DamageType,
+</span></span><span style="display:flex;"><span>                        FVector Origin,
+</span></span><span style="display:flex;"><span>                        FHitResult HitInfo,
+</span></span><span style="display:flex;"><span>                        <span style="color:#66d9ef">class</span> <span style="color:#a6e22e">AController</span><span style="color:#f92672">*</span> InstigatedBy,
+</span></span><span style="display:flex;"><span>                        AActor<span style="color:#f92672">*</span> DamageCauser);
+</span></span></code></pre></div><h3 id="2-dot-aactor还定义了这三种伤害委托类型的数据成员">
+  2. AActor还定义了这三种伤害委托类型的数据成员
+  <a class="anchor" href="#2-dot-aactor%e8%bf%98%e5%ae%9a%e4%b9%89%e4%ba%86%e8%bf%99%e4%b8%89%e7%a7%8d%e4%bc%a4%e5%ae%b3%e5%a7%94%e6%89%98%e7%b1%bb%e5%9e%8b%e7%9a%84%e6%95%b0%e6%8d%ae%e6%88%90%e5%91%98">#</a>
+</h3>
+<table>
+<thead>
+<tr>
+<th>伤害描述</th>
+<th>委托类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数值伤害</td>
+<td>AActor::OnTakeAnyDamage</td>
+</tr>
+<tr>
+<td>点伤害</td>
+<td>AActor::OnTakePointDamage</td>
+</tr>
+<tr>
+<td>半径伤害</td>
+<td>AActor::OnTakeRadialDamage</td>
+</tr>
+</tbody>
+</table>
+<p><img src="/pic/AActor类型/伤害委托成员.png" alt="伤害委托成员.png" width="400" /> <br/>
+如果希望AActor对对应类型伤害进行处理，则需为对应伤害委托类型的数据成员注册处理函数。可以在蓝图中设置。 <br/></p>
+<h3 id="3-dot-对actor造成伤害-aactor-takedamage">
+  3. 对Actor造成伤害 <code>AActor::TakeDamage</code>
+  <a class="anchor" href="#3-dot-%e5%af%b9actor%e9%80%a0%e6%88%90%e4%bc%a4%e5%ae%b3-aactor-takedamage">#</a>
+</h3>
+<p>欲对Actor造成伤害，对其调用TakeDamage函数。 <br/>
+TakeDamage根据传入的伤害事件类型参数做相应处理，并调用委托处理函数 <br/></p>
+<table>
+<thead>
+<tr>
+<th>伤害描述</th>
+<th>伤害事件类型</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>点伤害</td>
+<td>FPointDamageEvent</td>
+</tr>
+<tr>
+<td>半径伤害</td>
+<td>FRadialDamageEvent</td>
+</tr>
+<tr>
+<td>其他类型伤害</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p><figure><img src="/pic/AActor%e7%b1%bb%e5%9e%8b/AActor-TakeDamage.png" width="800"/>
+</figure>
+ <br/></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DamageAmount</td>
+<td>伤害的数量特征</td>
+<td></td>
+</tr>
+<tr>
+<td>DamageEvent</td>
+<td>伤害事件</td>
+<td></td>
+</tr>
+<tr>
+<td>EventInstigator</td>
+<td>伤害来源所属Controller</td>
+<td>伤害来源，Character或Pawn的上级Controller。如果划分队伍，判断伤害来自敌人还是友方。</td>
+</tr>
+<tr>
+<td>DamageCauser</td>
+<td>伤害源</td>
+<td>敌人或是武器，如榴弹、子弹或是刀</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-dot-处理流程">
+  4. 处理流程
+  <a class="anchor" href="#4-dot-%e5%a4%84%e7%90%86%e6%b5%81%e7%a8%8b">#</a>
+</h3>
+<ol>
+<li>为对应伤害类型注册处理函数 <br/></li>
+<li>欲造成伤害时，传入特定伤害事件，调用TakeDamage函数</li>
+</ol>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-派生关系">Part 1 派生关系</a>
+          <ul>
+            <li><a href="#1-dot-aactor类型">1. AActor类型</a></li>
+            <li><a href="#2-dot-uobject类型">2. UObject类型</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-2-组件-component">Part 2 组件 <code>Component</code></a>
+          <ul>
+            <li><a href="#1-dot-创建组件-uobject-createdefaultsubobject-t">1. 创建组件 <code>UObject::CreateDefaultSubobject&lt;T&gt;</code></a></li>
+            <li><a href="#2-dot-设置为根组件-aactor-setrootcomponent">2. 设置为根组件 <code>AActor::SetRootComponent</code></a></li>
+            <li><a href="#3-dot-获取根组件-aactor-getrootcomponent">3. 获取根组件 <code>AActor::GetRootComponent</code></a></li>
+            <li><a href="#4-dot-获取输入组件-aactor-inputcomponent">4. 获取输入组件 <code>AActor::InputComponent</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-actor变换信息">Part 3 Actor变换信息</a>
+          <ul>
+            <li><a href="#1-dot-获取actor变换信息-aactor-getactortransform">1. 获取Actor变换信息 <code>AActor::GetActorTransform</code></a></li>
+            <li><a href="#2-dot-获取actor位置信息-aactor-getactorlocation">2. 获取Actor位置信息 <code>AActor::GetActorLocation</code></a></li>
+            <li><a href="#3-dot-获取actor旋转信息-aactor-getactorrotation">3. 获取Actor旋转信息 <code>AActor::GetActorRotation</code></a></li>
+            <li><a href="#4-dot-设置actor位置-aactor-setactorlocation">4. 设置Actor位置 <code>AActor::SetActorLocation</code></a></li>
+            <li><a href="#5-dot-设置actor旋转-aactor-setactorrotation">5. 设置Actor旋转 <code>AActor::SetActorRotation</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-4-获取其他类型对象">Part 4 获取其他类型对象</a>
+          <ul>
+            <li><a href="#1-dot-uworld对象-aactor-getworld">1. UWorld对象 <code>AActor::GetWorld</code></a></li>
+            <li><a href="#2-dot-定时器管理对象-aactor-getworldtimermanager">2. 定时器管理对象 <code>AActor::GetWorldTimerManager</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-5-actor对象">Part 5 Actor对象</a>
+          <ul>
+            <li><a href="#1-dot-获取actor描述-uobjectbaseutility-getname">1. 获取Actor描述 <code>UObjectBaseUtility::GetName</code></a></li>
+            <li><a href="#2-dot-使actor出现在场景中-aactor-finishspawning">2. 使Actor出现在场景中 <code>AActor::FinishSpawning</code></a></li>
+            <li><a href="#3-dot-销毁actor-aactor-destroy">3. 销毁Actor <code>AActor::Destroy</code></a></li>
+            <li><a href="#4-dot-若干秒后销毁actor-aactor-setlifespan">4. 若干秒后销毁Actor <code>AActor::SetLifeSpan</code></a></li>
+            <li><a href="#5-dot-从场景中移除actor-aactor-endplay">5. 从场景中移除Actor <code>AActor::EndPlay</code></a></li>
+            <li><a href="#6-dot-判断actor有效性-isvalid">6. 判断Actor有效性 <code>IsValid</code></a></li>
+            <li><a href="#7-dot-判断指针基础类型-uobjectbaseutility-isa-t">7. 判断指针基础类型 <code>UObjectBaseUtility::IsA&lt;T&gt;</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-6-获取actor相对方向向量">Part 6 获取Actor相对方向向量</a>
+          <ul>
+            <li><a href="#1-dot-前进方向-actor-getactorforwardvector">1. 前进方向 <code>Actor::GetActorForwardVector</code></a></li>
+            <li><a href="#2-dot-向右-actor-getactorrightvector">2. 向右 <code>Actor::GetActorRightVector</code></a></li>
+            <li><a href="#3-dot-向上-actor-getactorupvector">3. 向上 <code>Actor::GetActorUpVector</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-7-对actor造成伤害">Part 7 对Actor造成伤害</a>
+          <ul>
+            <li><a href="#1-dot-aactor定义了三种伤害委托类型">1. AActor定义了三种伤害委托类型</a></li>
+            <li><a href="#2-dot-aactor还定义了这三种伤害委托类型的数据成员">2. AActor还定义了这三种伤害委托类型的数据成员</a></li>
+            <li><a href="#3-dot-对actor造成伤害-aactor-takedamage">3. 对Actor造成伤害 <code>AActor::TakeDamage</code></a></li>
+            <li><a href="#4-dot-处理流程">4. 处理流程</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

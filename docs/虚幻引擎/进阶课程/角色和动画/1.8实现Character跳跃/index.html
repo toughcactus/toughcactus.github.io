@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content=" Part 1 绑定键位 # 虚幻编辑器 项目设置 &gt; Engine &gt; Input 动作映射 函数描述 Jump 键位 SpaceBar Part 2 实现跳跃逻辑 # C&#43;&#43; 使用虚幻引擎提供的跳跃回调函数 绑定函数描述和回调函数 # 函数成员 private 在SetupPlayerInputComponent中调用 void ASTBaseCharacter::InitJump(UInputComponent* PlayerInputComponent) { PlayerInputComponent-&gt;BindAction(&#34;Jump&#34;, IE_Pressed, this, &amp;ASTBaseCharacter::Jump); } Part 3 添加跳跃动画 # 虚幻编辑器 ABP_BaseCharacter 跳跃动画 JumpStart JumpLoop JumpEnd 跳跃动画切换条件 变量 IsFalling 使用 ACharacter::IsFalling 来设置 true则Character在空中，false则说明Character在地面上 上一小节中，变量 Velocity 横跨 ABP_BaseCharacter 的 EventGraph 和 AnimGraph ，这里，布尔类型变量 IsFalling 也一样 在 EventGraph 设置变量值，在 AnimGraph 中使用变量 使用状态机 在一个动画蓝图中管理多个动画，并定义动画之间的转换条件 一、设置布尔型变量 IsFalling # EventGraph ACharacter::IsFalling 需要 Pawn 到 Character 的转换 不能同时从 EventBlueprintUpdateAnimation 出发 SetVelocity 之后，执行转换 输入是 Character 的 MovementComponent ，从 AsCharacter 到 Target ，自动添加提取数据成员 IsFalling 函数的返回类型是布尔，作为 SetIsFalling 的输入 完整 EventGraph 二、实现 状态机 # AnimGraph 添加 状态机 ，命名为 Locomotion ，作为 OutputPose 的输入 StateMechine 双击 Locomotion ，进入 状态机 仅一个入口 Entry 为 Entry 添加 State ，命名为 Walk 双击 Walk 为 Walk 设置输入动画 BS_Locomotion 即之前 AnimGraph 中， OutputPose 的输入 到此， Character 的运动动画和上一小节一致 直接从 AssetBrowser 把 Jump 的三个动画拖入 Locomotion 动画自动被封装为 State ，和之前 AddState ，再将动画作为输入达到的效果一样 添加状态转换路径 添加转换条件 双击转换图标 Walk &gt; JumpStart IsFalling 为 true JumpStart &gt; JumpLoop JumpStart 将近结束 JumpStart 只播放一次 JumpLoop &gt; JumpEnd IsFalling 为 false JumpLoop 循环播放 JumpEnd &gt; Walk JumpEnd 将近结束 JumpEnd 只播放一次 三、设置 State 输入动画 # 拿 JumpStart 状态举例 选中JumpStart动画 &gt; Details &gt; Settings &gt; LoopAnimation 默认循环播放动画 设置 JumpStart JumpEnd JumpLoop 的 LoopAnimation Jump 动画 设计时， JumpStart 和 JumpEnd 只播放一次， JumpLoop 可循环 如此设置可以修复Character跳跃时的卡顿 四、添加楼梯，查看 Jump 三阶段是否正常显示 # 添加楼梯 PlaceActors &gt; Geometry &gt; LinearStair 设置阶数 选中LinearStairBrush &gt; Details &gt; BrushSettings &gt; NumSteps Character 从楼梯跳到平面时，一直保持 JumpLoop 五、跑步时跳跃，落地平滑 # 可以减少 JumpEnd &gt; Walk 的 TimeRemaining 来缩短平滑 六、跳跃高度 # BP_STBaseCharacter JumpZVelocity 和 JumpStart 的时长有关 JumpLoop 动画更适合从临界点落下 ">
+<meta name="description" content=" Part 1 绑定键位 # 虚幻编辑器 项目设置 &gt; Engine &gt; Input 动作映射 函数描述 键位 Jump SpaceBar Part 2 实现跳跃逻辑 # C&#43;&#43; 使用虚幻引擎提供的跳跃回调函数 绑定函数描述和回调函数 # 函数成员 private 在SetupPlayerInputComponent中调用 void ASTBaseCharacter::InitJump(UInputComponent* PlayerInputComponent) { PlayerInputComponent-&gt;BindAction(&#34;Jump&#34;, IE_Pressed, this, &amp;ASTBaseCharacter::Jump); } Part 3 添加跳跃动画 # 虚幻编辑器 ABP_BaseCharacter 跳跃动画资产 JumpStart JumpLoop JumpEnd 跳跃动画切换条件 使用 ACharacter::IsFalling 来设置变量 IsFalling ；true则Character在空中，false则说明Character在地面上。 上一小节中，变量 Velocity 横跨 ABP_BaseCharacter 的 EventGraph 和 AnimGraph ，这里，布尔类型变量 IsFalling 也一样 在 EventGraph 设置变量值，在 AnimGraph 中使用变量 使用状态机 在一个动画蓝图中管理多个动画，并定义动画之间的转换条件 一、设置布尔型变量 IsFalling # EventGraph ACharacter::IsFalling 需要 Pawn 到 Character 的转换 不能同时从 EventBlueprintUpdateAnimation 出发， SetVelocity 之后，执行转换 输入是 Character 的 MovementComponent ，从 AsCharacter 到 Target ，自动添加提取数据成员， IsFalling 函数的返回类型是布尔，作为 SetIsFalling 的输入 完整 EventGraph 二、实现 状态机 # AnimGraph 添加 状态机 ，命名为 Locomotion ，作为 OutputPose 的输入 StateMechine 双击 Locomotion ，进入 状态机 仅一个入口 Entry 为 Entry 添加 State ，命名为 Walk 双击 Walk 为 Walk 设置输入动画 BS_Locomotion 即之前 AnimGraph 中， OutputPose 的输入 到此， Character 的运动动画和上一小节一致 直接从 AssetBrowser 把 Jump 的三个动画拖入 Locomotion 动画自动被封装为 State ，和之前 AddState ，再将动画作为输入达到的效果一样 添加状态转换路径 添加转换条件 双击转换图标 Walk &gt; JumpStart IsFalling 为 true JumpStart &gt; JumpLoop JumpStart 将近结束 JumpStart 只播放一次 JumpLoop &gt; JumpEnd IsFalling 为 false JumpLoop 循环播放 JumpEnd &gt; Walk JumpEnd 将近结束 JumpEnd 只播放一次 三、设置 State 输入动画 # 拿 JumpStart 状态举例 选中JumpStart动画 &gt; Details &gt; Settings &gt; LoopAnimation 默认循环播放动画 设置 JumpStart JumpEnd JumpLoop 的 LoopAnimation 设计 Jump 动画时， JumpStart 和 JumpEnd 只播放一次， JumpLoop 可循环。 如此设置还可修复Character跳跃时的卡顿 四、添加楼梯，查看 Jump 三阶段是否正常显示 # 添加楼梯 PlaceActors &gt; Geometry &gt; LinearStair 设置阶数 选中LinearStairBrush &gt; Details &gt; BrushSettings &gt; NumSteps Character 从楼梯跳到平面时，一直保持 JumpLoop 五、跑步时跳跃，落地平滑 # 可以减少 JumpEnd &gt; Walk 的 TimeRemaining 来缩短平滑 六、跳跃高度 # BP_STBaseCharacter JumpZVelocity 和 JumpStart 的时长有关 JumpLoop 动画更适合从临界点落下 ">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="实现Character跳跃" />
-<meta property="og:description" content=" Part 1 绑定键位 # 虚幻编辑器 项目设置 &gt; Engine &gt; Input 动作映射 函数描述 Jump 键位 SpaceBar Part 2 实现跳跃逻辑 # C&#43;&#43; 使用虚幻引擎提供的跳跃回调函数 绑定函数描述和回调函数 # 函数成员 private 在SetupPlayerInputComponent中调用 void ASTBaseCharacter::InitJump(UInputComponent* PlayerInputComponent) { PlayerInputComponent-&gt;BindAction(&#34;Jump&#34;, IE_Pressed, this, &amp;ASTBaseCharacter::Jump); } Part 3 添加跳跃动画 # 虚幻编辑器 ABP_BaseCharacter 跳跃动画 JumpStart JumpLoop JumpEnd 跳跃动画切换条件 变量 IsFalling 使用 ACharacter::IsFalling 来设置 true则Character在空中，false则说明Character在地面上 上一小节中，变量 Velocity 横跨 ABP_BaseCharacter 的 EventGraph 和 AnimGraph ，这里，布尔类型变量 IsFalling 也一样 在 EventGraph 设置变量值，在 AnimGraph 中使用变量 使用状态机 在一个动画蓝图中管理多个动画，并定义动画之间的转换条件 一、设置布尔型变量 IsFalling # EventGraph ACharacter::IsFalling 需要 Pawn 到 Character 的转换 不能同时从 EventBlueprintUpdateAnimation 出发 SetVelocity 之后，执行转换 输入是 Character 的 MovementComponent ，从 AsCharacter 到 Target ，自动添加提取数据成员 IsFalling 函数的返回类型是布尔，作为 SetIsFalling 的输入 完整 EventGraph 二、实现 状态机 # AnimGraph 添加 状态机 ，命名为 Locomotion ，作为 OutputPose 的输入 StateMechine 双击 Locomotion ，进入 状态机 仅一个入口 Entry 为 Entry 添加 State ，命名为 Walk 双击 Walk 为 Walk 设置输入动画 BS_Locomotion 即之前 AnimGraph 中， OutputPose 的输入 到此， Character 的运动动画和上一小节一致 直接从 AssetBrowser 把 Jump 的三个动画拖入 Locomotion 动画自动被封装为 State ，和之前 AddState ，再将动画作为输入达到的效果一样 添加状态转换路径 添加转换条件 双击转换图标 Walk &gt; JumpStart IsFalling 为 true JumpStart &gt; JumpLoop JumpStart 将近结束 JumpStart 只播放一次 JumpLoop &gt; JumpEnd IsFalling 为 false JumpLoop 循环播放 JumpEnd &gt; Walk JumpEnd 将近结束 JumpEnd 只播放一次 三、设置 State 输入动画 # 拿 JumpStart 状态举例 选中JumpStart动画 &gt; Details &gt; Settings &gt; LoopAnimation 默认循环播放动画 设置 JumpStart JumpEnd JumpLoop 的 LoopAnimation Jump 动画 设计时， JumpStart 和 JumpEnd 只播放一次， JumpLoop 可循环 如此设置可以修复Character跳跃时的卡顿 四、添加楼梯，查看 Jump 三阶段是否正常显示 # 添加楼梯 PlaceActors &gt; Geometry &gt; LinearStair 设置阶数 选中LinearStairBrush &gt; Details &gt; BrushSettings &gt; NumSteps Character 从楼梯跳到平面时，一直保持 JumpLoop 五、跑步时跳跃，落地平滑 # 可以减少 JumpEnd &gt; Walk 的 TimeRemaining 来缩短平滑 六、跳跃高度 # BP_STBaseCharacter JumpZVelocity 和 JumpStart 的时长有关 JumpLoop 动画更适合从临界点落下 " />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="实现游戏角色跳跃" />
+<meta property="og:description" content=" Part 1 绑定键位 # 虚幻编辑器 项目设置 &gt; Engine &gt; Input 动作映射 函数描述 键位 Jump SpaceBar Part 2 实现跳跃逻辑 # C&#43;&#43; 使用虚幻引擎提供的跳跃回调函数 绑定函数描述和回调函数 # 函数成员 private 在SetupPlayerInputComponent中调用 void ASTBaseCharacter::InitJump(UInputComponent* PlayerInputComponent) { PlayerInputComponent-&gt;BindAction(&#34;Jump&#34;, IE_Pressed, this, &amp;ASTBaseCharacter::Jump); } Part 3 添加跳跃动画 # 虚幻编辑器 ABP_BaseCharacter 跳跃动画资产 JumpStart JumpLoop JumpEnd 跳跃动画切换条件 使用 ACharacter::IsFalling 来设置变量 IsFalling ；true则Character在空中，false则说明Character在地面上。 上一小节中，变量 Velocity 横跨 ABP_BaseCharacter 的 EventGraph 和 AnimGraph ，这里，布尔类型变量 IsFalling 也一样 在 EventGraph 设置变量值，在 AnimGraph 中使用变量 使用状态机 在一个动画蓝图中管理多个动画，并定义动画之间的转换条件 一、设置布尔型变量 IsFalling # EventGraph ACharacter::IsFalling 需要 Pawn 到 Character 的转换 不能同时从 EventBlueprintUpdateAnimation 出发， SetVelocity 之后，执行转换 输入是 Character 的 MovementComponent ，从 AsCharacter 到 Target ，自动添加提取数据成员， IsFalling 函数的返回类型是布尔，作为 SetIsFalling 的输入 完整 EventGraph 二、实现 状态机 # AnimGraph 添加 状态机 ，命名为 Locomotion ，作为 OutputPose 的输入 StateMechine 双击 Locomotion ，进入 状态机 仅一个入口 Entry 为 Entry 添加 State ，命名为 Walk 双击 Walk 为 Walk 设置输入动画 BS_Locomotion 即之前 AnimGraph 中， OutputPose 的输入 到此， Character 的运动动画和上一小节一致 直接从 AssetBrowser 把 Jump 的三个动画拖入 Locomotion 动画自动被封装为 State ，和之前 AddState ，再将动画作为输入达到的效果一样 添加状态转换路径 添加转换条件 双击转换图标 Walk &gt; JumpStart IsFalling 为 true JumpStart &gt; JumpLoop JumpStart 将近结束 JumpStart 只播放一次 JumpLoop &gt; JumpEnd IsFalling 为 false JumpLoop 循环播放 JumpEnd &gt; Walk JumpEnd 将近结束 JumpEnd 只播放一次 三、设置 State 输入动画 # 拿 JumpStart 状态举例 选中JumpStart动画 &gt; Details &gt; Settings &gt; LoopAnimation 默认循环播放动画 设置 JumpStart JumpEnd JumpLoop 的 LoopAnimation 设计 Jump 动画时， JumpStart 和 JumpEnd 只播放一次， JumpLoop 可循环。 如此设置还可修复Character跳跃时的卡顿 四、添加楼梯，查看 Jump 三阶段是否正常显示 # 添加楼梯 PlaceActors &gt; Geometry &gt; LinearStair 设置阶数 选中LinearStairBrush &gt; Details &gt; BrushSettings &gt; NumSteps Character 从楼梯跳到平面时，一直保持 JumpLoop 五、跑步时跳跃，落地平滑 # 可以减少 JumpEnd &gt; Walk 的 TimeRemaining 来缩短平滑 六、跳跃高度 # BP_STBaseCharacter JumpZVelocity 和 JumpStart 的时长有关 JumpLoop 动画更适合从临界点落下 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" /><meta property="article:section" content="docs" />
 
 
-<title>实现Character跳跃 | ToughCactus</title>
+<title>实现游戏角色跳跃 | ToughCactus</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.abd259542d43c43933ed181a0447497951992ba99718a06e9076fdf00f8a5c9a.js" integrity="sha256-q9JZVC1DxDkz7RgaBEdJeVGZK6mXGKBukHb98A&#43;KXJo=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.76b93651dd2f575470b0067bb537b3b7f1d42a13cec268d3b918c049e33a1273.js" integrity="sha256-drk2Ud0vV1RwsAZ7tTezt/HUKhPOwmjTuRjASeM6EnM=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -70,11 +70,262 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <span>分享</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="toggle"  />
+    <label for="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="flex justify-between">
+      <a role="button" class="">开发工具</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/" class="">VSCode</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f3b1b01ebe1f17bcb23615417646b6e6" class="toggle"  />
+    <label for="section-f3b1b01ebe1f17bcb23615417646b6e6" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="toggle"  />
+    <label for="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="flex justify-between">
+      <a role="button" class="">Emacs</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/" class="">org-mode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="">插件篇 | 文件管理</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8f0677a94903c7e3083dad01e58ed439" class="toggle"  />
+    <label for="section-8f0677a94903c7e3083dad01e58ed439" class="flex justify-between">
+      <a role="button" class="">博客</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
     <span>虚幻引擎</span>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle"  />
+    <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
+      <a role="button" class="">API</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle"  />
+    <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
+      <a role="button" class="">虚幻C&#43;&#43;</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c25abc278a6873a94fa212bff746344" class="toggle"  />
+    <label for="section-9c25abc278a6873a94fa212bff746344" class="flex justify-between">
+      <a role="button" class="">Actor及其派生类</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="">AActor类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6ec12d43fc21edcca4a92356f25ab919" class="toggle"  />
+    <label for="section-6ec12d43fc21edcca4a92356f25ab919" class="flex justify-between">
+      <a role="button" class="">虚幻编辑器</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
     
       
         <li>
@@ -175,7 +426,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为Character绑定模型</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为游戏角色绑定模型</a>
   
 
         </li>
@@ -188,7 +439,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现Character前后左右移动</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现游戏角色前后左右移动</a>
   
 
         </li>
@@ -201,7 +452,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现Character视角旋转</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现游戏角色视角旋转</a>
   
 
         </li>
@@ -214,7 +465,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为Character添加跑步动画</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为游戏角色添加向前跑步动画</a>
   
 
         </li>
@@ -227,7 +478,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="active">实现Character跳跃</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="active">实现游戏角色跳跃</a>
   
 
         </li>
@@ -240,7 +491,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现Character跑步</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现游戏角色跑步</a>
   
 
         </li>
@@ -253,7 +504,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加转向动画</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加走路时转向动画</a>
   
 
         </li>
@@ -305,6 +556,136 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.1%E5%9C%A8Character%E4%B8%8A%E6%96%B9%E6%98%BE%E7%A4%BA%E7%94%9F%E5%91%BD%E5%80%BC/" class="">实时显示游戏角色生命值</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.2%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/" class="">计算伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.3%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/" class="">模拟榴弹爆炸</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.4%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/" class="">使用伤害类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.5%E6%B7%BB%E5%8A%A0Character%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/" class="">为游戏角色添加死亡逻辑</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.6%E5%AE%9E%E7%8E%B0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/" class="">添加观察视角</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.7%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/" class="">自动治疗</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.8%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/" class="">高处坠落伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.9%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/" class="">打包游戏和收尾</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -369,7 +750,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>实现Character跳跃</strong>
+  <strong>实现游戏角色跳跃</strong>
 
   <label for="toc-control">
     
@@ -424,10 +805,20 @@ https://github.com/alex-shpak/hugo-book
 <p><code>虚幻编辑器</code> <br/>
 <code>项目设置 &gt; Engine &gt; Input</code> <br/>
 <code>动作映射</code> <br/></p>
-<ul>
-<li>函数描述 <code>Jump</code> <br/></li>
-<li>键位 <code>SpaceBar</code> <br/></li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>函数描述</th>
+<th>键位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jump</td>
+<td>SpaceBar</td>
+</tr>
+</tbody>
+</table>
 <p><figure><img src="/pic/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e7%bb%91%e5%ae%9a%e8%b7%b3%e8%b7%83%e9%94%ae%e4%bd%8d/%e8%b7%b3%e8%b7%83%e9%94%ae%e4%bd%8d.png" width="500"/>
 </figure>
  <br/></p>
@@ -453,15 +844,10 @@ https://github.com/alex-shpak/hugo-book
 <p><code>虚幻编辑器</code> <br/>
 <code>ABP_BaseCharacter</code> <br/></p>
 <ol>
-<li>跳跃动画 <br/>
+<li>跳跃动画资产 <br/>
 <code>JumpStart</code> <code>JumpLoop</code> <code>JumpEnd</code> <br/></li>
 <li>跳跃动画切换条件 <br/>
-变量 <code>IsFalling</code> <br/>
-<ul>
-<li>使用 <code>ACharacter::IsFalling</code> 来设置 <br/></li>
-<li>true则Character在空中，false则说明Character在地面上 <br/></li>
-</ul>
-</li>
+使用 <code>ACharacter::IsFalling</code> 来设置变量 <code>IsFalling</code> ；true则Character在空中，false则说明Character在地面上。 <br/></li>
 <li>上一小节中，变量 <code>Velocity</code> 横跨 <code>ABP_BaseCharacter</code> 的 <code>EventGraph</code> 和 <code>AnimGraph</code> ，这里，布尔类型变量 <code>IsFalling</code> 也一样 <br/>
 在 <code>EventGraph</code> 设置变量值，在 <code>AnimGraph</code> 中使用变量 <br/></li>
 <li>使用状态机 <br/>
@@ -478,20 +864,16 @@ https://github.com/alex-shpak/hugo-book
 <ul>
 <li>
 <p>需要 <code>Pawn</code> 到 <code>Character</code> 的转换 <br/>
-不能同时从 <code>EventBlueprintUpdateAnimation</code> 出发 <br/>
-<code>SetVelocity</code> 之后，执行转换 <br/></p>
+不能同时从 <code>EventBlueprintUpdateAnimation</code> 出发， <code>SetVelocity</code> 之后，执行转换 <br/></p>
 <p><figure><img src="/pic/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-%e5%b0%86Pawn%e8%bd%ac%e6%8d%a2%e6%88%90Character.png" width="800"/>
         </figure>
  <br/></p>
 </li>
 <li>
-<p>输入是 <code>Character</code> 的 <code>MovementComponent</code> ，从 <code>AsCharacter</code> 到 <code>Target</code> ，自动添加提取数据成员 <br/></p>
+<p>输入是 <code>Character</code> 的 <code>MovementComponent</code> ，从 <code>AsCharacter</code> 到 <code>Target</code> ，自动添加提取数据成员， <code>IsFalling</code> 函数的返回类型是布尔，作为 <code>SetIsFalling</code> 的输入 <br/></p>
 <p><figure><img src="/pic/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-%e8%ae%be%e7%bd%ae%e5%8f%98%e9%87%8fIsFalling.png" width="900"/>
         </figure>
  <br/></p>
-</li>
-<li>
-<p><code>IsFalling</code> 函数的返回类型是布尔，作为 <code>SetIsFalling</code> 的输入 <br/></p>
 </li>
 </ul>
 </li>
@@ -604,16 +986,11 @@ https://github.com/alex-shpak/hugo-book
 <p><figure><img src="/pic/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Locomotion-JumpStart.png" width="1000"/>
 </figure>
  <br/></p>
-<ol>
-<li>
-<p>设置 <code>JumpStart</code> <code>JumpEnd</code> <code>JumpLoop</code> 的 <code>LoopAnimation</code> <br/></p>
 <ul>
-<li><code>Jump</code> 动画 <br/>
-设计时， <code>JumpStart</code> 和 <code>JumpEnd</code> 只播放一次， <code>JumpLoop</code> 可循环 <br/></li>
+<li>设置 <code>JumpStart</code> <code>JumpEnd</code> <code>JumpLoop</code> 的 <code>LoopAnimation</code> <br/>
+设计 <code>Jump</code> 动画时， <code>JumpStart</code> 和 <code>JumpEnd</code> 只播放一次， <code>JumpLoop</code> 可循环。 <br/>
+如此设置还可修复Character跳跃时的卡顿 <br/></li>
 </ul>
-<p>如此设置可以修复Character跳跃时的卡顿 <br/></p>
-</li>
-</ol>
 <h3 id="四-添加楼梯-查看-jump-三阶段是否正常显示">
   四、添加楼梯，查看 <code>Jump</code> 三阶段是否正常显示
   <a class="anchor" href="#%e5%9b%9b-%e6%b7%bb%e5%8a%a0%e6%a5%bc%e6%a2%af-%e6%9f%a5%e7%9c%8b-jump-%e4%b8%89%e9%98%b6%e6%ae%b5%e6%98%af%e5%90%a6%e6%ad%a3%e5%b8%b8%e6%98%be%e7%a4%ba">#</a>
@@ -639,9 +1016,7 @@ https://github.com/alex-shpak/hugo-book
   五、跑步时跳跃，落地平滑
   <a class="anchor" href="#%e4%ba%94-%e8%b7%91%e6%ad%a5%e6%97%b6%e8%b7%b3%e8%b7%83-%e8%90%bd%e5%9c%b0%e5%b9%b3%e6%bb%91">#</a>
 </h3>
-<ul>
-<li>可以减少 <code>JumpEnd &gt; Walk</code> 的 <code>TimeRemaining</code> 来缩短平滑 <br/></li>
-</ul>
+<p>可以减少 <code>JumpEnd &gt; Walk</code> 的 <code>TimeRemaining</code> 来缩短平滑 <br/></p>
 <h3 id="六-跳跃高度">
   六、跳跃高度
   <a class="anchor" href="#%e5%85%ad-%e8%b7%b3%e8%b7%83%e9%ab%98%e5%ba%a6">#</a>

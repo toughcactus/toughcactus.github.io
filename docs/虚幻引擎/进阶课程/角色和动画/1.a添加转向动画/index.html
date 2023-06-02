@@ -3,20 +3,20 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Overview # 当前实现了3种动作，走路，跑步和跳跃 走路这块，从静止到跑起来支持加速，使用 BS_Locomotion 本小节会重新实现走路动画，根据速度方向，加载转向和后退动画 之后还有 装弹 Reloading 、死亡 Death 、瞄准 Aiming 动画 Blend Space 2D混合空间 # 两个轴 Vertial Axis Horizontal Axis Part 1 建模 # 一、 ForwardVector 和 RightVector # Actor 有 ForwardVector 和 RightVector ， Character 前后左右移动有使用到这两个方向向量 若我们水平移动鼠标， ForwardVector 和 RightVector 随之发生改变 在视觉上， ForwardVector 一直向前， RightVector 一直向右，二者在水平面垂直 二、数学基础 # 1. 点乘 # 计算向量夹角 其中一个向量为 0向量 时，点乘结果为 0 ，而反余弦计算得到其夹角为 PI/2 2. 叉乘 # 用来将向量夹角从[0, PI]扩充到[-PI, PI] c.z 向量c的z坐标 其符号说明向量c的方向 theta 为 0 PI 和 -PI 时，叉乘结果为 0 无法通过向量确定平面，也就无法得到平面法向量 三、 VelocityVector # Actor 的速度是一个矢量，其表现是单位时间内的位移方向 当速度不为 0 ， VelocityVector 和 ForwardVector 的夹角与此时 Actor 应该展现的动画息息相关 四、计算夹角 # 坐标 ( Velocity , Angle ) VelocityVector 和 ForwardVector 夹角的计算通过反余弦结果和 sign(c.">
+<meta name="description" content="Overview # 当前实现了3种动作，走路，跑步和跳跃 走路这块，从静止到跑起来支持加速，使用 BS_Locomotion 本小节会重新实现走路动画，根据速度方向，加载转向和后退动画 之后还有 装弹 Reloading 、死亡 Death 、瞄准 Aiming 动画 Blend Space 2D混合空间 拥有两个轴： Vertial Axis Horizontal Axis Part 1 建模 # 一、 ForwardVector 和 RightVector # Actor 有 ForwardVector 和 RightVector ， Character 前后左右移动有使用到这两个方向向量 若我们水平移动鼠标， ForwardVector 和 RightVector 随之发生改变 在视觉上， ForwardVector 一直向前， RightVector 一直向右，二者在水平面垂直 二、数学基础 # 1. 点乘 # 计算向量夹角 其中一个向量为 0向量 时，点乘结果为 0 ，而反余弦计算得到其夹角为 PI/2 2. 叉乘 # 用来将向量夹角从[0, PI]扩充到[-PI, PI] c.z 向量c的z坐标 其符号说明向量c的方向 theta 为 0 PI 和 -PI 时，叉乘结果为 0 无法通过向量确定平面，也就无法得到平面法向量 三、 VelocityVector # Actor 的速度是一个矢量，其表现是单位时间内的位移方向 当速度不为 0 ， VelocityVector 和 ForwardVector 的夹角与此时 Actor 应该展现的动画有关 四、计算夹角 # 坐标 ( Velocity , Angle ) VelocityVector 和 ForwardVector 夹角的计算通过反余弦结果和 sign(c.">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="添加转向动画" />
-<meta property="og:description" content="Overview # 当前实现了3种动作，走路，跑步和跳跃 走路这块，从静止到跑起来支持加速，使用 BS_Locomotion 本小节会重新实现走路动画，根据速度方向，加载转向和后退动画 之后还有 装弹 Reloading 、死亡 Death 、瞄准 Aiming 动画 Blend Space 2D混合空间 # 两个轴 Vertial Axis Horizontal Axis Part 1 建模 # 一、 ForwardVector 和 RightVector # Actor 有 ForwardVector 和 RightVector ， Character 前后左右移动有使用到这两个方向向量 若我们水平移动鼠标， ForwardVector 和 RightVector 随之发生改变 在视觉上， ForwardVector 一直向前， RightVector 一直向右，二者在水平面垂直 二、数学基础 # 1. 点乘 # 计算向量夹角 其中一个向量为 0向量 时，点乘结果为 0 ，而反余弦计算得到其夹角为 PI/2 2. 叉乘 # 用来将向量夹角从[0, PI]扩充到[-PI, PI] c.z 向量c的z坐标 其符号说明向量c的方向 theta 为 0 PI 和 -PI 时，叉乘结果为 0 无法通过向量确定平面，也就无法得到平面法向量 三、 VelocityVector # Actor 的速度是一个矢量，其表现是单位时间内的位移方向 当速度不为 0 ， VelocityVector 和 ForwardVector 的夹角与此时 Actor 应该展现的动画息息相关 四、计算夹角 # 坐标 ( Velocity , Angle ) VelocityVector 和 ForwardVector 夹角的计算通过反余弦结果和 sign(c." />
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="添加走路时转向动画" />
+<meta property="og:description" content="Overview # 当前实现了3种动作，走路，跑步和跳跃 走路这块，从静止到跑起来支持加速，使用 BS_Locomotion 本小节会重新实现走路动画，根据速度方向，加载转向和后退动画 之后还有 装弹 Reloading 、死亡 Death 、瞄准 Aiming 动画 Blend Space 2D混合空间 拥有两个轴： Vertial Axis Horizontal Axis Part 1 建模 # 一、 ForwardVector 和 RightVector # Actor 有 ForwardVector 和 RightVector ， Character 前后左右移动有使用到这两个方向向量 若我们水平移动鼠标， ForwardVector 和 RightVector 随之发生改变 在视觉上， ForwardVector 一直向前， RightVector 一直向右，二者在水平面垂直 二、数学基础 # 1. 点乘 # 计算向量夹角 其中一个向量为 0向量 时，点乘结果为 0 ，而反余弦计算得到其夹角为 PI/2 2. 叉乘 # 用来将向量夹角从[0, PI]扩充到[-PI, PI] c.z 向量c的z坐标 其符号说明向量c的方向 theta 为 0 PI 和 -PI 时，叉乘结果为 0 无法通过向量确定平面，也就无法得到平面法向量 三、 VelocityVector # Actor 的速度是一个矢量，其表现是单位时间内的位移方向 当速度不为 0 ， VelocityVector 和 ForwardVector 的夹角与此时 Actor 应该展现的动画有关 四、计算夹角 # 坐标 ( Velocity , Angle ) VelocityVector 和 ForwardVector 夹角的计算通过反余弦结果和 sign(c." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" /><meta property="article:section" content="docs" />
 
 
-<title>添加转向动画 | ToughCactus</title>
+<title>添加走路时转向动画 | ToughCactus</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.abd259542d43c43933ed181a0447497951992ba99718a06e9076fdf00f8a5c9a.js" integrity="sha256-q9JZVC1DxDkz7RgaBEdJeVGZK6mXGKBukHb98A&#43;KXJo=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.76b93651dd2f575470b0067bb537b3b7f1d42a13cec268d3b918c049e33a1273.js" integrity="sha256-drk2Ud0vV1RwsAZ7tTezt/HUKhPOwmjTuRjASeM6EnM=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -70,11 +70,262 @@ https://github.com/alex-shpak/hugo-book
   
 
   
+    <span>分享</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="toggle"  />
+    <label for="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="flex justify-between">
+      <a role="button" class="">开发工具</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/" class="">VSCode</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f3b1b01ebe1f17bcb23615417646b6e6" class="toggle"  />
+    <label for="section-f3b1b01ebe1f17bcb23615417646b6e6" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="toggle"  />
+    <label for="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="flex justify-between">
+      <a role="button" class="">Emacs</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/" class="">org-mode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="">插件篇 | 文件管理</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8f0677a94903c7e3083dad01e58ed439" class="toggle"  />
+    <label for="section-8f0677a94903c7e3083dad01e58ed439" class="flex justify-between">
+      <a role="button" class="">博客</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
     <span>虚幻引擎</span>
   
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle"  />
+    <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
+      <a role="button" class="">API</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle"  />
+    <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
+      <a role="button" class="">虚幻C&#43;&#43;</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c25abc278a6873a94fa212bff746344" class="toggle"  />
+    <label for="section-9c25abc278a6873a94fa212bff746344" class="flex justify-between">
+      <a role="button" class="">Actor及其派生类</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="">AActor类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6ec12d43fc21edcca4a92356f25ab919" class="toggle"  />
+    <label for="section-6ec12d43fc21edcca4a92356f25ab919" class="flex justify-between">
+      <a role="button" class="">虚幻编辑器</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
     
       
         <li>
@@ -175,7 +426,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为Character绑定模型</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为游戏角色绑定模型</a>
   
 
         </li>
@@ -188,7 +439,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现Character前后左右移动</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现游戏角色前后左右移动</a>
   
 
         </li>
@@ -201,7 +452,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现Character视角旋转</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现游戏角色视角旋转</a>
   
 
         </li>
@@ -214,7 +465,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为Character添加跑步动画</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为游戏角色添加向前跑步动画</a>
   
 
         </li>
@@ -227,7 +478,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现Character跳跃</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现游戏角色跳跃</a>
   
 
         </li>
@@ -240,7 +491,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现Character跑步</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现游戏角色跑步</a>
   
 
         </li>
@@ -253,7 +504,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="active">添加转向动画</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="active">添加走路时转向动画</a>
   
 
         </li>
@@ -305,6 +556,136 @@ https://github.com/alex-shpak/hugo-book
 
           
   <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.1%E5%9C%A8Character%E4%B8%8A%E6%96%B9%E6%98%BE%E7%A4%BA%E7%94%9F%E5%91%BD%E5%80%BC/" class="">实时显示游戏角色生命值</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.2%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/" class="">计算伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.3%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/" class="">模拟榴弹爆炸</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.4%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/" class="">使用伤害类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.5%E6%B7%BB%E5%8A%A0Character%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/" class="">为游戏角色添加死亡逻辑</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.6%E5%AE%9E%E7%8E%B0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/" class="">添加观察视角</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.7%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/" class="">自动治疗</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.8%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/" class="">高处坠落伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.9%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/" class="">打包游戏和收尾</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
     
   </ul>
 
@@ -369,7 +750,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>添加转向动画</strong>
+  <strong>添加走路时转向动画</strong>
 
   <label for="toc-control">
     
@@ -387,11 +768,7 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a>
-          <ul>
-            <li><a href="#blend-space-2d混合空间"><code>Blend Space</code> <code>2D混合空间</code></a></li>
-          </ul>
-        </li>
+        <li><a href="#overview">Overview</a></li>
         <li><a href="#part-1-建模">Part 1 建模</a>
           <ul>
             <li><a href="#一-forwardvector-和-rightvector">一、 <code>ForwardVector</code> 和 <code>RightVector</code></a></li>
@@ -420,7 +797,7 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#二-将-bs-locomotion-walk-用作走路动画">二、将 <code>BS_Locomotion_Walk</code> 用作走路动画</a></li>
           </ul>
         </li>
-        <li><a href="#part-4-在蓝图计算-forwardvector-和-velocityvector-的夹角">Part 4 在蓝图计算 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角</a>
+        <li><a href="#part-4-在蓝图中计算-forwardvector-和-velocityvector-的夹角">Part 4 在蓝图中计算 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角</a>
           <ul>
             <li><a href="#1-dot-在蓝图中计算夹角并设置变量">1. 在蓝图中计算夹角并设置变量</a></li>
             <li><a href="#2-dot-绘制-forwardvectr-和-velocityvector-的叉乘结果">2. 绘制 <code>ForwardVectr</code> 和 <code>VelocityVector</code> 的叉乘结果</a></li>
@@ -457,15 +834,14 @@ https://github.com/alex-shpak/hugo-book
   Overview
   <a class="anchor" href="#overview">#</a>
 </h2>
-<p>当前实现了3种动作，走路，跑步和跳跃 <br/>
-走路这块，从静止到跑起来支持加速，使用 <code>BS_Locomotion</code> <br/>
-本小节会重新实现走路动画，根据速度方向，加载转向和后退动画 <br/>
-之后还有 装弹 <code>Reloading</code> 、死亡 <code>Death</code> 、瞄准 <code>Aiming</code> 动画 <br/></p>
-<h3 id="blend-space-2d混合空间">
-  <code>Blend Space</code> <code>2D混合空间</code>
-  <a class="anchor" href="#blend-space-2d%e6%b7%b7%e5%90%88%e7%a9%ba%e9%97%b4">#</a>
-</h3>
-<p>两个轴 <code>Vertial Axis</code> <code>Horizontal Axis</code> <br/></p>
+<ul>
+<li>当前实现了3种动作，走路，跑步和跳跃 <br/></li>
+<li>走路这块，从静止到跑起来支持加速，使用 <code>BS_Locomotion</code> <br/></li>
+<li>本小节会重新实现走路动画，根据速度方向，加载转向和后退动画 <br/>
+之后还有 装弹 <code>Reloading</code> 、死亡 <code>Death</code> 、瞄准 <code>Aiming</code> 动画 <br/></li>
+<li><code>Blend Space</code> <code>2D混合空间</code> <br/>
+拥有两个轴： <code>Vertial Axis</code> <code>Horizontal Axis</code> <br/></li>
+</ul>
 <h2 id="part-1-建模">
   Part 1 建模
   <a class="anchor" href="#part-1-%e5%bb%ba%e6%a8%a1">#</a>
@@ -474,9 +850,11 @@ https://github.com/alex-shpak/hugo-book
   一、 <code>ForwardVector</code> 和 <code>RightVector</code>
   <a class="anchor" href="#%e4%b8%80-forwardvector-%e5%92%8c-rightvector">#</a>
 </h3>
-<p><code>Actor</code> 有 <code>ForwardVector</code> 和 <code>RightVector</code> ， <code>Character</code> 前后左右移动有使用到这两个方向向量 <br/>
-若我们水平移动鼠标， <code>ForwardVector</code> 和 <code>RightVector</code> 随之发生改变 <br/>
-在视觉上， <code>ForwardVector</code> 一直向前， <code>RightVector</code> 一直向右，二者在水平面垂直 <br/></p>
+<ul>
+<li><code>Actor</code> 有 <code>ForwardVector</code> 和 <code>RightVector</code> ， <code>Character</code> 前后左右移动有使用到这两个方向向量 <br/></li>
+<li>若我们水平移动鼠标， <code>ForwardVector</code> 和 <code>RightVector</code> 随之发生改变 <br/>
+在视觉上， <code>ForwardVector</code> 一直向前， <code>RightVector</code> 一直向右，二者在水平面垂直 <br/></li>
+</ul>
 <h3 id="二-数学基础">
   二、数学基础
   <a class="anchor" href="#%e4%ba%8c-%e6%95%b0%e5%ad%a6%e5%9f%ba%e7%a1%80">#</a>
@@ -514,7 +892,7 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#%e4%b8%89-velocityvector">#</a>
 </h3>
 <p><code>Actor</code> 的速度是一个矢量，其表现是单位时间内的位移方向 <br/>
-当速度不为 <code>0</code> ， <code>VelocityVector</code> 和 <code>ForwardVector</code> 的夹角与此时 <code>Actor</code> 应该展现的动画息息相关 <br/></p>
+当速度不为 <code>0</code> ， <code>VelocityVector</code> 和 <code>ForwardVector</code> 的夹角与此时 <code>Actor</code> 应该展现的动画有关 <br/></p>
 <p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%a4%b9%e8%a7%92%e8%af%b4%e6%98%8e.png" width="600"/>
 </figure>
  <br/></p>
@@ -526,7 +904,6 @@ https://github.com/alex-shpak/hugo-book
 <code>VelocityVector</code> 和 <code>ForwardVector</code> 夹角的计算通过反余弦结果和 <code>sign(c.z)</code> 的乘积实现，分析特殊情形 <br/></p>
 <ul>
 <li>速度为 <code>0</code> ，真实夹角应该为 <code>0</code> <br/>
-计算夹角得到 <code>PI/2</code> <br/>
 由于此时 <code>Velocity</code> 为 <code>0</code> ，( 0, 任意 ) 对应 <code>Idle</code> ，可以显示正确动画 <br/></li>
 <li>速度不为 <code>0</code> ，夹角为 <code>0</code> 或 <code>PI</code> <br/>
 叉乘结果为 <code>0</code> ，即sign(c.z)为 <code>0</code> ，即计算夹角得到 <code>0</code> ，对应动画 <code>RunFwd</code> <br/>
@@ -620,14 +997,22 @@ https://github.com/alex-shpak/hugo-book
   1. 绘制 <code>ForwardVector</code>
   <a class="anchor" href="#1-dot-%e7%bb%98%e5%88%b6-forwardvector">#</a>
 </h3>
-<ul>
-<li>起点 <br/>
-<code>Actor</code> 当前位置 <br/></li>
-<li>偏移 <br/>
-放大的前进方向向量 <br/></li>
-<li>终点 <br/>
-起点 + 偏移 <br/></li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>起点</th>
+<th>偏移</th>
+<th>终点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Actor 当前位置</td>
+<td>放大的前进方向向量</td>
+<td>起点 + 偏移</td>
+</tr>
+</tbody>
+</table>
 <p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e7%bb%98%e5%88%b6ForwardVector.png" width="900"/>
 </figure>
  <br/></p>
@@ -635,12 +1020,22 @@ https://github.com/alex-shpak/hugo-book
   2. 绘制 <code>RightVector</code>
   <a class="anchor" href="#2-dot-%e7%bb%98%e5%88%b6-rightvector">#</a>
 </h3>
-<ul>
-<li>起点 <br/>
-<code>Actor</code> 当前位置 <br/></li>
-<li>偏移 <br/>
-放大的向右方向向量 <br/></li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>起点</th>
+<th>偏移</th>
+<th>终点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Actor 当前位置</td>
+<td>放大的向右方向向量</td>
+<td>起点 + 偏移</td>
+</tr>
+</tbody>
+</table>
 <p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e7%bb%98%e5%88%b6RightVector.png" width="900"/>
 </figure>
  <br/></p>
@@ -648,12 +1043,22 @@ https://github.com/alex-shpak/hugo-book
   3. 绘制 <code>VelocityVector</code>
   <a class="anchor" href="#3-dot-%e7%bb%98%e5%88%b6-velocityvector">#</a>
 </h3>
-<ul>
-<li>起点 <br/>
-<code>Actor</code> 当前位置 <br/></li>
-<li>偏移 <br/>
-放大的速度方向单位向量 <br/></li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>起点</th>
+<th>偏移</th>
+<th>终点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Actor 当前位置</td>
+<td>放大的速度方向单位向量</td>
+<td>起点 + 偏移</td>
+</tr>
+</tbody>
+</table>
 <p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e7%bb%98%e5%88%b6VelocityVector.png" width="900"/>
 </figure>
  <br/></p>
@@ -686,14 +1091,30 @@ https://github.com/alex-shpak/hugo-book
 <ol>
 <li>
 <p>设置轴 <br/></p>
-<ul>
-<li>水平轴表示 <code>速度</code> <br/>
-命名为 <code>Velocity</code> <br/>
-[ 0, 600 ] <br/></li>
-<li>垂直轴表示 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角 <br/>
-命名为 <code>Direction</code> <br/>
-[ -180, 180 ] <br/></li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>轴</th>
+<th>Name</th>
+<th>范围</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>水平轴</td>
+<td>Velocity</td>
+<td>[ 0, 600 ]</td>
+<td>速度</td>
+</tr>
+<tr>
+<td>垂直轴</td>
+<td>Direction</td>
+<td>[ -180, 180 ]</td>
+<td>ForwardVector 和 VelocityVector 的夹角</td>
+</tr>
+</tbody>
+</table>
 <p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/BS_Locomotion_Walk-Axis.png" width="400"/>
     </figure>
  <br/></p>
@@ -704,20 +1125,42 @@ https://github.com/alex-shpak/hugo-book
 <p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/BS_Locomotion_Walk.png" width="700"/>
     </figure>
  <br/></p>
-<ul>
-<li>动画资产 <br/>
-<code>Idle</code> <code>Run_Fwd</code> <code>Run_Bwd</code> <code>Run_Rt</code> <code>Run_Lt</code> <br/></li>
-<li>初始状态 <br/>
-<code>Idle</code> ( 0, 0 ) <br/></li>
-<li>满速前进 <br/>
-<code>Run_Fwd</code> ( 600, 0 ) <br/></li>
-<li>满速后退 <br/>
-<code>Run_Bwd</code> ( 600, -180 ) 和 ( 600, 180 ) <br/></li>
-<li>满速向右 <br/>
-<code>Run_Rt</code> ( 600, 90 ) <br/></li>
-<li>满速向左 <br/>
-<code>Run_Lt</code> ( 600, -90 ) <br/></li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>坐标</th>
+<th>动画资产</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>( 0, 0 )</td>
+<td>Idle</td>
+<td>初始状态</td>
+</tr>
+<tr>
+<td>( 600, 0 )</td>
+<td>Run_Fwd</td>
+<td>满速前进</td>
+</tr>
+<tr>
+<td>( 600, -180 ) 和 ( 600, 180 )</td>
+<td>Run_Bwd</td>
+<td>满速后退</td>
+</tr>
+<tr>
+<td>( 600, 90 )</td>
+<td>Run_Rt</td>
+<td>满速向右</td>
+</tr>
+<tr>
+<td>( 600, -90 )</td>
+<td>Run_Lt</td>
+<td>满速向左</td>
+</tr>
+</tbody>
+</table>
 </li>
 </ol>
 <h3 id="二-将-bs-locomotion-walk-用作走路动画">
@@ -742,9 +1185,9 @@ https://github.com/alex-shpak/hugo-book
     <br/></p>
 </li>
 </ol>
-<h2 id="part-4-在蓝图计算-forwardvector-和-velocityvector-的夹角">
-  Part 4 在蓝图计算 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角
-  <a class="anchor" href="#part-4-%e5%9c%a8%e8%93%9d%e5%9b%be%e8%ae%a1%e7%ae%97-forwardvector-%e5%92%8c-velocityvector-%e7%9a%84%e5%a4%b9%e8%a7%92">#</a>
+<h2 id="part-4-在蓝图中计算-forwardvector-和-velocityvector-的夹角">
+  Part 4 在蓝图中计算 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角
+  <a class="anchor" href="#part-4-%e5%9c%a8%e8%93%9d%e5%9b%be%e4%b8%ad%e8%ae%a1%e7%ae%97-forwardvector-%e5%92%8c-velocityvector-%e7%9a%84%e5%a4%b9%e8%a7%92">#</a>
 </h2>
 <p><code>虚幻编辑器</code> <br/></p>
 <h3 id="1-dot-在蓝图中计算夹角并设置变量">
@@ -769,12 +1212,22 @@ https://github.com/alex-shpak/hugo-book
   2. 绘制 <code>ForwardVectr</code> 和 <code>VelocityVector</code> 的叉乘结果
   <a class="anchor" href="#2-dot-%e7%bb%98%e5%88%b6-forwardvectr-%e5%92%8c-velocityvector-%e7%9a%84%e5%8f%89%e4%b9%98%e7%bb%93%e6%9e%9c">#</a>
 </h3>
-<ul>
-<li>起点 <br/>
-<code>Actor</code> 当前位置 <br/></li>
-<li>偏移 <br/>
-放大的叉乘结果 <br/></li>
-</ul>
+<table>
+<thead>
+<tr>
+<th>起点</th>
+<th>偏移</th>
+<th>终点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Actor 当前位置</td>
+<td>放大的叉乘结果</td>
+<td>起点 + 偏移</td>
+</tr>
+</tbody>
+</table>
 <p><img src="/pic/添加转向动画/实现转向动画/绘制叉乘结果.png" alt="绘制叉乘结果.png" width="900" /> <br/>
 运动时才有向量显示 <br/>
 向前和向后运动时，偶有不明显的显示 <br/></p>
@@ -815,7 +1268,7 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#2-dot-%e4%bb%a3%e7%a0%81%e4%bc%98%e5%8c%96">#</a>
 </h3>
 <p><code>可选</code> <br/>
-实现前后左右移动回调函数 <code>MoveForward</code> 和 <code>MoveRight</code> 时，如果 <code>Amount</code> 为0，直接返回 <br/></p>
+实现前后左右移动回调函数 <code>MoveForward</code> 和 <code>MoveRight</code> 时，如果 <code>Amount</code> 为0，直接返回；MoveFoward中，设置IsForward逻辑保留 <br/></p>
 <h2 id="part-6-使用-c-plus-plus-函数设置夹角值">
   Part 6 使用 <code>C++</code> 函数设置夹角值
   <a class="anchor" href="#part-6-%e4%bd%bf%e7%94%a8-c-plus-plus-%e5%87%bd%e6%95%b0%e8%ae%be%e7%bd%ae%e5%a4%b9%e8%a7%92%e5%80%bc">#</a>
@@ -833,9 +1286,7 @@ https://github.com/alex-shpak/hugo-book
   2. 阻断动画蓝图无效状态
   <a class="anchor" href="#2-dot-%e9%98%bb%e6%96%ad%e5%8a%a8%e7%94%bb%e8%93%9d%e5%9b%be%e6%97%a0%e6%95%88%e7%8a%b6%e6%80%81">#</a>
 </h3>
-<p>当我们打开动画蓝图时，其以standalone方式运行 <br/>
-即使未在虚幻编辑器中运行游戏，在蓝图编辑器打开ABP_BaseCharacter，其处于运行状态 <br/>
-可以看到动画蓝图视口的 <code>Actor</code> 是有动画的 <br/>
+<p>当我们打开动画蓝图时，其以standalone方式运行。即使未在虚幻编辑器中运行游戏，在蓝图编辑器打开ABP_BaseCharacter，其处于运行状态。可以看到动画蓝图视口的 <code>Actor</code> 是有动画的。 <br/>
 从 <code>EventBlueprintUpdateAnimation</code> 出发， <code>TryGetPawnOwner</code> 得到空指针时，停在 <code>CastToCharacter</code> <br/></p>
 <p><figure><img src="/pic/%e6%b7%bb%e5%8a%a0%e8%bd%ac%e5%90%91%e5%8a%a8%e7%94%bb/%e5%9c%a8%e8%93%9d%e5%9b%be%e4%b8%ad%e4%bd%bf%e7%94%a8C&#43;&#43;%e5%87%bd%e6%95%b0%e8%ae%a1%e7%ae%97%e5%a4%b9%e8%a7%92/ABP_BaseCharacter%e5%a4%84%e4%ba%8e%e8%bf%90%e8%a1%8c%e7%8a%b6%e6%80%81.png" width="1000"/>
 </figure>
@@ -903,11 +1354,7 @@ https://github.com/alex-shpak/hugo-book
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a>
-          <ul>
-            <li><a href="#blend-space-2d混合空间"><code>Blend Space</code> <code>2D混合空间</code></a></li>
-          </ul>
-        </li>
+        <li><a href="#overview">Overview</a></li>
         <li><a href="#part-1-建模">Part 1 建模</a>
           <ul>
             <li><a href="#一-forwardvector-和-rightvector">一、 <code>ForwardVector</code> 和 <code>RightVector</code></a></li>
@@ -936,7 +1383,7 @@ https://github.com/alex-shpak/hugo-book
             <li><a href="#二-将-bs-locomotion-walk-用作走路动画">二、将 <code>BS_Locomotion_Walk</code> 用作走路动画</a></li>
           </ul>
         </li>
-        <li><a href="#part-4-在蓝图计算-forwardvector-和-velocityvector-的夹角">Part 4 在蓝图计算 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角</a>
+        <li><a href="#part-4-在蓝图中计算-forwardvector-和-velocityvector-的夹角">Part 4 在蓝图中计算 <code>ForwardVector</code> 和 <code>VelocityVector</code> 的夹角</a>
           <ul>
             <li><a href="#1-dot-在蓝图中计算夹角并设置变量">1. 在蓝图中计算夹角并设置变量</a></li>
             <li><a href="#2-dot-绘制-forwardvectr-和-velocityvector-的叉乘结果">2. 绘制 <code>ForwardVectr</code> 和 <code>VelocityVector</code> 的叉乘结果</a></li>
