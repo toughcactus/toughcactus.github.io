@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="Part 1 派生关系 # UObjectBaseUtility &lt; UObject &lt; AActor 1. AActor类型 # 虚幻C&#43;&#43;基础类型，能放置到世界场景中的物体，具有相同的基类AActor。 所有能添加到世界场景中的物体都可称作Actor，如几何体，特效，声音。Actor对象有无实体均可。 初始状态不具备变换属性(有Gizmo表示，移动后会复位)，无法绑定模型，变换需要USceneComponent组件，模型需要UStaticMeshComponent组件。 可以在虚幻编辑器中往关卡添加Actor对象，也可以在代码中动态生成Actor对象。 Actor对象由各种Component组成，所有组件可以根据需求进行组装，方便重用。 2. UObject类型 # 虚幻引擎中最基础的类型，AActor类型的父类。 不能在场景中添加UObject对象，可以在代码中创建UObject对象并对逻辑进行封装。 Part 2 组件 Component # 具有视觉表示的组件，需要为其设置上级组件，或将其注册为根组件 1. 创建组件 UObject::CreateDefaultSubobject&lt;T&gt; # 返回指向组件的指针 参数 含义 说明 SubobjectName 虚幻编辑器中显示的组件名 FName类型 BTransient 使用默认值 使用 StaticMesh = CreateDefaultSubobject&lt;UStaticMeshComponent&gt;(&#34;StaticMeshInEditor&#34;); 在C&#43;&#43;中对变量StaticMesh做设置，在虚幻编辑器中对名为&quot;StaticMeshInEditor&quot;的组件做设置；二者相对应。 可以在C&#43;&#43;中修改变量名；如果修改组件名，虚幻编辑器中该组件的已有设置会因找不到目标载体而无法生效。 2. 设置为根组件 AActor::SetRootComponent # 根组件的设置会影响到变换矩阵求值 参数 含义 说明 NewRootComponent 指向组件的指针 使用 SetRootComponent(StaticMesh); USceneComponent *类型，可以接受UStaticMeshCompoent *(动态绑定)。因为UStaticMeshComponent派生自UMeshComponent，UMeshComponent派生自UPrimitiveComponent，UPrimitiveComponent派生自USceneComponent。 3. 获取根组件 AActor::GetRootComponent # 返回指向根组件的指针 使用 GetRootComponent(); 4.">
+<meta name="description" content="Part 1 派生关系 # UObjectBaseUtility &lt; UObject &lt; AActor 1. AActor类型 # 虚幻C&#43;&#43;基础类型，能放置到世界场景中的物体，具有相同的基类AActor。 所有能添加到世界场景中的物体都可称作Actor，如几何体，特效，声音。Actor对象有无实体均可。 初始状态不具备变换属性(有Gizmo表示，移动后会复位)，无法绑定模型。变换需要USceneComponent组件，模型需要UStaticMeshComponent组件。 可以在虚幻编辑器中往关卡添加Actor对象，也可以在代码中动态生成Actor对象。 Actor对象由各种Component组成，所有组件可以根据需求进行组装，方便重用。 2. UObject类型 # 虚幻引擎中最基础的类型，AActor类型的父类。 不能在场景中添加UObject对象，可以在代码中创建UObject对象并对逻辑进行封装。 Part 2 组件 Component # 具有视觉表示的组件，需要为其设置上级组件，或将其注册为根组件 1. 创建组件 UObject::CreateDefaultSubobject&lt;T&gt; # 返回指向组件的指针 参数 含义 说明 SubobjectName 虚幻编辑器中显示的组件名 FName类型 BTransient 使用默认值 使用 StaticMesh = CreateDefaultSubobject&lt;UStaticMeshComponent&gt;(&#34;StaticMeshInEditor&#34;); 在C&#43;&#43;中对变量StaticMesh做设置，在虚幻编辑器中对名为&quot;StaticMeshInEditor&quot;的组件做设置；二者相对应。 可以在C&#43;&#43;中修改变量名；如果修改组件名，虚幻编辑器中该组件的已有设置会因找不到目标载体而无法生效。 2. 设置为根组件 AActor::SetRootComponent # 根组件的设置会影响到变换矩阵求值 参数 含义 说明 NewRootComponent 指向组件的指针 使用 SetRootComponent(StaticMesh); USceneComponent *类型，可以接受UStaticMeshCompoent *(动态绑定)。因为UStaticMeshComponent派生自UMeshComponent，UMeshComponent派生自UPrimitiveComponent，UPrimitiveComponent派生自USceneComponent。 3. 获取根组件 AActor::GetRootComponent # 返回指向根组件的指针 使用 GetRootComponent(); 4.">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="AActor类型" />
-<meta property="og:description" content="Part 1 派生关系 # UObjectBaseUtility &lt; UObject &lt; AActor 1. AActor类型 # 虚幻C&#43;&#43;基础类型，能放置到世界场景中的物体，具有相同的基类AActor。 所有能添加到世界场景中的物体都可称作Actor，如几何体，特效，声音。Actor对象有无实体均可。 初始状态不具备变换属性(有Gizmo表示，移动后会复位)，无法绑定模型，变换需要USceneComponent组件，模型需要UStaticMeshComponent组件。 可以在虚幻编辑器中往关卡添加Actor对象，也可以在代码中动态生成Actor对象。 Actor对象由各种Component组成，所有组件可以根据需求进行组装，方便重用。 2. UObject类型 # 虚幻引擎中最基础的类型，AActor类型的父类。 不能在场景中添加UObject对象，可以在代码中创建UObject对象并对逻辑进行封装。 Part 2 组件 Component # 具有视觉表示的组件，需要为其设置上级组件，或将其注册为根组件 1. 创建组件 UObject::CreateDefaultSubobject&lt;T&gt; # 返回指向组件的指针 参数 含义 说明 SubobjectName 虚幻编辑器中显示的组件名 FName类型 BTransient 使用默认值 使用 StaticMesh = CreateDefaultSubobject&lt;UStaticMeshComponent&gt;(&#34;StaticMeshInEditor&#34;); 在C&#43;&#43;中对变量StaticMesh做设置，在虚幻编辑器中对名为&quot;StaticMeshInEditor&quot;的组件做设置；二者相对应。 可以在C&#43;&#43;中修改变量名；如果修改组件名，虚幻编辑器中该组件的已有设置会因找不到目标载体而无法生效。 2. 设置为根组件 AActor::SetRootComponent # 根组件的设置会影响到变换矩阵求值 参数 含义 说明 NewRootComponent 指向组件的指针 使用 SetRootComponent(StaticMesh); USceneComponent *类型，可以接受UStaticMeshCompoent *(动态绑定)。因为UStaticMeshComponent派生自UMeshComponent，UMeshComponent派生自UPrimitiveComponent，UPrimitiveComponent派生自USceneComponent。 3. 获取根组件 AActor::GetRootComponent # 返回指向根组件的指针 使用 GetRootComponent(); 4." />
+<meta property="og:description" content="Part 1 派生关系 # UObjectBaseUtility &lt; UObject &lt; AActor 1. AActor类型 # 虚幻C&#43;&#43;基础类型，能放置到世界场景中的物体，具有相同的基类AActor。 所有能添加到世界场景中的物体都可称作Actor，如几何体，特效，声音。Actor对象有无实体均可。 初始状态不具备变换属性(有Gizmo表示，移动后会复位)，无法绑定模型。变换需要USceneComponent组件，模型需要UStaticMeshComponent组件。 可以在虚幻编辑器中往关卡添加Actor对象，也可以在代码中动态生成Actor对象。 Actor对象由各种Component组成，所有组件可以根据需求进行组装，方便重用。 2. UObject类型 # 虚幻引擎中最基础的类型，AActor类型的父类。 不能在场景中添加UObject对象，可以在代码中创建UObject对象并对逻辑进行封装。 Part 2 组件 Component # 具有视觉表示的组件，需要为其设置上级组件，或将其注册为根组件 1. 创建组件 UObject::CreateDefaultSubobject&lt;T&gt; # 返回指向组件的指针 参数 含义 说明 SubobjectName 虚幻编辑器中显示的组件名 FName类型 BTransient 使用默认值 使用 StaticMesh = CreateDefaultSubobject&lt;UStaticMeshComponent&gt;(&#34;StaticMeshInEditor&#34;); 在C&#43;&#43;中对变量StaticMesh做设置，在虚幻编辑器中对名为&quot;StaticMeshInEditor&quot;的组件做设置；二者相对应。 可以在C&#43;&#43;中修改变量名；如果修改组件名，虚幻编辑器中该组件的已有设置会因找不到目标载体而无法生效。 2. 设置为根组件 AActor::SetRootComponent # 根组件的设置会影响到变换矩阵求值 参数 含义 说明 NewRootComponent 指向组件的指针 使用 SetRootComponent(StaticMesh); USceneComponent *类型，可以接受UStaticMeshCompoent *(动态绑定)。因为UStaticMeshComponent派生自UMeshComponent，UMeshComponent派生自UPrimitiveComponent，UPrimitiveComponent派生自USceneComponent。 3. 获取根组件 AActor::GetRootComponent # 返回指向根组件的指针 使用 GetRootComponent(); 4." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" /><meta property="article:section" content="docs" />
 
@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.76b93651dd2f575470b0067bb537b3b7f1d42a13cec268d3b918c049e33a1273.js" integrity="sha256-drk2Ud0vV1RwsAZ7tTezt/HUKhPOwmjTuRjASeM6EnM=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.53520aa9a68595c8b61d4f74f8c24d8d1f473bf02c64aa6e7c8aaeb33addd65f.js" integrity="sha256-U1IKqaaFlci2HU90&#43;MJNjR9HO/AsZKpufIquszrd1l8=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -846,17 +846,17 @@ https://github.com/alex-shpak/hugo-book
   1. AActor类型
   <a class="anchor" href="#1-dot-aactor%e7%b1%bb%e5%9e%8b">#</a>
 </h3>
-<p>虚幻C++基础类型，能放置到世界场景中的物体，具有相同的基类AActor。 <br/>
-所有能添加到世界场景中的物体都可称作Actor，如几何体，特效，声音。Actor对象有无实体均可。 <br/>
-初始状态不具备变换属性(有Gizmo表示，移动后会复位)，无法绑定模型，变换需要USceneComponent组件，模型需要UStaticMeshComponent组件。 <br/>
-可以在虚幻编辑器中往关卡添加Actor对象，也可以在代码中动态生成Actor对象。 <br/>
-Actor对象由各种Component组成，所有组件可以根据需求进行组装，方便重用。 <br/></p>
+<p>虚幻C++基础类型，能放置到世界场景中的物体，具有相同的基类AActor。 <br/></p>
+<p>所有能添加到世界场景中的物体都可称作Actor，如几何体，特效，声音。Actor对象有无实体均可。 <br/></p>
+<p>初始状态不具备变换属性(有Gizmo表示，移动后会复位)，无法绑定模型。变换需要USceneComponent组件，模型需要UStaticMeshComponent组件。 <br/></p>
+<p>可以在虚幻编辑器中往关卡添加Actor对象，也可以在代码中动态生成Actor对象。 <br/></p>
+<p>Actor对象由各种Component组成，所有组件可以根据需求进行组装，方便重用。 <br/></p>
 <h3 id="2-dot-uobject类型">
   2. UObject类型
   <a class="anchor" href="#2-dot-uobject%e7%b1%bb%e5%9e%8b">#</a>
 </h3>
-<p>虚幻引擎中最基础的类型，AActor类型的父类。 <br/>
-不能在场景中添加UObject对象，可以在代码中创建UObject对象并对逻辑进行封装。 <br/></p>
+<p>虚幻引擎中最基础的类型，AActor类型的父类。 <br/></p>
+<p>不能在场景中添加UObject对象，可以在代码中创建UObject对象并对逻辑进行封装。 <br/></p>
 <h2 id="part-2-组件-component">
   Part 2 组件 <code>Component</code>
   <a class="anchor" href="#part-2-%e7%bb%84%e4%bb%b6-component">#</a>
@@ -1249,7 +1249,7 @@ TakeDamage根据传入的伤害事件类型参数做相应处理，并调用委�
 </h3>
 <ol>
 <li>为对应伤害类型注册处理函数 <br/></li>
-<li>欲造成伤害时，传入特定伤害事件，调用TakeDamage函数</li>
+<li>欲造成伤害时，传入特定伤害事件，调用TakeDamage函数 <br/></li>
 </ol>
 </article>
  
