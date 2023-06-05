@@ -1,0 +1,1148 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Overview # 派生自APawn，实现了角色的动作(motion)，动画(animation)和物理交互(physical interaction) Part 1 跳跃回调函数 ACharacter::Jump # 若无其他处理，可以直接将Jump注册为跳跃回调函数 定义 将bPressedJump置为true，在下次调用Tick函数时，让Actor在Z轴跳跃 Part 2 构造函数 ACharacter::ACharacter # 设置使用组件的类型(派生类or基类) Part 3 子组件类型名 # 保存在FName中 静态成员 1. CharacterMovementComponent类型名 ACharacter::CharacterMovementComponentName # 角色运动组件 2. MeshComponent类型名 ACharacter::MeshComponentName # 网格体组件 3. CapsuleComponent类型名 ACharacter::CapsuleComponentName # 碰撞胶囊组件 Part 4 获取指向CharacterMovement组件的指针 ACharacter::GetCharacterMovement # CharacterMovementComponent或其派生类，根据ACharacter构造函数中设置的组件类型来 Part 5 播放动画剪辑 ACharacter::PlayAnimMontage # 定义 不需要在调用前检查动画剪辑指针的有效性，函数负责检查 参数 含义 AnimMontage 指向动画剪辑的指针 Part 6 落地事件 # 使用委托机制实现 处理流程 方法一 为落地事件数据成员注册处理函数，发生落地事件时，处理函数被调用 方法二 覆写虚函数Landed 1. Character提供的落地委托类型 FLandedSignature # 多播 支持蓝图 处理函数格式 void OnGroundLanded(const FHitResult&amp; Hit); OnLanded函数名已被使用 2.">
+<meta name="theme-color" content="#FFFFFF">
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="ACharacter类型" />
+<meta property="og:description" content="Overview # 派生自APawn，实现了角色的动作(motion)，动画(animation)和物理交互(physical interaction) Part 1 跳跃回调函数 ACharacter::Jump # 若无其他处理，可以直接将Jump注册为跳跃回调函数 定义 将bPressedJump置为true，在下次调用Tick函数时，让Actor在Z轴跳跃 Part 2 构造函数 ACharacter::ACharacter # 设置使用组件的类型(派生类or基类) Part 3 子组件类型名 # 保存在FName中 静态成员 1. CharacterMovementComponent类型名 ACharacter::CharacterMovementComponentName # 角色运动组件 2. MeshComponent类型名 ACharacter::MeshComponentName # 网格体组件 3. CapsuleComponent类型名 ACharacter::CapsuleComponentName # 碰撞胶囊组件 Part 4 获取指向CharacterMovement组件的指针 ACharacter::GetCharacterMovement # CharacterMovementComponent或其派生类，根据ACharacter构造函数中设置的组件类型来 Part 5 播放动画剪辑 ACharacter::PlayAnimMontage # 定义 不需要在调用前检查动画剪辑指针的有效性，函数负责检查 参数 含义 AnimMontage 指向动画剪辑的指针 Part 6 落地事件 # 使用委托机制实现 处理流程 方法一 为落地事件数据成员注册处理函数，发生落地事件时，处理函数被调用 方法二 覆写虚函数Landed 1. Character提供的落地委托类型 FLandedSignature # 多播 支持蓝图 处理函数格式 void OnGroundLanded(const FHitResult&amp; Hit); OnLanded函数名已被使用 2." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/ACharacter%E7%B1%BB%E5%9E%8B/" /><meta property="article:section" content="docs" />
+
+
+<title>ACharacter类型 | ToughCactus</title>
+<link rel="manifest" href="/manifest.json">
+<link rel="icon" href="/favicon.png" type="image/x-icon">
+<link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
+  <script defer src="/flexsearch.min.js"></script>
+  <script defer src="/en.search.min.6bc12bbe8c62ef26c1060eb1da6e8a7fe946655961a32348eb617b5c6d34326b.js" integrity="sha256-a8Ervoxi7ybBBg6x2m6Kf&#43;lGZVlhoyNI62F7XG00Mms=" crossorigin="anonymous"></script>
+
+  <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
+<!--
+Made with Book Theme
+https://github.com/alex-shpak/hugo-book
+-->
+  
+</head>
+<body dir="ltr">
+  <input type="checkbox" class="hidden toggle" id="menu-control" />
+  <input type="checkbox" class="hidden toggle" id="toc-control" />
+  <main class="container flex">
+    <aside class="book-menu">
+      <div class="book-menu-content">
+        
+  <nav>
+<h2 class="book-brand">
+  <a class="flex align-center" href="/"><span>ToughCactus</span>
+  </a>
+</h2>
+
+
+<div class="book-search">
+  <input type="text" id="book-search-input" placeholder="Search" aria-label="Search" maxlength="64" data-hotkeys="s/" />
+  <div class="book-search-spinner hidden"></div>
+  <ul id="book-search-results"></ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+  
+  <ul>
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>分享</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="toggle"  />
+    <label for="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="flex justify-between">
+      <a role="button" class="">开发工具</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/" class="">VSCode</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f3b1b01ebe1f17bcb23615417646b6e6" class="toggle"  />
+    <label for="section-f3b1b01ebe1f17bcb23615417646b6e6" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e5270f46858d8c5464db25f6bd215fa4" class="toggle"  />
+    <label for="section-e5270f46858d8c5464db25f6bd215fa4" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/" class="">bash</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="toggle"  />
+    <label for="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="flex justify-between">
+      <a role="button" class="">Emacs</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/" class="">org-mode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="">插件篇 | 文件管理</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8f0677a94903c7e3083dad01e58ed439" class="toggle"  />
+    <label for="section-8f0677a94903c7e3083dad01e58ed439" class="flex justify-between">
+      <a role="button" class="">博客</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>虚幻引擎</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle" checked />
+    <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
+      <a role="button" class="">API</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle" checked />
+    <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
+      <a role="button" class="">虚幻C&#43;&#43;</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c25abc278a6873a94fa212bff746344" class="toggle" checked />
+    <label for="section-9c25abc278a6873a94fa212bff746344" class="flex justify-between">
+      <a role="button" class="">Actor及其派生类</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="">AActor类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APawn%E7%B1%BB%E5%9E%8B/" class="">APawn类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/ACharacter%E7%B1%BB%E5%9E%8B/" class="active">ACharacter类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APlayerController%E7%B1%BB%E5%9E%8B/" class="">APlayerController类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AGameModeBase%E7%B1%BB%E5%9E%8B/" class="">AGameModeBase类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c276a0254804f7460cb82f89e38b2be" class="toggle"  />
+    <label for="section-9c276a0254804f7460cb82f89e38b2be" class="flex justify-between">
+      <a role="button" class="">全局类型</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B/UEngine%E7%B1%BB%E5%9E%8B/" class="">UEngine类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B/UWorld%E7%B1%BB%E5%9E%8B/" class="">UWorld类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6ec12d43fc21edcca4a92356f25ab919" class="toggle"  />
+    <label for="section-6ec12d43fc21edcca4a92356f25ab919" class="flex justify-between">
+      <a role="button" class="">虚幻编辑器</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-a30b888d97cedd0e72fd98dd83a446d9" class="toggle"  />
+    <label for="section-a30b888d97cedd0e72fd98dd83a446d9" class="flex justify-between">
+      <a role="button" class="">基础课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c55d44374101bd87d8c4761c8d07c64" class="toggle"  />
+    <label for="section-9c55d44374101bd87d8c4761c8d07c64" class="flex justify-between">
+      <a role="button" class="">进阶课程</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-1d099f39b37c7d342e94ef6f0f3007bb" class="toggle"  />
+    <label for="section-1d099f39b37c7d342e94ef6f0f3007bb" class="flex justify-between">
+      <a role="button" class="">角色和动画</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.1%E5%9C%A8%E6%9C%AC%E5%9C%B0%E8%BF%90%E8%A1%8CShooterGame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/" class="">运行ShooterGame示例项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.2%E5%88%9D%E5%A7%8B%E5%8C%96ShootTraining%E9%A1%B9%E7%9B%AE/" class="">初始化ShootTraining项目</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/" class="">代码规范</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/" class="">为游戏角色绑定模型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.5%E5%AE%9E%E7%8E%B0Character%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/" class="">实现游戏角色前后左右移动</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.6%E5%AE%9E%E7%8E%B0Character%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/" class="">实现游戏角色视角旋转</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.7%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/" class="">为游戏角色添加向前跑步动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.8%E5%AE%9E%E7%8E%B0Character%E8%B7%B3%E8%B7%83/" class="">实现游戏角色跳跃</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.9%E5%AE%9E%E7%8E%B0Character%E8%B7%91%E6%AD%A5/" class="">实现游戏角色跑步</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.a%E6%B7%BB%E5%8A%A0%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/" class="">添加走路时转向动画</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.b%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/" class="">打包游戏</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.c%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-abf72c0556c5506bfc005dd76784c9b5" class="toggle"  />
+    <label for="section-abf72c0556c5506bfc005dd76784c9b5" class="flex justify-between">
+      <a role="button" class="">健康系统</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.1%E5%9C%A8Character%E4%B8%8A%E6%96%B9%E6%98%BE%E7%A4%BA%E7%94%9F%E5%91%BD%E5%80%BC/" class="">实时显示游戏角色生命值</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.2%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/" class="">计算伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.3%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/" class="">模拟榴弹爆炸</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.4%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/" class="">使用伤害类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.5%E6%B7%BB%E5%8A%A0Character%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/" class="">为游戏角色添加死亡逻辑</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.6%E5%AE%9E%E7%8E%B0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/" class="">添加观察视角</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.7%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/" class="">自动治疗</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.8%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/" class="">高处坠落伤害</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.9%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/" class="">打包游戏和收尾</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" class="">代码重构</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+
+
+
+
+
+
+
+
+
+
+  
+<ul>
+  
+  <li>
+    <a href="/about/"  >
+        关于
+      </a>
+  </li>
+  
+</ul>
+
+
+
+
+
+
+</nav>
+
+
+
+
+  <script>(function(){var e=document.querySelector("aside .book-menu-content");addEventListener("beforeunload",function(){localStorage.setItem("menu.scrollTop",e.scrollTop)}),e.scrollTop=localStorage.getItem("menu.scrollTop")})()</script>
+
+
+ 
+      </div>
+    </aside>
+
+    <div class="book-page">
+      <header class="book-header">
+        
+  <div class="flex align-center justify-between">
+  <label for="menu-control">
+    <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
+  </label>
+
+  <strong>ACharacter类型</strong>
+
+  <label for="toc-control">
+    
+    <img src="/svg/toc.svg" class="book-icon" alt="Table of Contents" />
+    
+  </label>
+</div>
+
+
+  
+  <aside class="hidden clearfix">
+    
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#part-1-跳跃回调函数-acharacter-jump">Part 1 跳跃回调函数 <code>ACharacter::Jump</code></a></li>
+        <li><a href="#part-2-构造函数-acharacter-acharacter">Part 2 构造函数 ACharacter::ACharacter</a></li>
+        <li><a href="#part-3-子组件类型名">Part 3 子组件类型名</a>
+          <ul>
+            <li><a href="#1-dot-charactermovementcomponent类型名-acharacter-charactermovementcomponentname">1. CharacterMovementComponent类型名 <code>ACharacter::CharacterMovementComponentName</code></a></li>
+            <li><a href="#2-dot-meshcomponent类型名-acharacter-meshcomponentname">2. MeshComponent类型名 <code>ACharacter::MeshComponentName</code></a></li>
+            <li><a href="#3-dot-capsulecomponent类型名-acharacter-capsulecomponentname">3. CapsuleComponent类型名 <code>ACharacter::CapsuleComponentName</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-4-获取指向charactermovement组件的指针-acharacter-getcharactermovement">Part 4 获取指向CharacterMovement组件的指针 <code>ACharacter::GetCharacterMovement</code></a></li>
+        <li><a href="#part-5-播放动画剪辑-acharacter-playanimmontage">Part 5 播放动画剪辑 <code>ACharacter::PlayAnimMontage</code></a></li>
+        <li><a href="#part-6-落地事件">Part 6 落地事件</a>
+          <ul>
+            <li><a href="#1-dot-character提供的落地委托类型-flandedsignature">1. Character提供的落地委托类型 <code>FLandedSignature</code></a></li>
+            <li><a href="#2-dot-落地委托类型数据成员-acharacter-landeddelegate">2. 落地委托类型数据成员 <code>ACharacter::LandedDelegate</code></a></li>
+            <li><a href="#3-dot-character坠落接触地面时调用-acharacter-landed">3. Character坠落接触地面时调用 <code>ACharacter::Landed</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+
+  </aside>
+  
+ 
+      </header>
+
+      
+      
+  <article class="markdown"><h2 id="overview">
+  Overview
+  <a class="anchor" href="#overview">#</a>
+</h2>
+<p>派生自APawn，实现了角色的动作(motion)，动画(animation)和物理交互(physical interaction) <br/></p>
+<h2 id="part-1-跳跃回调函数-acharacter-jump">
+  Part 1 跳跃回调函数 <code>ACharacter::Jump</code>
+  <a class="anchor" href="#part-1-%e8%b7%b3%e8%b7%83%e5%9b%9e%e8%b0%83%e5%87%bd%e6%95%b0-acharacter-jump">#</a>
+</h2>
+<p>若无其他处理，可以直接将Jump注册为跳跃回调函数 <br/></p>
+<p><img src="/pic/ACharacter类型/ACharacter-Jump.png" alt="ACharacter-Jump.png" width="500" /> <br/>
+<strong>定义</strong> <br/>
+将bPressedJump置为true，在下次调用Tick函数时，让Actor在Z轴跳跃 <br/></p>
+<p><figure><img src="/pic/ACharacter%e7%b1%bb%e5%9e%8b/ACharacter-Jump-Definition.png" width="200"/>
+</figure>
+ <br/></p>
+<h2 id="part-2-构造函数-acharacter-acharacter">
+  Part 2 构造函数 ACharacter::ACharacter
+  <a class="anchor" href="#part-2-%e6%9e%84%e9%80%a0%e5%87%bd%e6%95%b0-acharacter-acharacter">#</a>
+</h2>
+<p>设置使用组件的类型(派生类or基类) <br/></p>
+<p><figure><img src="/pic/ACharacter%e7%b1%bb%e5%9e%8b/ACharacter-ACharacter.png" width="600"/>
+</figure>
+ <br/></p>
+<h2 id="part-3-子组件类型名">
+  Part 3 子组件类型名
+  <a class="anchor" href="#part-3-%e5%ad%90%e7%bb%84%e4%bb%b6%e7%b1%bb%e5%9e%8b%e5%90%8d">#</a>
+</h2>
+<p><code>保存在FName中</code> <code>静态成员</code> <br/></p>
+<p><figure><img src="/pic/ACharacter%e7%b1%bb%e5%9e%8b/ACharacter-%e7%bb%84%e4%bb%b6%e5%90%8d%e5%88%9d%e5%a7%8b%e5%8c%96.png" width="500"/>
+</figure>
+   <br/></p>
+<h3 id="1-dot-charactermovementcomponent类型名-acharacter-charactermovementcomponentname">
+  1. CharacterMovementComponent类型名 <code>ACharacter::CharacterMovementComponentName</code>
+  <a class="anchor" href="#1-dot-charactermovementcomponent%e7%b1%bb%e5%9e%8b%e5%90%8d-acharacter-charactermovementcomponentname">#</a>
+</h3>
+<p>角色运动组件 <br/></p>
+<p><figure><img src="/pic/ACharacter%e7%b1%bb%e5%9e%8b/ACharacter-CharacterMovementComponentName.png" width="1000"/>
+</figure>
+   <br/></p>
+<h3 id="2-dot-meshcomponent类型名-acharacter-meshcomponentname">
+  2. MeshComponent类型名 <code>ACharacter::MeshComponentName</code>
+  <a class="anchor" href="#2-dot-meshcomponent%e7%b1%bb%e5%9e%8b%e5%90%8d-acharacter-meshcomponentname">#</a>
+</h3>
+<p>网格体组件 <br/></p>
+<p><figure><img src="/pic/ACharacter%e7%b1%bb%e5%9e%8b/ACharacter-MeshComponentName.png" width="1000"/>
+</figure>
+   <br/></p>
+<h3 id="3-dot-capsulecomponent类型名-acharacter-capsulecomponentname">
+  3. CapsuleComponent类型名 <code>ACharacter::CapsuleComponentName</code>
+  <a class="anchor" href="#3-dot-capsulecomponent%e7%b1%bb%e5%9e%8b%e5%90%8d-acharacter-capsulecomponentname">#</a>
+</h3>
+<p>碰撞胶囊组件 <br/></p>
+<p><figure><img src="/pic/ACharacter%e7%b1%bb%e5%9e%8b/ACharacter-CapsuleComponentName.png" width="270"/>
+</figure>
+   <br/></p>
+<h2 id="part-4-获取指向charactermovement组件的指针-acharacter-getcharactermovement">
+  Part 4 获取指向CharacterMovement组件的指针 <code>ACharacter::GetCharacterMovement</code>
+  <a class="anchor" href="#part-4-%e8%8e%b7%e5%8f%96%e6%8c%87%e5%90%91charactermovement%e7%bb%84%e4%bb%b6%e7%9a%84%e6%8c%87%e9%92%88-acharacter-getcharactermovement">#</a>
+</h2>
+<p>CharacterMovementComponent或其派生类，根据ACharacter构造函数中设置的组件类型来 <br/></p>
+<p><figure><img src="/pic/ACharacter%e7%b1%bb%e5%9e%8b/ACharacter-GetCharacterMovement.png" width="500"/>
+</figure>
+   <br/></p>
+<h2 id="part-5-播放动画剪辑-acharacter-playanimmontage">
+  Part 5 播放动画剪辑 <code>ACharacter::PlayAnimMontage</code>
+  <a class="anchor" href="#part-5-%e6%92%ad%e6%94%be%e5%8a%a8%e7%94%bb%e5%89%aa%e8%be%91-acharacter-playanimmontage">#</a>
+</h2>
+<p><img src="/pic/ACharacter类型/ACharacter-PlayAnimMontage.png" alt="ACharacter-PlayAnimMontage.png" width="600" /> <br/>
+<strong>定义</strong> <br/>
+不需要在调用前检查动画剪辑指针的有效性，函数负责检查 <br/></p>
+<p><figure><img src="/pic/ACharacter%e7%b1%bb%e5%9e%8b/ACharacter-PlayAnimMontage-Definition.png" width="700"/>
+</figure>
+ <br/></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AnimMontage</td>
+<td>指向动画剪辑的指针</td>
+</tr>
+</tbody>
+</table>
+<h2 id="part-6-落地事件">
+  Part 6 落地事件
+  <a class="anchor" href="#part-6-%e8%90%bd%e5%9c%b0%e4%ba%8b%e4%bb%b6">#</a>
+</h2>
+<p>使用委托机制实现 <br/></p>
+<ul>
+<li>处理流程 <br/>
+方法一 为落地事件数据成员注册处理函数，发生落地事件时，处理函数被调用 <br/>
+方法二 覆写虚函数Landed <br/></li>
+</ul>
+<h3 id="1-dot-character提供的落地委托类型-flandedsignature">
+  1. Character提供的落地委托类型 <code>FLandedSignature</code>
+  <a class="anchor" href="#1-dot-character%e6%8f%90%e4%be%9b%e7%9a%84%e8%90%bd%e5%9c%b0%e5%a7%94%e6%89%98%e7%b1%bb%e5%9e%8b-flandedsignature">#</a>
+</h3>
+<p><code>多播</code> <code>支持蓝图</code> <br/></p>
+<p><img src="/pic/ACharacter类型/落地委托类型.png" alt="落地委托类型.png" width="600" /> <br/>
+处理函数格式 <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#66d9ef">void</span> <span style="color:#a6e22e">OnGroundLanded</span>(<span style="color:#66d9ef">const</span> FHitResult<span style="color:#f92672">&amp;</span> Hit);
+</span></span></code></pre></div><p><em>OnLanded函数名已被使用</em> <br/></p>
+<h3 id="2-dot-落地委托类型数据成员-acharacter-landeddelegate">
+  2. 落地委托类型数据成员 <code>ACharacter::LandedDelegate</code>
+  <a class="anchor" href="#2-dot-%e8%90%bd%e5%9c%b0%e5%a7%94%e6%89%98%e7%b1%bb%e5%9e%8b%e6%95%b0%e6%8d%ae%e6%88%90%e5%91%98-acharacter-landeddelegate">#</a>
+</h3>
+<p><figure><img src="/pic/ACharacter%e7%b1%bb%e5%9e%8b/ACharacter-LandedDelegate.png" width="600"/>
+</figure>
+  <br/></p>
+<h3 id="3-dot-character坠落接触地面时调用-acharacter-landed">
+  3. Character坠落接触地面时调用 <code>ACharacter::Landed</code>
+  <a class="anchor" href="#3-dot-character%e5%9d%a0%e8%90%bd%e6%8e%a5%e8%a7%a6%e5%9c%b0%e9%9d%a2%e6%97%b6%e8%b0%83%e7%94%a8-acharacter-landed">#</a>
+</h3>
+<p><img src="/pic/ACharacter类型/ACharacter-Landed.png" alt="ACharacter-Landed.png" width="600" /> <br/>
+<strong>定义</strong> <br/></p>
+<p><figure><img src="/pic/ACharacter%e7%b1%bb%e5%9e%8b/ACharacter-Landed-Definition.png" width="400"/>
+</figure>
+ <br/></p>
+</article>
+ 
+      
+
+      <footer class="book-footer">
+        
+  <div class="flex flex-wrap justify-between">
+
+
+
+
+
+</div>
+
+
+
+  <script>(function(){function e(e){const t=window.getSelection(),n=document.createRange();n.selectNodeContents(e),t.removeAllRanges(),t.addRange(n)}document.querySelectorAll("pre code").forEach(t=>{t.addEventListener("click",function(){if(window.getSelection().toString())return;e(t.parentElement),navigator.clipboard&&navigator.clipboard.writeText(t.parentElement.textContent)})})})()</script>
+
+
+ 
+        
+      </footer>
+
+      
+  
+  <div class="book-comments">
+
+</div>
+  
+ 
+
+      <label for="menu-control" class="hidden book-menu-overlay"></label>
+    </div>
+
+    
+    <aside class="book-toc">
+      <div class="book-toc-content">
+        
+  
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#part-1-跳跃回调函数-acharacter-jump">Part 1 跳跃回调函数 <code>ACharacter::Jump</code></a></li>
+        <li><a href="#part-2-构造函数-acharacter-acharacter">Part 2 构造函数 ACharacter::ACharacter</a></li>
+        <li><a href="#part-3-子组件类型名">Part 3 子组件类型名</a>
+          <ul>
+            <li><a href="#1-dot-charactermovementcomponent类型名-acharacter-charactermovementcomponentname">1. CharacterMovementComponent类型名 <code>ACharacter::CharacterMovementComponentName</code></a></li>
+            <li><a href="#2-dot-meshcomponent类型名-acharacter-meshcomponentname">2. MeshComponent类型名 <code>ACharacter::MeshComponentName</code></a></li>
+            <li><a href="#3-dot-capsulecomponent类型名-acharacter-capsulecomponentname">3. CapsuleComponent类型名 <code>ACharacter::CapsuleComponentName</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#part-4-获取指向charactermovement组件的指针-acharacter-getcharactermovement">Part 4 获取指向CharacterMovement组件的指针 <code>ACharacter::GetCharacterMovement</code></a></li>
+        <li><a href="#part-5-播放动画剪辑-acharacter-playanimmontage">Part 5 播放动画剪辑 <code>ACharacter::PlayAnimMontage</code></a></li>
+        <li><a href="#part-6-落地事件">Part 6 落地事件</a>
+          <ul>
+            <li><a href="#1-dot-character提供的落地委托类型-flandedsignature">1. Character提供的落地委托类型 <code>FLandedSignature</code></a></li>
+            <li><a href="#2-dot-落地委托类型数据成员-acharacter-landeddelegate">2. 落地委托类型数据成员 <code>ACharacter::LandedDelegate</code></a></li>
+            <li><a href="#3-dot-character坠落接触地面时调用-acharacter-landed">3. Character坠落接触地面时调用 <code>ACharacter::Landed</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+
+
+ 
+      </div>
+    </aside>
+    
+  </main>
+
+  
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+

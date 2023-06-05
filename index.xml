@@ -15,12 +15,30 @@
     </item>
     
     <item>
+      <title>bash</title>
+      <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/</guid>
+      <description> 花括号的使用 # 资料 可以使用花括号定义集合集合，集合内有多个可以枚举的项，使用逗号分隔 {项1, 项2, 项3...} 遇到花括号时，会对集合进行展开，可以将集合内的每一项与外面的字符串进行组合，然后返回全部组合项 xxx.conf{,.bak} 展开为 xxx.conf xxx.conf.bak 和前方的命令配合起来，就可以起到多个入参的效果 cp xxx.conf{,.bak} # cp xxx.conf xxx.conf.bak 接受多个参数的命令都可以这么玩，但前提是这些参数有共同部分，或者有某些规律 echo cp mkdir mv for mkdir app{,.bak} echo {1..5} echo {a..z} echo {001..10} # 前导0 echo {001..10..2} # 前导0 + 步进 echo {a..z}{0..9} # 组合：26 * 10 </description>
+    </item>
+    
+    <item>
       <title>org-mode</title>
       <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/</guid>
-      <description> 一、样式 # 删除线 +Content+ 下划线 ox-hugo转markdown存在问题 _Content_ 文本块 =test= ~test~ 斜体 /test/ 加粗 *test* 二、选项设置 # 关闭toc Table of Contents #+OPTIONS: toc:nil 指定toc显示层级 #+TOC: headlines 2 上标和下标 a_b a^b 关闭 #+OPTIONS: ^:nil 需要使用{}转义 #+OPTIONS ^:{} a_{b} a^{b} 自动为标题添加标号 关闭 #+OPTIONS num:nil 选项合并 #+OPTIONS: toc:nil ^:{} 显示所有内容 #+STARTUP: showall 只显示一级标题 #+STARTUP: overview 隐藏星号 #+STARTUP: hidestars 三、插入模板 # 代码框 填写编程语言 #+begin_src LANGUAGE #+end_src 文本框 #+begin_example #+end_example </description>
+      <description> Overview # The Org Manual 一、样式 # 删除线 +Content+ 下划线 ox-hugo转markdown存在问题 _Content_ 文本块 =test= ~test~ 斜体 /test/ 加粗 *test* 二、选项设置 # 关闭toc Table of Contents #+OPTIONS: toc:nil 指定toc显示层级 #+TOC: headlines 2 上标和下标 a_b a^b 关闭 #+OPTIONS: ^:nil 需要使用{}转义 #+OPTIONS ^:{} a_{b} a^{b} 自动为标题添加标号 关闭 #+OPTIONS num:nil 选项合并 #+OPTIONS: toc:nil ^:{} #+STARTUP: showall hidestars 显示所有内容 #+STARTUP: showall 只显示一级标题 #+STARTUP: overview 隐藏星号 #+STARTUP: hidestars 三、模板 # Structure Templates C-c C-, org-insert-structure-template 代码框 填写编程语言 // C++样式 #+begin_src LANGUAGE #+end_src 文本框 文本框样式 #+begin_example #+end_example quote quote样式 #+begin_quote #+end_quote </description>
+    </item>
+    
+    <item>
+      <title>UEngine类型</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B/UEngine%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B/UEngine%E7%B1%BB%E5%9E%8B/</guid>
+      <description> 一、头文件 # #include &amp;#34;Engine/Engine.h&amp;#34; 二、指向UEngine对象的指针 GEngine # 全局变量 使用前需检查 三、在屏幕输出信息 UEngine::AddOnScreenDebugMessage # 参数 名称 说明 消息标识 Key Key相同的消息只显示第一个；使用-1则一定会显示 文本显示时长 TimeToDisplay 文本颜色 DisplayColor 可以使用FColor预定义颜色，也可以使用自定义的FColor对象 文本内容 DebugMessage 在世界场景中的位置 bNewerOnTop 默认在顶部输出信息，为false则在屏幕底部输出 设置文字大小 TextScale 使用 if (GEngine) { GEngine-&amp;gt;AddOnScreenDebugMessage(-1, 3.0f, FColor::Orange, TEXT(&amp;#34;Hello&amp;#34;)); GEngine-&amp;gt;AddOnScreenDebugMessage(-1, 5.0f, FColor::Green, TEXT(&amp;#34;World!&amp;#34;)); } </description>
     </item>
     
     <item>
@@ -51,6 +69,24 @@
     </item>
     
     <item>
+      <title>APawn类型</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APawn%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APawn%E7%B1%BB%E5%9E%8B/</guid>
+      <description>APawn # 玩家所操作的角色，提供键位绑定。 由PlayerController控制，可在多个Pawn之间进行切换 Part 1 配置用户输入 APawn::SetupPlayerInputComponent # 在该函数内绑定键位 Part 2 获取类型 APawn::StaticClass # 静态成员 返回指向UClass的指针 在GENERATED_BODY宏中定义 UObject也有StaticClass，UObjectBaseUtility没有 Part 3 Controller切换Pawn # 1. Controller控制当前Pawn时调用 APawn::PossessedBy # 2. Controller释放当前Pawn时调用 APawn::UnPossessed # 3. 是否被PlayerController接管 APawn::IsControlled # 4. 是否被Controller接管 APawn::IsPawnControlled # AIController或PlayerController Part 4 以Pawn为原点建立相对坐标系，修改平移的方向向量 APawn::AddMovementInput # 控制Pawn前后左右移动，前进或后退传入ForwardVector和步长，左右移动传入RightVector和步长 控制Character前后左右移动亦通过该接口 参数 含义 WorldDirection 移动角色的方向 ScaleValue 方向正负 bForce 使用默认值 AddMovementInput(GetActorForwardVector(), Amount); // AddMovementInput(GetActorRightVector(), Amount); 定义 对UPawnMovementComponent::AddInputVector进行封装，修改方向向量 Part 5 绕指定轴旋转PlayerController # 旋转的控制权不在Pawn，在PlayerController。对PlayerController的旋转进行了封装。 X轴向前，Z轴向上，Y轴向右。 Roll 绕X轴旋转，顺时针为正方向 YOZ平面 Pitch 绕Y轴旋转，向上为正方向 XOZ平面 Yaw 绕Z轴旋转，向右为正方向 XOY平面 绕Y轴和Z轴旋转时，若无其他处理，可以直接将AddControllerPitchInput和AddControllerYawInput注册为旋转回调函数 1.</description>
+    </item>
+    
+    <item>
+      <title>UWorld类型</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B/UWorld%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B/UWorld%E7%B1%BB%E5%9E%8B/</guid>
+      <description>Overview # 关卡编辑器中，视口所展示的即世界场景，简称场景。 Engine/Source/Runtime/Engine/Classes/Engine/World.h 可以使用AActor::GetWorld获取UWorld对象，使用前需判断指针对象是否成功获取 一、头文件 # #include &amp;#34;Engine/World.h&amp;#34; 二、获取程序运行时长 UWorld::GetTimeSeconds # 使用 if (GetWorld()) { float Time = GetWorld()-&amp;gt;GetTimeSeconds(); } 三、动态生成Actor对象 # 分两步 调用基类或派生类的构造函数 调用对象的函数成员BeginPlay 1. 生成Actor对象 UWorld::SpawnActor # 返回AActor指针，如需使用派生类对象，需转换 对象类型 InClass 初始位置 Location 使用默认值，原点 初始旋转 Rotation 使用默认值，不发生旋转 TSubclassOf&amp;lt;ASimpleGeometry&amp;gt; GeometryClass; GetWorld()-&amp;gt;SpawnActor(GeometryClass); 2. 生成Actor对象 UWorld::SpawnActor&amp;lt;T&amp;gt; # 返回指向生成对象的指针 对象类型 Class 变换信息 Transform 其他参数 SpawnParameters 使用默认值 TSubclassOf&amp;lt;ASimpleGeometry&amp;gt; GeometryClass; const FTransform FTransform = FTransform(FRotator::ZeroRotator, FVector(0.0f, 300.0f, 300.0f)); ASimpleGeometry *Geometry = GetWorld()-&amp;gt;SpawnActor&amp;lt;ASimpleGeometry&amp;gt;(GeometryClass, FTransform); 3.</description>
+    </item>
+    
+    <item>
       <title>VSCode</title>
       <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -78,6 +114,15 @@
     </item>
     
     <item>
+      <title>ACharacter类型</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/ACharacter%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/ACharacter%E7%B1%BB%E5%9E%8B/</guid>
+      <description>Overview # 派生自APawn，实现了角色的动作(motion)，动画(animation)和物理交互(physical interaction) Part 1 跳跃回调函数 ACharacter::Jump # 若无其他处理，可以直接将Jump注册为跳跃回调函数 定义 将bPressedJump置为true，在下次调用Tick函数时，让Actor在Z轴跳跃 Part 2 构造函数 ACharacter::ACharacter # 设置使用组件的类型(派生类or基类) Part 3 子组件类型名 # 保存在FName中 静态成员 1. CharacterMovementComponent类型名 ACharacter::CharacterMovementComponentName # 角色运动组件 2. MeshComponent类型名 ACharacter::MeshComponentName # 网格体组件 3. CapsuleComponent类型名 ACharacter::CapsuleComponentName # 碰撞胶囊组件 Part 4 获取指向CharacterMovement组件的指针 ACharacter::GetCharacterMovement # CharacterMovementComponent或其派生类，根据ACharacter构造函数中设置的组件类型来 Part 5 播放动画剪辑 ACharacter::PlayAnimMontage # 定义 不需要在调用前检查动画剪辑指针的有效性，函数负责检查 参数 含义 AnimMontage 指向动画剪辑的指针 Part 6 落地事件 # 使用委托机制实现 处理流程 方法一 为落地事件数据成员注册处理函数，发生落地事件时，处理函数被调用 方法二 覆写虚函数Landed 1. Character提供的落地委托类型 FLandedSignature # 多播 支持蓝图 处理函数格式 void OnGroundLanded(const FHitResult&amp;amp; Hit); OnLanded函数名已被使用 2.</description>
+    </item>
+    
+    <item>
       <title>代码规范</title>
       <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.3%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -96,6 +141,15 @@
     </item>
     
     <item>
+      <title>APlayerController类型</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APlayerController%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APlayerController%E7%B1%BB%E5%9E%8B/</guid>
+      <description> Part 1 切换Pawn AController::Possess # Part 2 处理输入 APlayerController::SetupInputComponent # Part 3 获取类型 APlayerController::StaticClass # 静态成员 返回指向UClass的指针 在GENERATED_BODY中定义 Part 4 增减PlayerController旋转角度 # 1. 绕Y轴旋转 # 2. 绕Z轴旋转 # 3. 绕X轴旋转 # Part 5 设置Controller状态 AController::ChangeState # 修改StateName值并做相应修改 Part 6 使新Controller状态生效 APlayerController::ChangeState # 对先前状态进行收尾，为新状态做相应设置 参数 含义 NAME_Spectating 观察Pawn NAME_Playing 常规Pawn 二者都是常量 Part 7 使观察者状态生效 APlayerController::BeginSpectatingState # Controller释放当前Pawn 销毁当前SpectatorPawn 生成新SpectatorPawn并由Controller控制 定义 </description>
+    </item>
+    
+    <item>
       <title>为游戏角色绑定模型</title>
       <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/1.4%E4%B8%BACharacter%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
@@ -111,6 +165,15 @@
       
       <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.4%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/</guid>
       <description>Part 1 创建伤害类型 # C++ 1. 创建 Dev/STFireDamageType # UDamageType 公有类 2. 创建 Dev/STIceDamageType # UDamageType 公有类 Part 2 为伤害来源添加伤害类型属性 # C++ Dev/STDevDamageActor 添加 DamamgeType 属性 protected 蓝图可设置 UPROPERTY(EditAnywhere) TSubclassOf&amp;lt;UDamageType&amp;gt; DamageType; 造成伤害时，传入 DamageType 函数成员 private 在Tick中调用 取消在Tick中调用DevTakeDamage void ASTDevDamageActor::DevTakeDamageWithDamageType() { UGameplayStatics::ApplyRadialDamage(GetWorld(), Damage, GetActorLocation(), Radius, DamageType, {}, this, nullptr, DoFullDamage); } Part 3 在 HealthComponent 输出伤害来源信息 # C++ STHealthComponent 在处理函数中，根据 DamageType 的具体类型，做出相应处理 包含头文件 #include &amp;#34;Dev/STFireDamageType.h&amp;#34; #include &amp;#34;Dev/STIceDamageType.h&amp;#34; 输出伤害来源信息 函数成员 private 在OnTakeAnyDamage中调用 void USTHealthComponent::HandleDamage(const UDamageType *DamageType) { if (DamageType) { if (DamageType-&amp;gt;IsA&amp;lt;USTFireDamageType&amp;gt;()) { UE_LOG(LogHealthComponent, Display, TEXT(&amp;#34;So Hooooooot !</description>
+    </item>
+    
+    <item>
+      <title>AGameModeBase类型</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AGameModeBase%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AGameModeBase%E7%B1%BB%E5%9E%8B/</guid>
+      <description> 一、DefaultPawn设置 AGameModeBase::DefaultPawnClass # 数据成员 使用TSubOfClass定义的模板类 二、默认构造函数 AGameModeBase::AGameModeBase # 对关卡基础类型的设置可以参照这里 三、PlayerController设置 AGameModeBase::PlayerControllerClass # </description>
     </item>
     
     <item>
@@ -218,7 +281,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/</guid>
-      <description> Part 1 新增 Components/STHealthComponent # C++ STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C++ STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C++ STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 相关设置 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death去使能自动结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &amp;gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter BP_STPlayerController BP_STGameModeBase C++ ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter STPlayerController Dev/ STDevDamageActor </description>
+      <description> Part 1 新增 Components/STHealthComponent # C++ STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C++ STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C++ STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 相关设置 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death播放完结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &amp;gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter [-] BP_STPlayerController BP_STGameModeBase C++ ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter [-] STPlayerController Dev/ [] STDevDamageActor 阶段性总结 # 游戏角色 # C++ Player/STBaseCharacter Blueprint Player/BP_STBaseCharacter Player/Animations/ABP_BaseCharacter 其他 Player/Animations Blueprint BS_Run BS_Walk AM_Death C++ STBaseCharacter # 函数成员 基本函数 操作 构造函数 设置组件类型(初始化列表)；初始化组件 BeginPlay 检查组件是否成功创建(check)；组件设置；注册委托 SetupPlayerInputComponent 检查组件；绑定平移旋转跳跃跑步键位 委托 委托成员 作用 处理函数 操作 HealthComponent::OnHealthChanged 修改显示生命值 OnHealthChanged 调用DisplayHealthText HealthComponent::OnDeath 游戏角色死亡处理 OnDeath 播放死亡动画剪辑；禁止操作Character；定时销毁；切换到观察视角 ACharacter::LandedDelegate 计算落地伤害 OnGroundLanded 计算落地伤害；对Character调用TakeDamage 键位绑定 回调函数 键位 相关函数 MoveRight 左右移动 AddMovementInput；GetActorRightVector MoveForward 前后移动 AddMovementInput；GetActorForwardVector 左右旋转 ACharacter::AddControllerYawInput 上下旋转 ACharacter::AddControllerPitchInput 跳跃 ACharacter::Jump RunEnable，RunDisable 跑步 功能函数 函数 操作 相关函数 DisplayHealthText 设置TextRender文本 HealthTextComponent UTextRenderComponent::SetText 接口 接口函数 操作 GetDirection 计算前进方向和速度方向的夹角；供ABP_STBaseCharacter使用 IsRunning 判断角色是否满足跑步条件；供STCharacterMovementComponent使用；供ABP_STBaseCharacter使用 数据成员 组件 用途 SpringArmComponent 以游戏角色为中心左右旋转 CameraComponent 第三视角 HealthComponent 生命值系统 HealthTextComponent 显示生命值 CharacterMovementComponent 运动组件 标志位 AbleRun 跑步键位是否按下 IsForward 向前方向键是否按下 游戏角色死亡逻辑 DeathAnimMontage 死亡动画剪辑 LifeSpanOnDeath 销毁角色定时间隔 落地伤害逻辑 LandedDamageRange 伤害范围 LandedDamageVelocityRange 造成伤害的速度范围 Blueprint Player/BP_STBaseCharacter # CapsuleComponent HealthTextComponent Horizontal Alignment Center SpringArmComponent UsePawnControlRotation true MeshComponent Mesh &amp;gt; Skeletal Mesh Asset HeroTPP Materials &amp;gt; Element 0 HeroTPP Animation Mode UseAnimationBlueprint AnimClass ABP_BaseCharacter Blueprint Player/Animations/ABP_BaseCharacter # AnimGraph Locomotion &amp;gt; Slot &amp;gt; OutputPose 状态 状态 说明 走路 Walk BS_Walk；混合空间 跑步 Run BS_Run；混合空间1D 跳跃 JumpStart JumpLoop JumpEnd 死亡 AM_Death；动画剪辑 动画输入 速度 Velocity 速度和前进方向的夹角 Directon 转换条件 IsRunning C++ 满足3个条件：按下Shift；速度和前进方向夹角为0（按下W）；速度不为0 IsFalling CharacterMovementComponent::IsFalling 返回true，意味着游戏角色跳起；接着返回false，意味着游戏角色回到地面 EventGraph 设置变量 Velocity Directon IsRunning IsFalling 组件 # C++ STCharacterMovementComponent # 满足跑步判断时，增加最大速度 SpeedAcceleration 可设置类数据成员初始值；速度系数 STHealthCompoennt # 函数成员 基本函数 操作 构造函数 每帧调用Tick标志位置为false BeginPlay 初始化生命值；注册Actor::OnTakeAnyDamage TickComponent 屏蔽 接口 接口函数 操作 GetHealth 获取当前生命值；STBaseCharacter调用 内部逻辑 IsDead 判断角色是否满足跑步条件；供STCharacterMovementComponent使用；供ABP_STBaseCharacter使用 SetHealth 内部修改生命值；受到伤害或治疗时调用，随之广播 治疗 OnHealTrigger 定时器回调函数；治疗；满生命值停止定时器 StartHealTimer 受到伤害则开启定时器 StopHealTimer 收到伤害会关闭之前开启的定时器；满生命值时停止定时器 受伤处理函数 OnTakeAnyDamage 进入条件：伤害为正数，当前角色存活；受伤后，停止已开启的治疗定时器；更新生命值；若角色死亡，广播；否则，开启治疗定时器 数据成员 Health 生命值 MaxHealth 最大生命值 委托成员 OnHealthChanged 修改生命值(SetHealth)时广播 OnDeath 受到伤害时，若死亡，广播 治疗 HealTimer 定时器 AutoHeal 使能治疗 HealModifier 治疗量 HealRate 治疗频率 HealDelay 治疗延时 伤害源 # 函数成员 基本函数 操作 构造函数 初始化组件 BeginPlay Tick 绘制球体模拟爆炸范围；对球体内以及相交Actor造成伤害 数据成员 SceneComponent 变换属性 Radius 球体半径 SphereColor 球体颜色 Damage 伤害的数值特征 DoFullDamage 计算伤害机制标志位 </description>
     </item>
     
     <item>

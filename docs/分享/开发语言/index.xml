@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>MacOS on ToughCactus</title>
+    <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/</link>
+    <description>Recent content in MacOS on ToughCactus</description>
+    <generator>Hugo -- gohugo.io</generator><atom:link href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>bash</title>
+      <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/</guid>
+      <description> 花括号的使用 # 资料 可以使用花括号定义集合集合，集合内有多个可以枚举的项，使用逗号分隔 {项1, 项2, 项3...} 遇到花括号时，会对集合进行展开，可以将集合内的每一项与外面的字符串进行组合，然后返回全部组合项 xxx.conf{,.bak} 展开为 xxx.conf xxx.conf.bak 和前方的命令配合起来，就可以起到多个入参的效果 cp xxx.conf{,.bak} # cp xxx.conf xxx.conf.bak 接受多个参数的命令都可以这么玩，但前提是这些参数有共同部分，或者有某些规律 echo cp mkdir mv for mkdir app{,.bak} echo {1..5} echo {a..z} echo {001..10} # 前导0 echo {001..10..2} # 前导0 + 步进 echo {a..z}{0..9} # 组合：26 * 10 </description>
+    </item>
+    
+  </channel>
+</rss>

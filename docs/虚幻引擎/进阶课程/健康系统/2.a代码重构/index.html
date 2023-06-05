@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content=" Part 1 新增 Components/STHealthComponent # C&#43;&#43; STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C&#43;&#43; STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C&#43;&#43; STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 相关设置 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death去使能自动结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter BP_STPlayerController BP_STGameModeBase C&#43;&#43; ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter STPlayerController Dev/ STDevDamageActor ">
+<meta name="description" content=" Part 1 新增 Components/STHealthComponent # C&#43;&#43; STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C&#43;&#43; STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C&#43;&#43; STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 相关设置 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death播放完结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter [-] BP_STPlayerController BP_STGameModeBase C&#43;&#43; ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter [-] STPlayerController Dev/ [] STDevDamageActor 阶段性总结 # 游戏角色 # C&#43;&#43; Player/STBaseCharacter Blueprint Player/BP_STBaseCharacter Player/Animations/ABP_BaseCharacter 其他 Player/Animations Blueprint BS_Run BS_Walk AM_Death C&#43;&#43; STBaseCharacter # 函数成员 基本函数 操作 构造函数 设置组件类型(初始化列表)；初始化组件 BeginPlay 检查组件是否成功创建(check)；组件设置；注册委托 SetupPlayerInputComponent 检查组件；绑定平移旋转跳跃跑步键位 委托 委托成员 作用 处理函数 操作 HealthComponent::OnHealthChanged 修改显示生命值 OnHealthChanged 调用DisplayHealthText HealthComponent::OnDeath 游戏角色死亡处理 OnDeath 播放死亡动画剪辑；禁止操作Character；定时销毁；切换到观察视角 ACharacter::LandedDelegate 计算落地伤害 OnGroundLanded 计算落地伤害；对Character调用TakeDamage 键位绑定 回调函数 键位 相关函数 MoveRight 左右移动 AddMovementInput；GetActorRightVector MoveForward 前后移动 AddMovementInput；GetActorForwardVector 左右旋转 ACharacter::AddControllerYawInput 上下旋转 ACharacter::AddControllerPitchInput 跳跃 ACharacter::Jump RunEnable，RunDisable 跑步 功能函数 函数 操作 相关函数 DisplayHealthText 设置TextRender文本 HealthTextComponent UTextRenderComponent::SetText 接口 接口函数 操作 GetDirection 计算前进方向和速度方向的夹角；供ABP_STBaseCharacter使用 IsRunning 判断角色是否满足跑步条件；供STCharacterMovementComponent使用；供ABP_STBaseCharacter使用 数据成员 组件 用途 SpringArmComponent 以游戏角色为中心左右旋转 CameraComponent 第三视角 HealthComponent 生命值系统 HealthTextComponent 显示生命值 CharacterMovementComponent 运动组件 标志位 AbleRun 跑步键位是否按下 IsForward 向前方向键是否按下 游戏角色死亡逻辑 DeathAnimMontage 死亡动画剪辑 LifeSpanOnDeath 销毁角色定时间隔 落地伤害逻辑 LandedDamageRange 伤害范围 LandedDamageVelocityRange 造成伤害的速度范围 Blueprint Player/BP_STBaseCharacter # CapsuleComponent HealthTextComponent Horizontal Alignment Center SpringArmComponent UsePawnControlRotation true MeshComponent Mesh &gt; Skeletal Mesh Asset HeroTPP Materials &gt; Element 0 HeroTPP Animation Mode UseAnimationBlueprint AnimClass ABP_BaseCharacter Blueprint Player/Animations/ABP_BaseCharacter # AnimGraph Locomotion &gt; Slot &gt; OutputPose 状态 状态 说明 走路 Walk BS_Walk；混合空间 跑步 Run BS_Run；混合空间1D 跳跃 JumpStart JumpLoop JumpEnd 死亡 AM_Death；动画剪辑 动画输入 速度 Velocity 速度和前进方向的夹角 Directon 转换条件 IsRunning C&#43;&#43; 满足3个条件：按下Shift；速度和前进方向夹角为0（按下W）；速度不为0 IsFalling CharacterMovementComponent::IsFalling 返回true，意味着游戏角色跳起；接着返回false，意味着游戏角色回到地面 EventGraph 设置变量 Velocity Directon IsRunning IsFalling 组件 # C&#43;&#43; STCharacterMovementComponent # 满足跑步判断时，增加最大速度 SpeedAcceleration 可设置类数据成员初始值；速度系数 STHealthCompoennt # 函数成员 基本函数 操作 构造函数 每帧调用Tick标志位置为false BeginPlay 初始化生命值；注册Actor::OnTakeAnyDamage TickComponent 屏蔽 接口 接口函数 操作 GetHealth 获取当前生命值；STBaseCharacter调用 内部逻辑 IsDead 判断角色是否满足跑步条件；供STCharacterMovementComponent使用；供ABP_STBaseCharacter使用 SetHealth 内部修改生命值；受到伤害或治疗时调用，随之广播 治疗 OnHealTrigger 定时器回调函数；治疗；满生命值停止定时器 StartHealTimer 受到伤害则开启定时器 StopHealTimer 收到伤害会关闭之前开启的定时器；满生命值时停止定时器 受伤处理函数 OnTakeAnyDamage 进入条件：伤害为正数，当前角色存活；受伤后，停止已开启的治疗定时器；更新生命值；若角色死亡，广播；否则，开启治疗定时器 数据成员 Health 生命值 MaxHealth 最大生命值 委托成员 OnHealthChanged 修改生命值(SetHealth)时广播 OnDeath 受到伤害时，若死亡，广播 治疗 HealTimer 定时器 AutoHeal 使能治疗 HealModifier 治疗量 HealRate 治疗频率 HealDelay 治疗延时 伤害源 # 函数成员 基本函数 操作 构造函数 初始化组件 BeginPlay Tick 绘制球体模拟爆炸范围；对球体内以及相交Actor造成伤害 数据成员 SceneComponent 变换属性 Radius 球体半径 SphereColor 球体颜色 Damage 伤害的数值特征 DoFullDamage 计算伤害机制标志位 ">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="代码重构" />
-<meta property="og:description" content=" Part 1 新增 Components/STHealthComponent # C&#43;&#43; STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C&#43;&#43; STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C&#43;&#43; STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 相关设置 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death去使能自动结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter BP_STPlayerController BP_STGameModeBase C&#43;&#43; ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter STPlayerController Dev/ STDevDamageActor " />
+<meta property="og:description" content=" Part 1 新增 Components/STHealthComponent # C&#43;&#43; STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C&#43;&#43; STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C&#43;&#43; STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 相关设置 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death播放完结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter [-] BP_STPlayerController BP_STGameModeBase C&#43;&#43; ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter [-] STPlayerController Dev/ [] STDevDamageActor 阶段性总结 # 游戏角色 # C&#43;&#43; Player/STBaseCharacter Blueprint Player/BP_STBaseCharacter Player/Animations/ABP_BaseCharacter 其他 Player/Animations Blueprint BS_Run BS_Walk AM_Death C&#43;&#43; STBaseCharacter # 函数成员 基本函数 操作 构造函数 设置组件类型(初始化列表)；初始化组件 BeginPlay 检查组件是否成功创建(check)；组件设置；注册委托 SetupPlayerInputComponent 检查组件；绑定平移旋转跳跃跑步键位 委托 委托成员 作用 处理函数 操作 HealthComponent::OnHealthChanged 修改显示生命值 OnHealthChanged 调用DisplayHealthText HealthComponent::OnDeath 游戏角色死亡处理 OnDeath 播放死亡动画剪辑；禁止操作Character；定时销毁；切换到观察视角 ACharacter::LandedDelegate 计算落地伤害 OnGroundLanded 计算落地伤害；对Character调用TakeDamage 键位绑定 回调函数 键位 相关函数 MoveRight 左右移动 AddMovementInput；GetActorRightVector MoveForward 前后移动 AddMovementInput；GetActorForwardVector 左右旋转 ACharacter::AddControllerYawInput 上下旋转 ACharacter::AddControllerPitchInput 跳跃 ACharacter::Jump RunEnable，RunDisable 跑步 功能函数 函数 操作 相关函数 DisplayHealthText 设置TextRender文本 HealthTextComponent UTextRenderComponent::SetText 接口 接口函数 操作 GetDirection 计算前进方向和速度方向的夹角；供ABP_STBaseCharacter使用 IsRunning 判断角色是否满足跑步条件；供STCharacterMovementComponent使用；供ABP_STBaseCharacter使用 数据成员 组件 用途 SpringArmComponent 以游戏角色为中心左右旋转 CameraComponent 第三视角 HealthComponent 生命值系统 HealthTextComponent 显示生命值 CharacterMovementComponent 运动组件 标志位 AbleRun 跑步键位是否按下 IsForward 向前方向键是否按下 游戏角色死亡逻辑 DeathAnimMontage 死亡动画剪辑 LifeSpanOnDeath 销毁角色定时间隔 落地伤害逻辑 LandedDamageRange 伤害范围 LandedDamageVelocityRange 造成伤害的速度范围 Blueprint Player/BP_STBaseCharacter # CapsuleComponent HealthTextComponent Horizontal Alignment Center SpringArmComponent UsePawnControlRotation true MeshComponent Mesh &gt; Skeletal Mesh Asset HeroTPP Materials &gt; Element 0 HeroTPP Animation Mode UseAnimationBlueprint AnimClass ABP_BaseCharacter Blueprint Player/Animations/ABP_BaseCharacter # AnimGraph Locomotion &gt; Slot &gt; OutputPose 状态 状态 说明 走路 Walk BS_Walk；混合空间 跑步 Run BS_Run；混合空间1D 跳跃 JumpStart JumpLoop JumpEnd 死亡 AM_Death；动画剪辑 动画输入 速度 Velocity 速度和前进方向的夹角 Directon 转换条件 IsRunning C&#43;&#43; 满足3个条件：按下Shift；速度和前进方向夹角为0（按下W）；速度不为0 IsFalling CharacterMovementComponent::IsFalling 返回true，意味着游戏角色跳起；接着返回false，意味着游戏角色回到地面 EventGraph 设置变量 Velocity Directon IsRunning IsFalling 组件 # C&#43;&#43; STCharacterMovementComponent # 满足跑步判断时，增加最大速度 SpeedAcceleration 可设置类数据成员初始值；速度系数 STHealthCompoennt # 函数成员 基本函数 操作 构造函数 每帧调用Tick标志位置为false BeginPlay 初始化生命值；注册Actor::OnTakeAnyDamage TickComponent 屏蔽 接口 接口函数 操作 GetHealth 获取当前生命值；STBaseCharacter调用 内部逻辑 IsDead 判断角色是否满足跑步条件；供STCharacterMovementComponent使用；供ABP_STBaseCharacter使用 SetHealth 内部修改生命值；受到伤害或治疗时调用，随之广播 治疗 OnHealTrigger 定时器回调函数；治疗；满生命值停止定时器 StartHealTimer 受到伤害则开启定时器 StopHealTimer 收到伤害会关闭之前开启的定时器；满生命值时停止定时器 受伤处理函数 OnTakeAnyDamage 进入条件：伤害为正数，当前角色存活；受伤后，停止已开启的治疗定时器；更新生命值；若角色死亡，广播；否则，开启治疗定时器 数据成员 Health 生命值 MaxHealth 最大生命值 委托成员 OnHealthChanged 修改生命值(SetHealth)时广播 OnDeath 受到伤害时，若死亡，广播 治疗 HealTimer 定时器 AutoHeal 使能治疗 HealModifier 治疗量 HealRate 治疗频率 HealDelay 治疗延时 伤害源 # 函数成员 基本函数 操作 构造函数 初始化组件 BeginPlay Tick 绘制球体模拟爆炸范围；对球体内以及相交Actor造成伤害 数据成员 SceneComponent 变换属性 Radius 球体半径 SphereColor 球体颜色 Damage 伤害的数值特征 DoFullDamage 计算伤害机制标志位 " />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" /><meta property="article:section" content="docs" />
 
@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.53520aa9a68595c8b61d4f74f8c24d8d1f473bf02c64aa6e7c8aaeb33addd65f.js" integrity="sha256-U1IKqaaFlci2HU90&#43;MJNjR9HO/AsZKpufIquszrd1l8=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.6bc12bbe8c62ef26c1060eb1da6e8a7fe946655961a32348eb617b5c6d34326b.js" integrity="sha256-a8Ervoxi7ybBBg6x2m6Kf&#43;lGZVlhoyNI62F7XG00Mms=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -134,6 +134,40 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e5270f46858d8c5464db25f6bd215fa4" class="toggle"  />
+    <label for="section-e5270f46858d8c5464db25f6bd215fa4" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/" class="">bash</a>
   
 
         </li>
@@ -286,6 +320,105 @@ https://github.com/alex-shpak/hugo-book
 
   
     <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="">AActor类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APawn%E7%B1%BB%E5%9E%8B/" class="">APawn类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/ACharacter%E7%B1%BB%E5%9E%8B/" class="">ACharacter类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APlayerController%E7%B1%BB%E5%9E%8B/" class="">APlayerController类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AGameModeBase%E7%B1%BB%E5%9E%8B/" class="">AGameModeBase类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c276a0254804f7460cb82f89e38b2be" class="toggle"  />
+    <label for="section-9c276a0254804f7460cb82f89e38b2be" class="flex justify-between">
+      <a role="button" class="">全局类型</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B/UEngine%E7%B1%BB%E5%9E%8B/" class="">UEngine类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B/UWorld%E7%B1%BB%E5%9E%8B/" class="">UWorld类型</a>
   
 
         </li>
@@ -773,6 +906,24 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#part-3-新增-dev-stdevdamageactor">Part 3 新增 Dev/STDevDamageActor</a></li>
         <li><a href="#part-4-相关设置">Part 4 相关设置</a></li>
         <li><a href="#项目结构更新">项目结构更新</a></li>
+        <li><a href="#阶段性总结">阶段性总结</a>
+          <ul>
+            <li><a href="#游戏角色">游戏角色</a>
+              <ul>
+                <li><a href="#c-plus-plus-stbasecharacter"><code>C++</code> STBaseCharacter</a></li>
+                <li><a href="#blueprint-player-bp-stbasecharacter"><code>Blueprint</code> Player/BP_STBaseCharacter</a></li>
+                <li><a href="#blueprint-player-animations-abp-basecharacter"><code>Blueprint</code> Player/Animations/ABP_BaseCharacter</a></li>
+              </ul>
+            </li>
+            <li><a href="#组件">组件</a>
+              <ul>
+                <li><a href="#stcharactermovementcomponent">STCharacterMovementComponent</a></li>
+                <li><a href="#sthealthcompoennt">STHealthCompoennt</a></li>
+              </ul>
+            </li>
+            <li><a href="#伤害源">伤害源</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>
@@ -911,7 +1062,7 @@ https://github.com/alex-shpak/hugo-book
 <p><code>虚幻编辑器</code> <br/></p>
 <ol>
 <li>调整TextRender组件 <br/></li>
-<li>创建死亡动画剪辑 AM_Death，并设置AM_Death去使能自动结束 <br/></li>
+<li>创建死亡动画剪辑 AM_Death，并设置AM_Death播放完结束 <br/></li>
 <li>在动画蓝图中，通过Slot，连接状态机动画和OutputPose <br/>
 <code>ABP_BaseCharacter &gt; AnimGraph</code> <br/></li>
 <li>设置DeathAnimMontage属性 AM_Death <br/>
@@ -923,41 +1074,732 @@ https://github.com/alex-shpak/hugo-book
   <a class="anchor" href="#%e9%a1%b9%e7%9b%ae%e7%bb%93%e6%9e%84%e6%9b%b4%e6%96%b0">#</a>
 </h2>
 <ol>
-<li>资产 <code>Content/</code> <br/>
+<li>资产 Content/ <br/>
 <ul>
-<li><code>ExternalContent/</code> <br/></li>
-<li><code>Levels/</code> <br/>
-<code>DefaultMap</code> <br/></li>
-<li><code>Player/</code> <br/>
+<li>ExternalContent/ <br/></li>
+<li>Levels/ <br/>
+DefaultMap <br/></li>
+<li>Player/ <br/>
 <ul>
-<li><code>Animations/</code> <br/>
-<code>ABP_BaseCharacter</code> <br/>
-<code>BS_Run</code> <br/>
-<code>BS_Walk</code> <br/>
-<strong>AM_Death</strong> <br/></li>
-<li><code>BP_STBaseCharacter</code> <br/></li>
-<li><code>BP_STPlayerController</code> <br/></li>
+<li>Animations/ <br/>
+<input checked="" disabled="" type="checkbox"> ABP_BaseCharacter <br/>
+<input checked="" disabled="" type="checkbox"> BS_Run <br/>
+<input checked="" disabled="" type="checkbox"> BS_Walk <br/>
+<input checked="" disabled="" type="checkbox"> <strong>AM_Death</strong> <br/></li>
+<li><input checked="" disabled="" type="checkbox"> BP_STBaseCharacter <br/></li>
+<li>[-] BP_STPlayerController <br/></li>
 </ul>
 </li>
-<li><code>BP_STGameModeBase</code> <br/></li>
+<li>BP_STGameModeBase <br/></li>
 </ul>
 </li>
-<li>C++ <code>ShootTrainingSecond/</code> <br/>
+<li>C++ ShootTrainingSecond/ <br/>
 <ul>
-<li><code>ShootTrainingSecondGameModeBase</code> <br/></li>
-<li><code>Public/</code> <br/>
+<li>ShootTrainingSecondGameModeBase <br/></li>
+<li>Public/ <br/>
 <ul>
-<li><code>Components/</code> <br/>
-<code>STCharacterMovementComponent</code> <br/>
-<strong>STHealthComponent</strong> <br/></li>
-<li><code>Player/</code> <br/>
-<code>STBaseCharacter</code> <br/>
-<code>STPlayerController</code> <br/></li>
+<li>Components/ <br/>
+<input checked="" disabled="" type="checkbox"> STCharacterMovementComponent <br/>
+<input checked="" disabled="" type="checkbox"> <strong>STHealthComponent</strong> <br/></li>
+<li>Player/ <br/>
+<input checked="" disabled="" type="checkbox"> STBaseCharacter <br/>
+[-] STPlayerController <br/></li>
 <li><strong>Dev/</strong> <br/>
-<strong>STDevDamageActor</strong> <br/></li>
+[] <strong>STDevDamageActor</strong> <br/></li>
 </ul>
 </li>
 </ul>
+</li>
+</ol>
+<h2 id="阶段性总结">
+  阶段性总结
+  <a class="anchor" href="#%e9%98%b6%e6%ae%b5%e6%80%a7%e6%80%bb%e7%bb%93">#</a>
+</h2>
+<h3 id="游戏角色">
+  游戏角色
+  <a class="anchor" href="#%e6%b8%b8%e6%88%8f%e8%a7%92%e8%89%b2">#</a>
+</h3>
+<ol>
+<li><code>C++</code> <br/>
+Player/STBaseCharacter <br/></li>
+<li><code>Blueprint</code> <br/>
+Player/BP_STBaseCharacter <br/>
+Player/Animations/ABP_BaseCharacter <br/></li>
+<li>其他 Player/Animations <br/>
+<code>Blueprint</code> <br/>
+BS_Run <br/>
+BS_Walk <br/>
+AM_Death <br/></li>
+</ol>
+<h4 id="c-plus-plus-stbasecharacter">
+  <code>C++</code> STBaseCharacter
+  <a class="anchor" href="#c-plus-plus-stbasecharacter">#</a>
+</h4>
+<ol>
+<li>
+<p>函数成员 <br/></p>
+<table>
+<thead>
+<tr>
+<th>基本函数</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>构造函数</td>
+<td>设置组件类型(初始化列表)；初始化组件</td>
+</tr>
+<tr>
+<td>BeginPlay</td>
+<td>检查组件是否成功创建(check)；组件设置；注册委托</td>
+</tr>
+<tr>
+<td>SetupPlayerInputComponent</td>
+<td>检查组件；绑定平移旋转跳跃跑步键位</td>
+</tr>
+</tbody>
+</table>
+<p>委托 <br/></p>
+<table>
+<thead>
+<tr>
+<th>委托成员</th>
+<th>作用</th>
+<th>处理函数</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HealthComponent::OnHealthChanged</td>
+<td>修改显示生命值</td>
+<td>OnHealthChanged</td>
+<td>调用DisplayHealthText</td>
+</tr>
+<tr>
+<td>HealthComponent::OnDeath</td>
+<td>游戏角色死亡处理</td>
+<td>OnDeath</td>
+<td>播放死亡动画剪辑；禁止操作Character；定时销毁；切换到观察视角</td>
+</tr>
+<tr>
+<td>ACharacter::LandedDelegate</td>
+<td>计算落地伤害</td>
+<td>OnGroundLanded</td>
+<td>计算落地伤害；对Character调用TakeDamage</td>
+</tr>
+</tbody>
+</table>
+<p>键位绑定 <br/></p>
+<table>
+<thead>
+<tr>
+<th>回调函数</th>
+<th>键位</th>
+<th>相关函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>MoveRight</td>
+<td>左右移动</td>
+<td>AddMovementInput；GetActorRightVector</td>
+</tr>
+<tr>
+<td>MoveForward</td>
+<td>前后移动</td>
+<td>AddMovementInput；GetActorForwardVector</td>
+</tr>
+<tr>
+<td></td>
+<td>左右旋转</td>
+<td>ACharacter::AddControllerYawInput</td>
+</tr>
+<tr>
+<td></td>
+<td>上下旋转</td>
+<td>ACharacter::AddControllerPitchInput</td>
+</tr>
+<tr>
+<td></td>
+<td>跳跃</td>
+<td>ACharacter::Jump</td>
+</tr>
+<tr>
+<td>RunEnable，RunDisable</td>
+<td>跑步</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<p>功能函数 <br/></p>
+<table>
+<thead>
+<tr>
+<th>函数</th>
+<th>操作</th>
+<th>相关函数</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DisplayHealthText</td>
+<td>设置TextRender文本 <code>HealthTextComponent</code></td>
+<td>UTextRenderComponent::SetText</td>
+</tr>
+</tbody>
+</table>
+<p>接口 <br/></p>
+<table>
+<thead>
+<tr>
+<th>接口函数</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GetDirection</td>
+<td>计算前进方向和速度方向的夹角；供ABP_STBaseCharacter使用</td>
+</tr>
+<tr>
+<td>IsRunning</td>
+<td>判断角色是否满足跑步条件；供STCharacterMovementComponent使用；供ABP_STBaseCharacter使用</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>数据成员 <br/></p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SpringArmComponent</td>
+<td>以游戏角色为中心左右旋转</td>
+</tr>
+<tr>
+<td>CameraComponent</td>
+<td>第三视角</td>
+</tr>
+<tr>
+<td>HealthComponent</td>
+<td>生命值系统</td>
+</tr>
+<tr>
+<td>HealthTextComponent</td>
+<td>显示生命值</td>
+</tr>
+<tr>
+<td>CharacterMovementComponent</td>
+<td>运动组件</td>
+</tr>
+</tbody>
+</table>
+<p>标志位 <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>AbleRun</td>
+<td>跑步键位是否按下</td>
+</tr>
+<tr>
+<td>IsForward</td>
+<td>向前方向键是否按下</td>
+</tr>
+</tbody>
+</table>
+<p>游戏角色死亡逻辑 <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>DeathAnimMontage</td>
+<td>死亡动画剪辑</td>
+</tr>
+<tr>
+<td>LifeSpanOnDeath</td>
+<td>销毁角色定时间隔</td>
+</tr>
+</tbody>
+</table>
+<p>落地伤害逻辑 <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LandedDamageRange</td>
+<td>伤害范围</td>
+</tr>
+<tr>
+<td>LandedDamageVelocityRange</td>
+<td>造成伤害的速度范围</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h4 id="blueprint-player-bp-stbasecharacter">
+  <code>Blueprint</code> Player/BP_STBaseCharacter
+  <a class="anchor" href="#blueprint-player-bp-stbasecharacter">#</a>
+</h4>
+<ol>
+<li>CapsuleComponent <br/></li>
+<li>HealthTextComponent <br/>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Horizontal Alignment</td>
+<td>Center</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>SpringArmComponent <br/>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>UsePawnControlRotation</td>
+<td>true</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>MeshComponent <br/>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Mesh &gt; Skeletal Mesh Asset</td>
+<td>HeroTPP</td>
+</tr>
+<tr>
+<td>Materials &gt; Element 0</td>
+<td>HeroTPP</td>
+</tr>
+<tr>
+<td>Animation Mode</td>
+<td>UseAnimationBlueprint</td>
+</tr>
+<tr>
+<td>AnimClass</td>
+<td>ABP_BaseCharacter</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h4 id="blueprint-player-animations-abp-basecharacter">
+  <code>Blueprint</code> Player/Animations/ABP_BaseCharacter
+  <a class="anchor" href="#blueprint-player-animations-abp-basecharacter">#</a>
+</h4>
+<ol>
+<li>
+<p>AnimGraph <br/>
+Locomotion &gt; Slot &gt; OutputPose <br/>
+<strong>状态</strong> <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>状态</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>走路</td>
+<td>Walk</td>
+<td>BS_Walk；混合空间</td>
+</tr>
+<tr>
+<td>跑步</td>
+<td>Run</td>
+<td>BS_Run；混合空间1D</td>
+</tr>
+<tr>
+<td>跳跃</td>
+<td>JumpStart</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>JumpLoop</td>
+<td></td>
+</tr>
+<tr>
+<td></td>
+<td>JumpEnd</td>
+<td></td>
+</tr>
+<tr>
+<td>死亡</td>
+<td></td>
+<td>AM_Death；动画剪辑</td>
+</tr>
+</tbody>
+</table>
+<p><strong>动画输入</strong> <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>速度</td>
+<td>Velocity</td>
+</tr>
+<tr>
+<td>速度和前进方向的夹角</td>
+<td>Directon</td>
+</tr>
+</tbody>
+</table>
+<p><strong>转换条件</strong> <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>IsRunning</td>
+<td>C++</td>
+<td>满足3个条件：按下Shift；速度和前进方向夹角为0（按下W）；速度不为0</td>
+</tr>
+<tr>
+<td>IsFalling</td>
+<td>CharacterMovementComponent::IsFalling</td>
+<td>返回true，意味着游戏角色跳起；接着返回false，意味着游戏角色回到地面</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>EventGraph <br/>
+设置变量 <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Velocity</td>
+</tr>
+<tr>
+<td>Directon</td>
+</tr>
+<tr>
+<td>IsRunning</td>
+</tr>
+<tr>
+<td>IsFalling</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h3 id="组件">
+  组件
+  <a class="anchor" href="#%e7%bb%84%e4%bb%b6">#</a>
+</h3>
+<p><code>C++</code> <br/></p>
+<h4 id="stcharactermovementcomponent">
+  STCharacterMovementComponent
+  <a class="anchor" href="#stcharactermovementcomponent">#</a>
+</h4>
+<p>满足跑步判断时，增加最大速度 <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SpeedAcceleration</td>
+<td>可设置类数据成员初始值；速度系数</td>
+</tr>
+</tbody>
+</table>
+<h4 id="sthealthcompoennt">
+  STHealthCompoennt
+  <a class="anchor" href="#sthealthcompoennt">#</a>
+</h4>
+<ol>
+<li>
+<p>函数成员 <br/></p>
+<table>
+<thead>
+<tr>
+<th>基本函数</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>构造函数</td>
+<td>每帧调用Tick标志位置为false</td>
+</tr>
+<tr>
+<td>BeginPlay</td>
+<td>初始化生命值；注册Actor::OnTakeAnyDamage</td>
+</tr>
+<tr>
+<td>TickComponent</td>
+<td>屏蔽</td>
+</tr>
+</tbody>
+</table>
+<p><strong>接口</strong> <br/></p>
+<table>
+<thead>
+<tr>
+<th>接口函数</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>GetHealth</td>
+<td>获取当前生命值；STBaseCharacter调用</td>
+</tr>
+</tbody>
+</table>
+<p><strong>内部逻辑</strong> <br/></p>
+<table>
+<thead>
+<tr>
+<th>IsDead</th>
+<th>判断角色是否满足跑步条件；供STCharacterMovementComponent使用；供ABP_STBaseCharacter使用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SetHealth</td>
+<td>内部修改生命值；受到伤害或治疗时调用，随之广播</td>
+</tr>
+</tbody>
+</table>
+<p><strong>治疗</strong> <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OnHealTrigger</td>
+<td>定时器回调函数；治疗；满生命值停止定时器</td>
+</tr>
+<tr>
+<td>StartHealTimer</td>
+<td>受到伤害则开启定时器</td>
+</tr>
+<tr>
+<td>StopHealTimer</td>
+<td>收到伤害会关闭之前开启的定时器；满生命值时停止定时器</td>
+</tr>
+</tbody>
+</table>
+<p><strong>受伤处理函数</strong> <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OnTakeAnyDamage</td>
+<td>进入条件：伤害为正数，当前角色存活；受伤后，停止已开启的治疗定时器；更新生命值；若角色死亡，广播；否则，开启治疗定时器</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>数据成员 <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Health</td>
+<td>生命值</td>
+</tr>
+<tr>
+<td>MaxHealth</td>
+<td>最大生命值</td>
+</tr>
+</tbody>
+</table>
+<p><strong>委托成员</strong> <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>OnHealthChanged</td>
+<td>修改生命值(SetHealth)时广播</td>
+</tr>
+<tr>
+<td>OnDeath</td>
+<td>受到伤害时，若死亡，广播</td>
+</tr>
+</tbody>
+</table>
+<p><strong>治疗</strong> <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>HealTimer</td>
+<td>定时器</td>
+</tr>
+<tr>
+<td>AutoHeal</td>
+<td>使能治疗</td>
+</tr>
+<tr>
+<td>HealModifier</td>
+<td>治疗量</td>
+</tr>
+<tr>
+<td>HealRate</td>
+<td>治疗频率</td>
+</tr>
+<tr>
+<td>HealDelay</td>
+<td>治疗延时</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ol>
+<h3 id="伤害源">
+  伤害源
+  <a class="anchor" href="#%e4%bc%a4%e5%ae%b3%e6%ba%90">#</a>
+</h3>
+<ol>
+<li>函数成员 <br/>
+<table>
+<thead>
+<tr>
+<th>基本函数</th>
+<th>操作</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>构造函数</td>
+<td>初始化组件</td>
+</tr>
+<tr>
+<td>BeginPlay</td>
+<td></td>
+</tr>
+<tr>
+<td>Tick</td>
+<td>绘制球体模拟爆炸范围；对球体内以及相交Actor造成伤害</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>数据成员 <br/>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>SceneComponent</td>
+<td>变换属性</td>
+</tr>
+<tr>
+<td>Radius</td>
+<td>球体半径</td>
+</tr>
+<tr>
+<td>SphereColor</td>
+<td>球体颜色</td>
+</tr>
+<tr>
+<td>Damage</td>
+<td>伤害的数值特征</td>
+</tr>
+<tr>
+<td>DoFullDamage</td>
+<td>计算伤害机制标志位</td>
+</tr>
+</tbody>
+</table>
 </li>
 </ol>
 </article>
@@ -1008,6 +1850,24 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#part-3-新增-dev-stdevdamageactor">Part 3 新增 Dev/STDevDamageActor</a></li>
         <li><a href="#part-4-相关设置">Part 4 相关设置</a></li>
         <li><a href="#项目结构更新">项目结构更新</a></li>
+        <li><a href="#阶段性总结">阶段性总结</a>
+          <ul>
+            <li><a href="#游戏角色">游戏角色</a>
+              <ul>
+                <li><a href="#c-plus-plus-stbasecharacter"><code>C++</code> STBaseCharacter</a></li>
+                <li><a href="#blueprint-player-bp-stbasecharacter"><code>Blueprint</code> Player/BP_STBaseCharacter</a></li>
+                <li><a href="#blueprint-player-animations-abp-basecharacter"><code>Blueprint</code> Player/Animations/ABP_BaseCharacter</a></li>
+              </ul>
+            </li>
+            <li><a href="#组件">组件</a>
+              <ul>
+                <li><a href="#stcharactermovementcomponent">STCharacterMovementComponent</a></li>
+                <li><a href="#sthealthcompoennt">STHealthCompoennt</a></li>
+              </ul>
+            </li>
+            <li><a href="#伤害源">伤害源</a></li>
+          </ul>
+        </li>
       </ul>
     </li>
   </ul>

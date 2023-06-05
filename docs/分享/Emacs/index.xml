@@ -11,7 +11,7 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/</guid>
-      <description> 一、样式 # 删除线 +Content+ 下划线 ox-hugo转markdown存在问题 _Content_ 文本块 =test= ~test~ 斜体 /test/ 加粗 *test* 二、选项设置 # 关闭toc Table of Contents #+OPTIONS: toc:nil 指定toc显示层级 #+TOC: headlines 2 上标和下标 a_b a^b 关闭 #+OPTIONS: ^:nil 需要使用{}转义 #+OPTIONS ^:{} a_{b} a^{b} 自动为标题添加标号 关闭 #+OPTIONS num:nil 选项合并 #+OPTIONS: toc:nil ^:{} 显示所有内容 #+STARTUP: showall 只显示一级标题 #+STARTUP: overview 隐藏星号 #+STARTUP: hidestars 三、插入模板 # 代码框 填写编程语言 #+begin_src LANGUAGE #+end_src 文本框 #+begin_example #+end_example </description>
+      <description> Overview # The Org Manual 一、样式 # 删除线 +Content+ 下划线 ox-hugo转markdown存在问题 _Content_ 文本块 =test= ~test~ 斜体 /test/ 加粗 *test* 二、选项设置 # 关闭toc Table of Contents #+OPTIONS: toc:nil 指定toc显示层级 #+TOC: headlines 2 上标和下标 a_b a^b 关闭 #+OPTIONS: ^:nil 需要使用{}转义 #+OPTIONS ^:{} a_{b} a^{b} 自动为标题添加标号 关闭 #+OPTIONS num:nil 选项合并 #+OPTIONS: toc:nil ^:{} #+STARTUP: showall hidestars 显示所有内容 #+STARTUP: showall 只显示一级标题 #+STARTUP: overview 隐藏星号 #+STARTUP: hidestars 三、模板 # Structure Templates C-c C-, org-insert-structure-template 代码框 填写编程语言 // C++样式 #+begin_src LANGUAGE #+end_src 文本框 文本框样式 #+begin_example #+end_example quote quote样式 #+begin_quote #+end_quote </description>
     </item>
     
     <item>

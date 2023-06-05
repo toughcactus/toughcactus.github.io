@@ -14,5 +14,41 @@
       <description>Part 1 派生关系 # UObjectBaseUtility &amp;lt; UObject &amp;lt; AActor 1. AActor类型 # 虚幻C++基础类型，能放置到世界场景中的物体，具有相同的基类AActor。 所有能添加到世界场景中的物体都可称作Actor，如几何体，特效，声音。Actor对象有无实体均可。 初始状态不具备变换属性(有Gizmo表示，移动后会复位)，无法绑定模型。变换需要USceneComponent组件，模型需要UStaticMeshComponent组件。 可以在虚幻编辑器中往关卡添加Actor对象，也可以在代码中动态生成Actor对象。 Actor对象由各种Component组成，所有组件可以根据需求进行组装，方便重用。 2. UObject类型 # 虚幻引擎中最基础的类型，AActor类型的父类。 不能在场景中添加UObject对象，可以在代码中创建UObject对象并对逻辑进行封装。 Part 2 组件 Component # 具有视觉表示的组件，需要为其设置上级组件，或将其注册为根组件 1. 创建组件 UObject::CreateDefaultSubobject&amp;lt;T&amp;gt; # 返回指向组件的指针 参数 含义 说明 SubobjectName 虚幻编辑器中显示的组件名 FName类型 BTransient 使用默认值 使用 StaticMesh = CreateDefaultSubobject&amp;lt;UStaticMeshComponent&amp;gt;(&amp;#34;StaticMeshInEditor&amp;#34;); 在C++中对变量StaticMesh做设置，在虚幻编辑器中对名为&amp;quot;StaticMeshInEditor&amp;quot;的组件做设置；二者相对应。 可以在C++中修改变量名；如果修改组件名，虚幻编辑器中该组件的已有设置会因找不到目标载体而无法生效。 2. 设置为根组件 AActor::SetRootComponent # 根组件的设置会影响到变换矩阵求值 参数 含义 说明 NewRootComponent 指向组件的指针 使用 SetRootComponent(StaticMesh); USceneComponent *类型，可以接受UStaticMeshCompoent *(动态绑定)。因为UStaticMeshComponent派生自UMeshComponent，UMeshComponent派生自UPrimitiveComponent，UPrimitiveComponent派生自USceneComponent。 3. 获取根组件 AActor::GetRootComponent # 返回指向根组件的指针 使用 GetRootComponent(); 4.</description>
     </item>
     
+    <item>
+      <title>APawn类型</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APawn%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APawn%E7%B1%BB%E5%9E%8B/</guid>
+      <description>APawn # 玩家所操作的角色，提供键位绑定。 由PlayerController控制，可在多个Pawn之间进行切换 Part 1 配置用户输入 APawn::SetupPlayerInputComponent # 在该函数内绑定键位 Part 2 获取类型 APawn::StaticClass # 静态成员 返回指向UClass的指针 在GENERATED_BODY宏中定义 UObject也有StaticClass，UObjectBaseUtility没有 Part 3 Controller切换Pawn # 1. Controller控制当前Pawn时调用 APawn::PossessedBy # 2. Controller释放当前Pawn时调用 APawn::UnPossessed # 3. 是否被PlayerController接管 APawn::IsControlled # 4. 是否被Controller接管 APawn::IsPawnControlled # AIController或PlayerController Part 4 以Pawn为原点建立相对坐标系，修改平移的方向向量 APawn::AddMovementInput # 控制Pawn前后左右移动，前进或后退传入ForwardVector和步长，左右移动传入RightVector和步长 控制Character前后左右移动亦通过该接口 参数 含义 WorldDirection 移动角色的方向 ScaleValue 方向正负 bForce 使用默认值 AddMovementInput(GetActorForwardVector(), Amount); // AddMovementInput(GetActorRightVector(), Amount); 定义 对UPawnMovementComponent::AddInputVector进行封装，修改方向向量 Part 5 绕指定轴旋转PlayerController # 旋转的控制权不在Pawn，在PlayerController。对PlayerController的旋转进行了封装。 X轴向前，Z轴向上，Y轴向右。 Roll 绕X轴旋转，顺时针为正方向 YOZ平面 Pitch 绕Y轴旋转，向上为正方向 XOZ平面 Yaw 绕Z轴旋转，向右为正方向 XOY平面 绕Y轴和Z轴旋转时，若无其他处理，可以直接将AddControllerPitchInput和AddControllerYawInput注册为旋转回调函数 1.</description>
+    </item>
+    
+    <item>
+      <title>ACharacter类型</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/ACharacter%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/ACharacter%E7%B1%BB%E5%9E%8B/</guid>
+      <description>Overview # 派生自APawn，实现了角色的动作(motion)，动画(animation)和物理交互(physical interaction) Part 1 跳跃回调函数 ACharacter::Jump # 若无其他处理，可以直接将Jump注册为跳跃回调函数 定义 将bPressedJump置为true，在下次调用Tick函数时，让Actor在Z轴跳跃 Part 2 构造函数 ACharacter::ACharacter # 设置使用组件的类型(派生类or基类) Part 3 子组件类型名 # 保存在FName中 静态成员 1. CharacterMovementComponent类型名 ACharacter::CharacterMovementComponentName # 角色运动组件 2. MeshComponent类型名 ACharacter::MeshComponentName # 网格体组件 3. CapsuleComponent类型名 ACharacter::CapsuleComponentName # 碰撞胶囊组件 Part 4 获取指向CharacterMovement组件的指针 ACharacter::GetCharacterMovement # CharacterMovementComponent或其派生类，根据ACharacter构造函数中设置的组件类型来 Part 5 播放动画剪辑 ACharacter::PlayAnimMontage # 定义 不需要在调用前检查动画剪辑指针的有效性，函数负责检查 参数 含义 AnimMontage 指向动画剪辑的指针 Part 6 落地事件 # 使用委托机制实现 处理流程 方法一 为落地事件数据成员注册处理函数，发生落地事件时，处理函数被调用 方法二 覆写虚函数Landed 1. Character提供的落地委托类型 FLandedSignature # 多播 支持蓝图 处理函数格式 void OnGroundLanded(const FHitResult&amp;amp; Hit); OnLanded函数名已被使用 2.</description>
+    </item>
+    
+    <item>
+      <title>APlayerController类型</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APlayerController%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APlayerController%E7%B1%BB%E5%9E%8B/</guid>
+      <description> Part 1 切换Pawn AController::Possess # Part 2 处理输入 APlayerController::SetupInputComponent # Part 3 获取类型 APlayerController::StaticClass # 静态成员 返回指向UClass的指针 在GENERATED_BODY中定义 Part 4 增减PlayerController旋转角度 # 1. 绕Y轴旋转 # 2. 绕Z轴旋转 # 3. 绕X轴旋转 # Part 5 设置Controller状态 AController::ChangeState # 修改StateName值并做相应修改 Part 6 使新Controller状态生效 APlayerController::ChangeState # 对先前状态进行收尾，为新状态做相应设置 参数 含义 NAME_Spectating 观察Pawn NAME_Playing 常规Pawn 二者都是常量 Part 7 使观察者状态生效 APlayerController::BeginSpectatingState # Controller释放当前Pawn 销毁当前SpectatorPawn 生成新SpectatorPawn并由Controller控制 定义 </description>
+    </item>
+    
+    <item>
+      <title>AGameModeBase类型</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AGameModeBase%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AGameModeBase%E7%B1%BB%E5%9E%8B/</guid>
+      <description> 一、DefaultPawn设置 AGameModeBase::DefaultPawnClass # 数据成员 使用TSubOfClass定义的模板类 二、默认构造函数 AGameModeBase::AGameModeBase # 对关卡基础类型的设置可以参照这里 三、PlayerController设置 AGameModeBase::PlayerControllerClass # </description>
+    </item>
+    
   </channel>
 </rss>
