@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content="Overview # 定义了多种数学函数，包括sine, cosine, 和其他三角函数(Trigonometric Functions) API 通过命名空间FMath使用 头文件 UE5/Engine/Source/Runtime/Core/Public/Math/UnrealMathUtility.h 头文件 UE5/Engine/Source/Runtime/Core/Public/GenericPlatform/GenericPlatformMath.h 一、三角函数 # 1. 计算正弦值 FGenericPlatformMath::Sin # 静态成员 2. 弧度转角度 FMath::RadiansToDegrees # 3. 计算反余弦 FGenericPlatformMath::Acos # 二、获得随机布尔值 FMath::RandBool # 静态成员 三、取符号 FGenericPlatformMath::Sign # 四、获取二者中较小值 FGenericPlatformMath::Min # 五、范围 # 1. 获得满足范围的数值 FMath::Clamp # 模版函数 自动推测类型 要求三个参数类型一致 若 Min &lt;= X &lt;= Max，返回X； 若 X &lt; Min，返回Min； 若 Max &lt; X，返回Max 2. 区域线性映射 FMath::GetMappedRangeValueClamped&lt;T&gt; # 若给定值Value小于InputRange.X，返回OutputRange.X； 若给定值Value大于InputRange.Y，返回OutputRange.Y； 若给定值Value在范围内[InputRange.X, InputRange.Y]，返回线性映射值： 斜率 K = (OutputRange.">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/" />
-<title>API | ToughCactus</title>
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="FMath库" />
+<meta property="og:description" content="Overview # 定义了多种数学函数，包括sine, cosine, 和其他三角函数(Trigonometric Functions) API 通过命名空间FMath使用 头文件 UE5/Engine/Source/Runtime/Core/Public/Math/UnrealMathUtility.h 头文件 UE5/Engine/Source/Runtime/Core/Public/GenericPlatform/GenericPlatformMath.h 一、三角函数 # 1. 计算正弦值 FGenericPlatformMath::Sin # 静态成员 2. 弧度转角度 FMath::RadiansToDegrees # 3. 计算反余弦 FGenericPlatformMath::Acos # 二、获得随机布尔值 FMath::RandBool # 静态成员 三、取符号 FGenericPlatformMath::Sign # 四、获取二者中较小值 FGenericPlatformMath::Min # 五、范围 # 1. 获得满足范围的数值 FMath::Clamp # 模版函数 自动推测类型 要求三个参数类型一致 若 Min &lt;= X &lt;= Max，返回X； 若 X &lt; Min，返回Min； 若 Max &lt; X，返回Max 2. 区域线性映射 FMath::GetMappedRangeValueClamped&lt;T&gt; # 若给定值Value小于InputRange.X，返回OutputRange.X； 若给定值Value大于InputRange.Y，返回OutputRange.Y； 若给定值Value在范围内[InputRange.X, InputRange.Y]，返回线性映射值： 斜率 K = (OutputRange." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%B8%B8%E7%94%A8%E5%BA%93/FMath%E5%BA%93/" /><meta property="article:section" content="docs" />
+
+
+<title>FMath库 | ToughCactus</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
@@ -17,7 +19,6 @@
   <script defer src="/en.search.min.7065232655b7070836381358057cd8692390618dd5583a22b4e19469ec35d6e1.js" integrity="sha256-cGUjJlW3Bwg2OBNYBXzYaSOQYY3VWDoitOGUaew11uE=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
-<link rel="alternate" type="application/rss+xml" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/index.xml" title="ToughCactus" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -454,7 +455,7 @@ https://github.com/alex-shpak/hugo-book
   
     <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle" checked />
     <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
-      <a role="button" class="active">API</a>
+      <a role="button" class="">API</a>
     </label>
   
 
@@ -468,7 +469,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle"  />
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle" checked />
     <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
       <a role="button" class="">虚幻C&#43;&#43;</a>
     </label>
@@ -617,7 +618,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-44ad5176f97cac8da2ba13539cb8c0b4" class="toggle"  />
+    <input type="checkbox" id="section-44ad5176f97cac8da2ba13539cb8c0b4" class="toggle" checked />
     <label for="section-44ad5176f97cac8da2ba13539cb8c0b4" class="flex justify-between">
       <a role="button" class="">常用库</a>
     </label>
@@ -646,7 +647,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%B8%B8%E7%94%A8%E5%BA%93/FMath%E5%BA%93/" class="">FMath库</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%B8%B8%E7%94%A8%E5%BA%93/FMath%E5%BA%93/" class="active">FMath库</a>
   
 
         </li>
@@ -942,7 +943,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>API</strong>
+  <strong>FMath库</strong>
 
   <label for="toc-control">
     
@@ -956,7 +957,37 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#一-三角函数">一、三角函数</a>
+          <ul>
+            <li><a href="#1-dot-计算正弦值-fgenericplatformmath-sin">1. 计算正弦值 <code>FGenericPlatformMath::Sin</code></a></li>
+            <li><a href="#2-dot-弧度转角度-fmath-radianstodegrees">2. 弧度转角度 <code>FMath::RadiansToDegrees</code></a></li>
+            <li><a href="#3-dot-计算反余弦-fgenericplatformmath-acos">3. 计算反余弦 <code>FGenericPlatformMath::Acos</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#二-获得随机布尔值-fmath-randbool">二、获得随机布尔值 <code>FMath::RandBool</code></a></li>
+        <li><a href="#三-取符号-fgenericplatformmath-sign">三、取符号 <code>FGenericPlatformMath::Sign</code></a></li>
+        <li><a href="#四-获取二者中较小值-fgenericplatformmath-min">四、获取二者中较小值 <code>FGenericPlatformMath::Min</code></a></li>
+        <li><a href="#五-范围">五、范围</a>
+          <ul>
+            <li><a href="#1-dot-获得满足范围的数值-fmath-clamp">1. 获得满足范围的数值 <code>FMath::Clamp</code></a></li>
+            <li><a href="#2-dot-区域线性映射-fmath-getmappedrangevalueclamped-t">2. 区域线性映射 <code>FMath::GetMappedRangeValueClamped&lt;T&gt;</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#六-浮点数">六、浮点数</a>
+          <ul>
+            <li><a href="#1-dot-在允许误差范围内判等-fmath-isnearlyequal">1. 在允许误差范围内判等 <code>FMath::IsNearlyEqual</code></a></li>
+            <li><a href="#2-dot-在允许误差范围内判断是否为0-fmath-isnearlyzero">2. 在允许误差范围内判断是否为0 <code>FMath::IsNearlyZero</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -967,7 +998,127 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"></article>
+  <article class="markdown"><h2 id="overview">
+  Overview
+  <a class="anchor" href="#overview">#</a>
+</h2>
+<p>定义了多种数学函数，包括sine, cosine, 和其他三角函数(Trigonometric Functions) <br/>
+
+  <a href="https://docs.unrealengine.com/5.1/en-US/API/Runtime/Core/Math/FMath/">API</a> <br/></p>
+<ol>
+<li>通过命名空间FMath使用 <br/></li>
+<li>头文件 <br/>
+UE5/Engine/Source/Runtime/Core/Public/Math/UnrealMathUtility.h <br/></li>
+<li>头文件 <br/>
+UE5/Engine/Source/Runtime/Core/Public/GenericPlatform/GenericPlatformMath.h <br/></li>
+</ol>
+<h2 id="一-三角函数">
+  一、三角函数
+  <a class="anchor" href="#%e4%b8%80-%e4%b8%89%e8%a7%92%e5%87%bd%e6%95%b0">#</a>
+</h2>
+<h3 id="1-dot-计算正弦值-fgenericplatformmath-sin">
+  1. 计算正弦值 <code>FGenericPlatformMath::Sin</code>
+  <a class="anchor" href="#1-dot-%e8%ae%a1%e7%ae%97%e6%ad%a3%e5%bc%a6%e5%80%bc-fgenericplatformmath-sin">#</a>
+</h3>
+<p><code>静态成员</code> <br/></p>
+<p><figure><img src="/pic/FMath%e5%ba%93/FGenericPlatformMath-Sin.png" width="400"/>
+</figure>
+ <br/></p>
+<p><figure><img src="/pic/FMath%e5%ba%93/FGenericPlatformMath-Sin-Definition.png" width="500"/>
+</figure>
+ <br/></p>
+<h3 id="2-dot-弧度转角度-fmath-radianstodegrees">
+  2. 弧度转角度 <code>FMath::RadiansToDegrees</code>
+  <a class="anchor" href="#2-dot-%e5%bc%a7%e5%ba%a6%e8%bd%ac%e8%a7%92%e5%ba%a6-fmath-radianstodegrees">#</a>
+</h3>
+<p><figure><img src="/pic/FMath%e5%ba%93/FMath-RadiansToDegrees.png" width="500"/>
+</figure>
+ <br/></p>
+<p><figure><img src="/pic/FMath%e5%ba%93/FMath-RadiansToDegrees-Definition.png" width="800"/>
+</figure>
+ <br/></p>
+<h3 id="3-dot-计算反余弦-fgenericplatformmath-acos">
+  3. 计算反余弦 <code>FGenericPlatformMath::Acos</code>
+  <a class="anchor" href="#3-dot-%e8%ae%a1%e7%ae%97%e5%8f%8d%e4%bd%99%e5%bc%a6-fgenericplatformmath-acos">#</a>
+</h3>
+<p><figure><img src="/pic/FMath%e5%ba%93/FGenericPlatformMath-Acos.png" width="400"/>
+</figure>
+ <br/></p>
+<p><figure><img src="/pic/FMath%e5%ba%93/FGenericPlatformMath-Acos-Definition.png" width="800"/>
+</figure>
+   <br/></p>
+<h2 id="二-获得随机布尔值-fmath-randbool">
+  二、获得随机布尔值 <code>FMath::RandBool</code>
+  <a class="anchor" href="#%e4%ba%8c-%e8%8e%b7%e5%be%97%e9%9a%8f%e6%9c%ba%e5%b8%83%e5%b0%94%e5%80%bc-fmath-randbool">#</a>
+</h2>
+<p><code>静态成员</code> <br/></p>
+<p><figure><img src="/pic/FMath%e5%ba%93/FMath-RandBool.png" width="300"/>
+</figure>
+ <br/></p>
+<h2 id="三-取符号-fgenericplatformmath-sign">
+  三、取符号 <code>FGenericPlatformMath::Sign</code>
+  <a class="anchor" href="#%e4%b8%89-%e5%8f%96%e7%ac%a6%e5%8f%b7-fgenericplatformmath-sign">#</a>
+</h2>
+<p><figure><img src="/pic/FMath%e5%ba%93/FGenericPlatformMath-Sign.png" width="400"/>
+</figure>
+ <br/></p>
+<h2 id="四-获取二者中较小值-fgenericplatformmath-min">
+  四、获取二者中较小值 <code>FGenericPlatformMath::Min</code>
+  <a class="anchor" href="#%e5%9b%9b-%e8%8e%b7%e5%8f%96%e4%ba%8c%e8%80%85%e4%b8%ad%e8%be%83%e5%b0%8f%e5%80%bc-fgenericplatformmath-min">#</a>
+</h2>
+<p><figure><img src="/pic/FMath%e5%ba%93/FGenericPlatformMath-Min.png" width="500"/>
+</figure>
+ <br/></p>
+<h2 id="五-范围">
+  五、范围
+  <a class="anchor" href="#%e4%ba%94-%e8%8c%83%e5%9b%b4">#</a>
+</h2>
+<h3 id="1-dot-获得满足范围的数值-fmath-clamp">
+  1. 获得满足范围的数值 <code>FMath::Clamp</code>
+  <a class="anchor" href="#1-dot-%e8%8e%b7%e5%be%97%e6%bb%a1%e8%b6%b3%e8%8c%83%e5%9b%b4%e7%9a%84%e6%95%b0%e5%80%bc-fmath-clamp">#</a>
+</h3>
+<p><code>模版函数</code> <code>自动推测类型</code> <code>要求三个参数类型一致</code> <br/></p>
+<p><figure><img src="/pic/FMath%e5%ba%93/FMath-Clamp.png" width="500"/>
+</figure>
+ <br/></p>
+<blockquote>
+<p>若 Min &lt;= X &lt;= Max，返回X； <br/>
+若 X &lt; Min，返回Min； <br/>
+若 Max &lt; X，返回Max <br/></p>
+</blockquote>
+<h3 id="2-dot-区域线性映射-fmath-getmappedrangevalueclamped-t">
+  2. 区域线性映射 <code>FMath::GetMappedRangeValueClamped&lt;T&gt;</code>
+  <a class="anchor" href="#2-dot-%e5%8c%ba%e5%9f%9f%e7%ba%bf%e6%80%a7%e6%98%a0%e5%b0%84-fmath-getmappedrangevalueclamped-t">#</a>
+</h3>
+<p><figure><img src="/pic/FMath%e5%ba%93/FMath-GetMappedRangeValueClamped.png" width="600"/>
+</figure>
+ <br/></p>
+<blockquote>
+<p>若给定值Value小于InputRange.X，返回OutputRange.X； <br/>
+若给定值Value大于InputRange.Y，返回OutputRange.Y； <br/>
+若给定值Value在范围内[InputRange.X, InputRange.Y]，返回线性映射值： <br/>
+斜率 K = (OutputRange.Y - OutputRange.X) / (InputRange.Y - InputRange.X)； <br/>
+返回值 OutputRange.Y + (Value - InputRange.X) * K <br/></p>
+</blockquote>
+<h2 id="六-浮点数">
+  六、浮点数
+  <a class="anchor" href="#%e5%85%ad-%e6%b5%ae%e7%82%b9%e6%95%b0">#</a>
+</h2>
+<h3 id="1-dot-在允许误差范围内判等-fmath-isnearlyequal">
+  1. 在允许误差范围内判等 <code>FMath::IsNearlyEqual</code>
+  <a class="anchor" href="#1-dot-%e5%9c%a8%e5%85%81%e8%ae%b8%e8%af%af%e5%b7%ae%e8%8c%83%e5%9b%b4%e5%86%85%e5%88%a4%e7%ad%89-fmath-isnearlyequal">#</a>
+</h3>
+<p><figure><img src="/pic/FMath%e5%ba%93/FMath-IsNearlyEqual.png" width="600"/>
+</figure>
+ <br/></p>
+<h3 id="2-dot-在允许误差范围内判断是否为0-fmath-isnearlyzero">
+  2. 在允许误差范围内判断是否为0 <code>FMath::IsNearlyZero</code>
+  <a class="anchor" href="#2-dot-%e5%9c%a8%e5%85%81%e8%ae%b8%e8%af%af%e5%b7%ae%e8%8c%83%e5%9b%b4%e5%86%85%e5%88%a4%e6%96%ad%e6%98%af%e5%90%a6%e4%b8%ba0-fmath-isnearlyzero">#</a>
+</h3>
+<p><figure><img src="/pic/FMath%e5%ba%93/FMath-IsNearlyZero.png" width="600"/>
+</figure>
+ <br/></p>
+</article>
  
       
 
@@ -992,6 +1143,10 @@ https://github.com/alex-shpak/hugo-book
 
       
   
+  <div class="book-comments">
+
+</div>
+  
  
 
       <label for="menu-control" class="hidden book-menu-overlay"></label>
@@ -1002,7 +1157,37 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#一-三角函数">一、三角函数</a>
+          <ul>
+            <li><a href="#1-dot-计算正弦值-fgenericplatformmath-sin">1. 计算正弦值 <code>FGenericPlatformMath::Sin</code></a></li>
+            <li><a href="#2-dot-弧度转角度-fmath-radianstodegrees">2. 弧度转角度 <code>FMath::RadiansToDegrees</code></a></li>
+            <li><a href="#3-dot-计算反余弦-fgenericplatformmath-acos">3. 计算反余弦 <code>FGenericPlatformMath::Acos</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#二-获得随机布尔值-fmath-randbool">二、获得随机布尔值 <code>FMath::RandBool</code></a></li>
+        <li><a href="#三-取符号-fgenericplatformmath-sign">三、取符号 <code>FGenericPlatformMath::Sign</code></a></li>
+        <li><a href="#四-获取二者中较小值-fgenericplatformmath-min">四、获取二者中较小值 <code>FGenericPlatformMath::Min</code></a></li>
+        <li><a href="#五-范围">五、范围</a>
+          <ul>
+            <li><a href="#1-dot-获得满足范围的数值-fmath-clamp">1. 获得满足范围的数值 <code>FMath::Clamp</code></a></li>
+            <li><a href="#2-dot-区域线性映射-fmath-getmappedrangevalueclamped-t">2. 区域线性映射 <code>FMath::GetMappedRangeValueClamped&lt;T&gt;</code></a></li>
+          </ul>
+        </li>
+        <li><a href="#六-浮点数">六、浮点数</a>
+          <ul>
+            <li><a href="#1-dot-在允许误差范围内判等-fmath-isnearlyequal">1. 在允许误差范围内判等 <code>FMath::IsNearlyEqual</code></a></li>
+            <li><a href="#2-dot-在允许误差范围内判断是否为0-fmath-isnearlyzero">2. 在允许误差范围内判断是否为0 <code>FMath::IsNearlyZero</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
  

@@ -3,13 +3,15 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content="">
+<meta name="description" content=" Overview # 虚幻引擎提供的辅助类；提供多种静态函数，均可在蓝图中使用 源文件 UE5/Engine/Source/Runtime/Engine/Private/GameplayStatics.cpp 头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/GameplayStatics.h 一、头文件 # #include &#34;Kismet/GameplayStatics.h&#34; 二、获得场景中的指定类型的所有Actor对象 UGameplayStatics::GetAllActorsOfClass # 和类模板TSubclassOf搭配使用 保存到传入的数组引用参数中 指向游戏中任意Object WorldContextObject 可以使用GetWorld传入世界对象，或者使用指向PlayerController的指针(this) UGameplayStatics::GetAllActorsOfClass(GetWorld(), AGeometryPawn::StaticClass(), Pawns); 三、计算伤害 # 半径伤害 UGameplayStatics::ApplyRadialDamageWithFalloff # 静态成员 调用OverlapMultiByObjectType搜索和球体重叠的Actor，对这些Actor调用TakeDamage 三、计算伤害 包裹函数 # 半径伤害 UGameplayStatics::ApplyRadialDamage # 静态成员 包裹函数，封装UGameplayStatics::ApplyRadialDamageWithFalloff 参数 名称 说明 可以传入指向UWorld对象的指针 WorldContextObject 伤害的数量特征(quantitative characteristic) BaseDamage 半径伤害的中心位置 Origin 伤害半径 DamageRadius 伤害类型 DamageTypeClass UDamageType及其派生类，类型变量；处理函数根据伤害类型做出相应处理 不受伤害的Actor数组 IgnoreActors 伤害来源 DamageCauser 可以是武器 伤害来源的上级Controller InstigatedByController 当伤害来源是Pawn或Character时，传入上级Controller，用以判断阵营 计算半径伤害用标志 bDoFullDamage 为true时，处于伤害半径球体内的Actor，受到相同伤害值，计算半径伤害模型简单；为false时，离球体中心越近，伤害值越大，需要一定开销 减免伤害用枚举变量 DamagePreventionChannel 碰撞系数；当Character和伤害中心有隔挡时，如何计算伤害；在某些情形，允许Character不受伤害 使用 UGameplayStatics::ApplyRadialDamage(GetWorld(), Damage, GetActorLocation(), Radius, nullptr, {}, this, nullptr, DoFullDamage); 点伤害 UGameplayStatics::ApplyPointDamage # 存在碰撞，需要知道指向目标Actor的指针 其他类型 UGameplayStatics::ApplyDamage # 需要知道指向目标Actor的指针 ">
 <meta name="theme-color" content="#FFFFFF">
-<meta name="color-scheme" content="light dark"><meta property="og:title" content="" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/" />
-<title>API | ToughCactus</title>
+<meta name="color-scheme" content="light dark"><meta property="og:title" content="UGameplayStatics类型" />
+<meta property="og:description" content=" Overview # 虚幻引擎提供的辅助类；提供多种静态函数，均可在蓝图中使用 源文件 UE5/Engine/Source/Runtime/Engine/Private/GameplayStatics.cpp 头文件 UE5/Engine/Source/Runtime/Engine/Classes/Kismet/GameplayStatics.h 一、头文件 # #include &#34;Kismet/GameplayStatics.h&#34; 二、获得场景中的指定类型的所有Actor对象 UGameplayStatics::GetAllActorsOfClass # 和类模板TSubclassOf搭配使用 保存到传入的数组引用参数中 指向游戏中任意Object WorldContextObject 可以使用GetWorld传入世界对象，或者使用指向PlayerController的指针(this) UGameplayStatics::GetAllActorsOfClass(GetWorld(), AGeometryPawn::StaticClass(), Pawns); 三、计算伤害 # 半径伤害 UGameplayStatics::ApplyRadialDamageWithFalloff # 静态成员 调用OverlapMultiByObjectType搜索和球体重叠的Actor，对这些Actor调用TakeDamage 三、计算伤害 包裹函数 # 半径伤害 UGameplayStatics::ApplyRadialDamage # 静态成员 包裹函数，封装UGameplayStatics::ApplyRadialDamageWithFalloff 参数 名称 说明 可以传入指向UWorld对象的指针 WorldContextObject 伤害的数量特征(quantitative characteristic) BaseDamage 半径伤害的中心位置 Origin 伤害半径 DamageRadius 伤害类型 DamageTypeClass UDamageType及其派生类，类型变量；处理函数根据伤害类型做出相应处理 不受伤害的Actor数组 IgnoreActors 伤害来源 DamageCauser 可以是武器 伤害来源的上级Controller InstigatedByController 当伤害来源是Pawn或Character时，传入上级Controller，用以判断阵营 计算半径伤害用标志 bDoFullDamage 为true时，处于伤害半径球体内的Actor，受到相同伤害值，计算半径伤害模型简单；为false时，离球体中心越近，伤害值越大，需要一定开销 减免伤害用枚举变量 DamagePreventionChannel 碰撞系数；当Character和伤害中心有隔挡时，如何计算伤害；在某些情形，允许Character不受伤害 使用 UGameplayStatics::ApplyRadialDamage(GetWorld(), Damage, GetActorLocation(), Radius, nullptr, {}, this, nullptr, DoFullDamage); 点伤害 UGameplayStatics::ApplyPointDamage # 存在碰撞，需要知道指向目标Actor的指针 其他类型 UGameplayStatics::ApplyDamage # 需要知道指向目标Actor的指针 " />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%B8%B8%E7%94%A8%E5%BA%93/UGameplayStatics%E7%B1%BB%E5%9E%8B/" /><meta property="article:section" content="docs" />
+
+
+<title>UGameplayStatics类型 | ToughCactus</title>
 <link rel="manifest" href="/manifest.json">
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
@@ -17,7 +19,6 @@
   <script defer src="/en.search.min.7065232655b7070836381358057cd8692390618dd5583a22b4e19469ec35d6e1.js" integrity="sha256-cGUjJlW3Bwg2OBNYBXzYaSOQYY3VWDoitOGUaew11uE=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
-<link rel="alternate" type="application/rss+xml" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/index.xml" title="ToughCactus" />
 <!--
 Made with Book Theme
 https://github.com/alex-shpak/hugo-book
@@ -454,7 +455,7 @@ https://github.com/alex-shpak/hugo-book
   
     <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle" checked />
     <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
-      <a role="button" class="active">API</a>
+      <a role="button" class="">API</a>
     </label>
   
 
@@ -468,7 +469,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle"  />
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle" checked />
     <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
       <a role="button" class="">虚幻C&#43;&#43;</a>
     </label>
@@ -617,7 +618,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <input type="checkbox" id="section-44ad5176f97cac8da2ba13539cb8c0b4" class="toggle"  />
+    <input type="checkbox" id="section-44ad5176f97cac8da2ba13539cb8c0b4" class="toggle" checked />
     <label for="section-44ad5176f97cac8da2ba13539cb8c0b4" class="flex justify-between">
       <a role="button" class="">常用库</a>
     </label>
@@ -659,7 +660,7 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%B8%B8%E7%94%A8%E5%BA%93/UGameplayStatics%E7%B1%BB%E5%9E%8B/" class="">UGameplayStatics类型</a>
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%B8%B8%E7%94%A8%E5%BA%93/UGameplayStatics%E7%B1%BB%E5%9E%8B/" class="active">UGameplayStatics类型</a>
   
 
         </li>
@@ -942,7 +943,7 @@ https://github.com/alex-shpak/hugo-book
     <img src="/svg/menu.svg" class="book-icon" alt="Menu" />
   </label>
 
-  <strong>API</strong>
+  <strong>UGameplayStatics类型</strong>
 
   <label for="toc-control">
     
@@ -956,7 +957,29 @@ https://github.com/alex-shpak/hugo-book
   <aside class="hidden clearfix">
     
   
-
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#一-头文件">一、头文件</a></li>
+        <li><a href="#二-获得场景中的指定类型的所有actor对象-ugameplaystatics-getallactorsofclass">二、获得场景中的指定类型的所有Actor对象 <code>UGameplayStatics::GetAllActorsOfClass</code></a></li>
+        <li><a href="#三-计算伤害">三、计算伤害</a>
+          <ul>
+            <li><a href="#半径伤害-ugameplaystatics-applyradialdamagewithfalloff">半径伤害 UGameplayStatics::ApplyRadialDamageWithFalloff</a></li>
+          </ul>
+        </li>
+        <li><a href="#三-计算伤害-包裹函数">三、计算伤害 包裹函数</a>
+          <ul>
+            <li><a href="#半径伤害-ugameplaystatics-applyradialdamage">半径伤害 UGameplayStatics::ApplyRadialDamage</a></li>
+            <li><a href="#点伤害-ugameplaystatics-applypointdamage">点伤害 UGameplayStatics::ApplyPointDamage</a></li>
+            <li><a href="#其他类型-ugameplaystatics-applydamage">其他类型 UGameplayStatics::ApplyDamage</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
 
@@ -967,7 +990,167 @@ https://github.com/alex-shpak/hugo-book
 
       
       
-  <article class="markdown"></article>
+  <article class="markdown"><h2 id="overview">
+  Overview
+  <a class="anchor" href="#overview">#</a>
+</h2>
+<p>虚幻引擎提供的辅助类；提供多种静态函数，均可在蓝图中使用 <br/></p>
+<ol>
+<li>源文件 <br/>
+UE5/Engine/Source/Runtime/Engine/Private/GameplayStatics.cpp <br/></li>
+<li>头文件 <br/>
+UE5/Engine/Source/Runtime/Engine/Classes/Kismet/GameplayStatics.h <br/></li>
+</ol>
+<h2 id="一-头文件">
+  一、头文件
+  <a class="anchor" href="#%e4%b8%80-%e5%a4%b4%e6%96%87%e4%bb%b6">#</a>
+</h2>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span><span style="color:#75715e">#include</span> <span style="color:#75715e">&#34;Kismet/GameplayStatics.h&#34;</span><span style="color:#75715e">
+</span></span></span></code></pre></div><h2 id="二-获得场景中的指定类型的所有actor对象-ugameplaystatics-getallactorsofclass">
+  二、获得场景中的指定类型的所有Actor对象 <code>UGameplayStatics::GetAllActorsOfClass</code>
+  <a class="anchor" href="#%e4%ba%8c-%e8%8e%b7%e5%be%97%e5%9c%ba%e6%99%af%e4%b8%ad%e7%9a%84%e6%8c%87%e5%ae%9a%e7%b1%bb%e5%9e%8b%e7%9a%84%e6%89%80%e6%9c%89actor%e5%af%b9%e8%b1%a1-ugameplaystatics-getallactorsofclass">#</a>
+</h2>
+<p><code>和类模板TSubclassOf搭配使用</code> <code>保存到传入的数组引用参数中</code> <br/></p>
+<p><figure><img src="/pic/UGameplayStatics%e7%b1%bb%e5%9e%8b/UGameplayStatics-GetAllActorsOfClass.png" width="1000"/>
+</figure>
+ <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>指向游戏中任意Object</td>
+<td>WorldContextObject</td>
+<td>可以使用GetWorld传入世界对象，或者使用指向PlayerController的指针(this)</td>
+</tr>
+</tbody>
+</table>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UGameplayStatics<span style="color:#f92672">::</span>GetAllActorsOfClass(GetWorld(), AGeometryPawn<span style="color:#f92672">::</span>StaticClass(), Pawns);
+</span></span></code></pre></div><h2 id="三-计算伤害">
+  三、计算伤害
+  <a class="anchor" href="#%e4%b8%89-%e8%ae%a1%e7%ae%97%e4%bc%a4%e5%ae%b3">#</a>
+</h2>
+<h3 id="半径伤害-ugameplaystatics-applyradialdamagewithfalloff">
+  半径伤害 UGameplayStatics::ApplyRadialDamageWithFalloff
+  <a class="anchor" href="#%e5%8d%8a%e5%be%84%e4%bc%a4%e5%ae%b3-ugameplaystatics-applyradialdamagewithfalloff">#</a>
+</h3>
+<p><code>静态成员</code> <br/>
+调用OverlapMultiByObjectType搜索和球体重叠的Actor，对这些Actor调用TakeDamage <br/></p>
+<p><figure><img src="/pic/UGameplayStatics%e7%b1%bb%e5%9e%8b/UGameplayStatics-ApplyRadialDamageWithFalloff-%e5%8f%82%e6%95%b0%e8%af%b4%e6%98%8e.png" width="1000"/>
+</figure>
+   <br/></p>
+<p><figure><img src="/pic/UGameplayStatics%e7%b1%bb%e5%9e%8b/UGameplayStatics-ApplyRadialDamageWithFalloff.png" width="1000"/>
+</figure>
+   <br/></p>
+<h2 id="三-计算伤害-包裹函数">
+  三、计算伤害 包裹函数
+  <a class="anchor" href="#%e4%b8%89-%e8%ae%a1%e7%ae%97%e4%bc%a4%e5%ae%b3-%e5%8c%85%e8%a3%b9%e5%87%bd%e6%95%b0">#</a>
+</h2>
+<h3 id="半径伤害-ugameplaystatics-applyradialdamage">
+  半径伤害 UGameplayStatics::ApplyRadialDamage
+  <a class="anchor" href="#%e5%8d%8a%e5%be%84%e4%bc%a4%e5%ae%b3-ugameplaystatics-applyradialdamage">#</a>
+</h3>
+<p><code>静态成员</code> <br/>
+<strong>包裹函数，封装UGameplayStatics::ApplyRadialDamageWithFalloff</strong> <br/></p>
+<p><figure><img src="/pic/UGameplayStatics%e7%b1%bb%e5%9e%8b/UGameplayStatics-ApplyRadialDamage-%e5%8f%82%e6%95%b0%e8%af%b4%e6%98%8e.png" width="1000"/>
+</figure>
+   <br/></p>
+<p><figure><img src="/pic/UGameplayStatics%e7%b1%bb%e5%9e%8b/UGameplayStatics-ApplyRadialDamage.png" width="1000"/>
+</figure>
+ <br/></p>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>名称</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>可以传入指向UWorld对象的指针</td>
+<td>WorldContextObject</td>
+<td></td>
+</tr>
+<tr>
+<td>伤害的数量特征(quantitative characteristic)</td>
+<td>BaseDamage</td>
+<td></td>
+</tr>
+<tr>
+<td>半径伤害的中心位置</td>
+<td>Origin</td>
+<td></td>
+</tr>
+<tr>
+<td>伤害半径</td>
+<td>DamageRadius</td>
+<td></td>
+</tr>
+<tr>
+<td>伤害类型</td>
+<td>DamageTypeClass</td>
+<td>UDamageType及其派生类，类型变量；处理函数根据伤害类型做出相应处理</td>
+</tr>
+<tr>
+<td>不受伤害的Actor数组</td>
+<td>IgnoreActors</td>
+<td></td>
+</tr>
+<tr>
+<td>伤害来源</td>
+<td>DamageCauser</td>
+<td>可以是武器</td>
+</tr>
+<tr>
+<td>伤害来源的上级Controller</td>
+<td>InstigatedByController</td>
+<td>当伤害来源是Pawn或Character时，传入上级Controller，用以判断阵营</td>
+</tr>
+<tr>
+<td>计算半径伤害用标志</td>
+<td>bDoFullDamage</td>
+<td>为true时，处于伤害半径球体内的Actor，受到相同伤害值，计算半径伤害模型简单；为false时，离球体中心越近，伤害值越大，需要一定开销</td>
+</tr>
+<tr>
+<td>减免伤害用枚举变量</td>
+<td>DamagePreventionChannel</td>
+<td>碰撞系数；当Character和伤害中心有隔挡时，如何计算伤害；在某些情形，允许Character不受伤害</td>
+</tr>
+</tbody>
+</table>
+<p><strong>使用</strong> <br/></p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-C++" data-lang="C++"><span style="display:flex;"><span>UGameplayStatics<span style="color:#f92672">::</span>ApplyRadialDamage(GetWorld(),
+</span></span><span style="display:flex;"><span>                                    Damage,
+</span></span><span style="display:flex;"><span>                                    GetActorLocation(),
+</span></span><span style="display:flex;"><span>                                    Radius,
+</span></span><span style="display:flex;"><span>                                    <span style="color:#66d9ef">nullptr</span>,
+</span></span><span style="display:flex;"><span>                                    {},
+</span></span><span style="display:flex;"><span>                                    <span style="color:#66d9ef">this</span>,
+</span></span><span style="display:flex;"><span>                                    <span style="color:#66d9ef">nullptr</span>,
+</span></span><span style="display:flex;"><span>                                    DoFullDamage);
+</span></span></code></pre></div><h3 id="点伤害-ugameplaystatics-applypointdamage">
+  点伤害 UGameplayStatics::ApplyPointDamage
+  <a class="anchor" href="#%e7%82%b9%e4%bc%a4%e5%ae%b3-ugameplaystatics-applypointdamage">#</a>
+</h3>
+<p>存在碰撞，需要知道指向目标Actor的指针 <br/></p>
+<p><figure><img src="/pic/UGameplayStatics%e7%b1%bb%e5%9e%8b/UGameplayStatics-ApplyPointDamage.png" width="1400"/>
+</figure>
+ <br/></p>
+<h3 id="其他类型-ugameplaystatics-applydamage">
+  其他类型 UGameplayStatics::ApplyDamage
+  <a class="anchor" href="#%e5%85%b6%e4%bb%96%e7%b1%bb%e5%9e%8b-ugameplaystatics-applydamage">#</a>
+</h3>
+<p>需要知道指向目标Actor的指针 <br/></p>
+<p><figure><img src="/pic/UGameplayStatics%e7%b1%bb%e5%9e%8b/UGameplayStatics-ApplyDamage.png" width="1000"/>
+</figure>
+ <br/></p>
+</article>
  
       
 
@@ -992,6 +1175,10 @@ https://github.com/alex-shpak/hugo-book
 
       
   
+  <div class="book-comments">
+
+</div>
+  
  
 
       <label for="menu-control" class="hidden book-menu-overlay"></label>
@@ -1002,7 +1189,29 @@ https://github.com/alex-shpak/hugo-book
       <div class="book-toc-content">
         
   
-
+<nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#overview">Overview</a></li>
+        <li><a href="#一-头文件">一、头文件</a></li>
+        <li><a href="#二-获得场景中的指定类型的所有actor对象-ugameplaystatics-getallactorsofclass">二、获得场景中的指定类型的所有Actor对象 <code>UGameplayStatics::GetAllActorsOfClass</code></a></li>
+        <li><a href="#三-计算伤害">三、计算伤害</a>
+          <ul>
+            <li><a href="#半径伤害-ugameplaystatics-applyradialdamagewithfalloff">半径伤害 UGameplayStatics::ApplyRadialDamageWithFalloff</a></li>
+          </ul>
+        </li>
+        <li><a href="#三-计算伤害-包裹函数">三、计算伤害 包裹函数</a>
+          <ul>
+            <li><a href="#半径伤害-ugameplaystatics-applyradialdamage">半径伤害 UGameplayStatics::ApplyRadialDamage</a></li>
+            <li><a href="#点伤害-ugameplaystatics-applypointdamage">点伤害 UGameplayStatics::ApplyPointDamage</a></li>
+            <li><a href="#其他类型-ugameplaystatics-applydamage">其他类型 UGameplayStatics::ApplyDamage</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
 
 
  

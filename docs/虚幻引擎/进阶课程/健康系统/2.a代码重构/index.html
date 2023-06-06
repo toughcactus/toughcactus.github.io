@@ -3,10 +3,10 @@
 <head>
   <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="description" content=" Part 1 新增 Components/STHealthComponent # C&#43;&#43; STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C&#43;&#43; STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C&#43;&#43; STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 相关设置 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death播放完结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter [-] BP_STPlayerController BP_STGameModeBase C&#43;&#43; ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter [-] STPlayerController Dev/ STDevDamageActor 阶段性总结 # 游戏角色 # C&#43;&#43; Player/STBaseCharacter Blueprint Player/BP_STBaseCharacter Player/Animations/ABP_BaseCharacter 其他 Player/Animations Blueprint BS_Run BS_Walk AM_Death C&#43;&#43; STBaseCharacter # 函数成员 基本函数 操作 构造函数 设置组件类型(初始化列表)；初始化组件 BeginPlay 检查组件是否成功创建(check)；组件设置；注册委托 SetupPlayerInputComponent 检查组件；绑定平移旋转跳跃跑步键位 委托 委托成员 作用 处理函数 操作 HealthComponent::OnHealthChanged 修改显示生命值 OnHealthChanged 调用DisplayHealthText HealthComponent::OnDeath 游戏角色死亡处理 OnDeath 播放死亡动画剪辑；禁止操作Character；定时销毁；切换到观察视角 ACharacter::LandedDelegate 计算落地伤害 OnGroundLanded 计算落地伤害；对Character调用TakeDamage 键位绑定 回调函数 键位 相关函数 MoveRight 左右移动 AddMovementInput；GetActorRightVector MoveForward 前后移动 AddMovementInput；GetActorForwardVector 左右旋转 ACharacter::AddControllerYawInput 上下旋转 ACharacter::AddControllerPitchInput 跳跃 ACharacter::Jump RunEnable，RunDisable 跑步 功能函数 函数 操作 相关函数 DisplayHealthText 设置TextRender文本 HealthTextComponent UTextRenderComponent::SetText 接口 接口函数 操作 GetDirection 计算前进方向和速度方向的夹角；供ABP_STBaseCharacter使用 IsRunning 判断角色是否满足跑步条件；供STCharacterMovementComponent使用；供ABP_STBaseCharacter使用 数据成员 组件 用途 SpringArmComponent 以游戏角色为中心左右旋转 CameraComponent 第三视角 HealthComponent 生命值系统 HealthTextComponent 显示生命值 CharacterMovementComponent 运动组件 标志位 AbleRun 跑步键位是否按下 IsForward 向前方向键是否按下 游戏角色死亡逻辑 DeathAnimMontage 死亡动画剪辑 LifeSpanOnDeath 销毁角色定时间隔 落地伤害逻辑 LandedDamageRange 伤害范围 LandedDamageVelocityRange 造成伤害的速度范围 Blueprint Player/BP_STBaseCharacter # CapsuleComponent HealthTextComponent Horizontal Alignment Center SpringArmComponent UsePawnControlRotation true MeshComponent Mesh &gt; Skeletal Mesh Asset HeroTPP Materials &gt; Element 0 HeroTPP Animation Mode UseAnimationBlueprint AnimClass ABP_BaseCharacter Blueprint Player/Animations/ABP_BaseCharacter # AnimGraph Locomotion &gt; Slot &gt; OutputPose 状态 状态 说明 走路 Walk BS_Walk；混合空间 跑步 Run BS_Run；混合空间1D 跳跃 JumpStart JumpLoop JumpEnd 死亡 AM_Death；动画剪辑 动画输入 速度 Velocity 速度和前进方向的夹角 Directon 转换条件 IsRunning C&#43;&#43; 满足3个条件：按下Shift；速度和前进方向夹角为0（按下W）；速度不为0 IsFalling CharacterMovementComponent::IsFalling 返回true，意味着游戏角色跳起；接着返回false，意味着游戏角色回到地面 EventGraph 设置变量 Velocity Directon IsRunning IsFalling 组件 # C&#43;&#43; STCharacterMovementComponent # 满足跑步判断时，增加最大速度 SpeedAcceleration 可设置类数据成员初始值；速度系数 STHealthCompoennt # 函数成员 基本函数 操作 构造函数 每帧调用Tick标志位置为false BeginPlay 初始化生命值；注册Actor::OnTakeAnyDamage TickComponent 屏蔽 接口 接口函数 操作 GetHealth 获取当前生命值；STBaseCharacter调用 内部逻辑 IsDead 判断角色是否死亡 SetHealth 修改生命值；受到伤害或治疗时调用，随之广播 治疗 OnHealTrigger 定时器回调函数；治疗；满生命值停止定时器 StartHealTimer 受到伤害则开启定时器 StopHealTimer 收到伤害会关闭之前开启的定时器；满生命值时停止定时器 受伤处理函数 OnTakeAnyDamage 进入条件：伤害为正数，当前角色存活；受伤后，停止已开启的治疗定时器；更新生命值；若角色死亡，广播，否则，开启治疗定时器 数据成员 Health 生命值 MaxHealth 最大生命值 委托成员 OnHealthChanged 修改生命值(SetHealth)时广播 OnDeath 受到伤害时，若死亡，广播 治疗 HealTimer 定时器 AutoHeal 使能治疗 HealModifier 治疗量 HealRate 治疗频率 HealDelay 治疗延时 伤害源 # 函数成员 基本函数 操作 构造函数 初始化组件 BeginPlay Tick 绘制球体模拟爆炸范围；对球体内以及相交Actor造成伤害 数据成员 SceneComponent 变换属性 Radius 球体半径 SphereColor 球体颜色 Damage 伤害的数值特征 DoFullDamage 计算伤害机制标志位 ">
+<meta name="description" content="Part 1 新增 Components/STHealthComponent # C&#43;&#43; STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C&#43;&#43; STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C&#43;&#43; STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 相关设置 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death播放完结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 Part 5 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter [-] BP_STPlayerController BP_STGameModeBase C&#43;&#43; ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter [-] STPlayerController Dev/ STDevDamageActor Part 6 阶段性总结 # 一、游戏角色 # C&#43;&#43; Player/STBaseCharacter Blueprint Player/BP_STBaseCharacter Player/Animations/ABP_BaseCharacter 其他 Player/Animations Blueprint BS_Run BS_Walk AM_Death 1.">
 <meta name="theme-color" content="#FFFFFF">
 <meta name="color-scheme" content="light dark"><meta property="og:title" content="代码重构" />
-<meta property="og:description" content=" Part 1 新增 Components/STHealthComponent # C&#43;&#43; STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C&#43;&#43; STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C&#43;&#43; STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 相关设置 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death播放完结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter [-] BP_STPlayerController BP_STGameModeBase C&#43;&#43; ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter [-] STPlayerController Dev/ STDevDamageActor 阶段性总结 # 游戏角色 # C&#43;&#43; Player/STBaseCharacter Blueprint Player/BP_STBaseCharacter Player/Animations/ABP_BaseCharacter 其他 Player/Animations Blueprint BS_Run BS_Walk AM_Death C&#43;&#43; STBaseCharacter # 函数成员 基本函数 操作 构造函数 设置组件类型(初始化列表)；初始化组件 BeginPlay 检查组件是否成功创建(check)；组件设置；注册委托 SetupPlayerInputComponent 检查组件；绑定平移旋转跳跃跑步键位 委托 委托成员 作用 处理函数 操作 HealthComponent::OnHealthChanged 修改显示生命值 OnHealthChanged 调用DisplayHealthText HealthComponent::OnDeath 游戏角色死亡处理 OnDeath 播放死亡动画剪辑；禁止操作Character；定时销毁；切换到观察视角 ACharacter::LandedDelegate 计算落地伤害 OnGroundLanded 计算落地伤害；对Character调用TakeDamage 键位绑定 回调函数 键位 相关函数 MoveRight 左右移动 AddMovementInput；GetActorRightVector MoveForward 前后移动 AddMovementInput；GetActorForwardVector 左右旋转 ACharacter::AddControllerYawInput 上下旋转 ACharacter::AddControllerPitchInput 跳跃 ACharacter::Jump RunEnable，RunDisable 跑步 功能函数 函数 操作 相关函数 DisplayHealthText 设置TextRender文本 HealthTextComponent UTextRenderComponent::SetText 接口 接口函数 操作 GetDirection 计算前进方向和速度方向的夹角；供ABP_STBaseCharacter使用 IsRunning 判断角色是否满足跑步条件；供STCharacterMovementComponent使用；供ABP_STBaseCharacter使用 数据成员 组件 用途 SpringArmComponent 以游戏角色为中心左右旋转 CameraComponent 第三视角 HealthComponent 生命值系统 HealthTextComponent 显示生命值 CharacterMovementComponent 运动组件 标志位 AbleRun 跑步键位是否按下 IsForward 向前方向键是否按下 游戏角色死亡逻辑 DeathAnimMontage 死亡动画剪辑 LifeSpanOnDeath 销毁角色定时间隔 落地伤害逻辑 LandedDamageRange 伤害范围 LandedDamageVelocityRange 造成伤害的速度范围 Blueprint Player/BP_STBaseCharacter # CapsuleComponent HealthTextComponent Horizontal Alignment Center SpringArmComponent UsePawnControlRotation true MeshComponent Mesh &gt; Skeletal Mesh Asset HeroTPP Materials &gt; Element 0 HeroTPP Animation Mode UseAnimationBlueprint AnimClass ABP_BaseCharacter Blueprint Player/Animations/ABP_BaseCharacter # AnimGraph Locomotion &gt; Slot &gt; OutputPose 状态 状态 说明 走路 Walk BS_Walk；混合空间 跑步 Run BS_Run；混合空间1D 跳跃 JumpStart JumpLoop JumpEnd 死亡 AM_Death；动画剪辑 动画输入 速度 Velocity 速度和前进方向的夹角 Directon 转换条件 IsRunning C&#43;&#43; 满足3个条件：按下Shift；速度和前进方向夹角为0（按下W）；速度不为0 IsFalling CharacterMovementComponent::IsFalling 返回true，意味着游戏角色跳起；接着返回false，意味着游戏角色回到地面 EventGraph 设置变量 Velocity Directon IsRunning IsFalling 组件 # C&#43;&#43; STCharacterMovementComponent # 满足跑步判断时，增加最大速度 SpeedAcceleration 可设置类数据成员初始值；速度系数 STHealthCompoennt # 函数成员 基本函数 操作 构造函数 每帧调用Tick标志位置为false BeginPlay 初始化生命值；注册Actor::OnTakeAnyDamage TickComponent 屏蔽 接口 接口函数 操作 GetHealth 获取当前生命值；STBaseCharacter调用 内部逻辑 IsDead 判断角色是否死亡 SetHealth 修改生命值；受到伤害或治疗时调用，随之广播 治疗 OnHealTrigger 定时器回调函数；治疗；满生命值停止定时器 StartHealTimer 受到伤害则开启定时器 StopHealTimer 收到伤害会关闭之前开启的定时器；满生命值时停止定时器 受伤处理函数 OnTakeAnyDamage 进入条件：伤害为正数，当前角色存活；受伤后，停止已开启的治疗定时器；更新生命值；若角色死亡，广播，否则，开启治疗定时器 数据成员 Health 生命值 MaxHealth 最大生命值 委托成员 OnHealthChanged 修改生命值(SetHealth)时广播 OnDeath 受到伤害时，若死亡，广播 治疗 HealTimer 定时器 AutoHeal 使能治疗 HealModifier 治疗量 HealRate 治疗频率 HealDelay 治疗延时 伤害源 # 函数成员 基本函数 操作 构造函数 初始化组件 BeginPlay Tick 绘制球体模拟爆炸范围；对球体内以及相交Actor造成伤害 数据成员 SceneComponent 变换属性 Radius 球体半径 SphereColor 球体颜色 Damage 伤害的数值特征 DoFullDamage 计算伤害机制标志位 " />
+<meta property="og:description" content="Part 1 新增 Components/STHealthComponent # C&#43;&#43; STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C&#43;&#43; STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C&#43;&#43; STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 相关设置 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death播放完结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 Part 5 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter [-] BP_STPlayerController BP_STGameModeBase C&#43;&#43; ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter [-] STPlayerController Dev/ STDevDamageActor Part 6 阶段性总结 # 一、游戏角色 # C&#43;&#43; Player/STBaseCharacter Blueprint Player/BP_STBaseCharacter Player/Animations/ABP_BaseCharacter 其他 Player/Animations Blueprint BS_Run BS_Walk AM_Death 1." />
 <meta property="og:type" content="article" />
 <meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/2.a%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/" /><meta property="article:section" content="docs" />
 
@@ -16,7 +16,7 @@
 <link rel="icon" href="/favicon.png" type="image/x-icon">
 <link rel="stylesheet" href="/book.min.26e8a33fc5e9707933ffab2518e6539daefade68be907348abbd9429a6bb8eb5.css" integrity="sha256-JuijP8XpcHkz/6slGOZTna763mi&#43;kHNIq72UKaa7jrU=" crossorigin="anonymous">
   <script defer src="/flexsearch.min.js"></script>
-  <script defer src="/en.search.min.b358fe4735e3170bc5f764ebf105c7a64c018eccf2eff08034cbbba49ac40f40.js" integrity="sha256-s1j&#43;RzXjFwvF92Tr8QXHpkwBjszy7/CANMu7pJrED0A=" crossorigin="anonymous"></script>
+  <script defer src="/en.search.min.7065232655b7070836381358057cd8692390618dd5583a22b4e19469ec35d6e1.js" integrity="sha256-cGUjJlW3Bwg2OBNYBXzYaSOQYY3VWDoitOGUaew11uE=" crossorigin="anonymous"></script>
 
   <script defer src="/sw.min.6f6f90fcb8eb1c49ec389838e6b801d0de19430b8e516902f8d75c3c8bd98739.js" integrity="sha256-b2&#43;Q/LjrHEnsOJg45rgB0N4ZQwuOUWkC&#43;NdcPIvZhzk=" crossorigin="anonymous"></script>
 <!--
@@ -70,395 +70,11 @@ https://github.com/alex-shpak/hugo-book
   
 
   
-    <span>分享</span>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="toggle"  />
-    <label for="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="flex justify-between">
-      <a role="button" class="">开发工具</a>
-    </label>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/" class="">VSCode</a>
-  
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-f3b1b01ebe1f17bcb23615417646b6e6" class="toggle"  />
-    <label for="section-f3b1b01ebe1f17bcb23615417646b6e6" class="flex justify-between">
-      <a role="button" class="">MacOS</a>
-    </label>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
-  
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-e5270f46858d8c5464db25f6bd215fa4" class="toggle"  />
-    <label for="section-e5270f46858d8c5464db25f6bd215fa4" class="flex justify-between">
-      <a role="button" class="">MacOS</a>
-    </label>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/" class="">bash</a>
-  
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="toggle"  />
-    <label for="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="flex justify-between">
-      <a role="button" class="">Emacs</a>
-    </label>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/" class="">org-mode</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="">插件篇 | 文件管理</a>
-  
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-8f0677a94903c7e3083dad01e58ed439" class="toggle"  />
-    <label for="section-8f0677a94903c7e3083dad01e58ed439" class="flex justify-between">
-      <a role="button" class="">博客</a>
-    </label>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li class="book-section-flat" >
-          
-  
-  
-
-  
     <span>虚幻引擎</span>
   
 
           
   <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle"  />
-    <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
-      <a role="button" class="">API</a>
-    </label>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle"  />
-    <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
-      <a role="button" class="">虚幻C&#43;&#43;</a>
-    </label>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-9c25abc278a6873a94fa212bff746344" class="toggle"  />
-    <label for="section-9c25abc278a6873a94fa212bff746344" class="flex justify-between">
-      <a role="button" class="">Actor及其派生类</a>
-    </label>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="">AActor类型</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APawn%E7%B1%BB%E5%9E%8B/" class="">APawn类型</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/ACharacter%E7%B1%BB%E5%9E%8B/" class="">ACharacter类型</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APlayerController%E7%B1%BB%E5%9E%8B/" class="">APlayerController类型</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AGameModeBase%E7%B1%BB%E5%9E%8B/" class="">AGameModeBase类型</a>
-  
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-9c276a0254804f7460cb82f89e38b2be" class="toggle"  />
-    <label for="section-9c276a0254804f7460cb82f89e38b2be" class="flex justify-between">
-      <a role="button" class="">全局类型</a>
-    </label>
-  
-
-          
-  <ul>
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B/UEngine%E7%B1%BB%E5%9E%8B/" class="">UEngine类型</a>
-  
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B/UWorld%E7%B1%BB%E5%9E%8B/" class="">UWorld类型</a>
-  
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
-    
-      
-        <li>
-          
-  
-  
-
-  
-    <input type="checkbox" id="section-6ec12d43fc21edcca4a92356f25ab919" class="toggle"  />
-    <label for="section-6ec12d43fc21edcca4a92356f25ab919" class="flex justify-between">
-      <a role="button" class="">虚幻编辑器</a>
-    </label>
-  
-
-          
-  <ul>
-    
-  </ul>
-
-        </li>
-      
-    
-  </ul>
-
-        </li>
-      
     
       
         <li>
@@ -830,6 +446,450 @@ https://github.com/alex-shpak/hugo-book
         </li>
       
     
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-49ef9aea65744330dc3b0e4b097d8838" class="toggle"  />
+    <label for="section-49ef9aea65744330dc3b0e4b097d8838" class="flex justify-between">
+      <a role="button" class="">API</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-7635c292ea512b3ed59954ebf6da4b6c" class="toggle"  />
+    <label for="section-7635c292ea512b3ed59954ebf6da4b6c" class="flex justify-between">
+      <a role="button" class="">虚幻C&#43;&#43;</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c25abc278a6873a94fa212bff746344" class="toggle"  />
+    <label for="section-9c25abc278a6873a94fa212bff746344" class="flex justify-between">
+      <a role="button" class="">Actor及其派生类</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AActor%E7%B1%BB%E5%9E%8B/" class="">AActor类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APawn%E7%B1%BB%E5%9E%8B/" class="">APawn类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/ACharacter%E7%B1%BB%E5%9E%8B/" class="">ACharacter类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/APlayerController%E7%B1%BB%E5%9E%8B/" class="">APlayerController类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/Actor%E5%8F%8A%E5%85%B6%E6%B4%BE%E7%94%9F%E7%B1%BB/AGameModeBase%E7%B1%BB%E5%9E%8B/" class="">AGameModeBase类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-9c276a0254804f7460cb82f89e38b2be" class="toggle"  />
+    <label for="section-9c276a0254804f7460cb82f89e38b2be" class="flex justify-between">
+      <a role="button" class="">全局类型</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B/UEngine%E7%B1%BB%E5%9E%8B/" class="">UEngine类型</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%85%A8%E5%B1%80%E7%B1%BB%E5%9E%8B/UWorld%E7%B1%BB%E5%9E%8B/" class="">UWorld类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-44ad5176f97cac8da2ba13539cb8c0b4" class="toggle"  />
+    <label for="section-44ad5176f97cac8da2ba13539cb8c0b4" class="flex justify-between">
+      <a role="button" class="">常用库</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%B8%B8%E7%94%A8%E5%BA%93/DrawDebugHelpers%E5%BA%93/" class="">DrawDebugHelpers库</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%B8%B8%E7%94%A8%E5%BA%93/FMath%E5%BA%93/" class="">FMath库</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/API/%E8%99%9A%E5%B9%BBC&#43;&#43;/%E5%B8%B8%E7%94%A8%E5%BA%93/UGameplayStatics%E7%B1%BB%E5%9E%8B/" class="">UGameplayStatics类型</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-6ec12d43fc21edcca4a92356f25ab919" class="toggle"  />
+    <label for="section-6ec12d43fc21edcca4a92356f25ab919" class="flex justify-between">
+      <a role="button" class="">虚幻编辑器</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li class="book-section-flat" >
+          
+  
+  
+
+  
+    <span>分享</span>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="toggle"  />
+    <label for="section-f21d1468f46ee77a4f5a71705fdf2eb4" class="flex justify-between">
+      <a role="button" class="">Emacs</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/org-mode/" class="">org-mode</a>
+  
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/Emacs/%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/" class="">插件篇 | 文件管理</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-e5270f46858d8c5464db25f6bd215fa4" class="toggle"  />
+    <label for="section-e5270f46858d8c5464db25f6bd215fa4" class="flex justify-between">
+      <a role="button" class="">开发语言</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/" class="">bash</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="toggle"  />
+    <label for="section-147cce8c6cbaf07d8aa0a2a2a2e953a2" class="flex justify-between">
+      <a role="button" class="">开发工具</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/VSCode/" class="">VSCode</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-f3b1b01ebe1f17bcb23615417646b6e6" class="toggle"  />
+    <label for="section-f3b1b01ebe1f17bcb23615417646b6e6" class="flex justify-between">
+      <a role="button" class="">MacOS</a>
+    </label>
+  
+
+          
+  <ul>
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <a href="/docs/%E5%88%86%E4%BA%AB/MacOS/%E7%BB%88%E7%AB%AF/" class="">终端</a>
+  
+
+        </li>
+      
+    
+  </ul>
+
+        </li>
+      
+    
+      
+        <li>
+          
+  
+  
+
+  
+    <input type="checkbox" id="section-8f0677a94903c7e3083dad01e58ed439" class="toggle"  />
+    <label for="section-8f0677a94903c7e3083dad01e58ed439" class="flex justify-between">
+      <a role="button" class="">博客</a>
+    </label>
+  
+
+          
+  <ul>
+    
+  </ul>
+
+        </li>
+      
+    
   </ul>
 
         </li>
@@ -905,23 +965,23 @@ https://github.com/alex-shpak/hugo-book
         <li><a href="#part-2-为character添加healthcomponent和textrender组件">Part 2 为Character添加HealthComponent和TextRender组件</a></li>
         <li><a href="#part-3-新增-dev-stdevdamageactor">Part 3 新增 Dev/STDevDamageActor</a></li>
         <li><a href="#part-4-相关设置">Part 4 相关设置</a></li>
-        <li><a href="#项目结构更新">项目结构更新</a></li>
-        <li><a href="#阶段性总结">阶段性总结</a>
+        <li><a href="#part-5-项目结构更新">Part 5 项目结构更新</a></li>
+        <li><a href="#part-6-阶段性总结">Part 6 阶段性总结</a>
           <ul>
-            <li><a href="#游戏角色">游戏角色</a>
+            <li><a href="#一-游戏角色">一、游戏角色</a>
               <ul>
-                <li><a href="#c-plus-plus-stbasecharacter"><code>C++</code> STBaseCharacter</a></li>
-                <li><a href="#blueprint-player-bp-stbasecharacter"><code>Blueprint</code> Player/BP_STBaseCharacter</a></li>
-                <li><a href="#blueprint-player-animations-abp-basecharacter"><code>Blueprint</code> Player/Animations/ABP_BaseCharacter</a></li>
+                <li><a href="#1-dot-c-plus-plus-stbasecharacter">1. <code>C++</code> STBaseCharacter</a></li>
+                <li><a href="#2-dot-blueprint-player-bp-stbasecharacter">2. <code>Blueprint</code> Player/BP_STBaseCharacter</a></li>
+                <li><a href="#3-dot-blueprint-player-animations-abp-basecharacter">3. <code>Blueprint</code> Player/Animations/ABP_BaseCharacter</a></li>
               </ul>
             </li>
-            <li><a href="#组件">组件</a>
+            <li><a href="#二-组件">二、组件</a>
               <ul>
-                <li><a href="#stcharactermovementcomponent">STCharacterMovementComponent</a></li>
-                <li><a href="#sthealthcompoennt">STHealthCompoennt</a></li>
+                <li><a href="#1-dot-stcharactermovementcomponent">1. STCharacterMovementComponent</a></li>
+                <li><a href="#2-dot-sthealthcompoennt">2. STHealthCompoennt</a></li>
               </ul>
             </li>
-            <li><a href="#伤害源">伤害源</a></li>
+            <li><a href="#三-伤害源">三、伤害源</a></li>
           </ul>
         </li>
       </ul>
@@ -1069,9 +1129,9 @@ https://github.com/alex-shpak/hugo-book
 <code>BP_STBaseCharacter</code> <br/></li>
 <li>在场景中添加伤害源 <br/></li>
 </ol>
-<h2 id="项目结构更新">
-  项目结构更新
-  <a class="anchor" href="#%e9%a1%b9%e7%9b%ae%e7%bb%93%e6%9e%84%e6%9b%b4%e6%96%b0">#</a>
+<h2 id="part-5-项目结构更新">
+  Part 5 项目结构更新
+  <a class="anchor" href="#part-5-%e9%a1%b9%e7%9b%ae%e7%bb%93%e6%9e%84%e6%9b%b4%e6%96%b0">#</a>
 </h2>
 <ol>
 <li>资产 Content/ <br/>
@@ -1111,13 +1171,13 @@ DefaultMap <br/></li>
 </ul>
 </li>
 </ol>
-<h2 id="阶段性总结">
-  阶段性总结
-  <a class="anchor" href="#%e9%98%b6%e6%ae%b5%e6%80%a7%e6%80%bb%e7%bb%93">#</a>
+<h2 id="part-6-阶段性总结">
+  Part 6 阶段性总结
+  <a class="anchor" href="#part-6-%e9%98%b6%e6%ae%b5%e6%80%a7%e6%80%bb%e7%bb%93">#</a>
 </h2>
-<h3 id="游戏角色">
-  游戏角色
-  <a class="anchor" href="#%e6%b8%b8%e6%88%8f%e8%a7%92%e8%89%b2">#</a>
+<h3 id="一-游戏角色">
+  一、游戏角色
+  <a class="anchor" href="#%e4%b8%80-%e6%b8%b8%e6%88%8f%e8%a7%92%e8%89%b2">#</a>
 </h3>
 <ol>
 <li><code>C++</code> <br/>
@@ -1131,9 +1191,9 @@ BS_Run <br/>
 BS_Walk <br/>
 AM_Death <br/></li>
 </ol>
-<h4 id="c-plus-plus-stbasecharacter">
-  <code>C++</code> STBaseCharacter
-  <a class="anchor" href="#c-plus-plus-stbasecharacter">#</a>
+<h4 id="1-dot-c-plus-plus-stbasecharacter">
+  1. <code>C++</code> STBaseCharacter
+  <a class="anchor" href="#1-dot-c-plus-plus-stbasecharacter">#</a>
 </h4>
 <ol>
 <li>
@@ -1361,9 +1421,9 @@ AM_Death <br/></li>
 </table>
 </li>
 </ol>
-<h4 id="blueprint-player-bp-stbasecharacter">
-  <code>Blueprint</code> Player/BP_STBaseCharacter
-  <a class="anchor" href="#blueprint-player-bp-stbasecharacter">#</a>
+<h4 id="2-dot-blueprint-player-bp-stbasecharacter">
+  2. <code>Blueprint</code> Player/BP_STBaseCharacter
+  <a class="anchor" href="#2-dot-blueprint-player-bp-stbasecharacter">#</a>
 </h4>
 <ol>
 <li>CapsuleComponent <br/></li>
@@ -1428,9 +1488,9 @@ AM_Death <br/></li>
 </table>
 </li>
 </ol>
-<h4 id="blueprint-player-animations-abp-basecharacter">
-  <code>Blueprint</code> Player/Animations/ABP_BaseCharacter
-  <a class="anchor" href="#blueprint-player-animations-abp-basecharacter">#</a>
+<h4 id="3-dot-blueprint-player-animations-abp-basecharacter">
+  3. <code>Blueprint</code> Player/Animations/ABP_BaseCharacter
+  <a class="anchor" href="#3-dot-blueprint-player-animations-abp-basecharacter">#</a>
 </h4>
 <ol>
 <li>
@@ -1546,14 +1606,14 @@ Locomotion &gt; Slot &gt; OutputPose <br/>
 </table>
 </li>
 </ol>
-<h3 id="组件">
-  组件
-  <a class="anchor" href="#%e7%bb%84%e4%bb%b6">#</a>
+<h3 id="二-组件">
+  二、组件
+  <a class="anchor" href="#%e4%ba%8c-%e7%bb%84%e4%bb%b6">#</a>
 </h3>
 <p><code>C++</code> <br/></p>
-<h4 id="stcharactermovementcomponent">
-  STCharacterMovementComponent
-  <a class="anchor" href="#stcharactermovementcomponent">#</a>
+<h4 id="1-dot-stcharactermovementcomponent">
+  1. STCharacterMovementComponent
+  <a class="anchor" href="#1-dot-stcharactermovementcomponent">#</a>
 </h4>
 <p>满足跑步判断时，增加最大速度 <br/></p>
 <table>
@@ -1570,9 +1630,9 @@ Locomotion &gt; Slot &gt; OutputPose <br/>
 </tr>
 </tbody>
 </table>
-<h4 id="sthealthcompoennt">
-  STHealthCompoennt
-  <a class="anchor" href="#sthealthcompoennt">#</a>
+<h4 id="2-dot-sthealthcompoennt">
+  2. STHealthCompoennt
+  <a class="anchor" href="#2-dot-sthealthcompoennt">#</a>
 </h4>
 <ol>
 <li>
@@ -1744,9 +1804,9 @@ Locomotion &gt; Slot &gt; OutputPose <br/>
 </table>
 </li>
 </ol>
-<h3 id="伤害源">
-  伤害源
-  <a class="anchor" href="#%e4%bc%a4%e5%ae%b3%e6%ba%90">#</a>
+<h3 id="三-伤害源">
+  三、伤害源
+  <a class="anchor" href="#%e4%b8%89-%e4%bc%a4%e5%ae%b3%e6%ba%90">#</a>
 </h3>
 <ol>
 <li>函数成员 <br/>
@@ -1853,23 +1913,23 @@ Locomotion &gt; Slot &gt; OutputPose <br/>
         <li><a href="#part-2-为character添加healthcomponent和textrender组件">Part 2 为Character添加HealthComponent和TextRender组件</a></li>
         <li><a href="#part-3-新增-dev-stdevdamageactor">Part 3 新增 Dev/STDevDamageActor</a></li>
         <li><a href="#part-4-相关设置">Part 4 相关设置</a></li>
-        <li><a href="#项目结构更新">项目结构更新</a></li>
-        <li><a href="#阶段性总结">阶段性总结</a>
+        <li><a href="#part-5-项目结构更新">Part 5 项目结构更新</a></li>
+        <li><a href="#part-6-阶段性总结">Part 6 阶段性总结</a>
           <ul>
-            <li><a href="#游戏角色">游戏角色</a>
+            <li><a href="#一-游戏角色">一、游戏角色</a>
               <ul>
-                <li><a href="#c-plus-plus-stbasecharacter"><code>C++</code> STBaseCharacter</a></li>
-                <li><a href="#blueprint-player-bp-stbasecharacter"><code>Blueprint</code> Player/BP_STBaseCharacter</a></li>
-                <li><a href="#blueprint-player-animations-abp-basecharacter"><code>Blueprint</code> Player/Animations/ABP_BaseCharacter</a></li>
+                <li><a href="#1-dot-c-plus-plus-stbasecharacter">1. <code>C++</code> STBaseCharacter</a></li>
+                <li><a href="#2-dot-blueprint-player-bp-stbasecharacter">2. <code>Blueprint</code> Player/BP_STBaseCharacter</a></li>
+                <li><a href="#3-dot-blueprint-player-animations-abp-basecharacter">3. <code>Blueprint</code> Player/Animations/ABP_BaseCharacter</a></li>
               </ul>
             </li>
-            <li><a href="#组件">组件</a>
+            <li><a href="#二-组件">二、组件</a>
               <ul>
-                <li><a href="#stcharactermovementcomponent">STCharacterMovementComponent</a></li>
-                <li><a href="#sthealthcompoennt">STHealthCompoennt</a></li>
+                <li><a href="#1-dot-stcharactermovementcomponent">1. STCharacterMovementComponent</a></li>
+                <li><a href="#2-dot-sthealthcompoennt">2. STHealthCompoennt</a></li>
               </ul>
             </li>
-            <li><a href="#伤害源">伤害源</a></li>
+            <li><a href="#三-伤害源">三、伤害源</a></li>
           </ul>
         </li>
       </ul>
