@@ -2,14 +2,14 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
-      <loc>https://doks.netlify.app/about/hobby/</loc>
+      <loc>https://toughcactus.github.io/about/hobby/</loc>
       <lastmod>2023-06-08T00:00:00+00:00</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.5</priority>
     </url>
     
     <url>
-      <loc>https://doks.netlify.app/about/skill-tree/</loc>
+      <loc>https://toughcactus.github.io/about/skill-tree/</loc>
       <lastmod>2023-06-08T00:00:00+00:00</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.5</priority>
