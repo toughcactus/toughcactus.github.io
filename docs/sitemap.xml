@@ -2,14 +2,21 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   
     <url>
+      <loc>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/</loc>
+      <lastmod>2023-06-09T08:40:36+08:00</lastmod>
+      <changefreq>weekly</changefreq>
+      <priority>0.5</priority>
+    </url>
+    
+    <url>
       <loc>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/</loc>
-      <lastmod>2023-06-07T00:00:00+00:00</lastmod>
+      <lastmod>2023-06-09T08:40:36+08:00</lastmod>
       <changefreq>weekly</changefreq>
       <priority>0.5</priority>
     </url>
     <url>
         <loc>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/</loc>
-        <lastmod>2023-06-07T00:00:00+00:00</lastmod>
+        <lastmod>2023-06-09T08:40:36+08:00</lastmod>
         <changefreq>weekly</changefreq>
         <priority>0.5</priority>
       </url>
