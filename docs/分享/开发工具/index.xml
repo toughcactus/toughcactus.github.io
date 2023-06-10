@@ -5,7 +5,16 @@
     <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/</link>
     <description>Recent content in 开发工具 on </description>
     <generator>Hugo -- gohugo.io</generator>
-    <lastBuildDate>Fri, 09 Jun 2023 11:15:09 +0000</lastBuildDate><atom:link href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <lastBuildDate>Sat, 10 Jun 2023 11:15:09 +0000</lastBuildDate><atom:link href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git</title>
+      <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/</link>
+      <pubDate>Sat, 10 Jun 2023 21:44:19 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/</guid>
+      <description>安装与配置 # 安装 方法 官网下载git-2.40.0 make install xcode自带 本地配置git账户 git -v # 配置账户信息 git config --global user.name &amp;quot;USERNAME&amp;quot; git config --global user.email &amp;quot;EMAIL-ADDRESS&amp;quot; 配置ssh # 生成秘钥 | 拷贝公钥到github ssh-keygen cat /Users/USERNAME/.ssh/id_rsa.pub 本地初始化，设置上游 # git init git remote add cute git@github.com:xxx/xx.git # cute为上游别名 git remote -v git fetch cute # 拉取上游内容，和Github项目同步 创建分支与切换 # git branch -a # 查看当前分支 git checkout main # 切换到分支main git branch master # 创建新分支master git checkout master 首次提交，需关联上游分支 # # 提交 git add -A git commit -m &amp;quot;Commit public and set-up-blog.</description>
+    </item>
+    
     <item>
       <title>Chrome</title>
       <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/</link>
@@ -13,6 +22,33 @@
       
       <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/</guid>
       <description>开发者工具 # F12 设置页面布局 查看日志 查看元素信息 跟踪事件 # 开始Record 停止 页面滚动事件 文章目录滚动 </description>
+    </item>
+    
+    <item>
+      <title>VSCode</title>
+      <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode/</link>
+      <pubDate>Sat, 10 Jun 2023 21:37:23 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode/</guid>
+      <description>快捷键 # 操作 快捷键 减小字体 Command&amp;ndash; 放大字体 Command-+ 文件内查找 Command-F 注释代码 Command-K Command-C 去注释 Command-K Command-U 使用clang-format # 参考 安装扩展C/C++，自动安装clang-format 首选项 &amp;gt; Text Editor &amp;gt; Formatting，勾选 Format On Save 保存文件时，应用格式 插件 # 类别 C++ C/C++ C/C++ Extension Pack C/C++ Themes C# C# 项目编译 CMake CMakeTools 代码调试 CodeLLDB 主题 Dracula Official SynthWave &#39;84 其他 file-picker Mono Debug Emacs 自定义快捷键无法使用 </description>
+    </item>
+    
+    <item>
+      <title>Makefile</title>
+      <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/makefile/</link>
+      <pubDate>Sat, 10 Jun 2023 22:04:35 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/makefile/</guid>
+      <description>求C(n, k) = n! / (k! * (n - k)!) # 说明 combo(n, k) = C(n, k) fact(n) = n! fact.h // fact.h int fact(int); fact.cpp // fact.cpp #include &amp;quot;fact.h&amp;quot; int fact(int n) { int p = 1; for (int i = 1; i &amp;lt;= n; ++i) { p *= i; } return p; } combination.h // combination.h int combo(int n, int k); combination.cpp // combination.cpp #include &amp;quot;combination.h&amp;quot; #include &amp;quot;fact.h&amp;quot; int combo(int n, int k) { return fact(n) / fact(n-k) / fact(k); } main.</description>
+    </item>
+    
+    <item>
+      <title>Sublime</title>
+      <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/sublime/</link>
+      <pubDate>Sat, 10 Jun 2023 22:05:01 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/sublime/</guid>
+      <description>快捷键 # 操作 分屏 View &amp;gt; Layout &amp;gt; 默认Single，选择Columns: 2 右侧分屏 Option-Command-N；2-4 下方分屏 Option-Command-Shift-N；2-3 右侧分屏和下方分屏不能同时进行 分屏复原 Option-Command-1 Grid分屏 田字型；Option-Command-5 打开命令面板 Windows Control-P MacOS Command-P 行号跳转 Control-G </description>
     </item>
     
   </channel>

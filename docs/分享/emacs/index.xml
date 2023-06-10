@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Emacs on </title>
+    <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/</link>
+    <description>Recent content in Emacs on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sun, 11 Jun 2023 01:02:04 +0000</lastBuildDate><atom:link href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>快捷键</title>
+      <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E5%BF%AB%E6%8D%B7%E9%94%AE/</link>
+      <pubDate>Sat, 10 Jun 2023 23:58:32 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E5%BF%AB%E6%8D%B7%E9%94%AE/</guid>
+      <description>导航 # 字符 操作 快捷键 函数 左移 C-b backward-char 右移 C-f forward-char 上移 C-p previous-line 下移 C-n next-line 行首 C-a move-beginning-of-line 行尾 C-e move-end-of-line 文件头 M-&amp;lt; beginning-of-buffer 文件尾 M-&amp;gt; 所在行居中 C-l recenter-top-bottom 向前翻页 M-v 向后翻页 C-v 语义 操作 快捷键 函数 句首 M-a 句尾 M-e 下一个单词 M-f 上一个单词 M-b 调整段落换行 M-q </description>
+    </item>
+    
+    <item>
+      <title>org-mode</title>
+      <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/org-mode/</link>
+      <pubDate>Sat, 10 Jun 2023 23:56:27 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/org-mode/</guid>
+      <description>Overview # The Org Manual 样式 # 删除线 +Content+ 下划线 ox-hugo转markdown存在问题 _Content_ 文本块 =test= ~test~ 斜体 /test/ 加粗 *test* 选项设置 # 关闭toc Table of Contents #+OPTIONS: toc:nil 指定toc显示层级 #+TOC: headlines 2 上标和下标 a_b a^b 关闭 #+OPTIONS: ^:nil 需要使用{}转义 #+OPTIONS ^:{} a_{b} a^{b} 自动为标题添加标号 关闭 #+OPTIONS num:nil 选项合并 #+OPTIONS: toc:nil ^:{} #+STARTUP: showall hidestars 显示所有内容 #+STARTUP: showall 只显示一级标题 #+STARTUP: overview 隐藏星号 #+STARTUP: hidestars 模板 # Structure Templates C-c C-, org-insert-structure-template 代码框 填写编程语言 // C++样式 #+begin_src LANGUAGE #+end_src 文本框 文本框样式 #+begin_example #+end_example quote quote样式 #+begin_quote #+end_quote </description>
+    </item>
+    
+    <item>
+      <title>插件篇 | 文件管理</title>
+      <link>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E6%8F%92%E4%BB%B6%E7%AF%87-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</link>
+      <pubDate>Sun, 11 Jun 2023 00:00:02 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E6%8F%92%E4%BB%B6%E7%AF%87-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/</guid>
+      <description>Overview # speedbar Emacs内置功能，可以浏览文件内符号 neotree 文件管理 treemacs 工作区管理，和tags文件协作时，亦支持浏览文件内符号 speedbar # (semantic-mode) ;; 使能mode，进行语义分析 (speedbar) ;; 打开文件目录 neotree # 安装 (use-package neotree :ensure t :config (global-set-key [f8] &#39;neotree-toggle) (setq neo-theme &#39;icons) ;; 无需安装all-the-icons ) 使用 操作 快捷键 上级目录 U 将光标所在目录设为根目录 C-c C-c 显示 / 隐藏 H 上一行 / 下一行 p / n 打开文件 SPC / RET 打开 / 关闭 目录 TAB 刷新目录 g 最大化 / 最小化 窗口 A 删除文件 C-c C-d treemacs # 安装 (use-package treemacs :ensure t :defer t :init (with-eval-after-load &#39;winum (define-key winum-keymap (kbd &amp;quot;M-0&amp;quot;) #&#39;treemacs-select-window)) :config (progn ;;	(setq treemacs-show-cursor -1) (treemacs-resize-icons 15) (with-eval-after-load &#39;treemacs (define-key treemacs-mode-map [mouse-1] #&#39;treemacs-single-click-expand-action)) ;; 单击打开文件 ) :bind (:map global-map (&amp;quot;M-0&amp;quot; .</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -10,22 +10,22 @@
 
   <script>(()=>{var t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,e=localStorage.getItem("theme");t&&e===null&&(localStorage.setItem("theme","dark"),document.documentElement.setAttribute("data-dark-mode","")),t&&e==="dark"&&document.documentElement.setAttribute("data-dark-mode",""),e==="dark"&&document.documentElement.setAttribute("data-dark-mode","")})()</script>
 
-  <link rel="stylesheet" href="https://toughcactus.github.io/main.0e1ce1411adb5b1b9e5b4287f0acf84b1c59b662ad0db92fb78652db1349a9f3017fa2ef431ae619b03f9ea9ef7fe46943fa547eeb5966d1b9946836e8233742.css" integrity="sha512-DhzhQRrbWxueW0KH8Kz4SxxZtmKtDbkvt4ZS2xNJqfMBf6LvQxrmGbA/nqnvf&#43;RpQ/pUfutZZtG5lGg26CM3Qg==" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://toughcactus.github.io/main.af421a28c1a5ddf1ca8a3bad399db73f7201c97bfc01e5cb9ae6831c76af3199c990301ccee268e6e41b03d912112a014ecbccbd5e6c1111ee7661a1068c6bb5.css" integrity="sha512-r0IaKMGl3fHKijutOZ23P3IByXv8AeXLmuaDHHavMZnJkDAczuJo5uQbA9kSESoBTsvMvV5sERHudmGhBoxrtQ==" crossorigin="anonymous">
 <noscript><style>img.lazyload { display: none; }</style></noscript>
   <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <title>使用ox-hugo的头部设置 - ToughCactus</title>
-<meta name="description" content="Overview # ox-hugo manual 根目录 # 如果使能 org-hugo-external-file-extensions-allowed-for-copying，要求根目录下必须有static文件夹，默认创建ox-hugo文件夹，并将图片拷贝到ox-hugo 分区对应 根目录/content/分区，默认创建content文件夹 #&#43;HUGO_BASE_DIR: ../ 生成博文方式 # manual 子树 每个org子树作为一篇博文 ​* 每棵子树作为一篇博文 :PROPERTIES: :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true :weight 2 :END: ** 第一篇博文 ** 第二篇博文 org文件作为博文 #&#43;HUGO_CUSTOM_FRONT_MATTER: :bookCollapseSection true :weight 20 #&#43;HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true :weight 2 配置自定义选项 # 如果同时在子树和文件配置，根据子树导出时，只有子树定义项 子树 :PROPERTIES: :EXPROT_HUGO_CUSTOM_FRONT_MATTER: :foo bar :baz zoo :END: 文件 #&#43;HUGO_CUSTOM_FRONT_MATTER: :foo bar :baz zoo 分区 &#43; 样式 &#43; 权重 # 子树 :PROPERTIES: :EXPORT_HUGO_SECTION: ./ :EXPORT_HUGO_FRONT_MATTER_FORMAT: yaml :EXPORT_HUGO_WEIGHT: 4 :END: 文件 #&#43;HUGO_SECTION: .">
-  <link rel="canonical" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">
+  <title>Markdown - ToughCactus</title>
+<meta name="description" content="代码框 # ```elisp ``` 插入图片 # ![img](/pic/在本地运行ShooterGame示例项目/运行效果.png) 插入连接 # [参考](https://learn.microsoft.com/zh-cn/cpp/cpp/conditional-operator-q?view=msvc-170) 下划线 # &amp;lt;u&amp;gt;ddd&amp;lt;/u&amp;gt; 换行 # &amp;lt;br&amp;gt; 分隔线 # --- 注释 # &amp;lt;!--哈哈我是注释，不会在浏览器中显示。--&amp;gt; ">
+  <link rel="canonical" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用ox-hugo的头部设置">
-<meta property="og:description" content="Overview # ox-hugo manual 根目录 # 如果使能 org-hugo-external-file-extensions-allowed-for-copying，要求根目录下必须有static文件夹，默认创建ox-hugo文件夹，并将图片拷贝到ox-hugo 分区对应 根目录/content/分区，默认创建content文件夹 #&#43;HUGO_BASE_DIR: ../ 生成博文方式 # manual 子树 每个org子树作为一篇博文 ​* 每棵子树作为一篇博文 :PROPERTIES: :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true :weight 2 :END: ** 第一篇博文 ** 第二篇博文 org文件作为博文 #&#43;HUGO_CUSTOM_FRONT_MATTER: :bookCollapseSection true :weight 20 #&#43;HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true :weight 2 配置自定义选项 # 如果同时在子树和文件配置，根据子树导出时，只有子树定义项 子树 :PROPERTIES: :EXPROT_HUGO_CUSTOM_FRONT_MATTER: :foo bar :baz zoo :END: 文件 #&#43;HUGO_CUSTOM_FRONT_MATTER: :foo bar :baz zoo 分区 &#43; 样式 &#43; 权重 # 子树 :PROPERTIES: :EXPORT_HUGO_SECTION: ./ :EXPORT_HUGO_FRONT_MATTER_FORMAT: yaml :EXPORT_HUGO_WEIGHT: 4 :END: 文件 #&#43;HUGO_SECTION: .">
-<meta property="og:url" content="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">
+<meta property="og:title" content="Markdown">
+<meta property="og:description" content="代码框 # ```elisp ``` 插入图片 # ![img](/pic/在本地运行ShooterGame示例项目/运行效果.png) 插入连接 # [参考](https://learn.microsoft.com/zh-cn/cpp/cpp/conditional-operator-q?view=msvc-170) 下划线 # &lt;u&gt;ddd&lt;/u&gt; 换行 # &lt;br&gt; 分隔线 # --- 注释 # &lt;!--哈哈我是注释，不会在浏览器中显示。--&gt; ">
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/">
 <meta property="og:site_name" content="ToughCactus">
-<meta property="article:published_time" content="2023-06-08T11:42:14+00:00">
-  <meta property="article:modified_time" content="2023-06-10T20:19:48+08:00">
+<meta property="article:published_time" content="2023-06-10T23:35:59+00:00">
+  <meta property="article:modified_time" content="2023-06-11T00:59:19+08:00">
   
   <meta property="og:image" content="https://toughcactus.github.io/doks.png"/>
       <meta property="og:image:alt" content="ToughCactus">
@@ -33,10 +33,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@getdoks">
 <meta name="twitter:creator" content="@henkverlinde">
-<meta name="twitter:title" content="使用ox-hugo的头部设置">
+<meta name="twitter:title" content="Markdown">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://toughcactus.github.io/doks.png">
-    <meta name="twitter:image:alt" content="使用ox-hugo的头部设置">
+    <meta name="twitter:image:alt" content="Markdown">
 
 <script type="application/ld+json">
 {
@@ -75,9 +75,9 @@
       },
     {
       "@type": "WebPage",
-      "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/",
-      "url": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/",
-      "name": "使用ox-hugo的头部设置",
+      "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/",
+      "url": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/",
+      "name": "Markdown",
       "description": "",
       "isPartOf": {
         "@id": "https://toughcactus.github.io/#/schema/website/1"
@@ -85,22 +85,22 @@
       "about": {
           "@id": "https://toughcactus.github.io/#/schema/organization/1"
         },
-      "datePublished": "2023-06-08T11:42:14CET",
-      "dateModified": "2023-06-10T20:19:48CET",
+      "datePublished": "2023-06-10T23:35:59CET",
+      "dateModified": "2023-06-11T00:59:19CET",
       "breadcrumb": {
-        "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/#/schema/breadcrumb/1"
+        "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/#/schema/breadcrumb/1"
       },
       "primaryImageOfPage": {
-        "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/#/schema/image/2"
+        "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/#/schema/image/2"
       },
       "inLanguage": "en-US",
       "potentialAction": [{
-        "@type": "ReadAction", "target": ["https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/"]
+        "@type": "ReadAction", "target": ["https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/"]
       }]
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/#/schema/breadcrumb/1",
+      "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/#/schema/breadcrumb/1",
       "name": "Breadcrumbs",
       "itemListElement": [{
         "@type": "ListItem",
@@ -134,15 +134,15 @@
         "position":  4 ,
         "item": {
           "@type": "WebPage",
-          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/",
-          "url": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/",
-          "name": "Hugo"
+          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/",
+          "url": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/",
+          "name": "% E5% Bc%80% E5%8 F%91% E8% Af% Ad% E8% A8%80"
           }
         },{
         "@type": "ListItem",
         "position":  5 ,
         "item": {
-          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/"
+          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/"
           }
         }]
     },
@@ -153,16 +153,16 @@
         {
           "@type": "Article",
           "@id": "https://toughcactus.github.io/#/schema/article/1",
-          "headline": "使用ox-hugo的头部设置",
+          "headline": "Markdown",
           "description": "",
           "isPartOf": {
-            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/"
+            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/"
           },
           "mainEntityOfPage": {
-            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/"
+            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/"
           },
-          "datePublished": "2023-06-08T11:42:14CET",
-          "dateModified": "2023-06-10T20:19:48CET",
+          "datePublished": "2023-06-10T23:35:59CET",
+          "dateModified": "2023-06-11T00:59:19CET",
           "author": {
             "@id": "https://toughcactus.github.io/#/schema/person/2"
           },
@@ -170,7 +170,7 @@
               "@id": "https://toughcactus.github.io/#/schema/organization/1"
             },
           "image": {
-            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/#/schema/image/2"
+            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/#/schema/image/2"
           }
         }
       ]
@@ -195,10 +195,10 @@
       "@graph": [
         {
           "@type": "ImageObject",
-          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/#/schema/image/2",
+          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/#/schema/image/2",
           "url": "https://toughcactus.github.io/doks.png",
           "contentUrl": "https://toughcactus.github.io/doks.png",
-          "caption": "使用ox-hugo的头部设置"
+          "caption": "Markdown"
         }
       ]
     }
@@ -259,6 +259,23 @@
     
       
       <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-3bd2c20a732475803482c020650a0852" aria-expanded="false">
+          🧱
+        </button>
+        <div class="collapse" id="section-3bd2c20a732475803482c020650a0852">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/brick/%E7%BB%88%E7%AB%AF/">终端</a></li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-c31f48f84ef207e66a03c015a7243b43" aria-expanded="true">
           分享
         </button>
@@ -268,15 +285,25 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-2c509530bf439a36168a86e21c160c06" aria-expanded="false">
-                    开发工具
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-169bafefac5c96e7ad8b1714ec46c585" aria-expanded="false">
+                    Emacs
                   </button>
-                  <div class="collapse" id="section-2c509530bf439a36168a86e21c160c06">
+                  <div class="collapse" id="section-169bafefac5c96e7ad8b1714ec46c585">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       
                         
                           
-                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">Chrome</a></li>
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E5%BF%AB%E6%8D%B7%E9%94%AE/">快捷键</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/org-mode/">org-mode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E6%8F%92%E4%BB%B6%E7%AF%87-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">插件篇 | 文件管理</a></li>
                         
                       
                     </ul>
@@ -287,11 +314,26 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="false">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="true">
                     开发语言
                   </button>
-                  <div class="collapse" id="section-262a78b7bebf63c3eaefb8b7370826cb">
+                  <div class="collapse show" id="section-262a78b7bebf63c3eaefb8b7370826cb">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/">Shell脚本</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/elisp/">Elisp</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/">Markdown</a></li>
+                        
                       
                         
                           
@@ -306,10 +348,68 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="true">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-2c509530bf439a36168a86e21c160c06" aria-expanded="false">
+                    开发工具
+                  </button>
+                  <div class="collapse" id="section-2c509530bf439a36168a86e21c160c06">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/">Git</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">Chrome</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode/">VSCode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/makefile/">Makefile</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/sublime/">Sublime</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-0a5b7edb55b772c60bfa8af868b679cf" aria-expanded="false">
+                    MacOS
+                  </button>
+                  <div class="collapse" id="section-0a5b7edb55b772c60bfa8af868b679cf">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/macos/%E7%BB%88%E7%AB%AF/">终端</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="false">
                     Hugo
                   </button>
-                  <div class="collapse show" id="section-1b3840b0b70d91c17e70014c8537dbba">
+                  <div class="collapse" id="section-1b3840b0b70d91c17e70014c8537dbba">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       
                         
@@ -319,7 +419,7 @@
                       
                         
                           
-                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">使用ox-hugo的头部设置</a></li>
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9/">使用ox-hugo设置选项</a></li>
                         
                       
                         
@@ -426,6 +526,23 @@
     
       
       <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-3bd2c20a732475803482c020650a0852" aria-expanded="false">
+          🧱
+        </button>
+        <div class="collapse" id="section-3bd2c20a732475803482c020650a0852">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/brick/%E7%BB%88%E7%AB%AF/">终端</a></li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-c31f48f84ef207e66a03c015a7243b43" aria-expanded="true">
           分享
         </button>
@@ -435,15 +552,25 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-2c509530bf439a36168a86e21c160c06" aria-expanded="false">
-                    开发工具
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-169bafefac5c96e7ad8b1714ec46c585" aria-expanded="false">
+                    Emacs
                   </button>
-                  <div class="collapse" id="section-2c509530bf439a36168a86e21c160c06">
+                  <div class="collapse" id="section-169bafefac5c96e7ad8b1714ec46c585">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       
                         
                           
-                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">Chrome</a></li>
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E5%BF%AB%E6%8D%B7%E9%94%AE/">快捷键</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/org-mode/">org-mode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E6%8F%92%E4%BB%B6%E7%AF%87-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">插件篇 | 文件管理</a></li>
                         
                       
                     </ul>
@@ -454,11 +581,26 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="false">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="true">
                     开发语言
                   </button>
-                  <div class="collapse" id="section-262a78b7bebf63c3eaefb8b7370826cb">
+                  <div class="collapse show" id="section-262a78b7bebf63c3eaefb8b7370826cb">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/">Shell脚本</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/elisp/">Elisp</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/">Markdown</a></li>
+                        
                       
                         
                           
@@ -473,10 +615,68 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="true">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-2c509530bf439a36168a86e21c160c06" aria-expanded="false">
+                    开发工具
+                  </button>
+                  <div class="collapse" id="section-2c509530bf439a36168a86e21c160c06">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/">Git</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">Chrome</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode/">VSCode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/makefile/">Makefile</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/sublime/">Sublime</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-0a5b7edb55b772c60bfa8af868b679cf" aria-expanded="false">
+                    MacOS
+                  </button>
+                  <div class="collapse" id="section-0a5b7edb55b772c60bfa8af868b679cf">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/macos/%E7%BB%88%E7%AB%AF/">终端</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="false">
                     Hugo
                   </button>
-                  <div class="collapse show" id="section-1b3840b0b70d91c17e70014c8537dbba">
+                  <div class="collapse" id="section-1b3840b0b70d91c17e70014c8537dbba">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       
                         
@@ -486,7 +686,7 @@
                       
                         
                           
-                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">使用ox-hugo的头部设置</a></li>
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9/">使用ox-hugo设置选项</a></li>
                         
                       
                         
@@ -540,6 +740,23 @@
     
       
       <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-3bd2c20a732475803482c020650a0852" aria-expanded="false">
+          🧱
+        </button>
+        <div class="collapse" id="section-3bd2c20a732475803482c020650a0852">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/brick/%E7%BB%88%E7%AB%AF/">终端</a></li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
         <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-c31f48f84ef207e66a03c015a7243b43" aria-expanded="true">
           分享
         </button>
@@ -549,15 +766,25 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-2c509530bf439a36168a86e21c160c06" aria-expanded="false">
-                    开发工具
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-169bafefac5c96e7ad8b1714ec46c585" aria-expanded="false">
+                    Emacs
                   </button>
-                  <div class="collapse" id="section-2c509530bf439a36168a86e21c160c06">
+                  <div class="collapse" id="section-169bafefac5c96e7ad8b1714ec46c585">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       
                         
                           
-                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">Chrome</a></li>
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E5%BF%AB%E6%8D%B7%E9%94%AE/">快捷键</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/org-mode/">org-mode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E6%8F%92%E4%BB%B6%E7%AF%87-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">插件篇 | 文件管理</a></li>
                         
                       
                     </ul>
@@ -568,11 +795,26 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="false">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="true">
                     开发语言
                   </button>
-                  <div class="collapse" id="section-262a78b7bebf63c3eaefb8b7370826cb">
+                  <div class="collapse show" id="section-262a78b7bebf63c3eaefb8b7370826cb">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/">Shell脚本</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/elisp/">Elisp</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/">Markdown</a></li>
+                        
                       
                         
                           
@@ -587,10 +829,68 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="true">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-2c509530bf439a36168a86e21c160c06" aria-expanded="false">
+                    开发工具
+                  </button>
+                  <div class="collapse" id="section-2c509530bf439a36168a86e21c160c06">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/">Git</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">Chrome</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode/">VSCode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/makefile/">Makefile</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/sublime/">Sublime</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-0a5b7edb55b772c60bfa8af868b679cf" aria-expanded="false">
+                    MacOS
+                  </button>
+                  <div class="collapse" id="section-0a5b7edb55b772c60bfa8af868b679cf">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/macos/%E7%BB%88%E7%AB%AF/">终端</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="false">
                     Hugo
                   </button>
-                  <div class="collapse show" id="section-1b3840b0b70d91c17e70014c8537dbba">
+                  <div class="collapse" id="section-1b3840b0b70d91c17e70014c8537dbba">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       
                         
@@ -600,7 +900,7 @@
                       
                         
                           
-                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">使用ox-hugo的头部设置</a></li>
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9/">使用ox-hugo设置选项</a></li>
                         
                       
                         
@@ -655,16 +955,13 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#根目录">根目录</a></li>
-        <li><a href="#生成博文方式">生成博文方式</a></li>
-        <li><a href="#配置自定义选项">配置自定义选项</a></li>
-        <li><a href="#分区-plus-样式-plus-权重">分区 + 样式 + 权重</a></li>
-        <li><a href="#文件-最后修改">文件 最后修改</a></li>
-        <li><a href="#文件-草稿-plus-分类-plus-tag-plus-日期">文件 草稿+分类+tag+日期</a></li>
-        <li><a href="#子树-分类-plus-tag-plus-日期-plus-导出文件名">子树 分类+tag+日期+导出文件名</a></li>
-        <li><a href="#导出子树">导出子树</a></li>
-        <li><a href="#炫技">炫技</a></li>
+        <li><a href="#代码框">代码框</a></li>
+        <li><a href="#插入图片">插入图片</a></li>
+        <li><a href="#插入连接">插入连接</a></li>
+        <li><a href="#下划线">下划线</a></li>
+        <li><a href="#换行">换行</a></li>
+        <li><a href="#分隔线">分隔线</a></li>
+        <li><a href="#注释">注释</a></li>
       </ul>
     </li>
   </ul>
@@ -680,16 +977,13 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#根目录">根目录</a></li>
-        <li><a href="#生成博文方式">生成博文方式</a></li>
-        <li><a href="#配置自定义选项">配置自定义选项</a></li>
-        <li><a href="#分区-plus-样式-plus-权重">分区 + 样式 + 权重</a></li>
-        <li><a href="#文件-最后修改">文件 最后修改</a></li>
-        <li><a href="#文件-草稿-plus-分类-plus-tag-plus-日期">文件 草稿+分类+tag+日期</a></li>
-        <li><a href="#子树-分类-plus-tag-plus-日期-plus-导出文件名">子树 分类+tag+日期+导出文件名</a></li>
-        <li><a href="#导出子树">导出子树</a></li>
-        <li><a href="#炫技">炫技</a></li>
+        <li><a href="#代码框">代码框</a></li>
+        <li><a href="#插入图片">插入图片</a></li>
+        <li><a href="#插入连接">插入连接</a></li>
+        <li><a href="#下划线">下划线</a></li>
+        <li><a href="#换行">换行</a></li>
+        <li><a href="#分隔线">分隔线</a></li>
+        <li><a href="#注释">注释</a></li>
       </ul>
     </li>
   </ul>
@@ -705,12 +999,12 @@
 						<li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/docs/">Docs</a></li>
 <li class="breadcrumb-item"><a href="/docs/%E5%88%86%E4%BA%AB/">分享</a></li>
-<li class="breadcrumb-item"><a href="/docs/%E5%88%86%E4%BA%AB/hugo/">Hugo</a></li>
-<li class="breadcrumb-item active" aria-current="page">使用ox-hugo的头部设置</li>
+<li class="breadcrumb-item"><a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/">开发语言</a></li>
+<li class="breadcrumb-item active" aria-current="page">Markdown</li>
 					</ol>
 				</nav>
 			
-			<h1>使用ox-hugo的头部设置</h1>
+			<h1>Markdown</h1>
 			<p class="lead"></p>
 			<nav class="d-xl-none" aria-label="Quaternary navigation">
 				<div class="d-xl-none">
@@ -740,16 +1034,13 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#根目录">根目录</a></li>
-        <li><a href="#生成博文方式">生成博文方式</a></li>
-        <li><a href="#配置自定义选项">配置自定义选项</a></li>
-        <li><a href="#分区-plus-样式-plus-权重">分区 + 样式 + 权重</a></li>
-        <li><a href="#文件-最后修改">文件 最后修改</a></li>
-        <li><a href="#文件-草稿-plus-分类-plus-tag-plus-日期">文件 草稿+分类+tag+日期</a></li>
-        <li><a href="#子树-分类-plus-tag-plus-日期-plus-导出文件名">子树 分类+tag+日期+导出文件名</a></li>
-        <li><a href="#导出子树">导出子树</a></li>
-        <li><a href="#炫技">炫技</a></li>
+        <li><a href="#代码框">代码框</a></li>
+        <li><a href="#插入图片">插入图片</a></li>
+        <li><a href="#插入连接">插入连接</a></li>
+        <li><a href="#下划线">下划线</a></li>
+        <li><a href="#换行">换行</a></li>
+        <li><a href="#分隔线">分隔线</a></li>
+        <li><a href="#注释">注释</a></li>
       </ul>
     </li>
   </ul>
@@ -765,16 +1056,13 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#根目录">根目录</a></li>
-        <li><a href="#生成博文方式">生成博文方式</a></li>
-        <li><a href="#配置自定义选项">配置自定义选项</a></li>
-        <li><a href="#分区-plus-样式-plus-权重">分区 + 样式 + 权重</a></li>
-        <li><a href="#文件-最后修改">文件 最后修改</a></li>
-        <li><a href="#文件-草稿-plus-分类-plus-tag-plus-日期">文件 草稿+分类+tag+日期</a></li>
-        <li><a href="#子树-分类-plus-tag-plus-日期-plus-导出文件名">子树 分类+tag+日期+导出文件名</a></li>
-        <li><a href="#导出子树">导出子树</a></li>
-        <li><a href="#炫技">炫技</a></li>
+        <li><a href="#代码框">代码框</a></li>
+        <li><a href="#插入图片">插入图片</a></li>
+        <li><a href="#插入连接">插入连接</a></li>
+        <li><a href="#下划线">下划线</a></li>
+        <li><a href="#换行">换行</a></li>
+        <li><a href="#分隔线">分隔线</a></li>
+        <li><a href="#注释">注释</a></li>
       </ul>
     </li>
   </ul>
@@ -783,98 +1071,44 @@
       </div>
 
 			</nav>
-			<h2 id="overview">Overview <a href="#overview" class="anchor" aria-hidden="true">#</a></h2>
-<p><a href="https://ox-hugo.scripter.co/">ox-hugo manual</a> <br/></p>
-<h2 id="根目录">根目录 <a href="#%e6%a0%b9%e7%9b%ae%e5%bd%95" class="anchor" aria-hidden="true">#</a></h2>
-<p>如果使能 org-hugo-external-file-extensions-allowed-for-copying，要求根目录下必须有static文件夹，默认创建ox-hugo文件夹，并将图片拷贝到ox-hugo <br/>
-分区对应 根目录/content/分区，默认创建content文件夹 <br/></p>
-<pre><code class="language-elisp">#+HUGO_BASE_DIR: ../    
+			<h2 id="代码框">代码框 <a href="#%e4%bb%a3%e7%a0%81%e6%a1%86" class="anchor" aria-hidden="true">#</a></h2>
+<pre><code class="language-markdown">```elisp
+```
 </code></pre>
-<h2 id="生成博文方式">生成博文方式 <a href="#%e7%94%9f%e6%88%90%e5%8d%9a%e6%96%87%e6%96%b9%e5%bc%8f" class="anchor" aria-hidden="true">#</a></h2>
-<p><a href="https://ox-hugo.scripter.co/doc/screenshots/">manual</a> <a href="https://ox-hugo.scripter.co/doc/hugo-section/">子树</a> <br/></p>
-<ol>
-<li>每个org子树作为一篇博文 <br/>
-<pre><code class="language-nil">​* 每棵子树作为一篇博文
-  :PROPERTIES:
-  :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true :weight 2
-  :END:
-** 第一篇博文
-** 第二篇博文
+<h2 id="插入图片">插入图片 <a href="#%e6%8f%92%e5%85%a5%e5%9b%be%e7%89%87" class="anchor" aria-hidden="true">#</a></h2>
+<pre><code class="language-markdown">![img](/pic/在本地运行ShooterGame示例项目/运行效果.png)
 </code></pre>
-</li>
-<li>org文件作为博文 <br/>
-<pre><code class="language-text">#+HUGO_CUSTOM_FRONT_MATTER: :bookCollapseSection true :weight 20
-#+HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true :weight 2
+<h2 id="插入连接">插入连接 <a href="#%e6%8f%92%e5%85%a5%e8%bf%9e%e6%8e%a5" class="anchor" aria-hidden="true">#</a></h2>
+<pre><code class="language-markdown">[参考](https://learn.microsoft.com/zh-cn/cpp/cpp/conditional-operator-q?view=msvc-170)
 </code></pre>
-</li>
-</ol>
-<h2 id="配置自定义选项">配置自定义选项 <a href="#%e9%85%8d%e7%bd%ae%e8%87%aa%e5%ae%9a%e4%b9%89%e9%80%89%e9%a1%b9" class="anchor" aria-hidden="true">#</a></h2>
-<p>如果同时在子树和文件配置，根据子树导出时，只有子树定义项 <br/>
-<em>子树</em> <br/></p>
-<pre><code class="language-elisp">:PROPERTIES:
-:EXPROT_HUGO_CUSTOM_FRONT_MATTER: :foo bar :baz zoo
-:END:
+<h2 id="下划线">下划线 <a href="#%e4%b8%8b%e5%88%92%e7%ba%bf" class="anchor" aria-hidden="true">#</a></h2>
+<pre><code class="language-text">&lt;u&gt;ddd&lt;/u&gt;
 </code></pre>
-<p><em>文件</em> <br/></p>
-<pre><code class="language-elisp">#+HUGO_CUSTOM_FRONT_MATTER: :foo bar :baz zoo
+<h2 id="换行">换行 <a href="#%e6%8d%a2%e8%a1%8c" class="anchor" aria-hidden="true">#</a></h2>
+<pre><code class="language-markdown">&lt;br&gt;
 </code></pre>
-<h2 id="分区-plus-样式-plus-权重">分区 + 样式 + 权重 <a href="#%e5%88%86%e5%8c%ba-plus-%e6%a0%b7%e5%bc%8f-plus-%e6%9d%83%e9%87%8d" class="anchor" aria-hidden="true">#</a></h2>
-<p><em>子树</em> <br/></p>
-<pre><code class="language-elisp">:PROPERTIES:
-:EXPORT_HUGO_SECTION: ./
-:EXPORT_HUGO_FRONT_MATTER_FORMAT: yaml
-:EXPORT_HUGO_WEIGHT: 4
-:END:
+<h2 id="分隔线">分隔线 <a href="#%e5%88%86%e9%9a%94%e7%ba%bf" class="anchor" aria-hidden="true">#</a></h2>
+<pre><code class="language-markdown">---
 </code></pre>
-<p><em>文件</em> <br/></p>
-<pre><code class="language-elisp">#+HUGO_SECTION: ./
-#+TITLE: Doks主题
-#+HUGO_FRONT_MATTER_FORMAT: toml    
-#+HUGO_WEIGHT: 10
-</code></pre>
-<h2 id="文件-最后修改">文件 最后修改 <a href="#%e6%96%87%e4%bb%b6-%e6%9c%80%e5%90%8e%e4%bf%ae%e6%94%b9" class="anchor" aria-hidden="true">#</a></h2>
-<pre><code class="language-elisp">#+HUGO_AUTO_SET_LASTMOD: t
-</code></pre>
-<h2 id="文件-草稿-plus-分类-plus-tag-plus-日期">文件 草稿+分类+tag+日期 <a href="#%e6%96%87%e4%bb%b6-%e8%8d%89%e7%a8%bf-plus-%e5%88%86%e7%b1%bb-plus-tag-plus-%e6%97%a5%e6%9c%9f" class="anchor" aria-hidden="true">#</a></h2>
-<p>日期格式 yyyy-mm-dd，发布时会检查时区 <br/></p>
-<pre><code class="language-elisp">#+HUGO_DRAFT: true
-#+HUGO_CATEGORIES: emacs
-#+HUGO_TAGS: hugo
-#+DATE: 2021-09-10
-</code></pre>
-<h2 id="子树-分类-plus-tag-plus-日期-plus-导出文件名">子树 分类+tag+日期+导出文件名 <a href="#%e5%ad%90%e6%a0%91-%e5%88%86%e7%b1%bb-plus-tag-plus-%e6%97%a5%e6%9c%9f-plus-%e5%af%bc%e5%87%ba%e6%96%87%e4%bb%b6%e5%90%8d" class="anchor" aria-hidden="true">#</a></h2>
-<pre><code class="language-elisp">* CATEGORY :@emacs:
-** Doks主题 :hugo:org:
-   :PROPERTIES:
-   :EXPORT_DATE: 2023-06-07
-   :EXPORT_FILE_NAME: Doks主题     
-   :END:
-</code></pre>
-<h2 id="导出子树">导出子树 <a href="#%e5%af%bc%e5%87%ba%e5%ad%90%e6%a0%91" class="anchor" aria-hidden="true">#</a></h2>
-<p><a href="https://ox-hugo.scripter.co/doc/usage/">参考</a> <br/>
-<code>C-c C-e H A</code> <br/></p>
-<pre><code class="language-elisp">(org-hugo-export-wim-to-md :all-subtrees)
-</code></pre>
-<h2 id="炫技">炫技 <a href="#%e7%82%ab%e6%8a%80" class="anchor" aria-hidden="true">#</a></h2>
-<pre><code class="language-elisp">title = &quot;`(cdr (assoc &quot;ITEM&quot; (org-entry-properties)))`&quot;
-date = &quot;`(format-time-string &quot;%Y-%m-%dT%H:%M:%S&quot;)`&quot;
+<h2 id="注释">注释 <a href="#%e6%b3%a8%e9%87%8a" class="anchor" aria-hidden="true">#</a></h2>
+<pre><code class="language-markdown">&lt;!--哈哈我是注释，不会在浏览器中显示。--&gt;
 </code></pre>
 
 			<div class="page-footer-meta d-flex flex-column flex-md-row justify-content-between">
 				</div>
 			<div class="docs-navigation d-flex justify-content-between">
 	
-	<a href="/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+	<a href="/docs/%E5%88%86%E4%BA%AB/emacs/%E6%8F%92%E4%BB%B6%E7%AF%87-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">
 			<div class="card my-1">
 				<div class="card-body py-2">
-					&larr; 搭建个人博客
+					&larr; 插件篇 | 文件管理
 				</div>
 			</div>
 		</a>
-	<a class="ms-auto" href="/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">
+	<a class="ms-auto" href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode/">
 			<div class="card my-1">
 				<div class="card-body py-2">
-					Doks主题 &rarr;
+					VSCode &rarr;
 				</div>
 			</div>
 		</a>
@@ -908,9 +1142,9 @@ date = &quot;`(format-time-string &quot;%Y-%m-%dT%H:%M:%S&quot;)`&quot;
   
 
 <script src="/js/bootstrap.min.650aeec64c81d69d4c0850fc73c93da3f0330cec0a27772feed7f90f60baa5f47f1c45687d71914bdafd1c4e860d40f6dc08ede27a2f08431ff929c9a2d24621.js" integrity="sha512-ZQruxkyB1p1MCFD8c8k9o/AzDOwKJ3cv7tf5D2C6pfR/HEVofXGRS9r9HE6GDUD23Ajt4novCEMf&#43;SnJotJGIQ==" crossorigin="anonymous" defer></script>
-  <script src="/js/highlight.min.e0d9c5bb76559fc6a8e35e6d257e66ac6848b1064d833504359c80197347bb26ae0d69301434b7b9a50e84c4d35b958f082c37af71c82d8c2c5bbdd7c5d25ea0.js" integrity="sha512-4NnFu3ZVn8ao415tJX5mrGhIsQZNgzUENZyAGXNHuyauDWkwFDS3uaUOhMTTW5WPCCw3r3HILYwsW73XxdJeoA==" crossorigin="anonymous" defer></script>
+  <script src="/js/highlight.min.836e9b5b74e0d2b8c7e9ff6d89ea27207cda92009d199c018c08c620f11bbfa46937a66603548a63af1840fce1d731b18d96c2d08bf7f5a51ecfd8b363d7d2b2.js" integrity="sha512-g26bW3Tg0rjH6f9tieonIHzakgCdGZwBjAjGIPEbv6RpN6ZmA1SKY68YQPzh1zGxjZbC0Iv39aUez9izY9fSsg==" crossorigin="anonymous" defer></script>
   <script src="/main.min.cb2e2ebbf2e4002f3117addc33582923b2b3ae5265c22944cd117ebec7abe61c170417c4506d7a0f8f0fc9053dfdf441421d53601ac467042ff3d06ec0ba07fa.js" integrity="sha512-yy4uu/LkAC8xF63cM1gpI7KzrlJlwilEzRF&#43;vser5hwXBBfEUG16D48PyQU9/fRBQh1TYBrEZwQv89BuwLoH&#43;g==" crossorigin="anonymous" defer></script>
-  <script src="https://toughcactus.github.io/index.min.3e0fe5d47824e825f35922218880c2b947a52f467018988a4f8f7d7d32982bf89c2d263e5e77652e8557da3e1c5215f93336c24956475cb506afe932077a65fb.js" integrity="sha512-Pg/l1Hgk6CXzWSIhiIDCuUelL0ZwGJiKT499fTKYK/icLSY&#43;XndlLoVX2j4cUhX5MzbCSVZHXLUGr&#43;kyB3pl&#43;w==" crossorigin="anonymous" defer></script>
+  <script src="https://toughcactus.github.io/index.min.3181f041c14cc58e16b47d9fd81308b18e42aec0304ab2254b3828beca18914c7175be820377ca07bf5e8093053dd66fb3e2051d6a01791dbb8663b72a700e3f.js" integrity="sha512-MYHwQcFMxY4WtH2f2BMIsY5CrsAwSrIlSzgovsoYkUxxdb6CA3fKB79egJMFPdZvs&#43;IFHWoBeR27hmO3KnAOPw==" crossorigin="anonymous" defer></script>
   
   
 </body>

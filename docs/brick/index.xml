@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>🧱 on </title>
+    <link>https://toughcactus.github.io/docs/brick/</link>
+    <description>Recent content in 🧱 on </description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Sat, 10 Jun 2023 23:04:53 +0000</lastBuildDate><atom:link href="https://toughcactus.github.io/docs/brick/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>终端</title>
+      <link>https://toughcactus.github.io/docs/brick/%E7%BB%88%E7%AB%AF/</link>
+      <pubDate>Fri, 09 Jun 2023 22:11:40 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/brick/%E7%BB%88%E7%AB%AF/</guid>
+      <description>Overview # 介绍CLI，Terminal，Shell和Prompt视频 shell概念 # 接口 shell，和core相区分，是操作系统的外层。通过shell程序，可以使用系统服务或其他程序提供的功能。 根据操作系统类别和操作类型，shell可以分为图形shell（GUI）和命令行shell（CLI）。通常说的shell，指的命令行shell。 CLI Command-Line Interface 命令行界面 通过文本命令和计算机交互 GUI Graphical User Interface 图形用户界面 终端程序 # Terminal Wrapper Program 在终端输入文本命令 GUI或者程序提供的用于键入命令的窗口 终端程序 说明 iTerm MacOS Windows Terminal Windows Gnome Terminal 使用Gnome作为桌面的Linux自带的终端程序 Hyper Warp 目前MacOS；自动补全，鼠标交互，内置工作流，AI功能 Alacrity 命令解释器 # Shell 程序 终端中运行的程序。接受命令，然后解释并执行。 Shell启动时自动读取配置文件。 Shell 说明 sh Bourne Shell UNIX上的标准shell bash Bourne-Again Shell GNU开发；Linux默认；MacOS之前默认 不完全兼容sh shell，对一些命令和参数进行了扩展 配置文件 ~/.bash_profile zsh 19年起MacOS默认 配置文件 ~/zshrc 第三方框架oh-my-zsh提供其他功能 phish 脚本语言 # 需要解释器，每次运行时都需要解释。 脚本语言 JavaScript PHP Lua Python C# Shell脚本 # 开发语言 Shell Script 由一连串shell命令组成，可以指定用来解释脚本的shell程序 命令提示符 # Prompt 命令解释器提供并在终端显示，如当前路径和git信息。 类别 第三方提示 Powerline Starship Power Level 10K Spaceship 第三方框架 oh-my-zsh 提供各种promots，configuration options，aliases，plugins。支持自定义prompt，调整shell行为 查看Shell信息 # 命令解释器 当前使用的shell echo $SHELL echo $0 已安装shell cat /etc/shells Shell操作 # 切换shell程序 重新打开终端生效 chsh -s /bin/bash 不修改SHELL环境变量 zsh 手动读取配置文件 zsh source ~/.</description>
+    </item>
+    
+  </channel>
+</rss>
