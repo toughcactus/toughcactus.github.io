@@ -1,0 +1,1765 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preload" as="font" href="https://toughcactus.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="https://toughcactus.github.io/fonts/vendor/jost/jost-v4-latin-500.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="https://toughcactus.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2" type="font/woff2" crossorigin>
+
+  <script>(()=>{var t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,e=localStorage.getItem("theme");t&&e===null&&(localStorage.setItem("theme","dark"),document.documentElement.setAttribute("data-dark-mode","")),t&&e==="dark"&&document.documentElement.setAttribute("data-dark-mode",""),e==="dark"&&document.documentElement.setAttribute("data-dark-mode","")})()</script>
+
+  <link rel="stylesheet" href="https://toughcactus.github.io/main.af421a28c1a5ddf1ca8a3bad399db73f7201c97bfc01e5cb9ae6831c76af3199c990301ccee268e6e41b03d912112a014ecbccbd5e6c1111ee7661a1068c6bb5.css" integrity="sha512-r0IaKMGl3fHKijutOZ23P3IByXv8AeXLmuaDHHavMZnJkDAczuJo5uQbA9kSESoBTsvMvV5sERHudmGhBoxrtQ==" crossorigin="anonymous">
+<noscript><style>img.lazyload { display: none; }</style></noscript>
+  <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <title>实现游戏角色跳跃 - ToughCactus</title>
+<meta name="description" content="Part 1 绑定键位 # 虚幻编辑器 项目设置 &amp;gt; Engine &amp;gt; Input 动作映射 函数描述 键位 Jump SpaceBar Part 2 实现跳跃逻辑 # C&#43;&#43; 使用虚幻引擎提供的跳跃回调函数 绑定函数描述和回调函数 # 函数成员 private 在SetupPlayerInputComponent中调用 void ASTBaseCharacter::InitJump(UInputComponent* PlayerInputComponent) { PlayerInputComponent-&amp;gt;BindAction(&amp;quot;Jump&amp;quot;, IE_Pressed, this, &amp;amp;ASTBaseCharacter::Jump); } Part 3 添加跳跃动画 # 虚幻编辑器 ABP_BaseCharacter 跳跃动画资产 JumpStart JumpLoop JumpEnd 跳跃动画切换条件 使用 ACharacter::IsFalling 来设置变量 IsFalling ；true则Character在空中，false则说明Character在地面上。 上一小节中，变量 Velocity 横跨 ABP_BaseCharacter 的 EventGraph 和 AnimGraph ，这里，布尔类型变量 IsFalling 也一样 在 EventGraph 设置变量值，在 AnimGraph 中使用变量 使用状态机 在一个动画蓝图中管理多个动画，并定义动画之间的转换条件 一、设置布尔型变量 IsFalling # EventGraph ACharacter::IsFalling 需要 Pawn 到 Character 的转换 不能同时从 EventBlueprintUpdateAnimation 出发， SetVelocity 之后，执行转换 输入是 Character 的 MovementComponent ，从 AsCharacter 到 Target ，自动添加提取数据成员， IsFalling 函数的返回类型是布尔，作为 SetIsFalling 的输入 完整 EventGraph 二、实现 状态机 # AnimGraph 添加 状态机 ，命名为 Locomotion ，作为 OutputPose 的输入 StateMechine 双击 Locomotion ，进入 状态机 仅一个入口 Entry 为 Entry 添加 State ，命名为 Walk 双击 Walk 为 Walk 设置输入动画 BS_Locomotion 即之前 AnimGraph 中， OutputPose 的输入 到此， Character 的运动动画和上一小节一致 直接从 AssetBrowser 把 Jump 的三个动画拖入 Locomotion 动画自动被封装为 State ，和之前 AddState ，再将动画作为输入达到的效果一样 添加状态转换路径 添加转换条件 双击转换图标 Walk &amp;gt; JumpStart IsFalling 为 true JumpStart &amp;gt; JumpLoop JumpStart 将近结束 JumpStart 只播放一次 JumpLoop &amp;gt; JumpEnd IsFalling 为 false JumpLoop 循环播放 JumpEnd &amp;gt; Walk JumpEnd 将近结束 JumpEnd 只播放一次 三、设置 State 输入动画 # 拿 JumpStart 状态举例 选中JumpStart动画 &amp;gt; Details &amp;gt; Settings &amp;gt; LoopAnimation 默认循环播放动画 设置 JumpStart JumpEnd JumpLoop 的 LoopAnimation 设计 Jump 动画时， JumpStart 和 JumpEnd 只播放一次， JumpLoop 可循环。 如此设置还可修复Character跳跃时的卡顿 四、添加楼梯，查看 Jump 三阶段是否正常显示 # 添加楼梯 PlaceActors &amp;gt; Geometry &amp;gt; LinearStair 设置阶数 选中LinearStairBrush &amp;gt; Details &amp;gt; BrushSettings &amp;gt; NumSteps Character 从楼梯跳到平面时，一直保持 JumpLoop 五、跑步时跳跃，落地平滑 # 可以减少 JumpEnd &amp;gt; Walk 的 TimeRemaining 来缩短平滑 六、跳跃高度 # BP_STBaseCharacter JumpZVelocity 和 JumpStart 的时长有关 JumpLoop 动画更适合从临界点落下 ">
+  <link rel="canonical" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现游戏角色跳跃">
+<meta property="og:description" content="Part 1 绑定键位 # 虚幻编辑器 项目设置 &gt; Engine &gt; Input 动作映射 函数描述 键位 Jump SpaceBar Part 2 实现跳跃逻辑 # C&#43;&#43; 使用虚幻引擎提供的跳跃回调函数 绑定函数描述和回调函数 # 函数成员 private 在SetupPlayerInputComponent中调用 void ASTBaseCharacter::InitJump(UInputComponent* PlayerInputComponent) { PlayerInputComponent-&gt;BindAction(&quot;Jump&quot;, IE_Pressed, this, &amp;ASTBaseCharacter::Jump); } Part 3 添加跳跃动画 # 虚幻编辑器 ABP_BaseCharacter 跳跃动画资产 JumpStart JumpLoop JumpEnd 跳跃动画切换条件 使用 ACharacter::IsFalling 来设置变量 IsFalling ；true则Character在空中，false则说明Character在地面上。 上一小节中，变量 Velocity 横跨 ABP_BaseCharacter 的 EventGraph 和 AnimGraph ，这里，布尔类型变量 IsFalling 也一样 在 EventGraph 设置变量值，在 AnimGraph 中使用变量 使用状态机 在一个动画蓝图中管理多个动画，并定义动画之间的转换条件 一、设置布尔型变量 IsFalling # EventGraph ACharacter::IsFalling 需要 Pawn 到 Character 的转换 不能同时从 EventBlueprintUpdateAnimation 出发， SetVelocity 之后，执行转换 输入是 Character 的 MovementComponent ，从 AsCharacter 到 Target ，自动添加提取数据成员， IsFalling 函数的返回类型是布尔，作为 SetIsFalling 的输入 完整 EventGraph 二、实现 状态机 # AnimGraph 添加 状态机 ，命名为 Locomotion ，作为 OutputPose 的输入 StateMechine 双击 Locomotion ，进入 状态机 仅一个入口 Entry 为 Entry 添加 State ，命名为 Walk 双击 Walk 为 Walk 设置输入动画 BS_Locomotion 即之前 AnimGraph 中， OutputPose 的输入 到此， Character 的运动动画和上一小节一致 直接从 AssetBrowser 把 Jump 的三个动画拖入 Locomotion 动画自动被封装为 State ，和之前 AddState ，再将动画作为输入达到的效果一样 添加状态转换路径 添加转换条件 双击转换图标 Walk &gt; JumpStart IsFalling 为 true JumpStart &gt; JumpLoop JumpStart 将近结束 JumpStart 只播放一次 JumpLoop &gt; JumpEnd IsFalling 为 false JumpLoop 循环播放 JumpEnd &gt; Walk JumpEnd 将近结束 JumpEnd 只播放一次 三、设置 State 输入动画 # 拿 JumpStart 状态举例 选中JumpStart动画 &gt; Details &gt; Settings &gt; LoopAnimation 默认循环播放动画 设置 JumpStart JumpEnd JumpLoop 的 LoopAnimation 设计 Jump 动画时， JumpStart 和 JumpEnd 只播放一次， JumpLoop 可循环。 如此设置还可修复Character跳跃时的卡顿 四、添加楼梯，查看 Jump 三阶段是否正常显示 # 添加楼梯 PlaceActors &gt; Geometry &gt; LinearStair 设置阶数 选中LinearStairBrush &gt; Details &gt; BrushSettings &gt; NumSteps Character 从楼梯跳到平面时，一直保持 JumpLoop 五、跑步时跳跃，落地平滑 # 可以减少 JumpEnd &gt; Walk 的 TimeRemaining 来缩短平滑 六、跳跃高度 # BP_STBaseCharacter JumpZVelocity 和 JumpStart 的时长有关 JumpLoop 动画更适合从临界点落下 ">
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/">
+<meta property="og:site_name" content="ToughCactus">
+<meta property="article:published_time" content="2023-06-11T06:17:39+00:00">
+  <meta property="article:modified_time" content="2023-06-11T07:20:19+08:00">
+  
+  <meta property="og:image" content="https://toughcactus.github.io/doks.png"/>
+      <meta property="og:image:alt" content="ToughCactus">
+    
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@getdoks">
+<meta name="twitter:creator" content="@henkverlinde">
+<meta name="twitter:title" content="实现游戏角色跳跃">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://toughcactus.github.io/doks.png">
+    <meta name="twitter:image:alt" content="实现游戏角色跳跃">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+        "@id": "https://toughcactus.github.io/#/schema/organization/1",
+      "name": "Doks",
+      "url": "https://toughcactus.github.io/",
+      "sameAs": [
+        "https://twitter.com/getdoks"
+        , "https://github.com/h-enk/doks"
+        ],
+      "logo": {
+          "@type": "ImageObject",
+          "@id": "https://toughcactus.github.io/#/schema/image/1",
+          "url": "https://toughcactus.github.io/logo-doks.png",
+          "width":  512 ,
+          "height":  512 ,
+          "caption": "Doks"
+        },
+        "image": {
+          "@id": "https://toughcactus.github.io/#/schema/image/1"
+        }
+      },
+    {
+      "@type": "WebSite",
+      "@id": "https://toughcactus.github.io/#/schema/website/1",
+      "url": "https://toughcactus.github.io/",
+      "name": "ToughCactus",
+      "description": "Doks is a Hugo theme for building secure, fast, and SEO-ready documentation websites, which you can easily update and customize.",
+      "publisher": {
+          "@id": "https://toughcactus.github.io/#/schema/organization/1"
+        }
+      },
+    {
+      "@type": "WebPage",
+      "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/",
+      "url": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/",
+      "name": "实现游戏角色跳跃",
+      "description": "",
+      "isPartOf": {
+        "@id": "https://toughcactus.github.io/#/schema/website/1"
+      },
+      "about": {
+          "@id": "https://toughcactus.github.io/#/schema/organization/1"
+        },
+      "datePublished": "2023-06-11T06:17:39CET",
+      "dateModified": "2023-06-11T07:20:19CET",
+      "breadcrumb": {
+        "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/#/schema/breadcrumb/1"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/#/schema/image/2"
+      },
+      "inLanguage": "en-US",
+      "potentialAction": [{
+        "@type": "ReadAction", "target": ["https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/"]
+      }]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/#/schema/breadcrumb/1",
+      "name": "Breadcrumbs",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://toughcactus.github.io/",
+          "url": "https://toughcactus.github.io/",
+          "name": ""
+          }
+        },{
+        "@type": "ListItem",
+        "position":  2 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://toughcactus.github.io/docs/",
+          "url": "https://toughcactus.github.io/docs/",
+          "name": "Docs"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/",
+          "url": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/",
+          "name": "% E8%99%9 A% E5% B9% Bb% E5% Bc%95% E6%93%8 E"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/",
+          "url": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/",
+          "name": "% E8% Bf%9 B% E9%98% B6% E8% Af% Be% E7% A8%8 B"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/",
+          "url": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/",
+          "name": "% E8% A7%92% E8%89% B2% E5%92%8 C% E5%8 A% A8% E7%94% Bb"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  6 ,
+        "item": {
+          "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/"
+          }
+        }]
+    },
+
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://toughcactus.github.io/#/schema/article/1",
+          "headline": "实现游戏角色跳跃",
+          "description": "",
+          "isPartOf": {
+            "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/"
+          },
+          "mainEntityOfPage": {
+            "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/"
+          },
+          "datePublished": "2023-06-11T06:17:39CET",
+          "dateModified": "2023-06-11T07:20:19CET",
+          "author": {
+            "@id": "https://toughcactus.github.io/#/schema/person/2"
+          },
+          "publisher": {
+              "@id": "https://toughcactus.github.io/#/schema/organization/1"
+            },
+          "image": {
+            "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/#/schema/image/2"
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://toughcactus.github.io/#/schema/person/2",
+          "name": "Henk Verlinde",
+          "sameAs": [
+            "https://twitter.com/henkverlinde"
+            , "https://www.linkedin.com/in/henkverlinde/"
+            , "https://github.com/h-enk"
+            ]
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ImageObject",
+          "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/#/schema/image/2",
+          "url": "https://toughcactus.github.io/doks.png",
+          "contentUrl": "https://toughcactus.github.io/doks.png",
+          "caption": "实现游戏角色跳跃"
+        }
+      ]
+    }
+
+  ]
+}
+</script>
+
+  <meta name="theme-color" content="#fff">
+<link rel="icon" href="https://toughcactus.github.io/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="https://toughcactus.github.io/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="https://toughcactus.github.io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://toughcactus.github.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://toughcactus.github.io/favicon-16x16.png">
+<link rel="manifest" crossorigin="use-credentials" href="https://toughcactus.github.io/site.webmanifest">
+
+  
+
+</head>
+
+<body class="">
+  <div class="header-bar"></div>
+
+<header class="navbar navbar-expand-lg navbar-light doks-navbar">
+  <nav class="container-fluid flex-wrap flex-lg-nowrap" aria-label="Main navigation">
+
+    <a class="navbar-brand order-0" href="/" aria-label="ToughCactus">
+      ToughCactus
+    </a>
+
+    <button class="btn btn-link order-0 ms-auto d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+    </button>
+    <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="header-bar"></div>
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Browse docs</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <aside class="doks-sidebar mt-n3">
+          <nav id="doks-docs-nav" aria-label="Tertiary navigation">
+            
+<ul class="list-unstyled collapsible-sidebar">
+  
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-b1452797227c8dd79ace0e323009d662" aria-expanded="true">
+          虚幻引擎
+        </button>
+        <div class="collapse show" id="section-b1452797227c8dd79ace0e323009d662">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-cd4ac15c94c24f49288627d9c6ce70ce" aria-expanded="false">
+                    基础课程
+                  </button>
+                  <div class="collapse" id="section-cd4ac15c94c24f49288627d9c6ce70ce">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-4696f1ad74f4d52f8329560155ef762b" aria-expanded="true">
+                    进阶课程
+                  </button>
+                  <div class="collapse show" id="section-4696f1ad74f4d52f8329560155ef762b">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-05d87cb41d01c4048ccdb94056a90119" aria-expanded="true">
+                              角色和动画
+                            </button>
+                            <div class="collapse show" id="section-05d87cb41d01c4048ccdb94056a90119">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E8%BF%90%E8%A1%8Cshootergame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/">运行ShooterGame示例项目</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%88%9D%E5%A7%8B%E5%8C%96shoottraining%E9%A1%B9%E7%9B%AE/">初始化ShootTraining项目</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">代码规范</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/">为游戏角色绑定模型</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/">实现游戏角色前后左右移动</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/">实现游戏角色视角旋转</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/">为游戏角色添加向前跑步动画</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/">实现游戏角色跳跃</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%91%E6%AD%A5/">实现游戏角色跑步</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E6%B7%BB%E5%8A%A0%E8%B5%B0%E8%B7%AF%E6%97%B6%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/">添加走路时转向动画</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/">打包游戏</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></li>
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-b11d90242b17900ec3540f79bdc2cb0f" aria-expanded="false">
+                              健康系统
+                            </button>
+                            <div class="collapse" id="section-b11d90242b17900ec3540f79bdc2cb0f">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E6%97%B6%E6%98%BE%E7%A4%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%94%9F%E5%91%BD%E5%80%BC/">实时显示游戏角色生命值</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/">计算伤害</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/">模拟榴弹爆炸</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/">使用伤害类型</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/">为游戏角色添加死亡逻辑</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%B7%BB%E5%8A%A0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/">添加观察视角</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/">自动治疗</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/">高处坠落伤害</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/">打包游戏和收尾</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></li>
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-44a3d9a4d97f8fd2a1560251279110d1" aria-expanded="false">
+                              武器
+                            </button>
+                            <div class="collapse" id="section-44a3d9a4d97f8fd2a1560251279110d1">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-3bd2c20a732475803482c020650a0852" aria-expanded="false">
+          🧱
+        </button>
+        <div class="collapse" id="section-3bd2c20a732475803482c020650a0852">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/brick/%E7%BB%88%E7%AB%AF/">终端</a></li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-c31f48f84ef207e66a03c015a7243b43" aria-expanded="false">
+          分享
+        </button>
+        <div class="collapse" id="section-c31f48f84ef207e66a03c015a7243b43">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-169bafefac5c96e7ad8b1714ec46c585" aria-expanded="false">
+                    Emacs
+                  </button>
+                  <div class="collapse" id="section-169bafefac5c96e7ad8b1714ec46c585">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E5%BF%AB%E6%8D%B7%E9%94%AE/">快捷键</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/org-mode/">org-mode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E6%8F%92%E4%BB%B6%E7%AF%87-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">插件篇 | 文件管理</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="false">
+                    开发语言
+                  </button>
+                  <div class="collapse" id="section-262a78b7bebf63c3eaefb8b7370826cb">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/">Shell脚本</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/elisp/">Elisp</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/">Markdown</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">JavaScrpit</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-2c509530bf439a36168a86e21c160c06" aria-expanded="false">
+                    开发工具
+                  </button>
+                  <div class="collapse" id="section-2c509530bf439a36168a86e21c160c06">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/">Git</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">Chrome</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode/">VSCode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/makefile/">Makefile</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/sublime/">Sublime</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-0a5b7edb55b772c60bfa8af868b679cf" aria-expanded="false">
+                    MacOS
+                  </button>
+                  <div class="collapse" id="section-0a5b7edb55b772c60bfa8af868b679cf">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/macos/%E7%BB%88%E7%AB%AF/">终端</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="false">
+                    Hugo
+                  </button>
+                  <div class="collapse" id="section-1b3840b0b70d91c17e70014c8537dbba">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">搭建个人博客</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9/">使用ox-hugo设置选项</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">Doks主题</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">文章目录跟随文章内容滚动</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+  
+</ul>
+
+          </nav>
+        </aside>
+      </div>
+    </div>
+    <button class="btn btn-menu order-2 d-block d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDoks" aria-controls="offcanvasDoks" aria-label="Open main menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    <div class="offcanvas offcanvas-end border-0 py-lg-1" tabindex="-1" id="offcanvasDoks" data-bs-backdrop="true" aria-labelledby="offcanvasDoksLabel">
+      <div class="header-bar d-lg-none"></div>
+      <div class="offcanvas-header d-lg-none">
+        <h2 class="h5 offcanvas-title ps-2" id="offcanvasDoksLabel"><a class="text-dark" href="/">ToughCactus</a></h2>
+        <button type="button" class="btn-close text-reset me-2" data-bs-dismiss="offcanvas" aria-label="Close main menu"></button>
+      </div>
+      <div class="offcanvas-body p-4 p-lg-0">
+        <ul class="nav flex-column flex-lg-row align-items-lg-center mt-2 mt-lg-0 ms-lg-2 me-lg-auto">
+              <li class="nav-item">
+                <a class="nav-link ps-0 py-1" href="/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">笔记</a>
+              </li>
+            
+          
+              <li class="nav-item">
+                <a class="nav-link ps-0 py-1" href="/blog/">日志</a>
+              </li>
+            
+          
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle ps-0 py-1" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  关于
+                  <span class="dropdown-caret"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-main shadow rounded border-0" aria-labelledby="navbarDropdownMenuLink">
+                  <li>
+                      <a class="dropdown-item" href="/about/skill-tree/">技能树</a>
+                    </li>
+                  <li>
+                      <a class="dropdown-item" href="/about/hobby/">Hobby</a>
+                    </li>
+                  </ul>
+              </li>
+            
+          </ul>
+
+        <hr class="text-black-50 my-4 d-lg-none">
+        <form class="doks-search position-relative flex-grow-1 ms-lg-auto me-lg-2">
+          <input id="search" class="form-control is-search" type="search" placeholder="Search docs..." aria-label="Search docs..." autocomplete="off">
+          <div id="suggestions" class="shadow bg-white rounded d-none"></div>
+        </form>
+        <hr class="text-black-50 my-4 d-lg-none">
+        <ul class="nav flex-column flex-lg-row">
+          </ul>
+
+        <hr class="text-black-50 my-4 d-lg-none">
+        <button id="mode" class="btn btn-link" type="button" aria-label="Toggle user interface mode">
+          <span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+          <span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        </button>
+        </div>
+    </div>
+  </nav>
+</header>
+
+<div class="container-fluid">
+  <aside class="doks-sidebar">
+    <nav id="doks-docs-nav" class="collapse d-lg-none" aria-label="Tertiary navigation">
+      
+<ul class="list-unstyled collapsible-sidebar">
+  
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-b1452797227c8dd79ace0e323009d662" aria-expanded="true">
+          虚幻引擎
+        </button>
+        <div class="collapse show" id="section-b1452797227c8dd79ace0e323009d662">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-cd4ac15c94c24f49288627d9c6ce70ce" aria-expanded="false">
+                    基础课程
+                  </button>
+                  <div class="collapse" id="section-cd4ac15c94c24f49288627d9c6ce70ce">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-4696f1ad74f4d52f8329560155ef762b" aria-expanded="true">
+                    进阶课程
+                  </button>
+                  <div class="collapse show" id="section-4696f1ad74f4d52f8329560155ef762b">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-05d87cb41d01c4048ccdb94056a90119" aria-expanded="true">
+                              角色和动画
+                            </button>
+                            <div class="collapse show" id="section-05d87cb41d01c4048ccdb94056a90119">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E8%BF%90%E8%A1%8Cshootergame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/">运行ShooterGame示例项目</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%88%9D%E5%A7%8B%E5%8C%96shoottraining%E9%A1%B9%E7%9B%AE/">初始化ShootTraining项目</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">代码规范</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/">为游戏角色绑定模型</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/">实现游戏角色前后左右移动</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/">实现游戏角色视角旋转</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/">为游戏角色添加向前跑步动画</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/">实现游戏角色跳跃</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%91%E6%AD%A5/">实现游戏角色跑步</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E6%B7%BB%E5%8A%A0%E8%B5%B0%E8%B7%AF%E6%97%B6%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/">添加走路时转向动画</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/">打包游戏</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></li>
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-b11d90242b17900ec3540f79bdc2cb0f" aria-expanded="false">
+                              健康系统
+                            </button>
+                            <div class="collapse" id="section-b11d90242b17900ec3540f79bdc2cb0f">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E6%97%B6%E6%98%BE%E7%A4%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%94%9F%E5%91%BD%E5%80%BC/">实时显示游戏角色生命值</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/">计算伤害</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/">模拟榴弹爆炸</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/">使用伤害类型</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/">为游戏角色添加死亡逻辑</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%B7%BB%E5%8A%A0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/">添加观察视角</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/">自动治疗</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/">高处坠落伤害</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/">打包游戏和收尾</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></li>
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-44a3d9a4d97f8fd2a1560251279110d1" aria-expanded="false">
+                              武器
+                            </button>
+                            <div class="collapse" id="section-44a3d9a4d97f8fd2a1560251279110d1">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-3bd2c20a732475803482c020650a0852" aria-expanded="false">
+          🧱
+        </button>
+        <div class="collapse" id="section-3bd2c20a732475803482c020650a0852">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/brick/%E7%BB%88%E7%AB%AF/">终端</a></li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-c31f48f84ef207e66a03c015a7243b43" aria-expanded="false">
+          分享
+        </button>
+        <div class="collapse" id="section-c31f48f84ef207e66a03c015a7243b43">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-169bafefac5c96e7ad8b1714ec46c585" aria-expanded="false">
+                    Emacs
+                  </button>
+                  <div class="collapse" id="section-169bafefac5c96e7ad8b1714ec46c585">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E5%BF%AB%E6%8D%B7%E9%94%AE/">快捷键</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/org-mode/">org-mode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E6%8F%92%E4%BB%B6%E7%AF%87-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">插件篇 | 文件管理</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="false">
+                    开发语言
+                  </button>
+                  <div class="collapse" id="section-262a78b7bebf63c3eaefb8b7370826cb">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/">Shell脚本</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/elisp/">Elisp</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/">Markdown</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">JavaScrpit</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-2c509530bf439a36168a86e21c160c06" aria-expanded="false">
+                    开发工具
+                  </button>
+                  <div class="collapse" id="section-2c509530bf439a36168a86e21c160c06">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/">Git</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">Chrome</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode/">VSCode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/makefile/">Makefile</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/sublime/">Sublime</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-0a5b7edb55b772c60bfa8af868b679cf" aria-expanded="false">
+                    MacOS
+                  </button>
+                  <div class="collapse" id="section-0a5b7edb55b772c60bfa8af868b679cf">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/macos/%E7%BB%88%E7%AB%AF/">终端</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="false">
+                    Hugo
+                  </button>
+                  <div class="collapse" id="section-1b3840b0b70d91c17e70014c8537dbba">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">搭建个人博客</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9/">使用ox-hugo设置选项</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">Doks主题</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">文章目录跟随文章内容滚动</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+  
+</ul>
+
+    </nav>
+  </aside>
+</div>
+
+
+  <div class="wrap container-fluid" role="document">
+    <div class="content">
+      
+	<div class="row flex-xl-nowrap">
+		<div class="col-lg-5 col-xl-4 docs-sidebar docs-sidebar-top d-none d-lg-block">
+			<nav class="docs-links" aria-label="Main navigation">
+				
+<ul class="list-unstyled collapsible-sidebar">
+  
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-b1452797227c8dd79ace0e323009d662" aria-expanded="true">
+          虚幻引擎
+        </button>
+        <div class="collapse show" id="section-b1452797227c8dd79ace0e323009d662">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-cd4ac15c94c24f49288627d9c6ce70ce" aria-expanded="false">
+                    基础课程
+                  </button>
+                  <div class="collapse" id="section-cd4ac15c94c24f49288627d9c6ce70ce">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-4696f1ad74f4d52f8329560155ef762b" aria-expanded="true">
+                    进阶课程
+                  </button>
+                  <div class="collapse show" id="section-4696f1ad74f4d52f8329560155ef762b">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-05d87cb41d01c4048ccdb94056a90119" aria-expanded="true">
+                              角色和动画
+                            </button>
+                            <div class="collapse show" id="section-05d87cb41d01c4048ccdb94056a90119">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E8%BF%90%E8%A1%8Cshootergame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/">运行ShooterGame示例项目</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%88%9D%E5%A7%8B%E5%8C%96shoottraining%E9%A1%B9%E7%9B%AE/">初始化ShootTraining项目</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">代码规范</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/">为游戏角色绑定模型</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/">实现游戏角色前后左右移动</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/">实现游戏角色视角旋转</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/">为游戏角色添加向前跑步动画</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/">实现游戏角色跳跃</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%91%E6%AD%A5/">实现游戏角色跑步</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E6%B7%BB%E5%8A%A0%E8%B5%B0%E8%B7%AF%E6%97%B6%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/">添加走路时转向动画</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/">打包游戏</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></li>
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-b11d90242b17900ec3540f79bdc2cb0f" aria-expanded="false">
+                              健康系统
+                            </button>
+                            <div class="collapse" id="section-b11d90242b17900ec3540f79bdc2cb0f">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E6%97%B6%E6%98%BE%E7%A4%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%94%9F%E5%91%BD%E5%80%BC/">实时显示游戏角色生命值</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/">计算伤害</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/">模拟榴弹爆炸</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/">使用伤害类型</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/">为游戏角色添加死亡逻辑</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%B7%BB%E5%8A%A0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/">添加观察视角</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/">自动治疗</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/">高处坠落伤害</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/">打包游戏和收尾</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></li>
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-44a3d9a4d97f8fd2a1560251279110d1" aria-expanded="false">
+                              武器
+                            </button>
+                            <div class="collapse" id="section-44a3d9a4d97f8fd2a1560251279110d1">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-3bd2c20a732475803482c020650a0852" aria-expanded="false">
+          🧱
+        </button>
+        <div class="collapse" id="section-3bd2c20a732475803482c020650a0852">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/brick/%E7%BB%88%E7%AB%AF/">终端</a></li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-c31f48f84ef207e66a03c015a7243b43" aria-expanded="false">
+          分享
+        </button>
+        <div class="collapse" id="section-c31f48f84ef207e66a03c015a7243b43">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-169bafefac5c96e7ad8b1714ec46c585" aria-expanded="false">
+                    Emacs
+                  </button>
+                  <div class="collapse" id="section-169bafefac5c96e7ad8b1714ec46c585">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E5%BF%AB%E6%8D%B7%E9%94%AE/">快捷键</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/org-mode/">org-mode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E6%8F%92%E4%BB%B6%E7%AF%87-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">插件篇 | 文件管理</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="false">
+                    开发语言
+                  </button>
+                  <div class="collapse" id="section-262a78b7bebf63c3eaefb8b7370826cb">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/">Shell脚本</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/elisp/">Elisp</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/">Markdown</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">JavaScrpit</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-2c509530bf439a36168a86e21c160c06" aria-expanded="false">
+                    开发工具
+                  </button>
+                  <div class="collapse" id="section-2c509530bf439a36168a86e21c160c06">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/">Git</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">Chrome</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode/">VSCode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/makefile/">Makefile</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/sublime/">Sublime</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-0a5b7edb55b772c60bfa8af868b679cf" aria-expanded="false">
+                    MacOS
+                  </button>
+                  <div class="collapse" id="section-0a5b7edb55b772c60bfa8af868b679cf">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/macos/%E7%BB%88%E7%AB%AF/">终端</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="false">
+                    Hugo
+                  </button>
+                  <div class="collapse" id="section-1b3840b0b70d91c17e70014c8537dbba">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">搭建个人博客</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9/">使用ox-hugo设置选项</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">Doks主题</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">文章目录跟随文章内容滚动</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+  
+</ul>
+
+			</nav>
+		</div>
+		<nav class="docs-toc docs-toc-top d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+			<div class="d-xl-none">
+  <button class="btn btn-outline-primary btn-sm doks-toc-toggle collapsed" type="button" data-bs-toggle="collapse"
+    data-bs-target="#onThisPage" aria-controls="doks-docs-nav" aria-expanded="false"
+    aria-label="Toggle On this page navigation">
+    <span>On this page</span>
+    <span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-expand"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <title>Expand</title>
+        <polyline points="7 13 12 18 17 13"></polyline>
+        <polyline points="7 6 12 11 17 6"></polyline>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-collapse"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <title>Collapse</title>
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+      </svg>
+    </span>
+  </button>
+  <div class="collapse" id="onThisPage">
+    <div class="card card-body mt-3 py-1">
+      <div class="page-links">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-绑定键位">Part 1 绑定键位</a></li>
+        <li><a href="#part-2-实现跳跃逻辑">Part 2 实现跳跃逻辑</a>
+          <ul>
+            <li><a href="#绑定函数描述和回调函数">绑定函数描述和回调函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-添加跳跃动画">Part 3 添加跳跃动画</a>
+          <ul>
+            <li><a href="#一-设置布尔型变量-isfalling">一、设置布尔型变量 <code>IsFalling</code></a></li>
+            <li><a href="#二-实现-状态机">二、实现 <code>状态机</code></a></li>
+            <li><a href="#三-设置-state-输入动画">三、设置 <code>State</code> 输入动画</a></li>
+            <li><a href="#四-添加楼梯-查看-jump-三阶段是否正常显示">四、添加楼梯，查看 <code>Jump</code> 三阶段是否正常显示</a></li>
+            <li><a href="#五-跑步时跳跃-落地平滑">五、跑步时跳跃，落地平滑</a></li>
+            <li><a href="#六-跳跃高度">六、跳跃高度</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-links d-none d-xl-block">
+  <h3>On this page</h3>
+  <nav class="my-toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-绑定键位">Part 1 绑定键位</a></li>
+        <li><a href="#part-2-实现跳跃逻辑">Part 2 实现跳跃逻辑</a>
+          <ul>
+            <li><a href="#绑定函数描述和回调函数">绑定函数描述和回调函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-添加跳跃动画">Part 3 添加跳跃动画</a>
+          <ul>
+            <li><a href="#一-设置布尔型变量-isfalling">一、设置布尔型变量 <code>IsFalling</code></a></li>
+            <li><a href="#二-实现-状态机">二、实现 <code>状态机</code></a></li>
+            <li><a href="#三-设置-state-输入动画">三、设置 <code>State</code> 输入动画</a></li>
+            <li><a href="#四-添加楼梯-查看-jump-三阶段是否正常显示">四、添加楼梯，查看 <code>Jump</code> 三阶段是否正常显示</a></li>
+            <li><a href="#五-跑步时跳跃-落地平滑">五、跑步时跳跃，落地平滑</a></li>
+            <li><a href="#六-跳跃高度">六、跳跃高度</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </nav>
+      </div>
+
+		</nav>
+		<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+		
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Home</a></li>
+<li class="breadcrumb-item"><a href="/docs/">Docs</a></li>
+<li class="breadcrumb-item"><a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/">虚幻引擎</a></li>
+<li class="breadcrumb-item"><a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/">进阶课程</a></li>
+<li class="breadcrumb-item"><a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/">角色和动画</a></li>
+<li class="breadcrumb-item active" aria-current="page">实现游戏角色跳跃</li>
+					</ol>
+				</nav>
+			
+			<h1>实现游戏角色跳跃</h1>
+			<p class="lead"></p>
+			<nav class="d-xl-none" aria-label="Quaternary navigation">
+				<div class="d-xl-none">
+  <button class="btn btn-outline-primary btn-sm doks-toc-toggle collapsed" type="button" data-bs-toggle="collapse"
+    data-bs-target="#onThisPage" aria-controls="doks-docs-nav" aria-expanded="false"
+    aria-label="Toggle On this page navigation">
+    <span>On this page</span>
+    <span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-expand"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <title>Expand</title>
+        <polyline points="7 13 12 18 17 13"></polyline>
+        <polyline points="7 6 12 11 17 6"></polyline>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-collapse"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <title>Collapse</title>
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+      </svg>
+    </span>
+  </button>
+  <div class="collapse" id="onThisPage">
+    <div class="card card-body mt-3 py-1">
+      <div class="page-links">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-绑定键位">Part 1 绑定键位</a></li>
+        <li><a href="#part-2-实现跳跃逻辑">Part 2 实现跳跃逻辑</a>
+          <ul>
+            <li><a href="#绑定函数描述和回调函数">绑定函数描述和回调函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-添加跳跃动画">Part 3 添加跳跃动画</a>
+          <ul>
+            <li><a href="#一-设置布尔型变量-isfalling">一、设置布尔型变量 <code>IsFalling</code></a></li>
+            <li><a href="#二-实现-状态机">二、实现 <code>状态机</code></a></li>
+            <li><a href="#三-设置-state-输入动画">三、设置 <code>State</code> 输入动画</a></li>
+            <li><a href="#四-添加楼梯-查看-jump-三阶段是否正常显示">四、添加楼梯，查看 <code>Jump</code> 三阶段是否正常显示</a></li>
+            <li><a href="#五-跑步时跳跃-落地平滑">五、跑步时跳跃，落地平滑</a></li>
+            <li><a href="#六-跳跃高度">六、跳跃高度</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-links d-none d-xl-block">
+  <h3>On this page</h3>
+  <nav class="my-toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-绑定键位">Part 1 绑定键位</a></li>
+        <li><a href="#part-2-实现跳跃逻辑">Part 2 实现跳跃逻辑</a>
+          <ul>
+            <li><a href="#绑定函数描述和回调函数">绑定函数描述和回调函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-添加跳跃动画">Part 3 添加跳跃动画</a>
+          <ul>
+            <li><a href="#一-设置布尔型变量-isfalling">一、设置布尔型变量 <code>IsFalling</code></a></li>
+            <li><a href="#二-实现-状态机">二、实现 <code>状态机</code></a></li>
+            <li><a href="#三-设置-state-输入动画">三、设置 <code>State</code> 输入动画</a></li>
+            <li><a href="#四-添加楼梯-查看-jump-三阶段是否正常显示">四、添加楼梯，查看 <code>Jump</code> 三阶段是否正常显示</a></li>
+            <li><a href="#五-跑步时跳跃-落地平滑">五、跑步时跳跃，落地平滑</a></li>
+            <li><a href="#六-跳跃高度">六、跳跃高度</a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </nav>
+      </div>
+
+			</nav>
+			<h2 id="part-1-绑定键位">Part 1 绑定键位 <a href="#part-1-%e7%bb%91%e5%ae%9a%e9%94%ae%e4%bd%8d" class="anchor" aria-hidden="true">#</a></h2>
+<p><code>虚幻编辑器</code> <br/>
+<code>项目设置 &gt; Engine &gt; Input</code> <br/>
+<code>动作映射</code> <br/></p>
+<table>
+<thead>
+<tr>
+<th>函数描述</th>
+<th>键位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Jump</td>
+<td>SpaceBar</td>
+</tr>
+</tbody>
+</table>
+<p>
+<figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e7%bb%91%e5%ae%9a%e8%b7%b3%e8%b7%83%e9%94%ae%e4%bd%8d/%e8%b7%b3%e8%b7%83%e9%94%ae%e4%bd%8d.png" width="500"></figure> <br/></p>
+<h2 id="part-2-实现跳跃逻辑">Part 2 实现跳跃逻辑 <a href="#part-2-%e5%ae%9e%e7%8e%b0%e8%b7%b3%e8%b7%83%e9%80%bb%e8%be%91" class="anchor" aria-hidden="true">#</a></h2>
+<p><code>C++</code> <br/>
+使用虚幻引擎提供的跳跃回调函数 <br/></p>
+<h3 id="绑定函数描述和回调函数">绑定函数描述和回调函数 <a href="#%e7%bb%91%e5%ae%9a%e5%87%bd%e6%95%b0%e6%8f%8f%e8%bf%b0%e5%92%8c%e5%9b%9e%e8%b0%83%e5%87%bd%e6%95%b0" class="anchor" aria-hidden="true">#</a></h3>
+<p><code>函数成员</code> <code>private</code> <code>在SetupPlayerInputComponent中调用</code> <br/></p>
+<pre><code class="language-C++">void ASTBaseCharacter::InitJump(UInputComponent* PlayerInputComponent)
+{
+    PlayerInputComponent-&gt;BindAction(&quot;Jump&quot;, IE_Pressed, this, &amp;ASTBaseCharacter::Jump);
+}
+</code></pre>
+<h2 id="part-3-添加跳跃动画">Part 3 添加跳跃动画 <a href="#part-3-%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb" class="anchor" aria-hidden="true">#</a></h2>
+<p><code>虚幻编辑器</code> <br/>
+<code>ABP_BaseCharacter</code> <br/></p>
+<ol>
+<li>跳跃动画资产 <br/>
+<code>JumpStart</code> <code>JumpLoop</code> <code>JumpEnd</code> <br/></li>
+<li>跳跃动画切换条件 <br/>
+使用 <code>ACharacter::IsFalling</code> 来设置变量 <code>IsFalling</code> ；true则Character在空中，false则说明Character在地面上。 <br/></li>
+<li>上一小节中，变量 <code>Velocity</code> 横跨 <code>ABP_BaseCharacter</code> 的 <code>EventGraph</code> 和 <code>AnimGraph</code> ，这里，布尔类型变量 <code>IsFalling</code> 也一样 <br/>
+在 <code>EventGraph</code> 设置变量值，在 <code>AnimGraph</code> 中使用变量 <br/></li>
+<li>使用状态机 <br/>
+在一个动画蓝图中管理多个动画，并定义动画之间的转换条件 <br/></li>
+</ol>
+<h3 id="一-设置布尔型变量-isfalling">一、设置布尔型变量 <code>IsFalling</code> <a href="#%e4%b8%80-%e8%ae%be%e7%bd%ae%e5%b8%83%e5%b0%94%e5%9e%8b%e5%8f%98%e9%87%8f-isfalling" class="anchor" aria-hidden="true">#</a></h3>
+<p><code>EventGraph</code> <br/></p>
+<ol>
+<li>
+<p><code>ACharacter::IsFalling</code> <br/></p>
+<ul>
+<li>
+<p>需要 <code>Pawn</code> 到 <code>Character</code> 的转换 <br/>
+不能同时从 <code>EventBlueprintUpdateAnimation</code> 出发， <code>SetVelocity</code> 之后，执行转换 <br/></p>
+<p>
+        <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-%e5%b0%86Pawn%e8%bd%ac%e6%8d%a2%e6%88%90Character.png" width="800"></figure> <br/></p>
+</li>
+<li>
+<p>输入是 <code>Character</code> 的 <code>MovementComponent</code> ，从 <code>AsCharacter</code> 到 <code>Target</code> ，自动添加提取数据成员， <code>IsFalling</code> 函数的返回类型是布尔，作为 <code>SetIsFalling</code> 的输入 <br/></p>
+<p>
+        <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-%e8%ae%be%e7%bd%ae%e5%8f%98%e9%87%8fIsFalling.png" width="900"></figure> <br/></p>
+</li>
+</ul>
+</li>
+<li>
+<p>完整 <code>EventGraph</code> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-EventGraph.png" width="800"></figure> <br/></p>
+</li>
+</ol>
+<h3 id="二-实现-状态机">二、实现 <code>状态机</code> <a href="#%e4%ba%8c-%e5%ae%9e%e7%8e%b0-%e7%8a%b6%e6%80%81%e6%9c%ba" class="anchor" aria-hidden="true">#</a></h3>
+<p><code>AnimGraph</code> <br/></p>
+<ol>
+<li>
+<p>添加 <code>状态机</code> ，命名为 <code>Locomotion</code> ，作为 <code>OutputPose</code> 的输入 <br/>
+<code>StateMechine</code> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph.png" width="500"></figure> <br/></p>
+</li>
+<li>
+<p>双击 <code>Locomotion</code> ，进入 <code>状态机</code> <br/>
+仅一个入口 <code>Entry</code> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Default.png" width="500"></figure> <br/></p>
+</li>
+<li>
+<p>为 <code>Entry</code> 添加 <code>State</code> ，命名为 <code>Walk</code> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Entry-AddState.png" width="300"></figure> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Entry-Walk.png" width="200"></figure> <br/></p>
+</li>
+<li>
+<p>双击 <code>Walk</code> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Walk.png" width="150"></figure> <br/></p>
+</li>
+<li>
+<p>为 <code>Walk</code> 设置输入动画 <code>BS_Locomotion</code> <br/>
+即之前 <code>AnimGraph</code> 中， <code>OutputPose</code> 的输入 <br/></p>
+<p><img src="http://toughcactus.github.io/pic/角色和动画/实现Character跳跃/添加跳跃动画/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion.png" alt="ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion.png" width="600" /> <br/>
+到此， <code>Character</code> 的运动动画和上一小节一致 <br/></p>
+</li>
+<li>
+<p>直接从 <code>AssetBrowser</code> 把 <code>Jump</code> 的三个动画拖入 <code>Locomotion</code> <br/>
+动画自动被封装为 <code>State</code> ，和之前 <code>AddState</code> ，再将动画作为输入达到的效果一样 <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-%e6%b7%bb%e5%8a%a0Jump.png" width="900"></figure> <br/></p>
+</li>
+<li>
+<p>添加状态转换路径 <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Walk-BS_Locomotion-%e6%b7%bb%e5%8a%a0%e8%bd%ac%e6%8d%a2.png" width="700"></figure> <br/></p>
+</li>
+<li>
+<p>添加转换条件 <br/>
+<code>双击转换图标</code> <br/></p>
+<ul>
+<li>
+<p><code>Walk &gt; JumpStart</code> <br/>
+<code>IsFalling</code> 为 <code>true</code> <br/></p>
+<p>
+        <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Walk-JumpStart.png" width="800"></figure> <br/></p>
+</li>
+<li>
+<p><code>JumpStart &gt; JumpLoop</code> <br/>
+<code>JumpStart</code> 将近结束 <br/></p>
+<p>
+        <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Less.png" width="350"></figure> <br/></p>
+<p><img src="http://toughcactus.github.io/pic/角色和动画/实现Character跳跃/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpStart-JumpLoop.png" alt="ABP_BaseCharacter-AnimGraph-JumpStart-JumpLoop.png" width="800" /> <br/>
+<code>JumpStart</code> 只播放一次 <br/></p>
+</li>
+<li>
+<p><code>JumpLoop &gt; JumpEnd</code> <br/>
+<code>IsFalling</code> 为 <code>false</code> <br/></p>
+<p>
+        <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Not.png" width="350"></figure> <br/></p>
+<p><img src="http://toughcactus.github.io/pic/角色和动画/实现Character跳跃/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpLoop-JumpEnd.png" alt="ABP_BaseCharacter-AnimGraph-JumpLoop-JumpEnd.png" width="800" /> <br/>
+<code>JumpLoop</code> 循环播放 <br/></p>
+</li>
+<li>
+<p><code>JumpEnd &gt; Walk</code> <br/>
+<code>JumpEnd</code> 将近结束 <br/></p>
+<p><img src="http://toughcactus.github.io/pic/角色和动画/实现Character跳跃/添加跳跃动画/ABP_BaseCharacter-AnimGraph-JumpEnd-Walk.png" alt="ABP_BaseCharacter-AnimGraph-JumpEnd-Walk.png" width="800" /> <br/>
+<code>JumpEnd</code> 只播放一次 <br/></p>
+</li>
+</ul>
+</li>
+</ol>
+<h3 id="三-设置-state-输入动画">三、设置 <code>State</code> 输入动画 <a href="#%e4%b8%89-%e8%ae%be%e7%bd%ae-state-%e8%be%93%e5%85%a5%e5%8a%a8%e7%94%bb" class="anchor" aria-hidden="true">#</a></h3>
+<p>拿 <code>JumpStart</code> 状态举例 <br/>
+<code>选中JumpStart动画 &gt; Details &gt; Settings &gt; LoopAnimation</code> <br/>
+默认循环播放动画 <br/></p>
+<p>
+<figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/ABP_BaseCharacter-AnimGraph-Locomotion-JumpStart.png" width="1000"></figure> <br/></p>
+<ul>
+<li>设置 <code>JumpStart</code> <code>JumpEnd</code> <code>JumpLoop</code> 的 <code>LoopAnimation</code> <br/>
+设计 <code>Jump</code> 动画时， <code>JumpStart</code> 和 <code>JumpEnd</code> 只播放一次， <code>JumpLoop</code> 可循环。 <br/>
+如此设置还可修复Character跳跃时的卡顿 <br/></li>
+</ul>
+<h3 id="四-添加楼梯-查看-jump-三阶段是否正常显示">四、添加楼梯，查看 <code>Jump</code> 三阶段是否正常显示 <a href="#%e5%9b%9b-%e6%b7%bb%e5%8a%a0%e6%a5%bc%e6%a2%af-%e6%9f%a5%e7%9c%8b-jump-%e4%b8%89%e9%98%b6%e6%ae%b5%e6%98%af%e5%90%a6%e6%ad%a3%e5%b8%b8%e6%98%be%e7%a4%ba" class="anchor" aria-hidden="true">#</a></h3>
+<ol>
+<li>
+<p>添加楼梯 <br/>
+<code>PlaceActors &gt; Geometry &gt; LinearStair</code> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/LevelEditor-%e6%b7%bb%e5%8a%a0%e6%a5%bc%e6%a2%af.png" width="200"></figure> <br/></p>
+</li>
+<li>
+<p>设置阶数 <br/>
+<code>选中LinearStairBrush &gt; Details &gt; BrushSettings &gt; NumSteps</code> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%b7%b3%e8%b7%83/%e6%b7%bb%e5%8a%a0%e8%b7%b3%e8%b7%83%e5%8a%a8%e7%94%bb/LevelEditor-Details-%e8%ae%be%e7%bd%ae%e6%a5%bc%e6%a2%af%e9%98%b6%e6%95%b0.png" width="300"></figure> <br/></p>
+</li>
+</ol>
+<p><code>Character</code> 从楼梯跳到平面时，一直保持 <code>JumpLoop</code> <br/></p>
+<h3 id="五-跑步时跳跃-落地平滑">五、跑步时跳跃，落地平滑 <a href="#%e4%ba%94-%e8%b7%91%e6%ad%a5%e6%97%b6%e8%b7%b3%e8%b7%83-%e8%90%bd%e5%9c%b0%e5%b9%b3%e6%bb%91" class="anchor" aria-hidden="true">#</a></h3>
+<p>可以减少 <code>JumpEnd &gt; Walk</code> 的 <code>TimeRemaining</code> 来缩短平滑 <br/></p>
+<h3 id="六-跳跃高度">六、跳跃高度 <a href="#%e5%85%ad-%e8%b7%b3%e8%b7%83%e9%ab%98%e5%ba%a6" class="anchor" aria-hidden="true">#</a></h3>
+<p><code>BP_STBaseCharacter</code> <br/></p>
+<p><img src="http://toughcactus.github.io/pic/角色和动画/实现Character跳跃/添加跳跃动画/BP_STBaseCharacter-CharacterMovement-Dtails-JumpZVelocity.png" alt="BP_STBaseCharacter-CharacterMovement-Dtails-JumpZVelocity.png" width="1200" /> <br/>
+<code>JumpZVelocity</code> 和 <code>JumpStart</code> 的时长有关 <br/>
+<code>JumpLoop</code> 动画更适合从临界点落下 <br/></p>
+
+			<div class="page-footer-meta d-flex flex-column flex-md-row justify-content-between">
+				</div>
+			<div class="docs-navigation d-flex justify-content-between">
+	
+	<a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/">
+			<div class="card my-1">
+				<div class="card-body py-2">
+					&larr; 自动治疗
+				</div>
+			</div>
+		</a>
+	<a class="ms-auto" href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/">
+			<div class="card my-1">
+				<div class="card-body py-2">
+					高处坠落伤害 &rarr;
+				</div>
+			</div>
+		</a>
+	</div>
+
+			
+		</main>
+	</div>
+
+    </div>
+  </div>
+  
+  
+  
+  
+  <footer class="footer text-muted">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-8 order-last order-lg-first">
+        <ul class="list-inline">
+          <li class="list-inline-item">Powered by <a class="text-muted" href="https://github.com/">Github</a>, <a class="text-muted" href="https://gohugo.io/">Hugo</a>, and <a class="text-muted" href="https://getdoks.org/">Doks</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-8 order-first order-lg-last text-lg-end">
+        <ul class="list-inline">
+          </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+  
+
+<script src="/js/bootstrap.min.650aeec64c81d69d4c0850fc73c93da3f0330cec0a27772feed7f90f60baa5f47f1c45687d71914bdafd1c4e860d40f6dc08ede27a2f08431ff929c9a2d24621.js" integrity="sha512-ZQruxkyB1p1MCFD8c8k9o/AzDOwKJ3cv7tf5D2C6pfR/HEVofXGRS9r9HE6GDUD23Ajt4novCEMf&#43;SnJotJGIQ==" crossorigin="anonymous" defer></script>
+  <script src="/js/highlight.min.836e9b5b74e0d2b8c7e9ff6d89ea27207cda92009d199c018c08c620f11bbfa46937a66603548a63af1840fce1d731b18d96c2d08bf7f5a51ecfd8b363d7d2b2.js" integrity="sha512-g26bW3Tg0rjH6f9tieonIHzakgCdGZwBjAjGIPEbv6RpN6ZmA1SKY68YQPzh1zGxjZbC0Iv39aUez9izY9fSsg==" crossorigin="anonymous" defer></script>
+  <script src="/main.min.cb2e2ebbf2e4002f3117addc33582923b2b3ae5265c22944cd117ebec7abe61c170417c4506d7a0f8f0fc9053dfdf441421d53601ac467042ff3d06ec0ba07fa.js" integrity="sha512-yy4uu/LkAC8xF63cM1gpI7KzrlJlwilEzRF&#43;vser5hwXBBfEUG16D48PyQU9/fRBQh1TYBrEZwQv89BuwLoH&#43;g==" crossorigin="anonymous" defer></script>
+  <script src="https://toughcactus.github.io/index.min.2cb492289a7108e77de60b162f3cfe62dda02b17f8b0d3498591d0854d6c8ba3b6e64d18ffdb3261ee77e359b89a5beb6ecf6733e10f06bb44f1e228194c6943.js" integrity="sha512-LLSSKJpxCOd95gsWLzz&#43;Yt2gKxf4sNNJhZHQhU1si6O25k0Y/9syYe5341m4mlvrbs9nM&#43;EPBrtE8eIoGUxpQw==" crossorigin="anonymous" defer></script>
+  
+  
+</body>
+
+</html>

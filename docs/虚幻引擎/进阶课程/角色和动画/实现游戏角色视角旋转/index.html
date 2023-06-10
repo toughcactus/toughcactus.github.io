@@ -1,0 +1,1926 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="preload" as="font" href="https://toughcactus.github.io/fonts/vendor/jost/jost-v4-latin-regular.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="https://toughcactus.github.io/fonts/vendor/jost/jost-v4-latin-500.woff2" type="font/woff2" crossorigin>
+<link rel="preload" as="font" href="https://toughcactus.github.io/fonts/vendor/jost/jost-v4-latin-700.woff2" type="font/woff2" crossorigin>
+
+  <script>(()=>{var t=window.matchMedia&&window.matchMedia("(prefers-color-scheme: dark)").matches,e=localStorage.getItem("theme");t&&e===null&&(localStorage.setItem("theme","dark"),document.documentElement.setAttribute("data-dark-mode","")),t&&e==="dark"&&document.documentElement.setAttribute("data-dark-mode",""),e==="dark"&&document.documentElement.setAttribute("data-dark-mode","")})()</script>
+
+  <link rel="stylesheet" href="https://toughcactus.github.io/main.af421a28c1a5ddf1ca8a3bad399db73f7201c97bfc01e5cb9ae6831c76af3199c990301ccee268e6e41b03d912112a014ecbccbd5e6c1111ee7661a1068c6bb5.css" integrity="sha512-r0IaKMGl3fHKijutOZ23P3IByXv8AeXLmuaDHHavMZnJkDAczuJo5uQbA9kSESoBTsvMvV5sERHudmGhBoxrtQ==" crossorigin="anonymous">
+<noscript><style>img.lazyload { display: none; }</style></noscript>
+  <meta name="robots" content="index, follow">
+    <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+    <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+  <title>实现游戏角色视角旋转 - ToughCactus</title>
+<meta name="description" content="Part 1 绑定键位 # 虚幻编辑器 项目设置 &amp;gt; Engine &amp;gt; Input 轴映射 1. 抬头，低头 # 鼠标垂直方向的移动决定抬头角度，绕Y轴旋转 函数描述 键位 LookUp MouseY 2. 环顾四周 # 鼠标水平方向的移动决定身体旋转角度，绕Z轴旋转 函数描述 键位 TurnAround MouseX Part 2 实现视角旋转逻辑1 # C&#43;&#43; 一、搭建框架 # 添加空函数并绑定函数描述和回调函数，之后再实现函数逻辑 添加空函数 函数成员 函数体为空 private void LookUp(float Amount); void TurnAround(float Amount); 绑定函数描述和回调函数 函数成员 private 在SetupPlayerInputComponent中调用 void ASTBaseCharacter::InitCameraRotate(UInputComponent* PlayerInputComponent) { PlayerInputComponent-&amp;gt;BindAxis(&amp;quot;LookUp&amp;quot;, this, &amp;amp;ASTBaseCharacter::LookUp); PlayerInputComponent-&amp;gt;BindAxis(&amp;quot;TurnAround&amp;quot;, this, &amp;amp;ASTBaseCharacter::TurnAround); } 二、添加静态日志类型 # DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter, All, All) 三、实现回调函数 # void ASTBaseCharacter::LookUp(float Amount) { AddControllerPitchInput(Amount); UE_LOG(LogBaseCharacter, Log, TEXT(&amp;quot;LookUp Amount: %f&amp;quot;), Amount); } void ASTBaseCharacter::TurnAround(float Amount) { AddControllerYawInput(Amount); } Part 3 配置 Camera 组件在垂直方向上移动 # 虚幻编辑器 水平移动鼠标时，游戏角色和摄像机一齐左右旋转 垂直移动鼠标时，游戏角色无旋转 一、使 Camera 组件跟随 Pawn 旋转 # BP_STBaseCharacter 选中Camera组件 &amp;gt; 细节面板 &amp;gt; CameraOptions &amp;gt; 使能UsePawnControlRotation 保存并编译 此时向下移动鼠标时，摄像机向上旋转，向上移动鼠标时，摄像机向下旋转 查看日志，鼠标向上移动时，Amount的确是正数 二、调试 InputPitchScale # BP_PlayerController 参考 引擎版本 5.">
+  <link rel="canonical" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/">
+<meta property="og:locale" content="en_US">
+<meta property="og:type" content="article">
+<meta property="og:title" content="实现游戏角色视角旋转">
+<meta property="og:description" content="Part 1 绑定键位 # 虚幻编辑器 项目设置 &gt; Engine &gt; Input 轴映射 1. 抬头，低头 # 鼠标垂直方向的移动决定抬头角度，绕Y轴旋转 函数描述 键位 LookUp MouseY 2. 环顾四周 # 鼠标水平方向的移动决定身体旋转角度，绕Z轴旋转 函数描述 键位 TurnAround MouseX Part 2 实现视角旋转逻辑1 # C&#43;&#43; 一、搭建框架 # 添加空函数并绑定函数描述和回调函数，之后再实现函数逻辑 添加空函数 函数成员 函数体为空 private void LookUp(float Amount); void TurnAround(float Amount); 绑定函数描述和回调函数 函数成员 private 在SetupPlayerInputComponent中调用 void ASTBaseCharacter::InitCameraRotate(UInputComponent* PlayerInputComponent) { PlayerInputComponent-&gt;BindAxis(&quot;LookUp&quot;, this, &amp;ASTBaseCharacter::LookUp); PlayerInputComponent-&gt;BindAxis(&quot;TurnAround&quot;, this, &amp;ASTBaseCharacter::TurnAround); } 二、添加静态日志类型 # DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter, All, All) 三、实现回调函数 # void ASTBaseCharacter::LookUp(float Amount) { AddControllerPitchInput(Amount); UE_LOG(LogBaseCharacter, Log, TEXT(&quot;LookUp Amount: %f&quot;), Amount); } void ASTBaseCharacter::TurnAround(float Amount) { AddControllerYawInput(Amount); } Part 3 配置 Camera 组件在垂直方向上移动 # 虚幻编辑器 水平移动鼠标时，游戏角色和摄像机一齐左右旋转 垂直移动鼠标时，游戏角色无旋转 一、使 Camera 组件跟随 Pawn 旋转 # BP_STBaseCharacter 选中Camera组件 &gt; 细节面板 &gt; CameraOptions &gt; 使能UsePawnControlRotation 保存并编译 此时向下移动鼠标时，摄像机向上旋转，向上移动鼠标时，摄像机向下旋转 查看日志，鼠标向上移动时，Amount的确是正数 二、调试 InputPitchScale # BP_PlayerController 参考 引擎版本 5.">
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/">
+<meta property="og:site_name" content="ToughCactus">
+<meta property="article:published_time" content="2023-06-11T06:17:23+00:00">
+  <meta property="article:modified_time" content="2023-06-11T07:20:19+08:00">
+  
+  <meta property="og:image" content="https://toughcactus.github.io/doks.png"/>
+      <meta property="og:image:alt" content="ToughCactus">
+    
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:site" content="@getdoks">
+<meta name="twitter:creator" content="@henkverlinde">
+<meta name="twitter:title" content="实现游戏角色视角旋转">
+<meta name="twitter:description" content="">
+<meta name="twitter:image" content="https://toughcactus.github.io/doks.png">
+    <meta name="twitter:image:alt" content="实现游戏角色视角旋转">
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+        "@id": "https://toughcactus.github.io/#/schema/organization/1",
+      "name": "Doks",
+      "url": "https://toughcactus.github.io/",
+      "sameAs": [
+        "https://twitter.com/getdoks"
+        , "https://github.com/h-enk/doks"
+        ],
+      "logo": {
+          "@type": "ImageObject",
+          "@id": "https://toughcactus.github.io/#/schema/image/1",
+          "url": "https://toughcactus.github.io/logo-doks.png",
+          "width":  512 ,
+          "height":  512 ,
+          "caption": "Doks"
+        },
+        "image": {
+          "@id": "https://toughcactus.github.io/#/schema/image/1"
+        }
+      },
+    {
+      "@type": "WebSite",
+      "@id": "https://toughcactus.github.io/#/schema/website/1",
+      "url": "https://toughcactus.github.io/",
+      "name": "ToughCactus",
+      "description": "Doks is a Hugo theme for building secure, fast, and SEO-ready documentation websites, which you can easily update and customize.",
+      "publisher": {
+          "@id": "https://toughcactus.github.io/#/schema/organization/1"
+        }
+      },
+    {
+      "@type": "WebPage",
+      "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/",
+      "url": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/",
+      "name": "实现游戏角色视角旋转",
+      "description": "",
+      "isPartOf": {
+        "@id": "https://toughcactus.github.io/#/schema/website/1"
+      },
+      "about": {
+          "@id": "https://toughcactus.github.io/#/schema/organization/1"
+        },
+      "datePublished": "2023-06-11T06:17:23CET",
+      "dateModified": "2023-06-11T07:20:19CET",
+      "breadcrumb": {
+        "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/#/schema/breadcrumb/1"
+      },
+      "primaryImageOfPage": {
+        "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/#/schema/image/2"
+      },
+      "inLanguage": "en-US",
+      "potentialAction": [{
+        "@type": "ReadAction", "target": ["https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/"]
+      }]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/#/schema/breadcrumb/1",
+      "name": "Breadcrumbs",
+      "itemListElement": [{
+        "@type": "ListItem",
+        "position":  1 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://toughcactus.github.io/",
+          "url": "https://toughcactus.github.io/",
+          "name": ""
+          }
+        },{
+        "@type": "ListItem",
+        "position":  2 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://toughcactus.github.io/docs/",
+          "url": "https://toughcactus.github.io/docs/",
+          "name": "Docs"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  3 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/",
+          "url": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/",
+          "name": "% E8%99%9 A% E5% B9% Bb% E5% Bc%95% E6%93%8 E"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  4 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/",
+          "url": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/",
+          "name": "% E8% Bf%9 B% E9%98% B6% E8% Af% Be% E7% A8%8 B"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  5 ,
+        "item": {
+          "@type": "WebPage",
+          "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/",
+          "url": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/",
+          "name": "% E8% A7%92% E8%89% B2% E5%92%8 C% E5%8 A% A8% E7%94% Bb"
+          }
+        },{
+        "@type": "ListItem",
+        "position":  6 ,
+        "item": {
+          "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/"
+          }
+        }]
+    },
+
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Article",
+          "@id": "https://toughcactus.github.io/#/schema/article/1",
+          "headline": "实现游戏角色视角旋转",
+          "description": "",
+          "isPartOf": {
+            "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/"
+          },
+          "mainEntityOfPage": {
+            "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/"
+          },
+          "datePublished": "2023-06-11T06:17:23CET",
+          "dateModified": "2023-06-11T07:20:19CET",
+          "author": {
+            "@id": "https://toughcactus.github.io/#/schema/person/2"
+          },
+          "publisher": {
+              "@id": "https://toughcactus.github.io/#/schema/organization/1"
+            },
+          "image": {
+            "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/#/schema/image/2"
+          }
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "https://toughcactus.github.io/#/schema/person/2",
+          "name": "Henk Verlinde",
+          "sameAs": [
+            "https://twitter.com/henkverlinde"
+            , "https://www.linkedin.com/in/henkverlinde/"
+            , "https://github.com/h-enk"
+            ]
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ImageObject",
+          "@id": "https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/#/schema/image/2",
+          "url": "https://toughcactus.github.io/doks.png",
+          "contentUrl": "https://toughcactus.github.io/doks.png",
+          "caption": "实现游戏角色视角旋转"
+        }
+      ]
+    }
+
+  ]
+}
+</script>
+
+  <meta name="theme-color" content="#fff">
+<link rel="icon" href="https://toughcactus.github.io/favicon.ico" sizes="any">
+<link rel="icon" type="image/svg+xml" href="https://toughcactus.github.io/favicon.svg">
+<link rel="apple-touch-icon" sizes="180x180" href="https://toughcactus.github.io/apple-touch-icon.png">
+<link rel="icon" type="image/png" sizes="32x32" href="https://toughcactus.github.io/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="https://toughcactus.github.io/favicon-16x16.png">
+<link rel="manifest" crossorigin="use-credentials" href="https://toughcactus.github.io/site.webmanifest">
+
+  
+
+</head>
+
+<body class="">
+  <div class="header-bar"></div>
+
+<header class="navbar navbar-expand-lg navbar-light doks-navbar">
+  <nav class="container-fluid flex-wrap flex-lg-nowrap" aria-label="Main navigation">
+
+    <a class="navbar-brand order-0" href="/" aria-label="ToughCactus">
+      ToughCactus
+    </a>
+
+    <button class="btn btn-link order-0 ms-auto d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasExample" aria-controls="offcanvasExample">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg>
+    </button>
+    <div class="offcanvas offcanvas-start d-lg-none" tabindex="-1" id="offcanvasExample" aria-labelledby="offcanvasExampleLabel">
+      <div class="header-bar"></div>
+      <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasExampleLabel">Browse docs</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
+      </div>
+      <div class="offcanvas-body">
+        <aside class="doks-sidebar mt-n3">
+          <nav id="doks-docs-nav" aria-label="Tertiary navigation">
+            
+<ul class="list-unstyled collapsible-sidebar">
+  
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-b1452797227c8dd79ace0e323009d662" aria-expanded="true">
+          虚幻引擎
+        </button>
+        <div class="collapse show" id="section-b1452797227c8dd79ace0e323009d662">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-cd4ac15c94c24f49288627d9c6ce70ce" aria-expanded="false">
+                    基础课程
+                  </button>
+                  <div class="collapse" id="section-cd4ac15c94c24f49288627d9c6ce70ce">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-4696f1ad74f4d52f8329560155ef762b" aria-expanded="true">
+                    进阶课程
+                  </button>
+                  <div class="collapse show" id="section-4696f1ad74f4d52f8329560155ef762b">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-05d87cb41d01c4048ccdb94056a90119" aria-expanded="true">
+                              角色和动画
+                            </button>
+                            <div class="collapse show" id="section-05d87cb41d01c4048ccdb94056a90119">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E8%BF%90%E8%A1%8Cshootergame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/">运行ShooterGame示例项目</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%88%9D%E5%A7%8B%E5%8C%96shoottraining%E9%A1%B9%E7%9B%AE/">初始化ShootTraining项目</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">代码规范</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/">为游戏角色绑定模型</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/">实现游戏角色前后左右移动</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/">实现游戏角色视角旋转</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/">为游戏角色添加向前跑步动画</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/">实现游戏角色跳跃</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%91%E6%AD%A5/">实现游戏角色跑步</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E6%B7%BB%E5%8A%A0%E8%B5%B0%E8%B7%AF%E6%97%B6%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/">添加走路时转向动画</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/">打包游戏</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></li>
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-b11d90242b17900ec3540f79bdc2cb0f" aria-expanded="false">
+                              健康系统
+                            </button>
+                            <div class="collapse" id="section-b11d90242b17900ec3540f79bdc2cb0f">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E6%97%B6%E6%98%BE%E7%A4%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%94%9F%E5%91%BD%E5%80%BC/">实时显示游戏角色生命值</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/">计算伤害</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/">模拟榴弹爆炸</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/">使用伤害类型</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/">为游戏角色添加死亡逻辑</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%B7%BB%E5%8A%A0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/">添加观察视角</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/">自动治疗</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/">高处坠落伤害</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/">打包游戏和收尾</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></li>
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-44a3d9a4d97f8fd2a1560251279110d1" aria-expanded="false">
+                              武器
+                            </button>
+                            <div class="collapse" id="section-44a3d9a4d97f8fd2a1560251279110d1">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-3bd2c20a732475803482c020650a0852" aria-expanded="false">
+          🧱
+        </button>
+        <div class="collapse" id="section-3bd2c20a732475803482c020650a0852">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/brick/%E7%BB%88%E7%AB%AF/">终端</a></li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-c31f48f84ef207e66a03c015a7243b43" aria-expanded="false">
+          分享
+        </button>
+        <div class="collapse" id="section-c31f48f84ef207e66a03c015a7243b43">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-169bafefac5c96e7ad8b1714ec46c585" aria-expanded="false">
+                    Emacs
+                  </button>
+                  <div class="collapse" id="section-169bafefac5c96e7ad8b1714ec46c585">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E5%BF%AB%E6%8D%B7%E9%94%AE/">快捷键</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/org-mode/">org-mode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E6%8F%92%E4%BB%B6%E7%AF%87-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">插件篇 | 文件管理</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="false">
+                    开发语言
+                  </button>
+                  <div class="collapse" id="section-262a78b7bebf63c3eaefb8b7370826cb">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/">Shell脚本</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/elisp/">Elisp</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/">Markdown</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">JavaScrpit</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-2c509530bf439a36168a86e21c160c06" aria-expanded="false">
+                    开发工具
+                  </button>
+                  <div class="collapse" id="section-2c509530bf439a36168a86e21c160c06">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/">Git</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">Chrome</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode/">VSCode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/makefile/">Makefile</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/sublime/">Sublime</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-0a5b7edb55b772c60bfa8af868b679cf" aria-expanded="false">
+                    MacOS
+                  </button>
+                  <div class="collapse" id="section-0a5b7edb55b772c60bfa8af868b679cf">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/macos/%E7%BB%88%E7%AB%AF/">终端</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="false">
+                    Hugo
+                  </button>
+                  <div class="collapse" id="section-1b3840b0b70d91c17e70014c8537dbba">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">搭建个人博客</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9/">使用ox-hugo设置选项</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">Doks主题</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">文章目录跟随文章内容滚动</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+  
+</ul>
+
+          </nav>
+        </aside>
+      </div>
+    </div>
+    <button class="btn btn-menu order-2 d-block d-lg-none" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasDoks" aria-controls="offcanvasDoks" aria-label="Open main menu">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+    </button>
+    <div class="offcanvas offcanvas-end border-0 py-lg-1" tabindex="-1" id="offcanvasDoks" data-bs-backdrop="true" aria-labelledby="offcanvasDoksLabel">
+      <div class="header-bar d-lg-none"></div>
+      <div class="offcanvas-header d-lg-none">
+        <h2 class="h5 offcanvas-title ps-2" id="offcanvasDoksLabel"><a class="text-dark" href="/">ToughCactus</a></h2>
+        <button type="button" class="btn-close text-reset me-2" data-bs-dismiss="offcanvas" aria-label="Close main menu"></button>
+      </div>
+      <div class="offcanvas-body p-4 p-lg-0">
+        <ul class="nav flex-column flex-lg-row align-items-lg-center mt-2 mt-lg-0 ms-lg-2 me-lg-auto">
+              <li class="nav-item">
+                <a class="nav-link ps-0 py-1" href="/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">笔记</a>
+              </li>
+            
+          
+              <li class="nav-item">
+                <a class="nav-link ps-0 py-1" href="/blog/">日志</a>
+              </li>
+            
+          
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle ps-0 py-1" href="#" id="navbarDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                  关于
+                  <span class="dropdown-caret"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg></span>
+                </a>
+                <ul class="dropdown-menu dropdown-menu-main shadow rounded border-0" aria-labelledby="navbarDropdownMenuLink">
+                  <li>
+                      <a class="dropdown-item" href="/about/skill-tree/">技能树</a>
+                    </li>
+                  <li>
+                      <a class="dropdown-item" href="/about/hobby/">Hobby</a>
+                    </li>
+                  </ul>
+              </li>
+            
+          </ul>
+
+        <hr class="text-black-50 my-4 d-lg-none">
+        <form class="doks-search position-relative flex-grow-1 ms-lg-auto me-lg-2">
+          <input id="search" class="form-control is-search" type="search" placeholder="Search docs..." aria-label="Search docs..." autocomplete="off">
+          <div id="suggestions" class="shadow bg-white rounded d-none"></div>
+        </form>
+        <hr class="text-black-50 my-4 d-lg-none">
+        <ul class="nav flex-column flex-lg-row">
+          </ul>
+
+        <hr class="text-black-50 my-4 d-lg-none">
+        <button id="mode" class="btn btn-link" type="button" aria-label="Toggle user interface mode">
+          <span class="toggle-dark"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-moon"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path></svg></span>
+          <span class="toggle-light"><svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-sun"><circle cx="12" cy="12" r="5"></circle><line x1="12" y1="1" x2="12" y2="3"></line><line x1="12" y1="21" x2="12" y2="23"></line><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line><line x1="1" y1="12" x2="3" y2="12"></line><line x1="21" y1="12" x2="23" y2="12"></line><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line></svg></span>
+        </button>
+        </div>
+    </div>
+  </nav>
+</header>
+
+<div class="container-fluid">
+  <aside class="doks-sidebar">
+    <nav id="doks-docs-nav" class="collapse d-lg-none" aria-label="Tertiary navigation">
+      
+<ul class="list-unstyled collapsible-sidebar">
+  
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-b1452797227c8dd79ace0e323009d662" aria-expanded="true">
+          虚幻引擎
+        </button>
+        <div class="collapse show" id="section-b1452797227c8dd79ace0e323009d662">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-cd4ac15c94c24f49288627d9c6ce70ce" aria-expanded="false">
+                    基础课程
+                  </button>
+                  <div class="collapse" id="section-cd4ac15c94c24f49288627d9c6ce70ce">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-4696f1ad74f4d52f8329560155ef762b" aria-expanded="true">
+                    进阶课程
+                  </button>
+                  <div class="collapse show" id="section-4696f1ad74f4d52f8329560155ef762b">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-05d87cb41d01c4048ccdb94056a90119" aria-expanded="true">
+                              角色和动画
+                            </button>
+                            <div class="collapse show" id="section-05d87cb41d01c4048ccdb94056a90119">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E8%BF%90%E8%A1%8Cshootergame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/">运行ShooterGame示例项目</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%88%9D%E5%A7%8B%E5%8C%96shoottraining%E9%A1%B9%E7%9B%AE/">初始化ShootTraining项目</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">代码规范</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/">为游戏角色绑定模型</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/">实现游戏角色前后左右移动</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/">实现游戏角色视角旋转</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/">为游戏角色添加向前跑步动画</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/">实现游戏角色跳跃</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%91%E6%AD%A5/">实现游戏角色跑步</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E6%B7%BB%E5%8A%A0%E8%B5%B0%E8%B7%AF%E6%97%B6%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/">添加走路时转向动画</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/">打包游戏</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></li>
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-b11d90242b17900ec3540f79bdc2cb0f" aria-expanded="false">
+                              健康系统
+                            </button>
+                            <div class="collapse" id="section-b11d90242b17900ec3540f79bdc2cb0f">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E6%97%B6%E6%98%BE%E7%A4%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%94%9F%E5%91%BD%E5%80%BC/">实时显示游戏角色生命值</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/">计算伤害</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/">模拟榴弹爆炸</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/">使用伤害类型</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/">为游戏角色添加死亡逻辑</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%B7%BB%E5%8A%A0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/">添加观察视角</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/">自动治疗</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/">高处坠落伤害</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/">打包游戏和收尾</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></li>
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-44a3d9a4d97f8fd2a1560251279110d1" aria-expanded="false">
+                              武器
+                            </button>
+                            <div class="collapse" id="section-44a3d9a4d97f8fd2a1560251279110d1">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-3bd2c20a732475803482c020650a0852" aria-expanded="false">
+          🧱
+        </button>
+        <div class="collapse" id="section-3bd2c20a732475803482c020650a0852">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/brick/%E7%BB%88%E7%AB%AF/">终端</a></li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-c31f48f84ef207e66a03c015a7243b43" aria-expanded="false">
+          分享
+        </button>
+        <div class="collapse" id="section-c31f48f84ef207e66a03c015a7243b43">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-169bafefac5c96e7ad8b1714ec46c585" aria-expanded="false">
+                    Emacs
+                  </button>
+                  <div class="collapse" id="section-169bafefac5c96e7ad8b1714ec46c585">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E5%BF%AB%E6%8D%B7%E9%94%AE/">快捷键</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/org-mode/">org-mode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E6%8F%92%E4%BB%B6%E7%AF%87-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">插件篇 | 文件管理</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="false">
+                    开发语言
+                  </button>
+                  <div class="collapse" id="section-262a78b7bebf63c3eaefb8b7370826cb">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/">Shell脚本</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/elisp/">Elisp</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/">Markdown</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">JavaScrpit</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-2c509530bf439a36168a86e21c160c06" aria-expanded="false">
+                    开发工具
+                  </button>
+                  <div class="collapse" id="section-2c509530bf439a36168a86e21c160c06">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/">Git</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">Chrome</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode/">VSCode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/makefile/">Makefile</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/sublime/">Sublime</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-0a5b7edb55b772c60bfa8af868b679cf" aria-expanded="false">
+                    MacOS
+                  </button>
+                  <div class="collapse" id="section-0a5b7edb55b772c60bfa8af868b679cf">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/macos/%E7%BB%88%E7%AB%AF/">终端</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="false">
+                    Hugo
+                  </button>
+                  <div class="collapse" id="section-1b3840b0b70d91c17e70014c8537dbba">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">搭建个人博客</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9/">使用ox-hugo设置选项</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">Doks主题</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">文章目录跟随文章内容滚动</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+  
+</ul>
+
+    </nav>
+  </aside>
+</div>
+
+
+  <div class="wrap container-fluid" role="document">
+    <div class="content">
+      
+	<div class="row flex-xl-nowrap">
+		<div class="col-lg-5 col-xl-4 docs-sidebar docs-sidebar-top d-none d-lg-block">
+			<nav class="docs-links" aria-label="Main navigation">
+				
+<ul class="list-unstyled collapsible-sidebar">
+  
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-b1452797227c8dd79ace0e323009d662" aria-expanded="true">
+          虚幻引擎
+        </button>
+        <div class="collapse show" id="section-b1452797227c8dd79ace0e323009d662">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-cd4ac15c94c24f49288627d9c6ce70ce" aria-expanded="false">
+                    基础课程
+                  </button>
+                  <div class="collapse" id="section-cd4ac15c94c24f49288627d9c6ce70ce">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-4696f1ad74f4d52f8329560155ef762b" aria-expanded="true">
+                    进阶课程
+                  </button>
+                  <div class="collapse show" id="section-4696f1ad74f4d52f8329560155ef762b">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-05d87cb41d01c4048ccdb94056a90119" aria-expanded="true">
+                              角色和动画
+                            </button>
+                            <div class="collapse show" id="section-05d87cb41d01c4048ccdb94056a90119">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E8%BF%90%E8%A1%8Cshootergame%E7%A4%BA%E4%BE%8B%E9%A1%B9%E7%9B%AE/">运行ShooterGame示例项目</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%88%9D%E5%A7%8B%E5%8C%96shoottraining%E9%A1%B9%E7%9B%AE/">初始化ShootTraining项目</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%BB%A3%E7%A0%81%E8%A7%84%E8%8C%83/">代码规范</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%BB%91%E5%AE%9A%E6%A8%A1%E5%9E%8B/">为游戏角色绑定模型</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E5%89%8D%E5%90%8E%E5%B7%A6%E5%8F%B3%E7%A7%BB%E5%8A%A8/">实现游戏角色前后左右移动</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%A7%86%E8%A7%92%E6%97%8B%E8%BD%AC/">实现游戏角色视角旋转</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E5%90%91%E5%89%8D%E8%B7%91%E6%AD%A5%E5%8A%A8%E7%94%BB/">为游戏角色添加向前跑步动画</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%B3%E8%B7%83/">实现游戏角色跳跃</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E5%AE%9E%E7%8E%B0%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E8%B7%91%E6%AD%A5/">实现游戏角色跑步</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E6%B7%BB%E5%8A%A0%E8%B5%B0%E8%B7%AF%E6%97%B6%E8%BD%AC%E5%90%91%E5%8A%A8%E7%94%BB/">添加走路时转向动画</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F/">打包游戏</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></li>
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-b11d90242b17900ec3540f79bdc2cb0f" aria-expanded="false">
+                              健康系统
+                            </button>
+                            <div class="collapse" id="section-b11d90242b17900ec3540f79bdc2cb0f">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E6%97%B6%E6%98%BE%E7%A4%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%94%9F%E5%91%BD%E5%80%BC/">实时显示游戏角色生命值</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/">计算伤害</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/">模拟榴弹爆炸</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/">使用伤害类型</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/">为游戏角色添加死亡逻辑</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%B7%BB%E5%8A%A0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/">添加观察视角</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/">自动治疗</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/">高处坠落伤害</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/">打包游戏和收尾</a></li>
+                                
+                                  
+                                  <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/">代码重构</a></li>
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                        
+                          
+                          <li class="my-1 ms-3">
+                            <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-44a3d9a4d97f8fd2a1560251279110d1" aria-expanded="false">
+                              武器
+                            </button>
+                            <div class="collapse" id="section-44a3d9a4d97f8fd2a1560251279110d1">
+                              <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                                
+                              </ul>
+                            </div>
+                          </li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-3bd2c20a732475803482c020650a0852" aria-expanded="false">
+          🧱
+        </button>
+        <div class="collapse" id="section-3bd2c20a732475803482c020650a0852">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/brick/%E7%BB%88%E7%AB%AF/">终端</a></li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+      
+      <li class="mb-1">
+        <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-c31f48f84ef207e66a03c015a7243b43" aria-expanded="false">
+          分享
+        </button>
+        <div class="collapse" id="section-c31f48f84ef207e66a03c015a7243b43">
+          <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-169bafefac5c96e7ad8b1714ec46c585" aria-expanded="false">
+                    Emacs
+                  </button>
+                  <div class="collapse" id="section-169bafefac5c96e7ad8b1714ec46c585">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E5%BF%AB%E6%8D%B7%E9%94%AE/">快捷键</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/org-mode/">org-mode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/emacs/%E6%8F%92%E4%BB%B6%E7%AF%87-%E6%96%87%E4%BB%B6%E7%AE%A1%E7%90%86/">插件篇 | 文件管理</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="false">
+                    开发语言
+                  </button>
+                  <div class="collapse" id="section-262a78b7bebf63c3eaefb8b7370826cb">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/bash/">Shell脚本</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/elisp/">Elisp</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/markdown/">Markdown</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">JavaScrpit</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-2c509530bf439a36168a86e21c160c06" aria-expanded="false">
+                    开发工具
+                  </button>
+                  <div class="collapse" id="section-2c509530bf439a36168a86e21c160c06">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/git/">Git</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">Chrome</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/vscode/">VSCode</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/makefile/">Makefile</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/sublime/">Sublime</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-0a5b7edb55b772c60bfa8af868b679cf" aria-expanded="false">
+                    MacOS
+                  </button>
+                  <div class="collapse" id="section-0a5b7edb55b772c60bfa8af868b679cf">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/macos/%E7%BB%88%E7%AB%AF/">终端</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+              
+                
+                <li class="my-1 ms-3">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="false">
+                    Hugo
+                  </button>
+                  <div class="collapse" id="section-1b3840b0b70d91c17e70014c8537dbba">
+                    <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">搭建个人博客</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E8%AE%BE%E7%BD%AE%E9%80%89%E9%A1%B9/">使用ox-hugo设置选项</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">Doks主题</a></li>
+                        
+                      
+                        
+                          
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">文章目录跟随文章内容滚动</a></li>
+                        
+                      
+                    </ul>
+                  </div>
+                </li>
+              
+            
+          </ul>
+        </div>
+      </li>
+    
+  
+</ul>
+
+			</nav>
+		</div>
+		<nav class="docs-toc docs-toc-top d-none d-xl-block col-xl-3" aria-label="Secondary navigation">
+			<div class="d-xl-none">
+  <button class="btn btn-outline-primary btn-sm doks-toc-toggle collapsed" type="button" data-bs-toggle="collapse"
+    data-bs-target="#onThisPage" aria-controls="doks-docs-nav" aria-expanded="false"
+    aria-label="Toggle On this page navigation">
+    <span>On this page</span>
+    <span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-expand"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <title>Expand</title>
+        <polyline points="7 13 12 18 17 13"></polyline>
+        <polyline points="7 6 12 11 17 6"></polyline>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-collapse"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <title>Collapse</title>
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+      </svg>
+    </span>
+  </button>
+  <div class="collapse" id="onThisPage">
+    <div class="card card-body mt-3 py-1">
+      <div class="page-links">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-绑定键位">Part 1 绑定键位</a>
+          <ul>
+            <li><a href="#1-dot-抬头-低头">1. 抬头，低头</a></li>
+            <li><a href="#2-dot-环顾四周">2. 环顾四周</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-2-实现视角旋转逻辑1">Part 2 实现视角旋转逻辑1</a>
+          <ul>
+            <li><a href="#一-搭建框架">一、搭建框架</a></li>
+            <li><a href="#二-添加静态日志类型">二、添加静态日志类型</a></li>
+            <li><a href="#三-实现回调函数">三、实现回调函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-配置-camera-组件在垂直方向上移动">Part 3 配置 <code>Camera</code> 组件在垂直方向上移动</a>
+          <ul>
+            <li><a href="#一-使-camera-组件跟随-pawn-旋转">一、使 <code>Camera</code> 组件跟随 <code>Pawn</code> 旋转</a></li>
+            <li><a href="#二-调试-inputpitchscale">二、调试 <code>InputPitchScale</code></a></li>
+            <li><a href="#三-将-lookup-的-scale-改为-1">三、将 <code>LookUp</code> 的 <code>Scale</code> 改为-1</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-4-添加-springarm-组件">Part 4 添加 <code>SpringArm</code> 组件</a></li>
+        <li><a href="#part-5-配置-springarm-组件">Part 5 配置 <code>SpringArm</code> 组件</a>
+          <ul>
+            <li><a href="#一-查看-springarm-组件">一、查看 <code>SpringArm</code> 组件</a></li>
+            <li><a href="#二-关于-busepawncontrolrotation">二、关于 <code>bUsePawnControlRotation</code></a></li>
+            <li><a href="#三-设置-springarm-组件和-camera-组件的相对变换">三、设置 <code>SpringArm</code> 组件和 <code>Camera</code> 组件的相对变换</a></li>
+            <li><a href="#四-camera-组件和-springarm-组件的-busepawncontrolrotation-生效问题">四、 <code>Camera</code> 组件和 <code>SpringArm</code> 组件的 <code>bUsePawnControlRotation</code> 生效问题</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-6-为-character-绑定动画">Part 6 为 <code>Character</code> 绑定动画</a>
+          <ul>
+            <li><a href="#一-绑定动画">一、绑定动画</a></li>
+            <li><a href="#二-效果图">二、效果图</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-7-实现视角旋转逻辑2">Part 7 实现视角旋转逻辑2</a>
+          <ul>
+            <li><a href="#一-比对-lookup-turnaround-addcontrollerpitchinput-和-addcontrolleryawinput">一、比对 <code>LookUp</code> <code>TurnAround</code> <code>AddControllerPitchInput</code> 和 <code>AddControllerYawInput</code></a></li>
+            <li><a href="#二-函数描述直接绑定-addcontrollerpitchinput-和-addcontrolleryawinput">二、函数描述直接绑定 <code>AddControllerPitchInput</code> 和 <code>AddControllerYawInput</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-links d-none d-xl-block">
+  <h3>On this page</h3>
+  <nav class="my-toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-绑定键位">Part 1 绑定键位</a>
+          <ul>
+            <li><a href="#1-dot-抬头-低头">1. 抬头，低头</a></li>
+            <li><a href="#2-dot-环顾四周">2. 环顾四周</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-2-实现视角旋转逻辑1">Part 2 实现视角旋转逻辑1</a>
+          <ul>
+            <li><a href="#一-搭建框架">一、搭建框架</a></li>
+            <li><a href="#二-添加静态日志类型">二、添加静态日志类型</a></li>
+            <li><a href="#三-实现回调函数">三、实现回调函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-配置-camera-组件在垂直方向上移动">Part 3 配置 <code>Camera</code> 组件在垂直方向上移动</a>
+          <ul>
+            <li><a href="#一-使-camera-组件跟随-pawn-旋转">一、使 <code>Camera</code> 组件跟随 <code>Pawn</code> 旋转</a></li>
+            <li><a href="#二-调试-inputpitchscale">二、调试 <code>InputPitchScale</code></a></li>
+            <li><a href="#三-将-lookup-的-scale-改为-1">三、将 <code>LookUp</code> 的 <code>Scale</code> 改为-1</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-4-添加-springarm-组件">Part 4 添加 <code>SpringArm</code> 组件</a></li>
+        <li><a href="#part-5-配置-springarm-组件">Part 5 配置 <code>SpringArm</code> 组件</a>
+          <ul>
+            <li><a href="#一-查看-springarm-组件">一、查看 <code>SpringArm</code> 组件</a></li>
+            <li><a href="#二-关于-busepawncontrolrotation">二、关于 <code>bUsePawnControlRotation</code></a></li>
+            <li><a href="#三-设置-springarm-组件和-camera-组件的相对变换">三、设置 <code>SpringArm</code> 组件和 <code>Camera</code> 组件的相对变换</a></li>
+            <li><a href="#四-camera-组件和-springarm-组件的-busepawncontrolrotation-生效问题">四、 <code>Camera</code> 组件和 <code>SpringArm</code> 组件的 <code>bUsePawnControlRotation</code> 生效问题</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-6-为-character-绑定动画">Part 6 为 <code>Character</code> 绑定动画</a>
+          <ul>
+            <li><a href="#一-绑定动画">一、绑定动画</a></li>
+            <li><a href="#二-效果图">二、效果图</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-7-实现视角旋转逻辑2">Part 7 实现视角旋转逻辑2</a>
+          <ul>
+            <li><a href="#一-比对-lookup-turnaround-addcontrollerpitchinput-和-addcontrolleryawinput">一、比对 <code>LookUp</code> <code>TurnAround</code> <code>AddControllerPitchInput</code> 和 <code>AddControllerYawInput</code></a></li>
+            <li><a href="#二-函数描述直接绑定-addcontrollerpitchinput-和-addcontrolleryawinput">二、函数描述直接绑定 <code>AddControllerPitchInput</code> 和 <code>AddControllerYawInput</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </nav>
+      </div>
+
+		</nav>
+		<main class="docs-content col-lg-11 col-xl-9 mx-xl-auto">
+		
+				<nav aria-label="breadcrumb">
+					<ol class="breadcrumb">
+						<li class="breadcrumb-item"><a href="/">Home</a></li>
+<li class="breadcrumb-item"><a href="/docs/">Docs</a></li>
+<li class="breadcrumb-item"><a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/">虚幻引擎</a></li>
+<li class="breadcrumb-item"><a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/">进阶课程</a></li>
+<li class="breadcrumb-item"><a href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E8%A7%92%E8%89%B2%E5%92%8C%E5%8A%A8%E7%94%BB/">角色和动画</a></li>
+<li class="breadcrumb-item active" aria-current="page">实现游戏角色视角旋转</li>
+					</ol>
+				</nav>
+			
+			<h1>实现游戏角色视角旋转</h1>
+			<p class="lead"></p>
+			<nav class="d-xl-none" aria-label="Quaternary navigation">
+				<div class="d-xl-none">
+  <button class="btn btn-outline-primary btn-sm doks-toc-toggle collapsed" type="button" data-bs-toggle="collapse"
+    data-bs-target="#onThisPage" aria-controls="doks-docs-nav" aria-expanded="false"
+    aria-label="Toggle On this page navigation">
+    <span>On this page</span>
+    <span>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-expand"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <title>Expand</title>
+        <polyline points="7 13 12 18 17 13"></polyline>
+        <polyline points="7 6 12 11 17 6"></polyline>
+      </svg>
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" class="doks doks-collapse"
+        fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+        <title>Collapse</title>
+        <polyline points="17 11 12 6 7 11"></polyline>
+        <polyline points="17 18 12 13 7 18"></polyline>
+      </svg>
+    </span>
+  </button>
+  <div class="collapse" id="onThisPage">
+    <div class="card card-body mt-3 py-1">
+      <div class="page-links">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-绑定键位">Part 1 绑定键位</a>
+          <ul>
+            <li><a href="#1-dot-抬头-低头">1. 抬头，低头</a></li>
+            <li><a href="#2-dot-环顾四周">2. 环顾四周</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-2-实现视角旋转逻辑1">Part 2 实现视角旋转逻辑1</a>
+          <ul>
+            <li><a href="#一-搭建框架">一、搭建框架</a></li>
+            <li><a href="#二-添加静态日志类型">二、添加静态日志类型</a></li>
+            <li><a href="#三-实现回调函数">三、实现回调函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-配置-camera-组件在垂直方向上移动">Part 3 配置 <code>Camera</code> 组件在垂直方向上移动</a>
+          <ul>
+            <li><a href="#一-使-camera-组件跟随-pawn-旋转">一、使 <code>Camera</code> 组件跟随 <code>Pawn</code> 旋转</a></li>
+            <li><a href="#二-调试-inputpitchscale">二、调试 <code>InputPitchScale</code></a></li>
+            <li><a href="#三-将-lookup-的-scale-改为-1">三、将 <code>LookUp</code> 的 <code>Scale</code> 改为-1</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-4-添加-springarm-组件">Part 4 添加 <code>SpringArm</code> 组件</a></li>
+        <li><a href="#part-5-配置-springarm-组件">Part 5 配置 <code>SpringArm</code> 组件</a>
+          <ul>
+            <li><a href="#一-查看-springarm-组件">一、查看 <code>SpringArm</code> 组件</a></li>
+            <li><a href="#二-关于-busepawncontrolrotation">二、关于 <code>bUsePawnControlRotation</code></a></li>
+            <li><a href="#三-设置-springarm-组件和-camera-组件的相对变换">三、设置 <code>SpringArm</code> 组件和 <code>Camera</code> 组件的相对变换</a></li>
+            <li><a href="#四-camera-组件和-springarm-组件的-busepawncontrolrotation-生效问题">四、 <code>Camera</code> 组件和 <code>SpringArm</code> 组件的 <code>bUsePawnControlRotation</code> 生效问题</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-6-为-character-绑定动画">Part 6 为 <code>Character</code> 绑定动画</a>
+          <ul>
+            <li><a href="#一-绑定动画">一、绑定动画</a></li>
+            <li><a href="#二-效果图">二、效果图</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-7-实现视角旋转逻辑2">Part 7 实现视角旋转逻辑2</a>
+          <ul>
+            <li><a href="#一-比对-lookup-turnaround-addcontrollerpitchinput-和-addcontrolleryawinput">一、比对 <code>LookUp</code> <code>TurnAround</code> <code>AddControllerPitchInput</code> 和 <code>AddControllerYawInput</code></a></li>
+            <li><a href="#二-函数描述直接绑定-addcontrollerpitchinput-和-addcontrolleryawinput">二、函数描述直接绑定 <code>AddControllerPitchInput</code> 和 <code>AddControllerYawInput</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="page-links d-none d-xl-block">
+  <h3>On this page</h3>
+  <nav class="my-toc">
+        <nav id="TableOfContents">
+  <ul>
+    <li>
+      <ul>
+        <li><a href="#part-1-绑定键位">Part 1 绑定键位</a>
+          <ul>
+            <li><a href="#1-dot-抬头-低头">1. 抬头，低头</a></li>
+            <li><a href="#2-dot-环顾四周">2. 环顾四周</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-2-实现视角旋转逻辑1">Part 2 实现视角旋转逻辑1</a>
+          <ul>
+            <li><a href="#一-搭建框架">一、搭建框架</a></li>
+            <li><a href="#二-添加静态日志类型">二、添加静态日志类型</a></li>
+            <li><a href="#三-实现回调函数">三、实现回调函数</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-3-配置-camera-组件在垂直方向上移动">Part 3 配置 <code>Camera</code> 组件在垂直方向上移动</a>
+          <ul>
+            <li><a href="#一-使-camera-组件跟随-pawn-旋转">一、使 <code>Camera</code> 组件跟随 <code>Pawn</code> 旋转</a></li>
+            <li><a href="#二-调试-inputpitchscale">二、调试 <code>InputPitchScale</code></a></li>
+            <li><a href="#三-将-lookup-的-scale-改为-1">三、将 <code>LookUp</code> 的 <code>Scale</code> 改为-1</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-4-添加-springarm-组件">Part 4 添加 <code>SpringArm</code> 组件</a></li>
+        <li><a href="#part-5-配置-springarm-组件">Part 5 配置 <code>SpringArm</code> 组件</a>
+          <ul>
+            <li><a href="#一-查看-springarm-组件">一、查看 <code>SpringArm</code> 组件</a></li>
+            <li><a href="#二-关于-busepawncontrolrotation">二、关于 <code>bUsePawnControlRotation</code></a></li>
+            <li><a href="#三-设置-springarm-组件和-camera-组件的相对变换">三、设置 <code>SpringArm</code> 组件和 <code>Camera</code> 组件的相对变换</a></li>
+            <li><a href="#四-camera-组件和-springarm-组件的-busepawncontrolrotation-生效问题">四、 <code>Camera</code> 组件和 <code>SpringArm</code> 组件的 <code>bUsePawnControlRotation</code> 生效问题</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-6-为-character-绑定动画">Part 6 为 <code>Character</code> 绑定动画</a>
+          <ul>
+            <li><a href="#一-绑定动画">一、绑定动画</a></li>
+            <li><a href="#二-效果图">二、效果图</a></li>
+          </ul>
+        </li>
+        <li><a href="#part-7-实现视角旋转逻辑2">Part 7 实现视角旋转逻辑2</a>
+          <ul>
+            <li><a href="#一-比对-lookup-turnaround-addcontrollerpitchinput-和-addcontrolleryawinput">一、比对 <code>LookUp</code> <code>TurnAround</code> <code>AddControllerPitchInput</code> 和 <code>AddControllerYawInput</code></a></li>
+            <li><a href="#二-函数描述直接绑定-addcontrollerpitchinput-和-addcontrolleryawinput">二、函数描述直接绑定 <code>AddControllerPitchInput</code> 和 <code>AddControllerYawInput</code></a></li>
+          </ul>
+        </li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+      </nav>
+      </div>
+
+			</nav>
+			<h2 id="part-1-绑定键位">Part 1 绑定键位 <a href="#part-1-%e7%bb%91%e5%ae%9a%e9%94%ae%e4%bd%8d" class="anchor" aria-hidden="true">#</a></h2>
+<p><code>虚幻编辑器</code> <br/>
+<code>项目设置 &gt; Engine &gt; Input</code> <br/>
+<code>轴映射</code> <br/></p>
+<p>
+<figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%a7%86%e8%a7%92%e6%97%8b%e8%bd%ac/%e7%bb%91%e5%ae%9aCamera%e6%97%8b%e8%bd%ac%e7%9a%84%e9%bc%a0%e6%a0%87%e9%94%ae%e4%bd%8d/%e9%bc%a0%e6%a0%87%e9%94%ae%e4%bd%8d.png" width="400"></figure> <br/></p>
+<h3 id="1-dot-抬头-低头">1. 抬头，低头 <a href="#1-dot-%e6%8a%ac%e5%a4%b4-%e4%bd%8e%e5%a4%b4" class="anchor" aria-hidden="true">#</a></h3>
+<p>鼠标垂直方向的移动决定抬头角度，绕Y轴旋转 <br/></p>
+<table>
+<thead>
+<tr>
+<th>函数描述</th>
+<th>键位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>LookUp</td>
+<td>MouseY</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-dot-环顾四周">2. 环顾四周 <a href="#2-dot-%e7%8e%af%e9%a1%be%e5%9b%9b%e5%91%a8" class="anchor" aria-hidden="true">#</a></h3>
+<p>鼠标水平方向的移动决定身体旋转角度，绕Z轴旋转 <br/></p>
+<table>
+<thead>
+<tr>
+<th>函数描述</th>
+<th>键位</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>TurnAround</td>
+<td>MouseX</td>
+</tr>
+</tbody>
+</table>
+<h2 id="part-2-实现视角旋转逻辑1">Part 2 实现视角旋转逻辑1 <a href="#part-2-%e5%ae%9e%e7%8e%b0%e8%a7%86%e8%a7%92%e6%97%8b%e8%bd%ac%e9%80%bb%e8%be%911" class="anchor" aria-hidden="true">#</a></h2>
+<p><code>C++</code> <br/></p>
+<h3 id="一-搭建框架">一、搭建框架 <a href="#%e4%b8%80-%e6%90%ad%e5%bb%ba%e6%a1%86%e6%9e%b6" class="anchor" aria-hidden="true">#</a></h3>
+<p>添加空函数并绑定函数描述和回调函数，之后再实现函数逻辑 <br/></p>
+<ol>
+<li>添加空函数 <br/>
+<code>函数成员</code> <code>函数体为空</code> <code>private</code> <br/>
+<pre><code class="language-C++">void LookUp(float Amount);
+void TurnAround(float Amount);
+</code></pre>
+</li>
+<li>绑定函数描述和回调函数 <br/>
+<code>函数成员</code> <code>private</code> <code>在SetupPlayerInputComponent中调用</code> <br/>
+<pre><code class="language-C++">void ASTBaseCharacter::InitCameraRotate(UInputComponent* PlayerInputComponent)
+{
+    PlayerInputComponent-&gt;BindAxis(&quot;LookUp&quot;, this, &amp;ASTBaseCharacter::LookUp);
+    PlayerInputComponent-&gt;BindAxis(&quot;TurnAround&quot;, this, &amp;ASTBaseCharacter::TurnAround);
+}
+</code></pre>
+</li>
+</ol>
+<h3 id="二-添加静态日志类型">二、添加静态日志类型 <a href="#%e4%ba%8c-%e6%b7%bb%e5%8a%a0%e9%9d%99%e6%80%81%e6%97%a5%e5%bf%97%e7%b1%bb%e5%9e%8b" class="anchor" aria-hidden="true">#</a></h3>
+<pre><code class="language-C++">DEFINE_LOG_CATEGORY_STATIC(LogBaseCharacter, All, All)
+</code></pre>
+<h3 id="三-实现回调函数">三、实现回调函数 <a href="#%e4%b8%89-%e5%ae%9e%e7%8e%b0%e5%9b%9e%e8%b0%83%e5%87%bd%e6%95%b0" class="anchor" aria-hidden="true">#</a></h3>
+<pre><code class="language-C++">void ASTBaseCharacter::LookUp(float Amount)
+{
+    AddControllerPitchInput(Amount);
+    UE_LOG(LogBaseCharacter, Log, TEXT(&quot;LookUp Amount: %f&quot;), Amount);
+}
+
+void ASTBaseCharacter::TurnAround(float Amount)
+{
+    AddControllerYawInput(Amount);
+}
+</code></pre>
+<h2 id="part-3-配置-camera-组件在垂直方向上移动">Part 3 配置 <code>Camera</code> 组件在垂直方向上移动 <a href="#part-3-%e9%85%8d%e7%bd%ae-camera-%e7%bb%84%e4%bb%b6%e5%9c%a8%e5%9e%82%e7%9b%b4%e6%96%b9%e5%90%91%e4%b8%8a%e7%a7%bb%e5%8a%a8" class="anchor" aria-hidden="true">#</a></h2>
+<p><code>虚幻编辑器</code> <br/>
+水平移动鼠标时，游戏角色和摄像机一齐左右旋转 <br/>
+垂直移动鼠标时，游戏角色无旋转 <br/></p>
+<h3 id="一-使-camera-组件跟随-pawn-旋转">一、使 <code>Camera</code> 组件跟随 <code>Pawn</code> 旋转 <a href="#%e4%b8%80-%e4%bd%bf-camera-%e7%bb%84%e4%bb%b6%e8%b7%9f%e9%9a%8f-pawn-%e6%97%8b%e8%bd%ac" class="anchor" aria-hidden="true">#</a></h3>
+<p><code>BP_STBaseCharacter</code> <br/>
+<code>选中Camera组件 &gt; 细节面板 &gt; CameraOptions &gt; 使能UsePawnControlRotation</code> <br/>
+<code>保存并编译</code> <br/></p>
+<p><img src="http://toughcactus.github.io/pic/角色和动画/实现Character视角旋转/调整Camera垂直方向上旋转/BP_STBaseCharacter-UsePawnControlRotation-Enable.png" alt="BP_STBaseCharacter-UsePawnControlRotation-Enable.png" width="1000" /> <br/>
+此时向下移动鼠标时，摄像机向上旋转，向上移动鼠标时，摄像机向下旋转 <br/>
+查看日志，鼠标向上移动时，Amount的确是正数 <br/></p>
+<p>
+<figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%a7%86%e8%a7%92%e6%97%8b%e8%bd%ac/%e8%b0%83%e6%95%b4Camera%e5%9e%82%e7%9b%b4%e6%96%b9%e5%90%91%e4%b8%8a%e6%97%8b%e8%bd%ac/MouseY-Up.png" width="300"></figure>      <br/></p>
+<h3 id="二-调试-inputpitchscale">二、调试 <code>InputPitchScale</code> <a href="#%e4%ba%8c-%e8%b0%83%e8%af%95-inputpitchscale" class="anchor" aria-hidden="true">#</a></h3>
+<p><code>BP_PlayerController</code> <br/>
+<a href="https://docs.unrealengine.com/5.1/en-US/BlueprintAPI/PlayerController/GetDeprecatedInputPitchScale/">参考</a> <br/>
+引擎版本 <code>5.1</code> 之前，可以在 <code>PlayerController蓝图类</code> 的细节面板查看 <code>InputPitchScale</code> <br/></p>
+<ol>
+<li>
+<p>打印 <code>InputPitchScale</code> <br/></p>
+<p><img src="http://toughcactus.github.io/pic/角色和动画/实现Character视角旋转/调整Camera垂直方向上旋转/BP_PlayerController-打印InputScale.png" alt="BP_PlayerController-打印InputScale.png" width="700" /> <br/>
+<em>为负数，解释为何向上移动鼠标， <code>Camera组件</code> 向下旋转</em> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%a7%86%e8%a7%92%e6%97%8b%e8%bd%ac/%e8%b0%83%e6%95%b4Camera%e5%9e%82%e7%9b%b4%e6%96%b9%e5%90%91%e4%b8%8a%e6%97%8b%e8%bd%ac/BP_PlayerController-%e6%89%93%e5%8d%b0InputScale-Output.png" width="150"></figure> <br/></p>
+</li>
+<li>
+<p>尝试设置 <code>InputPitchScale</code> 为正数 <br/></p>
+<p><img src="http://toughcactus.github.io/pic/角色和动画/实现Character视角旋转/调整Camera垂直方向上旋转/BP_PlayerController-设置InputPitchScale.png" alt="BP_PlayerController-设置InputPitchScale.png" width="400" /> <br/>
+<em>向上移动鼠标， <code>Camera</code> 组件向上旋转</em> <br/>
+<code>InputPitchScale</code> <code>InputYawScale</code> <code>InputRollScale</code> 的绝对值对应旋转速度 <br/></p>
+</li>
+<li>
+<p>去除 <code>BP_STPlayerController</code> 中的打印和设置 <br/></p>
+</li>
+<li>
+<p>去除C++中 <code>LookUp</code> 中的日志打印 <br/></p>
+</li>
+</ol>
+<h3 id="三-将-lookup-的-scale-改为-1">三、将 <code>LookUp</code> 的 <code>Scale</code> 改为-1 <a href="#%e4%b8%89-%e5%b0%86-lookup-%e7%9a%84-scale-%e6%94%b9%e4%b8%ba-1" class="anchor" aria-hidden="true">#</a></h3>
+<p><img src="http://toughcactus.github.io/pic/角色和动画/实现Character视角旋转/调整Camera垂直方向上旋转/将LookUp的Scale改为-1.png" alt="将LookUp的Scale改为-1.png" width="400" /> <br/>
+此时，向上移动鼠标， <code>Camera</code> 组件向上旋转 <br/>
+可以注意到，垂直方向移动鼠标时，旋转的中心点是 <code>Camera</code> 组件 <br/></p>
+<h2 id="part-4-添加-springarm-组件">Part 4 添加 <code>SpringArm</code> 组件 <a href="#part-4-%e6%b7%bb%e5%8a%a0-springarm-%e7%bb%84%e4%bb%b6" class="anchor" aria-hidden="true">#</a></h2>
+<p><code>C++</code> <br/>
+<code>STBaseCharacter</code> <br/></p>
+<ol>
+<li>前向声明 <br/>
+<code>头文件</code> <br/>
+<pre><code class="language-C++">class USpringArmComponent;    
+</code></pre>
+</li>
+<li>包含头文件 <br/>
+<code>源文件</code> <br/>
+<pre><code class="language-C++">#include &quot;GameFrameWork/SpringArmComponent.h&quot;
+</code></pre>
+</li>
+<li>添加 <code>SpringArm</code> 组件 <br/>
+<code>数据成员</code> <code>protected</code> <br/>
+<pre><code class="language-C++">UPROPERTY(VisibleAnywhere, BlueprintReadWrite, Category = &quot;Components&quot;)
+USpringArmComponent *SpringArm;
+</code></pre>
+</li>
+<li>初始化 <code>SpringArm</code> 组件 <br/>
+<code>函数成员</code> <code>private</code> <code>在默认构造函数中调用</code> <br/>
+<code>设置原型默认值</code> <br/>
+<pre><code class="language-C++">void ASTBaseCharacter::InitSpringArmAndCamera()
+{
+    SpringArm = CreateDefaultSubobject&lt;USpringArmComponent&gt;(&quot;SpringArmComponent&quot;);
+    SpringArm-&gt;SetupAttachment(GetRootComponent());	
+    SpringArm-&gt;bUsePawnControlRotation = true;
+
+    Camera = CreateDefaultSubobject&lt;UCameraComponent&gt;(&quot;CameraComponent&quot;);
+    Camera-&gt;SetupAttachment(SpringArm);
+    Camera-&gt;bUsePawnControlRotation = false;
+}
+</code></pre>
+<code>不再在默认构造函数中调用InitCameraComponent</code> <br/></li>
+</ol>
+<h2 id="part-5-配置-springarm-组件">Part 5 配置 <code>SpringArm</code> 组件 <a href="#part-5-%e9%85%8d%e7%bd%ae-springarm-%e7%bb%84%e4%bb%b6" class="anchor" aria-hidden="true">#</a></h2>
+<p><code>虚幻编辑器</code> <br/>
+<code>BP_STBaseCharacter</code> <br/></p>
+<h3 id="一-查看-springarm-组件">一、查看 <code>SpringArm</code> 组件 <a href="#%e4%b8%80-%e6%9f%a5%e7%9c%8b-springarm-%e7%bb%84%e4%bb%b6" class="anchor" aria-hidden="true">#</a></h3>
+<p>
+<figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%a7%86%e8%a7%92%e6%97%8b%e8%bd%ac/%e8%b0%83%e6%95%b4SpringArm%e5%92%8cCamera/BP_STBaseCharacter-Component.png" width="300"></figure> <br/></p>
+<h3 id="二-关于-busepawncontrolrotation">二、关于 <code>bUsePawnControlRotation</code> <a href="#%e4%ba%8c-%e5%85%b3%e4%ba%8e-busepawncontrolrotation" class="anchor" aria-hidden="true">#</a></h3>
+<ol>
+<li><code>UCameraComponent</code> 和 <code>USpringArmComponent</code> 均有该数据成员 <br/></li>
+<li>在代码中设置 <code>bUsePawnControlRotation</code> ，设置的是类数据成员初始值 <br/>
+在蓝图编辑器中，对基于C++类的蓝图类数据成员恢复默认值，得到类数据成员初始值 <br/>
+已设置不会恢复默认值 <br/>
+当前， <code>BP_BaseCharacter</code> 中， <code>SpringArm</code> 组件的 <code>bUsePawnControlRotation</code> 使用默认值，而 <code>Camera</code> 组件的 <code>bUsePawnControlRotation</code> 仍使用我们之前设置的值 <br/></li>
+</ol>
+<h3 id="三-设置-springarm-组件和-camera-组件的相对变换">三、设置 <code>SpringArm</code> 组件和 <code>Camera</code> 组件的相对变换 <a href="#%e4%b8%89-%e8%ae%be%e7%bd%ae-springarm-%e7%bb%84%e4%bb%b6%e5%92%8c-camera-%e7%bb%84%e4%bb%b6%e7%9a%84%e7%9b%b8%e5%af%b9%e5%8f%98%e6%8d%a2" class="anchor" aria-hidden="true">#</a></h3>
+<ol>
+<li>
+<p>清除 <code>Camera</code> 组件的相对变换 <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%a7%86%e8%a7%92%e6%97%8b%e8%bd%ac/%e8%b0%83%e6%95%b4SpringArm%e5%92%8cCamera/BP_STBaseCharacter-Camera-Transform.png" width="1400"></figure> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%a7%86%e8%a7%92%e6%97%8b%e8%bd%ac/%e8%b0%83%e6%95%b4SpringArm%e5%92%8cCamera/BP_STBaseCharacter-Camera-Transform-Reset.png" width="1400"></figure> <br/></p>
+</li>
+<li>
+<p>设置 <code>SpringArm</code> 组件 <br/>
+<code>臂长</code> <br/></p>
+<p><img src="http://toughcactus.github.io/pic/角色和动画/实现Character视角旋转/调整SpringArm和Camera/BP_STBaseCharacter-SpringArm-TargetArmLength.png" alt="BP_STBaseCharacter-SpringArm-TargetArmLength.png" width="1400" /> <br/>
+<code>偏移</code> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%a7%86%e8%a7%92%e6%97%8b%e8%bd%ac/%e8%b0%83%e6%95%b4SpringArm%e5%92%8cCamera/BP_STBaseCharacter-SpringArm-SocketOffset.png" width="1400"></figure> <br/></p>
+</li>
+</ol>
+<h3 id="四-camera-组件和-springarm-组件的-busepawncontrolrotation-生效问题">四、 <code>Camera</code> 组件和 <code>SpringArm</code> 组件的 <code>bUsePawnControlRotation</code> 生效问题 <a href="#%e5%9b%9b-camera-%e7%bb%84%e4%bb%b6%e5%92%8c-springarm-%e7%bb%84%e4%bb%b6%e7%9a%84-busepawncontrolrotation-%e7%94%9f%e6%95%88%e9%97%ae%e9%a2%98" class="anchor" aria-hidden="true">#</a></h3>
+<ol>
+<li>二者均为 <code>true</code> 时， <code>SpringArm</code> 组件的生效， <code>Camera</code> 组件以 <code>Character</code> 为中心绕Y轴旋转 <br/></li>
+<li>二者均为 <code>false</code> ， <code>Camera</code> 组件不可绕Y轴旋转 <br/></li>
+<li>仅 <code>Camera</code> 组件的为true，摄像机以 <code>Camera</code> 组件为中心绕Y轴旋转 <br/></li>
+<li>去除 <code>Camera</code> 组件的 <code>bUsePawnControlRotation</code> 使能 <br/></li>
+</ol>
+<h2 id="part-6-为-character-绑定动画">Part 6 为 <code>Character</code> 绑定动画 <a href="#part-6-%e4%b8%ba-character-%e7%bb%91%e5%ae%9a%e5%8a%a8%e7%94%bb" class="anchor" aria-hidden="true">#</a></h2>
+<p><code>虚幻编辑器</code> <br/>
+<code>BP_STBaseCharacter</code> <br/></p>
+<h3 id="一-绑定动画">一、绑定动画 <a href="#%e4%b8%80-%e7%bb%91%e5%ae%9a%e5%8a%a8%e7%94%bb" class="anchor" aria-hidden="true">#</a></h3>
+<ol>
+<li>
+<p><code>选中Mesh组件 &gt; Details &gt; Animation</code> <br/>
+<code>设置AnimationMode为UseAnimationAsset</code> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%a7%86%e8%a7%92%e6%97%8b%e8%bd%ac/%e4%b8%baCharacter%e6%b7%bb%e5%8a%a0%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/BP_STBaseCharacter-Mesh-Animation-AnimationMode.png" width="1400"></figure> <br/></p>
+</li>
+<li>
+<p><code>设置为AnimToPlay为Run_Fwd</code> <br/>
+<code>编译并保存</code> <br/></p>
+<p>
+    <figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%a7%86%e8%a7%92%e6%97%8b%e8%bd%ac/%e4%b8%baCharacter%e6%b7%bb%e5%8a%a0%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/BP_STBaseCharacter-Mesh-AnimToPlay.png" width="1400"></figure> <br/></p>
+</li>
+</ol>
+<h3 id="二-效果图">二、效果图 <a href="#%e4%ba%8c-%e6%95%88%e6%9e%9c%e5%9b%be" class="anchor" aria-hidden="true">#</a></h3>
+<p>
+<figure class="img-fluid lazyload blur-up"><img src="http://toughcactus.github.io/pic/%e8%a7%92%e8%89%b2%e5%92%8c%e5%8a%a8%e7%94%bb/%e5%ae%9e%e7%8e%b0Character%e8%a7%86%e8%a7%92%e6%97%8b%e8%bd%ac/%e4%b8%baCharacter%e6%b7%bb%e5%8a%a0%e8%b7%91%e6%ad%a5%e5%8a%a8%e7%94%bb/%e6%95%88%e6%9e%9c%e5%9b%be.png" width="500"></figure> <br/></p>
+<h2 id="part-7-实现视角旋转逻辑2">Part 7 实现视角旋转逻辑2 <a href="#part-7-%e5%ae%9e%e7%8e%b0%e8%a7%86%e8%a7%92%e6%97%8b%e8%bd%ac%e9%80%bb%e8%be%912" class="anchor" aria-hidden="true">#</a></h2>
+<p><code>C++</code> <br/></p>
+<h3 id="一-比对-lookup-turnaround-addcontrollerpitchinput-和-addcontrolleryawinput">一、比对 <code>LookUp</code> <code>TurnAround</code> <code>AddControllerPitchInput</code> 和 <code>AddControllerYawInput</code> <a href="#%e4%b8%80-%e6%af%94%e5%af%b9-lookup-turnaround-addcontrollerpitchinput-%e5%92%8c-addcontrolleryawinput" class="anchor" aria-hidden="true">#</a></h3>
+<p>函数签名一致 <br/></p>
+<pre><code class="language-C++">void ASTBaseCharacter::LookUp(float Amount)
+{
+    AddControllerPitchInput(Amount);
+//	UE_LOG(LogBaseCharacter, Log, TEXT(&quot;LookUp Amount: %f&quot;), Amount);
+}
+
+void ASTBaseCharacter::TurnAround(float Amount)
+{
+    AddControllerYawInput(Amount);
+}
+
+void ASTBaseCharacter::InitCameraRotate(UInputComponent* PlayerInputComponent)
+{
+    PlayerInputComponent-&gt;BindAxis(&quot;Lookup&quot;, this, &amp;ASTBaseCharacter::LookUp);
+    PlayerInputComponent-&gt;BindAxis(&quot;TurnAround&quot;, this, &amp;ASTBaseCharacter::TurnAround);
+}
+</code></pre>
+<h3 id="二-函数描述直接绑定-addcontrollerpitchinput-和-addcontrolleryawinput">二、函数描述直接绑定 <code>AddControllerPitchInput</code> 和 <code>AddControllerYawInput</code> <a href="#%e4%ba%8c-%e5%87%bd%e6%95%b0%e6%8f%8f%e8%bf%b0%e7%9b%b4%e6%8e%a5%e7%bb%91%e5%ae%9a-addcontrollerpitchinput-%e5%92%8c-addcontrolleryawinput" class="anchor" aria-hidden="true">#</a></h3>
+<p><code>函数成员</code> <code>private</code> <code>在SetupPlayerInputComponent中调用</code> <br/></p>
+<pre><code class="language-C++">void ASTBaseCharacter::InitCameraRotateFinal(UInputComponent* PlayerInputComponent)
+{
+    PlayerInputComponent-&gt;BindAxis(&quot;Lookup&quot;, this, &amp;ASTBaseCharacter::AddControllerPitchInput);
+    PlayerInputComponent-&gt;BindAxis(&quot;TurnAround&quot;, this, &amp;ASTBaseCharacter::AddControllerYawInput);
+}
+</code></pre>
+<p><code>不再在SetupPlayerInputComponent中调用InitCameraRotate</code> <br/></p>
+
+			<div class="page-footer-meta d-flex flex-column flex-md-row justify-content-between">
+				</div>
+			<div class="docs-navigation d-flex justify-content-between">
+	
+	<a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/sublime/">
+			<div class="card my-1">
+				<div class="card-body py-2">
+					&larr; Sublime
+				</div>
+			</div>
+		</a>
+	<a class="ms-auto" href="/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%B7%BB%E5%8A%A0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/">
+			<div class="card my-1">
+				<div class="card-body py-2">
+					添加观察视角 &rarr;
+				</div>
+			</div>
+		</a>
+	</div>
+
+			
+		</main>
+	</div>
+
+    </div>
+  </div>
+  
+  
+  
+  
+  <footer class="footer text-muted">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-8 order-last order-lg-first">
+        <ul class="list-inline">
+          <li class="list-inline-item">Powered by <a class="text-muted" href="https://github.com/">Github</a>, <a class="text-muted" href="https://gohugo.io/">Hugo</a>, and <a class="text-muted" href="https://getdoks.org/">Doks</a></li>
+        </ul>
+      </div>
+      <div class="col-lg-8 order-first order-lg-last text-lg-end">
+        <ul class="list-inline">
+          </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+  
+
+<script src="/js/bootstrap.min.650aeec64c81d69d4c0850fc73c93da3f0330cec0a27772feed7f90f60baa5f47f1c45687d71914bdafd1c4e860d40f6dc08ede27a2f08431ff929c9a2d24621.js" integrity="sha512-ZQruxkyB1p1MCFD8c8k9o/AzDOwKJ3cv7tf5D2C6pfR/HEVofXGRS9r9HE6GDUD23Ajt4novCEMf&#43;SnJotJGIQ==" crossorigin="anonymous" defer></script>
+  <script src="/js/highlight.min.836e9b5b74e0d2b8c7e9ff6d89ea27207cda92009d199c018c08c620f11bbfa46937a66603548a63af1840fce1d731b18d96c2d08bf7f5a51ecfd8b363d7d2b2.js" integrity="sha512-g26bW3Tg0rjH6f9tieonIHzakgCdGZwBjAjGIPEbv6RpN6ZmA1SKY68YQPzh1zGxjZbC0Iv39aUez9izY9fSsg==" crossorigin="anonymous" defer></script>
+  <script src="/main.min.cb2e2ebbf2e4002f3117addc33582923b2b3ae5265c22944cd117ebec7abe61c170417c4506d7a0f8f0fc9053dfdf441421d53601ac467042ff3d06ec0ba07fa.js" integrity="sha512-yy4uu/LkAC8xF63cM1gpI7KzrlJlwilEzRF&#43;vser5hwXBBfEUG16D48PyQU9/fRBQh1TYBrEZwQv89BuwLoH&#43;g==" crossorigin="anonymous" defer></script>
+  <script src="https://toughcactus.github.io/index.min.2cb492289a7108e77de60b162f3cfe62dda02b17f8b0d3498591d0854d6c8ba3b6e64d18ffdb3261ee77e359b89a5beb6ecf6733e10f06bb44f1e228194c6943.js" integrity="sha512-LLSSKJpxCOd95gsWLzz&#43;Yt2gKxf4sNNJhZHQhU1si6O25k0Y/9syYe5341m4mlvrbs9nM&#43;EPBrtE8eIoGUxpQw==" crossorigin="anonymous" defer></script>
+  
+  
+</body>
+
+</html>
