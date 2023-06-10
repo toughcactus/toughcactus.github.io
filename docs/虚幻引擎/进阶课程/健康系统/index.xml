@@ -6,5 +6,95 @@
     <description>Recent content in 健康系统 on </description>
     <generator>Hugo -- gohugo.io</generator>
     <lastBuildDate>Sun, 11 Jun 2023 05:36:57 +0000</lastBuildDate><atom:link href="https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>实时显示游戏角色生命值</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E6%97%B6%E6%98%BE%E7%A4%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%94%9F%E5%91%BD%E5%80%BC/</link>
+      <pubDate>Sun, 11 Jun 2023 05:31:13 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E5%AE%9E%E6%97%B6%E6%98%BE%E7%A4%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E7%94%9F%E5%91%BD%E5%80%BC/</guid>
+      <description>Overview # 自定义健康组件 ActorComponent 纯逻辑 显示生命值 TextRenderComponent Part 1 创建健康组件 # 虚幻编辑器 ActorComponent 一、创建 Component/STHealthComponent # ActorComponent 公有类 Part 2 调整健康组件框架并给出初步实现 # C++ 一、调整框架 # 默认构造函数 将每帧调用TickComponent函数标志置为false PrimaryComponentTick.bCanEverTick = false; BeginPlay 屏蔽派生类 TickComponent 函数，使用基类实现 二、新增逻辑：实时生命值和最大生命值 # 数据成员 实时生命值 private float float Health = 0.0f; 最大生命值 protected 可设置类成员初始值 分组Health ( 0, 1000 ) UPROPERTY(EditDefaultsOnly, Category = &amp;quot;Health&amp;quot;, meta = (ClampMin = &amp;quot;0.0&amp;quot;, ClampMax = &amp;quot;1000.0&amp;quot;)) float MaxHealth = 100.0f;	三、新增逻辑：获取生命值和初始化生命值 # 函数成员 获取生命值 public 蓝图可调用 const函数 隐式inline UFUNCTION(BlueprintCallable) float GetHealth() const { return Health; } 初始化生命值 private 在BeginPlay中调用 void USTHealthComponent::InitHealth() { Health = MaxHealth; } Part 3 为 Character 添加健康组件 # C++ STBaseCharacter 包含健康组件头文件 头文件 前向声明 class USTHealthComponent; 源文件 #include &amp;quot;Components/STHealthComponent.</description>
+    </item>
+    
+    <item>
+      <title>计算伤害</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/</link>
+      <pubDate>Sun, 11 Jun 2023 05:49:08 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%AE%A1%E7%AE%97%E4%BC%A4%E5%AE%B3/</guid>
+      <description>Overview # 虚幻引擎提供一组函数，用来对Actor造成伤害 在Tick函数中，持续对游戏角色造成伤害；每次造成伤害，委托机制触发处理函数，更新角色生命值 一、每帧对 Character 造成伤害 # STBaseCharacter 函数成员 private 在Tick中调用 伤害来源是自己 void ASTBaseCharacter::CharacterTakeDamage() { TakeDamage(0.1f, FDamageEvent{}, GetController(), this); } 二、定义空的伤害委托处理函数，并注册到 Character # USTHealthComponent 包含头文件 源文件 #include &amp;quot;GameFramework/Actor.h&amp;quot; 定义日志类型 源文件 DEFINE_LOG_CATEGORY_STATIC(LogHealthComponent, All, All) 搭建处理函数框架 函数成员 private 委托类型FTakeAnyDamageSignature：从委托类型的定义获取处理函数签名；委托属性多播，支持蓝图，需要UFUNCTION宏 UFUNCTION() void OnTakeAnyDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser); 注册处理函数 函数成员 private 在BeginPlay中调用 void USTHealthComponent::RegisterDamageHandler() { AActor *ThisActor = GetOwner(); if (ThisActor) { ThisActor-&amp;gt;OnTakeAnyDamage.AddDynamic(this, &amp;amp;USTHealthComponent::OnTakeAnyDamage); } } 实现伤害委托处理函数 Health减为0，作为负数仍在减；差不多一秒10帧，即1s调用十次处理函数 触发处理函数时，不会传入整个FDamageEvent变量，而是传入UDamageType void USTHealthComponent::OnTakeAnyDamage(AActor* DamagedActor, float Damage, const class UDamageType* DamageType, class AController* InstigatedBy, AActor* DamageCauser) { Health -= Damage; } </description>
+    </item>
+    
+    <item>
+      <title>模拟榴弹爆炸</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/</link>
+      <pubDate>Sun, 11 Jun 2023 05:50:27 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%A8%A1%E6%8B%9F%E6%A6%B4%E5%BC%B9%E7%88%86%E7%82%B8/</guid>
+      <description>Part 1 建模 # 添加伤害源，派生自Actor，模拟榴弹爆炸瞬间 绘制球体，使得伤害范围可视化 对处在爆炸半径内的游戏角色持续造成伤害，伤害数值与游戏角色所在位置到球心的距离有关 Part 2 创建伤害来源 Dev/STDevDamageActor # 虚幻编辑器 STDevDamageActor，模拟榴弹爆炸 Actor 公有类 Part 3 准备工作 # C++ 屏蔽 ASTBaseCharacter::Tick中调用CharacterTakeDamage 添加头文件路径 ShootTraining/Source/ShootTraining/ShootTraining.Build.cs PublicIncludePaths.AddRange(new string[] { &amp;quot;ShootTraining/Public/Player&amp;quot;, &amp;quot;ShootTraining/Public/Components&amp;quot;, &amp;quot;ShootTraining/Public/Dev&amp;quot; }); Part 4 实现 STDevDamageActor # C++ STDevDamageActor 一、添加可视化组件，使得伤害源可变换 # 添加 SceneComponent 数据成员 protected 蓝图可设置 UPROPERTY(VisibleAnywhere, BlueprintReadWrite) USceneComponent *SceneComponent;	初始化 SceneComponent 函数成员 private 在构造函数中调用 void ASTDevDamageActor::InitSceneComponent() { SceneComponent = CreateDefaultSubobject&amp;lt;USceneComponent&amp;gt;(&amp;quot;SceneComponent&amp;quot;); SetRootComponent(SceneComponent); } 二、绘制球体，爆炸范围可视化 # 包含头文件 源文件 #include &amp;quot;DrawDebugHelpers.h&amp;quot; 球体半径和颜色 数据成员 protected 蓝图可设置 UPROPERTY(EditAnywhere) float Radius = 300.</description>
+    </item>
+    
+    <item>
+      <title>使用伤害类型</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/</link>
+      <pubDate>Sun, 11 Jun 2023 05:50:41 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BD%BF%E7%94%A8%E4%BC%A4%E5%AE%B3%E7%B1%BB%E5%9E%8B/</guid>
+      <description>Part 1 创建伤害类型 # C++ 1. 创建 Dev/STFireDamageType # UDamageType 公有类 2. 创建 Dev/STIceDamageType # UDamageType 公有类 Part 2 为伤害来源添加伤害类型属性 # C++ Dev/STDevDamageActor 添加 DamamgeType 属性 protected 蓝图可设置 UPROPERTY(EditAnywhere) TSubclassOf&amp;lt;UDamageType&amp;gt; DamageType; 造成伤害时，传入 DamageType 函数成员 private 在Tick中调用 取消在Tick中调用DevTakeDamage void ASTDevDamageActor::DevTakeDamageWithDamageType() { UGameplayStatics::ApplyRadialDamage(GetWorld(), Damage, GetActorLocation(), Radius, DamageType, {}, this, nullptr, DoFullDamage); } Part 3 在 HealthComponent 输出伤害来源信息 # C++ STHealthComponent 在处理函数中，根据 DamageType 的具体类型，做出相应处理 包含头文件 #include &amp;quot;Dev/STFireDamageType.h&amp;quot; #include &amp;quot;Dev/STIceDamageType.h&amp;quot; 输出伤害来源信息 函数成员 private 在OnTakeAnyDamage中调用 void USTHealthComponent::HandleDamage(const UDamageType *DamageType) { if (DamageType) { if (DamageType-&amp;gt;IsA&amp;lt;USTFireDamageType&amp;gt;()) { UE_LOG(LogHealthComponent, Display, TEXT(&amp;quot;So Hooooooot !</description>
+    </item>
+    
+    <item>
+      <title>为游戏角色添加死亡逻辑</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/</link>
+      <pubDate>Sun, 11 Jun 2023 05:51:15 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%B8%BA%E6%B8%B8%E6%88%8F%E8%A7%92%E8%89%B2%E6%B7%BB%E5%8A%A0%E6%AD%BB%E4%BA%A1%E9%80%BB%E8%BE%91/</guid>
+      <description>Part 1 使用委托：当生命值发生改变时，更新 TextRender 文本 # C++ 一、屏蔽当前 HealthText 的设置 # 之前，每帧都会根据生命值设置 TextRender 组件 ASTBaseCharacter::Tick中，屏蔽DisplayHealthText 在ASTBaseCharacter::BeginPlay中，调用DisplayHealthText初始化设置 先调用Component的BeginPlay，而后调用Character的BeginPlay 当前委托机制中，Character在BeginPlay中注册服务。如果由HealthComponent的BeginPlay中初始化生命值并广播，此时Character还未注册服务，广播在前，注册在后，则Character无法收到通知并初始化 TextRender 组件文本 二、使用委托修改HealthText，服务端修改 # Components/STHealthComponent OnTakeAnyDamage中，屏蔽HandleDamage 伤害类型仅做示例 定义委托类型 头文件 多播 仅C++ DECLARE_MULTICAST_DELEGATE(FOnHealthChanged) 添加委托类型成员 数据成员 public FOnHealthChanged OnHealthChanged; 生命值改变时，通知客户端 OnTakeAnyDamage OnHealthChanged.Broadcast(); 三、使用委托修改HealthText，客户端修改 # STBaseCharacter 处理函数 函数成员 private void ASTBaseCharacter::OnHealthChanged() { DisplayHealthText(); } 注册处理函数 函数成员 private 在BeginPlay中调用 void ASTBaseCharacter::BindOnHealthChanged() { Health-&amp;gt;OnHealthChanged.AddUObject(this, &amp;amp;ASTBaseCharacter::OnHealthChanged); } Part 2 若Character死亡，不再造成伤害 # C++ 一、判断Character死亡 # 函数成员 public 蓝图可调用，const函数 UFUNCTION(BlueprintCallable) bool IsDead() const { return Health &amp;lt;= 0.</description>
+    </item>
+    
+    <item>
+      <title>添加观察视角</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%B7%BB%E5%8A%A0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/</link>
+      <pubDate>Sun, 11 Jun 2023 05:51:30 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%B7%BB%E5%8A%A0%E8%A7%82%E5%AF%9F%E8%A7%86%E8%A7%92/</guid>
+      <description>Overview # 观察视角的实现，对应一个APawn派生类，ASpectatorPawn。关卡的默认类型里，观察者类即使用ASpectatorPawn。 场景中的SpectatorPawn，即漂浮的摄像机，可以前后左右上下移动，键位控制，可以旋转，由鼠标控制。 观察视角的存在，使得玩家死亡后，仍能继续观看游戏。当Character死亡并销毁，Controller无其他Pawn可控制。当Character死亡后，使Controller切换到ASpectatorPawn对象。 本小节使用默认的观察者类，所做的修改在STBaseCharacter中。 Part 1 Character死亡后，切换到观察视角 # C++ STBaseCharacter 添加头文件 先前我们已设置STBaseCharacter使用STPlayerController类。 APawn::Controller成员和具体的Controller对象动态绑定。由于其声明里使用AController，所以我们包含AController的头文件而非STPlayerController的 #include &amp;quot;GameFramework/Controller.h&amp;quot; Character死亡时，使用观察视角 private 在Character死亡处理函数OnDeath中调用 void ASTBaseCharacter::SwitchToSpectatorPawn() { if (Controller) { Controller-&amp;gt;ChangeState(NAME_Spectating); } } Part 2 查看 # 虚幻编辑器 查看WorldSetting中，GameMode使用的Spectator Class Pawn也可选择SpectatorPawn 验证观察视角 Character死亡后，世界大纲新增SpectatorPawn1 因为Character死亡的处理函数中，立即切换到SpectatorPawn，在Character销毁之前，无法继续操作Character，也就无法旋转Character的Camera </description>
+    </item>
+    
+    <item>
+      <title>自动治疗</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/</link>
+      <pubDate>Sun, 11 Jun 2023 05:51:47 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E8%87%AA%E5%8A%A8%E6%B2%BB%E7%96%97/</guid>
+      <description>Overview # 治疗机制 受到伤害则延缓治疗；不再受到伤害才会自动治疗 使用定时器实现。获取定时器管理对象有两种方式 UActorComponent::GetOwner &amp;gt; AActor::GetWorldTimerManager UActorComponent::GetWorld &amp;gt; UWorld::GetTimerManager 修改HealthComponent逻辑 C++ 一、封装更新生命值逻辑 # 之前在处理函数OnTakeAnyDamage中，更新生命值并广播。现在会有两个地方改变生命值，新增自动治疗，所以封装改变生命值逻辑。 受到伤害和自动治疗均会修改生命值，随之通知客户端(STBaseCharacter)修改HealthText。 函数成员 private 在OnTakeAnyDamage计算伤害时，改为调用SetHealth void USTHealthComponent::SetHealth(float NewHealth) { Health = FMath::Clamp(NewHealth, 0.0f, MaxHealth); OnHealthChanged.Broadcast(); } 二、添加治疗参数 # 参数 名称 使能自动治疗 AutoHeal 首次治疗延后时长 HealDelay 恢复生命值周期 HealRate 单次恢复量 HealModifier UPROPERTY(EditDefaultsOnly, Category = &amp;quot;Auto Heal&amp;quot;) bool AutoHeal = true; UPROPERTY(EditDefaultsOnly, Category = &amp;quot;Auto Heal&amp;quot;, meta = (EditCondition = &amp;quot;AutoHeal&amp;quot;)) float HealRate = 1.0f; UPROPERTY(EditDefaultsOnly, Category = &amp;quot;Auto Heal&amp;quot;, meta = (EditCondition = &amp;quot;AutoHeal&amp;quot;)) float HealDelay = 3.</description>
+    </item>
+    
+    <item>
+      <title>高处坠落伤害</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/</link>
+      <pubDate>Sun, 11 Jun 2023 05:52:09 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E9%AB%98%E5%A4%84%E5%9D%A0%E8%90%BD%E4%BC%A4%E5%AE%B3/</guid>
+      <description>Overview # STBaseCharacter逻辑 C++ 落地时获取Z方向的速度，其和坠落高度相关，速度越大，坠落高度越大 t = sqrt(2*h/g) = v/g 跳跃时落地，也符合坠落定义；在一定范围内，坠落无伤害 坠落伤害范围 LandedDamageRange [c, d] 落地时速度范围 LandedDamageVelocityRange [a, b] 速度小于a无伤； 在[a, b]范围内，对应伤害[c, d] c + (Velocity - a) (d - c) / (b - a) 速度大于b，伤害为d 在Character中获取速度的方式有两种： APawn::GetVelocity ACharacter:: GetCharacterMovement &amp;gt; UCharacterMovementComponent::Velocity 一、添加属性 # 原型可设置 参数 名称 LandedDamageRange 伤害范围 LandedDamageVelocityRange 落地受伤的速度范围 UPROPERTY(EditDefaultsOnly) FVector2D LandedDamageVelocityRange = {900.0f, 1200.0f}; UPROPERTY(EditDefaultsOnly)	FVector2D LandedDamageRange = {10.0f, 100.0f}; 二、订阅委托 # 委托处理函数 函数成员 private 委托支持蓝图 声明 UFUNCTION() void OnGroundLanded(const FHitResult&amp;amp; Hit); OnLanded已被使用 实现 坠落伤害属于环境伤害，无伤害源(Actor)和阵营(Controller) void ASTBaseCharacter::OnGroundLanded(const FHitResult&amp;amp; Hit) { float Velocity = -GetVelocity().</description>
+    </item>
+    
+    <item>
+      <title>打包游戏和收尾</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/</link>
+      <pubDate>Sun, 11 Jun 2023 05:52:23 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E6%89%93%E5%8C%85%E6%B8%B8%E6%88%8F%E5%92%8C%E6%94%B6%E5%B0%BE/</guid>
+      <description>一、打包游戏 # Shipping看不到Debug球 二、优化 # 定义委托类型之后，使用分号 定义委托类型时，类型名以F打头，以Signature结尾 建议 类定义顺序 public 构造函数 &amp;gt; 委托类型变量 &amp;gt; UFUNCTION &amp;gt; 其他函数 添加LifeSpanOnDeath属性 蓝图可设置 在SetupPlayerInputComponent中检查PlayInputComponent </description>
+    </item>
+    
+    <item>
+      <title>代码重构</title>
+      <link>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/</link>
+      <pubDate>Sun, 11 Jun 2023 05:52:33 +0000</pubDate>
+      
+      <guid>https://toughcactus.github.io/docs/%E8%99%9A%E5%B9%BB%E5%BC%95%E6%93%8E/%E8%BF%9B%E9%98%B6%E8%AF%BE%E7%A8%8B/%E5%81%A5%E5%BA%B7%E7%B3%BB%E7%BB%9F/%E4%BB%A3%E7%A0%81%E9%87%8D%E6%9E%84/</guid>
+      <description>Part 1 新增 Components/STHealthComponent # C++ STHEalthComponent 当前生命值和最大生命值 数据成员 Health MaxHealth 提供 public 接口，可以获取当前生命值 函数成员 GetHealth 提供 public 接口，判断角色是否死亡 函数成员 IsDead 定义委托类型并添加数据成员，生命值改变时通知 FOnHealthChangedSignature 定义委托类型并添加数据成员，生命值为0时通知 FOnDeathSignature 提供 private 接口，更新生命值并通知 SetHealth 添加定时器，受到伤害后延后治疗 数据成员 参数 名称 使能自动治疗 AutoHeal 治疗量 HealModifier 治疗频率 HealRate 延后治疗时长 HealDelay 函数成员 函数 名称 回调函数 OnHealTrigger 开启定时器 StartHealTimer 关闭定时器 StopHealTimer 注册受伤处理函数，更新生命值，死亡时广播 函数成员 OnTakeAnyDamage Part 2 为Character添加HealthComponent和TextRender组件 # C++ STBaseCharacter 添加组件并初始化 添加函数，修改HealthText组件文本；初始化和生命值改变时调用 注册HealthComponent的OnHealthChanged 添加数据成员，蓝图可设置死亡动画剪辑 添加数据成员，蓝图可设置角色死亡销毁延时 注册HealthComponent的OnDeath 角色死亡时，播放死亡动画剪辑，禁止控制游戏角色，定时销毁，并切换到观察者视角 添加数据成员，坠落伤害范围和受到伤害时落地速度范围 添加函数成员，坠落时委托处理函数，并注册委托服务 Part 3 新增 Dev/STDevDamageActor # C++ STDevDamageActor 添加SceneComponent，使能变换 添加数据成员，设置球体颜色和半径 绘制球体，显示爆炸伤害范围 添加数据成员，设置伤害数值特征和计算伤害选项 对伤害半径内的角色造成伤害 Part 4 相关设置 # 虚幻编辑器 调整TextRender组件 创建死亡动画剪辑 AM_Death，并设置AM_Death播放完结束 在动画蓝图中，通过Slot，连接状态机动画和OutputPose ABP_BaseCharacter &amp;gt; AnimGraph 设置DeathAnimMontage属性 AM_Death BP_STBaseCharacter 在场景中添加伤害源 Part 5 项目结构更新 # 资产 Content/ ExternalContent/ Levels/ DefaultMap Player/ Animations/ ABP_BaseCharacter BS_Run BS_Walk AM_Death BP_STBaseCharacter [-] BP_STPlayerController BP_STGameModeBase C++ ShootTrainingSecond/ ShootTrainingSecondGameModeBase Public/ Components/ STCharacterMovementComponent STHealthComponent Player/ STBaseCharacter [-] STPlayerController Dev/ STDevDamageActor Part 6 阶段性总结 # 一、游戏角色 # C++ Player/STBaseCharacter Blueprint Player/BP_STBaseCharacter Player/Animations/ABP_BaseCharacter 其他 Player/Animations Blueprint BS_Run BS_Walk AM_Death 1.</description>
+    </item>
+    
   </channel>
 </rss>
