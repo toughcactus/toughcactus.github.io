@@ -16,16 +16,16 @@
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <title>搭建个人博客 - ToughCactus</title>
-<meta name="description" content="Overview # 环境 说明 Github Page 部署服务器 Hugo 构建静态网页 安装依赖 # Hugo 1. 使用go安装 # Windows系统 安装go 官网下载 环境变量 # go export PATH=/usr/local/go/bin:$PATH export GOROOT=/usr/local/go export GOPATH=/Users/USERNAME/go export GOBIN=/Users/USERNAME/go/bin # go安装的软件 export PATH=$GOBIN:$PATH 生效 vi ~/.zshrc source ~/.zshrc 安装hugo 如若遇上网络不佳 go env -w GOPROXY=https://goproxy.cn,direct go env -w GOSUMDB=off 安装，验证 go install github.com/gohugoio/hugo@latest hugo env -v 如果需要使用hugo扩展功能，替换hugo文件 2. 使用homebrew安装 # MacOS brew install hugo 使用hugo构建静态网页 # 初始化项目 hugo new site /site/path 通用项目结构 文件 说明 config.">
+<meta name="description" content="Overview # 环境 说明 Github Page 部署服务器 Hugo 构建静态网页 anubis 主题 安装依赖 # Hugo 1. 使用go安装 # Windows系统 安装go 官网下载 环境变量 # go export PATH=/usr/local/go/bin:$PATH export GOROOT=/usr/local/go export GOPATH=/Users/USERNAME/go export GOBIN=/Users/USERNAME/go/bin # go安装的软件 export PATH=$GOBIN:$PATH 生效 vi ~/.zshrc source ~/.zshrc 安装hugo 如若遇上网络不佳 go env -w GOPROXY=https://goproxy.cn,direct go env -w GOSUMDB=off 安装，验证 go install github.com/gohugoio/hugo@latest hugo env -v 如果需要使用hugo扩展功能，替换hugo文件 2. 使用homebrew安装 # MacOS brew install hugo 初始化项目 # 初始化项目 hugo new site /site/path 通用项目结构 文件 说明 config.">
   <link rel="canonical" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
 <meta property="og:title" content="搭建个人博客">
-<meta property="og:description" content="Overview # 环境 说明 Github Page 部署服务器 Hugo 构建静态网页 安装依赖 # Hugo 1. 使用go安装 # Windows系统 安装go 官网下载 环境变量 # go export PATH=/usr/local/go/bin:$PATH export GOROOT=/usr/local/go export GOPATH=/Users/USERNAME/go export GOBIN=/Users/USERNAME/go/bin # go安装的软件 export PATH=$GOBIN:$PATH 生效 vi ~/.zshrc source ~/.zshrc 安装hugo 如若遇上网络不佳 go env -w GOPROXY=https://goproxy.cn,direct go env -w GOSUMDB=off 安装，验证 go install github.com/gohugoio/hugo@latest hugo env -v 如果需要使用hugo扩展功能，替换hugo文件 2. 使用homebrew安装 # MacOS brew install hugo 使用hugo构建静态网页 # 初始化项目 hugo new site /site/path 通用项目结构 文件 说明 config.">
+<meta property="og:description" content="Overview # 环境 说明 Github Page 部署服务器 Hugo 构建静态网页 anubis 主题 安装依赖 # Hugo 1. 使用go安装 # Windows系统 安装go 官网下载 环境变量 # go export PATH=/usr/local/go/bin:$PATH export GOROOT=/usr/local/go export GOPATH=/Users/USERNAME/go export GOBIN=/Users/USERNAME/go/bin # go安装的软件 export PATH=$GOBIN:$PATH 生效 vi ~/.zshrc source ~/.zshrc 安装hugo 如若遇上网络不佳 go env -w GOPROXY=https://goproxy.cn,direct go env -w GOSUMDB=off 安装，验证 go install github.com/gohugoio/hugo@latest hugo env -v 如果需要使用hugo扩展功能，替换hugo文件 2. 使用homebrew安装 # MacOS brew install hugo 初始化项目 # 初始化项目 hugo new site /site/path 通用项目结构 文件 说明 config.">
 <meta property="og:url" content="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
 <meta property="og:site_name" content="ToughCactus">
 <meta property="article:published_time" content="2023-06-08T10:57:46+00:00">
-  <meta property="article:modified_time" content="2023-06-11T01:03:33+08:00">
+  <meta property="article:modified_time" content="2023-06-11T01:50:01+08:00">
   
   <meta property="og:image" content="https://toughcactus.github.io/doks.png"/>
       <meta property="og:image:alt" content="ToughCactus">
@@ -86,7 +86,7 @@
           "@id": "https://toughcactus.github.io/#/schema/organization/1"
         },
       "datePublished": "2023-06-08T10:57:46CET",
-      "dateModified": "2023-06-11T01:03:33CET",
+      "dateModified": "2023-06-11T01:50:01CET",
       "breadcrumb": {
         "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/#/schema/breadcrumb/1"
       },
@@ -162,7 +162,7 @@
             "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/"
           },
           "datePublished": "2023-06-08T10:57:46CET",
-          "dateModified": "2023-06-11T01:03:33CET",
+          "dateModified": "2023-06-11T01:50:01CET",
           "author": {
             "@id": "https://toughcactus.github.io/#/schema/person/2"
           },
@@ -962,7 +962,14 @@
             <li><a href="#2-dot-使用homebrew安装">2. 使用homebrew安装</a></li>
           </ul>
         </li>
-        <li><a href="#使用hugo构建静态网页">使用hugo构建静态网页</a></li>
+        <li><a href="#初始化项目">初始化项目</a></li>
+        <li><a href="#使用主题anubis">使用主题anubis</a></li>
+        <li><a href="#使用hugo构建静态网页">使用hugo构建静态网页</a>
+          <ul>
+            <li><a href="#1-dot-运行服务器">1. 运行服务器</a></li>
+            <li><a href="#2-dot-生成静态页面">2. 生成静态页面</a></li>
+          </ul>
+        </li>
         <li><a href="#在github创建项目">在Github创建项目</a></li>
       </ul>
     </li>
@@ -986,7 +993,14 @@
             <li><a href="#2-dot-使用homebrew安装">2. 使用homebrew安装</a></li>
           </ul>
         </li>
-        <li><a href="#使用hugo构建静态网页">使用hugo构建静态网页</a></li>
+        <li><a href="#初始化项目">初始化项目</a></li>
+        <li><a href="#使用主题anubis">使用主题anubis</a></li>
+        <li><a href="#使用hugo构建静态网页">使用hugo构建静态网页</a>
+          <ul>
+            <li><a href="#1-dot-运行服务器">1. 运行服务器</a></li>
+            <li><a href="#2-dot-生成静态页面">2. 生成静态页面</a></li>
+          </ul>
+        </li>
         <li><a href="#在github创建项目">在Github创建项目</a></li>
       </ul>
     </li>
@@ -1045,7 +1059,14 @@
             <li><a href="#2-dot-使用homebrew安装">2. 使用homebrew安装</a></li>
           </ul>
         </li>
-        <li><a href="#使用hugo构建静态网页">使用hugo构建静态网页</a></li>
+        <li><a href="#初始化项目">初始化项目</a></li>
+        <li><a href="#使用主题anubis">使用主题anubis</a></li>
+        <li><a href="#使用hugo构建静态网页">使用hugo构建静态网页</a>
+          <ul>
+            <li><a href="#1-dot-运行服务器">1. 运行服务器</a></li>
+            <li><a href="#2-dot-生成静态页面">2. 生成静态页面</a></li>
+          </ul>
+        </li>
         <li><a href="#在github创建项目">在Github创建项目</a></li>
       </ul>
     </li>
@@ -1069,7 +1090,14 @@
             <li><a href="#2-dot-使用homebrew安装">2. 使用homebrew安装</a></li>
           </ul>
         </li>
-        <li><a href="#使用hugo构建静态网页">使用hugo构建静态网页</a></li>
+        <li><a href="#初始化项目">初始化项目</a></li>
+        <li><a href="#使用主题anubis">使用主题anubis</a></li>
+        <li><a href="#使用hugo构建静态网页">使用hugo构建静态网页</a>
+          <ul>
+            <li><a href="#1-dot-运行服务器">1. 运行服务器</a></li>
+            <li><a href="#2-dot-生成静态页面">2. 生成静态页面</a></li>
+          </ul>
+        </li>
         <li><a href="#在github创建项目">在Github创建项目</a></li>
       </ul>
     </li>
@@ -1095,6 +1123,10 @@
 <tr>
 <td>Hugo</td>
 <td>构建静态网页</td>
+</tr>
+<tr>
+<td>anubis</td>
+<td>主题</td>
 </tr>
 </tbody>
 </table>
@@ -1135,15 +1167,13 @@ hugo env -v
 <p><code>MacOS</code> <br/></p>
 <pre><code class="language-bash">brew install hugo
 </code></pre>
-<h2 id="使用hugo构建静态网页">使用hugo构建静态网页 <a href="#%e4%bd%bf%e7%94%a8hugo%e6%9e%84%e5%bb%ba%e9%9d%99%e6%80%81%e7%bd%91%e9%a1%b5" class="anchor" aria-hidden="true">#</a></h2>
+<h2 id="初始化项目">初始化项目 <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96%e9%a1%b9%e7%9b%ae" class="anchor" aria-hidden="true">#</a></h2>
 <ol>
-<li>
-<p>初始化项目 <br/></p>
+<li>初始化项目 <br/>
 <pre><code class="language-bash">hugo new site /site/path
 </code></pre>
 </li>
-<li>
-<p>通用项目结构 <br/></p>
+<li>通用项目结构 <br/>
 <table>
 <thead>
 <tr>
@@ -1175,13 +1205,22 @@ hugo env -v
 </tbody>
 </table>
 </li>
+<li>创建页面 <br/>
+保存到 ./content/post <br/>
+<pre><code class="language-bash">hugo new post/first-blog.org
+</code></pre>
+</li>
+</ol>
+<h2 id="使用主题anubis">使用主题anubis <a href="#%e4%bd%bf%e7%94%a8%e4%b8%bb%e9%a2%98anubis" class="anchor" aria-hidden="true">#</a></h2>
+<ol>
 <li>
-<p>下载主题 anubis <br/>
-<a href="https://themes.gohugo.io/themes/hugo-theme-anubis/">anubis on hugo</a> <a href="https://github.com/mitrichius/hugo-theme-anubis">anubis on github</a> <br/></p>
-<pre><code class="language-bash"># 如果使用git管理静态网页项目
-git init
+<p>下载主题 <br/>
+<a href="https://themes.gohugo.io/themes/hugo-theme-anubis/">anubis on hugo</a> <a href="https://github.com/mitrichius/hugo-theme-anubis">anubis on github</a> <br/>
+<strong>如果使用git管理静态网页项目</strong> <br/></p>
+<pre><code class="language-bash">git init
 git submodule add https://github.com/mitrichius/hugo-theme-anubis.git themes/anubis
 </code></pre>
+<p>或者直接下载，并存放到./theme目录下 <br/></p>
 </li>
 <li>
 <p>使用anubis提供的模板 <br/>
@@ -1241,7 +1280,7 @@ cp themes/anubis/exampleSite/content/. content
 </table>
 </li>
 <li>
-<p>anubis 文章模板 <br/>
+<p>文章模板 <br/>
 <code>yaml</code> <br/></p>
 <blockquote>
 <p>&mdash; <br/>
@@ -1262,31 +1301,63 @@ categories: [ <br/>
 <p>正文 <br/></p>
 </blockquote>
 </li>
-<li>
-<p>创建页面 <br/>
-保存到 ./content/post <br/></p>
-<pre><code class="language-bash">hugo new post/first-blog.org
+</ol>
+<h2 id="使用hugo构建静态网页">使用hugo构建静态网页 <a href="#%e4%bd%bf%e7%94%a8hugo%e6%9e%84%e5%bb%ba%e9%9d%99%e6%80%81%e7%bd%91%e9%a1%b5" class="anchor" aria-hidden="true">#</a></h2>
+<table>
+<thead>
+<tr>
+<th>选项</th>
+<th>说明</th>
+<th></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&ndash;theme=anubis</td>
+<td>设置主题； <code>-t anubis</code></td>
+<td>both</td>
+</tr>
+<tr>
+<td><code>--watch</code></td>
+<td>修改文件后自动刷新浏览器； <code>-w</code></td>
+<td>server</td>
+</tr>
+<tr>
+<td><code>--buildDrafts</code></td>
+<td>包括标记为draft的笔记； <code>-D</code></td>
+<td>both</td>
+</tr>
+<tr>
+<td><code>--buildFuture</code></td>
+<td>包括新发布笔记；检查date选项； <code>-F</code></td>
+<td>both</td>
+</tr>
+<tr>
+<td>&ndash;baseUrl=&quot;<a href="http://toughcactus.github.io/">http://toughcactus.github.io/</a>&quot;</td>
+<td>编译时不包含，GithubPage部署会丢失样式</td>
+<td>both</td>
+</tr>
+<tr>
+<td><code>--cleanDestinationDir</code></td>
+<td>将public文件夹中不再使用的文件删除</td>
+<td>hugo</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-dot-运行服务器">1. 运行服务器 <a href="#1-dot-%e8%bf%90%e8%a1%8c%e6%9c%8d%e5%8a%a1%e5%99%a8" class="anchor" aria-hidden="true">#</a></h3>
+<p><strong>查询server选项</strong> <br/>
+<a href="https://www.gohugo.org/doc/overview/quickstart/">参考</a> <br/></p>
+<pre><code class="language-bash">hugo help server
 </code></pre>
-</li>
-<li>
-<p>运行服务器端 <br/>
-本地测试，访问 <a href="http://localhost:1313/">http://localhost:1313/</a> <br/></p>
+<p>本地测试，访问 <a href="http://localhost:1313/">http://localhost:1313/</a> <br/></p>
 <pre><code class="language-bash">hugo server --theme=anubis --watch
-# hugo server --theme=anubis --buildDrafts --watch
 # hugo server
 </code></pre>
-</li>
-<li>
-<p>生成静态页面 <br/>
-生成文件在 ./public <br/></p>
+<h3 id="2-dot-生成静态页面">2. 生成静态页面 <a href="#2-dot-%e7%94%9f%e6%88%90%e9%9d%99%e6%80%81%e9%a1%b5%e9%9d%a2" class="anchor" aria-hidden="true">#</a></h3>
+<p>生成文件在 ./public <br/></p>
 <pre><code class="language-bash">hugo --theme=anubis --baseUrl=&quot;https://toughcactus.github.io/&quot;
-# hugo --theme=anubis --buildDrafts --baseUrl=&quot;https://toughcactus.github.io/&quot;
-# hugo -D
 # hugo
-# hugo -F --cleanDestinationDir
 </code></pre>
-</li>
-</ol>
 <h2 id="在github创建项目">在Github创建项目 <a href="#%e5%9c%a8github%e5%88%9b%e5%bb%ba%e9%a1%b9%e7%9b%ae" class="anchor" aria-hidden="true">#</a></h2>
 <ol>
 <li>创建repository <br/>
@@ -1349,7 +1420,7 @@ toughcactus.github.io <br/></li>
 <script src="/js/bootstrap.min.650aeec64c81d69d4c0850fc73c93da3f0330cec0a27772feed7f90f60baa5f47f1c45687d71914bdafd1c4e860d40f6dc08ede27a2f08431ff929c9a2d24621.js" integrity="sha512-ZQruxkyB1p1MCFD8c8k9o/AzDOwKJ3cv7tf5D2C6pfR/HEVofXGRS9r9HE6GDUD23Ajt4novCEMf&#43;SnJotJGIQ==" crossorigin="anonymous" defer></script>
   <script src="/js/highlight.min.836e9b5b74e0d2b8c7e9ff6d89ea27207cda92009d199c018c08c620f11bbfa46937a66603548a63af1840fce1d731b18d96c2d08bf7f5a51ecfd8b363d7d2b2.js" integrity="sha512-g26bW3Tg0rjH6f9tieonIHzakgCdGZwBjAjGIPEbv6RpN6ZmA1SKY68YQPzh1zGxjZbC0Iv39aUez9izY9fSsg==" crossorigin="anonymous" defer></script>
   <script src="/main.min.cb2e2ebbf2e4002f3117addc33582923b2b3ae5265c22944cd117ebec7abe61c170417c4506d7a0f8f0fc9053dfdf441421d53601ac467042ff3d06ec0ba07fa.js" integrity="sha512-yy4uu/LkAC8xF63cM1gpI7KzrlJlwilEzRF&#43;vser5hwXBBfEUG16D48PyQU9/fRBQh1TYBrEZwQv89BuwLoH&#43;g==" crossorigin="anonymous" defer></script>
-  <script src="https://toughcactus.github.io/index.min.3181f041c14cc58e16b47d9fd81308b18e42aec0304ab2254b3828beca18914c7175be820377ca07bf5e8093053dd66fb3e2051d6a01791dbb8663b72a700e3f.js" integrity="sha512-MYHwQcFMxY4WtH2f2BMIsY5CrsAwSrIlSzgovsoYkUxxdb6CA3fKB79egJMFPdZvs&#43;IFHWoBeR27hmO3KnAOPw==" crossorigin="anonymous" defer></script>
+  <script src="https://toughcactus.github.io/index.min.f48e4e595df245a1049a1bfefefcd0a7de6e991db4fdd98b004b81714c8c45b2ec195939f438d87c2a8aab5a10fdea8fa7eaee89384de5b61e5033c698110964.js" integrity="sha512-9I5OWV3yRaEEmhv&#43;/vzQp95umR20/dmLAEuBcUyMRbLsGVk59DjYfCqKq1oQ/eqPp&#43;ruiThN5bYeUDPGmBEJZA==" crossorigin="anonymous" defer></script>
   
   
 </body>
