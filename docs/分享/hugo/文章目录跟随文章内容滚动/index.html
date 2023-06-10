@@ -15,16 +15,16 @@
   <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <title>Doks主题 - ToughCactus</title>
-<meta name="description" content="Overview # demo github 依赖 说明 Git 并不知道为什么会依赖Git Node.js 前端插件 环境 Github Node.js Doks Hugo 安装依赖 # Git git --version Node.js 官网下载 18.16.0 LTS node --version npm --version npm config list # 查看配置 # 设置代理 npm config set proxy http://localhost:15236 npm config set https-proxy http://localhost:15236 # 如果代理不支持https npm config set registry &amp;quot;http://registry.npmjs.org&amp;quot; 初始化项目 # 下载到本地 和之前的hugo theme不同，不放到theme/，而是直接作为项目 官网提供两个项目，Child theme适合新手 git clone https://github.com/h-enk/doks.git doks 安装node modules npm install 本地部署服务器 不建议，会删除./public文件夹 npm run start 访问 http://localhost:1313/ 项目结构 # 基础结构 基础结构 说明 package.">
-  <link rel="canonical" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">
+  <title>文章目录跟随文章内容滚动 - ToughCactus</title>
+<meta name="description" content="如果在目录项高亮时设置文章目录滚动跟随，文章目录跳转功能失效 文章目录跳转时，会高亮中间的每一个目录项。在高亮下一个目录项时，文章目录立即滚动跟随，此时会终止跳转。 滚动触发 找到了文章目录对应的元素 document.querySelector(&#39;.docs-toc&#39;) ，没有找到页面对应的元素 1. 两种滚动注册 # 监听 所有滚动都会触发。配合定时器，如果在定时器到时间之前没有跳转到目的目录项，文章目录滚动偏移重置 window.addEventListener(&#39;scroll&#39;, () =&amp;gt; { // 处理 }); 绑定事件处理函数 对window绑定处理函数，只在滚动页面时触发 ✔️ 参考./assets/js/to-top.js window.onscroll = function() { // 处理 }; 2. 处理函数调用时间点 # 如果文章目录滚动即触发，因为持续滚动，文章目录跳转功能完全失效。得在滚动结束后，再调用处理函数。 使用定时器。滚动即重启定时器，定时器到时间再调用处理函数。 let timer = null; window.onscroll = function () { clearTimeout(timer); timer = setTimeout(function () { // 处理 }, 300); // 设置定时器间隔；要求不小于最长跳转时间 }; 3. 设置文章目录滚动 # 根据窗口高度 window.innerHeight ，能展示的目录项有限 max 。 每个目录项占用的高度 single ，和文章目录的总高度有关 document.querySelector(&#39;.docs-toc&#39;).scrollHeight 。 考虑到文章目录上方&amp;quot;On This Page&amp;quot;文本，窗口可供显示目录的高度应减去&amp;quot;On This Page&amp;quot;文本的高度。 若当前目录项超出窗口可展示目录项的一半，滚动文章目录，偏移量使得之后的当前目录项位于文章目录中间位置。 完整代码 放在.">
+  <link rel="canonical" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Doks主题">
-<meta property="og:description" content="Overview # demo github 依赖 说明 Git 并不知道为什么会依赖Git Node.js 前端插件 环境 Github Node.js Doks Hugo 安装依赖 # Git git --version Node.js 官网下载 18.16.0 LTS node --version npm --version npm config list # 查看配置 # 设置代理 npm config set proxy http://localhost:15236 npm config set https-proxy http://localhost:15236 # 如果代理不支持https npm config set registry &quot;http://registry.npmjs.org&quot; 初始化项目 # 下载到本地 和之前的hugo theme不同，不放到theme/，而是直接作为项目 官网提供两个项目，Child theme适合新手 git clone https://github.com/h-enk/doks.git doks 安装node modules npm install 本地部署服务器 不建议，会删除./public文件夹 npm run start 访问 http://localhost:1313/ 项目结构 # 基础结构 基础结构 说明 package.">
-<meta property="og:url" content="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">
+<meta property="og:title" content="文章目录跟随文章内容滚动">
+<meta property="og:description" content="如果在目录项高亮时设置文章目录滚动跟随，文章目录跳转功能失效 文章目录跳转时，会高亮中间的每一个目录项。在高亮下一个目录项时，文章目录立即滚动跟随，此时会终止跳转。 滚动触发 找到了文章目录对应的元素 document.querySelector(&#39;.docs-toc&#39;) ，没有找到页面对应的元素 1. 两种滚动注册 # 监听 所有滚动都会触发。配合定时器，如果在定时器到时间之前没有跳转到目的目录项，文章目录滚动偏移重置 window.addEventListener(&#39;scroll&#39;, () =&gt; { // 处理 }); 绑定事件处理函数 对window绑定处理函数，只在滚动页面时触发 ✔️ 参考./assets/js/to-top.js window.onscroll = function() { // 处理 }; 2. 处理函数调用时间点 # 如果文章目录滚动即触发，因为持续滚动，文章目录跳转功能完全失效。得在滚动结束后，再调用处理函数。 使用定时器。滚动即重启定时器，定时器到时间再调用处理函数。 let timer = null; window.onscroll = function () { clearTimeout(timer); timer = setTimeout(function () { // 处理 }, 300); // 设置定时器间隔；要求不小于最长跳转时间 }; 3. 设置文章目录滚动 # 根据窗口高度 window.innerHeight ，能展示的目录项有限 max 。 每个目录项占用的高度 single ，和文章目录的总高度有关 document.querySelector(&#39;.docs-toc&#39;).scrollHeight 。 考虑到文章目录上方&quot;On This Page&quot;文本，窗口可供显示目录的高度应减去&quot;On This Page&quot;文本的高度。 若当前目录项超出窗口可展示目录项的一半，滚动文章目录，偏移量使得之后的当前目录项位于文章目录中间位置。 完整代码 放在.">
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">
 <meta property="og:site_name" content="ToughCactus">
-<meta property="article:published_time" content="2023-06-07T11:19:42+00:00">
+<meta property="article:published_time" content="2023-06-09T10:46:13+00:00">
   <meta property="article:modified_time" content="2023-06-10T10:53:48+08:00">
   
   <meta property="og:image" content="https://toughcactus.github.io/doks.png"/>
@@ -33,10 +33,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@getdoks">
 <meta name="twitter:creator" content="@henkverlinde">
-<meta name="twitter:title" content="Doks主题">
+<meta name="twitter:title" content="文章目录跟随文章内容滚动">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://toughcactus.github.io/doks.png">
-    <meta name="twitter:image:alt" content="Doks主题">
+    <meta name="twitter:image:alt" content="文章目录跟随文章内容滚动">
 
 <script type="application/ld+json">
 {
@@ -75,9 +75,9 @@
       },
     {
       "@type": "WebPage",
-      "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/",
-      "url": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/",
-      "name": "Doks主题",
+      "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/",
+      "url": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/",
+      "name": "文章目录跟随文章内容滚动",
       "description": "",
       "isPartOf": {
         "@id": "https://toughcactus.github.io/#/schema/website/1"
@@ -85,22 +85,22 @@
       "about": {
           "@id": "https://toughcactus.github.io/#/schema/organization/1"
         },
-      "datePublished": "2023-06-07T11:19:42CET",
+      "datePublished": "2023-06-09T10:46:13CET",
       "dateModified": "2023-06-10T10:53:48CET",
       "breadcrumb": {
-        "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/#/schema/breadcrumb/1"
+        "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/#/schema/breadcrumb/1"
       },
       "primaryImageOfPage": {
-        "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/#/schema/image/2"
+        "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/#/schema/image/2"
       },
       "inLanguage": "en-US",
       "potentialAction": [{
-        "@type": "ReadAction", "target": ["https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/"]
+        "@type": "ReadAction", "target": ["https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/"]
       }]
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/#/schema/breadcrumb/1",
+      "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/#/schema/breadcrumb/1",
       "name": "Breadcrumbs",
       "itemListElement": [{
         "@type": "ListItem",
@@ -142,7 +142,7 @@
         "@type": "ListItem",
         "position":  5 ,
         "item": {
-          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/"
+          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/"
           }
         }]
     },
@@ -153,15 +153,15 @@
         {
           "@type": "Article",
           "@id": "https://toughcactus.github.io/#/schema/article/1",
-          "headline": "Doks主题",
+          "headline": "文章目录跟随文章内容滚动",
           "description": "",
           "isPartOf": {
-            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/"
+            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/"
           },
           "mainEntityOfPage": {
-            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/"
+            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/"
           },
-          "datePublished": "2023-06-07T11:19:42CET",
+          "datePublished": "2023-06-09T10:46:13CET",
           "dateModified": "2023-06-10T10:53:48CET",
           "author": {
             "@id": "https://toughcactus.github.io/#/schema/person/2"
@@ -170,7 +170,7 @@
               "@id": "https://toughcactus.github.io/#/schema/organization/1"
             },
           "image": {
-            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/#/schema/image/2"
+            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/#/schema/image/2"
           }
         }
       ]
@@ -195,10 +195,10 @@
       "@graph": [
         {
           "@type": "ImageObject",
-          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/#/schema/image/2",
+          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/#/schema/image/2",
           "url": "https://toughcactus.github.io/doks.png",
           "contentUrl": "https://toughcactus.github.io/doks.png",
-          "caption": "Doks主题"
+          "caption": "文章目录跟随文章内容滚动"
         }
       ]
     }
@@ -324,12 +324,12 @@
                       
                         
                           
-                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">Doks主题</a></li>
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">Doks主题</a></li>
                         
                       
                         
                           
-                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">文章目录跟随文章内容滚动</a></li>
+                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">文章目录跟随文章内容滚动</a></li>
                         
                       
                     </ul>
@@ -491,12 +491,12 @@
                       
                         
                           
-                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">Doks主题</a></li>
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">Doks主题</a></li>
                         
                       
                         
                           
-                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">文章目录跟随文章内容滚动</a></li>
+                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">文章目录跟随文章内容滚动</a></li>
                         
                       
                     </ul>
@@ -605,12 +605,12 @@
                       
                         
                           
-                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">Doks主题</a></li>
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">Doks主题</a></li>
                         
                       
                         
                           
-                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">文章目录跟随文章内容滚动</a></li>
+                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">文章目录跟随文章内容滚动</a></li>
                         
                       
                     </ul>
@@ -655,35 +655,9 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#安装依赖">安装依赖</a></li>
-        <li><a href="#初始化项目">初始化项目</a></li>
-        <li><a href="#项目结构">项目结构</a></li>
-        <li><a href="#设置语言">设置语言</a></li>
-        <li><a href="#设置主页">设置主页</a>
-          <ul>
-            <li><a href="#1-dot-title">1. title</a></li>
-            <li><a href="#2-dot-get-started-链接">2. get-started 链接</a></li>
-            <li><a href="#3-dot-文本块">3. 文本块</a></li>
-            <li><a href="#4-dot-文本">4. 文本</a></li>
-            <li><a href="#5-dot-footer">5. footer</a></li>
-          </ul>
-        </li>
-        <li><a href="#自定义配置">自定义配置</a>
-          <ul>
-            <li><a href="#1-dot-横向路径导航">1. 横向路径导航</a></li>
-            <li><a href="#2-dot-全尺寸布局">2. 全尺寸布局</a></li>
-            <li><a href="#3-dot-试验高亮目录">3. 试验高亮目录</a></li>
-            <li><a href="#4-dot-使用highlight-dot-js">4. 使用highlight.js</a></li>
-            <li><a href="#5-dot-目录导航">5. 目录导航</a></li>
-            <li><a href="#6-dot-代码框背景色">6. 代码框背景色</a></li>
-            <li><a href="#7-dot-设置表格样式">7. 设置表格样式</a></li>
-            <li><a href="#8-dot-渐变条">8. 渐变条</a></li>
-            <li><a href="#9-dot-主题色">9. 主题色</a></li>
-          </ul>
-        </li>
-        <li><a href="#实现目录高亮">实现目录高亮</a></li>
-        <li><a href="#遗留问题">遗留问题</a></li>
+        <li><a href="#1-dot-两种滚动注册">1. 两种滚动注册</a></li>
+        <li><a href="#2-dot-处理函数调用时间点">2. 处理函数调用时间点</a></li>
+        <li><a href="#3-dot-设置文章目录滚动">3. 设置文章目录滚动</a></li>
       </ul>
     </li>
   </ul>
@@ -699,35 +673,9 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#安装依赖">安装依赖</a></li>
-        <li><a href="#初始化项目">初始化项目</a></li>
-        <li><a href="#项目结构">项目结构</a></li>
-        <li><a href="#设置语言">设置语言</a></li>
-        <li><a href="#设置主页">设置主页</a>
-          <ul>
-            <li><a href="#1-dot-title">1. title</a></li>
-            <li><a href="#2-dot-get-started-链接">2. get-started 链接</a></li>
-            <li><a href="#3-dot-文本块">3. 文本块</a></li>
-            <li><a href="#4-dot-文本">4. 文本</a></li>
-            <li><a href="#5-dot-footer">5. footer</a></li>
-          </ul>
-        </li>
-        <li><a href="#自定义配置">自定义配置</a>
-          <ul>
-            <li><a href="#1-dot-横向路径导航">1. 横向路径导航</a></li>
-            <li><a href="#2-dot-全尺寸布局">2. 全尺寸布局</a></li>
-            <li><a href="#3-dot-试验高亮目录">3. 试验高亮目录</a></li>
-            <li><a href="#4-dot-使用highlight-dot-js">4. 使用highlight.js</a></li>
-            <li><a href="#5-dot-目录导航">5. 目录导航</a></li>
-            <li><a href="#6-dot-代码框背景色">6. 代码框背景色</a></li>
-            <li><a href="#7-dot-设置表格样式">7. 设置表格样式</a></li>
-            <li><a href="#8-dot-渐变条">8. 渐变条</a></li>
-            <li><a href="#9-dot-主题色">9. 主题色</a></li>
-          </ul>
-        </li>
-        <li><a href="#实现目录高亮">实现目录高亮</a></li>
-        <li><a href="#遗留问题">遗留问题</a></li>
+        <li><a href="#1-dot-两种滚动注册">1. 两种滚动注册</a></li>
+        <li><a href="#2-dot-处理函数调用时间点">2. 处理函数调用时间点</a></li>
+        <li><a href="#3-dot-设置文章目录滚动">3. 设置文章目录滚动</a></li>
       </ul>
     </li>
   </ul>
@@ -744,11 +692,11 @@
 <li class="breadcrumb-item"><a href="/docs/">Docs</a></li>
 <li class="breadcrumb-item"><a href="/docs/%E5%88%86%E4%BA%AB/">分享</a></li>
 <li class="breadcrumb-item"><a href="/docs/%E5%88%86%E4%BA%AB/hugo/">Hugo</a></li>
-<li class="breadcrumb-item active" aria-current="page">Doks主题</li>
+<li class="breadcrumb-item active" aria-current="page">文章目录跟随文章内容滚动</li>
 					</ol>
 				</nav>
 			
-			<h1>Doks主题</h1>
+			<h1>文章目录跟随文章内容滚动</h1>
 			<p class="lead"></p>
 			<nav class="d-xl-none" aria-label="Quaternary navigation">
 				<div class="d-xl-none">
@@ -778,35 +726,9 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#安装依赖">安装依赖</a></li>
-        <li><a href="#初始化项目">初始化项目</a></li>
-        <li><a href="#项目结构">项目结构</a></li>
-        <li><a href="#设置语言">设置语言</a></li>
-        <li><a href="#设置主页">设置主页</a>
-          <ul>
-            <li><a href="#1-dot-title">1. title</a></li>
-            <li><a href="#2-dot-get-started-链接">2. get-started 链接</a></li>
-            <li><a href="#3-dot-文本块">3. 文本块</a></li>
-            <li><a href="#4-dot-文本">4. 文本</a></li>
-            <li><a href="#5-dot-footer">5. footer</a></li>
-          </ul>
-        </li>
-        <li><a href="#自定义配置">自定义配置</a>
-          <ul>
-            <li><a href="#1-dot-横向路径导航">1. 横向路径导航</a></li>
-            <li><a href="#2-dot-全尺寸布局">2. 全尺寸布局</a></li>
-            <li><a href="#3-dot-试验高亮目录">3. 试验高亮目录</a></li>
-            <li><a href="#4-dot-使用highlight-dot-js">4. 使用highlight.js</a></li>
-            <li><a href="#5-dot-目录导航">5. 目录导航</a></li>
-            <li><a href="#6-dot-代码框背景色">6. 代码框背景色</a></li>
-            <li><a href="#7-dot-设置表格样式">7. 设置表格样式</a></li>
-            <li><a href="#8-dot-渐变条">8. 渐变条</a></li>
-            <li><a href="#9-dot-主题色">9. 主题色</a></li>
-          </ul>
-        </li>
-        <li><a href="#实现目录高亮">实现目录高亮</a></li>
-        <li><a href="#遗留问题">遗留问题</a></li>
+        <li><a href="#1-dot-两种滚动注册">1. 两种滚动注册</a></li>
+        <li><a href="#2-dot-处理函数调用时间点">2. 处理函数调用时间点</a></li>
+        <li><a href="#3-dot-设置文章目录滚动">3. 设置文章目录滚动</a></li>
       </ul>
     </li>
   </ul>
@@ -822,35 +744,9 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#安装依赖">安装依赖</a></li>
-        <li><a href="#初始化项目">初始化项目</a></li>
-        <li><a href="#项目结构">项目结构</a></li>
-        <li><a href="#设置语言">设置语言</a></li>
-        <li><a href="#设置主页">设置主页</a>
-          <ul>
-            <li><a href="#1-dot-title">1. title</a></li>
-            <li><a href="#2-dot-get-started-链接">2. get-started 链接</a></li>
-            <li><a href="#3-dot-文本块">3. 文本块</a></li>
-            <li><a href="#4-dot-文本">4. 文本</a></li>
-            <li><a href="#5-dot-footer">5. footer</a></li>
-          </ul>
-        </li>
-        <li><a href="#自定义配置">自定义配置</a>
-          <ul>
-            <li><a href="#1-dot-横向路径导航">1. 横向路径导航</a></li>
-            <li><a href="#2-dot-全尺寸布局">2. 全尺寸布局</a></li>
-            <li><a href="#3-dot-试验高亮目录">3. 试验高亮目录</a></li>
-            <li><a href="#4-dot-使用highlight-dot-js">4. 使用highlight.js</a></li>
-            <li><a href="#5-dot-目录导航">5. 目录导航</a></li>
-            <li><a href="#6-dot-代码框背景色">6. 代码框背景色</a></li>
-            <li><a href="#7-dot-设置表格样式">7. 设置表格样式</a></li>
-            <li><a href="#8-dot-渐变条">8. 渐变条</a></li>
-            <li><a href="#9-dot-主题色">9. 主题色</a></li>
-          </ul>
-        </li>
-        <li><a href="#实现目录高亮">实现目录高亮</a></li>
-        <li><a href="#遗留问题">遗留问题</a></li>
+        <li><a href="#1-dot-两种滚动注册">1. 两种滚动注册</a></li>
+        <li><a href="#2-dot-处理函数调用时间点">2. 处理函数调用时间点</a></li>
+        <li><a href="#3-dot-设置文章目录滚动">3. 设置文章目录滚动</a></li>
       </ul>
     </li>
   </ul>
@@ -859,604 +755,93 @@
       </div>
 
 			</nav>
-			<h2 id="overview">Overview <a href="#overview" class="anchor" aria-hidden="true">#</a></h2>
-<p><a href="https://getdoks.org/">demo</a> <a href="https://github.com/h-enk/doks">github</a> <br/></p>
-<table>
-<thead>
-<tr>
-<th>依赖</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Git</td>
-<td>并不知道为什么会依赖Git</td>
-</tr>
-<tr>
-<td>Node.js</td>
-<td>前端插件</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>环境</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Github</td>
-</tr>
-<tr>
-<td>Node.js</td>
-</tr>
-<tr>
-<td>Doks</td>
-</tr>
-<tr>
-<td>Hugo</td>
-</tr>
-</tbody>
-</table>
-<h2 id="安装依赖">安装依赖 <a href="#%e5%ae%89%e8%a3%85%e4%be%9d%e8%b5%96" class="anchor" aria-hidden="true">#</a></h2>
-<ol>
-<li>
-<p>Git <br/></p>
-<pre><code class="language-bash">git --version
-</code></pre>
-</li>
-<li>
-<p>Node.js <br/>
-<a href="https://nodejs.org/en">官网下载 18.16.0 LTS</a> <br/></p>
-<pre><code class="language-bash">node --version
-npm --version
-</code></pre>
-<pre><code class="language-bash">npm config list # 查看配置
-</code></pre>
-<pre><code class="language-bash"># 设置代理
-npm config set proxy http://localhost:15236
-npm config set https-proxy http://localhost:15236
-
-# 如果代理不支持https
-npm config set registry &quot;http://registry.npmjs.org&quot;
-</code></pre>
-</li>
+			<ol>
+<li>如果在目录项高亮时设置文章目录滚动跟随，文章目录跳转功能失效 <br/>
+文章目录跳转时，会高亮中间的每一个目录项。在高亮下一个目录项时，文章目录立即滚动跟随，此时会终止跳转。 <br/></li>
+<li>滚动触发 <br/>
+找到了文章目录对应的元素 <code>document.querySelector('.docs-toc')</code> ，没有找到页面对应的元素 <br/></li>
 </ol>
-<h2 id="初始化项目">初始化项目 <a href="#%e5%88%9d%e5%a7%8b%e5%8c%96%e9%a1%b9%e7%9b%ae" class="anchor" aria-hidden="true">#</a></h2>
-<ol>
-<li>下载到本地 <br/>
-和之前的hugo theme不同，不放到theme/，而是直接作为项目 <br/>
-<em>官网提供两个项目，Child theme适合新手</em> <br/>
-<pre><code class="language-bash">git clone https://github.com/h-enk/doks.git doks
-</code></pre>
-</li>
-<li>安装node modules <br/>
-<pre><code class="language-bash">npm install
-</code></pre>
-</li>
-<li>本地部署服务器 <br/>
-不建议，会删除./public文件夹 <br/>
-<pre><code class="language-bash">npm run start
-</code></pre>
-访问 <a href="http://localhost:1313/">http://localhost:1313/</a> <br/></li>
-</ol>
-<h2 id="项目结构">项目结构 <a href="#%e9%a1%b9%e7%9b%ae%e7%bb%93%e6%9e%84" class="anchor" aria-hidden="true">#</a></h2>
-<ol>
-<li>基础结构 <br/>
-<table>
-<thead>
-<tr>
-<th>基础结构</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>package.json和package-lock.json</td>
-<td>node modules信息；npm install命令根据这些信息安装需要的modules</td>
-</tr>
-<tr>
-<td>node_modules/</td>
-<td>下载的node modules</td>
-</tr>
-<tr>
-<td>archetypes/</td>
-<td>模板</td>
-</tr>
-<tr>
-<td>static/</td>
-<td>可以把图片放在这</td>
-</tr>
-<tr>
-<td>content/</td>
-<td>子文件对应一种语言</td>
-</tr>
-<tr>
-<td>config/</td>
-<td>配置文件的查找可以是config.toml，也可以是config/_default/config.toml；支持更多配置</td>
-</tr>
-<tr>
-<td>assets/</td>
-<td>js和css代码</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>node.js <br/>
-<table>
-<thead>
-<tr>
-<th>node_modules/</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>bootstrap</td>
-<td>bootstrap插件大本营；<a href="https://blog.getbootstrap.com/">getbootstrap 5.3.0</a></td>
-</tr>
-<tr>
-<td>highlight.js</td>
-<td>可配置的语法高亮</td>
-</tr>
-</tbody>
-</table>
-<table>
-<thead>
-<tr>
-<th>highLight.js/</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>scss</td>
-<td>highLight.js提供的高亮主题；下载的高亮主题保存到这里</td>
-</tr>
-<tr>
-<td>lib/languages</td>
-<td>支持高亮的语言</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>配置文件 <br/>
-<table>
-<thead>
-<tr>
-<th>config/_default/</th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>menus/</td>
-<td>不同语言的主页配置</td>
-</tr>
-<tr>
-<td>config.toml</td>
-<td>类似简单的config.toml</td>
-</tr>
-<tr>
-<td>languages.toml</td>
-<td>配置语言选项</td>
-</tr>
-<tr>
-<td>markup.toml</td>
-<td>toc显示的层级</td>
-</tr>
-<tr>
-<td>params.toml</td>
-<td>简单config.toml的部分功能；此处可设置主题选项 <code>darkMode</code> ，采用doks还是hugo提供的高亮 <code>highLight</code> ；横向路径导航 <code>breadCrumb</code> ；全尺寸布局 <code>fullWidth</code> ；试验高亮目录 <code>scrollSpy</code></td>
-</tr>
-</tbody>
-</table>
-</li>
-</ol>
-<h2 id="设置语言">设置语言 <a href="#%e8%ae%be%e7%bd%ae%e8%af%ad%e8%a8%80" class="anchor" aria-hidden="true">#</a></h2>
-<ol>
-<li>添加menu <br/>
-./config/_default/menus/menus.zh.toml <br/></li>
-<li>设置语言 <br/>
-<pre><code class="language-toml">// ./config/_default/config.toml
-
-# Multilingual
-## defaultContentLanguage = &quot;en&quot;
-## disableLanguages = [&quot;de&quot;, &quot;nl&quot;]
-# defaultContentLanguageInSubdir = true
-defaultContentLanguage = &quot;zh&quot;
-disableLanguages = [&quot;de&quot;, &quot;nl&quot;, &quot;en&quot;]
-</code></pre>
-</li>
-<li>设置语言项 <br/>
-<pre><code class="language-toml">// ./config/_default/languages.toml
-
-[zh]
-  languageName = &quot;Chinese&quot;
-  contentDir = &quot;content/zh&quot;
-  weight = 5
-  [zh.params]
-    languageISO = &quot;ZH&quot;
-    languageTag = &quot;zh-CN&quot;
-</code></pre>
-</li>
-<li>设置翻译 <br/>
-新增 ./i18n/zh.yaml，同en.yaml <br/></li>
-<li>设置中文对应content <br/>
-创建文件夹 content/zh <br/>
-content/zh/blog <br/>
-content/zh/docs <br/></li>
-</ol>
-<h2 id="设置主页">设置主页 <a href="#%e8%ae%be%e7%bd%ae%e4%b8%bb%e9%a1%b5" class="anchor" aria-hidden="true">#</a></h2>
-<h3 id="1-dot-title">1. title <a href="#1-dot-title" class="anchor" aria-hidden="true">#</a></h3>
-<pre><code class="language-toml"># ./config/_default/params.toml
-
-## title = &quot;Doks&quot;
-title = &quot;ToughCactus&quot;
-</code></pre>
-<h3 id="2-dot-get-started-链接">2. get-started 链接 <a href="#2-dot-get-started-%e9%93%be%e6%8e%a5" class="anchor" aria-hidden="true">#</a></h3>
-<pre><code class="language-html">&lt;!-- ./layout/index.html :9 --&gt;
-
-&lt;a class=&quot;btn btn-primary btn-lg px-4 mb-2&quot; href=&quot;/docs/{{ if .Site.Params.options.docsVersioning }}{{ .Site.Params.docsVersion }}/{{ end }}prologue/introduction/&quot; role=&quot;button&quot;&gt;{{ i18n &quot;get-started&quot; }}&lt;/a&gt;
-</code></pre>
-<h3 id="3-dot-文本块">3. 文本块 <a href="#3-dot-%e6%96%87%e6%9c%ac%e5%9d%97" class="anchor" aria-hidden="true">#</a></h3>
-<p>定义 my-sidebar-prefooter <br/></p>
-<pre><code class="language-html">&lt;!-- ./layout/index.html :60 --&gt;
-
-{{ define &quot;my-sidebar-prefooter&quot; }}
-{{ if eq $.Site.Language.LanguageName &quot;Chinese&quot; }}
-&lt;section class=&quot;section section-sm&quot;&gt;
-  &lt;div class=&quot;container&quot;&gt;
-    &lt;div class=&quot;row justify-content-center text-center&quot;&gt;
-      &lt;div class=&quot;col-lg-5&quot;&gt;
-        &lt;h2 class=&quot;h4&quot;&gt;虚幻引擎&lt;/h2&gt;
-        &lt;p&gt;C++, 蓝图.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;col-lg-5&quot;&gt;
-        &lt;h2 class=&quot;h4&quot;&gt;开发工具 ⚡️&lt;/h2&gt;
-        &lt;p&gt;Git, VSCode.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;col-lg-5&quot;&gt;
-        &lt;h2 class=&quot;h4&quot;&gt;开发语言&lt;/h2&gt;
-        &lt;p&gt;Bash.&lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;row justify-content-center text-center&quot;&gt;
-      &lt;div class=&quot;col-lg-5&quot;&gt;
-        &lt;h2 class=&quot;h4&quot;&gt;C++&lt;/h2&gt;
-        &lt;p&gt;.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;col-lg-5&quot;&gt;
-        &lt;h2 class=&quot;h4&quot;&gt;Emacs&lt;/h2&gt;
-        &lt;p&gt;.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;col-lg-5&quot;&gt;
-        &lt;h2 class=&quot;h4&quot;&gt;图形学&lt;/h2&gt;
-        &lt;p&gt;.&lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-    &lt;div class=&quot;row justify-content-center text-center&quot;&gt;
-      &lt;div class=&quot;col-lg-5&quot;&gt;
-        &lt;h2 class=&quot;h4&quot;&gt;Hugo&lt;/h2&gt;
-        &lt;p&gt;
-          &lt;a href=&quot;/docs/分享/hugo/doks主题/&quot;&gt;Doks主题&lt;/a&gt;.
-        &lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;col-lg-5&quot;&gt;
-        &lt;h2 class=&quot;h4&quot;&gt;MacOS应用&lt;/h2&gt;
-        &lt;p&gt;.&lt;/p&gt;
-      &lt;/div&gt;
-      &lt;div class=&quot;col-lg-5&quot;&gt;
-        &lt;h2 class=&quot;h4&quot;&gt;Linux&lt;/h2&gt;
-        &lt;p&gt;.&lt;/p&gt;
-      &lt;/div&gt;
-    &lt;/div&gt;
-  &lt;/div&gt;
-&lt;/section&gt;
-{{ end }}
-{{ end }}
-</code></pre>
-<p>激活 <br/></p>
-<pre><code class="language-html">&lt;!-- ./layout/_default/baseof.html :22 --&gt;
-
-{{ block &quot;my-sidebar-prefooter&quot; . }}{{ end }}
-</code></pre>
-<h3 id="4-dot-文本">4. 文本 <a href="#4-dot-%e6%96%87%e6%9c%ac" class="anchor" aria-hidden="true">#</a></h3>
-<pre><code class="language-html">&lt;!-- ./content/zh/_index.html --&gt;
-
----
-title : &quot;好记性不如烂键盘。&quot;
-description: &quot;none.&quot;
-lead: &quot;&quot;
-date: &quot;&quot;
-lastmod: &quot;&quot;
-draft: false
-images: []
----
-</code></pre>
-<h3 id="5-dot-footer">5. footer <a href="#5-dot-footer" class="anchor" aria-hidden="true">#</a></h3>
-<pre><code class="language-toml"># ./config/_default/params.toml
-
-## footer = &quot;Powered by &lt;a class=\&quot;text-muted\&quot; href=\&quot;https://www.netlify.com/\&quot;&gt;Netlify&lt;/a&gt;, &lt;a class=\&quot;text-muted\&quot; href=\&quot;https://gohugo.io/\&quot;&gt;Hugo&lt;/a&gt;, and &lt;a class=\&quot;text-muted\&quot; href=\&quot;https://getdoks.org/\&quot;&gt;Doks&lt;/a&gt;&quot;
-footer = &quot;Powered by &lt;a class=\&quot;text-muted\&quot; href=\&quot;https://github.com/\&quot;&gt;Github&lt;/a&gt;, &lt;a class=\&quot;text-muted\&quot; href=\&quot;https://gohugo.io/\&quot;&gt;Hugo&lt;/a&gt;, and &lt;a class=\&quot;text-muted\&quot; href=\&quot;https://getdoks.org/\&quot;&gt;Doks&lt;/a&gt;&quot;
-</code></pre>
-<h2 id="自定义配置">自定义配置 <a href="#%e8%87%aa%e5%ae%9a%e4%b9%89%e9%85%8d%e7%bd%ae" class="anchor" aria-hidden="true">#</a></h2>
-<h3 id="1-dot-横向路径导航">1. 横向路径导航 <a href="#1-dot-%e6%a8%aa%e5%90%91%e8%b7%af%e5%be%84%e5%af%bc%e8%88%aa" class="anchor" aria-hidden="true">#</a></h3>
-<p><a href="https://getdoks.org/docs/how-to/common-features/breadcrumb-navigation/">Breadcrumb Navigation</a> <br/></p>
-<pre><code class="language-toml"># ./config/_default/params.toml
-
-##  breadCrumb = false
-  breadCrumb = true
-</code></pre>
-<h3 id="2-dot-全尺寸布局">2. 全尺寸布局 <a href="#2-dot-%e5%85%a8%e5%b0%ba%e5%af%b8%e5%b8%83%e5%b1%80" class="anchor" aria-hidden="true">#</a></h3>
-<pre><code class="language-toml"># config/_default/params.toml
-
-##  fullWidth = true
-  fullWidth = true
-</code></pre>
-<h3 id="3-dot-试验高亮目录">3. 试验高亮目录 <a href="#3-dot-%e8%af%95%e9%aa%8c%e9%ab%98%e4%ba%ae%e7%9b%ae%e5%bd%95" class="anchor" aria-hidden="true">#</a></h3>
-<pre><code class="language-toml"># config/_default/params.toml
-
-scrollSpy = false # experimental; needs Bootstrap &gt;= 5.2.0-beta1 
-</code></pre>
-<p>scrollSpy是node.js module <br/></p>
-<h3 id="4-dot-使用highlight-dot-js">4. 使用highlight.js <a href="#4-dot-%e4%bd%bf%e7%94%a8highlight-dot-js" class="anchor" aria-hidden="true">#</a></h3>
-<p><a href="https://getdoks.org/docs/how-to/common-features/highlight-js/">hightlight.js</a> <a href="https://highlightjs.org/static/demo/">官网</a>  <br/>
-<strong>开关</strong> <br/>
-为false使用hugo默认代码高亮；为true则使用node modules，可以自行配置 <br/></p>
-<pre><code class="language-toml"># ./config/_default/params.toml
-highLight = true
-</code></pre>
-<p><strong>下载高亮主题</strong> <br/>
-<a href="https://draculatheme.com/highlightjs">Dracula</a> <br/></p>
-<pre><code class="language-bash">git clone https://github.com/dracula/highlightjs.git
-cp Dracula/highlightjs/dracula.css doks/node_modules/highlight.js/scss/
-</code></pre>
-<p><strong>设置高亮主题</strong> <br/></p>
-<pre><code class="language-css">// ./assets/scss/app.scss
-
-// @import &quot;highlight.js/scss/github-dark-dimmed&quot;; // 自带
-@import &quot;highlight.js/scss/dracula&quot;; // 新下载
-</code></pre>
-<p><strong>设置要高亮的编程语言</strong> <br/>
-到node_modules/highlight.js/lib/languages/去查找支持的语言，以及其名称 <br/>
-<code>C++和elisp</code> <br/></p>
-<pre><code class="language-javascript">// ./assets/js/highlight.js
-
-import cpp from 'highlight.js/lib/languages/cpp';
-import lisp from 'highlight.js/lib/languages/lisp';
-
-hljs.registerLanguage('cpp', cpp); // 无法使用+
-hljs.registerLanguage('elisp', lisp);
-hljs.registerLanguage('lisp', lisp);
-</code></pre>
-<p><em>不支持elisp，可以设置lisp</em> <br/></p>
-<h3 id="5-dot-目录导航">5. 目录导航 <a href="#5-dot-%e7%9b%ae%e5%bd%95%e5%af%bc%e8%88%aa" class="anchor" aria-hidden="true">#</a></h3>
-<pre><code class="language-css">// ./config/_default/markup.toml
-
-[tableOfContents]
-  endLevel = 3
-  ordered = false
-##  startLevel = 2
-  startLevel = 1
-</code></pre>
-<h3 id="6-dot-代码框背景色">6. 代码框背景色 <a href="#6-dot-%e4%bb%a3%e7%a0%81%e6%a1%86%e8%83%8c%e6%99%af%e8%89%b2" class="anchor" aria-hidden="true">#</a></h3>
-<ol>
-<li>若代码框的语言可识别，使用hljs配置 <br/>
-light主题，代码框背景色为浅色，换成深色 <br/>
-<pre><code class="language-css"> // ./assets/scss/components/_syntax.scss
-
- .hljs {
-     display: block;
-     overflow-x: auto;
-     padding: 1.25rem 1.5rem;
-//     background: $beige;
-//     color: $body-color;
-     background: $body-overlay-dark;
-     color: $body-color-dark;
-}
-</code></pre>
-</li>
-<li>代码框语言无法识别 <br/>
-不建议修改；文本块也使用这个样式 <br/>
-<pre><code class="language-css">// ./assets/scss/components/_code.scss
-
-code {
-  background: $beige;
-  color: $black;
-  padding: 0.25rem 0.5rem;
-}
-</code></pre>
-</li>
-</ol>
-<h3 id="7-dot-设置表格样式">7. 设置表格样式 <a href="#7-dot-%e8%ae%be%e7%bd%ae%e8%a1%a8%e6%a0%bc%e6%a0%b7%e5%bc%8f" class="anchor" aria-hidden="true">#</a></h3>
-<p>参照 Book 主题 <br/></p>
-<pre><code class="language-css">// ./assets/scss/components/_tables.scss
-
-// table {
-//   @extend .table;
-// 
-//   margin: 3rem 0;
-// }
-
-$padding-1: 1px !default;
-$padding-4: 0.25rem !default;
-$padding-8: 0.5rem !default;
-$padding-16: 1rem !default;
-
-table {
-  @extend .table;
-
-  margin: 3rem 0;
-
-  overflow: auto;
-  display: block;
-  border-spacing: 0;
-  border-collapse: collapse;
-  margin-top: $padding-16;
-  margin-bottom: $padding-16;
-
-  tr th,
-  tr td {
-    padding: $padding-8 $padding-16;
-    border: $padding-1 solid $gray-200;
-  }
-
-  tr:nth-child(2n) {
-    background: $gray-100;
-  }
-}
-</code></pre>
-<h3 id="8-dot-渐变条">8. 渐变条 <a href="#8-dot-%e6%b8%90%e5%8f%98%e6%9d%a1" class="anchor" aria-hidden="true">#</a></h3>
-<pre><code class="language-css">// ./assets/scss/layout/_header.scss
-
-// 橘 浅蓝 深蓝
-.header-bar {
-    border-top: 4px solid;
-    // border-image-source: linear-gradient(90deg, $primary, #8ed6fb 50%, #d32e9d);
-    border-image-source: linear-gradient(90deg, #cc3c11, #8edefb 50%, #2e31d3);
-    border-image-slice: 1;
-}
-</code></pre>
-<h3 id="9-dot-主题色">9. 主题色 <a href="#9-dot-%e4%b8%bb%e9%a2%98%e8%89%b2" class="anchor" aria-hidden="true">#</a></h3>
-<pre><code class="language-css">// ./assets/scss/common/_variables.scss
-
-// $primary: $purple;
-$primary: rgb(18, 63, 160);
-</code></pre>
-<h2 id="实现目录高亮">实现目录高亮 <a href="#%e5%ae%9e%e7%8e%b0%e7%9b%ae%e5%bd%95%e9%ab%98%e4%ba%ae" class="anchor" aria-hidden="true">#</a></h2>
-<p>Doks主题支持笔记本分区收起展开，博文目录，全尺寸布局，横向路径导航，以及分开的Docs和Blogs。 <br/>
-而对于内容较多的博文，目录高亮可以让读者有一个全局的把握。 <br/>
-<a href="https://atpx.com/blog/typecho-to-hugo/#3-%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E6%BB%9A%E5%8A%A8%E9%AB%98%E4%BA%AE">目录高亮参考</a> <a href="https://blog.csdn.net/dangbai01_/article/details/120130875">高亮样式</a> <br/>
-实现目录高亮我知道的有两个相关的点，一个是scrollspy，另一个则是intersection observer <br/>
-<strong>scrollspy</strong> <br/>
-node.js module，也是bootstrap的一个插件 <br/>
-Doks主题自带的试验性的目录高亮使用的scrollspy <br/></p>
-<pre><code class="language-bash"># 安装
-npm i scrollspy
-</code></pre>
-<p><a href="https://www.npmjs.com/package/scrollspy">on npm</a> <a href="https://getbootstrap.com/docs/5.3/components/scrollspy/">on getbootstrap</a> <br/>
-<strong>intersection observer</strong> <br/>
-js逻辑，我找的这个 <br/></p>
-<ol>
-<li>js逻辑 <br/>
-<em>我不知道怎么导入js代码，所以放在了 ./assets/js/hightlight.js的最后</em> <br/>
-<pre><code class="language-javascript">// 样式设置
-let options = {
-  root: document.querySelector('#article'),
-  rootMargin: '0px 0px -75%',
-  threshold: 1.0
-}
-
-// MyToc：叫什么名字不重要；作用是执行操作
-// .my-toc 的 . 说明是class；# 说明是element
-// .my-toc 即是nac class，保存TableOfContents文本
-const MyToc = document.querySelector('.my-toc'), 
-  headingObserver = new IntersectionObserver(headings =&gt; {
-    headings.forEach(heading =&gt; { // 对heading遍历
-      const id = heading.target.getAttribute('id'); //获取heading id
-      if (heading.isIntersecting) {
-        inactive(); // 取消之前添加的class
-        subItem = document.querySelector(`.my-toc a[href=&quot;#${id}&quot;]`).classList.add('active'); // 为当前heading添加class
-      }
-    });
-  }, options);
-// 对指定级别heading进行遍历；未指定，该级别标题不会被高亮
-document.querySelectorAll('h0[id],h1[id],h2[id],h3[id]').forEach((heading) =&gt; {
-  headingObserver.observe(heading);
-});
-
-function inactive() {
-  document.querySelectorAll('.my-toc a').forEach((a) =&gt; {
-    a.classList.remove('active');
+<h2 id="1-dot-两种滚动注册">1. 两种滚动注册 <a href="#1-dot-%e4%b8%a4%e7%a7%8d%e6%bb%9a%e5%8a%a8%e6%b3%a8%e5%86%8c" class="anchor" aria-hidden="true">#</a></h2>
+<p><strong>监听</strong> <br/>
+所有滚动都会触发。配合定时器，如果在定时器到时间之前没有跳转到目的目录项，文章目录滚动偏移重置 <br/></p>
+<pre><code class="language-javascript">window.addEventListener('scroll', () =&gt; {
+    // 处理
   });
+</code></pre>
+<p><strong>绑定事件处理函数</strong> <br/>
+对window绑定处理函数，只在滚动页面时触发 ✔️ <br/>
+<em>参考./assets/js/to-top.js</em> <br/></p>
+<pre><code class="language-javascript">window.onscroll = function() {
+    // 处理
+};
+</code></pre>
+<h2 id="2-dot-处理函数调用时间点">2. 处理函数调用时间点 <a href="#2-dot-%e5%a4%84%e7%90%86%e5%87%bd%e6%95%b0%e8%b0%83%e7%94%a8%e6%97%b6%e9%97%b4%e7%82%b9" class="anchor" aria-hidden="true">#</a></h2>
+<p>如果文章目录滚动即触发，因为持续滚动，文章目录跳转功能完全失效。得在滚动结束后，再调用处理函数。 <br/>
+使用定时器。滚动即重启定时器，定时器到时间再调用处理函数。 <br/></p>
+<pre><code class="language-javascript">let timer = null;
+window.onscroll = function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+        // 处理
+    }, 300); // 设置定时器间隔；要求不小于最长跳转时间
+};
+</code></pre>
+<h2 id="3-dot-设置文章目录滚动">3. 设置文章目录滚动 <a href="#3-dot-%e8%ae%be%e7%bd%ae%e6%96%87%e7%ab%a0%e7%9b%ae%e5%bd%95%e6%bb%9a%e5%8a%a8" class="anchor" aria-hidden="true">#</a></h2>
+<p>根据窗口高度 <code>window.innerHeight</code> ，能展示的目录项有限 <code>max</code> 。 <br/>
+每个目录项占用的高度 <code>single</code> ，和文章目录的总高度有关 <code>document.querySelector('.docs-toc').scrollHeight</code> 。 <br/>
+考虑到文章目录上方&quot;On This Page&quot;文本，窗口可供显示目录的高度应减去&quot;On This Page&quot;文本的高度。 <br/>
+若当前目录项超出窗口可展示目录项的一半，滚动文章目录，偏移量使得之后的当前目录项位于文章目录中间位置。 <br/>
+<strong>完整代码</strong> <br/>
+<em>放在./assets/js/hightlight.js最后</em> <br/></p>
+<pre><code class="language-javascript">let timer = null;
+window.onscroll = function () {
+    clearTimeout(timer);
+    timer = setTimeout(function () {
+        locate_heading();
+    }, 300);
+};
+
+function locate_heading() {
+    let res = document.querySelectorAll('.my-toc a.active');
+    if (res.length != 1) { return; }
+    let active_heading = res.item(0);
+
+    let count = 0, current = 0;
+    document.querySelectorAll('.my-toc a').forEach((a) =&gt; {
+        if (a == active_heading) {
+            current = count;
+            // console.log(&quot;current heading&quot;, a);
+        }
+        ++count;
+    });
+    ++current;
+    count /= 2;
+    console.log(current, &quot;/&quot;, count);
+
+    let fullToc = document.querySelector('.docs-toc');  //修改scrolltop
+
+    let single = fullToc.scrollHeight / count;
+    let offset = fullToc.scrollHeight - document.querySelector('.my-toc').scrollHeight; // on-this-page height
+    let max = parseInt((window.innerHeight - offset) / single);
+    let mid = parseInt(max / 2);
+
+    if (current &gt;= max - mid) {
+        fullToc.scrollTop = single * (current - mid);
+    } else {
+        fullToc.scrollTop = 0;
+    }
 }
 </code></pre>
-</li>
-<li>为当前TableOfContents设置nav class <br/>
-根据有无配置scrollSpy，对TableOfContents的设置不同 <br/>
-当scrollSpy为false时，最下方的{{ .TableOfContents }}对应右侧的目录 <br/>
-用 nav class将其围起来 <br/>
-<pre><code class="language-html">&lt;!-- ./layout/partials/sidebar/docs-toc.html --&gt;
-
-&lt;div class=&quot;page-links d-none d-xl-block&quot;&gt;
-  &lt;h3&gt;{{ i18n &quot;on-this-page&quot; }}&lt;/h3&gt;
-  {{ if eq .Site.Params.options.scrollSpy true -}}
-  {{ .TableOfContents | replaceRE &quot;&lt;nav id=\&quot;TableOfContents\&quot;&gt;&quot; &quot;&lt;nav id=\&quot;toc\&quot;&gt;&quot; | safeHTML }}
-      {{ else -}}
-      &lt;nav class=&quot;my-toc&quot;&gt;
-        {{ .TableOfContents }}
-      &lt;/nav&gt;
-      {{ end -}}
-&lt;/div&gt;
-</code></pre>
-</li>
-<li>设置class包含active的标题的样式 <br/>
-light <br/>
-<pre><code class="language-css">// ./assets/scss/common/_global.scss
-
-.my-toc a.active {
-  color: $primary;
-  font-weight: 800;
-  transition: all .25s ease-in-out
-}
-</code></pre>
-dark <br/>
-<pre><code class="language-css">// ./assets/scss/common/_dark.scss
-[data-dark-mode] .my-toc a.active {
-  color: $link-color-dark;
-}
-</code></pre>
-
-    <figure class="img-fluid lazyload blur-up"><img src="http://localhost:1313/pic/toc.png" width="200"></figure> <br/></li>
-</ol>
-<h2 id="遗留问题">遗留问题 <a href="#%e9%81%97%e7%95%99%e9%97%ae%e9%a2%98" class="anchor" aria-hidden="true">#</a></h2>
-<ol>
-<li>博文目录跳转偏移 <br/>
-受到navbarSticky影响 <br/>
-<table>
-<thead>
-<tr>
-<th></th>
-<th>说明</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>描述</td>
-<td>[pc] org文件所有标题均偏移；md文件一级标题导航到标题之下，其他级别标题正常</td>
-</tr>
-<tr>
-<td></td>
-<td>[平板] md文件从三级标题显示正常</td>
-</tr>
-<tr>
-<td>解决方法</td>
-<td>org转md；使用ox-hugo完成转换，md从二级标题开始</td>
-</tr>
-</tbody>
-</table>
-</li>
-<li>doks无法正确显示 ox-hugo 生成的图片链接 <br/></li>
-</ol>
+<p><em>不知道什么原因，.my-toc的元素个数是认为的2倍，而包含active类的a标签个数仍为1；使用.docs-toc更毛病</em> <br/></p>
 
 			<div class="page-footer-meta d-flex flex-column flex-md-row justify-content-between">
 				</div>
 			<div class="docs-navigation d-flex justify-content-between">
 	
-	<a href="/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">
+	<a href="/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">
 			<div class="card my-1">
 				<div class="card-body py-2">
-					&larr; 使用ox-hugo的头部设置
-				</div>
-			</div>
-		</a>
-	<a class="ms-auto" href="/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">
-			<div class="card my-1">
-				<div class="card-body py-2">
-					文章目录跟随文章内容滚动 &rarr;
+					&larr; Doks主题
 				</div>
 			</div>
 		</a>

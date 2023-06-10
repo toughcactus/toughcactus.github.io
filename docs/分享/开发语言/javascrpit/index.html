@@ -15,17 +15,17 @@
   <meta name="robots" content="index, follow">
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
-  <title>使用ox-hugo的头部设置 - ToughCactus</title>
-<meta name="description" content="Overview # ox-hugo manual 根目录 # 如果使能 org-hugo-external-file-extensions-allowed-for-copying，要求根目录下必须有static文件夹，默认创建ox-hugo文件夹，并将图片拷贝到ox-hugo 分区对应 根目录/content/分区，默认创建content文件夹 #&#43;HUGO_BASE_DIR: ../ 生成博文方式 # manual 子树 每个org子树作为一篇博文 ​* 每棵子树作为一篇博文 :PROPERTIES: :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true :weight 2 :END: ** 第一篇博文 ** 第二篇博文 org文件作为博文 #&#43;HUGO_CUSTOM_FRONT_MATTER: :bookCollapseSection true :weight 20 #&#43;HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true :weight 2 配置自定义选项 # 如果同时在子树和文件配置，根据子树导出时，只有子树定义项 子树 :PROPERTIES: :EXPROT_HUGO_CUSTOM_FRONT_MATTER: :foo bar :baz zoo :END: 文件 #&#43;HUGO_CUSTOM_FRONT_MATTER: :foo bar :baz zoo 分区 &#43; 样式 &#43; 权重 # 子树 :PROPERTIES: :EXPORT_HUGO_SECTION: ./ :EXPORT_HUGO_FRONT_MATTER_FORMAT: yaml :EXPORT_HUGO_WEIGHT: 4 :END: 文件 #&#43;HUGO_SECTION: .">
-  <link rel="canonical" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">
+  <title>JavaScrpit - ToughCactus</title>
+<meta name="description" content="foreach # 中断foreach循环不能使用break 获取窗口和显示器屏幕参数 # 参考 窗口 # 浏览器窗口可以改变大小 验证情况 内部高度 window.innerHeight o 内部宽度 window.innerWidth 外部高度 window.outerheight 外部宽度 window.outerwidth 显示器屏幕 # 验证情况 显示器屏幕高度，除windows任务栏以外 screen.availHeight 显示器屏幕宽度，除windows任务栏以外 screen.availWidth 显示器屏幕高度 screen.height 显示器屏幕宽度 screen.width 传参 # runoob 不需要给出参数类型 function myFunction(x, y = 10) { // y is 10 if not passed or undefined return x &#43; y; } myFunction(0, 2) // 输出 2 myFunction(5); // 输出 15, y 参数的默认值 处理滚动 # 参考 注册 # 添加监听事件 滚动 window 所有滚动都会触发 window.">
+  <link rel="canonical" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
-<meta property="og:title" content="使用ox-hugo的头部设置">
-<meta property="og:description" content="Overview # ox-hugo manual 根目录 # 如果使能 org-hugo-external-file-extensions-allowed-for-copying，要求根目录下必须有static文件夹，默认创建ox-hugo文件夹，并将图片拷贝到ox-hugo 分区对应 根目录/content/分区，默认创建content文件夹 #&#43;HUGO_BASE_DIR: ../ 生成博文方式 # manual 子树 每个org子树作为一篇博文 ​* 每棵子树作为一篇博文 :PROPERTIES: :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true :weight 2 :END: ** 第一篇博文 ** 第二篇博文 org文件作为博文 #&#43;HUGO_CUSTOM_FRONT_MATTER: :bookCollapseSection true :weight 20 #&#43;HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true :weight 2 配置自定义选项 # 如果同时在子树和文件配置，根据子树导出时，只有子树定义项 子树 :PROPERTIES: :EXPROT_HUGO_CUSTOM_FRONT_MATTER: :foo bar :baz zoo :END: 文件 #&#43;HUGO_CUSTOM_FRONT_MATTER: :foo bar :baz zoo 分区 &#43; 样式 &#43; 权重 # 子树 :PROPERTIES: :EXPORT_HUGO_SECTION: ./ :EXPORT_HUGO_FRONT_MATTER_FORMAT: yaml :EXPORT_HUGO_WEIGHT: 4 :END: 文件 #&#43;HUGO_SECTION: .">
-<meta property="og:url" content="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">
+<meta property="og:title" content="JavaScrpit">
+<meta property="og:description" content="foreach # 中断foreach循环不能使用break 获取窗口和显示器屏幕参数 # 参考 窗口 # 浏览器窗口可以改变大小 验证情况 内部高度 window.innerHeight o 内部宽度 window.innerWidth 外部高度 window.outerheight 外部宽度 window.outerwidth 显示器屏幕 # 验证情况 显示器屏幕高度，除windows任务栏以外 screen.availHeight 显示器屏幕宽度，除windows任务栏以外 screen.availWidth 显示器屏幕高度 screen.height 显示器屏幕宽度 screen.width 传参 # runoob 不需要给出参数类型 function myFunction(x, y = 10) { // y is 10 if not passed or undefined return x &#43; y; } myFunction(0, 2) // 输出 2 myFunction(5); // 输出 15, y 参数的默认值 处理滚动 # 参考 注册 # 添加监听事件 滚动 window 所有滚动都会触发 window.">
+<meta property="og:url" content="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">
 <meta property="og:site_name" content="ToughCactus">
-<meta property="article:published_time" content="2023-06-08T11:42:14+00:00">
-  <meta property="article:modified_time" content="2023-06-10T10:53:48+08:00">
+<meta property="article:published_time" content="2023-06-09T11:07:26+00:00">
+  <meta property="article:modified_time" content="2023-06-10T11:12:15+08:00">
   
   <meta property="og:image" content="https://toughcactus.github.io/doks.png"/>
       <meta property="og:image:alt" content="ToughCactus">
@@ -33,10 +33,10 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:site" content="@getdoks">
 <meta name="twitter:creator" content="@henkverlinde">
-<meta name="twitter:title" content="使用ox-hugo的头部设置">
+<meta name="twitter:title" content="JavaScrpit">
 <meta name="twitter:description" content="">
 <meta name="twitter:image" content="https://toughcactus.github.io/doks.png">
-    <meta name="twitter:image:alt" content="使用ox-hugo的头部设置">
+    <meta name="twitter:image:alt" content="JavaScrpit">
 
 <script type="application/ld+json">
 {
@@ -75,9 +75,9 @@
       },
     {
       "@type": "WebPage",
-      "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/",
-      "url": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/",
-      "name": "使用ox-hugo的头部设置",
+      "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/",
+      "url": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/",
+      "name": "JavaScrpit",
       "description": "",
       "isPartOf": {
         "@id": "https://toughcactus.github.io/#/schema/website/1"
@@ -85,22 +85,22 @@
       "about": {
           "@id": "https://toughcactus.github.io/#/schema/organization/1"
         },
-      "datePublished": "2023-06-08T11:42:14CET",
-      "dateModified": "2023-06-10T10:53:48CET",
+      "datePublished": "2023-06-09T11:07:26CET",
+      "dateModified": "2023-06-10T11:12:15CET",
       "breadcrumb": {
-        "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/#/schema/breadcrumb/1"
+        "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/#/schema/breadcrumb/1"
       },
       "primaryImageOfPage": {
-        "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/#/schema/image/2"
+        "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/#/schema/image/2"
       },
       "inLanguage": "en-US",
       "potentialAction": [{
-        "@type": "ReadAction", "target": ["https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/"]
+        "@type": "ReadAction", "target": ["https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/"]
       }]
     },
     {
       "@type": "BreadcrumbList",
-      "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/#/schema/breadcrumb/1",
+      "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/#/schema/breadcrumb/1",
       "name": "Breadcrumbs",
       "itemListElement": [{
         "@type": "ListItem",
@@ -134,15 +134,15 @@
         "position":  4 ,
         "item": {
           "@type": "WebPage",
-          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/",
-          "url": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/",
-          "name": "Hugo"
+          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/",
+          "url": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/",
+          "name": "% E5% Bc%80% E5%8 F%91% E8% Af% Ad% E8% A8%80"
           }
         },{
         "@type": "ListItem",
         "position":  5 ,
         "item": {
-          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/"
+          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/"
           }
         }]
     },
@@ -153,16 +153,16 @@
         {
           "@type": "Article",
           "@id": "https://toughcactus.github.io/#/schema/article/1",
-          "headline": "使用ox-hugo的头部设置",
+          "headline": "JavaScrpit",
           "description": "",
           "isPartOf": {
-            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/"
+            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/"
           },
           "mainEntityOfPage": {
-            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/"
+            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/"
           },
-          "datePublished": "2023-06-08T11:42:14CET",
-          "dateModified": "2023-06-10T10:53:48CET",
+          "datePublished": "2023-06-09T11:07:26CET",
+          "dateModified": "2023-06-10T11:12:15CET",
           "author": {
             "@id": "https://toughcactus.github.io/#/schema/person/2"
           },
@@ -170,7 +170,7 @@
               "@id": "https://toughcactus.github.io/#/schema/organization/1"
             },
           "image": {
-            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/#/schema/image/2"
+            "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/#/schema/image/2"
           }
         }
       ]
@@ -195,10 +195,10 @@
       "@graph": [
         {
           "@type": "ImageObject",
-          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/#/schema/image/2",
+          "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/#/schema/image/2",
           "url": "https://toughcactus.github.io/doks.png",
           "contentUrl": "https://toughcactus.github.io/doks.png",
-          "caption": "使用ox-hugo的头部设置"
+          "caption": "JavaScrpit"
         }
       ]
     }
@@ -287,15 +287,15 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="false">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="true">
                     开发语言
                   </button>
-                  <div class="collapse" id="section-262a78b7bebf63c3eaefb8b7370826cb">
+                  <div class="collapse show" id="section-262a78b7bebf63c3eaefb8b7370826cb">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       
                         
                           
-                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">JavaScrpit</a></li>
+                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">JavaScrpit</a></li>
                         
                       
                     </ul>
@@ -306,10 +306,10 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="true">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="false">
                     Hugo
                   </button>
-                  <div class="collapse show" id="section-1b3840b0b70d91c17e70014c8537dbba">
+                  <div class="collapse" id="section-1b3840b0b70d91c17e70014c8537dbba">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       
                         
@@ -319,7 +319,7 @@
                       
                         
                           
-                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">使用ox-hugo的头部设置</a></li>
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">使用ox-hugo的头部设置</a></li>
                         
                       
                         
@@ -454,15 +454,15 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="false">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="true">
                     开发语言
                   </button>
-                  <div class="collapse" id="section-262a78b7bebf63c3eaefb8b7370826cb">
+                  <div class="collapse show" id="section-262a78b7bebf63c3eaefb8b7370826cb">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       
                         
                           
-                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">JavaScrpit</a></li>
+                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">JavaScrpit</a></li>
                         
                       
                     </ul>
@@ -473,10 +473,10 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="true">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="false">
                     Hugo
                   </button>
-                  <div class="collapse show" id="section-1b3840b0b70d91c17e70014c8537dbba">
+                  <div class="collapse" id="section-1b3840b0b70d91c17e70014c8537dbba">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       
                         
@@ -486,7 +486,7 @@
                       
                         
                           
-                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">使用ox-hugo的头部设置</a></li>
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">使用ox-hugo的头部设置</a></li>
                         
                       
                         
@@ -568,15 +568,15 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="false">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-262a78b7bebf63c3eaefb8b7370826cb" aria-expanded="true">
                     开发语言
                   </button>
-                  <div class="collapse" id="section-262a78b7bebf63c3eaefb8b7370826cb">
+                  <div class="collapse show" id="section-262a78b7bebf63c3eaefb8b7370826cb">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       
                         
                           
-                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">JavaScrpit</a></li>
+                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/javascrpit/">JavaScrpit</a></li>
                         
                       
                     </ul>
@@ -587,10 +587,10 @@
               
                 
                 <li class="my-1 ms-3">
-                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="true">
+                  <button class="btn btn-toggle align-items-center rounded collapsed" data-bs-toggle="collapse" data-bs-target="#section-1b3840b0b70d91c17e70014c8537dbba" aria-expanded="false">
                     Hugo
                   </button>
-                  <div class="collapse show" id="section-1b3840b0b70d91c17e70014c8537dbba">
+                  <div class="collapse" id="section-1b3840b0b70d91c17e70014c8537dbba">
                     <ul class="btn-toggle-nav list-unstyled fw-normal pb-1 small">
                       
                         
@@ -600,7 +600,7 @@
                       
                         
                           
-                          <li><a class="docs-link rounded active" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">使用ox-hugo的头部设置</a></li>
+                          <li><a class="docs-link rounded" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E4%BD%BF%E7%94%A8ox-hugo%E7%9A%84%E5%A4%B4%E9%83%A8%E8%AE%BE%E7%BD%AE/">使用ox-hugo的头部设置</a></li>
                         
                       
                         
@@ -655,16 +655,24 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#根目录">根目录</a></li>
-        <li><a href="#生成博文方式">生成博文方式</a></li>
-        <li><a href="#配置自定义选项">配置自定义选项</a></li>
-        <li><a href="#分区-plus-样式-plus-权重">分区 + 样式 + 权重</a></li>
-        <li><a href="#文件-最后修改">文件 最后修改</a></li>
-        <li><a href="#文件-草稿-plus-分类-plus-tag-plus-日期">文件 草稿+分类+tag+日期</a></li>
-        <li><a href="#子树-分类-plus-tag-plus-日期-plus-导出文件名">子树 分类+tag+日期+导出文件名</a></li>
-        <li><a href="#导出子树">导出子树</a></li>
-        <li><a href="#炫技">炫技</a></li>
+        <li><a href="#foreach">foreach</a></li>
+        <li><a href="#获取窗口和显示器屏幕参数">获取窗口和显示器屏幕参数</a>
+          <ul>
+            <li><a href="#窗口">窗口</a></li>
+            <li><a href="#显示器屏幕">显示器屏幕</a></li>
+          </ul>
+        </li>
+        <li><a href="#传参">传参</a></li>
+        <li><a href="#处理滚动">处理滚动</a>
+          <ul>
+            <li><a href="#注册">注册</a></li>
+            <li><a href="#设置元素滚动偏移">设置元素滚动偏移</a></li>
+            <li><a href="#滚动结束后处理">滚动结束后处理</a></li>
+          </ul>
+        </li>
+        <li><a href="#dot-和">.和#</a></li>
+        <li><a href="#queryselectorall">querySelectorAll</a></li>
+        <li><a href="#nodelist类型">NodeList类型</a></li>
       </ul>
     </li>
   </ul>
@@ -680,16 +688,24 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#根目录">根目录</a></li>
-        <li><a href="#生成博文方式">生成博文方式</a></li>
-        <li><a href="#配置自定义选项">配置自定义选项</a></li>
-        <li><a href="#分区-plus-样式-plus-权重">分区 + 样式 + 权重</a></li>
-        <li><a href="#文件-最后修改">文件 最后修改</a></li>
-        <li><a href="#文件-草稿-plus-分类-plus-tag-plus-日期">文件 草稿+分类+tag+日期</a></li>
-        <li><a href="#子树-分类-plus-tag-plus-日期-plus-导出文件名">子树 分类+tag+日期+导出文件名</a></li>
-        <li><a href="#导出子树">导出子树</a></li>
-        <li><a href="#炫技">炫技</a></li>
+        <li><a href="#foreach">foreach</a></li>
+        <li><a href="#获取窗口和显示器屏幕参数">获取窗口和显示器屏幕参数</a>
+          <ul>
+            <li><a href="#窗口">窗口</a></li>
+            <li><a href="#显示器屏幕">显示器屏幕</a></li>
+          </ul>
+        </li>
+        <li><a href="#传参">传参</a></li>
+        <li><a href="#处理滚动">处理滚动</a>
+          <ul>
+            <li><a href="#注册">注册</a></li>
+            <li><a href="#设置元素滚动偏移">设置元素滚动偏移</a></li>
+            <li><a href="#滚动结束后处理">滚动结束后处理</a></li>
+          </ul>
+        </li>
+        <li><a href="#dot-和">.和#</a></li>
+        <li><a href="#queryselectorall">querySelectorAll</a></li>
+        <li><a href="#nodelist类型">NodeList类型</a></li>
       </ul>
     </li>
   </ul>
@@ -705,12 +721,12 @@
 						<li class="breadcrumb-item"><a href="/">Home</a></li>
 <li class="breadcrumb-item"><a href="/docs/">Docs</a></li>
 <li class="breadcrumb-item"><a href="/docs/%E5%88%86%E4%BA%AB/">分享</a></li>
-<li class="breadcrumb-item"><a href="/docs/%E5%88%86%E4%BA%AB/hugo/">Hugo</a></li>
-<li class="breadcrumb-item active" aria-current="page">使用ox-hugo的头部设置</li>
+<li class="breadcrumb-item"><a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E8%AF%AD%E8%A8%80/">开发语言</a></li>
+<li class="breadcrumb-item active" aria-current="page">JavaScrpit</li>
 					</ol>
 				</nav>
 			
-			<h1>使用ox-hugo的头部设置</h1>
+			<h1>JavaScrpit</h1>
 			<p class="lead"></p>
 			<nav class="d-xl-none" aria-label="Quaternary navigation">
 				<div class="d-xl-none">
@@ -740,16 +756,24 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#根目录">根目录</a></li>
-        <li><a href="#生成博文方式">生成博文方式</a></li>
-        <li><a href="#配置自定义选项">配置自定义选项</a></li>
-        <li><a href="#分区-plus-样式-plus-权重">分区 + 样式 + 权重</a></li>
-        <li><a href="#文件-最后修改">文件 最后修改</a></li>
-        <li><a href="#文件-草稿-plus-分类-plus-tag-plus-日期">文件 草稿+分类+tag+日期</a></li>
-        <li><a href="#子树-分类-plus-tag-plus-日期-plus-导出文件名">子树 分类+tag+日期+导出文件名</a></li>
-        <li><a href="#导出子树">导出子树</a></li>
-        <li><a href="#炫技">炫技</a></li>
+        <li><a href="#foreach">foreach</a></li>
+        <li><a href="#获取窗口和显示器屏幕参数">获取窗口和显示器屏幕参数</a>
+          <ul>
+            <li><a href="#窗口">窗口</a></li>
+            <li><a href="#显示器屏幕">显示器屏幕</a></li>
+          </ul>
+        </li>
+        <li><a href="#传参">传参</a></li>
+        <li><a href="#处理滚动">处理滚动</a>
+          <ul>
+            <li><a href="#注册">注册</a></li>
+            <li><a href="#设置元素滚动偏移">设置元素滚动偏移</a></li>
+            <li><a href="#滚动结束后处理">滚动结束后处理</a></li>
+          </ul>
+        </li>
+        <li><a href="#dot-和">.和#</a></li>
+        <li><a href="#queryselectorall">querySelectorAll</a></li>
+        <li><a href="#nodelist类型">NodeList类型</a></li>
       </ul>
     </li>
   </ul>
@@ -765,16 +789,24 @@
   <ul>
     <li>
       <ul>
-        <li><a href="#overview">Overview</a></li>
-        <li><a href="#根目录">根目录</a></li>
-        <li><a href="#生成博文方式">生成博文方式</a></li>
-        <li><a href="#配置自定义选项">配置自定义选项</a></li>
-        <li><a href="#分区-plus-样式-plus-权重">分区 + 样式 + 权重</a></li>
-        <li><a href="#文件-最后修改">文件 最后修改</a></li>
-        <li><a href="#文件-草稿-plus-分类-plus-tag-plus-日期">文件 草稿+分类+tag+日期</a></li>
-        <li><a href="#子树-分类-plus-tag-plus-日期-plus-导出文件名">子树 分类+tag+日期+导出文件名</a></li>
-        <li><a href="#导出子树">导出子树</a></li>
-        <li><a href="#炫技">炫技</a></li>
+        <li><a href="#foreach">foreach</a></li>
+        <li><a href="#获取窗口和显示器屏幕参数">获取窗口和显示器屏幕参数</a>
+          <ul>
+            <li><a href="#窗口">窗口</a></li>
+            <li><a href="#显示器屏幕">显示器屏幕</a></li>
+          </ul>
+        </li>
+        <li><a href="#传参">传参</a></li>
+        <li><a href="#处理滚动">处理滚动</a>
+          <ul>
+            <li><a href="#注册">注册</a></li>
+            <li><a href="#设置元素滚动偏移">设置元素滚动偏移</a></li>
+            <li><a href="#滚动结束后处理">滚动结束后处理</a></li>
+          </ul>
+        </li>
+        <li><a href="#dot-和">.和#</a></li>
+        <li><a href="#queryselectorall">querySelectorAll</a></li>
+        <li><a href="#nodelist类型">NodeList类型</a></li>
       </ul>
     </li>
   </ul>
@@ -783,98 +815,222 @@
       </div>
 
 			</nav>
-			<h2 id="overview">Overview <a href="#overview" class="anchor" aria-hidden="true">#</a></h2>
-<p><a href="https://ox-hugo.scripter.co/">ox-hugo manual</a> <br/></p>
-<h2 id="根目录">根目录 <a href="#%e6%a0%b9%e7%9b%ae%e5%bd%95" class="anchor" aria-hidden="true">#</a></h2>
-<p>如果使能 org-hugo-external-file-extensions-allowed-for-copying，要求根目录下必须有static文件夹，默认创建ox-hugo文件夹，并将图片拷贝到ox-hugo <br/>
-分区对应 根目录/content/分区，默认创建content文件夹 <br/></p>
-<pre><code class="language-elisp">#+HUGO_BASE_DIR: ../    
+			<h2 id="foreach">foreach <a href="#foreach" class="anchor" aria-hidden="true">#</a></h2>
+<p>中断foreach循环不能使用break <br/></p>
+<h2 id="获取窗口和显示器屏幕参数">获取窗口和显示器屏幕参数 <a href="#%e8%8e%b7%e5%8f%96%e7%aa%97%e5%8f%a3%e5%92%8c%e6%98%be%e7%a4%ba%e5%99%a8%e5%b1%8f%e5%b9%95%e5%8f%82%e6%95%b0" class="anchor" aria-hidden="true">#</a></h2>
+<p><a href="https://blog.csdn.net/linqunbin/article/details/93024360">参考</a>   <br/></p>
+<h3 id="窗口">窗口 <a href="#%e7%aa%97%e5%8f%a3" class="anchor" aria-hidden="true">#</a></h3>
+<p>浏览器窗口可以改变大小 <br/></p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>验证情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>内部高度</td>
+<td>window.innerHeight</td>
+<td>o</td>
+</tr>
+<tr>
+<td>内部宽度</td>
+<td>window.innerWidth</td>
+<td></td>
+</tr>
+<tr>
+<td>外部高度</td>
+<td>window.outerheight</td>
+<td></td>
+</tr>
+<tr>
+<td>外部宽度</td>
+<td>window.outerwidth</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h3 id="显示器屏幕">显示器屏幕 <a href="#%e6%98%be%e7%a4%ba%e5%99%a8%e5%b1%8f%e5%b9%95" class="anchor" aria-hidden="true">#</a></h3>
+<table>
+<thead>
+<tr>
+<th></th>
+<th></th>
+<th>验证情况</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>显示器屏幕高度，除windows任务栏以外</td>
+<td>screen.availHeight</td>
+<td></td>
+</tr>
+<tr>
+<td>显示器屏幕宽度，除windows任务栏以外</td>
+<td>screen.availWidth</td>
+<td></td>
+</tr>
+<tr>
+<td>显示器屏幕高度</td>
+<td>screen.height</td>
+<td></td>
+</tr>
+<tr>
+<td>显示器屏幕宽度</td>
+<td>screen.width</td>
+<td></td>
+</tr>
+</tbody>
+</table>
+<h2 id="传参">传参 <a href="#%e4%bc%a0%e5%8f%82" class="anchor" aria-hidden="true">#</a></h2>
+<p><a href="https://www.runoob.com/js/js-function-parameters.html">runoob</a> <br/>
+<em>不需要给出参数类型</em> <br/></p>
+<pre><code class="language-javascript">function myFunction(x, y = 10) {
+    // y is 10 if not passed or undefined
+    return x + y;
+}
+
+myFunction(0, 2) // 输出 2
+myFunction(5); // 输出 15, y 参数的默认值
 </code></pre>
-<h2 id="生成博文方式">生成博文方式 <a href="#%e7%94%9f%e6%88%90%e5%8d%9a%e6%96%87%e6%96%b9%e5%bc%8f" class="anchor" aria-hidden="true">#</a></h2>
-<p><a href="https://ox-hugo.scripter.co/doc/screenshots/">manual</a> <a href="https://ox-hugo.scripter.co/doc/hugo-section/">子树</a> <br/></p>
+<h2 id="处理滚动">处理滚动 <a href="#%e5%a4%84%e7%90%86%e6%bb%9a%e5%8a%a8" class="anchor" aria-hidden="true">#</a></h2>
+<p><a href="https://juejin.cn/post/7026337573135974431">参考</a> <br/></p>
+<h3 id="注册">注册 <a href="#%e6%b3%a8%e5%86%8c" class="anchor" aria-hidden="true">#</a></h3>
 <ol>
-<li>每个org子树作为一篇博文 <br/>
-<pre><code class="language-nil">​* 每棵子树作为一篇博文
-  :PROPERTIES:
-  :EXPORT_HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true :weight 2
-  :END:
-** 第一篇博文
-** 第二篇博文
+<li>添加监听事件 滚动 <br/>
+<strong>window</strong> <br/>
+所有滚动都会触发 <br/>
+<pre><code class="language-javascript">window.addEventListener('scroll', () =&gt; {
+    // 处理滚动事件
+  });
+</code></pre>
+<strong>Element</strong> <br/>
+需要检查元素有效性；只在元素滚动时触发 <br/>
+<pre><code class="language-javascript">let fullToc = document.querySelector('.docs-toc');
+if (fullToc != null) {
+    fullToc.addEventListener('scroll', () =&gt; {
+        // 处理滚动事件
+  });
+}
 </code></pre>
 </li>
-<li>org文件作为博文 <br/>
-<pre><code class="language-text">#+HUGO_CUSTOM_FRONT_MATTER: :bookCollapseSection true :weight 20
-#+HUGO_CUSTOM_FRONT_MATTER: :bookFlatSection true :weight 2
+<li>给目标元素的onscroll属性绑定事件处理函数 <br/>
+<strong>页面滚动触发</strong> <br/>
+<pre><code class="language-javascript">window.onscroll = function () {
+    // 处理滚动事件
+};
+</code></pre>
+[未验证] document.body.onscroll同window.onscroll <br/>
+[待验证] document.document.Element和document.body的区别，其scrollTop、clientHeight、scrollHeight参数 <a href="https://bbs.huaweicloud.com/blogs/361558">出处</a> <br/></li>
+</ol>
+<h3 id="设置元素滚动偏移">设置元素滚动偏移 <a href="#%e8%ae%be%e7%bd%ae%e5%85%83%e7%b4%a0%e6%bb%9a%e5%8a%a8%e5%81%8f%e7%a7%bb" class="anchor" aria-hidden="true">#</a></h3>
+<table>
+<thead>
+<tr>
+<th>参数</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>scrollLeft</td>
+<td>和左侧偏移量</td>
+</tr>
+<tr>
+<td>scrollTop</td>
+<td>和顶部偏移量</td>
+</tr>
+</tbody>
+</table>
+<h3 id="滚动结束后处理">滚动结束后处理 <a href="#%e6%bb%9a%e5%8a%a8%e7%bb%93%e6%9d%9f%e5%90%8e%e5%a4%84%e7%90%86" class="anchor" aria-hidden="true">#</a></h3>
+<ol>
+<li>定时器 <br/>
+<a href="https://juejin.cn/post/6844903966371905550">参考1</a> <a href="https://www.zhangxinxu.com/wordpress/2019/04/css-scroll-snap-event-element-detect/">参考2</a> <br/>
+<pre><code class="language-javascript">let timer = null;
+let fullToc = document.querySelector('.docs-toc');
+if (fullToc != null) {
+    fullToc.addEventListener('scroll', () =&gt; {
+        clearTimeout(timer);
+        timer = setTimeout(function () {
+            // 处理
+        }, 400);
+    });
+}
+</code></pre>
+</li>
+<li>周期性处理滚动事件 <br/>
+[未验证] <code>节流</code> <br/>
+<pre><code class="language-javascript">let scrolling = false;
+
+window.onscroll = () =&gt; {
+    scrolling = true;
+};
+
+setInterval(() =&gt; {
+    if (scrolling) {
+        scrolling = false;
+        // 处理逻辑
+    }
+},300);
 </code></pre>
 </li>
 </ol>
-<h2 id="配置自定义选项">配置自定义选项 <a href="#%e9%85%8d%e7%bd%ae%e8%87%aa%e5%ae%9a%e4%b9%89%e9%80%89%e9%a1%b9" class="anchor" aria-hidden="true">#</a></h2>
-<p>如果同时在子树和文件配置，根据子树导出时，只有子树定义项 <br/>
-<em>子树</em> <br/></p>
-<pre><code class="language-elisp">:PROPERTIES:
-:EXPROT_HUGO_CUSTOM_FRONT_MATTER: :foo bar :baz zoo
-:END:
+<h2 id="dot-和">.和# <a href="#dot-%e5%92%8c" class="anchor" aria-hidden="true">#</a></h2>
+<pre><code class="language-text">class=&quot;a&quot; .a
+id=&quot;b&quot; #b
 </code></pre>
-<p><em>文件</em> <br/></p>
-<pre><code class="language-elisp">#+HUGO_CUSTOM_FRONT_MATTER: :foo bar :baz zoo
+<h2 id="queryselectorall">querySelectorAll <a href="#queryselectorall" class="anchor" aria-hidden="true">#</a></h2>
+<p><a href="https://www.runoob.com/jsref/met-document-queryselectorall.html">runoob</a> <br/>
+返回NodeList类型对象 <br/></p>
+<pre><code class="language-javascript">elementList = document.querySelectorAll('.my-toc a.active'); // .my-toc中，a标签，其包含类active
+elementList = document.querySelectorAll('.my-toc a'); // .my-toc中，a标签
+subItem = document.querySelector(`.my-toc a[href=&quot;#${id}&quot;]`); //.my-toc中，href属性为${id}的a标签
+document.querySelectorAll('h0[id],h1[id],h2[id],h3[id]'); // 所有有id属性的h0,h1,h2,h3标题
 </code></pre>
-<h2 id="分区-plus-样式-plus-权重">分区 + 样式 + 权重 <a href="#%e5%88%86%e5%8c%ba-plus-%e6%a0%b7%e5%bc%8f-plus-%e6%9d%83%e9%87%8d" class="anchor" aria-hidden="true">#</a></h2>
-<p><em>子树</em> <br/></p>
-<pre><code class="language-elisp">:PROPERTIES:
-:EXPORT_HUGO_SECTION: ./
-:EXPORT_HUGO_FRONT_MATTER_FORMAT: yaml
-:EXPORT_HUGO_WEIGHT: 4
-:END:
+<h2 id="nodelist类型">NodeList类型 <a href="#nodelist%e7%b1%bb%e5%9e%8b" class="anchor" aria-hidden="true">#</a></h2>
+<ol>
+<li>获取元素个数 <br/>
+<pre><code class="language-javascript">let count = document.querySelectorAll('.my-toc a').length;
 </code></pre>
-<p><em>文件</em> <br/></p>
-<pre><code class="language-elisp">#+HUGO_SECTION: ./
-#+TITLE: Doks主题
-#+HUGO_FRONT_MATTER_FORMAT: toml    
-#+HUGO_WEIGHT: 10
+</li>
+<li>按索引访问元素 <br/>
+<a href="https://developer.mozilla.org/zh-CN/docs/Web/API/NodeList">参考</a> <br/>
+<pre><code class="language-javascript">let res = document.querySelectorAll('.my-toc a');
+if (res.length &gt;= 1) {
+    let active_heading = res.item(0);
+}
 </code></pre>
-<h2 id="文件-最后修改">文件 最后修改 <a href="#%e6%96%87%e4%bb%b6-%e6%9c%80%e5%90%8e%e4%bf%ae%e6%94%b9" class="anchor" aria-hidden="true">#</a></h2>
-<pre><code class="language-elisp">#+HUGO_AUTO_SET_LASTMOD: t
+</li>
+<li>遍历元素 <br/>
+<pre><code class="language-javascript">let count = 0, current = 0;
+document.querySelectorAll('.my-toc a').forEach((a) =&gt; {
+    if (a == active_heading) {
+        current = count;
+        // console.log(&quot;current heading&quot;, a);
+    }
+    ++count;
+});
 </code></pre>
-<h2 id="文件-草稿-plus-分类-plus-tag-plus-日期">文件 草稿+分类+tag+日期 <a href="#%e6%96%87%e4%bb%b6-%e8%8d%89%e7%a8%bf-plus-%e5%88%86%e7%b1%bb-plus-tag-plus-%e6%97%a5%e6%9c%9f" class="anchor" aria-hidden="true">#</a></h2>
-<p>日期格式 yyyy-mm-dd，发布时会检查时区 <br/></p>
-<pre><code class="language-elisp">#+HUGO_DRAFT: true
-#+HUGO_CATEGORIES: emacs
-#+HUGO_TAGS: hugo
-#+DATE: 2021-09-10
-</code></pre>
-<h2 id="子树-分类-plus-tag-plus-日期-plus-导出文件名">子树 分类+tag+日期+导出文件名 <a href="#%e5%ad%90%e6%a0%91-%e5%88%86%e7%b1%bb-plus-tag-plus-%e6%97%a5%e6%9c%9f-plus-%e5%af%bc%e5%87%ba%e6%96%87%e4%bb%b6%e5%90%8d" class="anchor" aria-hidden="true">#</a></h2>
-<pre><code class="language-elisp">* CATEGORY :@emacs:
-** Doks主题 :hugo:org:
-   :PROPERTIES:
-   :EXPORT_DATE: 2023-06-07
-   :EXPORT_FILE_NAME: Doks主题     
-   :END:
-</code></pre>
-<h2 id="导出子树">导出子树 <a href="#%e5%af%bc%e5%87%ba%e5%ad%90%e6%a0%91" class="anchor" aria-hidden="true">#</a></h2>
-<p><a href="https://ox-hugo.scripter.co/doc/usage/">参考</a> <br/>
-<code>C-c C-e H A</code> <br/></p>
-<pre><code class="language-elisp">(org-hugo-export-wim-to-md :all-subtrees)
-</code></pre>
-<h2 id="炫技">炫技 <a href="#%e7%82%ab%e6%8a%80" class="anchor" aria-hidden="true">#</a></h2>
-<pre><code class="language-elisp">title = &quot;`(cdr (assoc &quot;ITEM&quot; (org-entry-properties)))`&quot;
-date = &quot;`(format-time-string &quot;%Y-%m-%dT%H:%M:%S&quot;)`&quot;
-</code></pre>
+</li>
+</ol>
 
 			<div class="page-footer-meta d-flex flex-column flex-md-row justify-content-between">
 				</div>
 			<div class="docs-navigation d-flex justify-content-between">
 	
-	<a href="/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
+	<a href="/docs/%E5%88%86%E4%BA%AB/%E5%BC%80%E5%8F%91%E5%B7%A5%E5%85%B7/chrome/">
 			<div class="card my-1">
 				<div class="card-body py-2">
-					&larr; 搭建个人博客
+					&larr; Chrome
 				</div>
 			</div>
 		</a>
-	<a class="ms-auto" href="/docs/%E5%88%86%E4%BA%AB/hugo/doks%E4%B8%BB%E9%A2%98/">
+	<a class="ms-auto" href="/docs/%E5%88%86%E4%BA%AB/hugo/%E6%90%AD%E5%BB%BA%E4%B8%AA%E4%BA%BA%E5%8D%9A%E5%AE%A2/">
 			<div class="card my-1">
 				<div class="card-body py-2">
-					Doks主题 &rarr;
+					搭建个人博客 &rarr;
 				</div>
 			</div>
 		</a>
