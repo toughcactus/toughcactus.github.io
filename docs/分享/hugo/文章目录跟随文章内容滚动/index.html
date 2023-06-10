@@ -16,16 +16,16 @@
     <meta name="googlebot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
     <meta name="bingbot" content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1">
   <title>文章目录跟随文章内容滚动 - ToughCactus</title>
-<meta name="description" content="如果在目录项高亮时设置文章目录滚动跟随，文章目录跳转功能失效 文章目录跳转时，会高亮中间的每一个目录项。在高亮下一个目录项时，文章目录立即滚动跟随，此时会终止跳转。 滚动触发 找到了文章目录对应的元素 document.querySelector(&#39;.docs-toc&#39;) ，没有找到页面对应的元素 1. 两种滚动注册 # 监听 所有滚动都会触发。配合定时器，如果在定时器到时间之前没有跳转到目的目录项，文章目录滚动偏移重置 window.addEventListener(&#39;scroll&#39;, () =&amp;gt; { // 处理 }); 绑定事件处理函数 对window绑定处理函数，只在滚动页面时触发 ✔️ 参考./assets/js/to-top.js window.onscroll = function() { // 处理 }; 2. 处理函数调用时间点 # 如果文章目录滚动即触发，因为持续滚动，文章目录跳转功能完全失效。得在滚动结束后，再调用处理函数。 使用定时器。滚动即重启定时器，定时器到时间再调用处理函数。 let timer = null; window.onscroll = function () { clearTimeout(timer); timer = setTimeout(function () { // 处理 }, 300); // 设置定时器间隔；要求不小于最长跳转时间 }; 3. 设置文章目录滚动 # 根据窗口高度 window.innerHeight ，能展示的目录项有限 max 。 每个目录项占用的高度 single ，和文章目录的总高度有关 document.querySelector(&#39;.docs-toc&#39;).scrollHeight 。 考虑到文章目录上方&amp;quot;On This Page&amp;quot;文本，窗口可供显示目录的高度应减去&amp;quot;On This Page&amp;quot;文本的高度。 若当前目录项超出窗口可展示目录项的一半，滚动文章目录，偏移量使得之后的当前目录项位于文章目录中间位置。 完整代码 放在.">
+<meta name="description" content="如果在目录项高亮时设置文章目录滚动跟随，文章目录跳转功能失效 文章目录跳转时，会高亮中间的每一个目录项。在高亮下一个目录项时，文章目录立即滚动跟随，此时会终止跳转。 滚动触发 找到了文章目录对应的元素 document.querySelector(&#39;.docs-toc&#39;) ，没有找到页面对应的元素 1. 两种滚动注册 # 监听 所有滚动都会触发。配合定时器，如果在定时器到时间之前没有跳转到目的目录项，文章目录滚动偏移重置 window.addEventListener(&#39;scroll&#39;, () =&amp;gt; { // 处理 }); 绑定事件处理函数 对window绑定处理函数，只在滚动页面时触发 ✔️ 参考./assets/js/to-top.js window.onscroll = function() { // 处理 }; 2. 处理函数调用时间点 # 如果文章目录滚动即触发，因为持续滚动，文章目录跳转功能完全失效。得在滚动结束后，再调用处理函数。 使用定时器。滚动即重启定时器，定时器到时间再调用处理函数。 let timer = null; window.onscroll = function () { clearTimeout(timer); timer = setTimeout(function () { // 处理 }, 300); // 设置定时器间隔；要求不小于最长跳转时间 }; 3. 设置文章目录滚动 # 每个目录项占用的高度 single ，和文章目录除去&amp;quot;On This Page&amp;quot;文本之后的高度有关 document.querySelector(&#39;.my-toc&#39;).scrollHeight 。 考虑到文章目录上方&amp;quot;On This Page&amp;quot;文本，窗口可供显示目录的高度应减去&amp;quot;On This Page&amp;quot;文本的高度。 根据窗口高度 window.">
   <link rel="canonical" href="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">
 <meta property="og:locale" content="en_US">
 <meta property="og:type" content="article">
 <meta property="og:title" content="文章目录跟随文章内容滚动">
-<meta property="og:description" content="如果在目录项高亮时设置文章目录滚动跟随，文章目录跳转功能失效 文章目录跳转时，会高亮中间的每一个目录项。在高亮下一个目录项时，文章目录立即滚动跟随，此时会终止跳转。 滚动触发 找到了文章目录对应的元素 document.querySelector(&#39;.docs-toc&#39;) ，没有找到页面对应的元素 1. 两种滚动注册 # 监听 所有滚动都会触发。配合定时器，如果在定时器到时间之前没有跳转到目的目录项，文章目录滚动偏移重置 window.addEventListener(&#39;scroll&#39;, () =&gt; { // 处理 }); 绑定事件处理函数 对window绑定处理函数，只在滚动页面时触发 ✔️ 参考./assets/js/to-top.js window.onscroll = function() { // 处理 }; 2. 处理函数调用时间点 # 如果文章目录滚动即触发，因为持续滚动，文章目录跳转功能完全失效。得在滚动结束后，再调用处理函数。 使用定时器。滚动即重启定时器，定时器到时间再调用处理函数。 let timer = null; window.onscroll = function () { clearTimeout(timer); timer = setTimeout(function () { // 处理 }, 300); // 设置定时器间隔；要求不小于最长跳转时间 }; 3. 设置文章目录滚动 # 根据窗口高度 window.innerHeight ，能展示的目录项有限 max 。 每个目录项占用的高度 single ，和文章目录的总高度有关 document.querySelector(&#39;.docs-toc&#39;).scrollHeight 。 考虑到文章目录上方&quot;On This Page&quot;文本，窗口可供显示目录的高度应减去&quot;On This Page&quot;文本的高度。 若当前目录项超出窗口可展示目录项的一半，滚动文章目录，偏移量使得之后的当前目录项位于文章目录中间位置。 完整代码 放在.">
+<meta property="og:description" content="如果在目录项高亮时设置文章目录滚动跟随，文章目录跳转功能失效 文章目录跳转时，会高亮中间的每一个目录项。在高亮下一个目录项时，文章目录立即滚动跟随，此时会终止跳转。 滚动触发 找到了文章目录对应的元素 document.querySelector(&#39;.docs-toc&#39;) ，没有找到页面对应的元素 1. 两种滚动注册 # 监听 所有滚动都会触发。配合定时器，如果在定时器到时间之前没有跳转到目的目录项，文章目录滚动偏移重置 window.addEventListener(&#39;scroll&#39;, () =&gt; { // 处理 }); 绑定事件处理函数 对window绑定处理函数，只在滚动页面时触发 ✔️ 参考./assets/js/to-top.js window.onscroll = function() { // 处理 }; 2. 处理函数调用时间点 # 如果文章目录滚动即触发，因为持续滚动，文章目录跳转功能完全失效。得在滚动结束后，再调用处理函数。 使用定时器。滚动即重启定时器，定时器到时间再调用处理函数。 let timer = null; window.onscroll = function () { clearTimeout(timer); timer = setTimeout(function () { // 处理 }, 300); // 设置定时器间隔；要求不小于最长跳转时间 }; 3. 设置文章目录滚动 # 每个目录项占用的高度 single ，和文章目录除去&quot;On This Page&quot;文本之后的高度有关 document.querySelector(&#39;.my-toc&#39;).scrollHeight 。 考虑到文章目录上方&quot;On This Page&quot;文本，窗口可供显示目录的高度应减去&quot;On This Page&quot;文本的高度。 根据窗口高度 window.">
 <meta property="og:url" content="https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/">
 <meta property="og:site_name" content="ToughCactus">
-<meta property="article:published_time" content="2023-06-09T10:46:13+00:00">
-  <meta property="article:modified_time" content="2023-06-10T10:53:48+08:00">
+<meta property="article:published_time" content="2023-06-10T10:46:13+00:00">
+  <meta property="article:modified_time" content="2023-06-10T20:19:48+08:00">
   
   <meta property="og:image" content="https://toughcactus.github.io/doks.png"/>
       <meta property="og:image:alt" content="ToughCactus">
@@ -85,8 +85,8 @@
       "about": {
           "@id": "https://toughcactus.github.io/#/schema/organization/1"
         },
-      "datePublished": "2023-06-09T10:46:13CET",
-      "dateModified": "2023-06-10T10:53:48CET",
+      "datePublished": "2023-06-10T10:46:13CET",
+      "dateModified": "2023-06-10T20:19:48CET",
       "breadcrumb": {
         "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/#/schema/breadcrumb/1"
       },
@@ -161,8 +161,8 @@
           "mainEntityOfPage": {
             "@id": "https://toughcactus.github.io/docs/%E5%88%86%E4%BA%AB/hugo/%E6%96%87%E7%AB%A0%E7%9B%AE%E5%BD%95%E8%B7%9F%E9%9A%8F%E6%96%87%E7%AB%A0%E5%86%85%E5%AE%B9%E6%BB%9A%E5%8A%A8/"
           },
-          "datePublished": "2023-06-09T10:46:13CET",
-          "dateModified": "2023-06-10T10:53:48CET",
+          "datePublished": "2023-06-10T10:46:13CET",
+          "dateModified": "2023-06-10T20:19:48CET",
           "author": {
             "@id": "https://toughcactus.github.io/#/schema/person/2"
           },
@@ -787,49 +787,52 @@ window.onscroll = function () {
 };
 </code></pre>
 <h2 id="3-dot-设置文章目录滚动">3. 设置文章目录滚动 <a href="#3-dot-%e8%ae%be%e7%bd%ae%e6%96%87%e7%ab%a0%e7%9b%ae%e5%bd%95%e6%bb%9a%e5%8a%a8" class="anchor" aria-hidden="true">#</a></h2>
-<p>根据窗口高度 <code>window.innerHeight</code> ，能展示的目录项有限 <code>max</code> 。 <br/>
-每个目录项占用的高度 <code>single</code> ，和文章目录的总高度有关 <code>document.querySelector('.docs-toc').scrollHeight</code> 。 <br/>
+<p>每个目录项占用的高度 <code>single</code> ，和文章目录除去&quot;On This Page&quot;文本之后的高度有关 <code>document.querySelector('.my-toc').scrollHeight</code> 。 <br/>
 考虑到文章目录上方&quot;On This Page&quot;文本，窗口可供显示目录的高度应减去&quot;On This Page&quot;文本的高度。 <br/>
-若当前目录项超出窗口可展示目录项的一半，滚动文章目录，偏移量使得之后的当前目录项位于文章目录中间位置。 <br/>
+根据窗口高度 <code>window.innerHeight</code> 和&quot;On This Page&quot;文本的高度差，计算页面能展示的最大目录项 <code>max</code> 。一开始，页面会显示&quot;On This Page&quot;文本，此时展示的目录项数目小于 <code>max</code> 。 <br/>
+若当前目录项超出窗口最大可展示目录项的一半，滚动文章目录，偏移量使得之后的当前目录项位于文章目录中间位置。 <br/>
 <strong>完整代码</strong> <br/>
 <em>放在./assets/js/hightlight.js最后</em> <br/></p>
 <pre><code class="language-javascript">let timer = null;
 window.onscroll = function () {
-    clearTimeout(timer);
-    timer = setTimeout(function () {
-        locate_heading();
-    }, 300);
+  clearTimeout(timer);
+  timer = setTimeout(function () {
+    locate_heading();
+  }, 300);
 };
 
 function locate_heading() {
-    let res = document.querySelectorAll('.my-toc a.active');
-    if (res.length != 1) { return; }
-    let active_heading = res.item(0);
+  let res = document.querySelectorAll('.my-toc a.active');
+  if (res.length != 1) { return; }
+  let active_heading = res.item(0);
 
-    let count = 0, current = 0;
-    document.querySelectorAll('.my-toc a').forEach((a) =&gt; {
-        if (a == active_heading) {
-            current = count;
-            // console.log(&quot;current heading&quot;, a);
-        }
-        ++count;
-    });
-    ++current;
-    count /= 2;
-    console.log(current, &quot;/&quot;, count);
-
-    let fullToc = document.querySelector('.docs-toc');  //修改scrolltop
-
-    let single = fullToc.scrollHeight / count;
-    let offset = fullToc.scrollHeight - document.querySelector('.my-toc').scrollHeight; // on-this-page height
-    let max = parseInt((window.innerHeight - offset) / single);
-    let mid = parseInt(max / 2);
-
-    if (current &gt;= max - mid) {
-        fullToc.scrollTop = single * (current - mid);
-    } else {
-        fullToc.scrollTop = 0;
+  let count = 0, current = 0;
+  document.querySelectorAll('.my-toc a').forEach((a) =&gt; {
+    if (a == active_heading) {
+      current = count;
+      // console.log(&quot;current heading&quot;, a);
     }
+    ++count;
+  });
+  ++current;
+  count /= 2;
+  console.log(current, &quot;/&quot;, count);
+
+  let fullToc = document.querySelector('.docs-toc');  //修改scrolltop
+  let myToc = document.querySelector('.my-toc');
+
+  let single = myToc.scrollHeight / count;
+  let offset = fullToc.scrollHeight - myToc.scrollHeight; // on-this-page height
+  let max = parseInt((window.innerHeight - offset) / single);
+  let mid = parseInt(max / 2);
+
+  // console.log(&quot;single: &quot;, single, &quot;max: &quot;, max);
+
+  if (current &gt;= max - mid) {
+    fullToc.scrollTop = single * (current - mid);
+  } else {
+    fullToc.scrollTop = 0;
+  }
 }
 </code></pre>
 <p><em>不知道什么原因，.my-toc的元素个数是认为的2倍，而包含active类的a标签个数仍为1；使用.docs-toc更毛病</em> <br/></p>
@@ -875,9 +878,9 @@ function locate_heading() {
   
 
 <script src="/js/bootstrap.min.650aeec64c81d69d4c0850fc73c93da3f0330cec0a27772feed7f90f60baa5f47f1c45687d71914bdafd1c4e860d40f6dc08ede27a2f08431ff929c9a2d24621.js" integrity="sha512-ZQruxkyB1p1MCFD8c8k9o/AzDOwKJ3cv7tf5D2C6pfR/HEVofXGRS9r9HE6GDUD23Ajt4novCEMf&#43;SnJotJGIQ==" crossorigin="anonymous" defer></script>
-  <script src="/js/highlight.min.4d53ec1fcebf01ac6307faee3776ac48ceec969a4ac718b3b4d4141d068c6e33642dcb53ec3a857fd0740644b8429f92f11ab3e40a1d1c7b94a1372d9dd824f5.js" integrity="sha512-TVPsH86/AaxjB/ruN3asSM7slppKxxiztNQUHQaMbjNkLctT7DqFf9B0BkS4Qp&#43;S8Rqz5AodHHuUoTctndgk9Q==" crossorigin="anonymous" defer></script>
+  <script src="/js/highlight.min.e0d9c5bb76559fc6a8e35e6d257e66ac6848b1064d833504359c80197347bb26ae0d69301434b7b9a50e84c4d35b958f082c37af71c82d8c2c5bbdd7c5d25ea0.js" integrity="sha512-4NnFu3ZVn8ao415tJX5mrGhIsQZNgzUENZyAGXNHuyauDWkwFDS3uaUOhMTTW5WPCCw3r3HILYwsW73XxdJeoA==" crossorigin="anonymous" defer></script>
   <script src="/main.min.cb2e2ebbf2e4002f3117addc33582923b2b3ae5265c22944cd117ebec7abe61c170417c4506d7a0f8f0fc9053dfdf441421d53601ac467042ff3d06ec0ba07fa.js" integrity="sha512-yy4uu/LkAC8xF63cM1gpI7KzrlJlwilEzRF&#43;vser5hwXBBfEUG16D48PyQU9/fRBQh1TYBrEZwQv89BuwLoH&#43;g==" crossorigin="anonymous" defer></script>
-  <script src="https://toughcactus.github.io/index.min.c68a09db75931ce8b8c2b7163ebec5a10dbd376ab9f2b9b7018976c6fc265245da9941cc6b3a1ac5f0b6f239653f63c1467a8fe51fc41dac7c84012d86efca56.js" integrity="sha512-xooJ23WTHOi4wrcWPr7FoQ29N2q58rm3AYl2xvwmUkXamUHMazoaxfC28jllP2PBRnqP5R/EHax8hAEthu/KVg==" crossorigin="anonymous" defer></script>
+  <script src="https://toughcactus.github.io/index.min.3e0fe5d47824e825f35922218880c2b947a52f467018988a4f8f7d7d32982bf89c2d263e5e77652e8557da3e1c5215f93336c24956475cb506afe932077a65fb.js" integrity="sha512-Pg/l1Hgk6CXzWSIhiIDCuUelL0ZwGJiKT499fTKYK/icLSY&#43;XndlLoVX2j4cUhX5MzbCSVZHXLUGr&#43;kyB3pl&#43;w==" crossorigin="anonymous" defer></script>
   
   
 </body>
